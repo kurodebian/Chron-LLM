@@ -1,73 +1,136 @@
-# Domain Model
+# Agent Domain Model (R1)
 
-## 1. Primitive Types
+## Event
 
-Implementation-defined primitive types.
+Event {
 
----
+    id
 
-## 2. Event
+    source ∈ {
+        user,
+        assistant,
+        tool,
+        system
+    }
 
-Defines the concrete Event representation.
+    payload
 
----
+    metadata {
+        timestamp
+        seq
+        lamport?
+    }
 
-## 3. Evidence
-
-Defines how Evidence is represented.
-
-Examples may include:
-
-- append-only sequence
-- WAL
-- DAG
-- graph
-
----
-
-## 4. Candidate
-
-Concrete representation of a proposal.
-
-Examples:
-
-- OperationIR
-- Command
-- Plan
-- Proof
+}
 
 ---
 
-## 5. Canonical
+## Candidate
 
-Defines the concrete authoritative state.
+Candidate := OperationIR
+
+OperationIR {
+
+    id
+
+    source
+
+    trigger
+
+    intent
+
+    payload
+
+    constraints
+
+    metadata
+
+}
+
+intent ∈ {
+
+    append
+
+    reflect
+
+    tool
+
+    memory-read
+
+    memory-write
+
+    recover
+
+    summarize
+
+}
 
 ---
 
-## 6. Working
+## Session
 
-Defines transient state.
+Session :=
 
----
+    Canonical
 
-## 7. Derived
+    Working
 
-Defines non-authoritative derived state.
+    Derived
 
----
-
-## 8. External
-
-Defines external resources.
+    External
 
 ---
 
-## 9. Ownership
+Canonical :=
 
-Defines ownership and lifecycle of each type.
+    History
+
+    Config
+
+    MemoryRef
 
 ---
 
-## 10. Relationships
+Working :=
 
-Defines structural relationships among domain objects.
+    Candidate
+
+    Prompt
+
+    Backend
+
+    IR
+
+    Metrics
+
+    Lookup
+
+---
+
+Derived :=
+
+    Projection
+
+    Graph
+
+    Observation
+
+    Summary
+
+---
+
+External :=
+
+    LTM
+
+---
+
+## Context (R1)
+
+Context :=
+
+    History
+
+    Config
+
+    MemoryRef
