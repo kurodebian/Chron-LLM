@@ -149,3 +149,21 @@
                   (my-llama-init model n-ctx))))
     (setf *n-past* 0)
     (values model ctx)))
+
+;; (load "~/quicklisp/setup.lisp")
+;; (ql:quickload '(:cffi :babel))
+;; (load "~/Chron-LLM/chron-llm.lisp")
+;; (cffi:load-foreign-library #P"/home/junu/llama.cpp/build/bin/libllama_wrapper.so")
+;; (multiple-value-bind (model ctx)
+;;     (init-chron-llm "/home/junu/models/Phi-4-mini-instruct-Q6_K.gguf")
+;;   (defparameter *model* model)
+;;   (defparameter *ctx* ctx))
+
+;; (defparameter *prompt* "<|user|>\nこんにちは、自己紹介をお願いします。\n<|assistant|>")
+;; (defparameter *prompt-tokens* (tokenize *model* *prompt*))
+;; (print *prompt-tokens*)
+
+;; (setf *n-past* 0)
+;; (prefill-prompt *ctx* *prompt-tokens*)
+
+;; (generate *ctx* *model* :max-tokens 64 :temperature 0.7 :top-p 0.9)

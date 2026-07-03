@@ -115,7 +115,7 @@ cd ~/Chron-LLM
 g++ -shared -fPIC -g -O0 \
     -I ~/llama.cpp/include \
     -I ~/llama.cpp/ggml/include \
-    src/llama_wrapper.cpp \
+    src/libllama_wrapper.cpp \
     -L ~/llama.cpp/build/bin \
     -lllama \
     -Wl,-rpath,'$ORIGIN' \
