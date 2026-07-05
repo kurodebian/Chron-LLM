@@ -1,0 +1,3 @@
+{
+  "alive.ignore": ["**/chron-llm.lisp", "**/src/**", "**/.vscode/alive/**"]
+}

@@ -1,56 +1,25 @@
-(in-package :cl-user)
+;;;; chron-llm.lisp
+;;;; Chron‑LLM Δ3 — Logical Layer & Common ABI
+
+(in-package :chron-llm)
 
 ;; =============================================================================
-;; 1. CFFI 外部関数定義 (V3 仕様)
+;; 1. 共通データ構造 (ABI)
 ;; =============================================================================
+(defstruct (event (:conc-name ev-))
+  index 
+  clock 
+  causal-id 
+  kind 
+  payload)
 
-(cffi:defctype llama-token :int32)
-
-(cffi:defcfun ("my_llama_model_load" my-llama-model-load) :pointer
-  (path :string))
-
-(cffi:defcfun ("my_llama_init" my-llama-init) :pointer
-  (model :pointer)
-  (n-ctx :int32))
-
-(cffi:defcfun ("my_llama_model_get_vocab" my-llama-model-get-vocab) :pointer
-  (model :pointer))
-
-(cffi:defcfun ("my_llama_eval" my-llama-eval) :int32
-  (ctx :pointer)
-  (tokens :pointer) ; シンプルな :pointer に統一
-  (n-tokens :int32)
-  (n-past :int32))
-
-(cffi:defcfun ("my_llama_token_to_piece" my-llama-token-to-piece) :int32
-  (model :pointer)
-  (token-id :int32)
-  (buf :pointer)
-  (length :int32))
-
-(cffi:defcfun ("my_llama_tokenize" my-llama-tokenize) :int32
-  (vocab :pointer)
-  (text :pointer)     ; :string から :pointer に変更（生のUTF-8バイト列を直撃させる）
-  (text-len :int32)
-  (tokens :pointer)
-  (n-tokens-max :int32)
-  (add-special :bool)
-  (parse-special :bool))
-
-(cffi:defcfun ("my_llama_is_eog" my-llama-is-eog) :bool
-  (ctx :pointer)
-  (token-id :int32))
-
-(cffi:defcfun ("my_sampler_init" my-sampler-init) :pointer
-  (temperature :float)
-  (top-p :float))
-
-(cffi:defcfun ("my_sampler_sample" my-sampler-sample) :int32
-  (chain :pointer)
-  (ctx :pointer))
-
-(cffi:defcfun ("my_sampler_free" my-sampler-free) :void
-  (chain :pointer))
+(defstruct (node (:constructor %make-node))
+  id
+  kind
+  content
+  parent
+  (worldline-id :wl-0 :type symbol) ; メイン世界線
+  (status :active :type symbol))    ; :active / :fault
 
 ;; =============================================================================
 ;; 2. 状態管理 ＆ ユーティリティ
@@ -70,30 +39,23 @@
           (finish-output *standard-output*)
           octets)))))
 
-;; --- 2-pass ＆ 陽なUTF-8メモリ管理に修正した完全版 Tokenize ---
 (defun tokenize (model text)
   (let* ((vocab (my-llama-model-get-vocab model))
          (bytes (babel:string-to-octets text :encoding :utf-8))
          (text-len (length bytes)))
-    ;; CFFIの自動変換に頼らず、Lisp側で確保した生バイト列のポインタを渡す
     (cffi:with-foreign-pointer (buf text-len)
       (loop for i below text-len
             do (setf (cffi:mem-ref buf :unsigned-char i) (aref bytes i)))
-      
-      ;; パス1：必要トークン数を問い合わせ（llama.cppの仕様に基づき、負の数を abs で反転）
       (let* ((n-raw (my-llama-tokenize vocab buf text-len (cffi:null-pointer) 0 t t))
              (n-required (abs n-raw)))
         (when (zerop n-required)
           (error "Tokenize returned 0 tokens"))
-        
-        ;; パス2：正しいサイズのバッファを確保して実際に取得
         (cffi:with-foreign-object (arr :int32 n-required)
           (let ((n (my-llama-tokenize vocab buf text-len arr n-required t t)))
             (when (< n 0)
               (error "Tokenize failed (pass2): ~A" n))
             (loop for i below n collect (cffi:mem-aref arr :int32 i))))))))
 
-;; --- Prefill ---
 (defun prefill-prompt (ctx tokens)
   (let ((n (length tokens)))
     (cffi:with-foreign-object (arr :int32 n)
@@ -111,31 +73,27 @@
 
 (defun generate (ctx model &key (max-tokens 256) (temperature 0.7) (top-p 0.9))
   (sb-int:with-float-traps-masked (:invalid :divide-by-zero :overflow)
-    (let ((sampler (my-sampler-init (float temperature 1.0f0) (float top-p 1.0f0)))
+    (let ((sampler (my-sampler-init (float temperature 1.0f0)
+                                    (float top-p 1.0f0)))
           (history-bytes '()))
       (unwind-protect
            (dotimes (step max-tokens)
              (let ((next-id (my-sampler-sample sampler ctx)))
-               
                (when (my-llama-is-eog ctx next-id)
                  (return))
-
                (let ((bytes (print-token-stream model next-id)))
                  (when bytes
                    (push bytes history-bytes)))
-
-               ;; Autoregressive Decode (配列ポインタとして引き渡す)
                (cffi:with-foreign-object (arr :int32 1)
                  (setf (cffi:mem-ref arr :int32 0) next-id)
                  (let ((res (my-llama-eval ctx arr 1 *n-past*)))
                    (unless (zerop res)
                      (error "Decode failed with code: ~A" res)))
                  (incf *n-past*))))
-        
         (my-sampler-free sampler))
-      
       (format t "~%")
-      (let ((flattened (apply #'concatenate '(vector (unsigned-byte 8)) (nreverse history-bytes))))
+      (let ((flattened (apply #'concatenate '(vector (unsigned-byte 8))
+                              (nreverse history-bytes))))
         (babel:octets-to-string flattened :encoding :utf-8)))))
 
 ;; =============================================================================
@@ -150,20 +108,22 @@
     (setf *n-past* 0)
     (values model ctx)))
 
-;; (load "~/quicklisp/setup.lisp")
-;; (ql:quickload '(:cffi :babel))
-;; (load "~/Chron-LLM/chron-llm.lisp")
-;; (cffi:load-foreign-library #P"/home/junu/llama.cpp/build/bin/libllama_wrapper.so")
-;; (multiple-value-bind (model ctx)
-;;     (init-chron-llm "/home/junu/models/Phi-4-mini-instruct-Q6_K.gguf")
-;;   (defparameter *model* model)
-;;   (defparameter *ctx* ctx))
+#|
+(load "~/quicklisp/setup.lisp")
+(ql:quickload '(:cffi :babel))
+(load "~/Chron-LLM/chron-llm.lisp")
+(cffi:load-foreign-library #P"/home/junu/llama.cpp/build/bin/libllama_wrapper.so")
+(multiple-value-bind (model ctx)
+    (init-chron-llm "/home/junu/models/Phi-4-mini-instruct-Q6_K.gguf")
+  (defparameter *model* model)
+  (defparameter *ctx* ctx))
 
-;; (defparameter *prompt* "<|user|>\nこんにちは、自己紹介をお願いします。\n<|assistant|>")
-;; (defparameter *prompt-tokens* (tokenize *model* *prompt*))
-;; (print *prompt-tokens*)
+(defparameter *prompt* "<|user|>\nこんにちは、自己紹介をお願いします。\n<|assistant|>")
+(defparameter *prompt-tokens* (tokenize *model* *prompt*))
+(print *prompt-tokens*)
 
-;; (setf *n-past* 0)
-;; (prefill-prompt *ctx* *prompt-tokens*)
+(setf *n-past* 0)
+(prefill-prompt *ctx* *prompt-tokens*)
 
-;; (generate *ctx* *model* :max-tokens 64 :temperature 0.7 :top-p 0.9)
+(generate *ctx* *model* :max-tokens 64 :temperature 0.7 :top-p 0.9)
+|#
