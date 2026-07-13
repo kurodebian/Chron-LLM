@@ -8,27 +8,35 @@
 
 (in-package :phase-d.rollout)
 
+;; ------------------------------------------------------------
+;; Phase D Rollout
+;;
+;; Deterministic graph traversal.
+;;
+;; R0 provides both legacy and context-aware APIs.
+;; Context is reserved for future runtime extensions and is
+;; intentionally unused in the current implementation.
+;; ------------------------------------------------------------
+
 (defun rollout (graph start-node steps)
-  "contextなし版（後方互換）。単純に next-event を反復する。"
-  (loop with node = start-node
-        for i from 0 below steps
-        collect (let ((e (next-event graph node)))
-                  (when e
-                    (setf node (edge-to e))
-                    e))))
+  "Deterministically traverse GRAPH starting from START-NODE.
+
+Returns the sequence of traversed edges."
+
+  (loop
+    with node = start-node
+    for i from 0 below steps
+    declare (ignore i)
+    for edge = (next-event graph node)
+    while edge
+    do (setf node (edge-to edge))
+    collect edge))
 
 (defun rollout* (graph start-node steps)
-  "context-aware rollout。
-context = (:step n) だけを持つ最小時間文脈。
-guard が context を参照できる。"
-  (loop with node = start-node
-        with context = '(:step 0)
-        for i from 0 below steps
-        collect
-          (let ((e (next-event* graph node context)))
-            (when e
-              ;; 次の node へ遷移
-              (setf node (edge-to e))
-              ;; context を最小更新（時間だけ進める）
-              (setf context (list :step (1+ (getf context :step))))
-              e))))
+  "Context-aware rollout API.
+
+Reserved for future runtime extensions.
+
+R0 performs the same deterministic traversal as ROLLOUT."
+
+  (rollout graph start-node steps))

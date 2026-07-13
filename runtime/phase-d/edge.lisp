@@ -12,10 +12,49 @@
 
 (in-package :phase-d.edge)
 
+;; ------------------------------------------------------------
+;; Phase D Edge
+;;
+;; Pure structural relation between two nodes.
+;;
+;; Guarantees:
+;;   - contains no semantic interpretation
+;;   - immutable structural value
+;;   - deterministic traversal metadata only
+;;   - runtime policy is external to Phase D
+;;
+;; Guard is reserved for future runtime extensions and is not
+;; used by the R0 inference layer.
+;; ------------------------------------------------------------
+
 (defstruct edge
-  from       ;; node-id
-  to         ;; node-id
-  relation   ;; :temporal / :reply / :causal / ...
-  strength   ;; 0.0〜1.0（因果の強さ）
-  guard      ;; optional predicate（まだ未使用だが拡張点）
-  meta)      ;; e.g. :from-index, :to-index, :source :phase-d
+  ;; Source node identifier.
+  from
+
+  ;; Destination node identifier.
+  to
+
+  ;; Pure structural relation.
+  ;;
+  ;; Typical values:
+  ;;   :temporal
+  ;;   :reply
+  ;;   :causal
+  relation
+
+  ;; Relative traversal priority.
+  strength
+
+  ;; Reserved for future runtime policy.
+  ;;
+  ;; Ignored by the R0 inference layer.
+  guard
+
+  ;; Implementation-defined metadata.
+  ;;
+  ;; Typical entries:
+  ;;   :from-index
+  ;;   :to-index
+  ;;   :source
+  ;;   :version
+  meta)

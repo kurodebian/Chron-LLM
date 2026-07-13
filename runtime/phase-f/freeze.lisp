@@ -3,18 +3,23 @@
         :phase-f.frozen-config
         :phase-f.inlet)
   (:export
-   ;; Top-level API (SIGMA-4 F0 / C2)
+   ;; SIGMA-4 API
    #:frozen-semantics
    #:semantic-inlet
-   ;; Re-exports for downstream
+
+   ;; Frozen configuration
    #:frozen-config-p
    #:frozen-config-inlet-key
    #:frozen-config-version
    #:frozen-config-meta
+
+   ;; Semantic inlet
    #:semantic-inlet-p
    #:semantic-inlet-value
    #:semantic-inlet-inlet-key
    #:semantic-inlet-version
+
+   ;; Utilities
    #:bind-inlet
    #:normalize-output))
 
@@ -22,40 +27,65 @@
 
 ;; ============================================================
 ;; Phase F — Semantic Freeze Layer
-;; ============================================================
 ;;
 ;; F = frozen_semantics(config)
 ;; S = semantic_inlet(F)
 ;;
-;; Phase F is stateless and holds no semantic information itself.
-;; It freezes exactly one semantic inlet as the official entry
-;; point for LLM output normalization.
+;; This layer freezes exactly one semantic inlet for runtime
+;; integration. It contains no mutable runtime state and performs
+;; no semantic interpretation itself.
 ;;
-;; SIGMA-4:
-;;   F0:  inlet = A
-;;   C2:  bind(LLM_output → inlet)
+;; SIGMA-4
+;;
+;;   F0:
+;;       F = frozen_semantics(config)
+;;
+;;   C2:
+;;       S = semantic_inlet(F)
+;;
 ;; ============================================================
 
-(defun frozen-semantics (config)
-  "F = frozen_semantics(config)
-Create a frozen semantic configuration from a config plist.
-CONFIG is a plist with keys :inlet-key and :version.
-Defaults: inlet-key = :a (Phase A History), version = 0.
+(defun frozen-semantics (&optional (config '()))
+  "Create an immutable frozen semantic configuration.
 
-Returns a FROZEN-CONFIG instance."
-  (let ((inlet-key (or (getf config :inlet-key) :a))
-        (version   (or (getf config :version)   0)))
-    (make-frozen-config :inlet-key inlet-key
-                        :version   version
-                        :meta      config)))
+CONFIG is a property list.
+
+Recognized keys:
+
+  :INLET-KEY   keyword   (default :A)
+  :VERSION     integer   (default 0)
+
+Returns a FROZEN-CONFIG."
+
+  (assert (listp config)
+          (config)
+          "CONFIG must be a list.")
+
+  (assert (evenp (length config))
+          (config)
+          "CONFIG must be a property list.")
+
+  (assert
+   (loop for (key value) on config by #'cddr
+         always (keywordp key))
+   (config)
+   "CONFIG keys must be keywords.")
+
+  (make-frozen-config
+   :inlet-key (or (getf config :inlet-key) :a)
+   :version   (or (getf config :version) 0)
+   :meta      config))
 
 (defun semantic-inlet (frozen-config inlet-value)
-  "S = semantic_inlet(F)
-Bind a concrete inlet value to the frozen configuration.
-Returns the unique SEMANTIC-INLET for this F instance.
+  "Bind a concrete runtime inlet to a frozen configuration.
 
-FROZEN-CONFIG: the frozen-config returned by frozen-semantics.
-INLET-VALUE:   the concrete inlet (e.g. a Phase A History).
+Returns an immutable SEMANTIC-INLET.
 
-The returned inlet is the exclusive entry point (FINV-1)."
+This function performs no normalization and no semantic
+interpretation."
+
+  (assert (frozen-config-p frozen-config)
+          (frozen-config)
+          "FROZEN-CONFIG must be a FROZEN-CONFIG instance.")
+
   (bind-inlet frozen-config inlet-value))

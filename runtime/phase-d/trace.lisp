@@ -9,20 +9,36 @@
 
 (in-package :phase-d.trace)
 
-(defun format-edge (e)
-  "edge → human-readable trace line"
-  (format nil "~A -> ~A  (~A | s=~,2f)"
-          (edge-from e)
-          (edge-to e)
-          (edge-relation e)
-          (edge-strength e)))
+;; ------------------------------------------------------------
+;; Phase D Trace
+;;
+;; Human-readable deterministic traversal trace.
+;;
+;; Trace is a debugging and inspection utility only.
+;; It performs no semantic interpretation, graph mutation,
+;; or runtime execution beyond deterministic traversal.
+;; ------------------------------------------------------------
 
-(defun trace-rollout (graph start steps)
-  "rollout + observation layer（Phase Dの観測固定）"
-  (loop with node = start
-        for i from 0 below steps
-        for e = (next-event* graph node '(:step i))
-        while e
-        do (progn
-             (format t "~&[~D] ~A~%" i (format-edge e))
-             (setf node (edge-to e)))))
+(defun format-edge (edge)
+  "Return a human-readable representation of EDGE."
+
+  (format nil
+          "~A -> ~A  (~A | s=~,2f)"
+          (edge-from edge)
+          (edge-to edge)
+          (edge-relation edge)
+          (edge-strength edge)))
+
+(defun trace-rollout (graph start-node steps)
+  "Print a deterministic traversal trace."
+
+  (loop
+    with node = start-node
+    for step from 0 below steps
+    for edge = (next-event graph node)
+    while edge
+    do
+      (format t "~&[~D] ~A~%"
+              step
+              (format-edge edge))
+      (setf node (edge-to edge))))

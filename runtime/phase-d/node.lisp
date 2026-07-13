@@ -1,5 +1,6 @@
 (defpackage :phase-d.node
-  (:use :cl :phase-a.event)
+  (:use :cl
+        :phase-a.event)
   (:export
    #:make-node
    #:node-p
@@ -10,12 +11,53 @@
 
 (in-package :phase-d.node)
 
-(defstruct node
-  id      ;; node-id（ここでは event-index をそのまま使う）
-  event   ;; 元の Phase A event
-  meta)   ;; 将来: role/type/phase などを持てる
+;; ------------------------------------------------------------
+;; Phase D Node
+;;
+;; Node represents a deterministic identity anchor derived from
+;; a Phase C Model.
+;;
+;; Guarantees:
+;;   - deterministic identity
+;;   - no semantic interpretation
+;;   - event reference is provenance only
+;;   - execution semantics belong to inference/runtime layers
+;; ------------------------------------------------------------
 
-(defun node-id-from-index (i)
-  "最小実装: index をそのまま node-id として扱う。
-将来、永続IDやハッシュに差し替え可能な拡張点。"
-  i)
+(defstruct node
+  ;; Deterministic node identifier.
+  ;;
+  ;; Current implementation derives identity from the
+  ;; corresponding Phase C model index.
+  (id nil)
+
+  ;; Optional provenance reference.
+  ;;
+  ;; This field records the originating Phase A Event for
+  ;; debugging and traceability only.
+  ;;
+  ;; It MUST NOT be used for graph execution, traversal,
+  ;; or semantic interpretation.
+  (event nil)
+
+  ;; Implementation-defined metadata.
+  ;;
+  ;; Typical entries:
+  ;;   :model-index
+  ;;   :source-phase
+  ;;   :created-by
+  ;;
+  ;; Future metadata MAY be added without changing the Node ABI.
+  (meta nil
+        :type list))
+
+(defun node-id-from-index (index)
+  "Return the deterministic node identifier for MODEL INDEX.
+
+The current implementation uses the model index directly.
+
+Future implementations MAY replace this with a persistent,
+hash-based, or externally managed identifier while preserving
+deterministic behavior."
+
+  index)

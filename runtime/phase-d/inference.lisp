@@ -10,32 +10,87 @@
 
 (in-package :phase-d.inference)
 
+;; ------------------------------------------------------------
+;; Phase D Inference
+;;
+;; Deterministic traversal over a structural graph.
+;;
+;; Guarantees:
+;;   - deterministic edge selection
+;;   - no graph mutation
+;;   - no semantic interpretation
+;;   - traversal depends only on graph structure
+;;
+;; Context-aware APIs are preserved for forward compatibility.
+;; Current R0 implementation ignores CONTEXT.
+;; ------------------------------------------------------------
+
+(defun edge-order-key (edge)
+  "Return a deterministic secondary ordering key."
+
+  (list
+   (getf (edge-meta edge) :from-index 0)
+   (getf (edge-meta edge) :to-index 0)))
+
+(defun edge-precedes-p (a b)
+  "Deterministic edge ordering.
+
+Priority:
+
+  1. Higher strength
+  2. Lower from-index
+  3. Lower to-index"
+
+  (cond
+    ((> (edge-strength a)
+        (edge-strength b))
+     t)
+
+    ((< (edge-strength a)
+        (edge-strength b))
+     nil)
+
+    (t
+     (let ((ka (edge-order-key a))
+           (kb (edge-order-key b)))
+       (or (< (first ka)
+              (first kb))
+           (and (= (first ka)
+                   (first kb))
+                (< (second ka)
+                   (second kb))))))))
+
 (defun next-events (graph node-id)
-  "contextなし版（後方互換）。guardは無視して strength だけで選ぶ。"
+  "Return all outgoing edges from NODE-ID."
+
   (remove-if-not
-   (lambda (e)
-     (eq (edge-from e) node-id))
+   (lambda (edge)
+     (eq (edge-from edge) node-id))
    (graph-edges graph)))
 
 (defun next-event (graph node-id)
-  "contextなし版の局所推論。最も強い outgoing edge を返す。"
-  (let ((outs (next-events graph node-id)))
-    (when outs
-      (car (sort outs #'> :key #'edge-strength)))))
+  "Return the highest-priority outgoing edge."
+
+  (let ((edges (next-events graph node-id)))
+    (when edges
+      (car
+       (sort (copy-list edges)
+             #'edge-precedes-p)))))
 
 (defun next-events* (graph node-id context)
-  "context-aware outgoing edges。
-guard があれば context を渡してフィルタする。"
-  (remove-if-not
-   (lambda (e)
-     (and (eq (edge-from e) node-id)
-          (or (null (edge-guard e))
-              (funcall (edge-guard e) context))))
-   (graph-edges graph)))
+  "Context-aware API.
+
+CONTEXT is reserved for future extensions and is ignored in R0."
+
+  (declare (ignore context))
+
+  (next-events graph node-id))
 
 (defun next-event* (graph node-id context)
-  "context-aware next-event。
-context を考慮して有効な edge の中から、strength 最大のものを返す。"
-  (let ((outs (next-events* graph node-id context)))
-    (when outs
-      (car (sort outs #'> :key #'edge-strength)))))
+  "Context-aware deterministic edge selection.
+
+CONTEXT is reserved for future extensions and is ignored in R0."
+
+  (declare (ignore context))
+
+  (next-event graph node-id))
