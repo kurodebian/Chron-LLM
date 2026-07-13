@@ -1,44 +1,47 @@
-(defpackage :phase-d.trace
+(defpackage :ir-stream
   (:use :cl
-        :phase-d.edge
-        :phase-d.inference
-        :phase-d.graph)
+        :ir)
   (:export
-   #:trace-rollout
-   #:format-edge))
+   #:*ir-stream*
+   #:push-ir
+   #:clear-ir-stream))
 
-(in-package :phase-d.trace)
+(in-package :ir-stream)
 
 ;; ------------------------------------------------------------
-;; Phase D Trace
+;; IR Stream
 ;;
-;; Human-readable deterministic traversal trace.
+;; In-memory collection of IR observations emitted by the runtime
+;; callback.
 ;;
-;; Trace is a debugging and inspection utility only.
-;; It performs no semantic interpretation, graph mutation,
-;; or runtime execution beyond deterministic traversal.
+;; Guarantees:
+;;   - preserves callback insertion order
+;;   - supports deterministic analysis
+;;   - contains no semantic interpretation
+;;   - non-authoritative runtime state only
+;;
+;; The stream is cleared explicitly between decoding runs.
 ;; ------------------------------------------------------------
 
-(defun format-edge (edge)
-  "Return a human-readable representation of EDGE."
+(defparameter *ir-stream*
+  (make-array 0
+              :adjustable t
+              :fill-pointer 0)
+  "Adjustable vector containing IR observations for the current run.")
 
-  (format nil
-          "~A -> ~A  (~A | s=~,2f)"
-          (edge-from edge)
-          (edge-to edge)
-          (edge-relation edge)
-          (edge-strength edge)))
+(defun push-ir (ir)
+  "Append an IR observation to the current stream."
 
-(defun trace-rollout (graph start-node steps)
-  "Print a deterministic traversal trace."
+  (vector-push-extend ir *ir-stream*)
 
-  (loop
-    with node = start-node
-    for step from 0 below steps
-    for edge = (next-event graph node)
-    while edge
-    do
-      (format t "~&[~D] ~A~%"
-              step
-              (format-edge edge))
-      (setf node (edge-to edge))))
+  ir)
+
+(defun clear-ir-stream ()
+  "Reset the IR stream for a new decoding run."
+
+  (setf *ir-stream*
+        (make-array 0
+                    :adjustable t
+                    :fill-pointer 0))
+
+  *ir-stream*)
