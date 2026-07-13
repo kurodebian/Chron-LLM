@@ -1,0 +1,93 @@
+;;;; src/chron-llm/r2-2-e/evaluator.lisp
+
+(in-package :chron-llm/r2-2-e)
+
+
+(defstruct inference-decision
+  "Immutable representation of an inference evaluation result.
+
+TYPE represents the next state transition tag.
+REASON preserves causal context.
+PAYLOAD contains optional execution data."
+  type
+  reason
+  payload)
+
+
+(defun get-strategy (reason policy)
+  "Retrieve a strategy from POLICY for REASON.
+
+POLICY is treated as external data.
+If no strategy is defined, return a safe abort strategy."
+  (or (getf policy reason)
+      '(:action :abort
+        :params nil)))
+
+
+(defun evaluate-observation (world-state observation policy)
+  "Evaluate OBSERVATION against POLICY without mutating WORLD-STATE.
+
+Returns an inference-decision representing the next transition.
+Evaluation is deterministic for identical inputs."
+  (declare (ignore world-state))
+
+  (let* ((finish-reason
+           (inference-observation-finish-reason observation))
+         (error-info
+           (inference-observation-error-info observation))
+         (strategy
+           (cond
+             ((eq finish-reason :error)
+              (get-strategy
+               (getf error-info :type)
+               policy))
+             ((eq finish-reason :timeout)
+              (get-strategy
+               :timeout
+               policy))
+             ((eq finish-reason :stop)
+              '(:action :continue
+                :params nil))
+             (t
+              '(:action :abort
+                :params nil))))
+         (action
+           (getf strategy :action))
+         (params
+           (getf strategy :params)))
+
+    (make-inference-decision
+     :type action
+     :reason finish-reason
+     :payload params)))
+
+
+(defun derive-ops (decision world-state)
+  "Convert an inference decision into executable operations.
+
+WORLD-STATE is read-only and never modified.
+Returns a deterministic command list."
+  (declare (ignore world-state))
+
+  (case (inference-decision-type decision)
+    (:continue
+     '((:op :continue)))
+
+    (:retry
+     (list
+      (list :op :retry
+            :payload (inference-decision-payload decision))))
+
+    (:abort
+     (list
+      (list :op :abort
+            :reason (inference-decision-reason decision))))
+
+    (:optimize
+     (list
+      (list :op :optimize
+            :payload (inference-decision-payload decision))))
+
+    (otherwise
+     '((:op :abort
+        :reason :unknown-decision)))))

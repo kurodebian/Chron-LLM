@@ -1,0 +1,70 @@
+(in-package :cl-user)
+
+(in-package :chron-llm/r1)
+
+(import 'chron-llm/r2-2-e:evaluate-observation)
+(import 'chron-llm/r2-2-e:derive-ops)
+
+
+(defun evaluate-intent (world observation)
+  "R1 adapter layer: Decision -> Scheduler Ops."
+  (chron-llm/r2-2-e:derive-ops
+   (evaluate-observation
+    world
+    observation
+    '(:policy :default))
+   world))
+
+
+(defun run-boot-loop (initial-world provider generator)
+
+  (format t "~&--- Chron-LLM Boot Sequence Start ---~%")
+
+  (let ((current-world initial-world)
+        (observation
+          (chron-llm/r2-1-b:make-bootstrap-observation)))
+
+    (loop
+
+      (format t "~&Current Causal-ID: ~a~%"
+              (chron-llm/r2-3-s:world-state-causal-id
+               current-world))
+
+
+      (let ((ops
+              (evaluate-intent
+               current-world
+               observation)))
+
+        (multiple-value-bind
+              (new-world action)
+
+            (chron-llm/r2-3-s:scheduler-step
+             current-world
+             ops
+             (generate-causal-id generator))
+
+
+          (format t
+                  "~&Transition: ~a -> ~a~%"
+                  (chron-llm/r2-3-s:world-state-causal-id
+                   current-world)
+                  (chron-llm/r2-3-s:world-state-causal-id
+                   new-world))
+
+
+          (setf current-world new-world)
+
+
+          (if (eq
+               (chron-llm/r2-3-s:physical-action-type action)
+               :halt)
+
+              (return
+                (format t
+                        "~&System Halted safely.~%"))
+
+              (setf observation
+                    (fetch-observation
+                     provider
+                     action))))))))

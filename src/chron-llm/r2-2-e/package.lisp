@@ -1,0 +1,19 @@
+;;;; src/chron-llm/r2-2-e/package.lisp
+
+(in-package :cl-user)
+
+(defpackage :chron-llm/r2-2-e
+  (:use :cl)
+  (:import-from :chron-llm/r2-1-b
+                #:inference-observation
+                #:inference-observation-raw-text
+                #:inference-observation-finish-reason
+                #:inference-observation-error-info)
+  (:export
+   #:inference-decision
+   #:inference-decision-type
+   #:inference-decision-reason
+   #:inference-decision-payload
+   #:evaluate-observation
+   #:derive-ops
+   #:get-strategy))

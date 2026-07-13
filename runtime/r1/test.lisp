@@ -1,0 +1,32 @@
+(in-package :chronos-r1)
+
+(defun chronos-r1-self-test ()
+  (let* ((canonical (make-canonical :config '(:system-prompt "test" :observation-threshold 1.0)
+                                    :memory-ref '(:canonical "m0")))
+         (runtime (make-runtime :state (make-kernel-state :canonical canonical))))
+    ;; Accepted ingress is the only path that advances Canonical.
+    (multiple-value-bind (ignored report action command)
+        (runtime-submit runtime :user "hello")
+      (declare (ignore ignored report))
+      (assert (eq action :accept)) (assert (eq (runtime-command-kind command) :proceed)))
+    (let ((after-user (kernel-state-canonical (runtime-state runtime))))
+      (assert (= 1 (length (canonical-history after-user))))
+      ;; Rejection leaves the authoritative value untouched.
+      (multiple-value-bind (ignored report action command)
+          (runtime-submit runtime :assistant 42)
+        (declare (ignore ignored report command))
+        (assert (eq action :reject)))
+      (assert (eq after-user (kernel-state-canonical (runtime-state runtime)))))
+    ;; Prompt/replay are pure and prompt has no control-plane data.
+    (let* ((current (kernel-state-canonical (runtime-state runtime)))
+           (d1 (replay current)) (d2 (replay current))
+           (prompt (build-prompt d1 (canonical-memory-ref current) (canonical-config current))))
+      (assert (equal d1 d2)) (assert (not (search "observation" (string-downcase prompt)))))
+    ;; A recoverable clock mismatch is deferred without a canonical mutation.
+    (let ((before (kernel-state-canonical (runtime-state runtime))))
+      (multiple-value-bind (ignored report action command)
+          (runtime-submit runtime :assistant "later" :metadata '(:expected-clock 99))
+        (declare (ignore ignored report command)) (assert (eq action :defer)))
+      (assert (eq before (kernel-state-canonical (runtime-state runtime))))
+      (assert (= 1 (length (kernel-state-deferred-queue (runtime-state runtime))))))
+    t))

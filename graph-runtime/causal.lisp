@@ -1,0 +1,15 @@
+(in-package :chron-r2-0-a)
+
+(defun causal-subgraph (graph target-id)
+  "Return target's causal ancestry, root first, using only :CAUSAL edges."
+  (unless (get-node graph target-id) (error "Unknown target node: ~S" target-id))
+  (let ((seen (make-hash-table :test #'equal)) (ordered nil))
+    (labels ((visit (id)
+               (unless (gethash id seen)
+                 (setf (gethash id seen) t)
+                 (dolist (edge (causal-graph-edges graph))
+                   (when (and (eq (causal-edge-type edge) :causal)
+                              (equal (causal-edge-to edge) id))
+                     (visit (causal-edge-from edge))))
+                 (push (get-node graph id) ordered))))
+      (visit target-id) (nreverse ordered))))

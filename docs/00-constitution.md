@@ -63,7 +63,7 @@ Its representation is implementation-defined.
 
 ## 5. Commit
 
-Commit is the sole operation permitted to mutate Canonical.
+Only Commit may mutate any authoritative component of Canonical.
 
 Commit incorporates Evidence into Canonical.
 

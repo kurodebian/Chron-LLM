@@ -1,0 +1,98 @@
+(in-package :chron-r2-0-a)
+
+(defun %b-assert (condition description)
+  (unless condition (error "R2.0-B invariant failed: ~A" description)) t)
+
+(defun %b-fixture ()
+  (let* ((store (make-memory-store)) (graph (make-causal-graph))
+         (root (make-causal-node "root" :system (store-payload store "root")))
+         (head (make-causal-node "head" :prompt (store-payload store "head")))
+         (policy '(:include-evaluations nil)) (registry (make-world-registry :graph graph :memory store)))
+    (add-node! graph root) (add-node! graph head) (add-edge! graph (make-causal-edge "root" "head" :causal))
+    (values graph store policy registry)))
+
+(defun b1-world-creation ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture)
+    (let ((one (make-world "w1" graph store "root" "head" policy))
+          (two (make-world "w2" graph store "root" "head" policy)))
+      (register-world registry one) (register-world registry two)
+      (%b-assert (not (equal (world-id one) (world-id two))) "world ids are unique")
+      (%b-assert (handler-case (progn (register-world registry (make-world "w1" graph store "root" "head" policy)) nil)
+                   (error () t)) "world ids are never reused") t)))
+
+(defun b2-world-fork ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture)
+    (let* ((parent (make-world "parent" graph store "root" "head" policy '(:branch :parent)))
+           (child (fork-world parent "child")))
+      (register-world registry parent) (register-world registry child :parent-id "parent")
+      (%b-assert (equal (world-root-node child) "root") "fork root")
+      (%b-assert (equal (world-head-node child) "head") "fork head")
+      (%b-assert (equal (cdr (assoc "child" (world-registry-ancestry registry) :test #'equal)) "parent") "registry ancestry") t)))
+
+(defun b3-root-stability ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture) (declare (ignore registry))
+    (let ((world (make-world "w" graph store "root" "head" policy)))
+      (kernel-commit-world! world (make-causal-node "later" :assistant (store-payload store "later")))
+      (%b-assert (equal (world-root-node world) "root") "root remains immutable") t)))
+
+(defun b4-head-independence ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture) (declare (ignore registry))
+    (let* ((parent (make-world "p" graph store "root" "head" policy)) (child (fork-world parent "c")))
+      (kernel-commit-world! child (make-causal-node "child-head" :assistant (store-payload store "child")))
+      (%b-assert (equal (world-head-node parent) "head") "child commit cannot move parent") t)))
+
+(defun b5-projection-isolation ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture) (declare (ignore registry))
+    (let ((one (make-world "one" graph store "root" "head" policy))
+          (two (make-world "two" graph store "root" "head" '(:include-evaluations t))))
+      (%b-assert (not (equal (world-projection-policy one) (world-projection-policy two))) "policies isolated") t)))
+
+(defun b6-metadata-cow ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture) (declare (ignore registry))
+    (let* ((parent (make-world "p" graph store "root" "head" policy '(:label "parent"))) (child (fork-world parent "c")))
+      (replace-world-metadata! child '(:label "child"))
+      (%b-assert (equal (world-metadata parent) '(:label "parent")) "parent metadata unchanged")
+      (%b-assert (equal (world-metadata child) '(:label "child")) "child metadata replaced by copy") t)))
+
+(defun b7-graph-sharing ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture) (declare (ignore registry))
+    (let* ((parent (make-world "p" graph store "root" "head" policy)) (child (fork-world parent "c")))
+      (%b-assert (and (eq graph (world-graph-ref parent)) (eq graph (world-graph-ref child))
+                      (eq store (world-memory-ref parent)) (eq store (world-memory-ref child))) "shared graph and memory") t)))
+
+(defun b8-replay-independence ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture) (declare (ignore registry))
+    (let ((world (make-world "w" graph store "root" "head" policy '(:session "x"))))
+      (%b-assert (equal (replay-world world) (replay-world world)) "replay only uses constitutional input") t)))
+
+(defun b9-world-isolation ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture) (declare (ignore registry))
+    (let* ((one (make-world "one" graph store "root" "head" policy)) (two (fork-world one "two")))
+      (replace-world-metadata! one '(:private "one"))
+      (%b-assert (null (world-metadata two)) "world metadata cannot mutate another world") t)))
+
+(defun b10-commit-visibility ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture) (declare (ignore registry))
+    (let ((world (make-world "w" graph store "root" "head" policy))
+          (node (make-causal-node "committed" :assistant (store-payload store "commit"))))
+      (kernel-commit-world! world node)
+      (%b-assert (and (get-node graph "committed") (equal (world-head-node world) "committed")) "graph commit precedes visible head") t)))
+
+(defun b11-registry-persistence ()
+  (multiple-value-bind (graph store policy registry) (%b-fixture)
+    (let* ((parent (make-world "p" graph store "root" "head" policy)) (child (fork-world parent "c")))
+      (register-world registry parent) (register-world registry child :parent-id "p") (set-active-world registry "c")
+      (%b-assert (eq (find-world registry "c") child) "identity persists")
+      (%b-assert (eq (active-world registry) child) "active world persists")
+      (%b-assert (equal (cdr (assoc "c" (world-registry-ancestry registry) :test #'equal)) "p") "ancestry persists")
+      ;; Required Registry ABI deterministic checks: ordering, lookup, activation, archival rule.
+      (%b-assert (equal (mapcar #'world-id (list-worlds registry)) '("p" "c")) "list-worlds is deterministic")
+      (archive-world registry "p")
+      (%b-assert (handler-case (progn (set-active-world registry "p") nil) (error () t)) "archived cannot reactivate") t)))
+
+(defun run-r2-0-b-tests ()
+  (dolist (test '(b1-world-creation b2-world-fork b3-root-stability b4-head-independence
+                  b5-projection-isolation b6-metadata-cow b7-graph-sharing
+                  b8-replay-independence b9-world-isolation b10-commit-visibility
+                  b11-registry-persistence) t)
+    (%b-assert (funcall test) test)))
