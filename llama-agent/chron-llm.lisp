@@ -4,15 +4,20 @@
 (in-package :chron-llm)
 
 ;; =============================================================================
-;; 1. 共通データ構造 (ABI)
+;; 1. 共通データ構造 (ABI / System Types)
 ;; =============================================================================
-(defstruct (event (:conc-name ev-))
-  index 
-  clock 
-  causal-id 
-  kind 
-  payload)
 
+;;; 永続レコード: Header(システム管理) + Payload(利用者データ)
+;;; 純粋な ABI 定義。全レイヤから ev-* アクセサとして参照される。
+(defstruct (event (:conc-name ev-))
+  (index 0 :type integer)      ;; WAL位置
+  (clock 0 :type integer)      ;; 論理時計
+  (node-id 0 :type integer)    ;; 永続ID
+  (causal-id 0 :type integer)  ;; 世界線ID
+  (kind :unknown :type symbol) ;; イベント種別
+  (payload nil :type list))    ;; ユーザーデータ
+
+;;; 実行時ノード (旧来の互換・将来の拡張用)
 (defstruct (node (:constructor %make-node))
   id
   kind
