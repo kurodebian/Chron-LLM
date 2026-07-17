@@ -1,40 +1,68 @@
 # PHASE C — Event Interpretation Layer (Normative Charter)
 
 ## GOAL
-Derive structured semantic representation from History events via ABI.
+
+Derive Semantic Units from the Projection Model using the Event ABI contract.
 
 ## INPUT
-H : History
+
+M : Projection Model
+
+ABI : Event Interpretation Contract
+
 
 ## OUTPUT
-M = projection(H)  
-J = justification(M)
+
+S = interpret(M, ABI)
+
+J = j(S)
+
 
 ## CORE CONCEPTS
-- Event ABI introduces controlled interpretation boundary
-- Events are normalized into structured triples:
-  (role, type, payload)
+
+- Event ABI defines the interpretation boundary.
+- Interpretation derives normalized Semantic Units from Projection Model elements.
+- Semantic Units contain structured semantic fields.
+
 
 ## INVARIANTS
 
-CINV-1 Event ABI is versioned and explicit  
-CINV-2 Projection is deterministic over History  
-CINV-3 No mutation of History during projection  
-CINV-4 Model preserves event order  
-CINV-5 Justification is derived only from Model  
-CINV-6 No external semantic injection beyond ABI mapping  
+CINV-1 Interpretation is deterministic under a fixed Event ABI.
+
+CINV-2 Event ABI is explicit and versioned.
+
+CINV-3 Semantic Units are derived exclusively from the Projection Model.
+
+CINV-4 Interpretation preserves ordering defined by the Projection Model.
+
+CINV-5 Justification is derived only from Semantic Units.
+
+CINV-6 No external semantic injection beyond the Event ABI.
+
 
 ## SIGMA-4
 
 F0:
-A = H  
-M = d(H, ABI)  
-J = j(M)
+
+A = H
+
+M = d(H)
+
+S = interpret(M, ABI)
+
+J = j(S)
+
 
 C2:
+
 G(J, H)
 
+
 ## NON-GOALS
+
+Projection  
+Knowledge  
+Analysis  
 Full semantic reasoning  
 World modeling  
 Execution semantics  

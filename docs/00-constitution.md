@@ -1,4 +1,33 @@
-# Agent Causality Constitution (Frozen)
+# Agent Causality Constitution v1.0
+(Baseline Constitution)
+
+---
+
+# Purpose
+
+This Constitution defines the minimum constitutional principles governing authoritative causal state evolution.
+
+It specifies constitutional responsibilities rather than implementation.
+
+All implementation details remain outside the constitutional scope.
+
+---
+
+# Scope
+
+This Constitution defines only:
+
+* authoritative state
+* constitutional invariants
+* causal constraints
+
+Representation, algorithms, processing order, validation,
+storage, transport, synchronization, optimization,
+and implementation details are intentionally unspecified.
+
+Any implementation conforming to these constitutional constraints is valid.
+
+---
 
 ## 1. Fundamental Principles
 
@@ -7,6 +36,7 @@
 * Evidence consists of committed Events.
 * Evidence is causally ordered.
 * Derived is reproducible, deterministic, and non-authoritative.
+* Derived SHALL NOT introduce authoritative information.
 * Working is ephemeral and non-authoritative.
 * External is non-authoritative.
 
@@ -14,7 +44,7 @@
 
 ## 2. Session
 
-A Session consists of four abstract regions:
+A Session consists of four constitutional state categories:
 
 * Canonical
 * Working
@@ -32,6 +62,8 @@ Ephemeral, non-authoritative state.
 ### Derived
 
 A non-authoritative representation derived from Canonical.
+
+Derived does not possess authority.
 
 ### External
 
@@ -66,6 +98,8 @@ Its representation is implementation-defined.
 Only Commit may mutate any authoritative component of Canonical.
 
 Commit incorporates Evidence into Canonical.
+
+Commit establishes the next authoritative Canonical state.
 
 Commit preserves all constitutional invariants.
 
@@ -111,14 +145,10 @@ The ordering of non-authoritative processing is implementation-defined.
 
 ---
 
-## 9. Constitutional Scope
+## 9. Evolution
 
-This Constitution defines only:
+This Constitution intentionally specifies only the minimum constitutional constraints.
 
-* authoritative state
-* constitutional invariants
-* causal constraints
+Future amendments SHALL preserve constitutional consistency.
 
-Representation, algorithms, processing order, validation, storage, transport, synchronization, optimization, and implementation details are intentionally unspecified.
-
-Any implementation conforming to these constitutional constraints is valid.
+No new constitutional principle SHALL be introduced unless existing principles cannot adequately express the required constitutional responsibility.

@@ -1,39 +1,64 @@
-# PHASE D — Graph Execution Layer (Normative Charter)
+# PHASE D — Graph Structure Layer (Normative Charter)
 
 ## GOAL
-Construct executable relational graph from structured semantic model.
+
+Construct the deterministic relational graph from the structured semantic model.
 
 ## INPUT
-M : Model (Phase C)
+
+S : Semantic Model (Phase C)
 
 ## OUTPUT
-G = graph(M)
+
+G : Relational Graph
+G = graph(S)
+
+---
 
 ## CORE CONCEPTS
-- Nodes represent identity anchors (derived from model indices)
-- Edges represent relational transitions between nodes
-- Graph is executable under traversal semantics
+
+- Nodes represent identity anchors derived from Semantic Units.
+- Edges represent structural relations between nodes.
+- Graph represents deterministic relational structure.
+
+---
 
 ## INVARIANTS
 
-DINV-1 Graph construction is deterministic from Model  
-DINV-2 Nodes preserve identity consistency across edges  
-DINV-3 Edges are pure structural relations (no external semantics)  
-DINV-4 Traversal is deterministic given ordering rules  
-DINV-5 Graph contains no interpretation layer beyond structure  
+DINV-1 Graph construction is deterministic from Semantic Model.
+DINV-2 Nodes preserve identity consistency across relations.
+DINV-3 Edges represent structural relations only.
+DINV-4 Graph traversal is deterministic under its specified ordering rules.
+DINV-5 Graph contains no interpretation or meaning attribution.
+DINV-6 Graph does not introduce authoritative information.
+
+---
 
 ## SIGMA-4
 
 F0:
-M → G  
-G = (V, E)
+
+H → M → S → G
+
+where:
+
+H = History
+M = Projection Model
+S = Semantic Model
+G = Relational Graph
 
 C2:
+
 T(G)
 
+---
+
 ## NON-GOALS
-Semantic interpretation  
-ABI processing  
-Observation semantics  
-Meaning attribution  
+
+Semantic interpretation
+Event ABI processing
+Observation semantics
+Meaning attribution
 External world binding
+Knowledge generation
+Runtime execution
