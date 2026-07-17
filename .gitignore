@@ -1,3 +1,9 @@
 phi-log-generic.txt.backup
 *.backup
 lisp/phi-lisp-pipeline-intent.lisp
+
+# Temporary / cache files
+.vscode/alive/fasl/
+*.fasl
+*.backup
+phi-log*.txt
