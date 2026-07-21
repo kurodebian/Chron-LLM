@@ -4,8 +4,6 @@
 **Version:** R1  
 **Scope:** Formal operational semantics of the Chron-LLM runtime.
 
----
-
 # 1. Purpose
 
 This specification defines the operational semantics of the deterministic Chron-LLM runtime.
@@ -13,8 +11,6 @@ This specification defines the operational semantics of the deterministic Chron-
 It specifies the observable behavior of the core runtime operations while remaining independent of implementation details.
 
 This document defines **what** each operation means, not **how** it is implemented.
-
----
 
 # 2. Commit
 
@@ -44,8 +40,8 @@ Canonical'
 
 ## Preconditions
 
-- Event has passed Validation.
-- Kernel has selected `accept`.
+- The originating Candidate has passed Validation.
+- PolicyRouter has produced a `commit-request`.
 
 ## Postconditions
 
@@ -54,20 +50,18 @@ Canonical'
 
 ## Failure Semantics
 
-Commit SHALL either:
+Commit SHALL either
 
 - complete atomically, or
 - leave Canonical unchanged.
 
 Partial commits are prohibited.
 
----
-
 # 3. Replay
 
 ## Purpose
 
-Replay reconstructs deterministic runtime context from Canonical.
+Replay reconstructs the execution context required for deterministic runtime execution from Canonical.
 
 ## Input
 
@@ -85,21 +79,20 @@ Summary
 
 ## Observable Behavior
 
-Replay SHALL be
+Replay SHALL
 
-- deterministic
-- reproducible
-- side-effect-free
+- reconstruct the execution context from Canonical
+- be deterministic
+- be reproducible
+- be side-effect-free
 
 Replay SHALL NOT mutate Canonical.
-
----
 
 # 4. Derive
 
 ## Purpose
 
-Derive computes non-authoritative runtime representations from Canonical.
+Derive computes the complete non-authoritative runtime representation from Canonical.
 
 ## Input
 
@@ -118,6 +111,7 @@ Derived MAY include
 - Projection
 - Graph
 - Summary
+- Analysis
 
 ## Observable Behavior
 
@@ -127,7 +121,9 @@ Derive SHALL
 - produce identical outputs for identical Canonical
 - perform no state mutation
 
----
+Replay reconstructs the execution context used by the Runtime.
+
+Derive produces the complete Derived representation.
 
 # 5. Validation
 
@@ -158,9 +154,7 @@ Validation SHALL
 - perform no routing
 - perform no state mutation
 
-Interpretation of ValidationReport is delegated to PolicyRouter.
-
----
+Interpretation of ValidationReport is delegated exclusively to PolicyRouter.
 
 # 6. Candidate Lifecycle
 
@@ -176,30 +170,28 @@ Validated
 PolicyRouter
         │
         ▼
-Action
+RuntimeRequest
         │
-        ├────────────► accept
+        ├────────────► commit-request
         │                  │
         │                  ▼
-        │              Commit
+        │               Commit
         │
-        ├────────────► reject
+        ├────────────► reject-request
         │
-        ├────────────► defer
+        ├────────────► defer-request
         │                  │
         │                  ▼
         │          DeferredQueue
         │
-        ├────────────► retry
+        ├────────────► retry-request
         │
-        ├────────────► retry-penalty
+        ├────────────► retry-penalty-request
         │
-        └────────────► abort
+        └────────────► abort-request
 ```
 
-Only the `accept` path may produce authoritative state mutation.
-
----
+Only `commit-request` may produce authoritative state mutation.
 
 # 7. Recovery
 
@@ -227,12 +219,12 @@ Recovery MAY
 - destroy runtime caches
 - reconstruct Prefill
 - resume execution
+- reconstruct Derived
+- reconstruct Working
 
-Recovery SHALL NOT modify Canonical directly.
+Recovery SHALL NOT modify Canonical.
 
 Canonical mutation remains exclusively the responsibility of Commit.
-
----
 
 # 8. Worldline Branching
 
@@ -259,18 +251,22 @@ Branching MAY
 
 - destroy KV cache
 - reconstruct Prefill
+- reconstruct Derived
+- reconstruct Working
 - traverse causal Graph
+
+Branching SHALL NOT mutate Canonical.
 
 The new causal-id becomes authoritative only after Commit.
 
----
+Canonical mutation remains exclusively the responsibility of Commit.
 
 # 9. State Transitions
 
 The deterministic runtime transition function is
 
 ```
-KernelState × Action
+KernelState × RuntimeRequest
         │
         ▼
 KernelState'
@@ -280,8 +276,6 @@ Only the Kernel performs state transitions.
 
 Validation and PolicyRouter are pure functions.
 
----
-
 # 10. Determinism
 
 The following operations SHALL be deterministic:
@@ -289,12 +283,10 @@ The following operations SHALL be deterministic:
 - Replay
 - Derive
 - Validation
-- PolicyRouter
+- PolicyRouter (RuntimeRequest generation)
 - Kernel State Transition
 
 The Backend (LLM generation) is explicitly non-deterministic.
-
----
 
 # 11. Constitutional Constraints
 

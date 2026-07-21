@@ -2,7 +2,9 @@ Runtime R1
 
 Reference implementation.
 
-Non-normative. Conforms to:
+Non-normative.
+
+Conforms to:
 
 - Agent Causality Constitution
 - Phase A–F
@@ -13,12 +15,14 @@ Non-normative. Conforms to:
 - Scheduling R1
 - Worldline R1
 
-Includes:
+Coordinates the following runtime components:
 
-- chat-loop
+- Chat Loop
 - Prompt Builder
-- Backend
-- Memory integration
-- Validation policy
-- Runtime scheduling
-- Persistence
+- LLM Backend
+- Memory Integration
+- Validation Pipeline Integration
+- Runtime Scheduling
+- Persistence Integration
+
+This document specifies how the reference runtime composes existing normative components into an executable runtime. It introduces no additional runtime semantics.

@@ -4,107 +4,72 @@
 **Version:** R1  
 **Scope:** Deterministic authoritative state transitions executed by the Kernel.
 
----
-
 # 1. Purpose
 
 This specification defines the deterministic state transitions executed by the Chron-LLM Kernel.
 
-The Validation Pipeline collects facts.
+The Kernel is the sole component authorized to execute RuntimeRequests and mutate the authoritative system state.
 
-The PolicyRouter determines an Action.
+This document defines **how authoritative state changes**.
 
-The Kernel is the **sole component authorized to execute that Action and mutate the authoritative system state**.
-
-This document separates execution semantics from decision semantics, ensuring that the Kernel remains the deterministic execution core of the architecture.
-
----
+It does not define Validation, PolicyRouter, or Runtime behavior.
 
 # 2. Design Principles
 
 ## Single Mutator
 
-Only the Kernel may mutate:
+Only the Kernel may mutate
 
 - Canonical
 - DeferredQueue
-- FaultEvent log
-
----
+- FaultEvent Log
 
 ## Deterministic State Transition
 
-The Kernel performs:
+The Kernel performs
 
 - no validation
-- no interpretation
+- no policy interpretation
 - no external I/O
-- no LLM invocation
+- no Backend invocation
 
-Given identical inputs, the Kernel MUST produce identical outputs.
-
----
+Given identical inputs, the Kernel SHALL produce identical outputs.
 
 ## Runtime Separation
 
-The Kernel does not execute external operations.
+The Kernel emits RuntimeCommands.
 
-Instead, it emits a non-authoritative `RuntimeCommand` for execution by the Runtime.
-
-Execution of a RuntimeCommand is outside the scope of this specification.
-
----
+Execution of RuntimeCommands belongs exclusively to the Runtime.
 
 ## Clock-Driven Execution
 
-State evolution depends only on Canonical advancement.
+Kernel state evolution depends solely on Canonical advancement.
 
-No wall-clock time participates in state transitions.
-
----
+Wall-clock time shall not affect Kernel state transitions.
 
 # 3. Kernel State
 
-The Kernel operates on the composite KernelState.
+The Kernel operates on
 
 ```
-KernelState :=
-
-    Canonical
-    DeferredQueue
-    Working
+KernelState
 ```
 
-where
+whose structure is defined by the Domain Model.
 
-```
-Canonical :=
+KernelState contains
 
-    History
-    Config
-    MemoryRef
-```
-
-```
-Working :=
-
-    Candidate
-    Prompt
-    Backend
-    IR
-    Metrics
-    Lookup
-```
-
----
+- Canonical
+- DeferredQueue
+- Working
 
 # 4. Kernel Function
 
-The Kernel is defined as the deterministic transition function
+The deterministic transition function is
 
 ```
 Kernel(
-    Action,
+    RuntimeRequest,
     KernelState,
     Config
 )
@@ -117,19 +82,16 @@ Kernel(
 
 where
 
-- `Action` is produced by PolicyRouter.
-- `KernelState` is the current runtime state.
-- `RuntimeCommand` is a request emitted to the Runtime.
-
-The Kernel never communicates directly with the Backend.
-
----
+- RuntimeRequest is produced by PolicyRouter.
+- RuntimeCommand is consumed by the Runtime.
 
 # 5. RuntimeCommand
 
-RuntimeCommand is a non-authoritative instruction emitted by the Kernel.
+The RuntimeCommand domain object is defined by the Domain Model.
 
-Typical commands include
+This specification defines its execution semantics.
+
+Typical commands are
 
 ```
 proceed
@@ -145,17 +107,13 @@ regenerate-with-penalty
 terminate
 ```
 
-Execution of RuntimeCommand belongs exclusively to the Runtime.
-
----
+Execution semantics belong to the Runtime.
 
 # 6. State Transition Rules
 
-## accept
+## commit-request
 
-The Candidate is accepted.
-
-The Candidate is materialized into one or more canonical Events.
+The Candidate is materialized into one or more Events.
 
 ```
 Working.Candidate
@@ -167,7 +125,7 @@ Event Mapping
 Commit(Event)
 ```
 
-### Mutation
+Mutation
 
 ```
 Canonical.History++
@@ -185,11 +143,11 @@ Canonical.MemoryRef++
 
 Lamport Clock advances.
 
-DeferredQueue is unchanged.
+DeferredQueue remains unchanged.
 
 Working is reinitialized.
 
-### RuntimeCommand
+RuntimeCommand
 
 ```
 proceed
@@ -197,24 +155,19 @@ proceed
 
 ---
 
-## reject
+## reject-request
 
-The Candidate is permanently discarded.
-
-### Mutation
+Mutation
 
 ```
-Canonical
-    unchanged
+Canonical unchanged
 
-DeferredQueue
-    unchanged
+DeferredQueue unchanged
 
-Working
-    reinitialized
+Working reinitialized
 ```
 
-### RuntimeCommand
+RuntimeCommand
 
 ```
 discard
@@ -222,11 +175,9 @@ discard
 
 ---
 
-## defer
+## defer-request
 
-The Candidate is temporarily postponed.
-
-### Mutation
+Mutation
 
 ```
 DeferredQueue.enqueue(
@@ -237,14 +188,12 @@ DeferredQueue.enqueue(
 ```
 
 ```
-Canonical
-    unchanged
+Canonical unchanged
 
-Working
-    preserved
+Working preserved
 ```
 
-### RuntimeCommand
+RuntimeCommand
 
 ```
 sleep
@@ -252,24 +201,19 @@ sleep
 
 ---
 
-## retry
+## retry-request
 
-Generation should be attempted again using the same Canonical state.
-
-### Mutation
+Mutation
 
 ```
-Canonical
-    unchanged
+Canonical unchanged
 
-DeferredQueue
-    unchanged
+DeferredQueue unchanged
 
-Working
-    preserved
+Working preserved
 ```
 
-### RuntimeCommand
+RuntimeCommand
 
 ```
 regenerate
@@ -277,35 +221,29 @@ regenerate
 
 ---
 
-## retry-penalty
+## retry-penalty-request
 
-Generation should be retried with an adjusted decoding policy.
-
-### Mutation
+Mutation
 
 ```
-Canonical
-    unchanged
+Canonical unchanged
 
-DeferredQueue
-    unchanged
+DeferredQueue unchanged
 ```
 
 ```
-Working.GenerationPolicy
-    updated
+Working.GenerationPolicy updated
 ```
 
 or
 
 ```
-Working.DecodingPolicy
-    updated
+Working.DecodingPolicy updated
 ```
 
-according to the configured penalty strategy.
+according to the configured penalty policy.
 
-### RuntimeCommand
+RuntimeCommand
 
 ```
 regenerate-with-penalty
@@ -313,42 +251,31 @@ regenerate-with-penalty
 
 ---
 
-## abort
+## abort-request
 
-A fatal unrecoverable failure has occurred.
-
-### Mutation
+Mutation
 
 ```
-Canonical
-    unchanged
+Canonical unchanged
 
-DeferredQueue
-    unchanged
+DeferredQueue unchanged
 
-Working
-    preserved
+Working preserved
 ```
 
 Kernel emits a deterministic FaultEvent.
 
-### RuntimeCommand
+RuntimeCommand
 
 ```
 terminate
 ```
 
----
-
-# 7. DeferredQueue Semantics
+# 7. DeferredQueue
 
 DeferredQueue is owned exclusively by the Kernel.
 
-Validation cannot enqueue.
-
-PolicyRouter cannot enqueue.
-
-Deferred candidates are revalidated only after Canonical advances.
+Candidates are revalidated only after Canonical advances.
 
 Wakeup condition
 
@@ -374,8 +301,6 @@ Revalidation
 
 Timeout-based wakeup is outside the scope of R1.
 
----
-
 # 8. Canonical Advancement
 
 Canonical advances if and only if Commit succeeds.
@@ -387,35 +312,29 @@ Canonical advancement consists of
 3. MemoryRef update (when applicable)
 4. Lamport Clock increment
 
-Canonical advancement is the only trigger for DeferredQueue wakeup.
-
----
+Canonical advancement is the sole trigger for DeferredQueue wakeup.
 
 # 9. FaultEvent
 
-Kernel emits a FaultEvent only during an `abort` transition.
+FaultEvent is emitted only during an `abort-request` transition.
 
-FaultEvent records deterministic diagnostic information for post-mortem analysis.
-
-FaultEvent does not belong to Canonical History.
+FaultEvent is non-authoritative.
 
 Its ABI is defined in
 
 ```
-05-validation-pipeline-r0.md
+01-domain-model.md
 ```
-
----
 
 # 10. Determinism Guarantee
 
 Given identical
 
 - KernelState
+- RuntimeRequest
 - Config
-- Action
 
-the Kernel MUST always produce identical
+the Kernel SHALL always produce identical
 
 - KernelState'
 - RuntimeCommand
@@ -427,42 +346,20 @@ independent of
 - operating system
 - execution timing
 
----
-
 # 11. Constitutional Invariants
 
 The following invariants are enforced.
 
-- Validation determines what is true.
-- PolicyRouter determines what should happen.
-- Kernel determines how state changes.
-- Runtime performs external execution.
 - Only Commit may mutate Canonical.
-- Kernel never invokes the LLM Backend.
 - RuntimeCommand never mutates Canonical.
 - DeferredQueue is owned exclusively by the Kernel.
+- Kernel never invokes the Backend.
 - Kernel state transitions are deterministic and atomic.
-
----
 
 # 12. Architectural Position
 
-The Kernel occupies the deterministic execution boundary.
-
 ```
-Candidate
-        │
-        ▼
-Validation
-        │
-        ▼
-ValidationReport
-        │
-        ▼
-PolicyRouter
-        │
-        ▼
-Action
+RuntimeRequest
         │
         ▼
 Kernel
@@ -477,4 +374,4 @@ RuntimeCommand
 Runtime
 ```
 
-This separation guarantees that probabilistic LLM behavior never directly mutates the authoritative system state.
+The Kernel forms the deterministic execution boundary between PolicyRouter and Runtime.

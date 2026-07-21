@@ -17,7 +17,7 @@ G = graph(S)
 
 ## CORE CONCEPTS
 
-- Nodes represent identity anchors derived from Semantic Units.
+- Nodes represent identity anchors derived from Semantic Model.
 - Edges represent structural relations between nodes.
 - Graph represents deterministic relational structure.
 

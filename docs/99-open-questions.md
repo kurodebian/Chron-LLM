@@ -7,8 +7,6 @@ or intentionally deferred to future revisions.
 
 Nothing in this document is normative.
 
----
-
 # Domain
 
 ## Event Identity
@@ -18,8 +16,6 @@ Nothing in this document is normative.
 - Lamport Clock
 - Composite Identifier
 
----
-
 ## Event Metadata
 
 - timestamp
@@ -28,23 +24,17 @@ Nothing in this document is normative.
 - causal-parent
 - implementation-specific metadata
 
----
-
 ## Candidate Representation
 
 - OperationIR versioning
 - serialization format
 - compatibility strategy
 
----
-
 ## Evidence Representation
 
 - committed Event encoding
 - storage format
 - replay compatibility
-
----
 
 ## Versioning Strategy
 
@@ -53,16 +43,12 @@ Nothing in this document is normative.
 - ValidationReport ABI
 - FaultEvent ABI
 
----
-
 # Runtime
 
 ## Commit
 
 - idempotency semantics
 - atomicity guarantees
-
----
 
 ## Replay
 
@@ -71,8 +57,6 @@ Replay scope:
 - History only
 - History + Config
 - History + Config + MemoryRef
-
----
 
 ## Configuration
 
@@ -86,14 +70,10 @@ Config schema:
 - metrics
 - telemetry
 
----
-
 ## External Consistency
 
 - LTM synchronization
 - external storage update semantics
-
----
 
 ## Memory
 
@@ -103,16 +83,12 @@ MemoryRef architecture:
 - cache strategy
 - persistence model
 
----
-
 ## Scheduling
 
 - Candidate scheduling
 - DeferredQueue ordering
 - fairness policy
 - starvation prevention
-
----
 
 ## Tool Execution
 
@@ -121,15 +97,11 @@ MemoryRef architecture:
 - failure propagation
 - timeout policy
 
----
-
 ## Recovery
 
 - restart behavior
 - crash recovery
 - replay guarantees
-
----
 
 # Future Extensions
 
@@ -142,8 +114,6 @@ MemoryRef architecture:
 - Federated Memory
 - Cross-agent replay
 
----
-
 ## Causal Models
 
 - Causal DAG
@@ -152,16 +122,12 @@ MemoryRef architecture:
 - Tool-event causal ordering
 - Cross-session evidence linking
 
----
-
 ## Validation Extensions
 
 - additional detectors
 - additional invariant categories
 - pluggable PolicyRouter implementations
 - configurable routing strategies
-
----
 
 ## Runtime Extensions
 

@@ -1,564 +1,281 @@
 # Chron-LLM Validation Pipeline Specification
-## Release R0 (Frozen)
 
-**Status:** FROZEN  
-**Version:** R0  
-**Scope:** Chron-LLM Deterministic Validation Kernel  
-**Compatibility:** Forward Compatible (R1+ Extension Model)
-
----
+**Status:** Normative  
+**Version:** R1  
+**Scope:** Deterministic validation and policy routing.
 
 # 1. Purpose
 
-This specification defines the deterministic validation boundary between non-deterministic LLM generation and the deterministic Chron-LLM kernel.
-The Validation Pipeline is responsible only for collecting objective facts regarding a Candidate.
-Interpretation of those facts is delegated to PolicyRouter.
-Mutation of system state is delegated exclusively to Kernel.
-This separation guarantees deterministic behavior while allowing future extension of validators, detectors, and routing policies without changing the core ABI.
+This specification defines the deterministic validation boundary between non-authoritative Candidate generation and the deterministic Chron-LLM runtime.
 
----
+The Validation Pipeline is responsible for:
+
+- collecting objective facts
+- producing a ValidationReport
+- interpreting those facts through PolicyRouter
+- producing a RuntimeRequest
+
+This document does **not** define:
+
+- kernel state transitions
+- canonical mutation
+- deferred execution
+- runtime execution
+
+These are defined by the Kernel State Machine.
 
 # 2. Design Principles
 
 ## DP-1. Separation of Responsibilities
 
 Validation performs validation only.
-PolicyRouter performs interpretation only.
-Kernel performs state transition only.
 
----
+PolicyRouter performs interpretation only.
+
+Kernel performs state transition only.
 
 ## DP-2. Fact-Oriented Reporting
 
 Validation never returns decisions.
-Validation returns facts only.
-No PASS/FAIL state is required.
-Success is represented by the absence of violations.
 
----
+Validation returns facts only.
+
+No PASS/FAIL state is required.
+
+Success is represented by the absence of violations.
 
 ## DP-3. Deterministic Validation
 
-Given identical input:
+Given identical
+
 - Candidate
 - Canonical
 - Config
+
 Validation MUST produce an identical ValidationReport.
-Validation MUST NOT depend on timing, randomness, or external mutable state.
 
----
+Validation MUST NOT depend on
 
-## DP-4. Kernel Authority
+- timing
+- randomness
+- external mutable state
 
-Only Kernel may mutate:
-- Canonical
-- DeferredQueue
-- Event Log
-- World State
-Validation and PolicyRouter are pure functions.
-
----
-
-## DP-5. Configuration Independence
+## DP-4. Configuration Independence
 
 Configuration MAY modify routing policy.
-Configuration MUST NOT modify validation semantics.
 
----
+Configuration MUST NOT modify
 
-# 3. System Architecture
+- validation semantics
+- observation measurement semantics
+
+# 3. Pipeline
 
 ```
 Candidate
-        │
-        ▼
-+----------------------+
-|     Validation       |
-+----------------------+
-        │
-        ▼
+      │
+      ▼
+Validation
+      │
+      ▼
 ValidationReport
-(Facts Only)
-        │
-        ▼
-+----------------------+
-|    PolicyRouter      |
-+----------------------+
-        │
-        ▼
-Action
-        │
-        ▼
-+----------------------+
-|       Kernel         |
-+----------------------+
-        │
-        ├──────────────┐
-        ▼              │
-Canonical      DeferredQueue
-        ▲              │
-        └────Clock─────┘
+      │
+      ▼
+PolicyRouter
+      │
+      ▼
+RuntimeRequest
+      │
+      ▼
+Kernel
 ```
 
----
+RuntimeRequest is consumed exclusively by the Kernel.
 
-# 4. Validation Pipeline
+Kernel behavior is defined by the Kernel State Machine.
 
-Validation consists of four independent layers.
-Execution order is deterministic.
+# 4. Validation Layers
+
+Validation consists of four deterministic layers.
+
 ```
 SyntaxCheck
-        │
-SemanticCheck
-        │
+      │
+      ▼
+SemanticConsistencyCheck
+      │
+      ▼
 InvariantCheck
-        │
+      │
+      ▼
 ObservationCheck
-        │
+      │
+      ▼
 ValidationReport
 ```
-Each layer contributes facts.
+
+Each layer contributes objective facts.
+
 No layer performs routing.
-No layer mutates system state.
 
----
+No layer mutates runtime state.
 
-# 5. ValidationReport ABI
+# 5. ValidationReport
 
-```lisp
+```
 ValidationReport
 {
-    candidate-id : CandidateID
-    syntax-violations : [SyntaxViolation]
-    semantic-violations : [SemanticViolation]
-    invariant-violations : [InvariantViolation]
-    observations : [Observation]
+    candidate-id
+    syntax-violations
+    semantic-violations
+    invariant-violations
+    observations
 }
 ```
-Empty arrays represent successful validation.
 
----
+ValidationReport contains facts only.
 
-# 6. SyntaxViolation
+It contains no routing decision.
 
-```lisp
-SyntaxViolation
-{
-    code : Symbol
-    reason : String
-}
+# 6. Observation
+
+Observation records structural runtime facts.
+
 ```
-Examples:
-- ParseError
-- InvalidToken
-- UnsupportedFormat
-
----
-
-# 7. SemanticViolation
-
-```lisp
-SemanticViolation
-{
-    code : Symbol
-    reason : String
-}
-```
-Examples:
-- MissingMemoryReference
-- InvalidMetadata
-- CanonicalConflict
-
----
-
-# 8. InvariantViolation
-
-```lisp
-InvariantViolation
-{
-    category : Symbol
-    code : Symbol
-    recoverable : Boolean
-}
-```
-Categories:
-- Clock
-- Identity
-- ABI
-- Generation
-- History
-Examples:
-```
-Clock
-    MonotonicViolation
-Identity
-    DuplicateID
-ABI
-    EventMismatch
-Generation
-    PartialGenerationViolation
-History
-    DependencyUnavailable
-```
-Recoverability:
-```
-false
-    Permanent violation
-true
-    Temporary synchronization issue
-```
-
----
-
-# 9. Observation
-
-```lisp
 Observation
 {
-    detector : Symbol
-    score : Float
-    threshold : Float
-    recommendation : Recommendation
+    detector
+    score
+    threshold
+    facts
 }
 ```
-Recommendation is one of:
+
+Observation
+
+- contains no routing logic
+- contains no runtime decision
+- never rejects a Candidate
+
+# 7. PolicyRouter
+
+PolicyRouter consumes a ValidationReport and produces a RuntimeRequest.
+
 ```
-retry
-retry-penalty
-abort
-```
-Observation contains no routing logic.
-It merely reports detector output.
-
----
-
-# 10. Validation Layer Specifications
-
----
-
-## 10.1 SyntaxCheck
-
-Purpose:
-Validate structural correctness.
-Input:
-```
-Candidate
-```
-Output:
-```
-SyntaxViolation*
-```
-Properties:
-- deterministic
-- pure
-- stateless
-
----
-
-## 10.2 SemanticCheck
-
-Purpose:
-Validate semantic consistency against Canonical.
-Input:
-```
-Candidate
-Canonical
-```
-Checks include:
-- payload consistency
-- metadata validity
-- history references
-Output:
-```
-SemanticViolation*
-```
-Properties:
-- deterministic
-- canonical-only
-
----
-
-## 10.3 InvariantCheck
-
-Purpose:
-Validate deterministic kernel invariants.
-Checks include:
-Clock
-Identity
-ABI
-Generation
-History
-Output:
-```
-InvariantViolation*
-```
-
----
-
-## 10.4 ObservationCheck
-
-Purpose:
-Observe runtime anomalies.
-Observation does not reject.
-Observation produces Observation objects.
-Standard detectors (R0):
-```
-EchoDetector
-StagnationDetector
-DriftDetector
-DiscontinuityDetector
-```
-Additional detectors may be introduced in future versions.
-No ABI modification is required.
-
----
-
-# 11. PolicyRouter
-
-PolicyRouter consumes ValidationReport.
-It performs no validation.
-It performs no observation.
-It performs interpretation only.
-Signature:
-```lisp
 PolicyRouter(
     ValidationReport,
     Config
 )
-→ Action
+→ RuntimeRequest
 ```
 
----
+RuntimeRequest is declarative.
 
-# 12. Routing Rules
+It requests a runtime operation.
 
-Rules are evaluated in priority order.
+It performs no state transition.
 
----
+# 8. RuntimeRequest
 
-## Rule 1
+The RuntimeRequest domain object is defined by the Domain Model.
 
-If
+This specification defines the permitted RuntimeRequest kinds.
+
 ```
-syntax-violations ≠ ∅
-```
-Return
-```
-reject
-```
+RuntimeRequest ∈ {
 
----
+    commit-request
 
-## Rule 2
+    reject-request
 
-If
-```
-semantic-violations ≠ ∅
-```
-Return
-```
-reject
-```
+    defer-request
 
----
+    retry-request
 
-## Rule 3
+    retry-penalty-request
 
-If any
-```
-InvariantViolation
-recoverable = false
-```
-Return
-```
-reject
-```
+    abort-request
 
----
-
-## Rule 4
-
-If
-```
-InvariantViolation
-recoverable = true
-```
-and no unrecoverable violation exists
-Return
-```
-defer
-```
-
----
-
-## Rule 5
-
-If observations exist whose
-```
-score >= threshold
-```
-Return the highest recommendation.
-Priority:
-```
-abort
->
-retry-penalty
->
-retry
-```
-
----
-
-## Rule 6
-
-If no violations exist
-and no observation exceeds threshold
-Return
-```
-accept
-```
-
----
-
-# 13. DeferredQueue
-
-DeferredQueue is owned exclusively by Kernel.
-Validation cannot enqueue.
-PolicyRouter cannot enqueue.
-Kernel enqueues after Action == defer.
-
----
-
-## Wakeup Condition
-
-DeferredQueue SHALL NOT use timeout.
-Deferred candidates SHALL be revalidated only after Canonical advances.
-Trigger:
-```
-Canonical Commit
-↓
-Lamport Clock++
-↓
-DeferredQueue Wakeup
-↓
-Revalidation
-```
-This guarantees deterministic replay.
-
----
-
-# 14. Kernel Actions
-
-Possible actions:
-```
-accept
-reject
-defer
-retry
-retry-penalty
-abort
-```
-Only Kernel executes actions.
-
----
-
-# 15. FaultEvent ABI
-
-```lisp
-FaultEvent
-{
-    id : FaultID
-    clock : LamportClock
-    origin : Symbol
-    cause : String
-    detector : Symbol
-    candidate-id : CandidateID
-    extensions : Map
 }
 ```
-Origin examples:
+
+The semantics of RuntimeRequest execution are defined by the Kernel State Machine.
+
+# 9. Routing Rules
+
+The following rules define the deterministic evaluation order.
+
+The resulting RuntimeRequest is determined according to the configured routing policy.
+
 ```
-Validation
-Scheduler
-Commit
-Replay
+syntax violation
+        ↓
+reject-request
+
+semantic violation
+        ↓
+reject-request
+
+unrecoverable invariant
+        ↓
+reject-request
+
+recoverable invariant
+        ↓
+defer-request
+
+observation threshold exceeded
+        ↓
+configured retry /
+retry-penalty /
+abort
+
+otherwise
+        ↓
+commit-request
 ```
-Extensions MAY contain implementation-specific debugging information.
 
----
+# 10. Configuration
 
-# 16. Configuration
+Configuration MAY define
 
-Configuration belongs outside Validation.
-Examples:
+- retry limit
+- penalty strategy
+- detector thresholds
+- routing policy
+
+Configuration SHALL NOT modify
+
+- validation semantics
+- observation semantics
+
+# 11. Determinism Guarantee
+
+The following functions are deterministic.
+
 ```
-retry-limit
-penalty-strategy
-detector-thresholds
-logging
-metrics
-telemetry
-```
-Configuration SHALL NOT alter validation semantics.
-
----
-
-# 17. Extension Rules
-
-Future versions MAY add:
-- new detectors
-- new invariant categories
-- new recommendation strategies
-- new policy implementations
-Future versions MUST NOT:
-- mutate ValidationReport semantics
-- change Kernel authority
-- introduce state mutation inside Validation
-
----
-
-# 18. Determinism Guarantee
-
-The following function is deterministic:
-```
-(Candidate,
- Canonical,
- Config)
+(Candidate, Canonical, Config)
         │
         ▼
 ValidationReport
 ```
-The following function is deterministic:
 
 ```
-(ValidationReport,
- Config)
+(ValidationReport, Config)
         │
         ▼
-Action
+RuntimeRequest
 ```
-Kernel is the sole owner of state transition.
 
----
+# 12. Constitutional Invariants
 
-# 19. Frozen Constitutional Invariants
+The following principles are constitutionally frozen.
 
-The following principles are constitutionally frozen in R0.
-1. Validation collects facts only.
-2. ValidationReport contains facts only.
-3. PolicyRouter interprets facts only.
-4. Kernel is the only component allowed to mutate state.
-5. DeferredQueue is owned by Kernel.
-6. Validation is deterministic.
-7. Policy is configurable.
-8. Semantics are immutable.
-
----
-
-# End of Specification
-
-**Document Status:** FROZEN
-
-**Release:** Chron-LLM Validation Pipeline R0
-
-**This document defines the deterministic observation boundary between probabilistic LLM generation and the Chron-LLM deterministic kernel.**
+- Validation collects facts only.
+- ValidationReport contains facts only.
+- Observation contains structural facts only.
+- PolicyRouter interprets facts only.
+- Validation is deterministic.
+- RuntimeRequest is declarative.
+- RuntimeRequest is consumed exclusively by the Kernel.
+- Configuration cannot change validation semantics.

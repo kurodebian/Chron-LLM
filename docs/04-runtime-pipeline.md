@@ -1,18 +1,34 @@
-# Agent Runtime Specification
+# Agent Runtime Pipeline
 
 **Status:** Normative  
 **Version:** R1  
-**Scope:** Runtime execution pipeline and integration points
+**Scope:** Runtime execution pipeline and component integration.
 
----
+# 1. Purpose
 
-# Runtime Flow
+This specification defines the execution pipeline of the Chron-LLM runtime.
+
+It specifies the ordering and integration of runtime components.
+
+This document defines **where** each component participates in execution.
+
+It does **not** define:
+
+- data models
+- operational semantics
+- validation rules
+- kernel state transitions
+- implementation details
+
+These are specified by their respective normative specifications.
+
+# 2. Runtime Flow
 
 ```
 Input
     │
     ▼
-Event(user)
+Event
     │
     ▼
 Commit
@@ -33,15 +49,13 @@ Summary
 Prompt Builder
     │
     ▼
-Backend (LLM)
+Backend
     │
     ▼
-Candidate (OperationIR)
+Candidate
     │
     ▼
 Validation
-    │
-    ├──────────────► ObservationCheck(Graph, Candidate)
     │
     ▼
 ValidationReport
@@ -50,244 +64,126 @@ ValidationReport
 PolicyRouter
     │
     ▼
-Action
+RuntimeRequest
     │
     ▼
 Kernel
     │
     ▼
-Action Dispatch
+RuntimeCommand
     │
-    ├──────────────► Commit(Event)
-    │                    │
-    │                    ▼
-    │                 Canonical
-    │                    │
-    │                    ▼
-    │                  Replay
-    │                    │
-    │                    ▼
-    │                  Derived
-    │
-    ├──────────────► DeferredQueue
-    │                    │
-    │                    ▼
-    │          Canonical Advance
-    │                    │
-    │                    ▼
-    │              Revalidation
-    │
-    ├──────────────► Retry
-    │
-    ├──────────────► RetryPenalty
-    │
-    └──────────────► Abort
-                         │
-                         ▼
-                    FaultEvent
+    ▼
+Runtime
 ```
 
----
+# 3. Pipeline Overview
 
-# Validation
+The runtime pipeline is composed of the following stages.
 
-Validation is a deterministic, side-effect-free function.
-
-```
-Validation(
-    Candidate,
-    Canonical,
-    Config
-)
-→ ValidationReport
-```
-
-Observation := ObservationCheck(Graph, Candidate)
-
-Validation collects objective facts only.
-
-Validation performs no routing and no state mutation.
-
-See:
-
-- `05-validation-pipeline-r0.md`
-
----
-
-# PolicyRouter
-
-PolicyRouter interprets a ValidationReport according to Config.
-
-```
-PolicyRouter(
-    ValidationReport,
-    Config
-)
-→ Action
-```
-
-Possible actions are:
-
-```
-accept
-reject
-defer
-retry
-retry-penalty
-abort
-```
-
-PolicyRouter performs interpretation only.
-
-It performs neither validation nor state mutation.
-
----
-
-# Kernel
-
-Kernel is the sole component permitted to mutate authoritative state.
-
-Kernel executes the Action returned by PolicyRouter.
-
-Depending on the Action, Kernel may:
-
-- Commit an Event
-- Enqueue a Candidate into DeferredQueue
-- Trigger a retry
-- Trigger a retry with penalty
-- Emit a FaultEvent
-
-Kernel owns all runtime state transitions.
-
----
-
-# Commit API
-
-```
-Commit(Event)
-    ↓
-Canonical'
-    ↓
-History++
-```
-
-If
-
-```
-Event.intent ∈ {
-    memory-write
-    recover
-}
-```
-
-then
-
-```
-MemoryRef++
-```
-
-Commit is the only operation permitted to mutate Canonical.
-
----
-
-# Replay API
-
-```
-Replay(Context)
-    ↓
-Projection
-    ↓
-Graph
-    ↓
-Summary
-```
-Replay は deterministic / reproducible / side-effect-free。
-
----
-
-# Prompt Builder
-
-```
-Prompt :=
-    BuildPrompt(
-        Summary,
-        Graph,
-        MemoryRef,
-        Config
-    )
-
-```
-
-where
-
-```
-Context :=
-    History
-    Config
-    MemoryRef
-```
-
-Prompt generation is deterministic.
-
----
-
-# Backend
-
-```
-LLM :=
-    CandidateGenerator(Prompt)
-```
-
-The backend is non-deterministic.
-
-Its output is never authoritative until accepted by the Validation → PolicyRouter → Kernel pipeline.
-
----
-
-# Deferred Processing
-
-DeferredQueue is owned exclusively by the Kernel.
-
-Candidates receiving the `defer` action are enqueued by the Kernel.
-
-Wakeup is triggered only when Canonical advances.
-
-```
-Canonical Commit
-        │
-        ▼
-Lamport Clock++
-        │
-        ▼
-DeferredQueue Wakeup
-        │
-        ▼
-Revalidation
-```
-
-Timeout-based wakeup is outside the R1 specification.
-
----
-
-# Fault Processing
-
-When Action is `abort`, Kernel emits a `FaultEvent`.
-
-The FaultEvent ABI is defined in:
-
-- `05-validation-pipeline-r0.md`
-
----
-
-# Runtime Responsibility Summary
-
-| Component | Responsibility |
-|-----------|----------------|
-| Validation | Collect objective facts |
-| PolicyRouter | Interpret facts and select Action |
-| Kernel | Execute runtime state transitions |
-| Commit | Mutate Canonical |
-| Replay | Derive runtime context |
+| Stage | Purpose |
+|--------|---------|
+| Commit | Persist authoritative Events |
+| Replay | Reconstruct execution context |
 | Prompt Builder | Construct deterministic prompts |
-| Backend | Generate non-deterministic Candidates |
-| DeferredQueue | Hold deferred Candidates until revalidation |
+| Backend | Generate non-authoritative Candidates |
+| Validation | Produce ValidationReport |
+| PolicyRouter | Produce RuntimeRequest |
+| Kernel | Execute deterministic state transitions |
+| Runtime | Execute RuntimeCommand |
+
+# 4. Commit
+
+Commit is the entry point through which authoritative Events become part of Canonical.
+
+The operational semantics of Commit are defined by:
+
+- Operational Semantics
+
+The state transition semantics of Commit are defined by:
+
+- Kernel State Machine
+
+# 5. Replay
+
+Replay reconstructs the execution context required by the Runtime from Canonical.
+
+Replay produces:
+
+- Projection
+- Graph
+- Summary
+
+Replay semantics are defined by:
+
+- Operational Semantics
+
+# 6. Prompt Builder
+
+Prompt Builder constructs deterministic prompts from runtime context.
+
+Typical inputs include:
+
+- Summary
+- Graph
+- Memory Reference
+- Configuration
+
+Prompt construction semantics are outside the scope of this specification.
+
+# 7. Backend
+
+The Backend generates a Candidate from the constructed Prompt.
+
+Backend execution is explicitly non-authoritative.
+
+Its output does not become authoritative until processed by the Validation → PolicyRouter → Kernel pipeline.
+
+# 8. Validation
+
+Validation evaluates a Candidate and produces a ValidationReport.
+
+Validation semantics are defined by:
+
+- Validation Pipeline
+
+# 9. PolicyRouter
+
+PolicyRouter interprets a ValidationReport and produces a RuntimeRequest.
+
+PolicyRouter semantics are defined by:
+
+- Validation Pipeline
+
+# 10. Kernel
+
+The Kernel consumes a RuntimeRequest and produces a RuntimeCommand.
+
+Kernel state transition semantics are defined by:
+
+- Kernel State Machine
+
+# 11. Runtime
+
+The Runtime executes RuntimeCommand.
+
+Runtime execution is outside the scope of this specification.
+
+# 12. Pipeline Invariants
+
+The runtime pipeline satisfies the following architectural invariants.
+
+- Only Commit may mutate Canonical.
+- Replay is deterministic.
+- Validation performs no state mutation.
+- PolicyRouter performs no state mutation.
+- Kernel performs deterministic state transitions.
+- Backend is non-authoritative.
+- Runtime executes RuntimeCommand without defining state transition semantics.
+
+# 13. Related Specifications
+
+- 00 Constitution
+- 01 Domain Model
+- 02 Operational Semantics
+- 05 Validation Pipeline
+- 06 Kernel State Machine

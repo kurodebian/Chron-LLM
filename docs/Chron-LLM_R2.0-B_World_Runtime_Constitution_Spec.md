@@ -12,8 +12,6 @@
 
 **Depends on:** Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.md (Constitution Revision 1.0)
 
----
-
 # 0. Purpose
 
 R2.0-B defines the constitutional semantics of Worldline Runtime.
@@ -21,8 +19,6 @@ R2.0-B defines the constitutional semantics of Worldline Runtime.
 Its purpose is to establish deterministic execution views over a single Canonical Graph without duplicating history or violating the deterministic guarantees established in R2.0-A.
 
 The World Runtime extends the deterministic kernel while preserving all R2.0-A invariants.
-
----
 
 # 1. Core Philosophy
 
@@ -47,8 +43,6 @@ Views are multiple.
 History is shared.
 Execution is isolated.
 ```
-
----
 
 # 2. World Identity Contract
 
@@ -79,8 +73,6 @@ world.id:
 - MUST never be reused.
 - MUST remain stable for the lifetime of the World.
 
----
-
 # 3. Graph Ownership & Sharing Contract
 
 Exactly one Canonical Graph exists.
@@ -106,8 +98,6 @@ Requirements:
 - Worlds MUST NOT own the Memory Store.
 - Kernel owns truth.
 
----
-
 # 4. World = View Contract
 
 A World represents an execution view.
@@ -131,8 +121,6 @@ Worlds contain no historical data.
 
 History exists only inside the Canonical Graph.
 
----
-
 # 5. Commit Visibility Contract
 
 Visibility order is constitutionally fixed.
@@ -154,8 +142,6 @@ Requirements:
 - World MUST NEVER reference uncommitted nodes.
 - World MUST NEVER point to future history.
 
----
-
 # 6. Root Node Contract
 
 root-node defines the historical origin of a World.
@@ -164,8 +150,6 @@ Requirements:
 
 - MUST exist in the Canonical Graph.
 - MUST never change after World creation.
-
----
 
 # 7. Head Node Contract
 
@@ -181,7 +165,40 @@ Requirements:
 
 Backend, Evaluator, Registry, and Projection MUST NOT directly update head-node.
 
----
+## 7.1 Head Reachability Contract
+
+Every World head-node MUST be reachable from the World's root-node through :causal edges.
+
+A World referencing a non-causal or unreachable head-node is invalid.
+
+The following states are prohibited:
+
+```
+root-node
+|
++-- :causal --> node-A
+
+head-node = node-B
+```
+
+where:
+
+node-B
+
+is not reachable through :causal edges
+from root-node.
+
+Head validity requires:
+
+```
+root-node
+↓
+:causal path
+↓
+head-node
+```
+
+The Kernel MUST reject any commit or World transition that produces an unreachable head-node.
 
 # 8. Projection Policy Contract
 
@@ -200,8 +217,6 @@ Projection Policy:
 
 Changing Projection Policy requires creating a new World.
 
----
-
 # 9. Metadata Boundary Contract
 
 Metadata stores World-specific transient information.
@@ -217,8 +232,6 @@ Metadata:
 - MUST NOT cache Graph nodes.
 - MUST NOT shadow Canonical history.
 
----
-
 # 10. World Isolation Contract
 
 Worlds are execution-isolated.
@@ -228,8 +241,6 @@ Updating one World MUST NOT modify another World.
 Communication between Worlds occurs exclusively through Kernel-approved Graph commits.
 
 No direct World-to-World mutation is permitted.
-
----
 
 # 11. Branch Contract
 
@@ -263,8 +274,6 @@ Given identical parent World and identical inputs:
 
 All child properties MUST be identical except world.id.
 
----
-
 # 12. Registry Contract
 
 Registry indexes Worlds.
@@ -290,8 +299,6 @@ Registry MUST NOT:
 - modify Memory
 - modify World semantics
 
----
-
 # 13. Required Registry API
 
 Required ABI:
@@ -306,8 +313,6 @@ list-worlds
 
 Every API defined here MUST have deterministic verification tests.
 
----
-
 # 14. Registry Persistence Contract
 
 Registry MUST preserve:
@@ -321,8 +326,6 @@ Registry MAY rebuild derived indexes.
 Persistent data represents truth.
 
 Derived indexes represent cache.
-
----
 
 # 15. World Lifecycle Contract
 
@@ -347,8 +350,6 @@ ARCHIVED Worlds:
 - MAY be referenced by replay.
 
 Reactivation requires creation of a new World.
-
----
 
 # 16. Replay Boundary Contract
 
@@ -385,8 +386,6 @@ Replay MUST NOT depend on:
 
 Replay MUST produce identical execution state for identical Replay Input.
 
----
-
 # 17. World Invariants
 
 The following invariants are constitutionally required.
@@ -394,14 +393,13 @@ The following invariants are constitutionally required.
 - World identity is immutable.
 - Root node is immutable.
 - Head node always references committed history.
+- Head node is always reachable from root-node through :causal edges.
 - Graph is globally shared.
 - Memory is globally shared.
 - Projection is deterministic.
 - Metadata follows Copy-on-Write.
 - Registry is non-authoritative.
 - Replay is deterministic.
-
----
 
 # 18. Branch Runtime Verification Suite
 
@@ -412,6 +410,7 @@ The following Kernel Invariants MUST PASS.
 | B1 | World Creation | make-world creates globally unique Worlds |
 | B2 | World Fork | fork-world preserves ancestry |
 | B3 | Root Stability | root-node never changes |
+| B3.1 | Head Reachability | Valid Worlds always maintain causal reachability |
 | B4 | Head Independence | child head updates never affect parent |
 | B5 | Projection Isolation | Projection Policies remain isolated |
 | B6 | Metadata CoW | Metadata follows Copy-on-Write |
@@ -420,10 +419,9 @@ The following Kernel Invariants MUST PASS.
 | B9 | World Isolation | Worlds cannot mutate each other |
 | B10 | Commit Visibility | Commit order is Graph → World |
 | B11 | Registry Persistence | Registry preserves identity and ancestry |
+| B12 | Invalid Head Rejection | Kernel rejects unreachable or non-causal head transitions |
 
 Every constitutional API MUST have at least one deterministic verification test.
-
----
 
 # 19. Out of Scope
 
@@ -438,8 +436,6 @@ R2.0-B explicitly excludes:
 - Garbage Collection
 - Tool execution
 
----
-
 # 20. Constitution Freeze Criteria
 
 Constitution Revision:
@@ -448,7 +444,7 @@ Constitution Revision:
 2.0
 ```
 
-Status:
+Freeze Target Status:
 
 ```
 FROZEN
@@ -456,15 +452,16 @@ FROZEN
 
 Freeze requires:
 
-- All B1–B11 PASS.
+- All B1–B12 PASS.
 - Every constitutional API has deterministic verification tests.
 - World semantics are stable.
 - Registry ABI is stable.
 - Backward compatibility is guaranteed.
 
-Breaking changes require a new Constitution Revision.
+After Freeze:
 
----
+- This Constitution Revision becomes immutable.
+- Any breaking change requires a new Constitution Revision.
 
 # Final Statement
 

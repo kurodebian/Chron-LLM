@@ -1,292 +1,608 @@
 # **Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.md**
 
 **Document ID:** CHRON-R2.0-A-GRAPH-CONSTITUTION  
-**Status:** Normative / Constitution-Level  
-**Target:** CodeX Implementation & Verification Suite  
-**Phase:** R2.0-A  
-**Purpose:** Deterministic Graph Runtime Core Foundation  
-
----
+**Constitution Revision:** 1.0  
+**Status:** FROZEN CANDIDATE  
+**Classification:** Constitution-Level Specification  
+**Layer:** R2.0-A Graph Runtime Core  
+**Target:** CodeX Implementation & Deterministic Verification Suite  
 
 # **0. Purpose**
 
-R2.0-A の目的は、Chron-LLM の決定論的カーネル基盤を確立し、後続フェーズ：
+R2.0-A establishes the deterministic kernel foundation of Chron-LLM.
 
-- R2.0-B Worldline Runtime  
-- R2.1 Backend ABI  
-- R2.2 Evaluator  
+Its purpose is to define the immutable boundary between:
 
-がこの基盤の境界条件を侵食しないように固定することである。
+- Canonical History
+- Memory Content
+- Projection
+- Prompt Construction
+- Future Runtime Execution
 
-R2.0-A は以下を保証する：
+All subsequent phases:
 
-- 因果構造の決定論性  
-- Memory 内容の不変性  
-- Projection の再現性  
-- Prompt 生成の純粋性  
-- Prefill State の完全再現性  
+- R2.0-B World Runtime
+- R2.0-C Observability Runtime
+- R2.0-D Commit Kernel
+- R2.1 Backend ABI
+- R2.2 Evaluator
 
----
+MUST operate within the deterministic boundaries defined here.
 
-# **0.1 Determinism Definition (R2.0-A)**
+R2.0-A guarantees:
 
-Chron-LLM における決定論とは以下を意味する。
+- deterministic causal structure
+- immutable Memory content
+- append-only Canonical Graph
+- deterministic Projection
+- pure Prompt generation
+- reproducible Prefill State
 
-```
+# **0.1 Determinism Definition**
+
+Chron-LLM determinism is defined as:
+
 Given:
 
-  Graph (Structure)
-  Memory (Content)
-  Projection Policy (View)
-  Prompt Builder (Pure Function)
+```
+Canonical Graph Structure
+
+*
+
+Memory Store Content
+
+*
+
+Projection Policy
+
+*
+
+Prompt Builder Version
+```
 
 Then:
 
-  Prefill State MUST be identical
-  in both content and hash.
+```
+Prefill State MUST be identical
+in both content and hash.
 ```
 
-同一入力状態から生成される実行状態は、常に同一でなければならない。  
-この定義は R2 系全体の基準となる。
+Identical logical inputs MUST always produce identical execution context.
 
----
+This definition is the foundational invariant of the R2 series.
 
 # **1. Core Philosophy**
 
-Chron-LLM の責務分離：
+Chron-LLM separates:
 
 ```
-Graph      = What happened (Structure)
-Memory     = What content exists (Content)
-Projection = How information is viewed (View)
-Prompt     = How context is formatted (Usage)
-Backend    = How generation occurs (Execution)
-Evaluator  = How results are judged (Proposal)
-Kernel     = What becomes truth (Authority)
+Fact
+Knowledge
+Usage
+Execution
+Authority
 ```
 
-基本原則：
+into independent layers.
+
+```
+Graph      = What happened (Causal Fact)
+
+Memory     = What content exists
+
+Projection = How information is selected
+
+Prompt     = How context is formatted
+
+Backend    = How generation is executed
+
+Evaluator  = How proposals are produced
+
+Kernel     = What becomes Canonical truth
+```
+
+Fundamental principles:
 
 ```
 Causal is Fact.
+
 Evaluation is Knowledge.
+
 Prompt is Usage.
+
+Commit is Authority.
 ```
 
-Graph は価値判断を保持しない。  
-成功・失敗・高評価・低評価を区別せず、発生した事象を事実として保存する。  
-評価・優先度・探索戦略は上位レイヤーの責務である。
+The Graph stores historical facts only.
 
----
+The Graph MUST NOT encode:
 
-# **2. Module Structure**
+- success
+- failure
+- quality
+- priority
+- preference
 
-```
-chron-os/
+Those belong to higher-level interpretation layers.
 
-+-- memory/
-|    +-- store.lisp
-|
-+-- graph-runtime/
-|    +-- graph.lisp
-|    +-- causal.lisp
-|    +-- projection.lisp
-|    +-- prefill.lisp
-|
-+-- tests/
-     +-- r2-0-a-tests.lisp
-```
+# **2. Authority Boundary**
 
----
-
-# **2.1 Authority Boundary**
-
-The authority hierarchy of Chron-LLM is:
+Chron-LLM authority hierarchy:
 
 ```
 Kernel
+|
++-- Commit Kernel
+| |
+| +-- Canonical Event Creation
+| +-- Canonical Graph Append
+| +-- World Head Advancement
 |
 +-- Canonical Graph
 |
 +-- Memory Store
 |
-+-- Projection Policy
++-- Runtime Views
 |
-+-- Backend
++-- World Runtime
 |
-+-- Evaluator
++-- Observability Runtime
+|
++-- Backend Runtime
+|
++-- Evaluator Runtime
 ```
 
-## **Authority Rules**
+Authority Rules:
 
-- Kernel owns truth.  
-- Graph owns history structure.  
-- Memory owns immutable content.  
-- Projection owns context selection.  
-- Backend owns generation only.  
-- Evaluator produces proposals only.  
+- Kernel owns Canonical transition authority.
+- Commit Kernel is the only mechanism allowed to mutate Canonical state.
+- Canonical Graph owns causal history structure.
+- Memory Store owns immutable content.
+- World Runtime owns execution views.
+- Observability Runtime owns read-only inspection.
+- Backend generates proposals.
+- Evaluator generates proposals and evaluations.
 
-**No upper layer may directly mutate lower authority layers.**
+No component may bypass Commit Kernel.
 
-## **Evaluator Commit Flow**
+# **2.1 Canonical Mutation Rule**
 
-禁止：
+Canonical state mutation is restricted.
+
+Forbidden:
 
 ```
+Backend
+↓
+Graph Mutation
+
 Evaluator
-  ↓
-Direct Graph Mutation
+↓
+Graph Mutation
+
+Projection
+↓
+Graph Mutation
 ```
 
-正しい流れ：
+Required:
 
 ```
-Evaluator
-  ↓
-Evaluation Proposal
-  ↓
-Kernel Validation
-  ↓
-Commit Event
-  ↓
-Canonical Graph
+Proposal
+
+↓
+
+Validation
+
+↓
+
+Commit Kernel
+
+↓
+
+Canonical Event
+
+↓
+
+Graph Append
 ```
 
----
+Only Commit Kernel may create Canonical history.
 
 # **3. Memory Store Specification**
 
 ## **3.1 Responsibility**
 
-Memory Store は内容データを管理する。  
-Graph は内容を保持しない。  
-Graph Node は Memory Reference のみ保持する。
+Memory Store owns content.
 
----
+Graph stores references only.
+
+```
+Graph Node
+
+↓
+
+payload-ref
+
+↓
+
+Memory Store
+```
+
+Graph MUST NOT contain payload content.
 
 ## **3.2 Payload Reference**
 
-```lisp
+```
 (defstruct payload-ref
-  hash
-  type
-  size
-  storage)
+hash
+type
+size
+storage)
 ```
 
 Fields:
 
 ```
 hash      Content Address
+
 type      :text | :json | :blob | :meta
+
 size      Byte Size
+
 storage   :memory | :disk | :remote
 ```
-
----
 
 ## **3.3 Required API**
 
 ```
 store-payload
+
 load-payload
+
 payload-exists-p
 ```
 
----
-
-## **3.4 Immutability Contract**
+## **3.4 Memory Immutability**
 
 Memory Store MUST be immutable.
 
 Rules:
 
-- 保存後の payload 変更は禁止。  
-- 更新は新しい payload として扱う。  
-- hash は内容から決定される。
+- Existing payload MUST NOT change.
+- Update creates new payload.
+- Hash MUST derive from content.
 
 Example:
 
 ```
 store(A)
+
 store(A)
-→ same hash
+
+↓
+
+same hash
 ```
 
----
+# **4. Canonical Graph Specification**
 
-# **4. Graph Runtime Specification**
+## **4.1 Canonical Node**
 
-## **4.1 Node**
-
-```lisp
-(defstruct causal-node
-  id
-  type
-  payload-ref
-  metadata)
+```
+(defstruct canonical-node
+id
+type
+payload-ref
+metadata)
 ```
 
-Node Type examples:
+Node Types:
 
 ```
 :system
+
 :prompt
+
 :assistant
+
 :eval
+
 :feedback
 ```
 
----
+Node Type Semantics:
 
-## **4.2 Edge**
+```
+:system
+System initialization event.
 
-```lisp
-(defstruct causal-edge
-  from
-  to
-  type)
+:prompt
+Prompt construction event.
+
+:assistant
+Generated response event.
+
+:eval
+Evaluation recording event.
+
+:feedback
+Feedback recording event.
+```
+
+## **Canonical History Recording Rule**
+
+All accepted nodes are stored in Canonical Graph.
+
+Canonical Graph represents:
+
+```
+Canonical History
+=
+All accepted historical events
+```
+
+However:
+
+```
+Canonical History
+≠
+Causal Execution History
+```
+
+A Canonical Node records a historical fact.
+
+It does not automatically define execution causality.
+
+Therefore:
+
+```
+Recorded Fact
+≠
+Causal Fact
+```
+
+## **Node Type Authority Rule**
+
+Only nodes connected through:
+
+:causal
+
+edges participate in execution causal lineage.
+
+`:eval` and `:feedback` nodes represent observational history.
+
+They MAY:
+
+- exist inside Canonical Graph
+- reference Canonical Nodes
+- be used by Projection Layers
+- participate in analysis views
+
+They MUST NOT:
+
+- define execution causality
+- become causal ancestors of execution events
+- modify existing causal lineage
+- directly affect Backend execution
+- directly mutate Canonical state
+
+## **Edge Separation Rule**
+
+Canonical relationships are separated by edge type.
+
+Execution causality:
+
+```
+:causal
+```
+
+Evaluation relationship:
+
+```
+:eval
+```
+
+Feedback relationship:
+
+```
+:feedback
+```
+
+Therefore:
+
+```
+:eval Node
++
+:feedback Node
+```
+DO NOT
+
+create execution causality
+
+## **Projection Rule**
+
+Evaluation and feedback information MUST be accessed through explicit projection layers.
+
+Evaluation Projection
+
+Feedback Projection
+
+Projection MAY expose:
+
+- evaluation knowledge
+- feedback knowledge
+
+Projection MUST NOT:
+
+- mutate Canonical Graph
+- mutate Memory Store
+- modify causal lineage
+
+## **Causal Isolation Guarantee**
+
+The existence of:
+
+:eval nodes
+
+or
+
+:feedback nodes
+
+MUST NOT change:
+
+Causal Graph Structure
+
+Causal Projection Result
+
+Causal Prefill State
+
+unless explicitly included by:
+
+Projection Policy
+
+Final semantic distinction:
+
+:causal
+
+Execution history lineage
+
+:eval
+
+Evaluation observation history
+
+:feedback
+
+Feedback observation history
+
+No non-causal node type may become a hidden source of execution causality.
+
+## **4.2 Node Contract**
+
+Nodes MUST:
+
+- be immutable
+- reference immutable payload
+- represent accepted Canonical history only
+
+Nodes MUST NOT:
+
+- contain mutable state
+- contain execution state
+- contain future predictions
+- contain hidden runtime state
+
+Metadata:
+
+- MAY contain immutable descriptive information.
+- MUST NOT contain mutable execution state.
+- MUST NOT become an alternative source of truth.
+
+## **4.3 Graph Edge**
+
+```
+(defstruct graph-edge
+from
+to
+type)
 ```
 
 Edge Types:
 
 ```
 :causal
+
 :eval
+
 :feedback
 ```
 
----
+Meaning:
 
-## **4.3 Graph**
+```
+:causal
+Execution lineage relationship.
 
-```lisp
-(defstruct causal-graph
-  nodes
-  edges)
+:eval
+Evaluation observation relationship.
+
+:feedback
+Feedback observation relationship.
+```
+
+Only:
+
+```
+:causal
+```
+
+edges define execution causality.
+
+## **4.4 Graph**
+
+```
+(defstruct canonical-graph
+node-store
+edge-store
+root-id)
 ```
 
 Graph Rules:
 
-- Append only  
-- Node mutation 禁止  
-- Edge mutation 禁止  
+- append-only
+- node mutation prohibited
+- edge mutation prohibited
 
-変更は新しい Node / Edge として表現する。
+All changes MUST be represented by new nodes or edges.
 
----
+## Root Node Contract
+
+root-id MUST reference the immutable first Canonical Node.
+
+root-id MUST NOT change after Graph creation.
+
+All causal projection MUST originate from root-id.
+
+## Root Reachability Contract
+
+Every :causal node MUST be reachable from root-id.
+
+Nodes not reachable through :causal edges
+MUST NOT participate in causal execution history.
+
+A Canonical Graph containing unreachable causal nodes
+is invalid.
 
 # **5. Causal Projection**
 
-## **5.1 Rule**
+Causal Projection extracts historical causality.
 
-`causal-subgraph` は `:causal` edge のみを辿る。
+Projection is a deterministic view operation.
 
-評価情報は混入してはならない。
+The Projection Layer:
 
----
+- MUST NOT mutate Graph.
+- MUST NOT create Canonical state.
+- MUST NOT change Memory.
 
-## **5.2 API**
+Rule:
+
+`causal-subgraph`
+
+MUST traverse only:
+
+:causal
+
+edges.
+
+Evaluation information MUST:
+
+- NOT mutate causal history.
+- NOT appear in causal projection.
+- NOT define causal ordering.
+
+API:
 
 ```
 causal-subgraph(graph target-id)
@@ -298,11 +614,9 @@ Output:
 ordered causal node sequence
 ```
 
----
-
 # **6. Evaluation Projection**
 
-Evaluation は独立した View として取得する。
+Evaluation exists as an independent knowledge layer.
 
 API:
 
@@ -310,143 +624,197 @@ API:
 associated-evaluations(graph node-id)
 ```
 
-Evaluation は因果履歴を書き換えない。
+Evaluation:
 
----
+- MAY reference causal nodes
+- MUST NOT modify causal structure
+- MUST NOT change historical fact
 
 # **7. Context Projection**
 
-Context Projection は複数 View を非破壊的に統合する。
+Context Projection combines independent views.
 
 ```
 Causal View
-+
+
+*
+
 Evaluation View
+
 ↓
+
 Context View
 ```
 
 Context Node:
 
-```lisp
+```
 (defstruct context-node
- id
- type
- content
- feedbacks)
+id
+type
+content
+feedbacks)
 ```
 
----
+Context Projection MUST be deterministic.
 
 # **8. Prompt Builder Contract**
 
-Prompt Builder は Pure Function とする。
+Prompt Builder MUST be a pure function.
 
-## **MUST**
+Input:
 
-- Pure Function  
-- Deterministic Output  
-- Input = context-node list  
+```
+context-node list
+```
 
-## **MUST NOT**
+Output:
+
+```
+prompt representation
+```
+
+MUST:
+
+- deterministic
+- side-effect free
+- reproducible
+
+MUST NOT:
 
 ```
 Graph Access
-Memory Access
-Random
-Timestamp
-External IO
-Global State Mutation
-```
 
----
+Memory Access
+
+Random
+
+Timestamp
+
+External IO
+
+Global Mutation
+```
 
 # **9. Canonical Prompt Format**
 
-```lisp
+```
 (prompt
- (:node <id>
-  :type <keyword>
-  :content <string>
-  :feedback (<string> ...)))
+(:node <id>
+:type <keyword>
+:content <string>
+:feedback (<string> ...)))
 ```
 
----
+# **10. Prefill State Contract**
 
-# **10. Prefill State**
-
-```lisp
+```
 (defstruct prefill-state
- context
- target-id
- hash)
+context
+target-id
+hash)
 ```
 
 Guarantee:
 
-同一：
-
-```
-Graph
-Memory
-Projection Policy
-Prompt Builder
-```
-
-から生成される Prefill State は同一 hash を持つ。
-
----
-
-# **11. Verification Specification**
-
-Chron-LLM R2.0-A は以下の Kernel Invariants を満たさなければならない。
-
-| Test ID | Name                    | Objective |
-| ------- | ----------------------- | ---------- |
-| **T1**  | Memory Determinism      | 同一内容 → 同一 hash |
-| **T2**  | Graph Replay            | 因果列順序の再現 |
-| **T3**  | View Separation         | causal に eval が混入しない |
-| **T4**  | Context Projection      | 因果＋評価の非破壊統合 |
-| **T5**  | Prefill Hash Stability  | 同一入力 → 同一 hash |
-| **T6**  | Evaluation Independence | eval の存在で causal-only 結果が変化しない |
-
----
-
-## **11.1 T6 Evaluation Independence — Formal Definition**
-
-Purpose:
-Verify that causal history remains independent from evaluation knowledge.
-
-Rule:
-
 Given identical:
-- Graph causal structure
-- Memory content
-- Projection Policy excluding evaluation view
+
+```
+Canonical Graph
+
+Memory Store
+
+Projection Policy
+
+Prompt Builder Version
+```
 
 Then:
 
-Prefill State MUST remain identical
-regardless of existence of :eval nodes.
+```
+Prefill State MUST be identical.
 
-Evaluation nodes may affect Prefill State
-ONLY through an explicit Evaluation Projection Policy.
+Prefill Hash MUST be identical.
+```
 
----
+World-specific differences MUST originate only from explicit Projection Policy differences.
+
+# **11. Verification Specification**
+
+R2.0-A MUST satisfy:
+
+| Test ID | Name | Objective |
+|---|---|---|
+| T1 | Memory Determinism      | Same content produces same hash              |
+| T2 | Graph Replay            | Same Canonical Graph and Memory reproduce identical causal sequence |
+| T3 | View Separation         | Evaluation nodes MUST NOT appear in causal projection |
+| T4 | Context Projection      | Causal View and Evaluation View merge without mutation |
+| T5 | Prefill Hash Stability  | Same Graph, Memory, Projection Policy, and Prompt Builder produce same hash |
+| T6 | Evaluation Independence | Existence of evaluation nodes MUST NOT alter causal-only Prefill State     |
+
+
+# **11.1 T6 Formal Definition**
+
+Given identical:
+
+```
+Canonical Graph
+
+Memory Content
+
+Causal Projection Policy
+```
+
+Then:
+
+```
+Causal Prefill State MUST remain identical
+```
+
+regardless of the existence of additional:
+
+```
+:eval
+:feedback
+```
+
+nodes.
+
+Evaluation information MAY affect Prefill State only through an explicit:
+
+```
+Evaluation Projection Policy
+```
+
+Evaluation Projection MUST NOT mutate:
+
+```
+Canonical Graph
+
+Memory Store
+
+Causal History
+```
 
 # **12. Completion Criteria**
 
-R2.0-A Completion:
+R2.0-A is complete when:
 
 ```
 [PASS]
 
 Memory Determinism
+
 Graph Determinism
+
 Causal/Evaluation Separation
+
 Projection Determinism
+
 Prompt Determinism
+
 Prefill Hash Stability
+
 Evaluation Independence
 ```
 
@@ -456,70 +824,77 @@ Canonical result:
 Canonical Prefill Hash = sha256:<value>
 ```
 
-Implementation completion後に記録する。
-
----
-
 # **13. Out of Scope**
 
-R2.0-A では以下を扱わない。
+R2.0-A excludes:
 
 ```
 Backend ABI
+
 llama.cpp integration
+
 KV Cache
-Worldline Fork
+
+World Fork
+
 Scheduler
+
 Evaluator Generation
+
 Tool Execution
+
+Persistence
 ```
 
----
+# **14. Next Phase: R2.0-B World Runtime**
 
-# **14. Next Phase: R2.0-B Worldline Runtime**
-
-R2.0-B の目的：
+R2.0-B introduces:
 
 ```
-make-world
-fork-world
-world-root
-copy-on-write metadata
-branch projection
-worldline selection policies
+World Identity
+
+Forked Execution Views
+
+Copy-on-Write Metadata
+
+World Projection Policy
 ```
 
-R2.0-A の決定論的基盤上に、世界線を OS の一級オブジェクトとして導入する。
+Worlds MUST preserve:
 
----
+```
+Single Canonical Graph
+
+Single Memory Store
+
+Shared History
+```
 
 # **15. Implementation Rules**
 
 Implementation MUST:
 
-- Follow API signatures defined in this document.
-- Preserve immutability guarantees.
-- Reject hidden global state.
-- Provide deterministic tests before adding new phases.
-- Do not implement out-of-scope components.
+- preserve immutability
+- preserve deterministic behavior
+- use Commit Kernel for mutation
+- reject hidden global state
+- provide verification tests
 
-Any deviation requires a specification revision.
-
----
+Any violation requires Constitution Revision.
 
 # **Final Statement**
 
-本仕様書は Chron-LLM R2 系における：
+This Constitution defines:
 
-- Kernel Boundary  
-- Data Ownership  
-- Causal Model  
-- Projection Model  
-- Deterministic Verification  
+- Canonical history boundary
+- Immutable content ownership
+- Causal data model
+- Projection semantics
+- Deterministic context generation
 
-を定義する Constitution Specification である。
+R2.0-A establishes the immutable historical substrate.
 
-CodeX implementation MUST treat this document as a **binding contract**。  
-違反する実装は仕様外とする。
+All future Runtime layers MUST conform.
 
----
+Only Commit Kernel may create Canonical history.
+ 
