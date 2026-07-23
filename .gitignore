@@ -1,9 +1,25 @@
-phi-log-generic.txt.backup
-*.backup
-lisp/phi-lisp-pipeline-intent.lisp
+# Python 仮想環境（VS Code 999+件の主因）
+.venv/
+venv/
+__pycache__/
+*.py[cod]
 
-# Temporary / cache files
-.vscode/alive/fasl/
-*.fasl
+# LLM モデルファイル（巨大ファイル）
+*.gguf
+models/
+
+# ログ・バックアップ・生成物
 *.backup
 phi-log*.txt
+.aider*
+
+# Common Lisp / VS Code Alive キャッシュ
+.vscode/alive/fasl/
+*.fasl
+
+# 個別除外指定
+lisp/phi-lisp-pipeline-intent.lisp
+
+# 秘密鍵・環境変数ファイル
+.webui_secret_key
+*.env
