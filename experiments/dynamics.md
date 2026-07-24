@@ -2,8 +2,6 @@
 
 ## Deterministic Transition Execution Layer
 
----
-
 # 1. Overview
 
 ## 1.1 Purpose
@@ -19,11 +17,9 @@
 
 を提供する。
 
----
-
 # 2. Architectural Position
 
-```text id="graph-rollout-arch"
+``` id="graph-rollout-arch"
 
              Graph
               |
@@ -63,8 +59,6 @@
    Basin / Cycle Analysis
 ```
 
----
-
 # 3. Responsibility Boundary
 
 ## 3.1 Responsible
@@ -75,8 +69,6 @@
 | rollout*       | Execute finite trajectory |
 | find-attractor | Return terminal state     |
 
----
-
 ## 3.2 Non-Responsible
 
 | Function           | Owner           |
@@ -86,8 +78,6 @@
 | Event persistence  | WAL             |
 | Commit             | Kernel          |
 | Semantic reasoning | LLM             |
-
----
 
 # 4. Transition Model
 
@@ -104,7 +94,7 @@ where:
 
 Each edge:
 
-```text
+```
 Edge =
 (
  from,
@@ -114,29 +104,23 @@ Edge =
 )
 ```
 
----
-
 # 5. next-event Specification
 
 ## 5.1 Definition
 
-```lisp
+```
 (defun next-event (graph node-id)
 ```
-
----
 
 ## 5.2 Purpose
 
 指定 node から出る outgoing edge のうち、最大 strength の edge を選択する。
 
----
-
 # 6. Algorithm
 
 Code:
 
-```lisp
+```
 (defun next-event (graph node-id)
   (let ((edges
           (remove-if-not
@@ -149,76 +133,64 @@ Code:
            :key #'edge-strength))))
 ```
 
----
-
 ## Processing
 
 ### Step 1
 
 全 Edge 取得:
 
-```text
+```
 graph.edges
 ```
-
----
 
 ### Step 2
 
 from が一致する edge のみ抽出:
 
-```text
+```
 edge.from == node-id
 ```
-
----
 
 Example:
 
 Graph:
 
-```text
+```
 a1 → a2 0.9
 a1 → b1 0.4
 ```
 
 Input:
 
-```text
+```
 node-id = a1
 ```
 
 候補:
 
-```text
+```
 [
  a1→a2,
  a1→b1
 ]
 ```
 
----
-
 ### Step 3
 
 strength 降順ソート:
 
-```text
+```
 0.9
 0.4
 ```
-
----
 
 ### Step 4
 
 最大 Edge を返却:
 
-```text
+```
 a1→a2
 ```
-
----
 
 # 7. Return Contract
 
@@ -226,61 +198,51 @@ a1→a2
 
 Return:
 
-```text
+```
 Edge Object
 ```
-
----
 
 ## No outgoing edge
 
 Return:
 
-```text
+```
 NIL
 ```
-
----
 
 # 8. Determinism Contract
 
 同一 Graph:
 
-```text
+```
 G
 ```
 
 同一 Node:
 
-```text
+```
 N
 ```
 
 なら:
 
-```text
+```
 next-event(G,N)
 ```
 
 は常に同一 Edge を返す。
 
----
-
 # 9. rollout* Specification
 
 ## 9.1 Definition
 
-```lisp
+```
 (defun rollout* (graph start steps)
 ```
-
----
 
 ## 9.2 Purpose
 
 Graph transition を指定回数実行し、状態遷移履歴を生成する。
-
----
 
 # 10. Input
 
@@ -288,19 +250,15 @@ Graph transition を指定回数実行し、状態遷移履歴を生成する。
 
 対象 Graph。
 
----
-
 ## start
 
 開始 Node ID。
 
 例:
 
-```text
+```
 :a1
 ```
-
----
 
 ## steps
 
@@ -308,17 +266,15 @@ Graph transition を指定回数実行し、状態遷移履歴を生成する。
 
 例:
 
-```text
+```
 10
 ```
-
----
 
 # 11. Algorithm
 
 Code:
 
-```lisp
+```
 (defun rollout* (graph start steps)
   (let ((path (list start))
         (node start))
@@ -337,35 +293,31 @@ Code:
     path))
 ```
 
----
-
 # 12. Execution Model
 
 Example:
 
 Graph:
 
-```text
+```
 a1 → a2 → a3 → a1
 ```
 
 Start:
 
-```text
+```
 a1
 ```
 
 Steps:
 
-```text
+```
 5
 ```
 
----
-
 Execution:
 
-```text
+```
 step 0:
 
 [a1]
@@ -396,89 +348,77 @@ step 5:
 [a1 a2 a3 a1 a2 a3]
 ```
 
----
-
 # 13. Return Value
 
 Always returns:
 
-```text
+```
 Node ID List
 ```
 
 Example:
 
-```lisp
+```
 (:a1 :a2 :a3 :a1 :a2)
 ```
-
----
 
 # 14. Early Termination
 
 If:
 
-```text
+```
 next-event = NIL
 ```
 
 then:
 
-```text
+```
 rollout stops
 ```
 
 Example:
 
-```text
+```
 [a1 b1 c1]
 ```
 
 where:
 
-```text
+```
 c1 has no outgoing edge
 ```
 
 returns:
 
-```text
+```
 [a1 b1 c1]
 ```
-
----
 
 # 15. find-attractor Specification
 
 ## 15.1 Definition
 
-```lisp
+```
 (defun find-attractor (graph start steps)
 ```
-
----
 
 ## Purpose
 
 有限 rollout の最終状態を attractor candidate として返す。
 
----
-
 # 16. Algorithm
 
 Code:
 
-```lisp
+```
 (defun find-attractor (graph start steps)
   (car (last
         (rollout* graph start steps))))
 ```
 
----
-
 処理:
 
-```text
+```
 rollout
 
 ↓
@@ -494,13 +434,11 @@ last node
 return
 ```
 
----
-
 # 17. Example
 
 Input:
 
-```text
+```
 start:
 
 :a1
@@ -513,7 +451,7 @@ steps:
 
 Trajectory:
 
-```text
+```
 :a1
 :a2
 :a3
@@ -524,33 +462,27 @@ Trajectory:
 
 Return:
 
-```text
+```
 :a2
 ```
-
----
 
 # 18. Relationship With Cycle Detection
 
 Current:
 
-```text
+```
 find-attractor
 =
 terminal state
 ```
 
----
-
 Future cycle model:
 
-```text
+```
 find-recurrent-cycle
 =
 terminal recurrent structure
 ```
-
----
 
 Comparison:
 
@@ -559,13 +491,11 @@ Comparison:
 | find-attractor       | node   |
 | find-recurrent-cycle | cycle  |
 
----
-
 # 19. Relationship With Basin Analysis
 
 Current flow:
 
-```text
+```
 Node
 
 ↓
@@ -581,11 +511,9 @@ terminal node
 basin-map
 ```
 
----
-
 Extended flow:
 
-```text
+```
 Node
 
 ↓
@@ -605,25 +533,23 @@ attractor cycle
 basin structure
 ```
 
----
-
 # 20. 3Cluster Graph Example
 
 Given:
 
-```text
+```
 a1 → a2 → a3 → a1
 ```
 
 strength:
 
-```text
+```
 0.9
 ```
 
 and:
 
-```text
+```
 c1 → a1
 0.6
 
@@ -633,13 +559,13 @@ c1 → b1
 
 then:
 
-```text
+```
 rollout(c1)
 ```
 
 produces:
 
-```text
+```
 c1
  |
  v
@@ -655,23 +581,19 @@ a3
 a1
 ```
 
----
-
 # 21. Formal Properties
 
 ## ROLL-1 Determinism
 
 For fixed:
 
-```text
+```
 Graph
 Start
 Steps
 ```
 
 output path is deterministic.
-
----
 
 ## ROLL-2 Greedy Transition
 
@@ -681,8 +603,6 @@ Transition rule:
 next(n)=argmax_e strength(e)
 ]
 
----
-
 ## ROLL-3 Finite Execution
 
 Maximum transitions:
@@ -691,8 +611,6 @@ Maximum transitions:
 steps
 ]
 
----
-
 ## ROLL-4 Non-Mutation
 
 These functions:
@@ -700,8 +618,6 @@ These functions:
 * do not modify graph
 * do not modify nodes
 * do not modify edges
-
----
 
 # 22. Complexity
 
@@ -726,8 +642,6 @@ where:
 * (E) = total edges
 * (k) = outgoing edges
 
----
-
 ## rollout*
 
 For `steps = N`:
@@ -736,19 +650,17 @@ For `steps = N`:
 O(N \times next-event)
 ]
 
----
-
 ## Optimization Candidate
 
 Pre-index:
 
-```text
+```
 node-id → outgoing edges
 ```
 
 すると:
 
-```text
+```
 next-event
 ```
 
@@ -766,13 +678,11 @@ O(1)
 
 になる。
 
----
-
 # 23. Chron-OS Mapping
 
 この層は Chron-OS の:
 
-```text
+```
 State Transition Executor
 ```
 
@@ -788,8 +698,6 @@ State Transition Executor
 | Execution Trace | rollout path   |
 | Attractor       | terminal/cycle |
 
----
-
 # 24. Design Assessment
 
 ## Strengths
@@ -798,7 +706,7 @@ State Transition Executor
 
 Edge strength による選択で:
 
-```text
+```
 同じ状態
  ↓
 同じ次状態
@@ -806,13 +714,11 @@ Edge strength による選択で:
 
 を保証。
 
----
-
 ### 2. Analysis Friendly
 
 生成される:
 
-```text
+```
 path
 ```
 
@@ -824,19 +730,15 @@ path
 
 に直接利用可能。
 
----
-
 ### 3. Minimal Runtime Core
 
 責務が明確:
 
-```text
+```
 observe
 
 not decide
 ```
-
----
 
 # 25. Current Limitation
 
@@ -844,7 +746,7 @@ not decide
 
 現在:
 
-```text
+```
 attractor = last node
 ```
 
@@ -852,20 +754,18 @@ attractor = last node
 
 より厳密には:
 
-```text
+```
 attractor =
 recurrent strongly connected structure
 ```
 
 が望ましい。
 
----
-
 ## 25.2 Tie Handling
 
 同じ strength:
 
-```text
+```
 0.5
 0.5
 ```
@@ -874,17 +774,15 @@ recurrent strongly connected structure
 
 将来:
 
-```text
+```
 secondary ordering key
 ```
 
 推奨。
 
----
-
 # 26. Final Specification Summary
 
-```text
+```
 The rollout layer provides deterministic graph execution.
 
 next-event:

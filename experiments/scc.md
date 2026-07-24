@@ -2,8 +2,6 @@
 
 ## Graph Topology Observation Layer
 
----
-
 # 1. Overview
 
 ## 1.1 Purpose
@@ -19,11 +17,9 @@
 
 を検出する基礎層を提供する。
 
----
-
 # 2. Architectural Position
 
-```text
+```
                  Graph
 
                    |
@@ -47,8 +43,6 @@
           Basin Structure
 ```
 
----
-
 # 3. Responsibility Boundary
 
 ## 3.1 Responsible
@@ -61,8 +55,6 @@
 | dfs-component | reverse graph exploration      |
 | compute-sccs  | SCC decomposition              |
 
----
-
 ## 3.2 Non-Responsible
 
 | Function                | Owner            |
@@ -72,8 +64,6 @@
 | Execution               | rollout*         |
 | Persistence             | WAL              |
 | Semantic interpretation | LLM / Analysis   |
-
----
 
 # 4. Graph Model Assumption
 
@@ -90,35 +80,27 @@ where:
 
 Edge:
 
-```text
+```
 (from → to)
 ```
 
----
-
 # 5. Helper Function Specifications
-
----
 
 # 5.1 successors
 
 ## Definition
 
-```lisp
+```
 (defun successors (graph node)
 ```
-
----
 
 ## Purpose
 
 指定 node から出る successor node 一覧を取得する。
 
----
-
 ## Algorithm
 
-```lisp
+```
 edges where:
 
 edge.from == node
@@ -128,62 +110,52 @@ edge.from == node
 map edge.to
 ```
 
----
-
 ## Example
 
 Graph:
 
-```text
+```
 a1 → a2
 a1 → b1
 ```
 
 Input:
 
-```lisp
+```
 (successors graph :a1)
 ```
 
 Output:
 
-```lisp
+```
 (:a2 :b1)
 ```
-
----
 
 ## Contract
 
 Returns:
 
-```text
+```
 List<Node>
 ```
 
 No mutation.
 
----
-
 # 5.2 predecessors
 
 ## Definition
 
-```lisp
+```
 (defun predecessors (graph node)
 ```
-
----
 
 ## Purpose
 
 指定 node に入る predecessor node 一覧を取得する。
 
----
-
 ## Algorithm
 
-```text
+```
 edges where:
 
 edge.to == node
@@ -193,30 +165,26 @@ edge.to == node
 map edge.from
 ```
 
----
-
 ## Example
 
 Graph:
 
-```text
+```
 a1 → a2
 b1 → a2
 ```
 
 Input:
 
-```lisp
+```
 (predecessors graph :a2)
 ```
 
 Output:
 
-```lisp
+```
 (:a1 :b1)
 ```
-
----
 
 # 6. DFS Order Generation
 
@@ -224,11 +192,9 @@ Output:
 
 Definition:
 
-```lisp
+```
 (defun dfs-order (graph nodes)
 ```
-
----
 
 ## Purpose
 
@@ -236,23 +202,19 @@ SCC decomposition 前処理として DFS finishing order を生成する。
 
 これは Kosaraju Algorithm の第一段階。
 
----
-
 # 7. Algorithm
 
 内部:
 
-```lisp
+```
 visited = {}
 
 order = []
 ```
 
----
-
 DFS:
 
-```text
+```
 visit(node)
 
     mark visited
@@ -262,29 +224,25 @@ visit(node)
     push node after completion
 ```
 
----
-
 つまり:
 
-```text
+```
 post-order traversal
 ```
 
 を生成する。
 
----
-
 # 8. Example
 
 Graph:
 
-```text
+```
 A → B → C
 ```
 
 DFS:
 
-```text
+```
 visit A
 
  visit B
@@ -298,41 +256,33 @@ finish A
 
 Order:
 
-```text
+```
 (C B A)
 ```
-
----
 
 # 9. dfs-component
 
 ## Definition
 
-```lisp
+```
 (defun dfs-component (graph start visited)
 ```
-
----
 
 ## Purpose
 
 逆方向グラフを探索し、1つのSCCを取得する。
 
----
-
 ## Algorithm
 
 使用:
 
-```text
+```
 predecessor traversal
 ```
 
----
-
 処理:
 
-```text
+```
 start
 
 ↓
@@ -348,13 +298,11 @@ predecessors...
 component
 ```
 
----
-
 # 10. Example
 
 Graph:
 
-```text
+```
 A → B
 B → C
 C → A
@@ -362,13 +310,13 @@ C → A
 
 start:
 
-```text
+```
 A
 ```
 
 predecessor探索:
 
-```text
+```
 A
 
 ← C
@@ -378,27 +326,21 @@ A
 
 結果:
 
-```text
+```
 (A C B)
 ```
-
----
 
 # 11. compute-sccs
 
 ## Definition
 
-```lisp
+```
 (defun compute-sccs (graph nodes)
 ```
-
----
 
 ## Purpose
 
 Graph全体を Strongly Connected Components に分割する。
-
----
 
 # 12. Algorithm
 
@@ -406,13 +348,11 @@ Graph全体を Strongly Connected Components に分割する。
 
 Kosaraju Algorithm
 
----
-
 ## Phase 1
 
 DFS order:
 
-```text
+```
 G
  ↓
 dfs-order
@@ -420,35 +360,29 @@ dfs-order
 
 生成:
 
-```text
+```
 finishing order
 ```
-
----
 
 ## Phase 2
 
 順番に:
 
-```text
+```
 reverse graph DFS
 ```
 
 実行。
 
----
-
 結果:
 
-```text
+```
 SCC list
 ```
 
----
-
 # 13. Execution Flow
 
-```text
+```
 Input:
 
 Graph
@@ -488,19 +422,17 @@ dfs-component
 SCC collection
 ```
 
----
-
 # 14. Return Format
 
 戻り値:
 
-```text
+```
 List of Lists
 ```
 
 Example:
 
-```lisp
+```
 (
  (:a1 :a2 :a3)
 
@@ -510,8 +442,6 @@ Example:
 
 )
 ```
-
----
 
 # 15. Mathematical Definition
 
@@ -537,27 +467,23 @@ and:
 v \rightarrow u
 ]
 
----
-
 # 16. 3Cluster Graph Expected Result
 
 対象:
 
-```text
+```
 a1 → a2 → a3 → a1
 ```
 
 and:
 
-```text
+```
 b1 → b2 → b3 → b1
 ```
 
----
-
 Expected:
 
-```text
+```
 SCC-1
 
 (a1 a2 a3)
@@ -568,24 +494,22 @@ SCC-2
 (b1 b2 b3)
 ```
 
----
-
 Bridge:
 
-```text
+```
 c1
 c2
 ```
 
 Expected:
 
-```text
+```
 singleton SCC
 ```
 
 because:
 
-```text
+```
 c → cluster
 
 but
@@ -595,13 +519,11 @@ cluster → c
 
 does not exist。
 
----
-
 # 17. Relationship With Attractor Detection
 
 Current architecture:
 
-```text
+```
 Graph
 
 ↓
@@ -621,25 +543,21 @@ Attractor Candidate
 Basin
 ```
 
----
-
 重要:
 
 SCC は attractor と同一ではない。
 
 SCC:
 
-```text
+```
 mutual reachability
 ```
 
 Attractor:
 
-```text
+```
 stable recurrent dynamics
 ```
-
----
 
 # 18. Relationship With find-recurrent-cycle
 
@@ -651,37 +569,33 @@ Comparison:
 | find-cycle           | observed cycle   |
 | find-recurrent-cycle | trajectory cycle |
 
----
-
 Example:
 
 SCC:
 
-```text
+```
 (a1 a2 a3)
 ```
 
 Cycle:
 
-```text
+```
 (a1 a2 a3)
 ```
 
 Attractor:
 
-```text
+```
 same cycle
 ```
 
 になる場合がある。
 
----
-
 # 19. Determinism Contract
 
 Given:
 
-```text
+```
 same graph
 
 same nodes
@@ -689,13 +603,11 @@ same nodes
 
 then:
 
-```text
+```
 same SCC partition
 ```
 
 must be produced.
-
----
 
 # 20. Complexity
 
@@ -707,8 +619,6 @@ must be produced.
 O(E)
 ]
 
----
-
 ## predecessors
 
 全 edge scan:
@@ -716,8 +626,6 @@ O(E)
 [
 O(E)
 ]
-
----
 
 ## dfs-order
 
@@ -727,8 +635,6 @@ DFS:
 O(V+E)
 ]
 
----
-
 ## dfs-component
 
 DFS:
@@ -736,8 +642,6 @@ DFS:
 [
 O(V+E)
 ]
-
----
 
 ## compute-sccs
 
@@ -747,13 +651,11 @@ Kosaraju:
 O(V+E)
 ]
 
----
-
 # 21. Purity Contract
 
 `compute-sccs` comment:
 
-```lisp
+```
 "Purely observational."
 ```
 
@@ -761,7 +663,7 @@ O(V+E)
 
 禁止:
 
-```text
+```
 Graph mutation
 
 Node mutation
@@ -771,13 +673,11 @@ Edge mutation
 State update
 ```
 
----
-
 # 22. Chron-OS Mapping
 
 このモジュールは Chron-OS の:
 
-```text
+```
 Topology Analysis Layer
 ```
 
@@ -793,8 +693,6 @@ Mapping:
 | Cycle          | Worldline recurrence         |
 | Basin          | Attractor domain             |
 
----
-
 # 23. Design Assessment
 
 ## Strengths
@@ -807,13 +705,11 @@ Kosarajuベースで:
 * 決定的
 * 計算量明確
 
----
-
 ### 2. Correct Layer Separation
 
 構造:
 
-```text
+```
 Graph
 
 ↓
@@ -835,8 +731,6 @@ Basin
 
 が明確。
 
----
-
 ### 3. Chron-OSとの整合
 
 SCCは:
@@ -847,15 +741,13 @@ SCCは:
 
 CommitやWorld mutationとは独立。
 
----
-
 # 24. Improvement Candidates
 
 ## P1: Explicit Reverse Graph
 
 現在:
 
-```lisp
+```
 predecessors
 ```
 
@@ -863,37 +755,33 @@ predecessors
 
 改善:
 
-```text
+```
 Graph Index
 
 node → incoming edges
 ```
 
----
-
 ## P2: Stable Ordering
 
 Hash table traversal:
 
-```text
+```
 順序保証なし
 ```
 
 必要なら:
 
-```text
+```
 sort SCC members
 ```
 
 追加。
 
----
-
 ## P3: SCC Metadata
 
 将来:
 
-```lisp
+```
 (defstruct scc
   nodes
   size
@@ -902,8 +790,6 @@ sort SCC members
 ```
 
 可能。
-
----
 
 # 25. Formal Invariants
 
@@ -915,8 +801,6 @@ Every node belongs to exactly one SCC.
 \bigcup \mathrm{SCC}_i = V
 \]
 
----
-
 ## SCC-2
 
 SCCs do not overlap.
@@ -925,23 +809,17 @@ SCCs do not overlap.
 SCC_i \cap SCC_j=\emptyset
 ]
 
----
-
 ## SCC-3
 
 All nodes inside SCC are mutually reachable.
-
----
 
 ## SCC-4
 
 Analysis does not alter graph.
 
----
-
 # Final Specification Summary
 
-```text
+```
 compute-sccs performs deterministic topology analysis.
 
 Input:
