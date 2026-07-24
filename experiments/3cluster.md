@@ -2,8 +2,6 @@
 
 ## 3-Cluster Graph Construction and Topology Model
 
----
-
 # 1. Overview
 
 ## 1.1 Purpose
@@ -19,11 +17,9 @@
 * SCC (Strongly Connected Component) 解析対象データ提供
 * Attractor / Basin Analysis の入力生成
 
----
-
 # 2. Architectural Position
 
-```text
+```
                 Experiment Graph
 
                       |
@@ -48,8 +44,6 @@
 
      Phase-E Trace Analysis
 ```
-
----
 
 # 3. Package Specification
 
@@ -79,8 +73,6 @@
    #:build-basin-map))
 ```
 
----
-
 # 4. Responsibility Boundary
 
 ## 4.1 Provides
@@ -92,8 +84,6 @@
 | Graph          | State-space container    |
 | 3Cluster Graph | Test topology generation |
 
----
-
 ## 4.2 Does Not Provide
 
 | Function           | Layer        |
@@ -104,11 +94,7 @@
 | LLM inference      | Backend      |
 | Semantic reasoning | LLM          |
 
----
-
 # 5. Graph Data Model
-
----
 
 # 5.1 Node Structure
 
@@ -118,11 +104,9 @@
   role)
 ```
 
----
-
 ## Node Logical Model
 
-```text
+```
 Node =
 {
  id   : unique identifier
@@ -130,11 +114,7 @@ Node =
 }
 ```
 
----
-
 ## Fields
-
----
 
 ## node-id
 
@@ -150,13 +130,11 @@ Node identity.
 
 Examples:
 
-```text
+```
 :a1
 :b2
 :c1
 ```
-
----
 
 ## node-role
 
@@ -178,8 +156,6 @@ Defined roles:
 | :temporal | Temporal transition cluster |
 | :bridge   | Bridge node                 |
 
----
-
 # 5.2 Edge Structure
 
 ```lisp
@@ -190,11 +166,9 @@ Defined roles:
   strength)
 ```
 
----
-
 ## Edge Logical Model
 
-```text
+```
 Edge =
 {
  from
@@ -204,11 +178,7 @@ Edge =
 }
 ```
 
----
-
 ## Fields
-
----
 
 ## edge-from
 
@@ -216,11 +186,9 @@ Source node.
 
 Example:
 
-```text
+```
 :a1
 ```
-
----
 
 ## edge-to
 
@@ -228,11 +196,9 @@ Destination node.
 
 Example:
 
-```text
+```
 :a2
 ```
-
----
 
 ## edge-relation
 
@@ -240,13 +206,11 @@ Transition category.
 
 Examples:
 
-```text
+```
 :reply
 
 :temporal
 ```
-
----
 
 ## edge-strength
 
@@ -254,17 +218,15 @@ Transition weight.
 
 Range:
 
-```text
+```
 0.0 - 1.0
 ```
 
 Example:
 
-```text
+```
 0.9
 ```
-
----
 
 # 5.3 Graph Structure
 
@@ -274,19 +236,15 @@ Example:
   edges)
 ```
 
----
-
 ## Graph Model
 
-```text
+```
 Graph =
 {
  nodes : Node List
  edges : Edge List
 }
 ```
-
----
 
 # 6. 3 Cluster Graph Generator
 
@@ -296,8 +254,6 @@ Graph =
 (make-3cluster-graph)
 ```
 
----
-
 ## Purpose
 
 Creates a deterministic test graph containing:
@@ -306,15 +262,13 @@ Creates a deterministic test graph containing:
 2. Temporal Cluster
 3. Bridge Cluster
 
----
-
 # 7. Generated Node Topology
 
 ## 7.1 Nodes
 
 Generated nodes:
 
-```text
+```
 A Cluster
 
 a1
@@ -335,8 +289,6 @@ c1
 c2
 ```
 
----
-
 ## Node Classification
 
 | Node | Role     |
@@ -350,11 +302,7 @@ c2
 | c1   | bridge   |
 | c2   | bridge   |
 
----
-
 # 8. Edge Topology
-
----
 
 # 8.1 A Cluster
 
@@ -364,7 +312,7 @@ Strong reply cycle.
 
 Edges:
 
-```text
+```
 a1 → a2
 a2 → a3
 a3 → a1
@@ -372,21 +320,19 @@ a3 → a1
 
 Relation:
 
-```text
+```
 :reply
 ```
 
 Strength:
 
-```text
+```
 0.9
 ```
 
----
-
 Graph:
 
-```text
+```
        +----+
        |    |
        v    |
@@ -394,8 +340,6 @@ a1 → a2 → a3
 ^         |
 |---------|
 ```
-
----
 
 # 8.2 B Cluster
 
@@ -405,7 +349,7 @@ Temporal recurrence cycle.
 
 Edges:
 
-```text
+```
 b1 → b2
 b2 → b3
 b3 → b1
@@ -413,21 +357,19 @@ b3 → b1
 
 Relation:
 
-```text
+```
 :temporal
 ```
 
 Strength:
 
-```text
+```
 0.3
 ```
 
----
-
 Graph:
 
-```text
+```
        +----+
        |    |
        v    |
@@ -436,97 +378,85 @@ b1 → b2 → b3
 |---------|
 ```
 
----
-
 # 8.3 C Bridge Cluster
 
 ## Purpose
 
 Connect independent attractor candidates.
 
----
-
 Edges:
 
 ## c1
 
-```text
+```
 c1 → a1
 ```
 
 Relation:
 
-```text
+```
 :reply
 ```
 
 Strength:
 
-```text
+```
 0.6
 ```
 
----
-
-```text
+```
 c1 → b1
 ```
 
 Relation:
 
-```text
+```
 :temporal
 ```
 
 Strength:
 
-```text
+```
 0.4
 ```
 
----
-
 ## c2
 
-```text
+```
 c2 → a2
 ```
 
 Relation:
 
-```text
+```
 :reply
 ```
 
 Strength:
 
-```text
+```
 0.4
 ```
 
----
-
-```text
+```
 c2 → b2
 ```
 
 Relation:
 
-```text
+```
 :temporal
 ```
 
 Strength:
 
-```text
+```
 0.6
 ```
 
----
-
 # 9. Complete Graph Structure
 
-```text
+```
                  +---------+
                  |         |
                  v         |
@@ -552,25 +482,19 @@ Strength:
           +--------> b2
 ```
 
----
-
 # 10. Graph Properties
 
 ## 10.1 Node Count
 
-```text
+```
 N = 8
 ```
 
----
-
 ## 10.2 Edge Count
 
-```text
+```
 E = 10
 ```
-
----
 
 # 11. Expected SCC Structure
 
@@ -578,7 +502,7 @@ Given the topology:
 
 ## SCC-1
 
-```text
+```
 {a1,a2,a3}
 ```
 
@@ -586,11 +510,9 @@ Reason:
 
 All nodes mutually reachable.
 
----
-
 ## SCC-2
 
-```text
+```
 {b1,b2,b3}
 ```
 
@@ -598,17 +520,15 @@ Reason:
 
 Temporal cycle.
 
----
-
 ## Bridge Nodes
 
-```text
+```
 {c1,c2}
 ```
 
 Not strongly connected because:
 
-```text
+```
 c → cluster
 
 but
@@ -618,13 +538,11 @@ cluster → c
 
 does not exist.
 
----
-
 # 12. Attractor Analysis Compatibility
 
 This graph is designed for:
 
-```text
+```
 Graph
 
 ↓
@@ -644,11 +562,9 @@ build-basin-map
 build-basin-structure
 ```
 
----
-
 Expected attractor candidates:
 
-```text
+```
 A cycle
 
 (a1,a2,a3)
@@ -659,13 +575,11 @@ B cycle
 (b1,b2,b3)
 ```
 
----
-
 # 13. Basin Analysis Example
 
 Potential result:
 
-```text
+```
 Basin A
 
 attractor:
@@ -686,13 +600,11 @@ nodes:
 
 ※ 実際の分類は `next-event` / `rollout*` / `find-attractor` の遷移規則に依存する。
 
----
-
 # 14. Chron-OS Mapping
 
 このGraph Modelは Chron-OS の以下の抽象に対応する。
 
-```text
+```
 State Space
 
      |
@@ -721,15 +633,13 @@ Attractor
 Basin
 ```
 
----
-
 # 15. Determinism Contract
 
 ## Input
 
 固定:
 
-```text
+```
 nodes
 
 edges
@@ -737,13 +647,11 @@ edges
 transition rules
 ```
 
----
-
 ## Output
 
 必ず同一:
 
-```text
+```
 SCC
 
 cycle
@@ -752,8 +660,6 @@ attractor
 
 basin structure
 ```
-
----
 
 # 16. Design Assessment
 
@@ -769,11 +675,9 @@ basin structure
 * basin
 * bridge influence
 
----
-
 ### 2. Separation of Concepts
 
-```text
+```
 Node
  ↓
 Edge
@@ -789,8 +693,6 @@ Basin
 
 という解析階層が明確。
 
----
-
 ### 3. Chron-OS Compatibility
 
 このGraphは:
@@ -801,11 +703,9 @@ Basin
 
 の検証用モデルとして利用可能。
 
----
-
 # 17. Formal Specification Summary
 
-```text
+```
 3ClusterGraph provides a deterministic directed graph.
 
 Components:
@@ -839,7 +739,5 @@ Evaluate:
     basin construction
     state-space topology
 ```
-
----
 
 このコードは、前段の `build-basin-map` / `build-basin-structure` と組み合わせることで、Chron-OS Phase-E の **「状態空間トポロジー解析用リファレンスグラフ」** として機能する設計になっています。

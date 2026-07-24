@@ -13,13 +13,11 @@
 * basin size（質量）計測
 * 状態空間における安定領域分析
 
----
-
 # 2. Architectural Position
 
 ## 2.1 Analysis Pipeline
 
-```text
+```
  id="basin-flow"
 
         Graph
@@ -59,8 +57,6 @@
  Basin Structure
 ```
 
----
-
 # 3. Responsibility Boundary
 
 ## 3.1 Responsible
@@ -73,8 +69,6 @@
 | basin construction      | ✓      |
 | basin mass calculation  | ✓      |
 | basin ratio calculation | ✓      |
-
----
 
 ## 3.2 Non-Responsible
 
@@ -89,13 +83,11 @@
 | commit                        | Kernel         |
 | History persistence           | WAL            |
 
----
-
 # 4. Data Model
 
 ## 4.1 Basin Structure
 
-```lisp
+```
 (defstruct basin
   attractor
   nodes
@@ -103,11 +95,9 @@
   ratio)
 ```
 
----
-
 ## Logical Model
 
-```text
+```
 Basin
 
 {
@@ -118,21 +108,15 @@ Basin
 }
 ```
 
----
-
 # 5. Basin Fields Specification
-
----
 
 # 5.1 attractor
 
 ## Definition
 
-```lisp
+```
 (basin-attractor basin)
 ```
-
----
 
 ## Purpose
 
@@ -140,27 +124,21 @@ Basin
 
 Example:
 
-```text
+```
 state-A
 ```
-
----
 
 ## Contract
 
 同一 attractor を持つ node 群は同一 basin に属する。
 
----
-
 # 5.2 nodes
 
 ## Definition
 
-```lisp
+```
 (basin-nodes basin)
 ```
-
----
 
 ## Purpose
 
@@ -168,7 +146,7 @@ state-A
 
 Example:
 
-```text
+```
 [
  node1
  node5
@@ -176,17 +154,13 @@ Example:
 ]
 ```
 
----
-
 # 5.3 mass
 
 ## Definition
 
-```lisp
+```
 (basin-mass basin)
 ```
-
----
 
 ## Purpose
 
@@ -194,15 +168,13 @@ Basin の状態数。
 
 計算:
 
-```text
+```
 mass = |nodes|
 ```
 
----
-
 Example:
 
-```text
+```
 nodes:
 
 [A B C D]
@@ -212,17 +184,13 @@ mass:
 4
 ```
 
----
-
 # 5.4 ratio
 
 ## Definition
 
-```lisp
+```
 (basin-ratio basin)
 ```
-
----
 
 ## Purpose
 
@@ -234,11 +202,9 @@ Formula:
 ratio=\frac{mass}{total_nodes}
 ]
 
----
-
 Example:
 
-```text
+```
 total nodes = 100
 
 basin nodes = 25
@@ -246,27 +212,19 @@ basin nodes = 25
 ratio = 0.25
 ```
 
----
-
 # 6. Function Specification
-
----
 
 # 6.1 build-basin-map
 
 ## Definition
 
-```lisp
+```
 (defun build-basin-map (graph nodes steps)
 ```
-
----
 
 ## Purpose
 
 各 node の attractor を探索し、attractor 単位で node を分類する。
-
----
 
 ## Input
 
@@ -276,11 +234,9 @@ ratio = 0.25
 
 想定:
 
-```text
+```
 Node → Next Node
 ```
-
----
 
 ### nodes
 
@@ -288,15 +244,13 @@ Node → Next Node
 
 Example:
 
-```lisp
+```
 (
  n1
  n2
  n3
 )
 ```
-
----
 
 ### steps
 
@@ -307,13 +261,11 @@ Example:
 * attractor search depth
 * trajectory limit
 
----
-
 # 7. Algorithm
 
 Pseudo code:
 
-```text
+```
 create empty table
 
 for each node:
@@ -327,11 +279,9 @@ for each node:
 return table
 ```
 
----
-
 ## Equivalent
 
-```lisp
+```
 (map node)
 
        |
@@ -347,19 +297,17 @@ return table
 attractor → nodes
 ```
 
----
-
 # 8. Output Format
 
 戻り値:
 
-```text
+```
 Hash Table
 ```
 
 構造:
 
-```text
+```
 {
  attractor-A :
      (node1 node5 node8)
@@ -370,60 +318,50 @@ Hash Table
 }
 ```
 
----
-
 # 9. Properties
 
 ## 9.1 Grouping Guarantee
 
 同一 attractor:
 
-```text
+```
 A(node1)=A(node2)
 ```
 
 なら:
 
-```text
+```
 node1,node2 ∈ same basin
 ```
-
----
 
 ## 9.2 Coverage
 
 理想状態:
 
-```text
+```
 all nodes
 =
 union of all basin nodes
 ```
 
----
-
 # 10. build-basin-structure
 
 ## Definition
 
-```lisp
+```
 (defun build-basin-structure
     (basin-map total-nodes))
 ```
-
----
 
 ## Purpose
 
 Basin map を統計情報付き Basin object に変換する。
 
----
-
 # 11. Algorithm
 
 Pseudo:
 
-```text
+```
 create result list
 
 for each:
@@ -448,13 +386,11 @@ append
 return result
 ```
 
----
-
 # 12. Output
 
 例:
 
-```lisp
+```
 (
  #<BASIN attractor=A mass=30 ratio=0.3>
 
@@ -462,11 +398,9 @@ return result
 )
 ```
 
----
-
 # 13. Complete Analysis Flow
 
-```text
+```
  id="complete-basin"
 
 Graph
@@ -498,8 +432,6 @@ build-basin-structure
  }
 ]
 ```
-
----
 
 # 14. Mathematical Model
 
@@ -533,15 +465,13 @@ Basin ratio:
 R_i=\frac{|B_i|}{|S|}
 ]
 
----
-
 # 15. Chron-LLM / Chron-OS Mapping
 
 この解析層は Chron-LLM の Phase-E Trace Analysis に対応する。
 
 位置:
 
-```text
+```
  id="chron-map"
 
 History/WAL
@@ -572,8 +502,6 @@ Attractor Analysis
 Basin Structure
 ```
 
----
-
 # 16. Relation to Deterministic Kernel
 
 重要:
@@ -590,8 +518,6 @@ Basin Analysis は状態変更を行わない。
 | Commit           | ✗  |
 | Affect Scheduler | ✗  |
 
----
-
 # 17. Current Implementation Review
 
 ## Strengths
@@ -602,7 +528,7 @@ Basin Analysis は状態変更を行わない。
 
 責務:
 
-```text
+```
 classification
 ```
 
@@ -610,13 +536,11 @@ classification
 
 責務:
 
-```text
+```
 measurement
 ```
 
 分離されている。
-
----
 
 ### 2. Deterministic
 
@@ -630,17 +554,13 @@ measurement
 
 同一 basin structure。
 
----
-
 ### 3. Minimal State
 
 保持するもの:
 
-```text
+```
 analysis result only
 ```
-
----
 
 # 18. Potential Improvements
 
@@ -648,13 +568,13 @@ analysis result only
 
 現在:
 
-```lisp
+```
 (/ mass total-nodes)
 ```
 
 は:
 
-```text
+```
 total-nodes = 0
 ```
 
@@ -662,17 +582,15 @@ total-nodes = 0
 
 推奨:
 
-```lisp
+```
 (assert (> total-nodes 0))
 ```
-
----
 
 ## P1: Basin Ordering
 
 現在:
 
-```lisp
+```
 result
 ```
 
@@ -680,19 +598,17 @@ result
 
 必要なら:
 
-```text
+```
 sort by ratio descending
 ```
 
 を追加。
 
----
-
 ## P2: Stable Basin ID
 
 現在:
 
-```text
+```
 attractor object identity
 ```
 
@@ -700,13 +616,11 @@ attractor object identity
 
 将来:
 
-```text
+```
 basin-id
 ```
 
 追加可能。
-
----
 
 # 19. Formal Invariants
 
@@ -714,23 +628,19 @@ basin-id
 
 Every node belongs to exactly one basin.
 
-```text
+```
 ∀ node ∈ Nodes
 
 ∃! Basin
 ```
 
----
-
 ## BASIN-2
 
 Basin mass equals node count.
 
-```text
+```
 mass = length(nodes)
 ```
-
----
 
 ## BASIN-3
 
@@ -740,23 +650,19 @@ All basin ratios sum to approximately 1.
 \sum ratio_i = 1
 ]
 
----
-
 ## BASIN-4
 
 Analysis is observational.
 
-```text
+```
 Basin Analysis
 ≠
 Runtime Transition
 ```
 
----
-
 # Final Specification Summary
 
-```text
+```
 Basin Structure Analysis computes the topology of state-space convergence.
 
 Input:

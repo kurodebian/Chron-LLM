@@ -11,7 +11,8 @@
         ;; no cycle detected
         (list last-node))))
 
-(defun find-recurrent-cycle (graph start steps)
-  "Rollout and return the observed recurrent cycle (not a single node)."
-  (let ((path (rollout* graph start steps)))
+(defun find-recurrent-cycle (graph start steps &optional convergence-threshold)
+  "Rollout and return the observed recurrent cycle (not a single node).
+   Optionally, stop early if the path converges within the given threshold."
+  (let ((path (rollout* graph start steps convergence-threshold)))
     (reverse (find-cycle path))))
