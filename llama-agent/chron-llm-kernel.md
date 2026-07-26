@@ -4,8 +4,6 @@
 **Module** : Kernel  
 **Layer** : Runtime / Kernel Boundary
 
----
-
 # 1. 概要
 
 Chron Kernel は Runtime と Chron-LLM内部システムを分離する境界(Boundary Layer)である。
@@ -24,8 +22,6 @@ RuntimeはGraph・History・WALを直接操作しない。
 
 Kernelのみがシステム状態を変更できる。
 
----
-
 # 2. アーキテクチャ
 
 ```
@@ -43,8 +39,6 @@ Kernelのみがシステム状態を変更できる。
                     │
                 Kernel State
 ```
-
----
 
 # 3. 設計思想
 
@@ -77,8 +71,6 @@ History操作
 Kernel API
 ```
 
----
-
 # 4. Kernel責務
 
 Kernelが担当する機能
@@ -91,8 +83,6 @@ Kernelが担当する機能
 - Runtime DTO生成
 - World管理
 - Context構築
-
----
 
 # 5. 非責務
 
@@ -108,23 +98,17 @@ Kernelは以下を担当しない。
 - WAL実装
 - Historyアルゴリズム
 
----
-
 # 6. DTO
 
 KernelはRuntimeへDTOのみ公開する。
 
 Runtimeは内部Node/Eventを知らない。
 
----
-
 # 7. history-entry
 
 ## 目的
 
 Runtime用History表現
-
----
 
 ### フィールド
 
@@ -134,29 +118,21 @@ Runtime用History表現
 |text|String|表示テキスト|
 |clock|Integer|Commit Clock|
 
----
-
 ### 特徴
 
 Nodeは公開しない。
 
 RuntimeはEvent構造を知らない。
 
----
-
 # 8. context-object
 
 LLM非依存コンテキスト
-
----
 
 ### system-prompt
 
 将来Prompt Builder用
 
 現在未使用
-
----
 
 ### history
 
@@ -166,31 +142,21 @@ DTO化されたHistory
 List<HistoryEntry>
 ```
 
----
-
 ### memory-context
 
 Memory Service予約
-
----
 
 ### metadata
 
 将来拡張用
 
----
-
 # 9. kernel-state
 
 Runtimeへ公開される現在状態
 
----
-
 ### world-id
 
 現在世界線
-
----
 
 ### health
 
@@ -200,13 +166,9 @@ Runtimeへ公開される現在状態
 :degraded
 ```
 
----
-
 ### context
 
 Context Object
-
----
 
 # 10. Kernel Container
 
@@ -216,29 +178,20 @@ Kernel全体を管理するコンテナ
 
 ```
 Kernel
-
 ├── WAL
-
 ├── Graph
-
 └── Current World
 ```
-
----
 
 ## WAL
 
 唯一の永続化層
-
----
 
 ## Graph
 
 Projection Cache
 
 再構築可能
-
----
 
 ## Current World
 
@@ -252,8 +205,6 @@ Kernelのみ保持する。
 100
 ```
 
----
-
 ## 将来追加
 
 ```
@@ -266,8 +217,6 @@ Scheduler
 Listeners
 ```
 
----
-
 # 11. Kernel生成
 
 ## make-chron-kernel()
@@ -276,19 +225,13 @@ Listeners
 
 ```
 Kernel
-
 ↓
-
 WAL生成
-
 ↓
-
 Graph=nil
 ```
 
 Graphは初回Commit後生成される。
-
----
 
 # 12. History DTO Builder
 
@@ -304,23 +247,17 @@ Runtime DTO
 
 変換
 
----
-
 ### 入力
 
 ```
 Graph History
 ```
 
----
-
 ### 出力
 
 ```
 History Entry List
 ```
-
----
 
 ### 抽出項目
 
@@ -348,8 +285,6 @@ Payloadから
 
 を返す。
 
----
-
 # 13. Context Builder
 
 ## kernel-build-context-view()
@@ -358,35 +293,23 @@ Payloadから
 
 Runtime向けContext生成
 
----
-
 ### History取得
 
 ```
 Graph
-
 ↓
-
 graph-history()
-
 ↓
-
 DTO変換
 ```
-
----
 
 ### Memory
 
 Phase4以降
 
----
-
 ### Metadata
 
 未実装
-
----
 
 # 14. Projection更新
 
@@ -396,19 +319,13 @@ Phase4以降
 
 ```
 WAL
-
 ↓
-
 rebuild-graph-from-wal()
-
 ↓
-
 Kernel Graph更新
 ```
 
 Projectionは毎Commit後更新される。
-
----
 
 # 15. Health
 
@@ -430,15 +347,11 @@ Graph未生成
 
 :ok
 
----
-
 # 16. Commit Pipeline
 
 ## %kernel-commit-event()
 
 Kernel唯一のCommit処理
-
----
 
 ### 入力
 
@@ -448,27 +361,17 @@ Kind
 Payload
 ```
 
----
-
 ### Pipeline
 
 ```
 Stage Event
-
 ↓
-
 Commit
-
 ↓
-
 Projection更新
-
 ↓
-
 State生成
 ```
-
----
 
 ### 詳細
 
@@ -480,8 +383,6 @@ Stage
 stage-event()
 ```
 
----
-
 #### Step2
 
 Commit
@@ -489,8 +390,6 @@ Commit
 ```
 commit-staged()
 ```
-
----
 
 #### Step3
 
@@ -500,8 +399,6 @@ Projection更新
 refresh-projections()
 ```
 
----
-
 #### Step4
 
 Kernel State生成
@@ -509,8 +406,6 @@ Kernel State生成
 ```
 kernel-current-state()
 ```
-
----
 
 #### エラー
 
@@ -522,8 +417,6 @@ Kernel commit failed.
 
 例外送出。
 
----
-
 # 17. Public API
 
 ## kernel-submit-user-input()
@@ -531,8 +424,6 @@ Kernel commit failed.
 目的
 
 ユーザー入力受付
-
----
 
 生成Event
 
@@ -546,15 +437,11 @@ Payload
 :text
 ```
 
----
-
 ## kernel-submit-assistant-reply()
 
 目的
 
 Assistant応答受付
-
----
 
 生成Event
 
@@ -568,8 +455,6 @@ Payload
 :text
 ```
 
----
-
 ## kernel-current-state()
 
 現在状態取得
@@ -580,8 +465,6 @@ Payload
 Kernel State
 ```
 
----
-
 # 18. World Management
 
 ## kernel-create-world()
@@ -590,31 +473,19 @@ Kernel State
 
 新しい世界線生成
 
----
-
 ### 手順
 
 ```
 現在世界取得
-
 ↓
-
 World Counter++
-
 ↓
-
 Branch Event Commit
-
 ↓
-
 Current World変更
-
 ↓
-
 新World返却
 ```
-
----
 
 ### Branch Event
 
@@ -630,8 +501,6 @@ Payload
 Parent World
 ```
 
----
-
 ### World切替
 
 Commit後
@@ -646,8 +515,6 @@ New World
 
 へ更新。
 
----
-
 # 19. Runtimeとの境界
 
 Runtimeが利用可能
@@ -661,8 +528,6 @@ current-state
 
 create-world
 ```
-
----
 
 Runtimeが利用不可
 
@@ -682,43 +547,25 @@ immune
 wal
 ```
 
----
-
 # 20. 状態遷移
 
 ```
 Runtime
-
 ↓
-
 Kernel API
-
 ↓
-
 Stage
-
 ↓
-
 Commit
-
 ↓
-
 Projection
-
 ↓
-
 Health
-
 ↓
-
 DTO
-
 ↓
-
 Runtime
 ```
-
----
 
 # 21. DTO変換
 
@@ -726,13 +573,9 @@ Runtime
 
 ```
 Node
-
 ↓
-
 Event
-
 ↓
-
 HistoryEntry
 ```
 
@@ -741,8 +584,6 @@ Runtime
 ```
 HistoryEntryのみ
 ```
-
----
 
 # 22. 不変条件
 
@@ -755,16 +596,12 @@ Commit成功後
 - Health最新
 - DTO最新
 
----
-
 Runtime
 
 - Node非公開
 - Event非公開
 - Graph非公開
 - WAL非公開
-
----
 
 # 23. 計算量
 
@@ -784,15 +621,11 @@ O(n)
 
 n=WALサイズ
 
----
-
 History生成
 
 ```
 O(depth)
 ```
-
----
 
 DTO生成
 
@@ -800,15 +633,11 @@ DTO生成
 O(history)
 ```
 
----
-
 Health
 
 ```
 O(depth)
 ```
-
----
 
 # 24. Phase1制約
 
@@ -834,37 +663,23 @@ O(depth)
 - Transaction
 - Async Commit
 
----
-
 # 25. レイヤ構造
 
 ```
 Runtime
-
 ↓
-
 Kernel API
-
 ↓
-
 Kernel
-
 ↓
-
 Projection
-
 ↓
-
 Graph
-
 ↓
-
 Write Ahead Log
 ```
 
 KernelはRuntimeとPersistenceの唯一の境界である。
-
----
 
 # 26. 設計原則
 
@@ -883,8 +698,6 @@ Kernelは、
 を一つのトランザクションとして実行することで、Runtimeから見た状態の一貫性を保証する。
 
 ProjectionやHistoryはすべてCommit済WALから再構築されるため、Kernel自身はGraphを永続化せず、Projection Cacheとして管理する。
-
----
 
 # 27. コードレビュー・仕様との乖離
 
@@ -914,21 +727,15 @@ ProjectionやHistoryはすべてCommit済WALから再構築されるため、Ker
 - Branch Event生成時に `new-world` を明示的に指定できるAPIへ変更する。
 - もしくは `kernel-current-world` を切り替えてからCommitする。
 
----
-
 ## 27.2 Projection更新コスト
 
 現在は
 
 ```
 Commit毎
-
 ↓
-
 WAL全件
-
 ↓
-
 Graph再構築
 ```
 
@@ -950,15 +757,11 @@ Phase2以降では
 
 などの導入を想定した方がスケーラビリティが向上します。
 
----
-
 ## 27.3 `context-object.system-prompt`
 
 DTOには `system-prompt` フィールドがありますが、本コード内では一度も設定されていません。
 
 現状では予約フィールドであり、Prompt Builder導入時にKernelから生成される設計であることを仕様へ明記しておくことが望まれます。
-
----
 
 ## 27.4 Commit Pipeline
 
@@ -967,13 +770,10 @@ DTOには `system-prompt` フィールドがありますが、本コード内で
 ```
 Stage
 ↓
-
 Commit
 ↓
-
 Projection
 ↓
-
 DTO
 ```
 
@@ -992,19 +792,14 @@ DTO
 ```
 Stage
 ↓
-
 Validation
 ↓
-
 Commit
 ↓
-
 Projection
 ↓
-
 Post Commit Hooks
 ↓
-
 DTO
 ```
 

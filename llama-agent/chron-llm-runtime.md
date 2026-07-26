@@ -4,8 +4,6 @@
 **Module** : Runtime Service  
 **Layer** : Runtime Layer
 
----
-
 # 1. 概要
 
 Runtime Service は Chron-LLM の最上位実行層であり、人間との対話を担当する。
@@ -15,8 +13,6 @@ RuntimeはコンソールI/OおよびLLM呼び出しのみを責務とし、シ�
 すべての状態管理は Kernel に委譲される。
 
 RuntimeはKernelを介してのみChron-LLMへアクセスする。
-
----
 
 # 2. 設計目的
 
@@ -30,31 +26,19 @@ Runtimeは
 
 ```
 入力
-
 ↓
-
 Kernel
-
 ↓
-
 Context View
-
 ↓
-
 LLM
-
 ↓
-
 Kernel
-
 ↓
-
 表示
 ```
 
 という実行のみを担当する。
-
----
 
 # 3. レイヤ構成
 
@@ -78,8 +62,6 @@ Kernel
 
 RuntimeはKernel以下のレイヤを認識しない。
 
----
-
 # 4. 責務
 
 Runtimeが担当する機能
@@ -89,8 +71,6 @@ Runtimeが担当する機能
 - LLM呼び出し
 - Runtime例外表示
 - Kernel API呼び出し
-
----
 
 # 5. 非責務
 
@@ -110,8 +90,6 @@ Runtimeは以下を知らない。
 
 これらはKernelが管理する。
 
----
-
 # 6. Runtime状態
 
 Runtime自身は状態を保持しない。
@@ -126,8 +104,6 @@ Kernel
 
 Kernelがシステム全体の状態を保持する。
 
----
-
 # 7. エントリポイント
 
 ## agent-main-loop()
@@ -135,8 +111,6 @@ Kernelがシステム全体の状態を保持する。
 ### 目的
 
 Chron-LLM Runtime開始
-
----
 
 ### 入力
 
@@ -154,15 +128,11 @@ LLM Model
 
 となっている。
 
----
-
 ### 出力
 
 なし
 
 無限ループとして動作する。
-
----
 
 # 8. 初期化
 
@@ -178,23 +148,15 @@ make-chron-kernel()
 
 ```
 Kernel
-
 ↓
-
 WAL
-
 ↓
-
 Current World
-
 ↓
-
 Graph=nil
 ```
 
 RuntimeはKernel生成以外何もしない。
-
----
 
 # 9. メインループ
 
@@ -202,33 +164,19 @@ Runtimeは無限ループとして動作する。
 
 ```
 loop
-
 ↓
-
 入力
-
 ↓
-
 Kernel
-
 ↓
-
 Context
-
 ↓
-
 LLM
-
 ↓
-
 Kernel
-
 ↓
-
 表示
 ```
-
----
 
 # 10. Console Input
 
@@ -248,8 +196,6 @@ read-line()
 
 入力データは文字列のみ。
 
----
-
 # 11. User Input Pipeline
 
 取得した入力は
@@ -265,8 +211,6 @@ RuntimeはEventを生成しない。
 RuntimeはHistoryへ追加しない。
 
 KernelのみがEvent生成を行う。
-
----
 
 # 12. Context取得
 
@@ -284,8 +228,6 @@ kernel-current-state()
 KernelState
 ```
 
----
-
 取得内容
 
 ```
@@ -297,8 +239,6 @@ Context
 ```
 
 RuntimeはDTOのみ扱う。
-
----
 
 # 13. System表示
 
@@ -324,8 +264,6 @@ Health:OK
 
 内部GraphやHistoryは表示しない。
 
----
-
 # 14. Prompt Builder
 
 現在未実装。
@@ -334,21 +272,15 @@ Health:OK
 
 ```
 Context
-
 ↓
-
 Prompt Builder
-
 ↓
-
 Prompt
 ```
 
 を生成する。
 
 Prompt BuilderはRuntimeから利用されるが実装はKernel外部サービスとなる。
-
----
 
 # 15. LLM呼び出し
 
@@ -358,13 +290,9 @@ Prompt BuilderはRuntimeから利用されるが実装はKernel外部サービ�
 
 ```
 Prompt
-
 ↓
-
 generate()
-
 ↓
-
 Reply
 ```
 
@@ -373,8 +301,6 @@ Reply
 RuntimeのみがLLMを知る。
 
 KernelはLLMを知らない。
-
----
 
 # 16. Assistant Pipeline
 
@@ -389,8 +315,6 @@ kernel-submit-assistant-reply()
 RuntimeはReplyをHistoryへ直接追加しない。
 
 KernelがCommitする。
-
----
 
 # 17. Exception Handling
 
@@ -412,55 +336,31 @@ Runtime Error
 
 Kernel内部例外はRuntimeまで伝播する。
 
----
-
 # 18. 状態遷移
 
 ```
 User
-
 ↓
-
 Console
-
 ↓
-
 Kernel Submit
-
 ↓
-
 Commit
-
 ↓
-
 Projection
-
 ↓
-
 Context
-
 ↓
-
 Prompt
-
 ↓
-
 LLM
-
 ↓
-
 Reply
-
 ↓
-
 Kernel Submit
-
 ↓
-
 Commit
 ```
-
----
 
 # 19. Runtime API
 
@@ -477,8 +377,6 @@ kernel-submit-assistant-reply()
 ```
 
 Runtimeはこれ以外利用しない。
-
----
 
 # 20. RuntimeとKernel境界
 
@@ -516,55 +414,31 @@ Branch
 
 DTO以外公開しない。
 
----
-
 # 21. データフロー
 
 ```
 User Text
-
 ↓
-
 Kernel Submit
-
 ↓
-
 Event
-
 ↓
-
 WAL
-
 ↓
-
 Projection
-
 ↓
-
 History
-
 ↓
-
 Context
-
 ↓
-
 Prompt
-
 ↓
-
 LLM
-
 ↓
-
 Reply
-
 ↓
-
 Kernel Submit
 ```
-
----
 
 # 22. 不変条件
 
@@ -577,8 +451,6 @@ Runtimeは
 - Historyへアクセスしない
 
 Kernelのみが状態を変更できる。
-
----
 
 # 23. 計算量
 
@@ -608,8 +480,6 @@ LLM
 
 Runtime自身はほぼ一定時間処理である。
 
----
-
 # 24. Phase1制約
 
 実装済
@@ -629,8 +499,6 @@ Runtime自身はほぼ一定時間処理である。
 - Session管理
 - Command System
 - Multi Agent
-
----
 
 # 25. 設計原則
 
@@ -655,45 +523,29 @@ Kernelのみが状態を保持する。
 
 などへ容易に置き換え可能となる。
 
----
-
 # 26. 将来拡張
 
 Phase4以降
 
 ```
 Runtime
-
 ↓
-
 Prompt Builder
-
 ↓
-
 Model Adapter
-
 ↓
-
 Streaming Decoder
-
 ↓
-
 Tool Calling
-
 ↓
-
 Assistant Reply
-
 ↓
-
 Kernel Commit
 ```
 
 へ拡張される。
 
 Kernelとの境界は維持される。
-
----
 
 # 27. コードレビュー・仕様との乖離
 
@@ -708,8 +560,6 @@ Kernelとの境界は維持される。
 となっており、RuntimeはLLMを利用していない。
 
 これはPhase4でLLM統合を行うためのプレースホルダである。
-
----
 
 ## 27.2 `context` の未使用
 
@@ -732,16 +582,12 @@ context
 ```
 Context
 ↓
-
 Prompt Builder
 ↓
-
 Prompt
 ```
 
 の入力となる。
-
----
 
 ## 27.3 Runtimeの責務分離
 
@@ -754,8 +600,6 @@ Prompt
 への直接アクセスが完全に排除されている。
 
 これは**Kernel Boundary**の設計が一貫して守られていることを示している。
-
----
 
 ## 27.4 終了処理
 
@@ -776,8 +620,6 @@ loop
 - Session終了
 
 などをRuntime層へ追加することが望ましい。
-
----
 
 # 28. 総合評価
 

@@ -4,8 +4,6 @@
 **Module** : Stateful Reset / Agent Runtime  
 **Layer** : Runtime + Agent Memory Layer
 
----
-
 # 1. 概要
 
 本モジュールは Chron-LLM における
@@ -24,27 +22,17 @@
 
 ```
 KV Reset
-
 ↓
-
 Identity Prompt
-
 ↓
-
 Agent State
-
 ↓
-
 Memory Reconstruction
-
 ↓
-
 Continue
 ```
 
 という手順によって状態を復元する。
-
----
 
 # 2. 設計目的
 
@@ -52,27 +40,17 @@ Continue
 
 ```
 LLM
-
 ↓
-
 長時間動作
-
 ↓
-
 KV満杯
-
 ↓
-
 Reset
-
 ↓
-
 継続実行
 ```
 
 を実現することを目的とする。
-
----
 
 # 3. アーキテクチャ
 
@@ -94,8 +72,6 @@ Reset
                  llama.cpp
 ```
 
----
-
 # 4. 責務
 
 本モジュールが担当するもの
@@ -106,8 +82,6 @@ Reset
 - Context再投入
 - Reset判定
 - Agent Loop
-
----
 
 # 5. 非責務
 
@@ -122,8 +96,6 @@ Reset
 - Memory Search
 - Projection
 
----
-
 # 6. Runtime State
 
 ## *n-past*
@@ -133,8 +105,6 @@ Reset
 ```
 Past Tokens
 ```
-
----
 
 ## *system-prompt*
 
@@ -146,39 +116,27 @@ Agent Identity
 
 Reset後最初に投入される。
 
----
-
 # 7. Agent State
 
 ## chron-agent-state
 
 Agentの論理状態を保持する。
 
----
-
 ### goal
 
 現在目標
-
----
 
 ### context
 
 現在状況
 
----
-
 ### todo
 
 作業予定
 
----
-
 ### issues
 
 課題一覧
-
----
 
 # 8. 初期Agent
 
@@ -190,15 +148,11 @@ Goal
 リセット機構の初回テスト
 ```
 
----
-
 Context
 
 ```
 テスト環境
 ```
-
----
 
 TODO
 
@@ -206,16 +160,12 @@ TODO
 REPL確認
 ```
 
----
-
 # 9. Agent Prompt
 
 ## format-agent-state-to-prompt()
 
 Agent状態
-
 ↓
-
 Prompt
 
 変換
@@ -230,8 +180,6 @@ TODO
 
 のみ出力する。
 
----
-
 # 10. KV Reset
 
 ## my-llama-reset-kv()
@@ -244,13 +192,9 @@ Stub実装。
 
 ```
 KV Cache
-
 ↓
-
 Physical Clear
 ```
-
----
 
 # 11. Tokenize
 
@@ -272,8 +216,6 @@ Stub
 
 返却。
 
----
-
 # 12. Decode
 
 ## my-llama-decode()
@@ -284,27 +226,19 @@ Stub。
 
 ```
 Decode
-
 ↓
-
 n-past
-
 ↓
-
 Console
 ```
 
 表示。
-
----
 
 # 13. Stateful Reset
 
 ## perform-stateful-reset()
 
 本モジュールの中心機能。
-
----
 
 ### Step1
 
@@ -316,8 +250,6 @@ Reset Sequence
 
 表示。
 
----
-
 ### Step2
 
 KV物理削除
@@ -325,8 +257,6 @@ KV物理削除
 ```
 my-llama-reset-kv()
 ```
-
----
 
 ### Step3
 
@@ -338,29 +268,19 @@ my-llama-reset-kv()
 0
 ```
 
----
-
 ### Step4
 
 Identity Prompt投入
 
 ```
 System Prompt
-
 ↓
-
 Tokenize
-
 ↓
-
 Decode
-
 ↓
-
 n-past更新
 ```
-
----
 
 ### Step5
 
@@ -370,29 +290,19 @@ Agent State投入
 Goal
 
 TODO
-
 ↓
-
 Prompt
-
 ↓
-
 Tokenize
-
 ↓
-
 Decode
 ```
-
----
 
 ### Step6
 
 ```
 n-past更新
 ```
-
----
 
 ### Step7
 
@@ -404,35 +314,21 @@ Memory Rebuild Complete
 
 表示。
 
----
-
 # 14. Reset Pipeline
 
 ```
 KV Reset
-
 ↓
-
 n-past=0
-
 ↓
-
 Identity
-
 ↓
-
 Agent State
-
 ↓
-
 Decode
-
 ↓
-
 Continue
 ```
-
----
 
 # 15. KV Usage
 
@@ -452,39 +348,27 @@ Stub
 
 ```
 llama.cpp
-
 ↓
-
 実測
 ```
 
 予定。
-
----
 
 # 16. Reset判定
 
 ## should-trigger-reset-p()
 
 KV使用率取得
-
 ↓
-
 85%以上
-
 ↓
-
 Reset要求
-
----
 
 閾値
 
 ```
 85%
 ```
-
----
 
 # 17. Summary Update
 
@@ -494,13 +378,9 @@ Reset要求
 
 ```
 Response
-
 ↓
-
 Summary
-
 ↓
-
 Agent更新
 ```
 
@@ -510,8 +390,6 @@ Stub
 
 TODO追加のみ。
 
----
-
 更新内容
 
 ```
@@ -519,8 +397,6 @@ TODO追加のみ。
 ```
 
 をTODO先頭へ追加。
-
----
 
 # 18. Recovery Log
 
@@ -538,8 +414,6 @@ Ready
 
 Agent復旧確認。
 
----
-
 # 19. Generation
 
 ## my-llama-generate()
@@ -554,15 +428,11 @@ Stub
 
 返答生成
 
----
-
 # 20. Agent Runtime
 
 ## agent-main-loop()
 
 対話Runtime。
-
----
 
 起動
 
@@ -574,117 +444,69 @@ Stub
 
 表示。
 
----
-
 # 21. Runtime Command
 
 ## :quit
 
 終了。
 
----
-
 ## :reset
 
 強制Reset。
-
----
 
 その他
 
 通常Generation。
 
----
-
 # 22. 通常Pipeline
 
 ```
 User
-
 ↓
-
 Generate
-
 ↓
-
 Response
-
 ↓
-
 KV確認
-
 ↓
-
 Reset?
-
 ↓
-
 Continue
 ```
-
----
 
 # 23. 自動Reset
 
 応答終了
-
 ↓
-
 KV確認
-
 ↓
-
 85%以上
-
 ↓
-
 Summary
-
 ↓
-
 Reset
-
 ↓
-
 Continue
-
----
 
 # 24. 状態遷移
 
 ```
 Generate
-
 ↓
-
 KV増加
-
 ↓
-
 Threshold
-
 ↓
-
 Summary
-
 ↓
-
 Reset
-
 ↓
-
 Identity
-
 ↓
-
 Goal
-
 ↓
-
 Continue
 ```
-
----
 
 # 25. Agent Memory
 
@@ -704,33 +526,21 @@ Reset後
 
 再投入される。
 
----
-
 # 26. Memory Reconstruction
 
 ```
 Identity
-
 +
-
 Goal
-
 +
-
 TODO
-
 ↓
-
 LLM
-
 ↓
-
 同一人格
 ```
 
 を維持する。
-
----
 
 # 27. 不変条件
 
@@ -754,21 +564,15 @@ n-past
 
 再計算
 
----
-
 # 28. 計算量
 
 Reset
 
 ```
 O(System Prompt
-
 +
-
 Agent State)
 ```
-
----
 
 Summary
 
@@ -776,15 +580,11 @@ Summary
 O(summary)
 ```
 
----
-
 Runtime
 
 ```
 O(Response)
 ```
-
----
 
 # 29. Phase制約
 
@@ -806,8 +606,6 @@ O(Response)
 - Branch
 - DTO
 - Kernel統合
-
----
 
 # 30. 設計思想
 
@@ -841,15 +639,11 @@ Resetとは
 
 ```
 KV破棄
-
 ↓
-
 Memory再投入
 ```
 
 に過ぎない。
-
----
 
 # 31. 将来構想
 
@@ -857,37 +651,23 @@ Chron-LLMでは
 
 ```
 Summary
-
 ↓
-
 WAL
-
 ↓
-
 Graph
-
 ↓
-
 History
-
 ↓
-
 Memory
-
 ↓
-
 Prompt
-
 ↓
-
 Reset
 ```
 
 となる予定。
 
 Agent StateはKernel管理へ移行する。
-
----
 
 # 32. コードレビュー・設計評価
 
@@ -907,8 +687,6 @@ Agentの継続性を
 
 という論理状態で再構築する発想は、後のChron-LLMにおけるKernel・Memory・History分離の原型となっています。
 
----
-
 ## 32.2 グローバル状態
 
 以下はすべてグローバル変数です。
@@ -924,8 +702,6 @@ Agentの継続性を
 
 へ対応するには `chron-agent-state` や `n-past` をKernelまたはSessionオブジェクトへ保持する構成が望まれます。
 
----
-
 ## 32.3 Summary
 
 `update-agent-state-from-summary()` は現在TODOを追加するだけのStubです。
@@ -934,27 +710,17 @@ Agentの継続性を
 
 ```
 Conversation
-
 ↓
-
 Summary
-
 ↓
-
 Goal更新
-
 ↓
-
 TODO更新
-
 ↓
-
 Issue更新
 ```
 
 という永続的なAgent State更新へ発展させる設計が自然です。
-
----
 
 ## 32.4 Reset Trigger
 
@@ -968,8 +734,6 @@ KV使用率85%でResetする設計はシンプルですが、
 - 推論速度
 
 なども考慮した複合判定へ発展させる余地があります。
-
----
 
 # 33. Chron-LLMとの関係
 

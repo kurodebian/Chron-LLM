@@ -4,8 +4,6 @@
 **Module** : World Service  
 **Layer** : World Management Layer
 
----
-
 # 1. 概要
 
 ## 1.1 目的
@@ -20,8 +18,6 @@ World Service は Chron-LLM における**世界線（World）管理サービス
 のみを責務とする。
 
 世界線自体は独立した永続オブジェクトではなく、**WALに記録される Branch Event により定義される論理概念**である。
-
----
 
 # 2. アーキテクチャ上の位置付け
 
@@ -44,8 +40,6 @@ World Service は
 - WALへBranch Eventを生成する
 
 という仲介層である。
-
----
 
 # 3. 設計思想
 
@@ -73,8 +67,6 @@ World
 
 そのためWorld情報もReplayによって完全復元可能である。
 
----
-
 # 4. 責務
 
 本サービスが担当する機能
@@ -86,8 +78,6 @@ World
 - Parent World管理
 - World検索
 - 最新Node取得
-
----
 
 # 5. 非責務
 
@@ -103,8 +93,6 @@ World
 - Immune判定
 - Prompt生成
 - Memory管理
-
----
 
 # 6. Worldの概念
 
@@ -136,8 +124,6 @@ Commit
 
 という因果列を持つ。
 
----
-
 # 7. World Identifier
 
 Worldは整数で識別される。
@@ -162,8 +148,6 @@ wal-world-counter
 - 再利用しない
 - 一意
 
----
-
 # 8. Branching Model
 
 ```
@@ -177,8 +161,6 @@ wal-world-counter
 ```
 
 Branch自体もWAL Eventである。
-
----
 
 # 9. stage-branch-world()
 
@@ -194,8 +176,6 @@ Stage
 
 のみ行う。
 
----
-
 ## 入力
 
 ```
@@ -206,8 +186,6 @@ Write Ahead Log
 Parent World ID
 ```
 
----
-
 ## 出力
 
 ```
@@ -217,8 +195,6 @@ Parent World ID
 
  Branch Event)
 ```
-
----
 
 # 10. Branch生成アルゴリズム
 
@@ -234,8 +210,6 @@ world-counter++
 new-world-id
 ```
 
----
-
 ## Step2
 
 親World検索
@@ -245,8 +219,6 @@ get-latest-node-in-world()
 ```
 
 実行
-
----
 
 ## Step3
 
@@ -264,8 +236,6 @@ Event
 Node ID
 ```
 
----
-
 ## Root World
 
 親Nodeが存在しない場合
@@ -282,8 +252,6 @@ Parent Node
 
 これはRoot Branchを意味する。
 
----
-
 ## Step4
 
 Branch Event生成
@@ -294,23 +262,17 @@ stage-event()
 
 呼び出し
 
----
-
 ### Kind
 
 ```
 :branch
 ```
 
----
-
 ### Causal ID
 
 ```
 New World ID
 ```
-
----
 
 ### Payload
 
@@ -319,8 +281,6 @@ Parent Node
 
 Parent World
 ```
-
----
 
 ## Step5
 
@@ -335,8 +295,6 @@ event-node-id)
 ```
 
 StageされたBranch Eventが返される。
-
----
 
 # 11. Branch Event構造
 
@@ -370,8 +328,6 @@ Branch Tree
 
 を復元できる。
 
----
-
 # 12. World Query
 
 ## get-latest-node-in-world()
@@ -386,8 +342,6 @@ Branch Tree
 
 なNodeを返す。
 
----
-
 ## 入力
 
 ```
@@ -395,8 +349,6 @@ Graph
 
 World ID
 ```
-
----
 
 ## 出力
 
@@ -407,8 +359,6 @@ Causal Node
 
 NIL
 ```
-
----
 
 # 13. World検索アルゴリズム
 
@@ -434,8 +384,6 @@ Faultでない
 
 を実行する。
 
----
-
 ## 判定条件
 
 ### World一致
@@ -448,8 +396,6 @@ Node.CausalID
 WorldID
 ```
 
----
-
 ### Fault除外
 
 ```
@@ -459,8 +405,6 @@ Node.Class
 
 :fault
 ```
-
----
 
 ### 最新判定
 
@@ -473,8 +417,6 @@ LatestID
 ```
 
 なら更新。
-
----
 
 # 14. 最新判定
 
@@ -498,8 +440,6 @@ Node Counter
 
 が単調増加することを前提としている。
 
----
-
 # 15. Root World
 
 該当Worldが存在しない場合
@@ -521,8 +461,6 @@ Parent ID
 ```
 
 として扱われる。
-
----
 
 # 16. データフロー
 
@@ -549,8 +487,6 @@ Stage
 
 Commit (Kernel)
 ```
-
----
 
 # 17. 状態遷移
 
@@ -582,8 +518,6 @@ Commit
 World101
 ```
 
----
-
 # 18. データモデル
 
 ## World
@@ -595,8 +529,6 @@ Latest Node
 
 Parent World
 ```
-
----
 
 ## Branch Event
 
@@ -610,8 +542,6 @@ Causal ID
 Payload
 ```
 
----
-
 # 19. 計算量
 
 ## World生成
@@ -619,8 +549,6 @@ Payload
 ```
 O(1)
 ```
-
----
 
 ## Parent Node取得
 
@@ -632,15 +560,11 @@ Graph全体を走査する。
 
 n = Node数
 
----
-
 ## Branch Stage
 
 ```
 O(1)
 ```
-
----
 
 # 20. 不変条件
 
@@ -652,14 +576,10 @@ Branch生成後
 - Branch EventはStageのみ
 - Root Parentは0
 
----
-
 World Query
 
 - Fault Nodeは返さない
 - 同一World中で最新Nodeのみ返す
-
----
 
 # 21. Phase1制約
 
@@ -680,8 +600,6 @@ World Query
 - Replay
 - Incremental Index
 - Branch Validation
-
----
 
 # 22. 設計原則
 
@@ -719,8 +637,6 @@ WAL
 
 という責務分離が維持される。
 
----
-
 # 23. 将来拡張
 
 Phase2以降
@@ -751,8 +667,6 @@ Incremental World Index
 
 を追加予定。
 
----
-
 # 24. コードレビュー・設計評価
 
 ## 24.1 改善点
@@ -763,8 +677,6 @@ Incremental World Index
 - `World Query` が World Service に統合された
 
 ため、モジュール構成として自然になっています。
-
----
 
 ## 24.2 `event-node-id` の命名
 
@@ -792,8 +704,6 @@ staged-event
 ```
 
 の方が適切です。
-
----
 
 ## 24.3 最新Node探索の計算量
 
@@ -833,8 +743,6 @@ O(1)
 
 で取得できます。
 
----
-
 ## 24.4 Node IDによる最新判定
 
 現在は
@@ -848,8 +756,6 @@ Node ID > Latest ID
 これは **Node ID が生成順＝Commit順である**ことを前提にしています。
 
 設計としては問題ありませんが、仕様では「最新」の基準を **Node ID** ではなく **Commit Clock** と定義した方が、将来Node IDの生成方式が変わっても意味論が保たれます。
-
----
 
 # 25. 総合評価
 
