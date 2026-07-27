@@ -1,15 +1,85 @@
 #!/usr/bin/env python3
-import os
 import glob
 import json
+import os
+import sys
 import time
-import urllib.request
 import urllib.error
+import urllib.request
 
-# llama-server の OpenAI 互換エンドポイント (デフォルトポート 8080)
-API_URL = "http://localhost:8080/v1/chat/completions"
 
-# Radeon 890M + 27B モデルでの Prompt Eval 時間を考慮し 600 秒 (10分) に延長
+def get_win_host_ip():
+  """WSL2 環境から Windows ホストの IP アドレスを取得する"""
+  try:
+    with os.popen("ip route show default | awk '{print $3}'") as stream:
+      ip = stream.read().strip()
+      if ip:
+        return ip
+  except Exception:
+    pass
+  return None
+
+
+def detect_backend():
+  """起動中の LLM サーバー (llama-server または Ollama) を自動検出する"""
+  env_model = os.getenv("MODEL_NAME")
+
+  # 1. API_URL が明示されている場合
+  env_url = os.getenv("API_URL")
+  if env_url:
+    return env_url, env_model or "default"
+
+  # 2. OLLAMA_HOST が指定されている場合
+  ollama_host = os.getenv("OLLAMA_HOST")
+  if ollama_host:
+    base = ollama_host.rstrip("/")
+    if not base.startswith("http://") and not base.startswith("https://"):
+      base = f"http://{base}"
+    api_endpoint = (
+        f"{base}/v1/chat/completions"
+        if not base.endswith("/v1")
+        else f"{base}/chat/completions"
+    )
+    return api_endpoint, env_model or "default"
+
+  # 接続テスト対象のベースURLリスト
+  win_ip = get_win_host_ip()
+  candidates = ["http://localhost:8080", "http://localhost:11434"]
+  if win_ip:
+    candidates.extend([f"http://{win_ip}:11434", f"http://{win_ip}:8080"])
+
+  for base_url in candidates:
+    try:
+      req = urllib.request.Request(f"{base_url}/v1/models")
+      with urllib.request.urlopen(req, timeout=1.5) as res:
+        if res.status == 200:
+          data = json.loads(res.read().decode("utf-8"))
+          models = [m.get("id") for m in data.get("data", []) if m.get("id")]
+          selected_model = env_model or (models[0] if models else "default")
+          print(
+              f"[Auto-Detect] サーバー検出成功: {base_url} (モデル:"
+              f" {selected_model})"
+          )
+          return f"{base_url}/v1/chat/completions", selected_model
+    except Exception:
+      continue
+
+  # どちらも応答がない場合のフォールバック
+  default_url = (
+      f"http://{win_ip}:11434/v1/chat/completions"
+      if win_ip
+      else "http://localhost:8080/v1/chat/completions"
+  )
+  print(
+      "[Warn] サーバーが自動検出できませんでした。デフォルト"
+      f" ({default_url}) で試行します。"
+  )
+  return default_url, env_model or "default"
+
+
+# バックエンドの自動検出
+API_URL, MODEL_NAME = detect_backend()
+
 TIMEOUT_SEC = 600
 MAX_RETRIES = 3
 
@@ -24,93 +94,110 @@ STRICT RULES:
 """
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SRC_DIR = os.path.join(BASE_DIR, "llama-agent")
-OUT_DIR = os.path.join(SRC_DIR, "ir")
+
+# 第一引数でターゲットディレクトリを指定可能（未指定時は llama-agent）
+target_input = sys.argv[1] if len(sys.argv) > 1 else "llama-agent"
+SRC_DIR = os.path.abspath(
+    os.path.join(BASE_DIR, target_input)
+    if not os.path.isabs(target_input)
+    else target_input
+)
+
+# 対象フォルダ自体が "ir" で終わる場合は直下に、それ以外は ir サブフォルダを作成
+if os.path.basename(SRC_DIR.rstrip("/\\")) == "ir":
+  OUT_DIR = SRC_DIR
+else:
+  OUT_DIR = os.path.join(SRC_DIR, "ir")
 
 os.makedirs(OUT_DIR, exist_ok=True)
 
+
 def encode_file(filepath, current_idx, total_files):
-    filename = os.path.basename(filepath)
-    out_path = os.path.join(OUT_DIR, filename.replace(".md", ".spec"))
-    
-    prefix = f"[{current_idx:2d}/{total_files:2d}] {filename:<28} -> "
-    
-    # すでに正常生成済み（サイズ > 0）の場合は自動スキップ
-    if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
-        print(f"{prefix}(SKIP: Already exists)")
-        return
+  filename = os.path.basename(filepath)
+  out_path = os.path.join(OUT_DIR, filename.replace(".md", ".spec"))
 
-    print(f"{prefix}", end="", flush=True)
-    
-    with open(filepath, "r", encoding="utf-8") as f:
-        content = f.read()
+  prefix = f"[{current_idx:2d}/{total_files:2d}] {filename:<28} -> "
 
-    payload = {
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": content}
-        ],
-        "temperature": 0.0,
-        "stream": True
-    }
+  if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+    print(f"{prefix}(SKIP: Already exists)")
+    return
 
-    req = urllib.request.Request(
-        API_URL,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"}
-    )
+  print(f"{prefix}", end="", flush=True)
 
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            start_time = time.time()
-            chunks = []
-            
-            with urllib.request.urlopen(req, timeout=TIMEOUT_SEC) as res:
-                # SSE (Server-Sent Events) を1行ずつリアルタイム受信
-                for line in res:
-                    line_str = line.decode("utf-8").strip()
-                    if line_str.startswith("data: ") and line_str != "data: [DONE]":
-                        try:
-                            chunk_data = json.loads(line_str[6:])
-                            delta = chunk_data["choices"][0]["delta"].get("content", "")
-                            if delta:
-                                chunks.append(delta)
-                                # トークン生成ごとにドットを出力
-                                print(".", end="", flush=True)
-                        except json.JSONDecodeError:
-                            pass
-            
-            ir_spec = "".join(chunks).strip()
-            elapsed = time.time() - start_time
-            
-            if not ir_spec:
-                raise ValueError("Received empty content from API")
+  with open(filepath, "r", encoding="utf-8") as f:
+    content = f.read()
 
-            # アトミック書き込み（一時ファイルから置換）
-            tmp_path = out_path + ".tmp"
-            with open(tmp_path, "w", encoding="utf-8") as f_out:
-                f_out.write(ir_spec)
-            os.replace(tmp_path, out_path)
-            
-            orig_size = len(content)
-            new_size = len(ir_spec)
-            ratio = (1 - new_size / orig_size) * 100 if orig_size > 0 else 0
-            
-            print(f" ✓ ({new_size:5d} bytes, -{ratio:.1f}%, {elapsed:.1f}s)")
-            return
+  payload = {
+      "model": MODEL_NAME,
+      "messages": [
+          {"role": "system", "content": SYSTEM_PROMPT},
+          {"role": "user", "content": content},
+      ],
+      "temperature": 0.0,
+      "stream": True,
+  }
 
-        except Exception as e:
-            if attempt < MAX_RETRIES:
-                print(f"\n   [Retry {attempt}/{MAX_RETRIES} after error: {e}] {prefix}", end="", flush=True)
-                time.sleep(5 * attempt)
-            else:
-                print(f"\n ✗ Error: {e} (Failed after {MAX_RETRIES} attempts)")
+  req = urllib.request.Request(
+      API_URL,
+      data=json.dumps(payload).encode("utf-8"),
+      headers={"Content-Type": "application/json"},
+  )
+
+  for attempt in range(1, MAX_RETRIES + 1):
+    try:
+      start_time = time.time()
+      chunks = []
+
+      with urllib.request.urlopen(req, timeout=TIMEOUT_SEC) as res:
+        for line in res:
+          line_str = line.decode("utf-8").strip()
+          if line_str.startswith("data: ") and line_str != "data: [DONE]":
+            try:
+              chunk_data = json.loads(line_str[6:])
+              delta = chunk_data["choices"][0]["delta"].get("content", "")
+              if delta:
+                chunks.append(delta)
+                print(".", end="", flush=True)
+            except json.JSONDecodeError:
+              pass
+
+      ir_spec = "".join(chunks).strip()
+      elapsed = time.time() - start_time
+
+      if not ir_spec:
+        raise ValueError("Received empty content from API")
+
+      tmp_path = out_path + ".tmp"
+      with open(tmp_path, "w", encoding="utf-8") as f_out:
+        f_out.write(ir_spec)
+      os.replace(tmp_path, out_path)
+
+      orig_size = len(content)
+      new_size = len(ir_spec)
+      ratio = (1 - new_size / orig_size) * 100 if orig_size > 0 else 0
+
+      print(f" ✓ ({new_size:5d} bytes, -{ratio:.1f}%, {elapsed:.1f}s)")
+      return
+
+    except Exception as e:
+      if attempt < MAX_RETRIES:
+        print(
+            f"\n   [Retry {attempt}/{MAX_RETRIES} after error: {e}] {prefix}",
+            end="",
+            flush=True,
+        )
+        time.sleep(5 * attempt)
+      else:
+        print(f"\n ✗ Error: {e} (Failed after {MAX_RETRIES} attempts)")
+
 
 if __name__ == "__main__":
-    md_files = sorted(glob.glob(os.path.join(SRC_DIR, "*.md")))
-    total_files = len(md_files)
-    print(f"Target directory: {SRC_DIR}")
-    print(f"Found {total_files} markdown files.\n")
-    
-    for idx, f in enumerate(md_files, start=1):
-        encode_file(f, idx, total_files)
+  md_files = sorted(glob.glob(os.path.join(SRC_DIR, "*.md")))
+  total_files = len(md_files)
+  print(f"Target directory: {SRC_DIR}")
+  print(f"Output directory: {OUT_DIR}")
+  print(f"Target API:       {API_URL} (Model: {MODEL_NAME})")
+  print(f"Found {total_files} markdown files.\n")
+
+  for idx, f in enumerate(md_files, start=1):
+    encode_file(f, idx, total_files)

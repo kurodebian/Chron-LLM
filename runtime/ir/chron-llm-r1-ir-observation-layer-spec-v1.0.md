@@ -7,11 +7,9 @@
 **Phase:** Foundation for Phase D/E and Phase G  
 **Scope:** Chron-LLM Causal Kernel
 
----
-
 # 0. Purpose（目的）
 
-Chron-LLM R1 IR Observation Layer は、LLM 推論過程に対する
+Chron-LLM R1 IR Observation Layer は、LLM推論プロセスに対する
 
 - 非侵襲的観測
 - 決定論的記録
@@ -24,37 +22,19 @@ Chron-LLM R1 IR Observation Layer は、LLM 推論過程に対する
 (Authoritative Runtime State)
 から完全に分離される。
 
----
-
 ## Design Principle
 
 ```
-
 LLM Runtime
-
-```
- ↓
-```
-
+    ↓
 Observation
-
-```
- ↓
-```
-
+    ↓
 Analysis
-
-```
- ↓
-```
-
+    ↓
 Kernel Understanding
-
 ````
 
 観測層は状態変更を行わない。
-
----
 
 # 1. Architecture Overview
 
@@ -99,8 +79,6 @@ Kernel Understanding
               Phase G Evaluation
 ````
 
----
-
 # 2. Layer Responsibility
 
 ## Authoritative Runtime Layer
@@ -116,8 +94,6 @@ Kernel Understanding
 * llama.cpp
 * C Runtime
 
----
-
 ## Observation Layer
 
 責務:
@@ -131,8 +107,6 @@ Kernel Understanding
 * Runtime状態変更なし
 * 推論結果変更なし
 * 制御判断なし
-
----
 
 # 3. Event Contract
 
@@ -149,8 +123,6 @@ IR は Chron-LLM Observation Layer の基本単位である。
   score)
 ```
 
----
-
 # Field Definition
 
 | Field  | Type    | Description                |
@@ -161,8 +133,6 @@ IR は Chron-LLM Observation Layer の基本単位である。
 | token  | int     | generated token id         |
 | score  | float   | token score                |
 
----
-
 # Phase Definition
 
 | Phase | Meaning    |
@@ -170,8 +140,6 @@ IR は Chron-LLM Observation Layer の基本単位である。
 | 0     | prefill    |
 | 1     | generation |
 | 2     | finalize   |
-
----
 
 # IR Guarantee
 
@@ -193,8 +161,6 @@ IR は以下を保証する。
 
 Runtime状態には影響しない。
 
----
-
 # 4. Callback Bridge
 
 ## ir-callback / ir-ffi
@@ -202,8 +168,6 @@ Runtime状態には影響しない。
 責務:
 
 C Runtime と Lisp Kernel 間の観測ブリッジ。
-
----
 
 ## Callback Contract
 
@@ -223,8 +187,6 @@ C Runtime と Lisp Kernel 間の観測ブリッジ。
     :score score)))
 ```
 
----
-
 ## Initialization
 
 ```lisp
@@ -232,8 +194,6 @@ C Runtime と Lisp Kernel 間の観測ブリッジ。
   (register-ir-callback
     (cffi:callback ir-callback)))
 ```
-
----
 
 # Callback Guarantee
 
@@ -245,8 +205,6 @@ Callback は：
 * 推論制御なし
 
 である。
-
----
 
 # 5. IR Stream
 
@@ -262,8 +220,6 @@ IR Stream は Observation Layer の時系列バッファである。
    :fill-pointer 0))
 ```
 
----
-
 # API
 
 ## Push
@@ -276,8 +232,6 @@ IR Stream は Observation Layer の時系列バッファである。
   ir)
 ```
 
----
-
 ## Clear
 
 ```lisp
@@ -288,8 +242,6 @@ IR Stream は Observation Layer の時系列バッファである。
          :adjustable t
          :fill-pointer 0)))
 ```
-
----
 
 # Stream Guarantee
 
@@ -302,8 +254,6 @@ IR Stream は：
 
 である。
 
----
-
 # 6. Analysis Layer
 
 ## Module
@@ -311,8 +261,6 @@ IR Stream は：
 ```
 ir-divergence
 ```
-
----
 
 # 6.1 extract-actions
 
@@ -329,8 +277,6 @@ extract-actions(ir-stream)
 * phase=1のみ対象
 * pos順序保証
 * deterministic extraction
-
----
 
 # 6.2 run-ir-trial
 
@@ -356,8 +302,6 @@ extract phase-1 IR
 return vector
 ```
 
----
-
 # 6.3 divergence-profile
 
 目的:
@@ -379,8 +323,6 @@ number of trials
 | :all-same | 全一致判定             |
 | :p-same   | 最頻token一致率        |
 
----
-
 # 7. Formal Guarantees
 
 ## 7.1 Non-invasive
@@ -390,8 +332,6 @@ number of trials
 * 推論結果を変更しない
 * Runtime判断へ影響しない
 
----
-
 ## 7.2 Deterministic Analysis
 
 保証:
@@ -399,8 +339,6 @@ number of trials
 * pos ordering
 * phase separation
 * stable replay
-
----
 
 ## 7.3 Loose Coupling
 
@@ -415,8 +353,6 @@ Analysis Layer
 ```
 
 解析方式変更が収集層へ影響しない。
-
----
 
 # 8. Chron-LLM Kernel Integration
 
@@ -439,8 +375,6 @@ IR Stream
  +-- Debug World
 ```
 
----
-
 # 9. Extension Roadmap
 
 ## IR → DSL
@@ -448,8 +382,6 @@ IR Stream
 目的:
 
 因果Kernel用最小表現へ変換。
-
----
 
 ## Resource IR
 
@@ -459,15 +391,11 @@ IR Stream
 * memory delta
 * KV state
 
----
-
 ## WAL Integration
 
 目的:
 
 IR永続化。
-
----
 
 ## Phase-E Analysis
 
@@ -478,8 +406,6 @@ IR永続化。
 * attractor
 * worldline analysis
 
----
-
 # 10. Frozen Boundary
 
 ## Frozen
@@ -489,16 +415,12 @@ IR永続化。
 * Callback contract
 * Observation responsibility boundary
 
----
-
 ## Flexible
 
 * Analysis algorithm
 * Divergence metrics
 * Sensor implementation
 * Visualization
-
----
 
 # Final Statement
 
@@ -516,8 +438,6 @@ Chron-LLM R1 IR Observation Layer Specification
 を定義する正式仕様である。
 
 本仕様により、LLM Backend の実装差異に依存せず、Chron-LLM Kernel は推論過程を観測・解析・比較可能な状態として扱うことができる。
-
----
 
 ## 最終判定
 

@@ -14,8 +14,6 @@ The module acts as a **temporary observation buffer** between:
 
 It stores ordered IR objects during one decoding execution.
 
----
-
 # 2. Architectural Position
 
 ## 2.1 Data Flow
@@ -56,8 +54,6 @@ It stores ordered IR objects during one decoding execution.
 +-------------------------+
 ```
 
----
-
 # 3. Package Definition
 
 ## 3.1 Package Declaration
@@ -72,8 +68,6 @@ It stores ordered IR objects during one decoding execution.
    #:clear-ir-stream))
 ```
 
----
-
 # 4. Package Responsibility
 
 ## 4.1 Responsibilities
@@ -86,8 +80,6 @@ It stores ordered IR objects during one decoding execution.
 | Order preservation         | Maintain callback arrival sequence |
 | Run isolation              | Clear state between executions     |
 | Analysis input preparation | Provide deterministic stream       |
-
----
 
 ## 4.2 Non-Responsibilities
 
@@ -103,8 +95,6 @@ It stores ordered IR objects during one decoding execution.
 | Persistence             | WAL/History      |
 | Policy decisions        | Runtime          |
 
----
-
 # 5. Core Data Structure
 
 ## 5.1 Stream Definition
@@ -115,8 +105,6 @@ It stores ordered IR objects during one decoding execution.
               :adjustable t
               :fill-pointer 0))
 ```
-
----
 
 ## 5.2 Internal Representation
 
@@ -133,8 +121,6 @@ IR Stream =
   ...
 ]
 ```
-
----
 
 # 6. Stream Properties
 
@@ -161,8 +147,6 @@ stream:
 ]
 ```
 
----
-
 ## 6.2 Deterministic Analysis
 
 Given identical callback emission:
@@ -179,8 +163,6 @@ Result A
 ```
 
 The stream provides stable ordering for replay and comparison.
-
----
 
 ## 6.3 Non-Authoritative State
 
@@ -206,8 +188,6 @@ Authority model:
 
 `*ir-stream*` is never the source of truth.
 
----
-
 # 7. Global Stream Variable
 
 ## 7.1 Symbol
@@ -216,13 +196,9 @@ Authority model:
 *ir-stream*
 ```
 
----
-
 ## 7.2 Purpose
 
 Stores IR observations belonging to the current decoding execution.
-
----
 
 ## 7.3 Lifetime
 
@@ -252,11 +228,7 @@ clear
 next run
 ```
 
----
-
 # 8. API Specification
-
----
 
 # 8.1 push-ir
 
@@ -268,21 +240,15 @@ next run
   ir)
 ```
 
----
-
 ## Purpose
 
 Append one IR observation to the active stream.
-
----
 
 ## Signature
 
 ```lisp
 (push-ir ir-object)
 ```
-
----
 
 ## Input
 
@@ -300,8 +266,6 @@ must return:
 T
 ```
 
----
-
 ## Processing
 
 Algorithm:
@@ -317,8 +281,6 @@ append to vector
 
 return same IR
 ```
-
----
 
 ## Return Value
 
@@ -337,8 +299,6 @@ Result:
 ```text
 T
 ```
-
----
 
 ## Ordering Contract
 
@@ -361,8 +321,6 @@ stream =
 ]
 ```
 
----
-
 # 8.2 clear-ir-stream
 
 ## Definition
@@ -377,13 +335,9 @@ stream =
   *ir-stream*)
 ```
 
----
-
 ## Purpose
 
 Reset observation buffer before a new decoding run.
-
----
 
 ## Operation
 
@@ -408,13 +362,9 @@ After:
 ]
 ```
 
----
-
 ## Return Value
 
 Returns the newly created empty stream.
-
----
 
 # 9. Execution Lifecycle
 
@@ -459,8 +409,6 @@ analysis
 clear-ir-stream
 ```
 
----
-
 # 10. Deterministic Replay Model
 
 The stream provides:
@@ -499,8 +447,6 @@ Sequential processing
 Same observation order
 ```
 
----
-
 # 11. Relationship With IR
 
 ## IR Layer
@@ -522,8 +468,6 @@ IR
 }
 ```
 
----
-
 ## IR Stream Layer
 
 Role:
@@ -542,8 +486,6 @@ Example:
 ]
 ```
 
----
-
 Relationship:
 
 ```text
@@ -555,8 +497,6 @@ IR Stream
     v
 Analysis
 ```
-
----
 
 # 12. Relationship With Kernel
 
@@ -601,8 +541,6 @@ Commit
 History
 ```
 
----
-
 `ir-stream` has:
 
 ```text
@@ -612,8 +550,6 @@ State mutation authority: NO
 
 Commit authority: NO
 ```
-
----
 
 # 13. Memory Model
 
@@ -631,8 +567,6 @@ Persistence:
 NONE
 ```
 
----
-
 ## Memory Lifetime
 
 Bounded by:
@@ -640,8 +574,6 @@ Bounded by:
 ```text
 one decoding run
 ```
-
----
 
 ## Explicit Reset Requirement
 
@@ -652,8 +584,6 @@ The caller must execute:
 ```
 
 between runs.
-
----
 
 # 14. Threading Considerations
 
@@ -668,8 +598,6 @@ Reason:
 ```
 
 is a global mutable vector.
-
----
 
 Potential future design:
 
@@ -694,8 +622,6 @@ or:
 ctx-id → stream
 ```
 
----
-
 # 15. Error Conditions
 
 ## 15.1 Invalid IR Object
@@ -714,8 +640,6 @@ accepted
 
 because no type validation exists.
 
----
-
 Recommended future:
 
 ```lisp
@@ -723,8 +647,6 @@ Recommended future:
 ```
 
 before insertion.
-
----
 
 ## 15.2 Accidental Cross-run Contamination
 
@@ -739,8 +661,6 @@ Result:
 ```text
 previous run observations mixed
 ```
-
----
 
 # 16. Formal Invariants
 
@@ -762,13 +682,9 @@ position(A) < position(B)
 
 in stream.
 
----
-
 ## IR-S2 Ephemeral State
 
 `ir-stream` MUST NOT become authoritative storage.
-
----
 
 ## IR-S3 Semantic Neutrality
 
@@ -778,8 +694,6 @@ Stream MUST NOT:
 * interpret tokens
 * alter observations
 
----
-
 ## IR-S4 Run Isolation
 
 Each decoding execution SHOULD start with:
@@ -787,8 +701,6 @@ Each decoding execution SHOULD start with:
 ```lisp
 clear-ir-stream
 ```
-
----
 
 # 17. Chron-LLM Mapping
 
@@ -841,8 +753,6 @@ Current architecture:
        History/WAL
 ```
 
----
-
 # 18. Design Assessment
 
 ## Current Status
@@ -857,8 +767,6 @@ Advantages:
 * clear authority separation
 * replay-friendly
 
----
-
 ## Important Future Improvements
 
 ### P0: Type Validation
@@ -868,8 +776,6 @@ Advantages:
 ```lisp
 (assert (ir-p ir))
 ```
-
----
 
 ### P1: Context Isolation
 
@@ -885,8 +791,6 @@ global stream
 ctx-id → stream
 ```
 
----
-
 ### P2: Stream Snapshot API
 
 追加候補:
@@ -900,8 +804,6 @@ ctx-id → stream
 * immutable analysis input
 * replay archive
 * divergence comparison
-
----
 
 # Final Specification Summary
 

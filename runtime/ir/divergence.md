@@ -17,15 +17,11 @@
 ir-divergence
 ```
 
----
-
 # 1. 概要
 
 `ir-divergence` は Chron-LLM の **Observation Analysis Layer** に属する解析モジュールであり、複数回のLLMデコード実行から得られた IR（Intermediate Representation）を比較し、推論過程の**分岐性（Divergence）**を定量的に評価する。
 
 本モジュールは観測専用であり、LLM の推論結果や Runtime の状態には一切影響を与えない。
-
----
 
 # 2. 設計目的
 
@@ -58,8 +54,6 @@ Agreement Analysis
 **どの位置から推論が分岐し始めるか**
 
 を測定することを目的とする。
-
----
 
 # 3. アーキテクチャ上の位置
 
@@ -100,8 +94,6 @@ Visualization / Research
 
 Kernel には接続されない。
 
----
-
 # 4. 責務
 
 本モジュールが担当するもの
@@ -111,8 +103,6 @@ Kernel には接続されない。
 * 複数回推論実行
 * Token一致率測定
 * Divergence統計生成
-
----
 
 担当しないもの
 
@@ -124,8 +114,6 @@ Kernel には接続されない。
 * Worldline管理
 * Runtime制御
 
----
-
 # 5. 公開API
 
 ```lisp
@@ -133,8 +121,6 @@ extract-actions
 run-ir-trial
 divergence-profile
 ```
-
----
 
 # 6. extract-actions
 
@@ -147,8 +133,6 @@ Phase = 1
 ```
 
 のみ抽出する。
-
----
 
 ## シグネチャ
 
@@ -168,8 +152,6 @@ Vector<IR>
 List<IR>
 ```
 
----
-
 ## アルゴリズム
 
 ### Step1
@@ -184,8 +166,6 @@ IR位置順にソート
 ```
 
 元データは変更されない。
-
----
 
 ### Step2
 
@@ -207,8 +187,6 @@ Action IR
 
 となる。
 
----
-
 ## 時間計算量
 
 ```
@@ -229,8 +207,6 @@ O(N)
 O(N log N)
 ```
 
----
-
 # 7. run-ir-trial
 
 ## 目的
@@ -238,8 +214,6 @@ O(N log N)
 1回の推論を実行し、
 
 Phase-1 IR列を取得する。
-
----
 
 ## シグネチャ
 
@@ -259,8 +233,6 @@ Prompt
 Vector<IR>
 ```
 
----
-
 ## 処理手順
 
 ### Step1
@@ -270,8 +242,6 @@ IR Stream初期化
 ```lisp
 (clear-ir-stream)
 ```
-
----
 
 ### Step2
 
@@ -286,8 +256,6 @@ LLM実行
 
 IR CallbackによりIR Streamが蓄積される。
 
----
-
 ### Step3
 
 Action抽出
@@ -295,8 +263,6 @@ Action抽出
 ```
 extract-actions
 ```
-
----
 
 ### Step4
 
@@ -309,8 +275,6 @@ Vector化
 ```
 
 返却。
-
----
 
 ## データフロー
 
@@ -338,8 +302,6 @@ extract-actions
 Vector<IR>
 ```
 
----
-
 # 8. divergence-profile
 
 ## 目的
@@ -347,8 +309,6 @@ Vector<IR>
 同一Promptを複数回実行し、
 
 各Token位置ごとの一致率を測定する。
-
----
 
 ## シグネチャ
 
@@ -368,8 +328,6 @@ Vector<IR>
 ```
 List<Profile>
 ```
-
----
 
 # 9. アルゴリズム
 
@@ -395,8 +353,6 @@ Run3
 ...
 ```
 
----
-
 ## Step2
 
 共通長決定
@@ -411,8 +367,6 @@ Run3
 理由
 
 途中終了した系列を安全に比較するため。
-
----
 
 ## Step3
 
@@ -438,16 +392,12 @@ Token
 
 を取得。
 
----
-
 ### Token取得
 
 ```lisp
 (ir-token
  (aref seq step))
 ```
-
----
 
 ### 全一致判定
 
@@ -465,8 +415,6 @@ T
 
 NIL
 ```
-
----
 
 ### 一致率
 
@@ -500,8 +448,6 @@ A
 0.8
 ```
 
----
-
 # 10. 出力形式
 
 各Stepについて
@@ -525,8 +471,6 @@ A
  :p-same 0.6)
 ```
 
----
-
 # 11. Divergence指標
 
 現在計測される指標
@@ -536,8 +480,6 @@ A
 | step     | Token位置    |
 | all-same | 全系列一致      |
 | p-same   | 最多Token一致率 |
-
----
 
 # 12. 決定性
 
@@ -550,8 +492,6 @@ Profile
 は必ず一致する。
 
 解析中に乱数は使用しない。
-
----
 
 # 13. 不変条件
 
@@ -574,8 +514,6 @@ Statistics
 * Candidate
 * Canonical
 * Prompt
-
----
 
 # 14. 時間計算量
 
@@ -611,8 +549,6 @@ O(R × L)
 O(R × L)
 ```
 
----
-
 # 15. エラー処理
 
 本モジュールでは明示的な例外処理は行わない。
@@ -625,33 +561,23 @@ O(R × L)
 
 これらが満たされない場合の動作は下位モジュールに委譲される。
 
----
-
 # 16. 設計原則
 
 ## Observation Only
 
 解析のみを行い、Runtimeへ影響を与えない。
 
----
-
 ## Deterministic Analysis
 
 同一IR集合からは必ず同一統計が得られる。
-
----
 
 ## Lossless Observation
 
 IRを加工せず、そのまま解析対象とする。
 
----
-
 ## Runtime Isolation
 
 解析結果はKernel・Canonical・推論制御へフィードバックされない。
-
----
 
 # 17. 将来拡張
 
@@ -667,8 +593,6 @@ IRを加工せず、そのまま解析対象とする。
 * Worldline Branch Probability
 * Phase別（Prefill / Decode / Tool）解析
 * 可視化（ヒートマップ・系列グラフ）
-
----
 
 # 18. R1アーキテクチャにおける位置付け
 

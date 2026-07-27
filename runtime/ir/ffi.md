@@ -22,8 +22,6 @@
 * History管理
 * Runtime状態管理
 
----
-
 # 2. Architecture Position
 
 ## 2.1 Layer Position
@@ -59,8 +57,6 @@
 +-----------------------------+
 ```
 
----
-
 # 3. Package Specification
 
 ## 3.1 Package Definition
@@ -74,8 +70,6 @@
    :init-ir-bridge))
 ```
 
----
-
 ## 3.2 Package Name
 
 ```
@@ -85,8 +79,6 @@ ir-ffi
 役割:
 
 > IR Callback を外部ランタイムへ公開するためのFFI境界。
-
----
 
 # 4. Dependency Specification
 
@@ -98,8 +90,6 @@ ir-ffi
 | `CFFI`        | Foreign Function Interface |
 | `IR-CALLBACK` | Lisp側callback定義            |
 
----
-
 ## 4.2 Dependency Graph
 
 ```
@@ -109,8 +99,6 @@ ir-ffi
  │
  └── ir-callback
 ```
-
----
 
 # 5. Foreign Function Interface Definition
 
@@ -122,8 +110,6 @@ ir-ffi
  :void
  (cb :pointer))
 ```
-
----
 
 ## 5.2 External Symbol
 
@@ -142,15 +128,11 @@ void register_ir_callback(void *cb);
 | Argument           | callback pointer |
 | Ownership          | C側保持             |
 
----
-
 # 6. register-ir-callback
 
 ## 6.1 Purpose
 
 Cランタイムへ Lisp callback pointer を登録する。
-
----
 
 ## 6.2 Signature
 
@@ -159,8 +141,6 @@ Lisp:
 ```lisp
 (register-ir-callback cb)
 ```
-
----
 
 ## 6.3 Arguments
 
@@ -178,8 +158,6 @@ Lisp:
 Cから呼び出可能な関数ポインタ
 ```
 
----
-
 ## 6.4 Return
 
 ```
@@ -193,8 +171,6 @@ NIL
 ```
 
 相当。
-
----
 
 # 7. Callback Flow
 
@@ -234,8 +210,6 @@ C Runtime Stores Pointer
 IR Events Begin
 ```
 
----
-
 # 8. init-ir-bridge Specification
 
 ## 8.1 Function
@@ -246,8 +220,6 @@ IR Events Begin
     (cffi:callback ir-callback)))
 ```
 
----
-
 ## 8.2 Responsibility
 
 `init-ir-bridge` はIR通信路の初期化エントリポイント。
@@ -257,8 +229,6 @@ IR Events Begin
 1. Lisp callbackをC ABI形式へ変換
 2. callback pointer生成
 3. C runtimeへ登録
-
----
 
 # 9. Detailed Execution
 
@@ -280,8 +250,6 @@ Lisp Function
 Foreign Callable Pointer
 ```
 
----
-
 ## Step 2
 
 登録:
@@ -298,8 +266,6 @@ C Runtime
 callback_address =
 generated_pointer
 ```
-
----
 
 # 10. Runtime Contract
 
@@ -318,8 +284,6 @@ callback object
        v
 GC Root保持
 ```
-
----
 
 ## 10.2 GC Safety
 
@@ -349,8 +313,6 @@ C側が後からcallbackを呼ぶ場合、GCによる回収リスクがある。
     *ir-callback-pointer*))
 ```
 
----
-
 # 11. ABI Contract
 
 ## 11.1 C Side Requirement
@@ -375,8 +337,6 @@ typedef void (*ir_callback_t)(void*);
 
 が必要。
 
----
-
 # 12. Error Conditions
 
 ## 12.1 Missing C Symbol
@@ -392,8 +352,6 @@ register_ir_callback not found
 * shared library未ロード
 * symbol export不足
 * ABI mismatch
-
----
 
 ## 12.2 Callback Signature Mismatch
 
@@ -411,8 +369,6 @@ C callback ABI
 Lisp callback ABI
 ```
 
----
-
 ## 12.3 Callback Lifetime Failure
 
 状態:
@@ -428,8 +384,6 @@ segmentation fault
 callback pointer GC invalidation
 ```
 
----
-
 # 13. Current Responsibility Boundary
 
 ## Included
@@ -440,8 +394,6 @@ callback pointer GC invalidation
 | callback registration | ✓  |
 | FFI initialization    | ✓  |
 
----
-
 ## Excluded
 
 | 機能     | 担当          |
@@ -451,8 +403,6 @@ callback pointer GC invalidation
 | IR解析   | analysis    |
 | Commit | kernel      |
 | Policy | runtime     |
-
----
 
 # 14. Chron-LLM Architecture Mapping
 
@@ -488,8 +438,6 @@ callback pointer GC invalidation
         Review / Commit / History
 ```
 
----
-
 # 15. Design Classification
 
 | 項目          | 分類          |
@@ -500,8 +448,6 @@ callback pointer GC invalidation
 | Persistence | 無し          |
 | Authority   | 無し          |
 | Mutation    | 無し          |
-
----
 
 # 16. Formal Specification
 
@@ -523,8 +469,6 @@ IR-FFI MUST NOT:
 5. own inference state
 ```
 
----
-
 # 17. Review Summary
 
 ## Current Implementation Status
@@ -545,8 +489,6 @@ Callback lifetime管理
 global callback pointer retention
 ```
 
----
-
 ### P1
 
 ABI固定化
@@ -562,8 +504,6 @@ IR Callback ABI v1
 * threading
 * reentrancy
 
----
-
 ### P2
 
 Error handling
@@ -575,8 +515,6 @@ register success flag
 callback version
 ABI compatibility check
 ```
-
----
 
 ## Final Assessment
 

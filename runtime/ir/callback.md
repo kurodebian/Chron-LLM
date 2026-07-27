@@ -17,8 +17,6 @@
 ir-callback
 ```
 
----
-
 # 1. 概要
 
 本モジュールは、LLMバックエンド（C/C++）から発生する**物理イベント（Physical Event）**を、Chron-LLM の内部観測形式である **IR (Intermediate Representation)** に変換し、IR Streamへ格納するためのブリッジ層である。
@@ -47,8 +45,6 @@ IR Object
 IR Stream
 ```
 
----
-
 # 2. 設計目的
 
 Chron-LLMでは、LLM内部状態を直接操作しない。
@@ -71,8 +67,6 @@ Kernel
 
 本モジュールはその最初の入口となる。
 
----
-
 # 3. 責務
 
 本モジュールが担当するもの
@@ -81,8 +75,6 @@ Kernel
 * Physical Event取得
 * IR生成
 * IR Streamへの追加
-
----
 
 担当しないもの
 
@@ -95,8 +87,6 @@ Kernel
 * Prompt生成
 * 推論制御
 
----
-
 # 4. 依存モジュール
 
 ```
@@ -107,8 +97,6 @@ ir
 
 * `make-ir`
 
----
-
 ```
 ir-stream
 ```
@@ -116,8 +104,6 @@ ir-stream
 利用
 
 * `push-ir`
-
----
 
 ```
 cffi
@@ -127,8 +113,6 @@ cffi
 
 * `defcallback`
 
----
-
 # 5. 公開API
 
 ```lisp
@@ -137,8 +121,6 @@ ir-callback
 
 エクスポートされる唯一のシンボルである。
 
----
-
 # 6. Callback仕様
 
 ```lisp
@@ -146,8 +128,6 @@ ir-callback
 ```
 
 C側から呼び出される。
-
----
 
 ## シグネチャ
 
@@ -161,8 +141,6 @@ void callback(
 )
 ```
 
----
-
 ### 引数
 
 | 引数     | 型       | 意味           |
@@ -173,8 +151,6 @@ void callback(
 | score  | Float   | 生成スコア        |
 | phase  | Integer | 生成フェーズ       |
 
----
-
 ### 戻り値
 
 ```
@@ -182,8 +158,6 @@ void
 ```
 
 戻り値は存在しない。
-
----
 
 # 7. IR生成
 
@@ -206,8 +180,6 @@ make-ir
  :score score)
 ```
 
----
-
 ## フィールド対応
 
 | Physical Event | IR     |
@@ -219,8 +191,6 @@ make-ir
 | score          | score  |
 
 情報はそのまま保持される。
-
----
 
 # 8. IR Stream登録
 
@@ -244,8 +214,6 @@ IR Stream
 
 追加される。
 
----
-
 # 9. データフロー
 
 ```
@@ -267,8 +235,6 @@ push-ir
 
 IR Stream
 ```
-
----
 
 # 10. データ変換
 
@@ -323,8 +289,6 @@ phase
 
 加工は一切行わない。
 
----
-
 # 11. 決定性
 
 同一入力なら
@@ -355,8 +319,6 @@ IR(A)
 
 なし。
 
----
-
 # 12. 不変条件
 
 Callbackは
@@ -373,8 +335,6 @@ IR Stream
 
 のみである。
 
----
-
 # 13. エラー処理
 
 本コードでは
@@ -387,8 +347,6 @@ IR Stream
 * `push-ir` が成功する
 
 失敗時の挙動は依存モジュールへ委譲される。
-
----
 
 # 14. 性能
 
@@ -416,8 +374,6 @@ O(1)
 
 （IR Streamの増加を除く）
 
----
-
 # 15. スレッド安全性
 
 本実装では同期処理は行われていない。
@@ -431,8 +387,6 @@ push-ir
 がスレッドセーフであることを前提としている。
 
 複数スレッドから同時にコールバックされる環境では、IR Stream 側で排他制御またはロックフリー構造を提供する必要がある。
-
----
 
 # 16. アーキテクチャ上の位置
 
@@ -483,15 +437,11 @@ Validation
 Kernel
 ```
 
----
-
 # 17. 設計原則
 
 ## Physical Boundary
 
 物理層から論理層への唯一の入口となる。
-
----
 
 ## Observation Only
 
@@ -499,25 +449,17 @@ Kernel
 
 意思決定は一切行わない。
 
----
-
 ## Lossless Translation
 
 受信した全フィールドを保持し、情報を欠落・加工しない。
-
----
 
 ## Deterministic
 
 同一入力は必ず同一IRへ変換される。
 
----
-
 ## Side-effect Isolation
 
 副作用は **IR Streamへの追加のみ** とし、Kernel・Canonical・Runtime状態には影響を与えない。
-
----
 
 # 18. Phase Eとの関係
 

@@ -16,8 +16,6 @@ Its purpose is:
 * enable replay and divergence analysis
 * separate inference observation from kernel authority
 
----
-
 # 2. Architectural Position
 
 ## 2.1 Runtime Data Flow
@@ -52,8 +50,6 @@ Its purpose is:
 +-----------------------+
 ```
 
----
-
 # 3. Package Definition
 
 ## 3.1 Package Declaration
@@ -71,8 +67,6 @@ Its purpose is:
    #:ir-score))
 ```
 
----
-
 # 4. Package Responsibility
 
 ## 4.1 Responsible
@@ -86,8 +80,6 @@ Its purpose is:
 | IR type identification       | ✓      |
 | Field access                 | ✓      |
 | Observation transport format | ✓      |
-
----
 
 ## 4.2 Non-Responsible
 
@@ -103,8 +95,6 @@ Its purpose is:
 | History persistence | WAL/History    |
 | Prompt generation   | Runtime        |
 
----
-
 # 5. IR Data Model
 
 ## 5.1 Structure Definition
@@ -117,8 +107,6 @@ Its purpose is:
   token
   score)
 ```
-
----
 
 # 6. IR Object Contract
 
@@ -139,11 +127,7 @@ IR =
 )
 ```
 
----
-
 # 7. Field Specification
-
----
 
 # 7.1 ctx-id
 
@@ -165,8 +149,6 @@ uuid
 opaque identifier
 ```
 
----
-
 ## Purpose
 
 Runtime context identifier.
@@ -180,8 +162,6 @@ ctx-001
 ctx-002
 ```
 
----
-
 ## Contract
 
 MUST:
@@ -193,8 +173,6 @@ MUST NOT:
 
 * encode semantic meaning
 * represent user/session identity
-
----
 
 # 7.2 pos
 
@@ -216,8 +194,6 @@ token1 -> pos 1
 token2 -> pos 2
 ```
 
----
-
 ## Contract
 
 `pos` provides deterministic ordering.
@@ -234,8 +210,6 @@ then:
 IR-A emitted before IR-B
 ```
 
----
-
 ## Importance
 
 This field guarantees:
@@ -247,8 +221,6 @@ callback emission order
 deterministic replay order
 ```
 
----
-
 # 7.3 phase
 
 ## Definition
@@ -257,13 +229,9 @@ deterministic replay order
 (ir-phase ir)
 ```
 
----
-
 ## Purpose
 
 Runtime phase identifier.
-
----
 
 ## Standard Values
 
@@ -272,8 +240,6 @@ Runtime phase identifier.
 | 0     | Prefill    |
 | 1     | Generation |
 | 2     | Finalize   |
-
----
 
 ## Phase Model
 
@@ -290,8 +256,6 @@ Generation
 Finalize
 ```
 
----
-
 ## Contract
 
 Phase is observational metadata.
@@ -302,8 +266,6 @@ It MUST NOT:
 * control decoding
 * affect commit
 
----
-
 # 7.4 token
 
 ## Definition
@@ -312,13 +274,9 @@ It MUST NOT:
 (ir-token ir)
 ```
 
----
-
 ## Purpose
 
 Generated token identifier.
-
----
 
 ## Type
 
@@ -336,8 +294,6 @@ Example:
 token = 198
 ```
 
----
-
 ## Contract
 
 Represents:
@@ -352,8 +308,6 @@ Does not represent:
 what it means
 ```
 
----
-
 # 7.5 score
 
 ## Definition
@@ -361,8 +315,6 @@ what it means
 ```lisp
 (ir-score ir)
 ```
-
----
 
 ## Purpose
 
@@ -373,8 +325,6 @@ Examples:
 * log probability
 * likelihood
 * sampler score
-
----
 
 ## Type
 
@@ -392,8 +342,6 @@ Example:
 -0.234
 ```
 
----
-
 ## Contract
 
 Score is raw observation only.
@@ -403,8 +351,6 @@ IR MUST NOT:
 * rank tokens
 * select candidates
 * perform sampling
-
----
 
 # 8. Immutability Model
 
@@ -426,8 +372,6 @@ fields fixed
 analysis only
 ```
 
----
-
 ## Mutation Prohibited
 
 Forbidden:
@@ -437,8 +381,6 @@ Forbidden:
 ```
 
 after emission.
-
----
 
 # 9. Deterministic Replay Contract
 
@@ -474,8 +416,6 @@ Result:
 
 same observation sequence.
 
----
-
 # 10. IR Stream Model
 
 Multiple IR objects form an observation stream.
@@ -501,8 +441,6 @@ Properties:
 | Token record       | token     |
 | Score capture      | score     |
 
----
-
 # 11. Relationship With Kernel
 
 ## Authority Boundary
@@ -524,16 +462,12 @@ Properties:
        Review / Commit
 ```
 
----
-
 IR cannot:
 
 * modify state
 * create events
 * commit history
 * alter worldline
-
----
 
 # 12. Relationship With History/WAL
 
@@ -559,8 +493,6 @@ Commit
 History/WAL
 ```
 
----
-
 Truth:
 
 ```
@@ -573,8 +505,6 @@ Not:
 IR
 ```
 
----
-
 # 13. Replay and Analysis Usage
 
 Possible consumers:
@@ -586,8 +516,6 @@ Possible consumers:
 | benchmark           | measure runtime behavior |
 | evaluator           | score observation        |
 | debugging           | inspect callbacks        |
-
----
 
 # 14. API Specification
 
@@ -604,8 +532,6 @@ Possible consumers:
 
 Creates one observation record.
 
----
-
 ## Predicate
 
 ```lisp
@@ -619,8 +545,6 @@ true
 ```
 
 if object is IR.
-
----
 
 ## Accessors
 
@@ -636,8 +560,6 @@ if object is IR.
 (ir-score x)
 ```
 
----
-
 # 15. Formal Invariants
 
 ## IR-1 Observation Purity
@@ -647,8 +569,6 @@ IR MUST represent observation only.
 ```
 IR ∉ Runtime State
 ```
-
----
 
 ## IR-2 No Semantic Layer
 
@@ -660,8 +580,6 @@ intent
 decision
 policy
 ```
-
----
 
 ## IR-3 Ordering Preservation
 
@@ -677,8 +595,6 @@ through:
 pos
 ```
 
----
-
 ## IR-4 Replay Compatibility
 
 Given identical IR stream:
@@ -688,8 +604,6 @@ same analysis result
 ```
 
 must be obtainable.
-
----
 
 # 16. Chron-LLM Mapping
 
@@ -733,8 +647,6 @@ Commit
 History
 ```
 
----
-
 # 17. Design Evaluation
 
 ## Current Status
@@ -748,8 +660,6 @@ Strengths:
 * LLM independence
 * analysis isolation
 * kernel authority preserved
-
----
 
 ## Future Extension Candidates
 
@@ -781,8 +691,6 @@ semantic interpretation
 policy result
 commit information
 ```
-
----
 
 # Final Specification Summary
 
