@@ -20,6 +20,20 @@ def get_win_host_ip():
   return None
 
 
+def fetch_v1_models(base_url):
+  """/v1/models からモデル名を取得する"""
+  try:
+    req = urllib.request.Request(f"{base_url}/v1/models")
+    with urllib.request.urlopen(req, timeout=2.0) as res:
+      if res.status == 200:
+        data = json.loads(res.read().decode("utf-8"))
+        models = [m.get("id") for m in data.get("data", []) if m.get("id")]
+        return models[0] if models else None
+  except Exception:
+    pass
+  return None
+
+
 def detect_backend():
   """起動中の LLM サーバー (llama-server または Ollama) を自動検出する"""
   env_model = os.getenv("MODEL_NAME")
@@ -29,7 +43,7 @@ def detect_backend():
   if env_url:
     return env_url, env_model or "default"
 
-  # 2. OLLAMA_HOST が指定されている場合
+  # 2. OLLAMA_HOST が明示されている場合
   ollama_host = os.getenv("OLLAMA_HOST")
   if ollama_host:
     base = ollama_host.rstrip("/")
@@ -40,36 +54,72 @@ def detect_backend():
         if not base.endswith("/v1")
         else f"{base}/chat/completions"
     )
-    return api_endpoint, env_model or "default"
+    model = env_model or fetch_v1_models(base) or "default"
+    return api_endpoint, model
 
-  # 接続テスト対象のベースURLリスト
   win_ip = get_win_host_ip()
-  candidates = ["http://localhost:8080", "http://localhost:11434"]
+  hosts = ["http://localhost", "http://127.0.0.1"]
   if win_ip:
-    candidates.extend([f"http://{win_ip}:11434", f"http://{win_ip}:8080"])
+    hosts.append(f"http://{win_ip}")
 
-  for base_url in candidates:
+  # ----------------------------------------------------
+  # 判定 A: llama.cpp (llama-server) のチェック (:8080)
+  # ----------------------------------------------------
+  for host in hosts:
+    base_url = f"{host}:8080"
     try:
-      req = urllib.request.Request(f"{base_url}/v1/models")
-      with urllib.request.urlopen(req, timeout=1.5) as res:
+      req = urllib.request.Request(f"{base_url}/health")
+      with urllib.request.urlopen(req, timeout=2.0) as res:
+        if res.status == 200:
+          model = env_model or fetch_v1_models(base_url) or "default"
+          print(
+              f"[Auto-Detect] llama.cpp (llama-server) 検出: {base_url} (モデル:"
+              f" {model})"
+          )
+          return f"{base_url}/v1/chat/completions", model
+    except Exception:
+      pass
+
+  # ----------------------------------------------------
+  # 判定 B: Ollama のチェック (:11434)
+  # ----------------------------------------------------
+  for host in hosts:
+    base_url = f"{host}:11434"
+    try:
+      # Ollama 固有のエンドポイント /api/tags で確認
+      req = urllib.request.Request(f"{base_url}/api/tags")
+      with urllib.request.urlopen(req, timeout=2.0) as res:
         if res.status == 200:
           data = json.loads(res.read().decode("utf-8"))
-          models = [m.get("id") for m in data.get("data", []) if m.get("id")]
+          models = [
+              m.get("name") for m in data.get("models", []) if m.get("name")
+          ]
           selected_model = env_model or (models[0] if models else "default")
           print(
-              f"[Auto-Detect] サーバー検出成功: {base_url} (モデル:"
+              f"[Auto-Detect] Ollama 検出: {base_url} (モデル:"
               f" {selected_model})"
           )
           return f"{base_url}/v1/chat/completions", selected_model
     except Exception:
-      continue
+      pass
 
-  # どちらも応答がない場合のフォールバック
-  default_url = (
-      f"http://{win_ip}:11434/v1/chat/completions"
-      if win_ip
-      else "http://localhost:8080/v1/chat/completions"
-  )
+  # ----------------------------------------------------
+  # 判定 C: その他の OpenAI 互換サーバー (/v1/models)
+  # ----------------------------------------------------
+  for host in hosts:
+    for port in [8080, 11434]:
+      base_url = f"{host}:{port}"
+      model = fetch_v1_models(base_url)
+      if model:
+        selected_model = env_model or model
+        print(
+            f"[Auto-Detect] OpenAI互換 API 検出: {base_url} (モデル:"
+            f" {selected_model})"
+        )
+        return f"{base_url}/v1/chat/completions", selected_model
+
+  # どちらも検出できない場合のデフォルト
+  default_url = "http://localhost:8080/v1/chat/completions"
   print(
       "[Warn] サーバーが自動検出できませんでした。デフォルト"
       f" ({default_url}) で試行します。"
