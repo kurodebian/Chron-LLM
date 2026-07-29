@@ -1,0 +1,932 @@
+{
+  "total_files_scanned": 98,
+  "total_candidate_pairs": 185,
+  "threshold": 0.75,
+  "pairs": [
+    {
+      "file_a": "docs/ir/phase-b-charter.spec",
+      "file_b": "docs/ir/phase-c-charter.spec",
+      "similarity": 0.9307
+    },
+    {
+      "file_a": "llama-agent/ir/llama-agent.spec",
+      "file_b": "llama-agent/ir/llama-agent2.spec",
+      "similarity": 0.9246
+    },
+    {
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ffi.lisp",
+      "similarity": 0.9197
+    },
+    {
+      "file_a": "runtime/ir/callback.md",
+      "file_b": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "similarity": 0.9052
+    },
+    {
+      "file_a": "experiments/ir/3cluster.spec",
+      "file_b": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity": 0.9048
+    },
+    {
+      "file_a": "runtime/ir/callback.md",
+      "file_b": "runtime/ir/divergence.md",
+      "similarity": 0.8986
+    },
+    {
+      "file_a": "docs/ir/phase-c-charter.spec",
+      "file_b": "docs/ir/phase-d-charter.spec",
+      "similarity": 0.8964
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "file_b": "runtime/ir/divergence.md",
+      "similarity": 0.8938
+    },
+    {
+      "file_a": "runtime/ir/ir.md",
+      "file_b": "runtime/ir/stream.md",
+      "similarity": 0.8927
+    },
+    {
+      "file_a": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity": 0.8918
+    },
+    {
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/stream.lisp",
+      "similarity": 0.8918
+    },
+    {
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/stream.lisp",
+      "similarity": 0.8885
+    },
+    {
+      "file_a": "llama-agent/ir/ffi-bindings-mock.spec",
+      "file_b": "llama-agent/ir/ffi-bindings.spec",
+      "similarity": 0.8878
+    },
+    {
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity": 0.8856
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "docs/ir/architecture-v1.spec",
+      "similarity": 0.8825
+    },
+    {
+      "file_a": "docs/ir/phase-b-charter.spec",
+      "file_b": "docs/ir/phase-d-charter.spec",
+      "similarity": 0.8784
+    },
+    {
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/04-runtime-pipeline.spec",
+      "similarity": 0.8753
+    },
+    {
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ir.lisp",
+      "similarity": 0.8709
+    },
+    {
+      "file_a": "docs/ir/knowledge-system.spec",
+      "file_b": "docs/reference/ir/knowledge-rationale.spec",
+      "similarity": 0.8693
+    },
+    {
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/projection.spec",
+      "similarity": 0.8677
+    },
+    {
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity": 0.864
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-immune.spec",
+      "file_b": "llama-agent/ir/chron-llm-world.spec",
+      "similarity": 0.8633
+    },
+    {
+      "file_a": "runtime/r1/ir/core.spec",
+      "file_b": "runtime/r1/ir/package.spec",
+      "similarity": 0.8576
+    },
+    {
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/stream.lisp",
+      "similarity": 0.8567
+    },
+    {
+      "file_a": "tests/md/ir/r2-1-b-tests.spec",
+      "file_b": "tests/md/ir/r2-2-e-tests.spec",
+      "similarity": 0.8561
+    },
+    {
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/ir.lisp",
+      "similarity": 0.8547
+    },
+    {
+      "file_a": "runtime/ir/stream.lisp",
+      "file_b": "runtime/ir/stream.md",
+      "similarity": 0.8498
+    },
+    {
+      "file_a": "tests/md/ir/r2-0-a-tests.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.8497
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/causal-kernel.spec",
+      "similarity": 0.8492
+    },
+    {
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity": 0.8485
+    },
+    {
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-b-charter.spec",
+      "similarity": 0.8481
+    },
+    {
+      "file_a": "tests/md/ir/r2-2-e-tests.spec",
+      "file_b": "tests/md/ir/r2-3-s-tests.spec",
+      "similarity": 0.8468
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "similarity": 0.8433
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity": 0.843
+    },
+    {
+      "file_a": "runtime/ir/ir.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity": 0.8386
+    },
+    {
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "docs/ir/phase-f-charter.spec",
+      "similarity": 0.8377
+    },
+    {
+      "file_a": "runtime/ir/stream.lisp",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity": 0.8349
+    },
+    {
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/ir.md",
+      "similarity": 0.8312
+    },
+    {
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/stream.lisp",
+      "similarity": 0.8306
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.8293
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "similarity": 0.8276
+    },
+    {
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity": 0.8262
+    },
+    {
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity": 0.8258
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.8232
+    },
+    {
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/callback.spec",
+      "similarity": 0.8214
+    },
+    {
+      "file_a": "experiments/ir/3cluster.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity": 0.8211
+    },
+    {
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ir.lisp",
+      "similarity": 0.8206
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity": 0.8187
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-graph.spec",
+      "file_b": "llama-agent/ir/chron-llm-immune.spec",
+      "similarity": 0.8163
+    },
+    {
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-c-charter.spec",
+      "similarity": 0.8148
+    },
+    {
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.8141
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-graph.spec",
+      "file_b": "llama-agent/ir/chron-llm-world.spec",
+      "similarity": 0.8141
+    },
+    {
+      "file_a": "observability/ir/world-snapshot.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.8135
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-causal.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.8117
+    },
+    {
+      "file_a": "graph-runtime/ir/prefill.spec",
+      "file_b": "graph-runtime/ir/projection.spec",
+      "similarity": 0.811
+    },
+    {
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/prefill.spec",
+      "similarity": 0.8094
+    },
+    {
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "docs/ir/11-prompt-builder.spec",
+      "similarity": 0.8091
+    },
+    {
+      "file_a": "experiments/ir/basin.spec",
+      "file_b": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity": 0.8087
+    },
+    {
+      "file_a": "tests/md/ir/r2-1-b-tests.spec",
+      "file_b": "tests/md/ir/r2-3-s-tests.spec",
+      "similarity": 0.8044
+    },
+    {
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/10-tool-execution.spec",
+      "similarity": 0.8038
+    },
+    {
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/stream.md",
+      "similarity": 0.8038
+    },
+    {
+      "file_a": "runtime/ir/callback.md",
+      "file_b": "runtime/ir/ffi.md",
+      "similarity": 0.8029
+    },
+    {
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity": 0.8027
+    },
+    {
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "docs/ir/06-kernel-state-machine.spec",
+      "similarity": 0.7993
+    },
+    {
+      "file_a": "graph-runtime/ir/causal.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.7993
+    },
+    {
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "similarity": 0.7991
+    },
+    {
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/11-prompt-builder.spec",
+      "similarity": 0.7989
+    },
+    {
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/divergence.lisp",
+      "similarity": 0.7989
+    },
+    {
+      "file_a": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "file_b": "experiments/ir/dynamics.spec",
+      "similarity": 0.7936
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity": 0.7935
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.7929
+    },
+    {
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-d-charter.spec",
+      "similarity": 0.7928
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-causal.spec",
+      "file_b": "llama-agent/ir/chron-llm-immune.spec",
+      "similarity": 0.7928
+    },
+    {
+      "file_a": "runtime/ir/stream.md",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity": 0.7924
+    },
+    {
+      "file_a": "docs/ir/00-constitution.spec",
+      "file_b": "docs/ir/02-operational-semantics.spec",
+      "similarity": 0.7923
+    },
+    {
+      "file_a": "tests/md/ir/r2-0-a-tests.spec",
+      "file_b": "tests/md/ir/r2-3-s-tests.spec",
+      "similarity": 0.7923
+    },
+    {
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ffi.md",
+      "similarity": 0.7915
+    },
+    {
+      "file_a": "graph-runtime/ir/graph.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.7913
+    },
+    {
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity": 0.7906
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity": 0.7891
+    },
+    {
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity": 0.7883
+    },
+    {
+      "file_a": "tests/md/ir/r2-0-b-tests.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity": 0.7879
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity": 0.7866
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm.spec",
+      "similarity": 0.786
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "file_b": "runtime/ir/ir.md",
+      "similarity": 0.7855
+    },
+    {
+      "file_a": "docs/ir/13-worldline-branching.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.7853
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-runtime.spec",
+      "file_b": "runtime/r1/ir/core.spec",
+      "similarity": 0.7842
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/prefill.spec",
+      "similarity": 0.7835
+    },
+    {
+      "file_a": "tests/md/ir/r2-0-c-tests.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity": 0.7835
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-runtime.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity": 0.7821
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity": 0.7819
+    },
+    {
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/05-validation-pipeline.spec",
+      "similarity": 0.7818
+    },
+    {
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm.spec",
+      "similarity": 0.7812
+    },
+    {
+      "file_a": "graph-runtime/ir/causal.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity": 0.7811
+    },
+    {
+      "file_a": "tests/md/ir/r2-0-b-tests.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity": 0.7807
+    },
+    {
+      "file_a": "graph-runtime/ir/causal.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity": 0.7797
+    },
+    {
+      "file_a": "tests/md/ir/r2-0-b-tests.spec",
+      "file_b": "tests/md/ir/r2-3-s-tests.spec",
+      "similarity": 0.7796
+    },
+    {
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "similarity": 0.7784
+    },
+    {
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity": 0.7777
+    },
+    {
+      "file_a": "runtime/r0/ir/chat-loop.spec",
+      "file_b": "runtime/r0/ir/prompt.spec",
+      "similarity": 0.7776
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "llama-agent/ir/causal-kernel.spec",
+      "similarity": 0.7773
+    },
+    {
+      "file_a": "runtime/ir/ir.md",
+      "file_b": "runtime/ir/stream.lisp",
+      "similarity": 0.7773
+    },
+    {
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/06-kernel-state-machine.spec",
+      "similarity": 0.7771
+    },
+    {
+      "file_a": "memory/ir/store.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.7766
+    },
+    {
+      "file_a": "runtime/r0/ir/history.spec",
+      "file_b": "runtime/r0/ir/prompt.spec",
+      "similarity": 0.7757
+    },
+    {
+      "file_a": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.7753
+    },
+    {
+      "file_a": "docs/ir/08-memory-model.spec",
+      "file_b": "docs/ir/12-recovery.spec",
+      "similarity": 0.7752
+    },
+    {
+      "file_a": "runtime/ir/divergence.md",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity": 0.7749
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "observability/ir/world-snapshot.spec",
+      "similarity": 0.7746
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "similarity": 0.774
+    },
+    {
+      "file_a": "tests/md/ir/r2-0-a-tests.spec",
+      "file_b": "tests/md/ir/r2-2-e-tests.spec",
+      "similarity": 0.774
+    },
+    {
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "docs/ir/05-validation-pipeline.spec",
+      "similarity": 0.7738
+    },
+    {
+      "file_a": "runtime/ir/ffi.md",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity": 0.7726
+    },
+    {
+      "file_a": "runtime/r0/ir/chat-loop.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity": 0.7723
+    },
+    {
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/08-memory-model.spec",
+      "similarity": 0.772
+    },
+    {
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity": 0.772
+    },
+    {
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.7718
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity": 0.7708
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-runtime.spec",
+      "file_b": "tests/md/ir/r2-3-s-tests.spec",
+      "similarity": 0.7705
+    },
+    {
+      "file_a": "docs/ir/phase-f-charter.spec",
+      "file_b": "tests/md/ir/phase0-big-bang-test.spec",
+      "similarity": 0.7702
+    },
+    {
+      "file_a": "runtime/ir/divergence.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity": 0.7702
+    },
+    {
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/stream.md",
+      "similarity": 0.77
+    },
+    {
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity": 0.7698
+    },
+    {
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity": 0.7694
+    },
+    {
+      "file_a": "docs/ir/13-worldline-branching.spec",
+      "file_b": "llama-agent/ir/chron-llm-world.spec",
+      "similarity": 0.7694
+    },
+    {
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/ir.md",
+      "similarity": 0.7691
+    },
+    {
+      "file_a": "docs/ir/13-worldline-branching.spec",
+      "file_b": "llama-agent/ir/chron-llm-immune.spec",
+      "similarity": 0.769
+    },
+    {
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-kernel.spec",
+      "similarity": 0.7683
+    },
+    {
+      "file_a": "registry/ir/registry.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity": 0.7682
+    },
+    {
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity": 0.768
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "file_b": "runtime/ir/stream.md",
+      "similarity": 0.7676
+    },
+    {
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "runtime/r1/ir/package.spec",
+      "similarity": 0.7674
+    },
+    {
+      "file_a": "runtime/r0/ir/chat-loop.spec",
+      "file_b": "runtime/r0/ir/history.spec",
+      "similarity": 0.767
+    },
+    {
+      "file_a": "runtime/r0/ir/llama-run.spec",
+      "file_b": "tests/md/ir/r2-3-s-tests.spec",
+      "similarity": 0.7663
+    },
+    {
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/ffi.lisp",
+      "similarity": 0.7655
+    },
+    {
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "runtime/r1/ir/package.spec",
+      "similarity": 0.7652
+    },
+    {
+      "file_a": "observability/ir/world-snapshot.spec",
+      "file_b": "tests/md/ir/r2-0-a-tests.spec",
+      "similarity": 0.7651
+    },
+    {
+      "file_a": "runtime/r0/ir/api.spec",
+      "file_b": "runtime/r1/ir/package.spec",
+      "similarity": 0.764
+    },
+    {
+      "file_a": "runtime/ir/callback.md",
+      "file_b": "runtime/ir/stream.md",
+      "similarity": 0.7636
+    },
+    {
+      "file_a": "docs/ir/00-constitution.spec",
+      "file_b": "docs/ir/04-runtime-pipeline.spec",
+      "similarity": 0.7628
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/projection.spec",
+      "similarity": 0.7628
+    },
+    {
+      "file_a": "docs/ir/06-kernel-state-machine.spec",
+      "file_b": "llama-agent/ir/chron-llm-kernel.spec",
+      "similarity": 0.7627
+    },
+    {
+      "file_a": "llama-agent/ir/ffi-bindings-mock.spec",
+      "file_b": "llama-agent/ir/llama-agent.spec",
+      "similarity": 0.7625
+    },
+    {
+      "file_a": "runtime/r1/ir/package.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.7625
+    },
+    {
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.7621
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.7616
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "llama-agent/ir/chron-llm.spec",
+      "similarity": 0.7612
+    },
+    {
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-world.spec",
+      "similarity": 0.7611
+    },
+    {
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/stream.lisp",
+      "similarity": 0.761
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "observability/ir/world-snapshot.spec",
+      "similarity": 0.7608
+    },
+    {
+      "file_a": "runtime/ir/divergence.spec",
+      "file_b": "runtime/ir/ir.md",
+      "similarity": 0.7607
+    },
+    {
+      "file_a": "docs/ir/00-constitution.spec",
+      "file_b": "docs/ir/11-prompt-builder.spec",
+      "similarity": 0.7602
+    },
+    {
+      "file_a": "runtime/ir/divergence.spec",
+      "file_b": "runtime/ir/stream.md",
+      "similarity": 0.7601
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/chron-llm.spec",
+      "similarity": 0.7597
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-world.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity": 0.7597
+    },
+    {
+      "file_a": "runtime/r1/ir/package.spec",
+      "file_b": "tests/md/ir/r2-1-b-tests.spec",
+      "similarity": 0.7595
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/chron-llm-immune.spec",
+      "similarity": 0.7592
+    },
+    {
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "tests/md/ir/r2-0-a-tests.spec",
+      "similarity": 0.7585
+    },
+    {
+      "file_a": "runtime/ir/ffi.spec",
+      "file_b": "runtime/ir/stream.lisp",
+      "similarity": 0.7575
+    },
+    {
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/ffi.lisp",
+      "similarity": 0.7567
+    },
+    {
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "llama-agent/ir/chron-llm-kernel.spec",
+      "similarity": 0.7566
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-runtime.spec",
+      "file_b": "runtime/r1/ir/package.spec",
+      "similarity": 0.7564
+    },
+    {
+      "file_a": "runtime/r1/ir/package.spec",
+      "file_b": "tests/md/ir/r2-3-s-tests.spec",
+      "similarity": 0.7562
+    },
+    {
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "llama-agent/ir/chron-llm.spec",
+      "similarity": 0.7558
+    },
+    {
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/phase-f-charter.spec",
+      "similarity": 0.7552
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/divergence.lisp",
+      "similarity": 0.7548
+    },
+    {
+      "file_a": "experiments/ir/scc.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.7544
+    },
+    {
+      "file_a": "llama-agent/ir/ffi-bindings.spec",
+      "file_b": "llama-agent/ir/llama-agent.spec",
+      "similarity": 0.7541
+    },
+    {
+      "file_a": "runtime/r0/ir/api.spec",
+      "file_b": "runtime/r0/ir/chat-loop.spec",
+      "similarity": 0.7539
+    },
+    {
+      "file_a": "docs/ir/11-prompt-builder.spec",
+      "file_b": "docs/ir/phase-f-charter.spec",
+      "similarity": 0.7538
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-runtime.spec",
+      "similarity": 0.7532
+    },
+    {
+      "file_a": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.753
+    },
+    {
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/divergence.md",
+      "similarity": 0.7527
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-kernel.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.7526
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/ir.lisp",
+      "similarity": 0.7524
+    },
+    {
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/02-operational-semantics.spec",
+      "similarity": 0.7523
+    },
+    {
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity": 0.752
+    },
+    {
+      "file_a": "llama-agent/ir/chron-llm-causal.spec",
+      "file_b": "llama-agent/ir/chron-llm-world.spec",
+      "similarity": 0.7518
+    },
+    {
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/chron-llm-world.spec",
+      "similarity": 0.7517
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "memory/ir/store.spec",
+      "similarity": 0.7516
+    },
+    {
+      "file_a": "runtime/r0/ir/prompt.spec",
+      "file_b": "runtime/r0/ir/trace.spec",
+      "similarity": 0.7514
+    },
+    {
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity": 0.7509
+    },
+    {
+      "file_a": "experiments/ir/basin.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity": 0.7509
+    },
+    {
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/stream.lisp",
+      "similarity": 0.7508
+    },
+    {
+      "file_a": "runtime/ir/divergence.spec",
+      "file_b": "runtime/ir/stream.lisp",
+      "similarity": 0.7505
+    }
+  ]
+}
