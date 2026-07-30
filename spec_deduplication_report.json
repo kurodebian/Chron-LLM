@@ -1,0 +1,1221 @@
+{
+  "processed_pairs": 86,
+  "results": [
+    {
+      "pair_summary": "2つの文書は共に Chron-R2.0 の世界グラフランタイム仕様を定義しており、CausalGraph、World、Registry などの核心的な型と操作が類似している。ただし、Document B はより詳細な型定義（例：ID, Type, Payload）や観測用の型（WorldObs, RegistryObs など）を含み、Document A に比べて構造が洗練されている。また、Document B には INVARIANTS セクションが存在し、Document A にはない。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を補完し、より詳細な型定義や観測用構造体（WorldObs, RegistryObs）を含んでいるため、統合することで全体的な仕様の網羅性と整合性が向上します。Delta3 Kernel における型の明確化と観測機構の拡張を考慮し、Document B の内容を Document A にマージすることが最適です。",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity_score": 0.9347
+    },
+    {
+      "pair_summary": "Document A は Graph、Node、Edge の基本型定義と next-event, rollout*, find-attractor などの操作を含み、Basin と SCC に関する不変条件も定義している。一方 Document B はより詳細な型定義（Trajectory, Cycle, Attractor, Cluster など）と、それらを用いた操作（rollout*、find_cycle、build_basin_map など）を含み、さらに MAP 定義や類似度スコアも含まれている。両者は時間軸（ts）やクラスタ構造（Cluster）の導入など、機能拡張が見られる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の機能を拡張し、より詳細な型定義（Cluster, Cycle, Attractor, Trajectory）や操作（find_cycle, build_basin_map など）を含んでいるため、A に B を統合することが望ましい。Delta3 Kernel における構造的整合性と機能拡張の観点から、B の詳細な定義と操作を A にマージし、共通の型定義と操作を標準化することで、より堅牢で拡張性の高い仕様体系を構築できる。",
+      "file_a": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.9318
+    },
+    {
+      "pair_summary": "Document A は FFI の Lisp 実装を示し、Document B は同機能の仕様書（インターフェース定義・状態・動作・制約）を記述している。両者は同じ関数 init-ir-bridge と register_ir_callback の呼び出しを含み、機能的重複があるが、形式と詳細レベルが異なる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の機能をより詳細に仕様化しており、Delta3 Kernel の文脈では、実装コード（Doc A）とその仕様（Doc B）を統合して管理することが望ましい。PHASE C で定義された仕様（Doc B）は PHASE D での実装（Doc A）に直接関連しており、MERGE_B_INTO_A により整合性が保たれ、コードと仕様の乖離を防ぐ。",
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity_score": 0.9278
+    },
+    {
+      "pair_summary": "Document A は chronos-r1 モジュールの詳細な仕様を定義し、Event, Candidate, Canonical, KernelState などの型と、validate, policy-route, kernel-transition などの操作を含む。一方 Document B は同様の概念を Package 構造で再定義し、型名や操作名が若干異なるが、基本的な構成要素は共通である。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A はより詳細な構造と操作定義を含み、Document B はその概略的な型と操作の集合を提供している。Delta3 Kernel の仕様として、Document A を基準にし、Document B の内容（特に型定義や操作の分類）を統合することで、より洗練された仕様が得られる。また、Document B は Document A に含まれる概念を補完的に記述しており、統合により冗長性を排除しつつ整合性を高められる。",
+      "file_a": "runtime/r1/ir/core.spec",
+      "file_b": "runtime/r1/ir/package.spec",
+      "similarity_score": 0.9019
+    },
+    {
+      "pair_summary": "Document A は Phase B の文書で、History (H) から ProjectionModel (M)、そして JustificationStructure (J) を導出する仕様を定義している。一方、Document B は Phase C の文書で、同じ H から M を生成し、さらに EventABI (ABI) を介して SemanticModel (S) を導出し、J を導出する構造を持つ。両者は基本的な STATE と AXIOM の定義が類似しているが、OP や INV、EXCLUDE の詳細に差異がある。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を拡張し、より詳細な SemanticModel (S) および EventABI (ABI) を導入しているため、Phase C が Phase B の進化版と位置づけられる。Delta3 Kernel における整合性を保ちながら、B の詳細な定義を A に統合することで、より洗練されたモデル構造を実現できる。また、EXCLUDE 項目も B がより包括的な排除リストを持つため、A に統合することで全体の整合性と保守性が向上する。",
+      "file_a": "docs/ir/phase-b-charter.spec",
+      "file_b": "docs/ir/phase-c-charter.spec",
+      "similarity_score": 0.9018
+    },
+    {
+      "pair_summary": "Document A は Lisp による実装コード、Document B は仕様書形式での記述であり、両者はIRストリームの機能を同じく定義している。共通して定義される要素としては *ir-stream* 変数、push-ir と clear-ir-stream 関数、およびストリームの性質（順序保持、非権威性、中立性）が含まれる。相違点としては、Document A は実装詳細を含み、Document B は型定義や事前条件・事後条件、不変条件、ライフサイクル、スレッド安全性などの仕様表現を含む。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の実装に対応する仕様書であり、機能定義や不変条件、ライフサイクル、スレッド安全性など詳細な仕様を提供している。Delta3 Kernel における設計整合性と保守性の観点から、Document B の仕様を Document A の実装に統合することが推奨される。これにより、実装と仕様の乖離を防ぎ、コードの理解と保守性が向上する。",
+      "file_a": "runtime/ir/stream.lisp",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.8997
+    },
+    {
+      "pair_summary": "Document A は因果関係に基づくグラフ構造とコンテキスト抽出ロジックを定義し、PrefillState の生成プロセスを詳細に記述している。一方 Document B は Node 型と PrefillState の構造、および project-context, canonical-prompt, build-prefill-state 関数の動作を簡潔に記述しており、主にコンテキスト抽出とプロンプト生成のロジックに焦点を当てている。両者は PrefillState の生成ロジックに共通点があるが、Document A はより詳細な型定義、制約、およびグラフ操作を含んでいる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B の内容は Document A の PrefillState 関連の関数定義とアルゴリズムを補完するものであり、特に project-context, canonical-prompt, build-prefill-state のロジックが共通している。Document A はより詳細な型定義と制約を含むため、Document B を統合することで全体的な仕様の整合性と網羅性が向上する。Delta3 Kernel における PrefillState の生成処理は、この統合によりより堅牢で一貫した実装が可能となる。",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/prefill.spec",
+      "similarity_score": 0.8892
+    },
+    {
+      "pair_summary": "Document A は Phase A の初期設計を定義し、History (H) に関する基本的な公理と制約を記述している。一方、Document B は Phase B の拡張設計であり、History (H) に加えて ProjectionModel (M) と JustificationStructure (J) を導入し、それらの間の操作と公理を明示している。共通点として H = A という定義と、EventABI, Resolution などの除外要素が存在するが、Document B はより詳細なモデル構造と関係性を含んでいる。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を継承しつつ、ProjectionModel (M) と JustificationStructure (J) を追加定義しており、Phase A から Phase B への自然な拡張である。Delta3 Kernel における構造的整合性を保ちながら、より詳細なモデル定義を統合するため、Document B の内容を Document A にマージすることが推奨される。",
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-b-charter.spec",
+      "similarity_score": 0.8891
+    },
+    {
+      "pair_summary": "Doc A は Common Lisp による実装コード、Doc B は仕様書形式（モジュール定義、型、操作、前提条件、不変条件など）を含む抽象仕様である。両者は同じ機能（IR divergence 分析）を対象としており、主な関数 extract-actions, run-ir-trial, divergence-profile の動作と目的が一致するが、Doc A は実装詳細を含み、Doc B は抽象的な仕様表現を含む。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc B は Doc A の実装に対応する抽象仕様であり、機能的・構造的に重複が少なく、補完的である。Doc A に Doc B の型定義、操作仕様、前提条件、不変条件を統合することで、実装と仕様の整合性が保たれ、Delta3 Kernel の設計原則（抽象性と実装の一貫性）に沿った構造となる。Phase F は仕様の成熟段階であり、Phase E は実装段階であるため、Doc B を Doc A に統合することで、より堅牢な設計が可能になる。",
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8877
+    },
+    {
+      "comparison": {
+        "similarity_score": 0.87,
+        "overall_assessment": "Highly similar",
+        "key_matching_elements": [
+          "Purpose and Functionality",
+          "Data Flow Architecture",
+          "Package Definition and API",
+          "Core Data Structure (Vector-based Stream)",
+          "Ordering Guarantee and Deterministic Analysis",
+          "Relationship with IR and Kernel Layers",
+          "Memory Model and Lifecycle Management",
+          "Error Conditions and Invariants"
+        ],
+        "major_differences": [
+          "Document A includes more detailed architectural diagrams and conceptual models",
+          "Document B has a more formal specification structure with sections like 'Chron-LLM Mapping' and 'Design Assessment'",
+          "Document B provides explicit future improvement priorities (P0, P1, P2) not present in Document A"
+        ],
+        "compliance_with_specification": "Fully compliant",
+        "recommendation": "The documents represent the same conceptual design with Document B being a more formal specification version of Document A. Both align well with the stated goals of providing a temporary, ordered observation buffer for IR objects in a deterministic analysis pipeline."
+      },
+      "file_a": "runtime/ir/ir.md",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.8707
+    },
+    {
+      "pair_summary": "2つの文書は共にChron-LLMのオペレーショナルセマンティクスとランタイムパイプラインの仕様を記述しており、Event、Canonical、Commit、Replay、Validation、PolicyRouter、Kernelなどの主要なコンポーネントについて言及している。ただし、Document Aはより詳細なプロパティ（PRE, POST, INV）やKernelStateの遷移を含み、Document Bはフローの視点からRuntimeCommandやBackendの処理を強調している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document AはPHASE E（オペレーショナルセマンティクス）に位置し、CommitやValidationなどの詳細な動作仕様を含む。一方、Document BはPHASE F（ランタイムパイプライン）に属し、フロー全体の視点からBackendやPromptBuilderの処理を補足している。Delta3 Kernelの統合方針として、Document Aの詳細なセマンティクスを基盤とし、Document BのフロービューおよびBackend処理の情報を統合することで、より包括的かつ一貫した仕様構造を形成できる。",
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/04-runtime-pipeline.spec",
+      "similarity_score": 0.8699
+    },
+    {
+      "pair_summary": "Document A は知識システムの構造的定義（型、インバリアント、プロセス、状態）を含み、Document B はレイヤー間の関係性と概念間の依存関係を示す。両者は共通する概念（Meta, Design, Runtime, Governance, Foundation, Constitution など）を持ち、意味論的に重複するが、構造的アプローチや詳細レベルに違いがある。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の概念を補完する形で、レイヤー間の関係性や依存関係を明確にし、より詳細な意味論的構造を提供している。Delta3 Kernel における知識システムの定義は、Document A の基本的な型構造と、Document B の関係性・制約を統合することで、より堅牢で一貫性のある設計が可能になる。Document B の内容は Document A の E フェーズ（設計・実行）に適合するため、A に統合することが最適。",
+      "file_a": "docs/ir/knowledge-system.spec",
+      "file_b": "docs/reference/ir/knowledge-rationale.spec",
+      "similarity_score": 0.8694
+    },
+    {
+      "pair_summary": "Document A は 3クラスタグラフの構造と基本的な操作を定義し、Document B はより詳細な型定義、操作、不変条件、およびベクトル類似度を含む拡張仕様である。両者は共通して 'reply', 'temporal', 'bridge' のロールを扱い、グラフ処理の機能を共有しているが、Document B はより洗練されたデータ構造と分析機能を提供する。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の機能を補完し、より詳細な型定義や分析メカニズム（SCC、Attractor、Basin）を含む。Delta3 Kernel における整合性と拡張性の観点から、Document B の内容を Document A に統合することで、より堅牢なグラフ解析フレームワークが構築できる。PHASE C から PHASE E への進化であり、機能の重複は最小限に抑えられる。",
+      "file_a": "experiments/ir/3cluster.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.8653
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の IR (Intermediate Representation) レイヤーの仕様を定義し、Observation Layer の操作や状態管理、および divergence 分析のための関数群を含む。一方 Document B は IR の divergence 分析に関するモジュール仕様であり、extract-actions や run-ir-trial、divergence-profile などの関数とそのアルゴリズムを記述している。両者は共通して divergence 分析の機能を提供するが、Document A はより広範な IR レイヤー全体の構造と操作を定義し、Document B はその中での分析処理に特化している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "F",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の Observation Layer 内の divergence 分析機能を補完する詳細な実装を提供しており、特に extract-actions や run-ir-trial、divergence-profile のアルゴリズムが明示されている。Delta3 Kernel における IR レイヤーの統合では、Document A の全体的な構造と Document B の具体的な分析ロジックを統合することで、より堅牢で完全な実装を実現できる。また、Document B に含まれる INV-DET や INV-LOSSLESS などの不変条件も、Document A の INV-COUPLING や INV-IMMUTABLE と整合性があり、統合により一貫性が向上する。",
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8544
+    },
+    {
+      "pair_summary": "Doc A と Doc B は共に Chron-LLM のグラフランタイムコア仕様を定義しており、Payload、Node、Edge、Graph、MemoryStore、PrefillState などの概念を共有している。ただし、Doc B は Registry や World、Observed モデル、Observation 関連の型や操作を含み、Doc A には存在しない。また、Doc A は CommitKernel や CanonicalEvent といったコミットフローに関する記述があり、Doc B にはない。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A は Phase C の Graph Runtime Core を定義しており、Doc B は Phase D の World Graph Runtime を補完する。Doc B に存在する Registry, World, Observed モデルや Observation 関連の型・操作は Doc A の構造に統合可能であり、特に Doc A の CanonicalGraph や MemoryStore と整合性が取れる。また、Doc B の store-payload, load-payload, causal-subgraph などの操作も Doc A の同等機能と重複せず、補完的であるため、Doc B を Doc A に統合することが推奨される。Delta3 Kernel における Graph と Memory の整合性・不変性に関する INV も Doc B で確認可能であり、統合によりより堅牢な仕様が得られる。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "similarity_score": 0.8506
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM のグラフランタイムコアの構成仕様を定義し、Node, Edge, Graph の型定義と、store-payload, load-payload, causal-subgraph などの操作および不変条件を含む。一方 Document B は因果関係に基づくコンテキスト抽出やプリフィルステート構築の仕様を示しており、同様の概念（causal-subgraph, associated-evals, project-context）を含むが、より具体的な操作と型定義の違いがある。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の構成要素（特に因果サブグラフやコンテキスト抽出）を補完する具体的な操作と型定義を提供しており、Delta3 Kernel の整合性を保ちながら統合することが望ましい。Document A がより抽象的かつ全体的な仕様であるのに対し、Document B は実装に近い詳細を含むため、A に B をマージすることで全体的な構造と機能の明確化が図れる。また、INV-CausalIntegrity や INV-EvalIsolation などの不変条件も Document A の INV-CAUSAL-SEPARATION や INV-EVAL-INDEP と整合的であり、統合により一貫性が向上する。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.8489
+    },
+    {
+      "pair_summary": "2つの文書はともに 'ir-divergence' モジュールについて記述しており、機能・アーキテクチャ・API・アルゴリズム・設計原則などがほぼ同一である。Document A は詳細なマニュアル形式の文書であり、Document B はコンパクトな仕様書形式である。主な差異は表現形式と一部の技術的記述の深さにあり、内容の意味論的重複は非常に高い。",
+      "relationship": "EXACT_DUPLICATE",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "E",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "2つの文書は同一のモジュール（ir-divergence）を対象としており、内容の意味論的重複が非常に高い。Document A は詳細な説明と図解付きのマニュアル形式であり、Document B はコンパクトな仕様書形式であるため、両者は補完的であり、統合する必要性は低い。Delta3 Kernel の観点からは、同一Phase Eに属するモジュールであり、互いに依存関係や矛盾がないため、保持を推奨。",
+      "file_a": "runtime/ir/divergence.md",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8485
+    },
+    {
+      "pair_summary": "Doc A は ir-stream パッケージの Lisp 実装コードであり、Doc B はその仕様書としての Markdown 文档である。両者は同じ機能（IR観測のバッファリング、順序保持、実行間の隔離）を定義しており、コードと仕様が一致している。ただし Doc B はより詳細なアーキテクチャ説明、データフロー図、責任分界、設計評価などを含んでいる。",
+      "relationship": "EXACT_DUPLICATE",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "F",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A は実装コード、Doc B はその仕様書であり、両者は同一の機能を定義しており、Delta3 Kernel の F フェーズ（実装・設計整合）において完全に一致している。コードと仕様が整合しており、重複は存在しない。したがって、両方を保持し、整合性を維持する必要がある。",
+      "file_a": "runtime/ir/stream.lisp",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.8476
+    },
+    {
+      "pair_summary": "2つの文書はともに Chron-LLM Delta3 のブートローダー仕様を定義しており、機能的な重複が強く、構造も類似している。ただし、Document B は Phase 1.1 として明示的にバージョン管理されており、より詳細なレイヤー構成と初期化フロー、制約条件が記述されている。また、Document A はより抽象的で関数呼び出しの形式に近い表現を採用している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を補完し、より詳細な初期化フローと制約条件を提供している。Delta3 Kernel の整合性を保つためには、Document B の明確なレイヤー定義と Phase A における構造的整合性を反映した統合が望ましい。また、Document A の抽象度の高い記述は Document B の詳細な実装に統合することで、より堅牢な仕様として機能する。",
+      "file_a": "llama-agent/ir/llama-agent.spec",
+      "file_b": "llama-agent/ir/llama-agent2.spec",
+      "similarity_score": 0.8473
+    },
+    {
+      "pair_summary": "Document A と Document B は共に因果関係に基づくシステムアーキテクチャを定義しており、Event、Graph、Node、Edge の概念を共有している。ただし、フィールド名や型定義、操作の詳細、および制約条件に違いがある。Document A はより詳細なLLM状態管理と故障処理のロジックを含む一方、Document B はより簡潔で抽象的な表現を採用している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の因果関係の核となる概念（Event, Graph, Node, Edge）を簡潔に表現しており、Delta3 Kernel の設計においては Document A の詳細なロジックと統合することで、より堅牢な因果グラフ処理が可能になる。特に、Document B の lift や clean 関数は Document A の Lift_Graph および Trace_Causal に補完的であり、これらをマージすることでシステムの整合性と拡張性が向上する。また、Document B の構造は Phase D に位置づけられ、Document A は Phase E に属しており、より先進的な仕様である Document A に統合することが適切である。",
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/causal-kernel.spec",
+      "similarity_score": 0.8456
+    },
+    {
+      "pair_summary": "Document A は 3cluster グラフの構造とアルゴリズムを定義し、具体的なグラフデータと不変条件を含む。一方 Document B は dynamical analysis のための操作と型定義を含み、より抽象的かつ汎用的な記述である。両者はグラフ処理に関連する機能を共有しているが、Document A は特定の実験設定、Document B は分析手法の抽象化を重視している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の機能を補完する抽象化された操作と型定義を含み、Delta3 Kernel における汎用的なグラフ分析フレームワークとして統合可能。Document A が具体的な実験設定を提供し、Document B がその操作の詳細と不変条件を補完するため、B を A に統合することで全体の整合性と再利用性が向上する。",
+      "file_a": "experiments/ir/3cluster.spec",
+      "file_b": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity_score": 0.84
+    },
+    {
+      "pair_summary": "Document A と Document B は共に World の定義、操作、制約を記述しており、構造的に類似しているが、文法や表現形式に違いがある。Document A はより詳細な型定義、制約、テストケースを含み、Document B はより簡潔な操作と一部の制約を示している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "F",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は Phase F における世界の構成とその動作仕様を詳細に記述しており、Document B も同様に Phase F の内容を含んでいる。ただし Document B はより簡潔な形式で記述されており、Document A に統合することで冗長性を排除し、一貫性を高めることができる。Delta3 Kernel における World の定義と操作は、Document A の構造を基準として統合されるべきであり、Document B の要素（例：kernel-commit-world! の定義）をマージすることで仕様の網羅性が向上する。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.838
+    },
+    {
+      "pair_summary": "Document A は観測データ型と操作の仕様を簡潔に定義し、Frozen 状態であることを示している。一方、Document B は各観測型の詳細な構造、バリデーション、関数定義、および依存関係を含む。両者は同じ観測型（world-observation, registry-observation, ancestry-observation, diff-observation）を扱い、機能的に重複しているが、Document B がより詳細な実装仕様を提供している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を補完する詳細な実装仕様を提供しており、Delta3 Kernel の観測インターフェースの整合性と拡張性を高めるために、Document B の内容を Document A に統合することが推奨される。Document A が Freeze 状態であるため、Document B の詳細な定義はその上位仕様として適切に取り込まれる。PHASE C から D への進化であり、整合性と拡張性の観点から、より詳細な Document B を基に統合するべきである。",
+      "file_a": "docs/ir/r2-0-c-freeze-report.spec",
+      "file_b": "observability/ir/world-snapshot.spec",
+      "similarity_score": 0.8373
+    },
+    {
+      "pair_summary": "Document A は ir-callback モジュールの仕様を定義し、Physical->IR 変換のトリガーとなるコールバック関数とその動作を記述している。一方 Document B は IR 型や Stream の定義、および make-ir 関数の仕様を含む ir パッケージ全体の仕様である。両者は関連性があるが、Document A がコールバックの動作、Document B が IR の構造と操作を定義している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は物理層からIRへの変換を担当するコールバックを定義しており、Document B はそのコールバックが操作する IR 型や Stream の構造・動作を定義している。Delta3 Kernel における Phase C（Physical->IR Bridge）と Phase B（IR Definition）の関係性から、Document B の内容は Document A の補完であり、統合することで一貫性と整合性が保たれる。また、IR の構造とコールバックの動作を同一ドキュメントにまとめることで、開発・保守の効率性が向上する。",
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.8366
+    },
+    {
+      "pair_summary": "Document A は Chron-R2.0 の World Graph ランタイム仕様を定義し、CausalGraph、PayloadRef、Registry などの型と操作を含む。一方 Document B はストレージとペイロード管理の抽象型・操作を定義し、sha256計算やstore操作に関する詳細な記述がある。両者は共通してペイロード管理と因果グラフ操作に関わる概念を扱い、一部の操作名が類似しているが、Document A はより具体的な実装と整合性制約を含む。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の構成要素（特にストレージとペイロード管理）に関する詳細な抽象定義を提供しており、Delta3 Kernel の設計においては Document A の実装ベースに Document B の抽象層を統合することが望ましい。Document A が Phase E（実装・動作仕様）であり、Document B が Phase D（抽象・インターフェース仕様）であるため、B を A に統合することで全体の整合性と設計の一貫性が向上する。また、ペイロード管理の操作（store-payload, load-payload）は Document A で定義されているが、Document B でより詳細なロジックと型制約が補完されるため、統合によりより堅牢な仕様となる。",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "memory/ir/store.spec",
+      "similarity_score": 0.8351
+    },
+    {
+      "pair_summary": "2つの文書は、WorldID、NodeID、BranchEvent、およびワールド間のブランチ処理に関する基本的な型定義と操作を共有しているが、Document B には追加の CausalNode 型と、Fault ノードの除外ロジック、および Phase1 の実装制限が含まれている。また、Document A は ImmuneStatus や History の概念を含み、Document B にはそのような概念は存在しない。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の機能を補完する形で、CausalNode 型や Fault ノードの除外ロジック、および Phase1 の実装制限を含んでいるため、Document A に統合することが望ましい。Delta3 Kernel では、構造的整合性と機能拡張を考慮し、Document B の内容を Document A にマージして、より洗練されたワールド管理モデルを形成する。また、Document A の ImmuneStatus や History 関連の概念は、Document B に統合することで一貫性が保たれる。",
+      "file_a": "llama-agent/ir/chron-llm-immune.spec",
+      "file_b": "llama-agent/ir/chron-llm-world.spec",
+      "similarity_score": 0.83
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の IR (Intermediate Representation) レイヤーの仕様を定義し、特に観測層（Observation Layer）における Phase、IR型、操作（OP）、および不変条件（INV）について記述している。一方、Document B は Lisp 言語による実装で、Document A の機能を実行するための関数（extract-actions, run-ir-trial, divergence-profile）を提供する。両者は共通して Phase-1 の IR を抽出し、複数実行結果の divergence を分析することを目的としているが、Document A は抽象仕様、Document B は具体的な実装である。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A は Phase E（Observation Layer）の抽象仕様を記述しており、Document B はその実装（Phase F）に対応する Lisp コードである。Delta3 Kernel の観点では、Document A が仕様層、Document B が実装層として位置づけられ、互いに補完的であり統合は不要である。両者を分離して保持することで、仕様の明確性と実装の柔軟性が保たれる。",
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/divergence.lisp",
+      "similarity_score": 0.8283
+    },
+    {
+      "pair_summary": "Document A は callback 関数の実装コードを示し、Document B はその関数の仕様・動作規則・性能指標を記述した文書である。両者は同じ関数 ir-callback を対象としており、機能定義と実装内容が一致しているが、Document A はコードレベル、Document B は仕様・設計レベルの表現である。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は実装コードであり、Document B はその仕様を記述した文書であるため、仕様を実装に統合することが望ましい。PHASE C の仕様（callback.spec）は PHASE D の実装（callback.lisp）の上位概念であり、Delta3 Kernel の整合性を保つために、Document B の内容を Document A にマージしてコード内に仕様情報を埋め込むべきである。",
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/callback.spec",
+      "similarity_score": 0.8202
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の全体的な仕様（型定義、状態、操作、不変条件）を記述しており、Document B は LLM 生成プロセスの具体的な実行フローとエラー処理を含むモジュール仕様である。両者は共通してトークン生成、状態管理、サンプリング、LLM ライブラリ呼び出しに関わる機能を扱っているが、Document B は Document A の機能を具体化・実装に近い形で再現している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の機能を具体的な実行フローとして再現しており、特に generate 操作の詳細な実装とエラーハンドリング、状態遷移が含まれている。Delta3 Kernel における機能整合性を保つためには、Document B の内容を Document A に統合し、より詳細な実装情報を補完することが望ましい。Phase E は実装段階であり、Phase F は仕様定義段階であるため、B が A を補完する形で統合されるべきである。",
+      "file_a": "llama-agent/ir/chron-llm.spec",
+      "file_b": "llama-agent/ir/generate.spec",
+      "similarity_score": 0.8191
+    },
+    {
+      "pair_summary": "Document A は Phase C の文書で、History (H) から ProjectionModel (M)、EventABI を用いて SemanticModel (S) を導出し、JustificationStructure (J) を構築するプロセスを定義している。一方、Document B は Phase D の文書で、SemanticModel (S) から RelationalGraph (G) を生成し、その構造とトランザクションの特性を記述している。両者は共通して S と G の定義を持ち、H から M への変換も関連しているが、処理の流れや目的は異なる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は Phase C の初期の SemanticModel (S) を定義し、Document B は Phase D でその S から RelationalGraph (G) を生成する処理を記述している。両者は SemanticModel を共有しており、Delta3 Kernel における S と G の関係性を統合的に扱うべきである。また、S が共通して使用されるため、Phase D の内容は Phase C の文書に統合することで整合性が保たれ、冗長性を排除できる。",
+      "file_a": "docs/ir/phase-c-charter.spec",
+      "file_b": "docs/ir/phase-d-charter.spec",
+      "similarity_score": 0.8159
+    },
+    {
+      "pair_summary": "Doc A は ir-ffi.lisp の実装コードであり、Doc B はその仕様書である。両者は同じ機能（LispからCへのcallback登録）を対象としており、Doc A の内容が Doc B の詳細な仕様を反映しているが、Doc B にのみ存在するアーキテクチャ図、責任範囲、エラーハンドリング、設計分類などの詳細情報は Doc A には含まれていない。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A は実装コードであり、Doc B はその仕様書であるため、Doc B の詳細な設計情報（アーキテクチャ位置、依存関係、ABI契約、エラーハンドリング、設計分類など）を Doc A に統合することが望ましい。Delta3 Kernelの設計原則に従い、コードと仕様は密接に結合され、整合性が保たれるべきである。また、Doc B には Doc A にはない重要な設計判断（例：callback lifetime管理やABI固定化）が含まれており、これらをコードに反映することで品質向上が期待できる。",
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ffi.md",
+      "similarity_score": 0.8146
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の Graph Runtime Core の構成仕様を定義し、CanonicalGraph、MemoryStore、および関連する不変条件や操作を記述している。一方、Document B は World Runtime Observation Contract を定義し、World、Registry、Observation オブジェクトの型と操作、不変条件を含む。両者は共通して Graph と Memory の概念を扱い、関連する操作や不変条件が存在するが、Document A はより低レベルな Core 操作に焦点を当て、Document B は上位の World や Registry の管理を主としている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の概念（例：Graph、MemoryStore、不変条件）を補完的に定義しており、特に World や Registry の管理、Observation モデルが Document A の Core Runtime に統合可能な要素を含む。Delta3 Kernel における Graph と Memory の抽象化を強化するため、Document B の内容を Document A にマージすることが推奨される。これにより、より包括的なランタイム構成仕様が実現され、Core と World レベルの整合性が保たれる。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity_score": 0.8129
+    },
+    {
+      "pair_summary": "Document A はイベント処理とカーネルの動作仕様を定義し、Document B は Chronicle のマッピングと関連要素の命名規則を示している。共通して Canonical、Candidate、Validation、Commit、Replay などの概念が登場するが、文書の目的と詳細な記述の粒度に差がある。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の概念を補完するマッピング情報を提供しており、特に Δ0_Validator, Δ0_Policy, Runtime_Kernel などの命名規則が Document A の仕様と整合性を持つ。Delta3 Kernel における概念の明確化と一貫性を保つため、Document B の内容を Document A に統合することが推奨される。また、Document A は Phase E（実行時セマンティクス）に位置づけられ、Document B は Phase D（マッピング・定義）であり、整合性を保つために B を A に統合する方向性が適切である。",
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity_score": 0.8128
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM のコア仕様を定義し、Event、Node、Context、Sampler などの型と、init-chron-llm、tokenize、prefill-prompt、generate などの操作を含む。一方 Document B は FFI バインディングの仕様で、llama.cpp とのインターフェースを定義し、ポインタ型や FFI 呼び出し、ABI の整合性に関する記述がある。両者は同じ機能を実現するが、Document A が抽象層、Document B が物理層のインターフェースを扱っている。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の実装層（特に RUNTIME_API と KERNEL_ABI）を補完する FFI バインディングであり、Delta3 Kernel の物理インターフェースとして位置づけられる。Document A が抽象仕様（Phase E）を定義し、Document B がその実装（Phase F）を提供するため、B を A に統合することで、抽象と実装の整合性が保たれ、Kernel 内部でのモジュール構造が明確になる。また、FFI 呼び出しの詳細は Kernel の内部実装として適切に埋め込まれる必要があり、この統合により Delta3 Kernel における ABI レイヤーの整合性と保守性が向上する。",
+      "file_a": "llama-agent/ir/chron-llm.spec",
+      "file_b": "llama-agent/ir/ffi-bindings.spec",
+      "similarity_score": 0.8099
+    },
+    {
+      "pair_summary": "Document A と Document B はともに ir-stream パッケージの仕様を定義しており、基本的な構造・機能・制約が一致している。ただし、Document A は詳細な説明と図解、実装例を含む一方、Document B はより形式的な仕様記述（型定義、事前条件、事後条件、不変条件）に重きを置いている。",
+      "relationship": "EXACT_DUPLICATE",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "2つの文書は同一の機能と設計原則を共有しており、互いに補完的な関係にある。Document A は実装詳細および設計意図の説明を豊かに含み、Document B は形式的仕様（型、条件、不変条件）を明確に定義している。Delta3 Kernel の整合性を保つため、両方を維持し、Document A を基準とした補足情報として Document B を活用することが推奨される。",
+      "file_a": "runtime/ir/stream.md",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.8088
+    },
+    {
+      "pair_summary": "Doc A は ir-divergence.lisp の Lisp 実装コードであり、Doc B はそのモジュールの仕様書である。両者は同じ機能（IR Divergence Analysis）を定義しており、API シグネチャやアルゴリズムの詳細も一致しているが、Doc A は実装コード、Doc B は設計文書として位置づけられている。",
+      "relationship": "EXACT_DUPLICATE",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "E",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A と Doc B は同一の機能（IR Divergence Analysis）を定義しており、コードと仕様が完全に一致しているため、互いに補完し合う関係にある。Delta3 Kernel の観点からは、このモジュールは Phase E に属する観測層であり、実装と仕様の両方が必要であるため、削除や統合は不要。両方を維持することで、実装の正確性と設計の明確性が保たれる。",
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/divergence.md",
+      "similarity_score": 0.8066
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM R2.0-B の世界（World）およびそのレジストリ（Registry）の構造、操作、不変条件を定義した仕様書であり、Document B は同バージョンにおけるテストケースと関連する型定義、ユーティリティ、システムルールを含むテスト仕様である。両者は同じフェーズ（R2.0-B）に属し、主にWorldの作成・フォーク・コミット、およびレジストリ管理に関する内容を重複して扱っているが、Document A はより抽象的かつ構造的な定義を含み、Document B は具体的なテストケースと実装詳細を補足している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を補完するテスト仕様であり、特に不変条件や操作の動作に関する詳細なテストケースを提供している。Delta3 Kernel における整合性と再現性の確保のため、テストケースを仕様に統合することが望ましい。また、Document B は Document A に含まれる型定義や操作の詳細を補完し、全体的な設計の明確化に寄与する。したがって、Document B の内容を Document A にマージすることで、より包括的かつ堅牢な仕様書となる。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity_score": 0.8064
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM R2.0-C レベルの観測性ランタイムの構成仕様を定義しており、Observation、StateSnapshot、DiffResult などの型とその操作、不変条件、制約、ライフサイクル、テストケースを含む。一方 Document B は同様の観測性関連機能についての凍結報告書であり、状態、スコープ、型、操作、不変条件、検証方法などを記述しているが、より具体的な実装や技術的詳細は省略されている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A はより詳細な構造と技術的仕様を含み、Document B はその凍結状態と検証結果を補足する。両者は同一フェーズ（Phase C）に属しており、内容の大部分が重複しているため、Document B の情報（特にテストケースや検証環境など）を Document A に統合することで、より包括的かつ堅牢な仕様書とすることができる。Delta3 Kernel における観測性モジュールの整合性と拡張性を高めるために、この統合が推奨される。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "docs/ir/r2-0-c-freeze-report.spec",
+      "similarity_score": 0.8048
+    },
+    {
+      "pair_summary": "2つの文書は共にIntermediate Representation (IR)の定義を含み、その構造や機能的要件が一致している。ただし、Document A はLisp形式の実装コードであり、Document B は仕様書形式（型定義・操作定義）である。IRのフィールド、型、制約条件、および動作フローについて類似性が高いが、表現形式は異なる。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の仕様を形式的に記述した文書であり、Delta3 Kernelの設計文書としての役割を果たす。Document A が実装コードであるのに対し、Document B はその抽象仕様を提供するため、統合により一貫性と可読性を高める。Phase E（仕様定義）からF（実装）への流れに従い、Document B を Document A に統合することが推奨される。",
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.8035
+    },
+    {
+      "pair_summary": "Document A は Chron-R2.0 の World Graph ランタイム仕様を定義し、Registry、World、CausalGraph などの型と操作を含む。一方 Document B は CausalGraph の基本的な構造と操作を定義した低レベルの仕様であり、型定義や操作の詳細が異なるが、CausalNode と CausalEdge の概念は共通している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の CausalGraph 部分の基礎的な型定義と操作を提供しており、Document A 側で定義されているより高次の概念（Registry, World, PrefillState など）に統合可能である。Delta3 Kernel におけるグラフ構造の整合性を保つためには、Document B の CausalGraph 定義を Document A にマージし、より詳細な操作と不変条件を統合することが望ましい。",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity_score": 0.8033
+    },
+    {
+      "pair_summary": "Document A は ir-ffi モジュールの詳細な仕様書であり、そのアーキテクチャ、パッケージ定義、FFI接続方法、コールバックフロー、エラーハンドリングなどを網羅している。一方 Document B は、モジュールの機能・状態・操作・不変条件を簡潔に記述した仕様書であり、主に形式的記述とベクトル類似度を含む。両者は同じモジュール（ir-ffi）を対象としており、内容の大部分が重複しているが、Document A がより詳細で技術的深さを持つ。",
+      "relationship": "EXACT_DUPLICATE",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A は詳細な技術仕様と設計文書であり、Document B は形式的記述と要約を含む。両者は同じPHASE C（Intermediate Representation Layer）に属し、内容の重複は意味論的に同一であるため、統合は不要。ただし、Document B の形式的記述は Document A の補完として価値があるため、両方を保持する。Delta3 Kernel における ir-ffi の役割は、FFI Bridge 層としてのコールバック登録とその寿命管理であり、この2つの文書がそれを適切にカバーしているため、統合や置換は行わない。",
+      "file_a": "runtime/ir/ffi.md",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity_score": 0.8024
+    },
+    {
+      "pair_summary": "Document A はドメインモデルを定義する仕様であり、Event, Candidate, Session などの型とその関係性、INV・PROD_CONS・OWNERSHIP を含む。一方 Document B はランタイムパイプラインのフローと各処理の操作（OP）を記述し、Commit, Replay, Backend などの処理とそれらの入出力、および INV を含む。共通して Event, Canonical, Candidate, ValidationReport, RuntimeRequest, RuntimeCommand などの型が登場するが、Document A は構造的定義、Document B は動作フローを主に記述している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は Phase C（ドメインモデル定義）に位置し、型定義と関係性を網羅している。一方 Document B は Phase D（ランタイムパイプライン）に属し、処理フローと操作の詳細を記述している。両者は意味的に重複する型が存在するが、Document B の内容は Document A の構造的定義を補完する形で、Delta3 Kernel におけるプロセスの実装と整合性を高めるために、Document B の処理フロー情報を Document A に統合することが推奨される。",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/04-runtime-pipeline.spec",
+      "similarity_score": 0.802
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM のコア仕様を定義し、LLM のトークン処理やコンテキスト管理、イベント構造などを含む。一方 Document B は R0 レイヤーの実行層仕様であり、セッション管理、履歴、トレース、およびカスケードされたイベント処理フローを記述している。共通して 'Event' や 'Context'、'History' の概念が存在するが、Document A はより低レベルの実装と状態管理に焦点を当て、Document B は上位レイヤーの抽象化とプロセスフローを扱っている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の上位抽象層（特に R0 レイヤー）を補完する内容であり、Session や History、Trace、RuntimeCommand などの概念が Document A の Event や Context と相互に関連している。Delta3 Kernel における Phase F は実装層であり、Document B の内容はその補完的な構造を提供するため、統合的に Document A にマージすることが望ましい。また、Document B の R0Trace や PhysicalEvent は Document A のイベント処理と因果関係の管理に直接関連し、Kernel とのインターフェースも一致するため、統合により全体の構造が明確になる。",
+      "file_a": "llama-agent/ir/chron-llm.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity_score": 0.8014
+    },
+    {
+      "pair_summary": "Document A は R2.0-B テスト仕様を定義し、World, Graph, Store, Registry などの型と、make-world, fork-world, kernel-commit-world! などの操作、および関連するテストケースと不変条件を含む。一方 Document B は World 型の詳細な定義、Policy、ReplayRes、および make-world, fork-world, kernel-commit-world!, replay-world などの操作の仕様を含むが、テストや Registry の概念は含まれない。両者は共通して World の構造と基本操作を扱い、一部の不変条件も類似しているが、Document A はより詳細なテストとシステム全体の構造（Registry）を含んでいる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の World 型定義と操作仕様を補完する内容を含み、特に kernel-commit-world! や replay-world の詳細な動作定義が存在する。Delta3 Kernel における型定義と操作の整合性を保つため、Document B の内容を Document A に統合することが望ましい。また、Document A はテストケースや Registry の概念を含んでいるため、全体的なシステム設計を考慮すると Document A をベースとして Document B の詳細情報をマージする方針が妥当である。",
+      "file_a": "tests/md/ir/r2-0-b-tests.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.8014
+    },
+    {
+      "pair_summary": "Document A は R2.0-C フリーズレポートであり、観察型（observation types）とその操作（ops）の仕様、および不変性・決定性などの検証条件（INV）を定義している。一方、Document B は同様の観察型に関するテスト仕様と実行ルーチンを含むテストドキュメントであり、各テストケース（d1〜d7）で観察型の挙動を検証する内容を詳細に記述している。両者は共通して観察型（world-observation, registry-observation など）とその不変性・決定性に関する検証を扱い、Document B は Document A の仕様を具体的にテストする。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は仕様のフリーズ状態（FROZEN）であり、観察型とその操作、不変性条件を定義している。一方、Document B はその仕様を検証するテストケースを含むドキュメントであり、PHASE D に位置づけられる。Delta3 Kernel の観点では、仕様の整合性と検証を保つために、テストケースを仕様に統合することが望ましい。Document B は Document A の内容を補完し、実装の信頼性を高めるため、A に統合するべきである。",
+      "file_a": "docs/ir/r2-0-c-freeze-report.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity_score": 0.8001
+    },
+    {
+      "pair_summary": "2つの文書は共にIR（Intermediate Representation）の仕様を定義しており、基本的な構造・フィールド・目的が一致している。Document Aは詳細な説明と図、そして設計評価を含む一方、Document Bはより簡潔な形式で型定義と不変条件を記述している。",
+      "relationship": "EXACT_DUPLICATE",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "F",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "2つの文書は同一のPHASE F（Final Specification）に位置し、意味論的に重複しており、内容も一致している。Document Aは詳細な説明と設計評価を含むため、Document Bはその簡略版として存在する。Delta3 Kernelの統合方針としては、両方を保持し、Document Aを詳細仕様、Document BをAPI仕様として利用可能とする。",
+      "file_a": "runtime/ir/ir.md",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.7996
+    },
+    {
+      "pair_summary": "Document A はイベント駆動型のシステムアーキテクチャを定義し、イベントの因果関係やストリーム処理、フォールトハンドリングを含む。一方 Document B も同様の概念を含みつつ、グラフ構造、ノード分類、制御決定ロジック、およびフォールト回復メカニズムを詳細に記述している。共通点としてイベント、因果関係、フォールト処理が存在するが、Document B はより詳細なグラフベースのモデルと制御ロジックを含む。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の概念を補完する詳細なグラフ構造と制御ロジックを含み、Delta3 Kernel の整合性を保つために統合が望ましい。特に、Document B の Graph や Edge、Node の定義、Lift_Graph 関数、Control_Decide および Handle_Abort 操作は、Document A のイベント処理とフォールトハンドリングの拡張として適切に統合可能である。また、Document B の INV は Document A の不変条件を補完し、システムの堅牢性を高める。",
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "docs/ir/architecture-v1.spec",
+      "similarity_score": 0.7974
+    },
+    {
+      "pair_summary": "Document A は Phase A の初期設計を定義し、History (H) に関する基本的な公理と制約を記述している。一方、Document B は Phase C の設計であり、History (A) に加えて ProjectionModel (M)、EventABI (ABI)、SemanticModel (S)、JustificationStructure (J) などの概念を導入し、それらの間の操作と関係性を定義している。共通点として AXIOM: A = H が存在するが、Document B はより詳細なモデル構造と操作を含んでいる。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を拡張し、より詳細なモデル構造（ProjectionModel, SemanticModel, JustificationStructure）と操作（interpret, justify）を追加しているため、Phase C は Phase A の発展版である。Delta3 Kernel における整合性を保ちながら、Document B の内容を Document A に統合することで、全体の設計の一貫性と拡張性が向上する。",
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-c-charter.spec",
+      "similarity_score": 0.7945
+    },
+    {
+      "pair_summary": "Document A は Basin の構造と操作を定義した抽象仕様であり、Document B は Dynamical Analysis の実験的実装を含む具体的な仕様である。両者は Basin 関連の型定義・操作・不変条件を共有しているが、Document B には Graph, Node, Edge の詳細な定義と next-event, rollout などの動的遷移操作が含まれている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を補完する具体的な実装詳細を含み、特に Graph, Node, Edge の定義と next-event, rollout などの動的遷移操作が追加されている。Delta3 Kernel における仕様の整合性と拡張性を考慮し、Document B の内容を Document A に統合することで、より包括的な Basin 分析の仕様として機能する。ただし、Document A は Phase E で抽象的定義、Document B は Phase F で具体的実装を示しているため、統合は上位の抽象層（A）に統合する方向で行う。",
+      "file_a": "experiments/ir/basin.spec",
+      "file_b": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity_score": 0.7943
+    },
+    {
+      "pair_summary": "Document A と Document B は共に因果グラフとコンテキストの処理に関する仕様を定義しており、Node, Edge, Graph, ContextNode, PrefillState などの型定義および関連操作（add-node!, add-edge!, project-context, build-prefill-state など）が類似している。ただし、Document B はより詳細な操作の前提条件や不変条件（INV）を含み、型定義においてより厳密な制約（immutable, Keyword, Object など）が設定されている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "E",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は初期的な因果グラフの構造と基本操作を定義しており、Document B はその詳細な実装および不変条件を補完している。両者は同じ PHASE E（因果グラフ・コンテキスト処理）に位置づけられ、Document B のより厳密な型定義や INV、操作の前提条件が Document A を補完する形で統合可能である。Delta3 Kernel における因果グラフの構築とコンテキスト抽出ロジックを一貫性を持たせつつ拡張するために、Document B の内容を Document A にマージすることが推奨される。",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.7933
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM のグラフランタイムコアの構成仕様を定義し、特にメモリストア、グラフ構造、ノード・エッジタイプ、および不変条件を詳細に記述している。一方、Document B はストレージとペイロード管理の基本的な型定義、操作、およびワールド・レジストリの概念を含む抽象化された仕様であり、Document A の一部機能（例：store-payload, load-payload）を再定義しているが、全体的な構造や目的は異なる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は Phase A の初期設計文書であり、Document B も同様に Phase A に属するが、より抽象的なストレージとペイロード管理の定義を含んでいる。Document B の内容（特に payload-ref, store-payload, load-payload などの操作）は Document A のメモリ・ストア関連仕様と補完的であり、Delta3 Kernel の初期構成においてはこれらを統合して一貫性を持たせるべきである。また、Document B に含まれる world-registry や kernel-commit-world などの概念も、後続の Phase B 以降への拡張として有用であり、A に統合することで全体的なアーキテクチャの整合性が保たれる。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "memory/ir/store.spec",
+      "similarity_score": 0.7888
+    },
+    {
+      "pair_summary": "Document A はランタイムパイプラインの構造と各ステップの操作、および状態遷移を定義しており、Document B は Chronicle システムにおける内部マッピングと概念対応関係を示している。両者は共通するコンセプト（如 Canonical, Commit, Replay, ValidationReport など）を持ち、一部の操作や型が同一または類似であるが、Document B はより抽象的かつ内部的なマッピングを目的としている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を補完する形で、内部の実装マッピング（Δ0_Validator, Runtime_Kernel など）と概念対応関係を提供しており、特に Kernel と ValidationReport の定義が Document A に存在する操作と一致している。Delta3 Kernel における整合性と一貫性を保つためには、Document B のマッピング情報を Document A に統合することが望ましい。また、Document A は Phase E（Runtime Pipeline）に位置し、Document B は Phase F（Mapping & Abstraction）に属しており、この関係性からも B を A に統合する方向性が妥当である。",
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity_score": 0.7881
+    },
+    {
+      "pair_summary": "Doc A は IR の Lisp 定義（defstruct, パッケージ宣言）のみを含み、Doc B はその仕様の包括的な文書であり、IR の目的、構造、制約、関係性などを詳細に記述している。両者は内容的に重複しており、Doc B が Doc A の詳細な解説および文脈を提供する形である。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A は実装レベルの IR 定義（Lisp の defstruct）であり、Doc B はその仕様を文書化した上位階層の定義である。Delta3 Kernel における設計整合性を保つため、両者を分離して保持することが推奨される。Doc A は実装の基底であり、Doc B は設計文書としての役割を持つため、統合は不要であり、それぞれの目的に応じて独立して維持するべきである。",
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/ir.md",
+      "similarity_score": 0.7876
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM のグラフランタイムコアの構成仕様を定義し、CanonicalGraph、Node、Edge、Store、およびその整合性制約やプロセスフロー（CommitKernelなど）を詳細に記述している。一方 Document B は PrefillState の生成ロジックと関連関数（project-context, canonical-prompt, build-prefill-state）についての仕様を含み、Determinism や Immutability といった制約も述べている。両者は PrefillState の構築とその性質に関する共通部分を持つが、Document A はより広範なグラフ構造とストレージモデルを扱い、Document B は主に Prefill 関連の処理に焦点を当てている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B の PrefillState 関連の仕様（build-prefill-state、project-context、canonical-prompt など）は Document A の PrefillState 定義と整合性があり、特に T5 (Prefill Hash Stability) に該当する内容が重複している。また、Document B は Document A の Phase C（Graph Runtime Core Constitution）の補完的な詳細を提供しており、Delta3 Kernel の観点から Prefill 関連処理を統合的に管理するためには B を A にマージすることが望ましい。ただし、Document A がより広範なグラフ・ストレージモデルを含むため、A 側の構造を維持しつつ B の Prefill 関連定義を統合する。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/prefill.spec",
+      "similarity_score": 0.7871
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の観測性に関する構成仕様を定義し、Observation、StateSnapshot、DiffResult などの型と不変条件、制約、テストケースを含む。一方 Document B は同様の観測性機能に対するテスト仕様を記述しており、具体的なテストケース（d1〜d7）とその実行方法、および関連する不変条件（INV）を含む。両者は共通して観測性の動作を検証することを目的としており、Document B は Document A の内容を補完的に実装・検証するものである。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は仕様の定義（PHASE C）であり、Document B はそのテスト実装（PHASE D）を含む。Delta3 Kernel の設計では、仕様とテストの整合性を保つために、テストケースを仕様に統合することが望ましい。また、Document B に記載されたテストケースは Document A の不変条件や制約を補完的に検証するものであり、これらを統合することで仕様の信頼性と実装の品質が向上する。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity_score": 0.7855
+    },
+    {
+      "pair_summary": "Document A は Phase B のチャーターで、History (H) から ProjectionModel (M) および JustificationStructure (J) を導出するモデル構造を定義している。一方、Document B は Phase D のチャーターで、SemanticModel (S) から RelationalGraph (G) を構築し、その構造と性質を記述している。両者は共通して H, M, S, G の概念を含み、OP および AXIOM の定義に類似性があるが、文脈や目的は異なる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A と B はそれぞれ異なるフェーズ（Phase B と Phase D）に位置し、それぞれの目的と構造が異なるため、統合は適切ではない。ただし、H, M, S, G の概念が共通しており、Delta3 Kernel におけるモデル間の関係性を理解する上で両者は補完的である。したがって、独立して保持し、それぞれのフェーズにおける役割を明確にすることで、より包括的なアーキテクチャ理解を促進する。",
+      "file_a": "docs/ir/phase-b-charter.spec",
+      "file_b": "docs/ir/phase-d-charter.spec",
+      "similarity_score": 0.7853
+    },
+    {
+      "pair_summary": "Document A は IR (Intermediate Representation) の型定義と操作を含む仕様であり、Document B はその IR ストリームの実装詳細（配列操作、不変性、ライフサイクル）を記述している。両者は同じパッケージ 'ir' を使用し、IR 型と Stream 型の定義に類似性があるが、Document B は Document A の内容を補完する形で実装層の情報を提供している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の IR 型と Stream 操作の実装詳細を補完するものであり、特に 'push-ir' や 'clear-ir-stream' などの操作が Document A に記述されていないため、統合することで全体的な仕様の整合性と網羅性が向上します。Delta3 Kernel の観点では、IR ストリームの管理方法を明確化し、実行時動作の予測可能性を高めるために、Document B の内容を Document A に統合することが推奨されます。",
+      "file_a": "runtime/ir/ir.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.7828
+    },
+    {
+      "pair_summary": "Document A と Document B は共に因果グラフとコンテキストの操作を定義しており、Node, Edge, Graph の基本型と add-node!, add-edge! などの操作が存在する。ただし、Document B には get-node, associated-evals, canonical-prompt などの追加操作と、PrefillState の構造に違いがある。また、Document A は World や Registry などの高レベルな概念を含む一方、Document B はより低レベルなグラフ操作中心の仕様である。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の因果グラフ操作の低レベル実装を補完する内容であり、特に Node, Edge, Graph の定義と add-node!, add-edge! などの基本操作が共通している。また、Document B に含まれる project-context, canonical-prompt, build-prefill-state などの操作は、Document A の PrefillState や ContextNode の構築ロジックを補完する。Phase C と Phase D はそれぞれ因果グラフの定義と実装の段階であり、Document B は Document A の内容を補完するため、B を A に統合することが推奨される。Delta3 Kernel における構造的整合性と一貫性を保つためにも、より詳細な操作を含む Document B を Document A にマージするべきである。",
+      "file_a": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.7826
+    },
+    {
+      "pair_summary": "Document A はモック実装用の FFI バインディング仕様（ffi-bindings-mock.spec）であり、Document B は本番用の FFI バインディング仕様（ffi-bindings.spec）である。両者は同じ関数名と基本的なインターフェースを持つが、型定義や詳細な動作、文脈（モック vs 実装）に違いがある。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の本番実装版であり、機能的に補完的である。Delta3 Kernel における FFI レイヤーの設計では、モックから本番実装への移行を前提とした統合が必要であり、Document B の内容を Document A に統合することで、開発・テスト・運用の一貫性が保たれる。また、Document B は ABI 互換性を保つことを明示しており、Delta3 Kernel の抽象化層との整合性も高いため、統合が推奨される。",
+      "file_a": "llama-agent/ir/ffi-bindings-mock.spec",
+      "file_b": "llama-agent/ir/ffi-bindings.spec",
+      "similarity_score": 0.7826
+    },
+    {
+      "pair_summary": "Document A は CFFI コールバック関数 `ir-callback` の定義を含み、Document B はそのコールバックを登録するための FFI 関数 `register-ir-callback` とブリッジ初期化関数 `init-ir-bridge` を定義している。両者は互いに依存しており、同じ機能を実現するための異なるモジュールである。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の関数 `ir-callback` を使用する依存関係を持ち、かつ両者は同じ機能（IR コールバックの登録と処理）を実現するため、Delta3 Kernel の設計原則に従い、より高い凝集度を持つ1つのモジュールとして統合することが望ましい。PHASE C で定義されるコールバックロジックを含む Document A を基準とし、Document B の初期化ロジックを統合することで、コードの重複を排除し、モジュール構造を明確にする。",
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ffi.lisp",
+      "similarity_score": 0.7817
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM R2.0 の World ランタイム構成に関する詳細な仕様を定義しており、Document B は Registry の型定義と操作を含む簡潔な仕様である。両者は World と Registry の概念を共有し、関連する操作や不変条件が重複しているが、Document A がより詳細で構造化された表現を提供している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の Registry 部分の補足的な定義を提供しており、特に World と Registry の関係性、ライフサイクル、不変条件に関する情報が重複している。Delta3 Kernel における構造的整合性を保つためには、Document B の内容を Document A に統合し、より一貫した仕様として構築する必要がある。また、Document A は Phase E に位置づけられ、より高次の実行モデルを扱っているため、Document B の内容をマージすることで全体の整合性が向上する。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "registry/ir/registry.spec",
+      "similarity_score": 0.781
+    },
+    {
+      "pair_summary": "Doc A は R0 レベルのチャットループ処理とトレース機構を定義し、Doc B は同様の機能を含むが、より抽象的なレイヤー構造（R0_SessionExec, Kernel, Backend など）とプロセスフロー（PhysicalEvent -> IR_Stream -> Analysis）を含む。両者は Session、History、Trace の基本概念を共有しているが、Doc B はより高次のアーキテクチャとプロセスの分離を示しており、Doc A はその実装詳細に焦点を当てている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc B は Doc A の内容をより抽象的かつ体系的に整理し、R0 レベルの実行層（SessionExec）と Kernel 層、Backend 層との関係性を明確にしている。Delta3 Kernel における Phase B は Doc B のような抽象化された構造を含むべきであり、Doc A の具体的な処理ロジックを Doc B の上位構造に統合することで、より整合性のあるアーキテクチャが実現できる。また、Doc B に含まれる R0Trace や PhysicalEvent などの概念は、Doc A のトレース機構と補完的であり、統合することで全体の設計の一貫性が向上する。",
+      "file_a": "runtime/r0/ir/chat-loop.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity_score": 0.7808
+    },
+    {
+      "pair_summary": "Document A は因果関係に基づくグラフ構造とコンテキスト抽出の仕様を定義しており、Document B は同様の機能を実装するための投影ロジックを含む。両者は共通して因果サブグラフの探索と評価データの取り込みを扱うが、Document A はより詳細な型定義や不変条件、および PrefillState の生成を含んでいる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B の project-context 操作と associated-evaluations は Document A の因果サブグラフと評価データの取り込みロジックと重複しており、Delta3 Kernel におけるコンテキスト構築の実装に統合可能。Document A がより包括的な仕様を提供しているため、B を A に統合することで一貫性と機能の補完が図れる。また、Document B の Vector Similarity Score は 0.7792 と高い類似度を示しており、技術的整合性が高い。",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/projection.spec",
+      "similarity_score": 0.7792
+    },
+    {
+      "pair_summary": "Doc A は因果関係を扱うカーネル仕様であり、Event、WAL、Node、Edge、Graph などの型と append、stage、commit、lift などの操作を定義している。一方 Doc B は Chron-LLM の因果関係を管理する WAL およびイベント処理の仕様で、Event、WAL、および commit、stage、append などの操作を含むが、Node や Graph などの概念は存在しない。両者は共通して WAL とイベントの管理を目的としているが、Doc A の方がより詳細な因果グラフ構造を扱っている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc B の WAL 構造とイベント操作は Doc A のカーネルの基礎機能を補完する。特に、Doc B の commit-staged や stage-event などの操作は Doc A の commit および discard に相当し、共通の概念が存在するため、Doc B を Doc A に統合することでより包括的な因果カーネル仕様が実現できる。Delta3 Kernel においては、WAL の管理とイベントの処理を一元化することが重要であり、この統合によりその整合性が向上する。",
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity_score": 0.7783
+    },
+    {
+      "pair_summary": "Document A は World ランタイムの観測契約（Observation Contract）を定義し、CausalGraph および関連型・操作を含むが、より高次の概念（World, Registry, PrefillState など）を含む。一方 Document B は CausalGraph の基本構造と操作のみを定義した低レベルの IR であり、Document A の一部の型や操作を再定義している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の CausalGraph 関連の基本型と操作を再定義しており、これは PHASE B で定義される低レベル IR であり、PHASE E における World ランタイムの観測契約に必要な基礎構造を提供する。Delta3 Kernel では、PHASE B の定義が PHASE E の実装に必要不可欠であるため、Document B の内容を Document A に統合し、より一貫した型定義と操作シグネチャを持つようにする。これにより、構造的整合性と再利用性が向上する。",
+      "file_a": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity_score": 0.7781
+    },
+    {
+      "pair_summary": "Document A はメモリモデル（ShortTermMemory、LongTermMemory、CanonicalMemory）とその操作（Commit、recover）および不変条件（INV）を定義している。一方、Document B は回復プロセス（Recover）の仕様、操作フロー、許可・禁止操作、および不変条件を記述しており、両者はメモリ関連の概念を共有しているが、文書の焦点と詳細レベルに違いがある。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B の回復プロセス（Recover）は Document A の CanonicalMemory および Commit 操作と密接に関連しており、特に Recover が Canonical から再構成されること、ReplayCompatible な動作を要求する点は、Document A のメモリモデルの整合性を補完する。Delta3 Kernel における MemoryRef と CanonicalMemory の整合性を保つためには、Recover の詳細な仕様を Document A に統合することが望ましい。また、Document B がより詳細な回復フローを提供しており、Document A に統合することで全体のメモリ管理モデルの明確化と一貫性向上が図れる。",
+      "file_a": "docs/ir/08-memory-model.spec",
+      "file_b": "docs/ir/12-recovery.spec",
+      "similarity_score": 0.7764
+    },
+    {
+      "pair_summary": "Document A はドメインモデルを定義する仕様であり、Event, Candidate, Session などの型とその関係性、INV・PROD_CONS・OWNERSHIP を含む。一方 Document B はオペレーショナルセマンティクスを記述し、Commit, Replay, Validation などの動作とその条件、制約、ライフサイクルを示している。共通して Commit と Canonical の関係性、およびイベント処理の流れが扱われているが、Document A は構造的定義、Document B は動作的セマンティクスを主に記述している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は PHASE C（ドメインモデル）に位置し、Document B は PHASE D（オペレーショナルセマンティクス）に位置する。Document B の内容（Commit, Replay, Validation などの動作定義）は Document A の型定義と関係性を補完し、Delta3 Kernel の整合性を保つために、Document B のセマンティクスを Document A に統合することが推奨される。これにより、構造と動作の両面から一貫したモデルが形成され、Kernel の実装および運用における曖昧さが解消される。",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/02-operational-semantics.spec",
+      "similarity_score": 0.7749
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の観測性に関する構成仕様を定義し、State、Observation、DiffResult などの型とその操作、不変条件、制約、ライフサイクル、テストケースを含む。一方 Document B は world-observation と registry-observation などの観測スキーマを定義したスキーマ仕様であり、主にデータ構造とビルダーファンクションに関する内容である。両者は観測性の概念を共有しているが、Document A がより抽象的かつ全体的なフレームワークを記述し、Document B は具体的な観測スキーマの実装を示している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の観測性構成仕様における具体的なスキーマ定義を補完するものであり、特に world-observation, registry-observation, ancestry-observation, diff-observation の型定義とその生成関数が Document A の StateSnapshot や DiffResult に相当する。Delta3 Kernel においては、Document B のスキーマ構造を Document A の観測モデルに統合し、より具体的な実装を提供することで、観測性の抽象度と実装の一貫性を高める。また、Document A の型定義がより詳細なスキーマ構造を持つ Document B をカバーできるため、B を A に統合することが推奨される。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "observability/ir/world-snapshot.spec",
+      "similarity_score": 0.7737
+    },
+    {
+      "pair_summary": "Document A は CFFI コールバック関数 `ir-callback` の定義を含み、Document B は IR 構造体とその仕様を定義している。両者は関連性があり、同じ機能を実現するための異なる側面の文書である。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A は実行時コールバックのインターフェースを定義し、Document B はそのコールバックによって生成される IR 構造体の仕様を提供している。両者は異なる PHASE（A が F、B が E）に位置し、それぞれが異なる層の実装を担当しているため、統合は不要であり、共存が望ましい。Delta3 Kernel の観点からは、コールバックとその出力形式の整合性を保つために、両方の定義を維持する必要がある。",
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ir.lisp",
+      "similarity_score": 0.7728
+    },
+    {
+      "pair_summary": "Document A はドメインモデルを定義する仕様であり、Event, Candidate, ValidationReport, Session などの型とその関係性、INV および PROD_CONS を含む。一方 Document B は Chronicle システムにおけるマッピングを示し、各コンポーネントの実装対象（Δ0_Validator, Runtime_Kernel など）と、Event, Candidate, Canonical などの概念の具体化を記述している。共通して扱う要素は存在するが、Document A が抽象的なモデル定義、Document B がその実装マッピングであるため、構造的に補完的である。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は Phase C でドメインモデルを定義しており、Document B は Phase D でその実装マッピング（Δ0_Validator, Runtime_Kernel など）を示している。Delta3 Kernel の観点では、Document B の内容が Document A の抽象モデルを具体的な実装に落とし込むものであり、統合的に扱うべきである。Document B のマッピング情報は Document A の型定義や INV に補完的であり、MERGE_B_INTO_A により一貫した仕様構造が形成される。",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity_score": 0.7712
+    },
+    {
+      "pair_summary": "Document A は Basin の構造と計算方法を定義した簡潔な仕様であり、Document B は Chron-LLM の全体的な型定義、操作、不変条件を含む包括的な仕様である。両者は Basin 関連の型や操作を共有しているが、Document B はより詳細で拡張された内容を含んでいる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を補完し、より詳細な型定義や操作、不変条件を含んでいるため、Document A を基準として Document B の情報を統合することが望ましい。Delta3 Kernel における Basin 関連の処理は、Document B の拡張性と整合性を考慮して、より洗練された構造を持つ Document B の定義を採用するべきである。",
+      "file_a": "experiments/ir/basin.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.7694
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM カーネルの内部仕様（型定義、操作、不変条件、複雑性）を記述し、Document B はその実行環境とランタイムインターフェースに関する仕様を示している。両者はカーネルの基本的な構造と操作を共有しており、Document B は Document A の上位レイヤー（実行環境）を定義している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の実行環境および API インターフェースを補完するものであり、Delta3 Kernel の設計においては、カーネルの内部仕様（Fフェーズ）とその実行環境（Eフェーズ）を統合的に扱う必要がある。Document B に記述された RuntimeEnv や main_loop などの内容は、Document A のカーネル操作を実際に利用するためのインターフェースであり、これらを統合することで全体の設計の一貫性と実装の明確化が図れる。",
+      "file_a": "llama-agent/ir/chron-llm-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-runtime.spec",
+      "similarity_score": 0.7682
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の Runtime と Kernel の基本的な構造、状態、操作を定義しており、特に Delta3 パイプラインにおけるコアな実行環境の仕様を示している。一方 Document B は R0 セッション実行層とその下位レイヤー（R1_IRObs、CausalKernel など）の設計を含む、より詳細なアーキテクチャ構成とプロセスフローを記述している。両者は共通して Kernel と Runtime の概念を扱い、LLM を生成エンジンとして利用する前提は一致しているが、Document A は抽象的かつ初期段階の仕様であり、Document B はより具体的な実装層とプロセスの詳細を含んでいる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は Phase F（最終的な実行環境）を対象としており、Document B は初期のアーキテクチャ設計（Phase A）を示しているため、Document B の詳細なレイヤー構成とプロセス定義を Document A に統合することが望ましい。Delta3 Kernel における抽象化と実装の境界線を明確にし、R0〜R1 の流れを Kernel 内部で処理する形で整合性を持たせるため、Document B の内容を Document A にマージして、より包括的な仕様として構築する。",
+      "file_a": "llama-agent/ir/chron-llm-runtime.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity_score": 0.7655
+    },
+    {
+      "pair_summary": "Document A は callback シグネチャとその変換ロジック、および関連する不変条件を定義しており、Document B は IR ストリームの型定義、操作、不変条件、ライフサイクル、スレッド安全性について記述している。両者は異なるモジュール（ir-callback と ir-stream）を対象としており、関連性は低いが、callback が push_ir を呼び出すという点で一部の機能的接続性がある。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A は物理層からIRへの橋渡しを行うコールバック機構を定義しており、Document B はIRストリームの管理と操作を記述している。両者は異なるPHASE（A-C と D）に位置し、機能的に独立しているが、callback が push_ir を呼び出すという関係性により一部の相互作用があるため、統合は不要であり、それぞれを保持することが最適である。Delta3 Kernel の観点では、それぞれのモジュールが独立した役割を果たしており、分離された定義が望ましい。",
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.7639
+    },
+    {
+      "pair_summary": "Doc A は IR (Intermediate Representation) の型定義と操作を記述した仕様であり、Doc B はその IR を一時的にバッファリングする ir-stream パッケージの設計と動作を説明するドキュメントである。両者は同じ概念（IRストリーム）を扱いながら、Doc A が基本的な型・操作、Doc B がその実装とアーキテクチャ的位置づけを詳細に記述している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A は Phase E（IR定義）で、Doc B は Phase F（実装・バッファリング層）に対応しており、両者は親子関係にあり、Doc B の内容は Doc A の補完的な詳細を提供する。Delta3 Kernel における IR の定義とそのストリーム管理の実装を統合的に扱うため、Doc B の情報を Doc A にマージすることが推奨される。これにより、IR の構造とそのバッファリングメカニズムが一貫して定義され、Kernel への統合性が向上する。",
+      "file_a": "runtime/ir/ir.spec",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.7624
+    },
+    {
+      "pair_summary": "Document A は因果関係に基づくグラフの実行時モデルとコンテキスト構築プロセスを定義し、Document B は因果グラフの基本的な型定義と操作を記述している。両者は共通して CausalNode、CausalEdge、CausalGraph の概念を持ち、操作も類似しているが、Document A はより詳細な評価・コンテキスト抽出ロジックを含む。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の基礎となる型定義と基本操作を提供しており、Delta3 Kernel の設計では Document B の内容を Document A のより高次の仕様に統合することが望ましい。Document A が Phase D（実行時モデル）であり、Document B が Phase C（IR 型定義）であるため、B を A にマージすることで、型定義と操作の整合性を保ちながら全体的な構造を簡潔化できる。",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity_score": 0.7621
+    },
+    {
+      "pair_summary": "Document A は world-observation、registry-observation、ancestry-observation、diff-observation の観測スキーマとそれらを構築する関数を定義し、Document B はこれらの観測型のテストケースとその動作仕様を含む。両者は同じ観測スキーマを扱い、Document B は Document A の関数の動作を検証するテストを提供している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A は観測スキーマと構築関数を定義する仕様であり、Document B はその動作を検証するテストケースを含む。PHASE C で定義された仕様に対して、PHASE D でテストが追加されるため、親子関係にあり、統合は不要である。Delta3 Kernel では、仕様とテストの分離が推奨されるため、両方を保持する。",
+      "file_a": "observability/ir/world-snapshot.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity_score": 0.7614
+    },
+    {
+      "pair_summary": "Document A は実行スケジューリングとリトライロジックを定義し、Document B はツール実行とイベント処理、およびその整合性制約を記述している。両者は異なる機能モジュールを対象としており、一部の概念（例：CanonicalState、retry、イベント処理）が共通するが、詳細なロジックや目的は異なる。",
+      "relationship": "INDEPENDENT",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A はスケジューリングとリトライの低レベル制御を扱い、Document B はツール実行とイベント処理の整合性を定義しているため、それぞれが異なるPHASE（D: 実行管理、E: ツール実行）に対応し、機能的に独立している。Delta3 Kernel の設計では、これらの文書は互いに補完的な役割を果たしており、統合は不要である。",
+      "file_a": "docs/ir/09-runtime-scheduling.spec",
+      "file_b": "docs/ir/10-tool-execution.spec",
+      "similarity_score": 0.7607
+    },
+    {
+      "pair_summary": "2つの文書は、Chron-LLMのコアコンセプト（Event, Candidate, Canonical, Validation, KernelActionなど）を共有しており、特にEventとCandidateの定義、およびそれらの処理フロー（commit, validate, policy-route, kernel-transition）が類似している。ただし、Document Bはより具体的な実装概念（如Runtime, KernelState, Fault, runtime-run-candidateなど）を含み、Document Aは抽象的な型定義とプロダクション/コンシューマー関係、所有権を強調している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document BはDocument Aの内容を補完し、特にRuntime関連の概念（KernelState, RuntimeCommand, Fault, runtime-run-candidateなど）を詳細に定義している。Delta3 Kernelの設計において、Document Aが抽象層（型定義・プロダクションコンシューマー関係）を提供し、Document Bが実装層（Runtimeの動作フロー）を補完する構造であるため、Document BをDocument Aに統合することが望ましい。これにより、PHASE Cで定義された抽象モデルとPHASE Dでの実装詳細が一貫して整合する。",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "runtime/r1/ir/core.spec",
+      "similarity_score": 0.7598
+    },
+    {
+      "pair_summary": "2つの文書は、Chron-LLM システムにおけるイベント処理、グラフ構造、因果関係の管理に関する基本的なアーキテクチャを記述している。Doc A はより詳細な型定義、状態、操作、不変条件を含み、Doc B は同様の概念をより抽象的かつアルゴリズム中心に記述している。両者は機能的に重複しており、Doc A が Doc B よりも詳細で体系的である。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A は Phase E（詳細設計）に位置し、システムの全体像と不変条件を網羅している。一方 Doc B は Phase D（アルゴリズム設計）に位置し、グラフ構築ロジックの実装方法を示している。Doc B の内容は Doc A の一部として統合可能であり、特に lift-to-graph 関数や因果関係の追跡ロジックが Doc A に補完的に含まれる。Delta3 Kernel におけるグラフ構築と因果関係管理の実装を一貫性を持たせるため、Doc B のアルゴリズムを Doc A に統合することが推奨される。",
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity_score": 0.7595
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM のシステムアーキテクチャを定義し、Event、Edge、SystemState の型と、init、emit、handle_fault などの操作を含む。一方 Document B は llama-agent の因果関係のインターフェース仕様であり、WAL、Event、各種操作（make-event, commit-event, append-event など）を定義している。両者は共通してイベント処理と因果関係の管理を目的としているが、実装の詳細や型定義に違いがある。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の因果関係の実装を補完する内容であり、特に WAL の管理やイベントの生成・コミット処理に関する詳細が含まれている。Delta3 Kernel では、因果関係の整合性とイベント処理の効率性を高めるために、Document B の WAL 操作を Document A のシステム状態管理に統合することが望ましい。これにより、より堅牢な因果関係モデルが構築可能となる。",
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity_score": 0.7589
+    },
+    {
+      "pair_summary": "Document A 定義了 Chron-LLM のコミットカーネルの構成仕様、特にイベント生成・コミット処理、状態管理、不変条件などを詳細に記述している。一方 Document B は llama-agent における因果関係を扱う WAL（Write-Ahead Log）の型定義と操作を示しており、イベントの作成・ステージング・コミット、時刻(clock)の管理などを行う。両者は共通してイベント処理とログ管理に関わるが、目的と抽象レベルが異なる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A はコミットカーネルの詳細な仕様を記述しており、PHASE D の中核機能であるイベント処理と状態整合性に関する定義を含む。一方 Document B は PHASE C の初期段階における WAL やイベント管理の基本構造を示しており、より低レベルな操作モデルを提供する。両者は異なる抽象層であり、互いに補完的であるため、統合は不要であり、それぞれを維持することが推奨される。Delta3 Kernel においては、Document A の内容がカーネルのコアロジックとして扱われ、Document B はその補助的な実装モデルとして利用可能である。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity_score": 0.7562
+    },
+    {
+      "pair_summary": "Document A は IR Callback レイヤーの技術仕様を詳細に記述し、Document B は同レイヤーの観測契約と全体アーキテクチャ位置を説明する。両者は同一モジュール（ir-callback）に関する内容を重複しており、構造的に類似しているが、Document A がより詳細な実装仕様、Document B が抽象的な観測契約として位置づけられている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "F",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は技術的実装詳細を含むため、Document B の観測契約と設計原則の内容を統合することで、より包括的な仕様として完成します。Delta3 Kernel における Phase F（Observation Layer）の統一性を保ちながら、IR Callback の役割とインターフェースを明確化するため、Document B の内容を Document A にマージすることが推奨されます。",
+      "file_a": "runtime/ir/callback.md",
+      "file_b": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "similarity_score": 0.7554
+    },
+    {
+      "pair_summary": "Document A は ir-divergence モジュールの仕様で、IR の抽出・解析・差分プロファイル生成機能を定義している。一方 Document B は ir パッケージ全体の基本型・操作・不変条件を定義し、IR の構造と流れを記述している。共通して IR 型やその操作が扱われているが、目的と詳細な機能は異なる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の機能実装に必要な基本型・操作・不変条件を提供しており、Delta3 Kernel の観点から見ると、IR の定義とその操作が共通化されるべきである。Document A は分析層（ObservationAnalysisLayer）であり、Document B は基盤層（Runtime Layer）に位置するため、Document B の内容を Document A に統合することで、構造の一貫性と再利用性が向上する。また、IR の immutable 性や ordering に関する不変条件も Kernel に適合する。",
+      "file_a": "runtime/ir/divergence.spec",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.7511
+    },
+    {
+      "pair_summary": "Document A は世界線分岐（Branching）の仕様を定義し、Event の種類に応じた分岐条件と Commit 操作の処理を含む。一方 Document B は Commit カーネルの構成仕様であり、イベントの生成・格納・検証プロセスおよびその不変性に関する制約を詳細に記述している。両者は共通して因果関係（CausalID）とイベント処理の概念を共有しており、特に Commit 操作の目的は似ているが、Document A は分岐ロジックに焦点を当て、Document B はコミットプロセス全体の構造と整合性を定義している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "D",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は分岐ロジック（Branch）を定義しており、Document B は Commit 操作の詳細な仕様と整合性制約を含んでいる。両者は同じ PHASE D（Commit Kernel）に位置し、Delta3 Kernel の観点から、Commit 操作が分岐処理の一部として扱われるべきであるため、Document B の内容を Document A に統合することが推奨される。これにより、因果関係の生成ロジック（GenCausalID）やイベントの不変性、WAL と Graph の整合性に関する記述が一元化され、全体的な構造の明確化と保守性の向上が図れる。",
+      "file_a": "docs/ir/13-worldline-branching.spec",
+      "file_b": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "similarity_score": 0.7502
+    },
+    {
+      "pair_summary": "Document A と Document B は共に世界（World）の構造と操作を定義しており、Causal Graph に基づく状態管理とコミットメカニズムが共通している。ただし、Document A はより詳細な型定義、不変条件、およびオペレーションの仕様を含み、Document B は簡略化された表現と一部の操作の実装ロジックを含む。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A は Phase E に位置し、より詳細な仕様と構造的整合性を持つ。Document B は Phase D に属し、基本的な型定義と操作の概要を提供しているが、一部のロジック（例：replay-world の実装）が Document A に統合可能である。Delta3 Kernel の観点から、Document A を基準として Document B の内容をマージすることで、より堅牢な仕様が得られ、冗長性を排除できる。",
+      "file_a": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.75
+    }
+  ]
+}

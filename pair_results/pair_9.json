@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A is the Common Lisp implementation of the IR divergence analysis module, while Doc B is its formal specification defining types, operations, and invariants. They describe identical functionality with high structural correspondence.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B acts as the authoritative contract for Doc A. Both must be retained to maintain traceability between specification and implementation within the Delta3 Kernel runtime. Note: A minor semantic discrepancy exists in divergence-profile (Doc A measures agreement with Run-1, while Doc B calculates mode consensus); Doc A should ideally be refactored to align strictly with Doc B's statistical definition.",
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8877
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define core runtime operations (Commit, Replay, Validation) and types for Chron-LLM. Document A provides formal operational semantics with strict Pre/Post conditions and invariants focused on Kernel correctness. Document B outlines the architectural execution pipeline including additional stages like PromptBuilder and Backend interaction, but defines operations with less rigorous constraints than A.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A's formal Pre/Post conditions and invariants (e.g., atomic Commit, deterministic Replay) are superior for Delta3 Kernel verification compared to Document B's looser definitions. Merging B into A allows us to define the complete Runtime Pipeline (including PromptBuilder/Backend flow from B) while enforcing the rigorous operational semantics of A across all stages, eliminating redundant and potentially conflicting operation definitions.",
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/04-runtime-pipeline.spec",
+      "similarity_score": 0.8699
+    }
+  ]
+}

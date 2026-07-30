@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the immutable Phase A Core Graph Constitution with strict Delta3 Kernel invariants (append-only, CommitKernel authority). Doc B specifies a World Runtime layer but redundantly redefines core graph types and permits mutable operations that violate Doc A's authority constraints.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_A_DELETE_B",
+      "integration_rationale": "Doc A establishes the authoritative Delta3 Kernel rules (INV-AUTHORITY, INV-GRAPH-APPEND). Doc B's mutable graph operations (add-node!) contradict these invariants. World management logic should be refactored into a distinct Phase C/D specification that imports from Doc A, rather than maintaining this conflicting definition.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "similarity_score": 0.8506
+    }
+  ]
+}

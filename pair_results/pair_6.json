@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A is the executable Common Lisp implementation of the IR Stream module, while Doc B is its formal specification defining types, operations, invariants, and lifecycle constraints. They describe identical functionality with high semantic alignment.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "In the Delta3 Kernel architecture, formal specifications (.spec) serve as verifiable contracts for runtime components. Doc B defines critical invariants (INV-S1..S4) and lifecycle rules required for correctness proofs and verification tooling, while Doc A provides the executable logic. Both artifacts are necessary and complementary; merging them would obscure the distinction between implementation details and formal requirements.",
+      "file_a": "runtime/ir/stream.lisp",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.8997
+    }
+  ]
+}

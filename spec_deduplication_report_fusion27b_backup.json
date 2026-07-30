@@ -1,0 +1,271 @@
+{
+  "processed_pairs": 19,
+  "results": [
+    {
+      "pair_summary": "Both documents define the R2.0 World, Causal Graph, and Registry ontology. Doc A specifies a runtime implementation with a shared global graph model (Registry-centric) and imperative operations. Doc B defines a strict Observation Contract and Kernel interface using reference-based worlds, Copy-on-Write semantics, atomic commit invariants, and snapshot capabilities.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_B_DELETE_A",
+      "integration_rationale": "Doc B represents the authoritative Delta3 Kernel contract (Phase B), enforcing necessary isolation, atomicity (INV(Commit)), and versioning semantics via fork-world. Doc A's shared-graph invariant (Registry.graph == World.graph) conflicts with the branching capabilities required by the Kernel. Doc B's strict typing and snapshot contracts are essential for system stability; Doc A is an obsolete implementation draft.",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity_score": 0.9347
+    },
+    {
+      "pair_summary": "Both documents define dynamical analysis primitives for Chron-LLM graph structures, including attractors, basins of attraction, cycles, and SCCs. Document A (v0.1) presents a foundational mathematical specification focused on pure graph dynamics operations. Document B (v0.2) is an evolved system-level specification that supersedes A by incorporating temporal attributes, clustering logic, stability metrics, detailed result types, and mappings to WorldState/Events.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "integration_rationale": "Document B fully encompasses the logical scope of Document A while adding critical engineering constraints required for Delta3 Kernel integration, such as temporal tracking (ts), stability thresholds, and cluster typing rules. Document A serves only as a historical prototype for the dynamical analysis module and should be deprecated in favor of the comprehensive v0.2 specification.",
+      "file_a": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.9318
+    },
+    {
+      "pair_summary": "Doc A is the executable Common Lisp implementation of the IR FFI bridge, while Doc B is its formal specification defining module contracts, state invariants, and operational pre/post-conditions for the same functionality.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B serves as the formal contract and verification target for Doc A within the Delta3 Kernel framework. The specification ensures memory safety (gc_rooted invariant) and interface stability, while Doc A provides the runtime execution logic. Both are required to maintain a verifiable and robust runtime environment.",
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity_score": 0.9278
+    },
+    {
+      "pair_summary": "Both documents define the chronos-r1 runtime module, specifying identical core types (Event, Candidate, Canonical, KernelState) and operations. Document A provides detailed implementation logic, specific transition rules, and strict invariants (INV1-8). Document B focuses on API structural grouping (domain-api vs kernel-boundary) and includes testing/inspection ops but lacks the granular constraints of A.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "D",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A is the authoritative source for Delta3 Kernel correctness due to its explicit invariants (e.g., Canonical immutability, Validation pipeline enforcement) and precise kernel-transition logic. Document B's definition of branch-worldline conflicts with A's safety constraints by implying direct canonical creation. Merge B into A to adopt its cleaner API categorization (pure-ops/kernel-boundary) and add missing testing/inspection operations, while strictly retaining A's logic and invariants as the single source of truth.",
+      "file_a": "runtime/r1/ir/core.spec",
+      "file_b": "runtime/r1/ir/package.spec",
+      "similarity_score": 0.9019
+    },
+    {
+      "pair_summary": "Doc A defines Phase B (Projection), focusing on deterministic derivation of ProjectionModel from History without semantic interpretation or ABI. Doc B defines Phase C (Interpretation), introducing EventABI and SemanticModel to interpret projections into justifications. They share formal notation and overlapping state definitions but specify sequential, functionally distinct pipeline stages.",
+      "relationship": "INDEPENDENT",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "These documents define sequential stages of the Delta3 Kernel IR pipeline. Phase B produces the ProjectionModel (M) consumed by Phase C. Their EXCLUDE clauses explicitly enforce separation of concerns: Phase B excludes ABI/Interpretation, while Phase C excludes ProjectionGeneration. Merging them would blur architectural boundaries; keeping both maintains strict modularity and phase integrity required for the kernel's deterministic execution model.",
+      "file_a": "docs/ir/phase-b-charter.spec",
+      "file_b": "docs/ir/phase-c-charter.spec",
+      "similarity_score": 0.9018
+    },
+    {
+      "pair_summary": "Doc A (stream.lisp) provides the executable Common Lisp implementation of the IR stream buffer, while Doc B (stream.spec) defines its formal specification including types, pre/post-conditions, invariants (ordering, neutrality), and lifecycle constraints. Both describe identical functionality but at different abstraction layers: concrete runtime code versus formal design contract.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "In the Delta3 Kernel architecture, maintaining a strict separation between formal specifications (.spec) and runtime implementations (.lisp) is critical for verification. Doc B serves as the machine-checkable contract ensuring INV-S1/S2/S3 (ordering, ephemerality, neutrality), while Doc A realizes this in memory. Merging would obscure formal properties or clutter code; keeping both enables automated regression testing of implementation against design invariants.",
+      "file_a": "runtime/ir/stream.lisp",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.8997
+    },
+    {
+      "pair_summary": "Both documents define the construction of PrefillState from a graph structure for LLM context building. Document A is a formal specification (v1.0) defining causal edges, payload references, and strict invariants. Document B is a simpler definition with direct content storage and hardcoded prompt serialization logic. They share function names but have conflicting Node type definitions.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_A_DELETE_B",
+      "integration_rationale": "Document A provides the rigorous causal context semantics and payload separation necessary for Delta3 Kernel's deterministic execution. Document B represents an earlier or less precise iteration with inefficient inline content storage and rigid serialization that conflicts with A's abstract builder pattern. Deleting B eliminates type ambiguity in the graph-runtime/ir namespace.",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/prefill.spec",
+      "similarity_score": 0.8892
+    },
+    {
+      "pair_summary": "Doc A defines Phase A focusing exclusively on History (H) as an authoritative, reproducible causal record with specific exclusions. Doc B defines Phase B, extending the system state to include ProjectionModel (M) and JustificationStructure (J) derived from H, while repeating the foundational axioms and invariants of H found in Doc A.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "These documents represent distinct, sequential architectural layers within the Chron-LLM framework. Phase A establishes the immutable substrate (History), while Phase B defines the dynamic processing layer (Projection/Justification) dependent on it. Merging them would conflate storage semantics with reasoning logic, violating Delta3 Kernel modularity principles. The overlap in H definitions is intentional interface alignment and should be preserved across separate phase charters.",
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-b-charter.spec",
+      "similarity_score": 0.8891
+    },
+    {
+      "pair_summary": "Doc A defines the atomic IR data structure and its immutability contract for runtime observations. Doc B defines the transient in-memory buffer mechanism (IR Stream) used to aggregate these observations during execution. Both share significant architectural context, diagrams, and philosophical constraints regarding 'Observation vs Truth', resulting in high textual similarity.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "These documents define distinct architectural components within the Phase A Runtime layer: Doc A specifies the data schema (IR struct), while Doc B specifies the runtime state management (Stream buffer). Although they share explanatory context, merging them would conflate data definition with implementation-specific buffering logic. Keeping both maintains clear separation of concerns between the IR ABI and its collection mechanism.",
+      "file_a": "runtime/ir/ir.md",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.8707
+    },
+    {
+      "pair_summary": "Doc A defines formal operational semantics, pre/post conditions, and global invariants for core kernel operations (Commit, Replay, Validation) focusing on state correctness. Doc B outlines the sequential runtime pipeline flow integrating these operations with external components (Backend, PromptBuilder). They share definitions for core operations but differ in abstraction level and scope.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "D",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the source of truth for state transition correctness and Delta3 Kernel invariants, while Doc B describes the orchestration sequence involving non-deterministic components. Merging them would conflate formal semantics with architectural flow. They should remain distinct but cross-reference to ensure consistency on shared operations.",
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/04-runtime-pipeline.spec",
+      "similarity_score": 0.8699
+    },
+    {
+      "pair_summary": "Doc A defines the formal type hierarchy, fields, and structural invariants for the Knowledge System IR (Meta, Design, Executable). Doc B maps these same concepts to architectural layers (Governance, Conceptual, Execution) and provides semantic rationale/relationships. There is high lexical overlap regarding core components, but they differ in abstraction level: Doc A is a structural specification, while Doc B is a conceptual reference.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the authoritative structural specification (Schema) required by Delta3 Kernel for validation and implementation contracts. Doc B functions as architectural documentation explaining vertical layering, semantic intent, and design rationale. Keeping them separate maintains clarity between strict executable definitions (A) and high-level conceptual reasoning (B), preventing spec clutter while ensuring traceability of design decisions.",
+      "file_a": "docs/ir/knowledge-system.spec",
+      "file_b": "docs/reference/ir/knowledge-rationale.spec",
+      "similarity_score": 0.8694
+    },
+    {
+      "pair_summary": "Doc A is a concrete experimental specification defining local types and a hardcoded '3-cluster' graph instance with basic analysis functions. Doc B is the formal, generalized Chron-LLM IR specification (v0.2) that comprehensively defines core types (Node, Edge, Trajectory, Cycle), operators, invariants, and mappings required by the Delta3 Kernel.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "integration_rationale": "Doc B serves as the canonical Phase C specification for the Chron-LLM Intermediate Representation. Doc A duplicates core type definitions (Role, Node, Edge) that are now standardized in Doc B, creating a risk of semantic drift and fragmentation within the Delta3 Kernel's graph logic. The specific graph data and test cases in Doc A should be migrated to the test fixture directory (e.g., tests/fixtures/3cluster.json), while Doc A itself is deprecated as its type definitions are subsumed by the robust framework in Doc B.",
+      "file_a": "experiments/ir/3cluster.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.8653
+    },
+    {
+      "pair_summary": "Doc A defines the comprehensive IR Observation Layer (collection via callbacks and analysis) with strict typing, while Doc B focuses solely on divergence analysis algorithms. Both define overlapping operations (`extract-actions`, `divergence-profile`) but conflict on IR type definitions (`token` as int vs String).",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A is the authoritative v1.0 spec for the Observation Layer in Delta3 Kernel. It should absorb Doc B's algorithmic details to ensure completeness, while resolving type conflicts (standardizing on int tokens and explicit Phase enums) to maintain a unified runtime interface.",
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8544
+    },
+    {
+      "pair_summary": "Both documents define the Chron-LLM R2 Graph Runtime Intermediate Representation and Causal Context logic. Document A establishes a formal 'Constitution' specifying storage models, commit flows, node types, and strict invariants (INV). Document B focuses on operational semantics for graph manipulation and context projection. There is significant semantic overlap regarding Node/Edge definitions, causal subgraph extraction, and PrefillState hashing.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A serves as the authoritative Phase A Constitution for the Graph Runtime, defining critical invariants (INV-GRAPH-APPEND, INV-CAUSAL-SEPARATION) and storage interfaces required by the Delta3 Kernel. Document B provides operational details that are largely subsumed by A's function signatures but lacks A's rigor on feedback edges and authority checks. Merging B into A consolidates the behavioral contracts under the constitutional framework, eliminating redundancy while preserving implementation guidance.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.8489
+    },
+    {
+      "pair_summary": "Both documents define the 'ir-divergence' module within the Observation Analysis Layer of Chron-LLM. Document A is a comprehensive Markdown specification detailing architecture, rationale, diagrams, and future extensions. Document B is a concise formal specification defining types, operations, algorithms, and invariants. They describe identical logic, constraints, and APIs but differ significantly in format (narrative vs. formal) and scope of context.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A serves as the architectural design document (human-readable context, diagrams, roadmap), while Document B acts as the formal interface contract (machine-verifiable constraints). Maintaining both ensures clarity for engineering teams and strict adherence to invariants required by the Delta3 Kernel. Merging them would compromise either readability or formal precision.",
+      "file_a": "runtime/ir/divergence.md",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8485
+    },
+    {
+      "pair_summary": "Both documents define the Lisp-based bootloader for the Chron-LLM Delta3 agent system. Document B is a refined evolution of Document A, introducing explicit versioning (Phase 1.1), stricter error handling (FailFast vs Warn), detailed logging steps, and more granular layer definitions (Core/Graph/World) compared to Document A's generic layers.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "integration_rationale": "Document B supersedes Document A by enforcing critical bootstrap constraints (No ASDF, FailFast) and defining a more robust dependency graph required for the Delta3 Kernel's Phase 1 stability. Document A's lenient error handling ('warn') poses risks for kernel initialization integrity. Therefore, Document A should be deprecated in favor of Document B as the canonical bootloader specification.",
+      "file_a": "llama-agent/ir/llama-agent.spec",
+      "file_b": "llama-agent/ir/llama-agent2.spec",
+      "similarity_score": 0.8473
+    },
+    {
+      "pair_summary": "Both documents define the core IR and state management for Chron-LLM, including WAL, Graph lifting, and fault handling. Doc A is a high-level architectural spec using UUIDs and explicit control policies, while Doc B is an implementation-oriented kernel spec introducing transactional staging (stage/commit), integer IDs, and world-based branching semantics.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc B's transactional WAL mechanics (staging/commit) and world management are critical for Delta3 Kernel correctness but absent in Doc A. Merging B into A will align the architectural documentation with the actual kernel implementation, ensuring consistency between design intent and execution semantics.",
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/causal-kernel.spec",
+      "similarity_score": 0.8456
+    },
+    {
+      "pair_summary": "Both documents define the 'World' runtime entity as an isolated execution view referencing shared Graph and Memory stores with deterministic replay capabilities. Doc A is a formal Phase B Constitution specifying Registry, Lifecycle states, and high-level invariants (FROZEN status), whereas Doc B provides implementation-oriented operation signatures (e.g., kernel-commit-world!, ReplayRes) and data structures that align semantically but lack the governance structure of Doc A.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A is the authoritative R2.0-B Constitution for the World Runtime within the Delta3 Kernel architecture. Doc B contains critical implementation details (specifically the ReplayRes structure and explicit kernel-commit interface) that are currently fragmented outside the main specification. Merging B into A ensures a unified source of truth, aligning abstract invariants with concrete API definitions required for Kernel integration, while maintaining the isolation guarantees defined in Phase B.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.838
+    },
+    {
+      "pair_summary": "Doc A defines the runtime callback mechanism bridging physical execution to IR generation, while Doc B specifies the core IR data structure, types, and stream invariants. They share identical field definitions for the IR object but address different concerns: process flow vs. data schema.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B serves as the canonical type definition for IR, which Doc A depends on. While both define the same fields, this redundancy is acceptable if Doc A's INV(Lossless) is updated to reference Doc B's TYPE IR strictly rather than hardcoding field lists. Separation maintains clarity between data structures and bridge logic within the Delta3 Kernel runtime.",
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.8366
+    }
+  ]
+}

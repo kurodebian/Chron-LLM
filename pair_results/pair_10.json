@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the fundamental IR (Intermediate Representation) data structure as an immutable observation record emitted by the runtime. Doc B defines the IR Stream module, which acts as a temporary in-memory buffer to collect and order these IR objects during execution. Both documents share significant semantic overlap regarding architectural constraints (immutability, non-authoritative status, kernel boundaries), but define distinct technical layers: atomic data type versus transient collection state.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "The documents define complementary and necessary components of the Delta3 Kernel observation pipeline. Doc A establishes the core ABI for runtime observations (IR struct), while Doc B implements the mechanism to aggregate these into a deterministic sequence for analysis (Stream). Merging them would violate separation of concerns by conflating immutable data definitions with mutable runtime state management. The semantic overlap in rationale is appropriate to ensure architectural consistency across the subsystem.",
+      "file_a": "runtime/ir/ir.md",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.8707
+    }
+  ]
+}

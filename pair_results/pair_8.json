@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines Phase A charter focusing on History state and exclusions. Doc B defines Phase B charter extending H with ProjectionModel and JustificationStructure operations. They share base axioms but define distinct architectural layers.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Distinct phase charters required for Delta3 Kernel layering; merging obscures the boundary between raw history recording (A) and derived projection logic (B).",
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-b-charter.spec",
+      "similarity_score": 0.8891
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Document A defines the formal executable schema and structural types of the KnowledgeSystem (Meta, Design, Executable) with specific runtime invariants. Document B serves as a conceptual rationale mapping these same core types to architectural layers (e.g., GovernanceLayer, ConceptualLayer) and introduces additional conceptual entities like Repository and Authority. While they share high semantic similarity regarding system components and independence constraints, A focuses on structural definition while B focuses on semantic classification and design intent.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A acts as the canonical source of truth for the IR structure and runtime contracts required by the Delta3 Kernel. Document B provides necessary architectural context by classifying these structures into layers, which aids in understanding system boundaries and responsibilities without cluttering the executable spec. Keeping both allows separation between 'what is defined' (A) and 'why/how it maps conceptually' (B), provided that any future changes to core types in A are reflected in B's layer mappings to prevent drift.",
+      "file_a": "docs/ir/knowledge-system.spec",
+      "file_b": "docs/reference/ir/knowledge-rationale.spec",
+      "similarity_score": 0.8694
+    }
+  ]
+}

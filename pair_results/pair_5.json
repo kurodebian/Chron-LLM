@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines Phase B Charter focusing on structural projection and justification without semantic interpretation. Doc B defines Phase C Charter, building upon M to introduce ABI-based semantic interpretation (S) and subsequent justification.",
+      "relationship": "INDEPENDENT",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A establishes the structural projection layer (Phase B), while Doc B introduces the semantic interpretation layer via ABI (Phase C). Both are necessary to define the complete transformation from History to Semantic Justification within the Chron-LLM architecture.",
+      "file_a": "docs/ir/phase-b-charter.spec",
+      "file_b": "docs/ir/phase-c-charter.spec",
+      "similarity_score": 0.9018
+    }
+  ]
+}

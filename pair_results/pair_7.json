@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define the logic for constructing PrefillState from a Graph structure, including context projection and prompt hashing. Document A is a formal specification with rigorous type definitions (separating payload refs), preconditions, invariants (causal integrity), and graph mutation operations. Document B is a simplified pseudo-code definition that embeds content directly in nodes, lacks causal/eval edge distinction, and omits graph manipulation logic.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "D",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_A_DELETE_B",
+      "integration_rationale": "Document A (v1.0) is the authoritative specification for Delta3 Kernel's graph runtime, explicitly enforcing causal integrity and eval isolation which are critical architectural constraints. Document B lacks these semantic distinctions and appears to be an earlier draft or simplified interface; its specific serialization logic can be implemented as a concrete builder function under Document A's generic contract.",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/prefill.spec",
+      "similarity_score": 0.8892
+    }
+  ]
+}

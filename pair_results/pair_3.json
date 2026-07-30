@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A represents the executable Common Lisp implementation of the IR-FFI bridge using CFFI, while Doc B serves as its formal specification detailing state invariants, pre/post conditions, and memory safety constraints for the identical module.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B provides the necessary formal verification contract for Doc A within the Delta3 Kernel. Retaining both ensures that the FFI implementation strictly adheres to defined safety invariants and interface requirements.",
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity_score": 0.9278
+    }
+  ]
+}

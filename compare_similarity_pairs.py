@@ -4,7 +4,9 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.request
+from urllib.error import HTTPError
 
 
 def get_win_host_ip():
@@ -51,9 +53,13 @@ def detect_backend(cli_model=None, cli_url=None):
                     selected_model = (
                         cli_model
                         or env_model
-                        or (chat_models[0] if chat_models else (all_models[0] if all_models else "fusion711:27b"))
+                        or (
+                            chat_models[0]
+                            if chat_models
+                            else (all_models[0] if all_models else "fusion711:27b")
+                        )
                     )
-                    
+
                     final_url = target_url or f"{base_url}/v1/chat/completions"
                     return final_url, selected_model
         except Exception:
@@ -101,7 +107,7 @@ def read_file_content(filepath, max_chars=4000):
             )
         return content
     except Exception as e:
-        print(f"⚠️ ファイル読み込み失敗 [{filepath}]: {e}")
+        print(f"\n⚠️ ファイル読み込み失敗 [{filepath}]: {e}")
         return None
 
 
@@ -109,12 +115,15 @@ def clean_json_response(raw_text):
     """LLMレスポンスから純粋なJSON文字列を取り出す（Thinking出力やMarkdown対策）"""
     raw_text = raw_text.strip()
 
-    # ```json ... ``` ブロックの抽出
+    # 1. <think>...</think> タグ（Reasoningモデルの思考過程）を除去
+    raw_text = re.sub(r"<think>.*?</think>", "", raw_text, flags=re.DOTALL).strip()
+
+    # 2. ```json ... ``` ブロックの抽出
     match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", raw_text, re.DOTALL)
     if match:
         return match.group(1)
 
-    # ブロック記法がない場合は最初と最後の波括弧を探す
+    # 3. ブロック記法がない場合は最初と最後の波括弧を探す
     start = raw_text.find("{")
     end = raw_text.rfind("}")
     if start != -1 and end != -1 and start < end:
@@ -123,8 +132,10 @@ def clean_json_response(raw_text):
     return raw_text
 
 
-def analyze_pair_with_llm(file_a, file_b, similarity_score, api_url, model_name):
-    """2つのファイルをLLMに食わせて重複度・統合関係を解析"""
+def analyze_pair_with_llm(
+    file_a, file_b, similarity_score, api_url, model_name, max_retries=2
+):
+    """2つのファイルをLLMに食わせて重複度・統合関係を解析 (リトライ・エラーハンドリング強化)"""
     content_a = read_file_content(file_a)
     content_b = read_file_content(file_b)
 
@@ -151,28 +162,45 @@ Vector Similarity Score: {similarity_score}
             {"role": "user", "content": user_prompt},
         ],
         "temperature": 0.1,
+        "response_format": {"type": "json_object"},  # Ollama / OpenAI互換 JSON構造強制
     }
 
-    req = urllib.request.Request(
-        api_url,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
-    )
+    req_data = json.dumps(payload).encode("utf-8")
 
-    try:
-        with urllib.request.urlopen(req, timeout=180) as response:
-            res_data = json.loads(response.read().decode("utf-8"))
-            raw_content = res_data["choices"][0]["message"]["content"]
-            cleaned_json = clean_json_response(raw_content)
+    for attempt in range(1, max_retries + 1):
+        try:
+            req = urllib.request.Request(
+                api_url,
+                data=req_data,
+                headers={"Content-Type": "application/json"},
+            )
+            with urllib.request.urlopen(req, timeout=600) as response:
+                res_data = json.loads(response.read().decode("utf-8"))
+                raw_content = res_data["choices"][0]["message"]["content"]
+                cleaned_json = clean_json_response(raw_content)
 
-            result = json.loads(cleaned_json)
-            result["file_a"] = file_a
-            result["file_b"] = file_b
-            result["similarity_score"] = similarity_score
-            return result
-    except Exception as e:
-        print(f"❌ 対話解析エラー [{file_a} vs {file_b}]: {e}")
-        return None
+                result = json.loads(cleaned_json)
+                result["file_a"] = file_a
+                result["file_b"] = file_b
+                result["similarity_score"] = similarity_score
+                return result
+
+        except HTTPError as e:
+            err_body = e.read().decode("utf-8", errors="ignore")
+            print(
+                f"\n⚠️ HTTPエラー ({e.code}) [試行 {attempt}/{max_retries}]: {err_body}"
+            )
+        except json.JSONDecodeError as e:
+            print(
+                f"\n⚠️ JSONパース失敗 [試行 {attempt}/{max_retries}]: {e}"
+            )
+        except Exception as e:
+            print(f"\n⚠️ 通信/対話解析エラー [試行 {attempt}/{max_retries}]: {e}")
+
+        if attempt < max_retries:
+            time.sleep(2)  # 再試行前の待機
+
+    return None
 
 
 def main():
@@ -219,7 +247,7 @@ def main():
 
     pairs = map_data.get("pairs", [])
     if args.top > 0:
-        pairs = pairs[:args.top]
+        pairs = pairs[: args.top]
 
     print(f"🚀 重複判定パイプライン開始 (対象: {len(pairs)} ペア)")
     print(f"🤖 使用モデル: {model_name} @ {api_url}\n")
@@ -244,10 +272,13 @@ def main():
         else:
             print("❌ スキップ")
 
-    output_data = {"processed_pairs": len(report_results), "results": report_results}
-
-    with open(args.out, "w", encoding="utf-8") as f:
-        json.dump(output_data, f, ensure_ascii=False, indent=2)
+        # 途中で中断・クラッシュしても結果が残るようループごとにファイル書き出し (チェックポイント)
+        output_data = {
+            "processed_pairs": len(report_results),
+            "results": report_results,
+        }
+        with open(args.out, "w", encoding="utf-8") as f:
+            json.dump(output_data, f, ensure_ascii=False, indent=2)
 
     print(f"\n🎉 判定完了! 解析結果を '{args.out}' に保存しました。")
 

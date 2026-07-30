@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines a concrete experimental instance of a '3-cluster' graph with local type definitions and specific node/edge data. Doc B provides a comprehensive, abstract specification (v0.2) for Chron-LLM IR types, operations, and invariants, including generalized structures like Trajectory and ThreeClusterGraph. They share core semantic concepts (Node, Edge, Roles) but differ significantly in abstraction level and scope.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B serves as the canonical type system and behavioral contract for the Delta3 Kernel IR layer. Doc A functions as a concrete test fixture or canonical example validating the 3-cluster topology dynamics. While their core type definitions overlap, they serve distinct purposes (Schema vs Instance). To ensure architectural consistency, Doc A should be refactored to import types from Doc B rather than redefining them locally, eliminating redundancy while preserving the specific graph instance G for regression testing and documentation.",
+      "file_a": "experiments/ir/3cluster.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.8653
+    }
+  ]
+}

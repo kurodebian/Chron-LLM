@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define the core types and operations for the Chronos-R1 runtime module. Document A provides a detailed behavioral specification with explicit transition logic, priority rules, and numbered invariants (INV1-8). Document B presents a structural interface view with operation grouping (domain-api, pure-ops) and testing stubs but lacks the specific internal constraints found in A.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A is the authoritative specification for Delta3 Kernel compliance due to its rigorous invariant definitions and detailed kernel-transition logic. Document B should be merged into A to adopt its cleaner operation categorization (e.g., separating pure-ops from kernel-boundary) and to incorporate its inspection/testing interfaces, ensuring a single source of truth that combines structural clarity with behavioral precision.",
+      "file_a": "runtime/r1/ir/core.spec",
+      "file_b": "runtime/r1/ir/package.spec",
+      "similarity_score": 0.9019
+    }
+  ]
+}

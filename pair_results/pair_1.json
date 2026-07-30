@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define Chron-R2.0 World Graph structures with high semantic overlap (>93%). Doc A specifies a mutable, shared-state runtime model where worlds reference a global Registry graph. Doc B defines an immutable, snapshot-based observation contract aligned with Delta3 Kernel semantics (atomic commits, versioned observations), introducing functional operation signatures.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc B represents a more mature, Kernel-compliant specification. Doc A's shared mutable state model (INV: w.graph == Registry.graph) conflicts with the consistency requirements of Delta3 Kernel execution. The recommended action is to refactor Doc A to adopt Doc B's immutable snapshot semantics and kernel-commit constraints, while retaining Doc A's detailed context projection logic if it offers superior granularity for LLM prefilling.",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity_score": 0.9347
+    }
+  ]
+}

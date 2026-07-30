@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents specify an IR observation layer for divergence analysis during generation. Doc A provides a comprehensive runtime integration model with explicit callbacks (ir-callback), richer IR types (including scores and context pointers), and strict non-invasive invariants. Doc B focuses on the algorithmic implementation of divergence profiling using simpler data types (String tokens) and assumes external execution contexts.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "D",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A is the superior architectural specification for the Chron-LLM Delta3 Kernel environment due to its native type alignment (token IDs vs Strings) and explicit definition of the runtime bridge mechanism. However, Doc B contains valuable concrete algorithmic logic for divergence calculation that is abstracted in Doc A. The recommended integration strategy is to retain Doc A as the canonical interface and data model while incorporating Doc B's specific profiling algorithms into Doc A's analysis operations.",
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8544
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc B (v0.2) is a comprehensive evolution of Doc A (v0.1), adding temporal attributes, cluster definitions, and refined stability metrics to the abstract dynamical analysis framework defined in A.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "integration_rationale": "Doc B fully encapsulates Doc A's dynamical definitions while integrating necessary temporal and structural context (Clusters, Timestamps) required for the Delta3 Kernel. Doc A should be deprecated as a preliminary draft.",
+      "file_a": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.9318
+    }
+  ]
+}

@@ -1,0 +1,1275 @@
+{
+  "processed_pairs": 86,
+  "results": [
+    {
+      "pair_summary": "2つの文書は、世界グラフランタイムの仕様を定義していますが、一部の型や操作が異なる点があります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の一部の型と操作を拡張または修正しており、統合することでより完全な仕様が得られます。特に、PayloadRef, MemStore, CausalNode, CausalEdge, ContextNode, PrefillState, World, Registry, WorldObs, RegistryObs, AncestryObs, DiffObs の定義や操作の詳細が異なるため、Document B の内容を Document A に統合することをお勧めします。",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity_score": 0.9347
+    },
+    {
+      "pair_summary": "2つの文書はグラフ理論に基づくモデルの仕様を定義していますが、構造や操作が若干異なります。Doc Aはより基本的な操作と型を含み、Doc Bは時間スタンプや追加の属性を持つ拡張版です。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc BはDoc Aの仕様を拡張しており、追加の属性や操作が含まれています。統合することで、より完全なモデル定義を保持し、将来の開発に役立つ可能性があります。",
+      "file_a": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.9318
+    },
+    {
+      "pair_summary": "Document A は Lisp 言語で書かれた IR-FFI パッケージの定義と関数実装を含み、Document B は同様のパッケージの仕様を記述した spec ファイルです。両者は同じ機能を提供し、構造的に類似していますが、形式と詳細に違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A と Document B は同じ機能を提供するが、それぞれ異なる形式で記述されているため、両方を保持することが適切です。一方のファイルを統合することで、情報の冗長性が解消されますが、その一方で重要な詳細や注釈が失われる可能性があります。したがって、両方のファイルを維持し、必要に応じて参照するようにすることをお勧めします。",
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity_score": 0.9278
+    },
+    {
+      "pair_summary": "2つの文書はChronos-R1の仕様を定義しており、構造的類似性が高く、多くの型や操作が共通しています。ただし、いくつかの違いと追加情報があります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document BはDocument Aに追加の型や操作を含んでおり、統合することでより完全な仕様が得られます。特に、Domain APIとTesting部分はDocument Aに含まれていないため、統合が必要です。",
+      "file_a": "runtime/r1/ir/core.spec",
+      "file_b": "runtime/r1/ir/package.spec",
+      "similarity_score": 0.9019
+    },
+    {
+      "pair_summary": "Document A and Document B both describe specifications for different phases (B and C) of a system, with some overlapping states and operations. However, they have distinct differences in their states, operations, axioms, invariants, and exclusions.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Both documents describe different phases with unique specifications. Keeping both allows for a comprehensive understanding of the system's architecture across different stages without losing any critical information.",
+      "file_a": "docs/ir/phase-b-charter.spec",
+      "file_b": "docs/ir/phase-c-charter.spec",
+      "similarity_score": 0.9018
+    },
+    {
+      "pair_summary": "Document A は Common Lisp のパッケージ定義と関数実装を含む IR ストリームの実装です。Document B は IR ストリームの仕様を記述した形式で、型定義、状態、操作、不変条件、ライフサイクル、スレッドセーフティを詳細に説明しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A は実装の詳細を提供し、Document B は仕様と不変条件を明確にしています。両方のドキュメントが互いに補完的な役割を果たしているため、統合する必要はありませんが、共存させることが適切です。",
+      "file_a": "runtime/ir/stream.lisp",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.8997
+    },
+    {
+      "pair_summary": "Document A と Document B は、グラフ構造とプリフィルステートの定義に似ていますが、ノードの型と属性、関数の名前、および操作の詳細に微妙な違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の一部を含み、追加の機能や詳細を提供しています。したがって、Document B を Document A に統合することで、より完全な仕様と一貫性を維持できます。",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/prefill.spec",
+      "similarity_score": 0.8892
+    },
+    {
+      "pair_summary": "Document A と Document B は共通の STATE H (History) と AXIOM A = H を持ちますが、それぞれ異なる STATE M (ProjectionModel), J (JustificationStructure) を含みます。また、INV（Invariant）や EXCLUDE（除外）の項目も若干異なります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A と Document B は異なる PHASE (A と B) を表しており、それぞれ独自の STATE, AXIOM, INV, EXCLUDE を持っています。これらは互いに補完的な役割を果たしているため、統合せずに両方を保持することをお勧めします。Delta3 Kernel の統合方針では、異なる PHASE で定義された仕様は独立して維持されるべきです。",
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-b-charter.spec",
+      "similarity_score": 0.8891
+    },
+    {
+      "pair_summary": "2つの文書は同じパッケージ名（ir-divergence）と関数定義（extract-actions, run-ir-trial, divergence-profile）を持っていますが、文書Bは仕様ファイルで、より形式化された記述と型情報が含まれています。文書Aは実装コードであり、文書Bの仕様を具体的に実装しています。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bは文書Aの仕様を明確に記述しており、統合することで実装コードと仕様が一致しやすくなります。",
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8877
+    },
+    {
+      "similarity": 0.8707,
+      "differences": [
+        {
+          "section": "1.1 Purpose",
+          "description": "Document A provides a detailed explanation of the purpose and responsibilities of the `ir-stream` package, including its role as a temporary observation buffer between runtime callback emission, IR analysis layer, and divergence/trace/replay tooling. Document B does not provide this level of detail."
+        },
+        {
+          "section": "2. Architectural Position",
+          "description": "Document A includes a data flow diagram that illustrates the interaction between different components such as LLM Backend, ir-callback, IR, ir-stream, and Analysis Layer. Document B does not include this diagram."
+        },
+        {
+          "section": "3. Package Definition",
+          "description": "Document A provides a package declaration for `ir-stream`, including exported symbols like *ir-stream*, push-ir, and clear-ir-stream. Document B does not provide this information."
+        },
+        {
+          "section": "4. Package Responsibility",
+          "description": "Document A lists the responsibilities of the `ir-stream` package, such as IR observation buffering, order preservation, run isolation, and analysis input preparation. It also lists non-responsibilities like IR generation, token decoding, semantic interpretation, proposal generation, commit, persistence, and policy decisions. Document B does not provide this information."
+        },
+        {
+          "section": "5. Core Data Structure",
+          "description": "Document A defines the core data structure of `ir-stream` as an adjustable Common Lisp vector with a logical model that represents a collection of IR objects. Document B does not provide this information."
+        },
+        {
+          "section": "6. Stream Properties",
+          "description": "Document A discusses stream properties such as ordering guarantee, deterministic analysis, and non-authoritative state. It also provides an example of how the stream maintains callback arrival sequence. Document B does not provide this level of detail."
+        },
+        {
+          "section": "7. Global Stream Variable",
+          "description": "Document A explains the purpose, lifetime, and lifecycle of the global stream variable *ir-stream*. Document B does not provide this information."
+        },
+        {
+          "section": "8. API Specification",
+          "description": "Document A provides a detailed specification for the push-ir function, including its definition, purpose, signature, input, and example usage. Document B does not provide this level of detail."
+        },
+        {
+          "section": "10. Deterministic Replay Model",
+          "description": "Document A explains that the stream provides an ordered IR collection for deterministic replay, but it is not a state snapshot. It also describes how replay works by processing the IR stream sequentially. Document B does not provide this information."
+        },
+        {
+          "section": "11. Relationship With IR",
+          "description": "Document A discusses the relationship between the IR layer and the IR Stream layer, explaining that one IR object is part of an IR Stream collection. It also provides examples of single observations and collections of observations. Document B does not provide this information."
+        },
+        {
+          "section": "12. Relationship With Kernel",
+          "description": "Document A explains the boundary between different components in the system, including LLM, IR, IR Stream, Analysis, Proposal, Review, Commit, and History/WAL. It also describes the authority model for `ir-stream`. Document B does not provide this information."
+        },
+        {
+          "section": "13. Memory Model",
+          "description": "Document A discusses the memory model of `ir-stream`, including storage in RAM only with no persistence. It also explains the bounded lifetime of the stream and the explicit reset requirement between runs. Document B does not provide this information."
+        },
+        {
+          "section": "14. Threading Considerations",
+          "description": "Document A discusses threading considerations, noting that `ir-stream` is not thread-safe due to its global mutable vector. It also suggests potential future designs for context-local IR Streams using dynamic binding or a mapping from ctx-id to stream. Document B does not provide this information."
+        },
+        {
+          "section": "15. Error Conditions",
+          "description": "Document A lists error conditions, such as invalid IR objects and accidental cross-run contamination, along with current behavior and recommended future improvements. Document B does not provide this information."
+        },
+        {
+          "section": "16. Formal Invariants",
+          "description": "Document A lists formal invariants for `ir-stream`, including ordering, ephemeral state, semantic neutrality, and run isolation. It also explains the importance of starting each decoding execution with clear-ir-stream. Document B does not provide this information."
+        },
+        {
+          "section": "17. Chron-LLM Mapping",
+          "description": "Document A provides a current architecture diagram that maps different components in the system, including LLM, token emission, ir-callback, IR, ir-stream, divergence-analysis, trace-analysis, Proposal, Review, Commit, and History/WAL. Document B does not provide this information."
+        },
+        {
+          "section": "18. Design Assessment",
+          "description": "Document A assesses the current design of `ir-stream`, highlighting its advantages such as implementation simplicity, deterministic ordering, low overhead, clear authority separation, and replay-friendliness. It also lists important future improvements, including type validation, context isolation, and a stream snapshot API. Document B does not provide this information."
+        },
+        {
+          "section": "Final Specification Summary",
+          "description": "Document A provides a final specification summary that outlines the key features of `ir-stream`, including its role as a temporary ordered observation buffer, guarantees such as insertion order and deterministic analysis input, and non-responsibilities like interpretation, decision-making, persistence, and committing. It also emphasizes that truth remains in History/WAL and that IR Stream remains an observational workspace only. Document B does not provide this information."
+        }
+      ],
+      "file_a": "runtime/ir/ir.md",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.8707
+    },
+    {
+      "pair_summary": "2つの文書は、イベント処理のライフサイクルと関連する操作を定義していますが、構造や詳細に微妙な違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A のライフサイクルに追加のステップ（PromptBuilder, Backend）を含んでおり、統合することでより完全なイベント処理フローが定義できます。",
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/04-runtime-pipeline.spec",
+      "similarity_score": 0.8699
+    },
+    {
+      "pair_summary": "2つの文書は知識システムの構造と仕様について述べていますが、用語や分類が異なるため部分的な重複があります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B の概念と分類が Document A に存在しない新しい視点を提供しています。統合することで、より豊富な知識システムのモデルを作成できます。",
+      "file_a": "docs/ir/knowledge-system.spec",
+      "file_b": "docs/reference/ir/knowledge-rationale.spec",
+      "similarity_score": 0.8694
+    },
+    {
+      "pair_summary": "2つの文書はどちらもグラフ構造と関連操作を定義していますが、文書Bはより詳細な型定義と追加の操作を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bは文書Aよりも詳細で、追加の型定義と操作が含まれています。これらの拡張機能を統合することで、文書Aの機能性が向上し、より完全なグラフ処理能力が得られます。",
+      "file_a": "experiments/ir/3cluster.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.8653
+    },
+    {
+      "pair_summary": "2つの文書は、IR（Intermediate Representation）の処理や生成に関する仕様を定義していますが、構造と内容に若干の違いがあります。Document A はより詳細な操作と状態管理を含み、Document B は主に分離度分析に関連する操作を定義しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B | C | D | E | F | NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B の分離度分析の仕様は Document A に統合することで、IR プロセス全体の観察と分析が一元化され、より効率的な管理が可能になります。",
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8544
+    },
+    {
+      "pair_summary": "2つの文書は、グラフランタイムの構造と操作に関する仕様を共有していますが、具体的な型定義や操作関数に微妙な違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の一部的な拡張と重複を含んでいます。特に、World や Registry に関する仕様が追加されています。これらの追加情報は、より広範なグラフランタイムのコンテキストを提供し、統合することで全体的な理解を深めることができます。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "similarity_score": 0.8506
+    },
+    {
+      "pair_summary": "2つの文書は、グラフランタイムの構造と操作に関する仕様を定義していますが、文書Bが文書Aに比べてより簡潔で一部の詳細が欠けている点があります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bは文書Aの一部を簡潔にまとめたものであり、統合することでより完全な仕様が得られます。特に、文書Bの型定義や操作関数が文書Aに不足している部分を補完します。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.8489
+    },
+    {
+      "pair_summary": "Document A と Document B は同一トピック（IR Divergence Analysis Layer）についての詳細な仕様を記述していますが、文書形式や表現方法に違いがあります。内容は主に一致しており、一部のAPIの説明やアルゴリズムの詳細が異なる場合があります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を補完し、一部の詳細なアルゴリズムやAPIの説明が追加されています。したがって、Document B を Document A に統合することで、より完全な仕様書を作成できます。",
+      "file_a": "runtime/ir/divergence.md",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8485
+    },
+    {
+      "pair_summary": "Document A is a Lisp source file defining the ir-stream package and its functions, while Document B is a markdown specification document detailing the architecture, responsibilities, and properties of the ir-stream module. Both documents describe similar functionality but in different formats.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B provides a more detailed and structured specification of the ir-stream module, which can be beneficial for understanding the architecture and responsibilities. Merging Document B into Document A would enhance the Lisp source file with comprehensive documentation, making it easier to maintain and understand.",
+      "file_a": "runtime/ir/stream.lisp",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.8476
+    },
+    {
+      "pair_summary": "2つの文書は共通のモジュール名 'llama-agent' と 'llama-agent2' を持ち、どちらも物理層から開始して各層をロードするブートシーケンスを定義しています。しかし、文書Bはより詳細なログ出力や特定のファイルの読み込み順序、およびAPIの定義が含まれています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bは文書Aにない追加の機能と詳細を提供しています。これらの追加情報は、より完全な統合と拡張を可能にするため、文書Bを文書Aに統合することをお勧めします。",
+      "file_a": "llama-agent/ir/llama-agent.spec",
+      "file_b": "llama-agent/ir/llama-agent2.spec",
+      "similarity_score": 0.8473
+    },
+    {
+      "pair_summary": "2つの文書は、イベント処理やグラフ構築に関する類似な仕様を含んでいます。ただし、型定義や操作の詳細が異なるため、完全な重複ではありません。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の一部的な仕様を含んでおり、統合することでより完全な仕様体系が得られます。特に、型定義や操作の詳細が異なるため、Document B を Document A に統合することが適切です。",
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/causal-kernel.spec",
+      "similarity_score": 0.8456
+    },
+    {
+      "pair_summary": "2つの文書は、グラフ構造と関連操作について類似していますが、定義や型の表現に若干の違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の機能を拡張し、追加の操作（rollout*、find-recurrent-cycle）と詳細な型定義を含んでいます。これらの追加要素を統合することで、より完全で強力な仕様が得られます。",
+      "file_a": "experiments/ir/3cluster.spec",
+      "file_b": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity_score": 0.84
+    },
+    {
+      "pair_summary": "2つの文書は、World の定義や操作に関する仕様を扱っていますが、構造と詳細に若干の違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の一部的な内容を含んでおり、追加の機能や詳細を提供しています。したがって、Document B を Document A に統合することで、より完全な仕様を保持できます。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.838
+    },
+    {
+      "pair_summary": "2つの文書は観察型（world-observation, registry-observation, ancestry-observation, diff-observation）の定義と操作について似ていますが、構造や詳細に違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の観察型の定義を詳細に説明しており、追加の情報や具体的な操作が含まれています。したがって、Document B を Document A に統合することで、より完全な仕様と一貫性を保つことができます。",
+      "file_a": "docs/ir/r2-0-c-freeze-report.spec",
+      "file_b": "observability/ir/world-snapshot.spec",
+      "similarity_score": 0.8373
+    },
+    {
+      "pair_summary": "2つの文書はどちらもIR（Intermediate Representation）に関する仕様を定義していますが、Document Aはcallback関数とその動作を詳細に説明している一方で、Document BはIRの構造や操作関数を定義しています。両者は互いに関連性があり、統合が必要です。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document BはIRの構造と操作関数を定義しており、Document Aではこれらの概念が暗黙的に使用されています。統合することで、callback関数の動作が明確なIRの定義に基づいて説明され、文書全体の整合性が向上します。",
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.8366
+    },
+    {
+      "pair_summary": "2つの文書は、PayloadRef, MemStore, CausalNode, CausalEdge, CausalGraph, ContextNode, PrefillState, World, Registry, ObsWorld, ObsRegistry, ObsAncestry, ObsDiff の型定義と store-payload, load-payload, add-node!, add-edge!, causal-subgraph, project-context, canonical-prompt, build-prefill-state, register-world, set-active-world, archive-world などの操作を含んでいます。ただし、文書Bはより抽象的な型定義と追加の操作（make-memory-store, %content-string, utf8-octets, sha256-string, payload-exists-p, fork-world, replace-world-metadata!, kernel-commit-world!, replay-world, find-world, active-world, list-worlds, prefill-state, canonical-prompt）を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bは文書Aに含まれていない追加の型定義と操作を含んでいます。これらの追加の機能性が有用であるため、文書Bを文書Aに統合することをお勧めします。これにより、より完全な仕様体系が得られ、将来の開発やメンテナンスが容易になります。",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "memory/ir/store.spec",
+      "similarity_score": 0.8351
+    },
+    {
+      "pair_summary": "2つの文書は、世界の分岐とイベントステージングに関する似た概念を扱っていますが、構造や用語に微妙な違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B (chron-llm-world.spec) は Document A (chron-llm-immune.spec) の一部を含んでおり、構造と概念が似ています。したがって、B を A に統合することで、より完全な仕様体系を作成できます。",
+      "file_a": "llama-agent/ir/chron-llm-immune.spec",
+      "file_b": "llama-agent/ir/chron-llm-world.spec",
+      "similarity_score": 0.83
+    },
+    {
+      "pair_summary": "Document A と Document B は、IR（Intermediate Representation）の観察層に関する仕様を定義していますが、文書BはLispコードで実装されており、文書Aは仕様書形式です。両者は共通の操作や関数名を持ちますが、具体的な実装詳細と構造に違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document Bは具体的な実装を含んでおり、Document Aの仕様を補完する役割を果たしています。したがって、Document Bの内容をDocument Aに統合することで、より完全な仕様と実装の対応関係を確立できます。",
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/divergence.lisp",
+      "similarity_score": 0.8283
+    },
+    {
+      "pair_summary": "Document A は Lisp コードで IR コールバックの定義を示していますが、Document B は同様の機能を説明する仕様書です。両者は同じ論理的な目的を持っていますが、表現形式と詳細が異なります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の機能をより詳細に説明しており、統合することでコードのドキュメンテーションが充実します。",
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/callback.spec",
+      "similarity_score": 0.8202
+    },
+    {
+      "pair_summary": "2つの文書はどちらもLLM生成プロセスに関連していますが、実装の詳細や使用するデータ構造に違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "両文書は異なる側面をカバーしており、統合すると全体的なLLM生成プロセスの理解が深まります。",
+      "file_a": "llama-agent/ir/chron-llm.spec",
+      "file_b": "llama-agent/ir/generate.spec",
+      "similarity_score": 0.8191
+    },
+    {
+      "pair_summary": "Document A と Document B は、どちらも Chron-LLM の仕様体系における特定のフェーズ（Phase C と Phase D）について記述しています。両文書とも History, ProjectionModel, SemanticModel を使用し、それぞれ異なる操作とアキームを定義しています。Document A では Interpretation と JustificationStructure が中心的ですが、Document B では GraphConstruction が焦点となっています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A と Document B は異なるフェーズを扱っているため、それぞれの特徴や操作が互いに補完的な関係にあると考えられます。したがって、両文書を保持し、各フェーズの仕様を明確に分けて統合することが推奨されます。",
+      "file_a": "docs/ir/phase-c-charter.spec",
+      "file_b": "docs/ir/phase-d-charter.spec",
+      "similarity_score": 0.8159
+    },
+    {
+      "pair_summary": "Document A は Lisp コードで IR FFI ブリッジの実装を提供し、Document B はその仕様を詳細に記述しています。両者は同じ機能を扱っていますが、形式と内容が異なる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の実装を補完する詳細な仕様を提供しています。したがって、Document B の内容を Document A に統合することで、より完全な情報を持つことができます。",
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ffi.md",
+      "similarity_score": 0.8146
+    },
+    {
+      "pair_summary": "Document A and Document B describe similar systems with overlapping concepts such as nodes, edges, graphs, and memory stores. However, they differ in specific details like data types, operations, and invariants.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Both documents describe different but related aspects of the Chron-LLM system. Document A focuses on the graph runtime core, while Document B covers world observation and management. Keeping both allows for a comprehensive understanding of the system's architecture without redundancy.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity_score": 0.8129
+    },
+    {
+      "pair_summary": "Document A と Document B は、操作セマンティクスと Chron マッピングに関する仕様を扱っていますが、内容に若干の重複があります。両文書ともに Validation、PolicyRouter、Commit、Replay、Derived の概念を含みますが、具体的な実装や関連性が異なる部分も存在します。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B の内容は Document A に統合することで、操作セマンティクスと Chron マッピングの両方を網羅した一貫した仕様書を作成できます。特に Validation、PolicyRouter、Commit、Replay、Derived の概念についての詳細な説明が追加され、文書全体の理解性が向上します。",
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity_score": 0.8128
+    },
+    {
+      "pair_summary": "2つの文書は、Chron-LLM の仕様を定義していますが、一方は高レベルの抽象化（Doc A）で他方は低レベルの FFI バインディング（Doc B）に焦点を当てています。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A は Chron-LLM の高レベルの抽象化を提供し、Doc B はその実装に必要な低レベルの FFI バインディングを定義しています。両者は相補的な役割を果たしており、統合することは適切ではありませんが、共存することが推奨されます。",
+      "file_a": "llama-agent/ir/chron-llm.spec",
+      "file_b": "llama-agent/ir/ffi-bindings.spec",
+      "similarity_score": 0.8099
+    },
+    {
+      "pair_summary": "Document A and Document B describe the same IR Stream specification with similar content, including package definition, responsibilities, data structures, API specifications, and invariants. However, Document B is more concise and formalized, focusing on type definitions, operations, and state management.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B provides a more formalized and concise specification, which can be integrated into Document A to enhance clarity and completeness. The additional structure in Document B (such as type definitions and operations) will improve the overall organization and maintainability of the IR Stream specification.",
+      "file_a": "runtime/ir/stream.md",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.8088
+    },
+    {
+      "pair_summary": "Document A は Lisp コードで IR Divergence Analysis の実装を示していますが、Document B は同様の機能についての詳細な仕様と説明を Markdown 形式で提供しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の実装を補完する詳細な仕様と説明を提供しています。したがって、Document B の内容を Document A に統合することで、より完全な情報源となり、開発やドキュメンテーションの作成に役立ちます。",
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/divergence.md",
+      "similarity_score": 0.8066
+    },
+    {
+      "pair_summary": "2つの文書は、Chron-LLM の World ランタイムに関する仕様を扱っていますが、構造的類似性があります。Document A は主にタイプ定義、ロール、操作、およびテストケースを含み、Document B は主にユーティリティ関数、オペレーション、およびテストスイートを含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B のユーティリティ関数と追加のテストケースは、Document A の仕様を補完し、統合することでより完全な World ランタイムの定義が得られます。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity_score": 0.8064
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の観察ランタイムに関する仕様を定義しており、Document B はその一部である観察ランタイムの凍結レポートを示しています。両文書には類似したタイプと操作が含まれていますが、Document B は特定の状態（FROZEN）とスコープを指定しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A は観察ランタイムの全体的な仕様を定義しており、Document B はその特定の状態とスコープに関する追加情報を提供しています。両文書が互いに補完するため、両方を保持することが適切です。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "docs/ir/r2-0-c-freeze-report.spec",
+      "similarity_score": 0.8048
+    },
+    {
+      "pair_summary": "2つの文書は同じパッケージ名とエクスポートされたシンボルを持ち、IR（Intermediate Representation）の定義と関連操作が共通しています。ただし、文書AはLispコードで実装されており、文書Bは仕様書形式で記述されています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bは文書Aの仕様を補完する形で、より詳細な型定義と操作が記述されています。文書Aに文書Bの内容を統合することで、IRの完全な定義と使用方法が明確になります。",
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.8035
+    },
+    {
+      "pair_summary": "2つの文書はどちらも因果グラフの構造と操作に関する仕様を定義していますが、具体的な型定義や関数の詳細に違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の一部的な内容を含み、追加の型定義や関数が提供されています。これらの拡張機能を統合することで、より完全な仕様を達成できます。",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity_score": 0.8033
+    },
+    {
+      "pair_summary": "Document A と Document B は同じ内容を異なる形式で説明しており、構造的類似性が高く、意味論的重複も存在します。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の内容を簡潔にまとめた形式で提供しており、追加の情報や修正が含まれているため、Document A に統合することをお勧めします。これにより、より完全な仕様と一貫性のあるドキュメントを作成できます。",
+      "file_a": "runtime/ir/ffi.md",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity_score": 0.8024
+    },
+    {
+      "pair_summary": "Document A と Document B は、どちらも Chron-LLM のアーキテクチャに関する仕様を定義していますが、焦点が異なる。Document A はドメインモデルの詳細を記述し、イベントやリクエストのフローを含みます。Document B はランタイムパイプラインの構造と操作を説明しており、特定のオペレーション（Commit, Replay, PromptBuilder 等）とその制約を定義しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A | B | C | D | E | F | NONE",
+        "doc_b_phase": "B | C | D | E | F | NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A と Document B の内容は部分的に重複していますが、それぞれ異なる側面をカバーしています。Document B のランタイムパイプラインの詳細を Document A に統合することで、全体的なアーキテクチャの理解を深めることができます。",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/04-runtime-pipeline.spec",
+      "similarity_score": 0.802
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の基本的な仕様と操作を定義していますが、Document B はより具体的な層別アーキテクチャとセッション管理の詳細を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "R0",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A の基本仕様と Document B の層別アーキテクチャは互いに補完的な関係であり、統合することでより完全な Chron-LLM の仕様を提供できます。",
+      "file_a": "llama-agent/ir/chron-llm.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity_score": 0.8014
+    },
+    {
+      "pair_summary": "2つの文書はどちらもWorldの定義や操作に関する仕様を扱っていますが、構造と詳細に違いがあります。Document Aはより具体的なAPIとテストケースを含んでおり、Document Bは型定義とインバリアントのみを記述しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document Bの型定義とインバリアントは、Document Aに追加することで全体的な仕様がより完全になる。特に、型定義の詳細な情報やインバリアントは、APIの実装とテストを補完する役割があるため、統合することが適切です。",
+      "file_a": "tests/md/ir/r2-0-b-tests.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.8014
+    },
+    {
+      "pair_summary": "Document A は R2-0-C のフリーズレポートであり、状態、範囲、タイプ、操作、不変条件、および検証情報を含んでいます。Document B は R2-0-C のテスト仕様で、タイプ定義、ユーティリティ関数、テストケース、ランナー、および不変条件を記述しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B のテスト仕様は Document A のフリーズレポートに直接統合できる。特に、不変条件とタイプ定義が重複しているため、統合することで情報の冗長性を削減し、一貫性を保つことができる。",
+      "file_a": "docs/ir/r2-0-c-freeze-report.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity_score": 0.8001
+    },
+    {
+      "pair_summary": "2つの文書は同じIR（Intermediate Representation）仕様について説明していますが、形式と詳細に違いがあります。Document Aはより詳しい説明と図示を含み、Document Bは簡潔なAPI仕様と型定義に焦点を当てています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document Bの簡潔なAPI仕様と型定義をDocument Aに統合することで、より完全で一貫したIR仕様書を作成できます。これにより、開発者がIRの使用方法を理解しやすくなり、実装時のミスを減らすことができます。",
+      "file_a": "runtime/ir/ir.md",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.7996
+    },
+    {
+      "pair_summary": "2つの文書は共通の Event 構造を持ちますが、異なる種類の Kind、追加の State 定義、および異なる操作と不変条件を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "2つの文書は部分的な重複と異なる要素を含んでいます。それぞれの特徴を維持するために、両方の文書を保持し、統合するための明確な戦略が必要です。",
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "docs/ir/architecture-v1.spec",
+      "similarity_score": 0.7974
+    },
+    {
+      "pair_summary": "Document A と Document B は共通の STATE H (History) と AXIOM A = H を持ちますが、それぞれ異なる STATE, OP, AXIOM, INV, EXCLUDE の定義を持っています。Document B には Document A にない ProjectionModel, EventABI, SemanticModel, JustificationStructure が含まれており、Document A には Document B にない EventABI, Resolution, SemanticUnit, Interpretation, LLMRuntime が含まれています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A と Document B は異なる PHASE (A と C) を表しており、それぞれ独自の仕様を持っています。そのため、両方を保持し、PHASE に応じて適切な統合方針を適用することが推奨されます。Delta3 Kernel の統合方針では、異なる PHASE の仕様は独立して維持されますが、共通部分があれば統合するためのガイドラインがあります。",
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-c-charter.spec",
+      "similarity_score": 0.7945
+    },
+    {
+      "pair_summary": "2つの文書はどちらもグラフ構造と吸収域（Basin）に関する仕様を定義していますが、Document B には追加の操作や型定義があります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の仕様を拡張しており、追加の操作や型定義が含まれています。これらの拡張は互いに補完的であり、統合することでより完全な仕様体系が得られます。",
+      "file_a": "experiments/ir/basin.spec",
+      "file_b": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity_score": 0.7943
+    },
+    {
+      "pair_summary": "2つの文書は主に因果グラフとコンテキストノードに関する仕様を定義していますが、型名や操作の詳細が異なるため部分的な重複があります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の仕様を一部拡張しており、型名や操作の詳細が異なるため、Document B を Document A に統合することで全体的な仕様の一貫性と完全性を確保できます。",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.7933
+    },
+    {
+      "pair_summary": "2つの文書は、データ構造や操作関数に関する仕様を定義していますが、内容に若干の違いがあります。Document A はより詳細な型定義とバリデーションルールを含んでおり、Document B はより一般的なストア操作とワールド管理機能を追加しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A | B | C | D | E | F | NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A と Document B の内容は一部重複していますが、Document B に含まれる追加のストア操作とワールド管理機能は有用です。これらの機能を Document A に統合することで、より完全な仕様体系を構築できます。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "memory/ir/store.spec",
+      "similarity_score": 0.7888
+    },
+    {
+      "pair_summary": "2つの文書は、ランタイムパイプラインとクロナマッピングに関する仕様を扱っていますが、それぞれ異なる詳細を持っています。文書Aはより一般的なランタイムフローを説明し、文書Bはクロナの具体的な実装要素を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bはクロナの具体的な実装要素を提供しており、文書Aに統合することで、ランタイムパイプラインの詳細な仕様が充実します。",
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity_score": 0.7881
+    },
+    {
+      "pair_summary": "2つの文書はともにIR（Intermediate Representation）について説明していますが、形式と詳細度が異なります。Doc AはLispコードとコメントで構成され、Doc BはMarkdown形式の仕様書です。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc Bはより詳細な仕様書であり、情報の充実度が高いため、Doc Aに統合することで全体的な理解を深めることができます。",
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/ir.md",
+      "similarity_score": 0.7876
+    },
+    {
+      "pair_summary": "2つの文書はどちらもグラフランタイムの構造と関連する仕様を定義していますが、Document A はより詳細なノードタイプ、エッジタイプ、および関連する関数やバリデーションルールを含んでいます。Document B は主に PrefillState の定義と関連する関数を焦点にしています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A | B | C | D | E | F | NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A はより広範なグラフランタイムの仕様をカバーしており、Document B の内容は Document A の一部として統合できます。これにより、PrefillState の定義と関連する関数が Document A に完全に含まれ、全体的な仕様の一貫性が保たれます。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/prefill.spec",
+      "similarity_score": 0.7871
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM の観察ランタイムの仕様を定義しており、Document B はそのテストケースを含んでいます。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A は観察ランタイムの仕様を定義し、Document B はその仕様に対する具体的なテストケースを提供しています。両者は親子関係であり、互いに補完的な役割を果たしています。したがって、両方のドキュメントを保持し、統合する必要があります。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity_score": 0.7855
+    },
+    {
+      "pair_summary": "Document A と Document B はどちらも Chron-LLM の仕様体系に関するものであり、状態（STATE）、操作（OP）、公理（AXIOM）、不変条件（INV）の定義が含まれています。しかし、それぞれ異なるフェーズ（Phase B と Phase D）に属しており、状態や操作の詳細、不変条件、除外項目が異なります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A と Document B は異なるフェーズに属しているため、それぞれの特徴を保持することが重要です。統合する必要はありませんが、両方の文書を参照することで、Chron-LLM の全体的な仕様体系をより完全に理解することができます。",
+      "file_a": "docs/ir/phase-b-charter.spec",
+      "file_b": "docs/ir/phase-d-charter.spec",
+      "similarity_score": 0.7853
+    },
+    {
+      "pair_summary": "Document A と Document B はどちらも IR (Intermediate Representation) に関する仕様を定義していますが、B は追加でストリーム操作（push-ir, clear-ir-stream）とライフサイクルの詳細を含んでいます。A の内容は B のサブセットであり、B は A を拡張しています。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_A_INTO_B",
+      "integration_rationale": "Document B は Document A の内容を拡張しており、追加のストリーム操作とライフサイクルの詳細が含まれています。したがって、Document A を Document B に統合することで、より完全な仕様を保持できます。",
+      "file_a": "runtime/ir/ir.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.7828
+    },
+    {
+      "pair_summary": "Document A と Document B は、どちらも因果グラフと関連するコンテキストノードの構造を定義していますが、文書Bは文書Aよりも具体的な型定義と操作を含んでいます。文書Bは文書Aに含まれる概念を拡張し、追加の操作や不変条件も提供しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bは文書Aに含まれる概念を拡張し、追加の操作や不変条件も提供しています。したがって、文書Bの内容を文書Aに統合することで、より完全な仕様と機能性を得ることができます。",
+      "file_a": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.7826
+    },
+    {
+      "pair_summary": "Document A and Document B describe similar FFI bindings for a mock model and a real model, respectively. Both documents define operations related to loading models, initializing contexts, evaluating tokens, and managing samplers. However, there are differences in the types defined, operation signatures, and additional features like event handling and lifecycle sequences.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Both documents describe different aspects of FFI bindings, with Document A focusing on a mock model and Document B on a real model. Keeping both allows for a comprehensive understanding of the system's architecture without redundancy.",
+      "file_a": "llama-agent/ir/ffi-bindings-mock.spec",
+      "file_b": "llama-agent/ir/ffi-bindings.spec",
+      "similarity_score": 0.7826
+    },
+    {
+      "pair_summary": "Document A 定義した IR コールバックパッケージと関数が、Document B で使用されています。両文書は CFFI ベースの外部関数呼び出しと IR の処理に焦点を当てています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A で定義された IR コールバックを拡張し、IR ブリッジの初期化を追加しています。したがって、Document B の内容を Document A に統合することで、より完全な機能と一貫性が保たれます。",
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ffi.lisp",
+      "similarity_score": 0.7817
+    },
+    {
+      "pair_summary": "2つの文書はどちらも世界（World）の構造と操作について定義していますが、具体的な型定義や操作の詳細に違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の一部的な内容を含んでおり、統合することでより完全な世界（World）の定義が得られます。特に、Registry の詳細と関連操作が不足しているため、Document B を Document A に統合することが適切です。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "registry/ir/registry.spec",
+      "similarity_score": 0.781
+    },
+    {
+      "pair_summary": "2つの文書は共通のセッション管理とチャットループの概念を持っていますが、構造と詳細に違いがあります。Document Aは単純なチャットループを定義していますが、Document Bはより複雑で層化されたアーキテクチャ（R0_SessionExec, R1_IRObs, CausalKernel, Backend）を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "A | B | C | D | E | F",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document AとDocument Bは異なる抽象レベルで同じ概念を扱っています。Document Aの単純なチャットループは、Document Bのより複雑なアーキテクチャの一部として役立つ可能性があります。したがって、両方の文書を保持し、必要に応じて統合することが推奨されます。",
+      "file_a": "runtime/r0/ir/chat-loop.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity_score": 0.7808
+    },
+    {
+      "pair_summary": "Document A と Document B はどちらもグラフ構造と関連操作を定義していますが、型定義や操作の詳細に微妙な違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B の型定義と操作が Document A に近いですが、いくつかの詳細が異なるため、統合することで一貫性を保つことができます。特に、`context-node` 型と `project-context` 操作の定義が似ているため、Document B を Document A に統合すると良いでしょう。",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/projection.spec",
+      "similarity_score": 0.7792
+    },
+    {
+      "pair_summary": "2つの文書は共通の構造を持つが、異なる型定義と操作を使用している。どちらもイベントの追加、ステージング、コミットなどの基本的な操作を含む。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "両文書は部分的に重複しているが、異なる型定義と操作を使用しているため、統合するよりも独立して維持することを推奨します。",
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity_score": 0.7783
+    },
+    {
+      "pair_summary": "2つの文書はどちらも因果グラフ（CausalGraph）に関連する仕様を定義していますが、文書Aはより詳細な型定義と操作を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bは文書Aに含まれていない型定義と操作を提供しています。これらの追加の要素を統合することで、文書Aがより完全な仕様を備えることができます。",
+      "file_a": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity_score": 0.7781
+    },
+    {
+      "pair_summary": "Document A はメモリモデルの定義と操作を説明しており、Document B は復旧プロセスの仕様を記載しています。両文書ともメモリ参照や状態管理に関連していますが、具体的な内容や焦点が異なる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "両文書は異なる側面からメモリ管理と復旧を扱っているため、それぞれの特徴を維持したまま併存させることが適切です。",
+      "file_a": "docs/ir/08-memory-model.spec",
+      "file_b": "docs/ir/12-recovery.spec",
+      "similarity_score": 0.7764
+    },
+    {
+      "pair_summary": "2つの文書は、Domain Model (Doc A) と Operational Semantics (Doc B) の両方を扱っていますが、それぞれ異なるレベルで詳細を提供しています。Doc A は型定義や関係性を明確にし、Doc B は具体的な操作やライフサイクルの説明を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc B の Operational Semantics は Doc A の Domain Model を補完し、具体的な操作やライフサイクルの詳細を提供しています。両文書を統合することで、より完全な仕様体系が得られます。",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/02-operational-semantics.spec",
+      "similarity_score": 0.7749
+    },
+    {
+      "pair_summary": "2つの文書は観測性に関する仕様を扱っていますが、構造や内容に若干の違いがあります。Document Aはより一般的な観測性の定義と操作を含み、Document Bは特定の観測型（world-observation, registry-observation等）の詳細なスキーマと関連する関数を定義しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document BはDocument Aで定義された観測性の概念を具体的化した詳細なスキーマと関数を提供しています。この情報はDocument Aに統合することで、より完全な観測性の仕様が得られます。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "observability/ir/world-snapshot.spec",
+      "similarity_score": 0.7737
+    },
+    {
+      "pair_summary": "Document A 定義した ir-callback パッケージは、Document B の ir パッケージによって提供される make-ir 関数を使用しています。両文書は IR（Intermediate Representation）の概念を共有しており、構造と目的が類似しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A と Document B は IR の概念を共有していますが、それぞれ異なる役割を持っています。Document A は callback 定義を提供し、Document B は IR 構造体の定義を提供します。両方のファイルは独立して存在することが適切であり、互いに補完的な関係です。",
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ir.lisp",
+      "similarity_score": 0.7728
+    },
+    {
+      "pair_summary": "Document A と Document B は、どちらも Chron-LLM のアーキテクチャに関する仕様を定義していますが、文書 B はより具体的な実装やマッピングに焦点を当てています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "両文書は異なるレベルで Chron-LLM の仕様をカバーしており、それぞれの特徴が重要です。Document A は一般的なアーキテクチャ定義を提供し、Document B は具体的な実装マッピングを示しています。したがって、両方の文書を保持して統合することで、より完全な理解と参照性を維持できます。",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity_score": 0.7712
+    },
+    {
+      "pair_summary": "2つの文書はどちらもグラフ構造と関連操作を定義していますが、内容や型定義に若干の違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "2つの文書は部分的に重複しているが、それぞれ異なる操作や型定義を持っているため、両方を保持し統合する方が適切です。",
+      "file_a": "experiments/ir/basin.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.7694
+    },
+    {
+      "pair_summary": "Document A は Chron-LLM カーネルの仕様を詳細に定義しており、Document B はそのカーネルを使用するランタイム環境の仕様を示しています。両者は共通の KernelState 構造体を持ちますが、用途と抽象化レベルが異なる。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "F",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A はカーネルの低レベルな操作と状態管理を定義しており、Document B はそのカーネルを使用するランタイム環境の動作を示しています。両者は異なる抽象化レベルで関連しているため、それぞれ独立して維持することが適切です。",
+      "file_a": "llama-agent/ir/chron-llm-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-runtime.spec",
+      "similarity_score": 0.7682
+    },
+    {
+      "pair_summary": "2つの文書はともに Chron-LLM のランタイム仕様を扱っていますが、それぞれ異なる層や操作を定義しています。Document A は基本的なランタイム環境とカーネルの操作を記述しており、Document B はより詳細なセッション管理、トレース生成、物理イベント処理などの高层仕様を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "R0",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "両文書は異なる層を扱っているため、それぞれの特徴を維持したまま統合することが適切です。Document A の基本的なランタイム環境と Document B の高层仕様を併用することで、より完全な Chron-LLM の仕様体系を構築できます。",
+      "file_a": "llama-agent/ir/chron-llm-runtime.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity_score": 0.7655
+    },
+    {
+      "pair_summary": "Document A は IR コールバックの仕様を定義しており、Document B は IR ストリームの仕様を定義しています。両者は IR プロセスに関連していますが、具体的な機能と構造には違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "両文書は異なる側面の IR プロセスを定義しており、互いに補完的な役割を果たしています。したがって、両方を保持し、統合する必要はありません。",
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.7639
+    },
+    {
+      "pair_summary": "Document A は IR の型定義や操作関数を詳細に説明している一方、Document B は IR Stream の仕様、アーキテクチャ的位置付け、API スペックなどを含んでいます。両文書は IR 関連の内容を扱っているが、焦点と詳細な内容が異なる。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A と Document B は IR 関連の異なる側面をカバーしており、それぞれに独自の重要な情報を含んでいます。したがって、両文書を保持し、必要に応じて相互参照できるように統合することをお勧めします。",
+      "file_a": "runtime/ir/ir.spec",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.7624
+    },
+    {
+      "pair_summary": "Document A と Document B はどちらもグラフ構造と関連操作を定義していますが、具体的な型名や操作の詳細に違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "両文書にはそれぞれ独自の特徴があり、統合すると情報が不足する可能性があります。したがって、両方を保持し、必要に応じて相互参照することをお勧めします。",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity_score": 0.7621
+    },
+    {
+      "pair_summary": "Document A 定義した観察型（world-observation, registry-observation, ancestry-observation, diff-observation）と関連する関数（build-world-observation, build-registry-observation, build-ancestry-observation, build-diff-observation）を含む。Document B はこれらの観察型を使用してテストケースを定義している。",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "F",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A は観察型と関連する関数の定義を含む基本的な仕様であり、Document B はその観察型を使用して具体的なテストケースを提供している。両者は異なる PHASE（C vs F）に属しており、互いに依存しているが独立しているため、両方を保持するべきです。",
+      "file_a": "observability/ir/world-snapshot.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity_score": 0.7614
+    },
+    {
+      "pair_summary": "2つの文書はともに実行スケジューリングやリトライメカニズムについて定義していますが、それぞれ異なるイベントタイプと状態管理を使用しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "両文書は異なるコンテキストで使用される可能性があり、それぞれの特徴を維持することが重要です。統合する必要はありませんが、参照関係や相互依存性を明確に記述することをお勧めします。",
+      "file_a": "docs/ir/09-runtime-scheduling.spec",
+      "file_b": "docs/ir/10-tool-execution.spec",
+      "similarity_score": 0.7607
+    },
+    {
+      "pair_summary": "2つの文書は、同じドメインモデルと関連する型定義、操作、および不変条件を共有していますが、文書Bはより具体的な実装詳細や追加の型（如く KernelAction, Fault, KernelState, Runtime）を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "文書Bは文書Aにない追加の型と操作を含んでおり、統合することでより完全なドメインモデルが得られます。文書Aの基本的な構造は維持され、文書Bの詳細な実装部分が追加されます。",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "runtime/r1/ir/core.spec",
+      "similarity_score": 0.7598
+    },
+    {
+      "pair_summary": "2つの文書は、イベント処理、グラフ構築、および状態管理に関する類似な仕様を含んでいます。ただし、具体的な型定義や操作の詳細が異なるため、部分的な重複と独立性があります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "2つの文書は類似した概念を扱っていますが、それぞれ異なる詳細と型定義を持っているため、統合せずに両方を保持することが適切です。",
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity_score": 0.7595
+    },
+    {
+      "pair_summary": "2つの文書は共通のイベント処理とWAL管理の概念を持っていますが、具体的な型定義や操作が異なる。Doc AはUUIDを使用し、Doc Bは整数を使用しています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "2つの文書は異なる型定義と操作を使用しているため、統合する利点が不明確です。それぞれの文書を独立に維持し、必要に応じて参照することが推奨されます。",
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity_score": 0.7589
+    },
+    {
+      "pair_summary": "Document A と Document B はどちらも WAL（Write-Ahead Log）とイベント処理に関する仕様を定義していますが、具体的なデータ構造や操作が異なる。Document A は Chron-LLM のコンミット・カーネルの仕様で、イベントの種類や状態管理が明確に定義されています。一方、Document B は Llama-Agent の WAL 操作に関するより一般的な仕様です。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A と Document B は異なるコンテキストで WAL の仕様を定義しており、それぞれの特徴が重要です。Document A は Chron-LLM の具体的な実装に焦点を当てており、Document B はより一般的な WAL 操作をカバーしています。したがって、両方の文書を保持し、必要に応じて参照できるようにすることをお勧めします。",
+      "file_a": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity_score": 0.7562
+    },
+    {
+      "pair_summary": "2つの文書はどちらも Chron-LLM R1 の IR Observation Layer に関する仕様ですが、Document A は具体的な実装詳細に焦点を当てており、Document B はより広範な観察層の設計原則と統合方針を含んでいます。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "D/E",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の設計原則と統合方針を広げており、より高层の視点から観察層の役割と位置付けを説明しています。したがって、Document B の内容を Document A に統合することで、より完全な仕様書を作成できます。",
+      "file_a": "runtime/ir/callback.md",
+      "file_b": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "similarity_score": 0.7554
+    },
+    {
+      "pair_summary": "2つの文書はどちらもIR（Intermediate Representation）に関する仕様を定義していますが、内容や構造に若干の違いがあります。Document Aはより具体的な操作とプロファイル生成のアルゴリズムを含んでおり、Document BはIRの作成と属性へのアクセスを焦点にしています。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document Bが提供するIRの作成と属性へのアクセス機能は、Document Aで定義された操作を補完します。したがって、Document Bの内容をDocument Aに統合することで、より完全なIR仕様を形成できます。",
+      "file_a": "runtime/ir/divergence.spec",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.7511
+    },
+    {
+      "pair_summary": "Document A describes a branching mechanism for worldlines with events and states, while Document B outlines the commit kernel constitution for Chron-LLM R2.0, focusing on event handling, state management, and invariants.",
+      "relationship": "INDEPENDENT",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Both documents describe different aspects of the Chron-LLM system, with Document A focusing on branching mechanisms and Document B on commit operations. They are independent but complementary, and keeping both allows for a comprehensive understanding of the system's architecture.",
+      "file_a": "docs/ir/13-worldline-branching.spec",
+      "file_b": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "similarity_score": 0.7502
+    },
+    {
+      "pair_summary": "2つの文書は、World ランタイムの観察コントラクトに関する定義と操作を扱っていますが、構造や詳細に微妙な違いがあります。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document B は Document A の一部を含み、追加のフィールドや操作が定義されています。Document A に Document B の内容を統合することで、より完全な仕様と一貫性を維持できます。",
+      "file_a": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.75
+    }
+  ]
+}
