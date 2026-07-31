@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the static domain model (types, enums, invariants, ownership) while Doc B specifies the dynamic runtime pipeline and operational flow using those types. They share significant semantic overlap regarding component interactions but differ in abstraction level.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the canonical schema definition (Phase C) ensuring type safety and ownership constraints for Delta3 Kernel. Doc B describes the execution protocol (Phase D). While redundant in listing types, they must coexist to separate data structure definitions from control flow logic. Integration requires Doc B to formally reference Doc A's type definitions rather than loosely enumerating them.",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/04-runtime-pipeline.spec",
+      "similarity_score": 0.802
+    }
+  ]
+}

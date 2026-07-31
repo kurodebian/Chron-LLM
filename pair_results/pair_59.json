@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc B defines the canonical Hardware Abstraction Layer (HAL) interface for llama.cpp integration, specifying pointer-based types and event structures required by the Delta3 Kernel. Doc A provides a deterministic mock implementation of this exact interface using symbolic types for testing purposes. They share identical API signatures to ensure ABI compatibility.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B serves as the production contract (PhysicalLayer HAL) for native code interaction, while Doc A is critical for unit testing and simulation of the Delta3 Kernel without external dependencies. The 'mock_compat' invariant in Doc B explicitly mandates their coexistence to ensure the kernel logic remains decoupled from the underlying C library implementation details.",
+      "file_a": "llama-agent/ir/ffi-bindings-mock.spec",
+      "file_b": "llama-agent/ir/ffi-bindings.spec",
+      "similarity_score": 0.7826
+    }
+  ]
+}

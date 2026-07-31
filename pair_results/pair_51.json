@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the high-level 'Constitution' for Chron-LLM R2.0-A, focusing on abstract types, causal separation rules, and critical invariants (INV-*). Doc B provides a concrete module specification ('store.spec') with implementation logic, explicit hashing algorithms, and world lifecycle operations.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A establishes the architectural constraints and correctness criteria (e.g., INV-GRAPH-APPEND, INV-PREFILL-DET) required by the Delta3 Kernel. Doc B implements these concepts with necessary operational granularity (e.g., SHA-256 logic, world forking). They represent distinct layers of abstraction: Constitution vs. Implementation Interface. Keeping both ensures architectural integrity while providing executable specifications.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "memory/ir/store.spec",
+      "similarity_score": 0.7888
+    }
+  ]
+}

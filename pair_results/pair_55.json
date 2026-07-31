@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the normative R2.0-C Observability Constitution (types, operations, invariants), while Doc B implements the corresponding verification suite (tests d1-d7) validating those specific constraints. They share identical semantic requirements but serve distinct roles as definition versus enforcement.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A acts as the architectural contract for Delta3 Kernel observability, while Doc B serves as the executable test harness. Merging them would conflate high-level invariants with low-level test utilities (fixtures/assertions). They should remain separate to maintain separation of concerns; however, Doc B should ideally import types from Doc A via module references to prevent specification drift.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity_score": 0.7855
+    }
+  ]
+}

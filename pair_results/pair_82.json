@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the formal Phase D Commit Kernel Constitution with hash-based content addressing, strict immutability, and clockless causal IDs. Doc B presents a simpler, untagged specification using integer counters and optional clocks for events and WAL management.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "integration_rationale": "Doc A establishes the authoritative Delta3 Kernel architecture (Phase D), enforcing deterministic hash-based identities and prohibiting wall-clock timestamps to ensure causal consistency. Doc B's reliance on integer node IDs and clock fields fundamentally conflicts with these invariants, indicating it is either a legacy draft or an incompatible abstraction that must be deprecated in favor of the Phase D Constitution.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity_score": 0.7562
+    }
+  ]
+}

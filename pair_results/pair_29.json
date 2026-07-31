@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines low-level LLM runtime primitives and types integrated with Chron-LLM Kernel structures (WAL, LogicalClock). Doc B implements a high-level generation orchestration module that consumes Doc A's primitives while adding Delta3-specific immune system monitoring (entropy checks) and fault recovery logic.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A establishes the canonical Runtime Interface ensuring strict state invariants and Kernel alignment. Doc B represents a specific Agent Policy/Orchestration layer that relies on A's primitives to implement safety-critical generation flows (immune sensors, rollback). Merging them would conflate core API definitions with domain-specific execution policies, violating separation of concerns required by the Delta3 architecture.",
+      "file_a": "llama-agent/ir/chron-llm.spec",
+      "file_b": "llama-agent/ir/generate.spec",
+      "similarity_score": 0.8191
+    }
+  ]
+}

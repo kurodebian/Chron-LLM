@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define the IR (Intermediate Representation) package API, data structure fields (ctx-id, pos, phase, token, score), and core logical invariants (purity, immutability, ordering). Document A is a comprehensive architectural design specification with detailed rationale and Chron-LLM context. Document B is a concise formal interface summary that semantically duplicates the definitions found in Document A without adding unique constraints.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A serves as the authoritative source of truth, containing critical architectural context (Delta3 Kernel boundaries, WAL relationship) and explicit formal invariants (IR-1 to IR-4) that cover all content in Document B. Maintaining both files creates a risk of specification drift between the design doc and the interface summary. Recommended action is to merge Document B's concise syntax into Document A as an appendix or reference block for quick lookup, then deprecate Document B.",
+      "file_a": "runtime/ir/ir.md",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.7996
+    }
+  ]
+}

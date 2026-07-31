@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the immutable IR data structure (fields, accessors) and abstract Stream type with purity invariants. Doc B defines the concrete mutable runtime stream buffer (*ir-stream*), lifecycle management (clear/push), and threading constraints, but redundantly re-declares the IR type loosely.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc B represents the runtime implementation of Doc A's abstract Stream type. Merging is recommended to eliminate redundant IR definitions (preventing schema drift) and unify the data contract with its execution context semantics within the Delta3 Kernel. The integration should normalize Doc B's Lisp-style state management into Doc A's interface, preserving the global buffer logic as a specific runtime behavior of the IR subsystem.",
+      "file_a": "runtime/ir/ir.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.7828
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines high-level worldline branching logic and state transitions based on semantic event types (drift/stagnation). Doc B defines the low-level Commit Kernel infrastructure (Phase D), specifying event persistence, WAL mechanics, and causal ID generation algorithms.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B serves as the foundational infrastructure (Phase D) for event persistence and consistency. Doc A represents a higher-level control policy (likely Phase E/Delta3 Kernel logic) that consumes Doc B's primitives. Integration requires updating Doc A to explicitly invoke Doc B's Commit operation for persisting branch states, rather than using abstract 'gen_id()' or simplified state updates.",
+      "file_a": "docs/ir/13-worldline-branching.spec",
+      "file_b": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "similarity_score": 0.7502
+    }
+  ]
+}

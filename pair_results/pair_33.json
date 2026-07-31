@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines formal operational semantics, state transition rules (Commit/Replay), and invariants for the IR layer. Doc B maps these abstract concepts to specific Delta3 Kernel implementation artifacts (e.g., Event -> WAL_Entry, ValidationReport -> Δ0_Report). They share terminology but serve different architectural purposes: logical definition vs. concrete binding.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Separation of concerns is critical for the Delta3 Kernel architecture. Doc A establishes invariant logic independent of implementation details, ensuring deterministic behavior across backends. Doc B provides necessary binding to physical structures (WAL, RefStore) without polluting the abstract specification. Merging would couple formal semantics with concrete runtime artifacts, reducing flexibility for kernel refactoring.",
+      "file_a": "docs/ir/02-operational-semantics.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity_score": 0.8128
+    }
+  ]
+}

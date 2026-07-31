@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines a narrow specification for the 'IR Callback Layer', focusing strictly on the bridge mechanism between C Runtime and IR Stream with strict isolation constraints. Doc B defines the comprehensive 'IR Observation Layer Specification' (Unified Contract), which encompasses the same callback bridge but extends scope to include stream management, analysis utilities (divergence profiling), and integration with Phase G/Causal Graphs.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "E",
+        "doc_b_phase": "E",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_A_INTO_B",
+      "integration_rationale": "Doc B serves as the master 'Unified Observation Contract' and already includes the callback interface definition found in Doc A (Section 4). To maintain a single source of truth for the Delta3 Kernel's observation layer, Doc A should be deprecated as a standalone spec. However, Doc A's explicit design principles ('Physical Boundary', 'Lossless Translation') and strict performance constraints (O(1)) must be integrated into Doc B to reinforce its guarantees.",
+      "file_a": "runtime/ir/callback.md",
+      "file_b": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "similarity_score": 0.7554
+    }
+  ]
+}

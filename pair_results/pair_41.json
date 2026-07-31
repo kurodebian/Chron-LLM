@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A provides a comprehensive Markdown specification for the IR-FFI bridge, including architectural context, implementation details, error handling, and design rationale. Doc B presents a concise formal specification (DSL) of the same module, defining interface contracts, state invariants, and pre/post conditions. While semantically aligned on functionality, they differ significantly in representation depth and purpose.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the primary human-readable design document and implementation guide, essential for developer onboarding and architectural understanding. Doc B acts as the machine-readable formal contract required by the Delta3 Kernel for automated verification and consistency checking of runtime invariants. Maintaining both ensures clarity for engineers while satisfying the rigorous formal requirements of the Chron-LLM architecture.",
+      "file_a": "runtime/ir/ffi.md",
+      "file_b": "runtime/ir/ffi.spec",
+      "similarity_score": 0.8024
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define Basin of Attraction logic within the IR layer. Doc A specifies a foundational algorithmic approach using simple graph traversal and partition invariants. Doc B (v0.2) presents a comprehensive system specification that integrates Basin analysis with Trajectories, SCCs, and Stability thresholds, offering a richer type system.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "integration_rationale": "Doc B represents the evolved Chron-LLM architecture (v0.2) where attractors are derived from SCCs and stability metrics, rendering Doc A's simpler traversal-based logic insufficient for Delta3 Kernel requirements. To maintain a single source of truth and ensure temporal consistency, Doc A should be deprecated in favor of the integrated model defined in Doc B.",
+      "file_a": "experiments/ir/basin.spec",
+      "file_b": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity_score": 0.7694
+    }
+  ]
+}

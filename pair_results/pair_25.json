@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines high-level World Graph Runtime logic, context projection, and lifecycle management using concrete pseudo-code structures. Doc B provides low-level IR definitions, explicit memory store mechanics (including SHA256 implementation), and abstract world interfaces for the Delta3 Kernel. They share significant semantic overlap in type definitions (PayloadRef, Store) but differ in abstraction level and scope.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B represents the foundational IR/Memory layer (Phase A) of Delta3 Kernel, establishing canonical primitives and invariants. Doc A describes the Runtime execution model (Phase C/D) that consumes these primitives to manage World Graphs and context generation. While they redundantly define basic types like PayloadRef, they serve distinct architectural roles: B as the implementation contract for memory/IR, and A as the behavioral specification for runtime operations. Both must be retained to preserve system integrity across layers.",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "memory/ir/store.spec",
+      "similarity_score": 0.8351
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Document A defines the abstract domain model, including core types (Event, Candidate), enums, invariants, and data flow ownership for Chron-LLM interactions. Document B maps these specific domain concepts to concrete Delta3 Kernel implementation entities (e.g., WAL_Entry, proposalIR, Δ0_Report) and restates the logical invariants using kernel-specific terminology.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Maintain strict separation of concerns between the logical domain model (Phase C) and the physical kernel implementation mapping (Phase E). Document A serves as the source of truth for business logic and constraints, while Document B acts as the interface contract linking these concepts to Delta3 Kernel internals (WAL, Snapshots). Merging them would couple abstract rules to specific infrastructure details, reducing architectural flexibility. The invariant duplication in B should be resolved by referencing A's definitions rather than restating them.",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity_score": 0.7712
+    }
+  ]
+}

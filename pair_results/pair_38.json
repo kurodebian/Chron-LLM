@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the formal constitution, types, operations, and invariants for the R2.0-C Observability Runtime. Doc B serves as a freeze report confirming ABI stability and implementation details for the same layer.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A establishes the canonical semantic contract and correctness invariants for Delta3 Kernel observability. Doc B captures version-specific implementation details (ABI, SBCL environment) and release status. Merging would conflate architectural design with transient release artifacts; maintaining both ensures traceability from formal requirements to frozen delivery.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "docs/ir/r2-0-c-freeze-report.spec",
+      "similarity_score": 0.8048
+    }
+  ]
+}

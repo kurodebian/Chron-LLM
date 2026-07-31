@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the abstract operational flow, state transitions, and invariants of the runtime pipeline (e.g., Commit -> Replay -> Validation). Doc B provides a concrete semantic mapping, equating these abstract concepts to specific Delta3 Kernel entities and storage primitives (e.g., Event=WAL_Entry, Validation=Δ0_Validator).",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A focuses on behavioral logic and pipeline orchestration, while Doc B serves as a semantic bridge linking abstract IR concepts to concrete Delta3 Kernel implementations. Keeping them separate maintains separation of concerns: Doc A remains focused on execution flow invariants, while Doc B acts as a reusable glossary/mapping layer that can be referenced by other system components (e.g., fault handling, session management) beyond just the runtime pipeline.",
+      "file_a": "docs/ir/04-runtime-pipeline.spec",
+      "file_b": "docs/ir/07-chron-mapping.spec",
+      "similarity_score": 0.7881
+    }
+  ]
+}

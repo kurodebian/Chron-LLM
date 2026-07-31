@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents specify Chron-R2.0 IR primitives for causal graphs, context projection, and prefill state generation. Doc A encompasses a broader 'World-Graph-Runtime' scope including World lifecycle and Registry management. Doc B focuses strictly on the Graph Runtime layer with more explicit definitions for eval edge isolation and builder flexibility in prompt construction. Core types (Node, Edge, PrefillState) are semantically equivalent but syntactically divergent.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "D",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A is positioned as the comprehensive Runtime Specification. Doc B provides necessary refinements regarding Eval isolation and deterministic serialization options that are critical for Delta3 Kernel stability but currently missing from A. Merging B's graph-specific logic into A ensures a single source of truth for IR types while preserving A's World management capabilities.",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.7933
+    }
+  ]
+}

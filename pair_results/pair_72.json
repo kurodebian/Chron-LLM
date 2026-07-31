@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the Chron-LLM Kernel internals (WAL, Graph, State transitions), while Doc B defines the Runtime environment and main loop that orchestrates the Kernel. They share interface contracts (`KernelState`, API signatures) but define distinct architectural layers.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Maintains strict separation of concerns between the stateful Kernel and the orchestration Runtime as required by Delta3 architecture. The overlap in interface definitions should be resolved via module imports rather than merging files, preserving the constraint that Kernel remains agnostic to LLM/Runtime details.",
+      "file_a": "llama-agent/ir/chron-llm-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-runtime.spec",
+      "similarity_score": 0.7682
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A specifies the runtime callback bridge mechanism (Physical->IR) and its execution invariants, while Doc B defines the foundational IR data types, structures, and stream semantics consumed by that bridge.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B acts as the Parent specification, defining the canonical IR schema essential for Delta3 Kernel's determinism and replay capabilities. Doc A is the Child implementation, providing the specific FFI bridge logic to ingest data into that schema. Maintaining separation ensures strict modularity: the core type system (B) remains stable and independent of runtime adapter details (A), while A enforces compliance with B via its invariants.",
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.8366
+    }
+  ]
+}

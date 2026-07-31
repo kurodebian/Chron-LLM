@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the foundational memory hierarchy (ShortTerm, LongTerm, Canonical) and access invariants for the Delta3 Kernel. Doc B specifies the operational recovery protocol that utilizes these structures to reconstruct state deterministically. They share significant semantic overlap regarding Canonical immutability and deterministic replay but differ in focus: Data Model vs. Recovery Procedure.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the schema definition for memory states and write constraints, while Doc B implements the specific algorithmic contract for state recovery using those definitions. Keeping them separate maintains separation of concerns within the IR layer: one defines 'what' the state is (and its invariants), the other defines 'how' to restore it deterministically without mutating authoritative history.",
+      "file_a": "docs/ir/08-memory-model.spec",
+      "file_b": "docs/ir/12-recovery.spec",
+      "similarity_score": 0.7764
+    }
+  ]
+}

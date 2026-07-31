@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines low-level LLM inference operations (tokenize, generate) and event structures embedding Kernel primitives (WorldlineID). Doc B defines the high-level Runtime architecture (R0/R1/Kernel layers), session management, and strict interface contracts (RuntimeCommand).",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "E",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A represents the implementation details of the 'Backend' layer referenced in Doc B. However, to comply with Delta3 Kernel architecture defined in Doc B, Doc A's raw operations must be encapsulated behind the `RuntimeCommand` interface. Doc A should not expose direct llama_eval calls or Kernel-managed headers (WorldlineID) directly to agents; instead, it acts as an opaque execution engine controlled by the R0/Kernel layers specified in Doc B.",
+      "file_a": "llama-agent/ir/chron-llm.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity_score": 0.8014
+    }
+  ]
+}

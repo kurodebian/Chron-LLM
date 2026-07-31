@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines a concrete graph topology ('3-cluster') with specific nodes, edges, and invariants for testing. Doc B provides the formal type definitions and operational contracts (pre/post conditions) for dynamical analysis algorithms applicable to such graphs.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B serves as the formal contract for the Delta3 Kernel's dynamical analysis module (defining how attractors/basins are computed). Doc A acts as a canonical test case or configuration defining a specific recurrent topology to validate that logic. Merging would conflate general algorithmic contracts with specific experimental data constants.",
+      "file_a": "experiments/ir/3cluster.spec",
+      "file_b": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity_score": 0.84
+    }
+  ]
+}

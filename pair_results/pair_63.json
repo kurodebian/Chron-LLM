@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines a comprehensive Graph Runtime IR specification including node/edge types, causal traversal, context projection, and prefill state hashing. Doc B focuses exclusively on context projection logic with similar semantics but different feedback materialization (strings vs Eval objects).",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_A_DELETE_B",
+      "integration_rationale": "Doc A represents the canonical v1.0 specification for Delta3 Kernel integration, ensuring EvalIsolation and deterministic hashing required for caching. Doc B's projection logic is subsumed by Doc A; its approach of materializing feedbacks into strings within the IR layer violates abstraction boundaries defined in Doc A.",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/projection.spec",
+      "similarity_score": 0.7792
+    }
+  ]
+}

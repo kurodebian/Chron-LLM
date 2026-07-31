@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "両文書はChron-LLMにおけるRuntime環境とKernelの境界定義および相互作用プロトコルを規定している。Doc A（Δ3-P1）は、KernelをSingle Source of Truthとする高レベルなアーキテクチャ契約と簡易的なI/Oループを定義する抽象仕様である。一方、Doc B（R1-v1.0）は、セッション管理・履歴追跡・トレース生成を含む具体的な実行レイヤー（R0）の技術仕様であり、Kernelとのインタフェースを詳細なデータ構造（Trace, IR, RuntimeCommand）で規定している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc AはPhase Bにおける「Kernel隔離原則」と「Runtimeの論理的役割」を定義する抽象契約として有効であり、システム全体の設計指針を示す。Doc BはPhase C/DにおけるR0レイヤーの実装仕様として、Doc Aの概念を実際のトレース・履歴管理機能に具体化している。両者は異なる抽象度（アーキテクチャ契約 vs 実装詳細）で同一領域を記述しており、矛盾ではなく補完関係にあるため併存させる。ただし、Doc Aの簡易API（submit_user_input）はDoc BのR0処理フローを経由する必要があることを統合ドキュメントで明記し、一貫性を確保する。",
+      "file_a": "llama-agent/ir/chron-llm-runtime.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity_score": 0.7655
+    }
+  ]
+}

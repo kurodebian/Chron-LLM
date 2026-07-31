@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the formal specification for the IR Observation Layer using abstract types and operations. Doc B implements the divergence analysis logic in Common Lisp consistent with Doc A's definitions. Both share high semantic alignment on core algorithms like extract-actions and divergence-profile.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the authoritative contract for the Delta3 Kernel's observation interface, ensuring non-invasive and deterministic behavior. Doc B provides the concrete runtime implementation of the specified divergence algorithms. Maintaining both ensures architectural traceability from formal spec to executable code without conflating abstraction levels.",
+      "file_a": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "file_b": "runtime/ir/divergence.lisp",
+      "similarity_score": 0.8283
+    }
+  ]
+}

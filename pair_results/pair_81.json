@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the high-level Chron-LLM architectural state machine (semantic events, UUID causal tracking, KV-cache integration). Doc B defines a lower-level WAL mechanism with integer IDs and staging logic but lacks semantic alignment with the Kernel's requirements.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "NONE",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_A_DELETE_B",
+      "integration_rationale": "Doc A (architecture-v1.1.spec) is the canonical definition for Delta3 Kernel's causal state management, enforcing UUID lineage and stream-aware fault handling required for robust generation. Doc B conflicts with these type definitions (Int vs UUID causal-id) and lacks critical semantic fields (stream_id). While Doc B introduces transactional staging concepts, these should be encapsulated within a WAL implementation module compliant with Doc A's interface rather than existing as a competing top-level IR spec.",
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity_score": 0.7589
+    }
+  ]
+}

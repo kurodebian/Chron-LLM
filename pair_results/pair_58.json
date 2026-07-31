@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines a comprehensive World Runtime and Observation Contract, including lifecycle management (Registry/Fork/Archive) and high-level graph types. Doc B focuses specifically on Graph IR operations and causal context generation algorithms. They share significant type definitions (Node/Edge/Context) and core logic (project-context), but Doc A provides broader system state context while Doc B details traversal mechanics.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A serves as the canonical specification for the World Runtime environment (Phase C), which inherently requires consistent Graph IR definitions. Doc B's graph operations and context logic are critical components of this runtime but currently exist in isolation with redundant type definitions. Merging B into A ensures a single source of truth for causal context generation within the Delta3 Kernel, aligning graph traversal logic directly with world lifecycle and observation contracts.",
+      "file_a": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.7826
+    }
+  ]
+}

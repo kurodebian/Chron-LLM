@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define causal graph primitives (CausalNode, CausalEdge, CausalGraph) and associated operations. Document A outlines a high-level World-Graph Runtime specification including Registry management, payload storage, and LLM context projection (PrefillState), assuming mutable graph updates. Document B defines strict, immutable graph IR types with functional update semantics ([RO] fields, returning new graphs).",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A requires alignment with the Delta3 Kernel's persistent data structure requirements defined in Document B. By merging B's rigorous type definitions and immutability constraints into A, we eliminate semantic drift between the runtime design and core IR implementation. This ensures that World lifecycle operations (A) correctly utilize functional graph updates (B), maintaining consistency across the Chron-LLM architecture.",
+      "file_a": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity_score": 0.8033
+    }
+  ]
+}

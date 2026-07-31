@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A provides the executable Common Lisp definition of the IR package and structure. Doc B serves as the formal architectural specification for the same IR component, detailing its role in the Delta3 Kernel data flow, contracts, and usage patterns. The definitions are semantically identical with no conflicts.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A is the necessary implementation artifact for the runtime, while Doc B acts as the authoritative design specification and documentation. They fulfill distinct roles: execution vs. architectural definition. Keeping both ensures that the code remains aligned with the formal IR contracts defined in the Delta3 Kernel architecture.",
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/ir.md",
+      "similarity_score": 0.7876
+    }
+  ]
+}

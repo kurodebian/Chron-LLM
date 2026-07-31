@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A is the Common Lisp implementation of the ir-callback using CFFI bindings, while Doc B is the formal specification defining its signature, transition logic, and system invariants (Determinism, Isolation). They describe identical functional behavior but serve distinct roles as executable code versus verification contract.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B serves as the formal contract ensuring Delta3 Kernel invariants are satisfied by Doc A. Keeping both allows for runtime verification and ensures the implementation strictly adheres to the architectural specification without conflating executable logic with mathematical constraints.",
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/callback.spec",
+      "similarity_score": 0.8202
+    }
+  ]
+}

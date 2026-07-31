@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the formal types, predicates, and functions for world observations within the IR; Doc B provides a test suite with simplified type definitions and behavioral invariants to verify the correctness of Doc A's specifications.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the canonical specification for observation structures, while Doc B acts as its verification layer. Keeping them separate maintains a clear boundary between definition and testing, allowing Doc B to use simplified mock types (e.g., WOBS vs world-observation) without polluting the core IR spec.",
+      "file_a": "observability/ir/world-snapshot.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity_score": 0.7614
+    }
+  ]
+}

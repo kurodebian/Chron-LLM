@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define the World entity, its lifecycle states, and core operations (make-world, fork-world, kernel-commit-world!, replay-world). Document A is a broader 'Runtime Observation Contract' including Registry management and observation types (WorldObs), while Document B focuses strictly on the internal IR type definitions and invariants of the World structure.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A serves as the canonical architectural contract for the Delta3 Kernel's runtime interface. Document B contains specific IR implementation details (e.g., head-cell vs head, Shared refs) that must be reconciled into the Contract to ensure type safety and semantic consistency between the Kernel API and the underlying World IR. Merging B into A preserves the broader Registry/Observation context while refining the World definition.",
+      "file_a": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.75
+    }
+  ]
+}

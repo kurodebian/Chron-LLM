@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A (v1.1) is a refined evolution of Doc B (v1). Both define Event/WAL/Fault models for Chron-LLM. A introduces stream_id, granular tool events, and implicit causal traversal, while B defines explicit graph lifting and control policies.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_A_DELETE_B",
+      "integration_rationale": "Doc A (v1.1) supersedes Doc B (v1) by streamlining the state model for Delta3 Kernel efficiency, removing explicit graph storage in favor of WAL-based causal traversal, and adding necessary stream/tool granularity. B's control logic should be verified against current runtime specs but structurally B is obsolete.",
+      "file_a": "docs/ir/architecture-v1.1.spec",
+      "file_b": "docs/ir/architecture-v1.spec",
+      "similarity_score": 0.7974
+    }
+  ]
+}

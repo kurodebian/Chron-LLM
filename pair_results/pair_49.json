@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define basin dynamics analysis for graphs. Doc A uses a simplified deterministic functional graph model (Map[Node, Node]), while Doc B specifies a complex weighted graph with roles and edges tailored for Chron-LLM-R1 reasoning traces, including cycle detection.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "D",
+        "is_same_phase": true
+      },
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "integration_rationale": "Doc B supersedes Doc A by incorporating essential features for Delta3 Kernel dynamical analysis: weighted edges (argmax transitions), node roles, and Strongly Connected Components (SCCs) for cycle detection. Doc A's deterministic map abstraction is insufficient for the stochastic nature of LLM reasoning traces.",
+      "file_a": "experiments/ir/basin.spec",
+      "file_b": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity_score": 0.7943
+    }
+  ]
+}

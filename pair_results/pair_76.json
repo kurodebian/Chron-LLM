@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define core graph data structures (Nodes, Edges) and basic manipulation operations. Document B focuses on foundational data integrity, immutability invariants, and generic causal graph definitions suitable for a kernel layer. Document A extends these concepts with LLM-specific logic, including causal context extraction, evaluation isolation, and prefill state generation.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document B serves as the Phase A/B Delta3 Kernel core data model (CausalGraph), establishing structural invariants. Document A represents the Phase D Graph Runtime layer, utilizing graph structures for causal context assembly and prompt generation. Merging them would violate separation of concerns by coupling low-level kernel definitions with high-level inference logic. Future refactoring should align Doc A to import types from Doc B rather than duplicating base definitions.",
+      "file_a": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity_score": 0.7621
+    }
+  ]
+}

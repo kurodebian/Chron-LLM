@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines Phase C (Semantic Interpretation), mapping Projection Models and ABIs to Semantic Models. Doc B defines Phase D (Graph Construction), structuring Semantic Models into Relational Graphs. They represent sequential, non-overlapping stages in the IR pipeline sharing state definitions but distinct operational scopes.",
+      "relationship": "INDEPENDENT",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "These specifications define sequential dependencies within the Delta3 Kernel's IR pipeline. Phase C produces the SemanticModel (S) required by Phase D to generate the RelationalGraph (G). Merging them would violate separation of concerns between semantic interpretation and structural graph topology generation.",
+      "file_a": "docs/ir/phase-c-charter.spec",
+      "file_b": "docs/ir/phase-d-charter.spec",
+      "similarity_score": 0.8159
+    }
+  ]
+}

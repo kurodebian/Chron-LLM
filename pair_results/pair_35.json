@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define the `ir-stream` package within the Chron-LLM runtime architecture. Document A provides a comprehensive Markdown specification detailing architectural context, data flow, and design rationale. Document B presents a concise formal specification defining types, operations with pre/post conditions, and invariants using pseudo-code notation. They share identical core logic regarding APIs (`push-ir`, `clear-ir-stream`), lifecycle management, threading constraints (unsafe global state), and invariant definitions (Ordering, Ephemeral, Neutrality, Isolation).",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A is the superior source of truth due to its architectural completeness and alignment with Chron-LLM's narrative documentation standards. Document B contains valuable formal rigor (pre/post conditions) that should be integrated into Document A, specifically within the API definitions and Formal Invariants sections. This consolidation ensures a single point of reference for the Delta3 Kernel runtime contract, preventing specification drift between narrative and formal views while maintaining the precise behavioral constraints required for deterministic replay.",
+      "file_a": "runtime/ir/stream.md",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.8088
+    }
+  ]
+}

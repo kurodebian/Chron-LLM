@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the 'ir-callback' module acting as a bridge to convert physical execution events into IR objects, while Doc B defines the 'ir-stream' package responsible for storing these IR observations in a mutable array with specific lifecycle management. Doc A explicitly depends on Doc B.",
+      "relationship": "INDEPENDENT",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "These documents represent distinct layers of the Runtime IR pipeline: Doc A is the ingestion interface (Producer/Bridge), and Doc B is the storage mechanism (Consumer/Buffer). Merging them would violate separation of concerns, coupling the physical execution hook directly to the specific array-based implementation of the stream. They should remain separate modules linked by dependency.",
+      "file_a": "runtime/ir/callback.spec",
+      "file_b": "runtime/ir/stream.spec",
+      "similarity_score": 0.7639
+    }
+  ]
+}

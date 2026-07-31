@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the static domain model including types (Event, Candidate), enums (ReqKind, CmdKind), and structural invariants/ownership; Doc B specifies operational semantics defining state transitions (Commit, Replay) and functional properties on those same entities. There is direct overlap in enum definitions (RuntimeRequest kinds) and invariant statements regarding Canonical immutability.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Maintaining separation between static schema (Doc A) and dynamic behavior (Doc B) supports Delta3 Kernel modularity. However, Doc B must be refactored to reference Doc A's type definitions rather than duplicating enums like RuntimeRequest, ensuring a single source of truth for the IR specification.",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "docs/ir/02-operational-semantics.spec",
+      "similarity_score": 0.7749
+    }
+  ]
+}

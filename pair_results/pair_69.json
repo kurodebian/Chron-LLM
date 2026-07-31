@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc B defines the core data structure (struct) for Intermediate Representation (IR), specifying fields like ctx-id, pos, phase, token, and score as immutable observation records. Doc A implements a CFFI callback handler that utilizes this IR struct to capture runtime events from C code and push them into an IR stream.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B establishes the canonical data contract for runtime observations required by Delta3 Kernel's deterministic replay and analysis systems. Doc A provides the necessary FFI boundary implementation to populate these structures from C-level callbacks. Keeping them separate maintains a clean separation of concerns between pure data definitions (Doc B) and external interface logic (Doc A), ensuring the IR schema remains stable and reusable across different ingestion mechanisms.",
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ir.lisp",
+      "similarity_score": 0.7728
+    }
+  ]
+}

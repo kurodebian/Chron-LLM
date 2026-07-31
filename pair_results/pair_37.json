@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the abstract World Runtime Constitution (types, invariants, operations) for Phase B. Doc B implements a concrete test suite that validates these specific requirements one-to-one. They share identical domain models but serve distinct architectural roles: Specification vs. Verification.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A is the canonical source of truth for Delta3 Kernel's World Runtime logic. Doc B provides essential automated verification coverage mapped directly to Doc A's test cases (TEST B1-B12). Merging them would conflate requirements with validation logic, while deleting either compromises architectural integrity or system verifiability. The minor package naming inconsistency in Doc B ('r2-0-a') should be corrected to 'r2-0-b' for consistency.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity_score": 0.8064
+    }
+  ]
+}

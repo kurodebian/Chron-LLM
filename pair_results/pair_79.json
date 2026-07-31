@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the abstract domain model, core type schemas (Event, Candidate, Canonical), and architectural ownership rules for the IR layer. Doc B implements these concepts into a concrete runtime specification for R1, adding operational logic (OPS), state transitions (kernel-transition), and specific invariants. They share identical base types but differ significantly in abstraction level: A is structural/contractual, while B is behavioral/implementational.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the canonical interface definition (Phase B) ensuring consistency across all runtime versions, while Doc B details the specific Delta3 Kernel logic and state management for R1 (Phase D). Merging them would conflate architectural constraints with implementation details. The recommended integration strategy is to maintain both files but enforce that Doc B imports or strictly adheres to the type definitions in Doc A to eliminate semantic duplication.",
+      "file_a": "docs/ir/01-domain-model.spec",
+      "file_b": "runtime/r1/ir/core.spec",
+      "similarity_score": 0.7598
+    }
+  ]
+}

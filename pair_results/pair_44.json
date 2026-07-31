@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A is a behavioral test specification validating World lifecycle and isolation invariants for R2.0-B, while Doc B is the canonical structural definition of the World IR entity with operational contracts. They share high semantic alignment on CoW and graph sharing but serve distinct roles as verification artifacts versus interface definitions.",
+      "relationship": "INDEPENDENT",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the executable acceptance criteria for Delta3 Kernel's World semantics, ensuring behavioral correctness through specific scenarios. Doc B defines the authoritative type system and operational contracts (pre/post conditions) required for implementation. Merging them would conflate test logic with interface specifications; maintaining separation ensures clear boundaries between verification (tests/md) and definition (world/ir).",
+      "file_a": "tests/md/ir/r2-0-b-tests.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.8014
+    }
+  ]
+}

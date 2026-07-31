@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines a CFFI callback handler (ir-callback) for processing IR events, while Doc B provides the initialization bridge (init-ir-bridge) to register this specific callback with the external runtime. They are tightly coupled components serving the same FFI integration purpose.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_A_INTO_B",
+      "integration_rationale": "Both files constitute the IR Foreign Function Interface layer within the Delta3 Kernel runtime. Doc B depends directly on Doc A to function. Merging the callback definition (Doc A) into the bridge module (Doc B) eliminates unnecessary package fragmentation, centralizes FFI bindings in a single file, and simplifies dependency management without altering functionality.",
+      "file_a": "runtime/ir/callback.lisp",
+      "file_b": "runtime/ir/ffi.lisp",
+      "similarity_score": 0.7817
+    }
+  ]
+}

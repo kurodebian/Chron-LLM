@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "両文書はDelta3 Kernelの実行時セマンティクスを定義しており、リトライ処理とCanonicalStateの不変性に関する共通の制約を持つ。Doc Aはキュー管理やLamportClockに基づくスケジューリングアルゴリズムおよびLLM生成のリトライペナルティに焦点を当てる一方、Doc BはTool Execution特有の状態遷移（COMMIT/TIMEOUT/ABORT）と対話状態への影響範囲を定義している。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "D",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc Aはオーケストレーション層（スケジューリング・キューイング）を、Doc Bはツールインタラクションの整合性層（状態遷移ルール）を担当するため、Delta3 Kernelにおける関心の分離（Separation of Concerns）を維持する観点から別個に保持すべきである。重複しているCanonicalState不変性の制約は、両モジュールが同じアーキテクチャ原則に従っていることを示すものであり、統合の理由にはならない。",
+      "file_a": "docs/ir/09-runtime-scheduling.spec",
+      "file_b": "docs/ir/10-tool-execution.spec",
+      "similarity_score": 0.7607
+    }
+  ]
+}

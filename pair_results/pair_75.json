@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the core IR data structure, immutability invariants, and abstract Stream type definition. Doc B specifies the concrete runtime implementation of the IR buffer (ir-stream), detailing lifecycle management, memory models, threading constraints, and operational APIs.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A establishes the immutable schema and semantic neutrality of IR objects required for Delta3 Kernel analysis (Phase A: Core Types). Doc B implements the ephemeral, mutable collection mechanism necessary to aggregate these observations during execution without polluting the core type definition with runtime state logic (Phase B: Runtime Infrastructure). Keeping them separate ensures a clean separation between data contracts and execution environment management.",
+      "file_a": "runtime/ir/ir.spec",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.7624
+    }
+  ]
+}

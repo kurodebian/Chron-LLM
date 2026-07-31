@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the logical IR specification for the Chron-LLM agent, detailing domain types (Event, WorldlineID), algorithms, and kernel invariants. Doc B specifies the physical FFI bindings to llama.cpp, mapping high-level operations to native C functions and pointers. They share operation names but operate at distinct abstraction layers.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A represents the semantic contract and kernel-managed logic (IR), whereas Doc B implements the Hardware Abstraction Layer (HAL) for native execution. Keeping them separate preserves the Delta3 Kernel's required boundary between logical correctness (Events/Worldlines) and physical implementation details (memory/layout). Merging would conflate high-level semantics with low-level FFI constraints.",
+      "file_a": "llama-agent/ir/chron-llm.spec",
+      "file_b": "llama-agent/ir/ffi-bindings.spec",
+      "similarity_score": 0.8099
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines a comprehensive World Runtime Contract (R2.0) encompassing Graph, Memory, Registry, and Observation types with specific lifecycle operations. Doc B defines a standalone Causal Graph IR structure. Both documents define overlapping core types (CausalNode, CausalGraph), but exhibit semantic inconsistencies in field definitions (e.g., 'payload:PayloadRef' in A vs 'payload-ref: Ref' in B) and scope granularity.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "A",
+        "is_same_phase": false
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A represents the evolved R2.0 specification where Graph structures are tightly coupled with World semantics and Delta3 Kernel operations (e.g., kernel-commit-world!). Doc B's generic definitions lack the structural constraints (like PayloadRef) required by the Runtime Contract defined in A. To eliminate type fragmentation and ensure a single source of truth for the IR used by the Kernel, the graph primitives from B should be consolidated into A, aligning all graph operations with the World lifecycle requirements.",
+      "file_a": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "file_b": "graph-runtime/ir/graph.spec",
+      "similarity_score": 0.7781
+    }
+  ]
+}

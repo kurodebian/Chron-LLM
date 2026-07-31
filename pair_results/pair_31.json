@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A is the Common Lisp implementation source code for the IR FFI bridge module (`ir-ffi`), while Doc B is its comprehensive architectural specification and design document. Both define identical package structures, function signatures (`init-ir-bridge`, `register_ir_callback`), and dependencies. Doc B provides detailed contracts, ABI definitions, GC safety requirements, and responsibility boundaries that govern the implementation in Doc A.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A and Doc B represent complementary artifacts within the Delta3 Kernel's IR layer: Implementation vs. Specification. Doc B serves as the architectural source of truth, defining formal contracts (ABI, lifetime management) that Doc A must adhere to. Although Doc B contains code snippets identical to Doc A for documentation purposes, this is standard practice and does not constitute redundant overlap requiring merging. Crucially, Doc B identifies a runtime contract risk in Doc A's current implementation regarding GC safety (`cffi:callback` retention), indicating that Doc B governs the evolution of Doc A without invalidating either artifact.",
+      "file_a": "runtime/ir/ffi.lisp",
+      "file_b": "runtime/ir/ffi.md",
+      "similarity_score": 0.8146
+    }
+  ]
+}

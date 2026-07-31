@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A (Lisp) implements the IR Divergence Analysis module with functions extract-actions, run-ir-trial, and divergence-profile. Doc B (Markdown) provides a detailed specification describing the exact same package, APIs, algorithms, and architectural position as Doc A. They are semantically identical in defining the module's logic.",
+      "relationship": "EXACT_DUPLICATE",
+      "phase_alignment": {
+        "doc_a_phase": "NONE",
+        "doc_b_phase": "NONE",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc B serves as verbose documentation for the concise implementation in Doc A. To eliminate redundancy and prevent specification drift, the architectural context, design principles, and algorithmic details from Doc B should be integrated into Doc A as comprehensive package docstrings and function comments. This establishes a single source of truth where the executable code acts as both implementation and definitive specification.",
+      "file_a": "runtime/ir/divergence.lisp",
+      "file_b": "runtime/ir/divergence.md",
+      "similarity_score": 0.8066
+    }
+  ]
+}

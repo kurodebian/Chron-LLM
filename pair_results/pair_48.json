@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines Phase A constraints where History is the sole authority (A=H) and explicitly excludes ABI/Interpretation. Doc B defines Phase C, introducing Projection/Semantic layers derived from History while maintaining A=H. They share core axioms but define distinct architectural boundaries.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "C",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Phase A establishes the immutable causal record and exclusion of interpretive logic. Phase C defines how interpretation (S) and justification (J) are deterministically derived from History via ABI without compromising authority. Both specs are essential for Delta3 Kernel's layered integrity.",
+      "file_a": "docs/ir/phase-a-charter.spec",
+      "file_b": "docs/ir/phase-c-charter.spec",
+      "similarity_score": 0.7945
+    }
+  ]
+}

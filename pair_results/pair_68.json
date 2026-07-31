@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Document A defines the abstract constitution, types, and strict invariants (immutability, determinism) for R2.0-C Observability. Document B provides the concrete implementation schema using primitive vectors and builder functions to realize these observations within the IR layer.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A serves as the formal verification contract (Constitution) ensuring architectural integrity and correctness guarantees for the Delta3 Kernel, while Document B defines the specific serialization format required for runtime execution. Keeping them separate maintains a critical separation of concerns between abstract invariants and concrete data structures, allowing internal representation changes without violating external contracts.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "file_b": "observability/ir/world-snapshot.spec",
+      "similarity_score": 0.7737
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define the core IR and causal context logic for Chron-LLM R2.0 Graph Runtime. Doc A is a comprehensive 'Constitution' covering types, stores, commit flows, and formal invariants. Doc B focuses specifically on graph operations (projection, traversal) with similar type definitions but less architectural scope.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "A",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A acts as the canonical 'Core Constitution'. Doc B's specific operational signatures (e.g., project-context, add-node!) and projection logic should be integrated into Doc A to unify the abstract specification with implementation details. This ensures a single source of truth for IR definitions within Phase A, preventing semantic drift between the constitution and runtime modules.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity_score": 0.8489
+    }
+  ]
+}

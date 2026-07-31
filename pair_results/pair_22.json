@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define the World Runtime semantics for Chron-LLM Phase B. Doc A is a formal, FROZEN Constitution Spec establishing World as an ExecutionView with Registry management, strict Lifecycle states, and UUID-based identity. Doc B is an implementation-level spec defining similar invariants (Shared Graph/Mem, Kernel Commit) but uses conflicting type syntax (e.g., Str vs UUID, [NodeID] vs Node) and lacks the Registry/Lifecycle governance found in A.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_A_DELETE_B",
+      "integration_rationale": "Doc A serves as the canonical Phase B Constitution and is FROZEN, establishing the authoritative contract for World isolation, determinism, and Kernel authority. Doc B redundantly redefines core types with implementation-specific syntax that conflicts with A (e.g., head-cell lists vs Node references). To ensure Delta3 Kernel consistency, Doc B's definitions must be superseded by Doc A; any implementation code should import from the Constitution Spec rather than maintaining a divergent local spec.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "world/ir/world.spec",
+      "similarity_score": 0.838
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A is the executable Common Lisp implementation of the IR Stream module with concise inline comments defining its guarantees. Doc B is a comprehensive Markdown specification detailing the same module's architecture, API contracts, lifecycle, formal invariants (IR-S1 to IR-S4), and system mapping. Both define identical functionality and constraints.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the authoritative implementation required for runtime execution within the Delta3 Kernel, while Doc B provides essential architectural context, design constraints, and system mapping that code comments cannot efficiently convey. Maintaining both ensures traceability between Chron-LLM's design principles (e.g., semantic neutrality, non-authoritative state) and its concrete realization.",
+      "file_a": "runtime/ir/stream.lisp",
+      "file_b": "runtime/ir/stream.md",
+      "similarity_score": 0.8476
+    }
+  ]
+}

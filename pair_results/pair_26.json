@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define core World branching mechanisms and WAL state management with nearly identical logic for stage_branch_world. Doc A introduces 'Immune' status checks based on history cleaning, while Doc B provides a structured Phase 1 service definition with explicit CausalNode fault handling.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "A",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_A_INTO_B",
+      "integration_rationale": "Doc B represents a more mature, implementation-ready specification (explicit Phase1 constraints and algorithms) with a robust data model (CausalNode classes). Doc A's branching logic is redundant. The 'Immune' status from Doc A should be integrated into Doc B as a derived query based on CausalNode validity/fault states to maintain a single source of truth for World operations in the Delta3 Kernel.",
+      "file_a": "llama-agent/ir/chron-llm-immune.spec",
+      "file_b": "llama-agent/ir/chron-llm-world.spec",
+      "similarity_score": 0.83
+    }
+  ]
+}

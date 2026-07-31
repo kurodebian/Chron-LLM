@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define core Chron-LLM IR types (Event, Node, Edge) and WAL-to-Graph lifting logic. Doc A provides a comprehensive system architecture including control flow, fault handling, and LLM state management. Doc B focuses specifically on Graph data structures and algorithms, introducing optimizations like HealthyTable for causal lookups that are absent in Doc A.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc A serves as the architectural source of truth for the Delta3 Kernel. Doc B contains critical implementation details (HealthyTable, optimized parent lookup) that improve graph construction efficiency but currently exist in isolation with slightly divergent type definitions. Merging B into A ensures a single canonical specification that aligns high-level control logic with low-level graph optimization strategies, eliminating semantic drift between documentation and module specs.",
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity_score": 0.7595
+    }
+  ]
+}

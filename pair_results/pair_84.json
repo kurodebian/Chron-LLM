@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc B defines the canonical Intermediate Representation (IR) data structure, lifecycle invariants, and stream flow for the runtime kernel. Doc A specifies a specialized Observation Analysis Layer module that consumes IR streams to compute divergence profiles, but redundantly defines a simplified local version of the IR type.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B serves as the foundational schema (Parent) for IR within the Delta3 Kernel ecosystem, while Doc A implements specific analytical logic (Child/Consumer). Both must be retained to preserve core type definitions and analysis capabilities. Integration requires refactoring Doc A to import and utilize Doc B's canonical IR definition instead of its local simplified version, ensuring strict schema consistency across the ObservationAnalysisLayer.",
+      "file_a": "runtime/ir/divergence.spec",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.7511
+    }
+  ]
+}

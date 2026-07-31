@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define the Intermediate Representation (IR) structure used in the runtime callback system. Document A provides the executable Common Lisp implementation with detailed comments describing guarantees and constraints. Document B provides a formal specification of the same interface, types, operations, and invariants (purity, immutability, ordering). They are semantically aligned but differ in artifact type (code vs. formal spec).",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Document A serves as the authoritative implementation within the Delta3 Kernel runtime, while Document B acts as a formal contract for verification. Maintaining both ensures that the executable logic (A) can be rigorously validated against the specified invariants (B), such as INV-PURITY and INV-IMMUTABLE, which are critical for deterministic replay and kernel integrity. Merging would either lose the machine-readable spec format or clutter the implementation with formal notation.",
+      "file_a": "runtime/ir/ir.lisp",
+      "file_b": "runtime/ir/ir.spec",
+      "similarity_score": 0.8035
+    }
+  ]
+}

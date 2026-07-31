@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define a Write-Ahead Log (WAL) mechanism with staging and committing operations for events. Document A extends this into a comprehensive Causal Kernel specification, including graph lifting (lift), node classification, world branching, and history reconstruction logic essential for causal reasoning. Document B defines only basic storage mechanics with unused causal fields, lacking the structural logic present in A.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "B",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_A_DELETE_B",
+      "integration_rationale": "Document A represents the mature Delta3 Kernel specification (Phase D/E) where linear logs are transformed into causal graphs for agent reasoning. Document B appears to be an earlier draft or lower-level abstraction that was subsumed by the Kernel definition in A. Since A fully implements the 'causal' semantics implied by both filenames while B does not, retaining B creates redundancy and architectural ambiguity.",
+      "file_a": "llama-agent/ir/causal-kernel.spec",
+      "file_b": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity_score": 0.7783
+    }
+  ]
+}

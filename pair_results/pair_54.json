@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the high-level Graph Runtime Constitution (canonical types, memory model, global invariants) for R2.0-A. Doc B specifies concrete prefill logic and prompt formatting algorithms within the graph-runtime IR layer. They overlap significantly on PrefillState definitions but differ in abstraction level: A is architectural contract, B is module implementation detail.",
+      "relationship": "PARENT_CHILD",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc A serves as the authoritative architectural contract defining canonical structures (CanonicalNode, PayloadRef) and critical invariants (causal separation, immutability) required by Delta3 Kernel. Doc B provides necessary implementation specifics for prompt construction that are too granular for a Constitution spec. Both should be retained to maintain separation of concerns between system constraints and module logic, provided Doc B is refactored to reference Doc A's canonical types rather than redefining simplified Node structures.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "file_b": "graph-runtime/ir/prefill.spec",
+      "similarity_score": 0.7871
+    }
+  ]
+}

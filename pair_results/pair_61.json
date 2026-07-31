@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the Phase B World Runtime Constitution with strict architectural roles (Kernel=Authority, Registry=Non-Authoritative) where Worlds reference shared Graph/Memory. Doc B specifies a functional Registry implementation that manages Worlds but structurally assumes the Registry holds Graph/Memory references and acts as an active state manager, conflicting with Doc A's constitutional invariants.",
+      "relationship": "SUPERSEDED",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "B",
+        "is_same_phase": true
+      },
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "integration_rationale": "Doc A (R2.0-B Constitution) establishes the canonical architectural contract for Phase B, explicitly defining Registry as non-authoritative and enforcing Graph/Memory sharing via World references to maintain Delta3 Kernel consistency. Doc B's model of Registry owning Graph/Memory state contradicts these constitutional invariants and represents an obsolete design pattern that must be deprecated to prevent architectural drift.",
+      "file_a": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "file_b": "registry/ir/registry.spec",
+      "similarity_score": 0.781
+    }
+  ]
+}

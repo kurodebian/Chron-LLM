@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Document A defines the frozen contract and invariants for the R2.0-C Observation Interface (types, ops, ABI guarantees). Document B provides the corresponding executable test suite and verification logic that validates compliance with those specific invariants (D1-D6 mapped to d1-d7 tests). They share semantic definitions but serve distinct roles: definition vs. validation.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Maintain strict separation between the immutable ABI contract (A) and the mutable verification harness (B). Document A guarantees stability for Delta3 Kernel consumers; Document B ensures runtime compliance via SBCL tests. Merging them risks violating the 'FROZEN' status of the report or cluttering the test spec with administrative metadata.",
+      "file_a": "docs/ir/r2-0-c-freeze-report.spec",
+      "file_b": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity_score": 0.8001
+    }
+  ]
+}

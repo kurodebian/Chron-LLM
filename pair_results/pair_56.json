@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the Phase B charter focusing on deterministic derivation of ProjectionModel from History without semantic interpretation. Doc B defines the Phase D charter focusing on constructing a RelationalGraph from a SemanticModel with structural constraints. They represent distinct, sequential stages in the Chron-LLM IR pipeline.",
+      "relationship": "INDEPENDENT",
+      "phase_alignment": {
+        "doc_a_phase": "B",
+        "doc_b_phase": "D",
+        "is_same_phase": false
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "These documents define separate architectural contracts for different pipeline stages within the Delta3 Kernel. Phase B establishes the foundational projection logic (H->M), while Phase D governs graph topology generation (S->G). Maintaining them separately preserves clear phase boundaries, invariant isolation, and modular verification capabilities.",
+      "file_a": "docs/ir/phase-b-charter.spec",
+      "file_b": "docs/ir/phase-d-charter.spec",
+      "similarity_score": 0.7853
+    }
+  ]
+}

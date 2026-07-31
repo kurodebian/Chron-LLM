@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define the 'ir-divergence' module within the Observation Analysis Layer. Document A is a comprehensive Markdown specification detailing design rationale, architecture context, algorithms, and future extensions. Document B is a concise formal specification (DSL) capturing the exact same types, operations, algorithms, and invariants as Document A but without contextual explanation.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Document A serves as the authoritative source of truth due to its architectural context and design rationale. Document B is redundant in content but valuable for formal definition. To prevent specification drift, Document B's formal definitions should be integrated into Document A (e.g., as a machine-readable appendix or code block). This consolidates the Observation Analysis Layer specs while maintaining compatibility with any tooling that consumes the DSL syntax.",
+      "file_a": "runtime/ir/divergence.md",
+      "file_b": "runtime/ir/divergence.spec",
+      "similarity_score": 0.8485
+    }
+  ]
+}

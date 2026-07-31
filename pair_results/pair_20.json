@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Both documents define an event-driven WAL-to-Graph IR with causal/temporal edges and fault isolation mechanisms. Doc A provides a high-level architectural view including control logic, LLM state management (KV cache), and UUID-based identity with a global clock. Doc B specifies a concrete 'causal kernel' implementation featuring staging buffers, world-line branching (wld), integer IDs, and transactional commit/discard operations.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_B_INTO_A",
+      "integration_rationale": "Doc B introduces critical Delta3 Kernel features (staging, world-line isolation) missing in Doc A's simpler global-clock model. To ensure architectural consistency and kernel efficiency, Doc A should be updated to adopt Doc B's IR mechanics (Int IDs, staging, wld), while preserving Doc A's higher-level Control_Decide and Handle_Abort logic adapted to the new kernel primitives.",
+      "file_a": "docs/ir/architecture-v1.spec",
+      "file_b": "llama-agent/ir/causal-kernel.spec",
+      "similarity_score": 0.8456
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A defines the ABI contract, freeze status, and high-level invariants for observation types (world, registry, ancestry, diff) in version r2-0-c. Doc B provides the concrete implementation details, data structures (vectors), and logic for these exact same types.",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "C",
+        "doc_b_phase": "C",
+        "is_same_phase": true
+      },
+      "recommended_action": "MERGE_A_INTO_B",
+      "integration_rationale": "Doc B contains the structural definitions required for Delta3 Kernel code generation, while Doc A holds critical ABI stability constraints and freeze metadata. Merging A's status and invariants into B creates a single, self-describing specification that ensures type safety and ABI compliance are enforced directly within the implementation definition, reducing cross-file dependency risks.",
+      "file_a": "docs/ir/r2-0-c-freeze-report.spec",
+      "file_b": "observability/ir/world-snapshot.spec",
+      "similarity_score": 0.8373
+    }
+  ]
+}

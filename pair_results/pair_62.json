@@ -1,0 +1,19 @@
+{
+  "processed_pairs": 1,
+  "results": [
+    {
+      "pair_summary": "Doc A は R0 レベルのチャットループ処理アルゴリズムおよびトレース生成ロジックを定義する実装仕様である。Doc B は Chron-LLM のアーキテクチャレイヤー（R0/R1/Kernel）間の境界、データ契約（ABI）、および Delta3 Kernel とのインタフェースを定義する高次設計仕様である。両者は Session や Trace の型定義で重複しているが、Doc A が内部処理フローに焦点を当てるのに対し、Doc B はレイヤー間連携とスコープ管理に焦点を当てている。",
+      "relationship": "PARTIAL_OVERLAP",
+      "phase_alignment": {
+        "doc_a_phase": "D",
+        "doc_b_phase": "D",
+        "is_same_phase": true
+      },
+      "recommended_action": "KEEP_BOTH",
+      "integration_rationale": "Doc B は R0/R1/Kernels のアーキテクチャ契約（Contract）および Delta3 Kernel とのインタフェース定義（RuntimeCommand ABI など）を規定しており、システム全体の整合性を担保する「設計基準」として機能する。一方、Doc A は Doc B で定義された R0_SessionExec レイヤー内部における具体的な実行フロー（chat-loop）を示す「実装仕様」である。両者を統合するとアーキテクチャの抽象度と実装の詳細が混在するため、Doc B を契約定義として維持し、Doc A をその契約に準拠するモジュール仕様として独立して保持することが推奨される。",
+      "file_a": "runtime/r0/ir/chat-loop.spec",
+      "file_b": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity_score": 0.7808
+    }
+  ]
+}
