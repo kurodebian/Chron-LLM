@@ -1,0 +1,27 @@
+{
+  "component_id": "component-009",
+  "artifact_count": 2,
+  "artifacts": [
+    {
+      "file_path": "llama-agent/ir/llama-agent.spec",
+      "line_count": 34,
+      "content": "MODULE llama-agent.lisp : Bootloader\nTYPE Layer = Physical | Logical | Kernel | Immune | Runtime | Generation | MainLoop\nSTATE *system-dir* := uiop:pathname-directory-pathname(*load-pathname*)\nSTATE *use-mock-physical-p* : Bool := T\n\nOP init_quicklisp(): load(\"quicklisp/setup.lisp\") ON_FAIL error()\nOP load_libs(): load([\"CFFI\", \"Babel\"])\nOP load_system_file(f): p:=make-pathname(:directory *system-dir*, :name f); IF probe-file(p) THEN load(p) ELSE warn()\n\nSEQ boot_order := [Physical, Logical, Kernel, Immune, Runtime, Generation, MainLoop]\n\nOP init_layers():\n  phys := IF *use-mock-physical-p* THEN \"ffi-bindings-mock.lisp\" ELSE \"ffi-bindings.lisp\"\n  load_system_file(phys)\n  load_system_file(\"chron-llm.lisp\")\n  load_system_file(\"chron-llm-causal.lisp\")\n  load_system_file(\"immune-system.lisp\")\n  load_system_file(\"chron-llm-runtime.lisp\")\n  load_system_file(\"generate.lisp\")\n  load_system_file(\"run-test.lisp\")\n\nOP start-delta3(path := \"/path/to/model.gguf\"):\n  m := my-llama-model-load(path)\n  c := my-llama-init(4096)\n  agent-main-loop(c, m)\n\nOP start-delta3-stub():\n  PRE *use-mock-physical-p* == T\n  agent-main-loop(nil, nil)\n\nINV boot_seq: load_sequence == boot_order\nINV abi: sig(my-llama-*_mock) == sig(my-llama-*_real)\nINV purity: post_boot_state(bootloader) == {}\nINV deps: Layer[i] -> Layer[j] IMPLIES i > j"
+    },
+    {
+      "file_path": "llama-agent/ir/llama-agent2.spec",
+      "line_count": 91,
+      "content": "MODULE: llama-agent2.lisp\nTYPE: Integrated Bootloader\nVERSION: Chron-LLM Δ3 Phase 1.1\n\nSTATE:\n  *system-dir*: Path = (uiop:pathname-directory-pathname *load-pathname*)\n  *use-mock-physical-p*: Boolean\n\nOPS:\n  load-system-file(filename):\n    path = merge-pathnames(filename, *system-dir*)\n    IF NOT probe-file(path) -> ERROR(\"Required file not found\")\n    load(path)\n\nSEQUENCE:\n  LOG(\"Chron-LLM Δ3 Phase 1.1 Bootloader Starting\")\n  INIT_QUICKLISP()\n  LOAD_PHYSICAL()\n  LOAD_LLM()\n  LOAD_CORE()\n  LOAD_GRAPH()\n  LOAD_WORLD()\n  LOAD_IMMUNE()\n  LOAD_RUNTIME()\n  LOAD_GENERATION()\n  LOAD_TEST()\n  LOG(\"Chron-LLM Δ3 Phase 1.1 Boot Completed\")\n\nINIT_QUICKLISP():\n  IF NOT probe-file(\"quicklisp/setup.lisp\") -> ERROR(\"Quicklisp not found\")\n  load(\"quicklisp/setup.lisp\")\n  ql:quickload(\"cffi\")\n  ql:quickload(\"babel\")\n\nLOAD_PHYSICAL():\n  LOG(\"Loading Physical Layer\")\n  IF *use-mock-physical-p* -> load-system-file(\"ffi-bindings-mock.lisp\")\n  ELSE -> load-system-file(\"ffi-bindings.lisp\")\n\nLOAD_LLM():\n  LOG(\"Loading LLM Interface\")\n  load-system-file(\"chron-llm.lisp\")\n\nLOAD_CORE():\n  LOG(\"Loading Core\")\n  load-system-file(\"chron-llm-core.lisp\")\n\nLOAD_GRAPH():\n  LOG(\"Loading Graph Layer\")\n  load-system-file(\"chron-llm-graph.lisp\")\n\nLOAD_WORLD():\n  LOG(\"Loading World\")\n  load-system-file(\"chron-llm-world.lisp\")\n\nLOAD_IMMUNE():\n  LOG(\"Loading Immune\")\n  load-system-file(\"chron-llm-immune.lisp\")\n\nLOAD_RUNTIME():\n  LOG(\"Loading Runtime\")\n  load-system-file(\"chron-llm-runtime.lisp\")\n\nLOAD_GENERATION():\n  LOG(\"Loading Generation\")\n  load-system-file(\"generate.lisp\")\n\nLOAD_TEST():\n  LOG(\"Loading Test Wrapper\")\n  load-system-file(\"run-test.lisp\")\n\nAPI:\n  start-delta3(model-path=\"/path/to/model.gguf\"):\n    load-model(model-path)\n    init-context()\n    agent-main-loop() [BLOCKING]\n\n  start-delta3-stub():\n    agent-main-loop(nil, nil)\n\nINVARIANTS:\n  INV_LoadOrder: [Physical, LLM, Core, Graph, World, Immune, Runtime, Generation, Test]\n  INV_NoReverseDep: Layers depend only on preceding layers\n  INV_PhysicalSwap: Physical Layer is sole swappable unit (Mock/FFI)\n  INV_FailFast: Stop on missing files/Quicklisp; No recovery\n\nNON_RESPONSIBILITIES:\n  Inference, KV, WAL, Graph Logic, Runtime Logic, Prompt, Event, Memory, Immune Logic\n\nPHASE_1_1_CONSTRAINTS:\n  NO ASDF, NO Lazy Load, NO Plugins, NO Versioning, NO Config Files, NO Log Levels, NO Parallel Load, NO Hot Reload"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_19.json",
+      "source": "llama-agent/ir/llama-agent.spec",
+      "target": "llama-agent/ir/llama-agent2.spec",
+      "similarity": 0.8473,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document B supersedes A by enforcing critical Delta3 Kernel stability requirements (FailFast invariant, explicit dependency ordering) absent in A's lenient 'warn' logic. Merging B into the canonical llama-agent.spec ensures the bootloader adheres to Phase 1.1 constraints and prevents silent failures during system initialization."
+    }
+  ]
+}

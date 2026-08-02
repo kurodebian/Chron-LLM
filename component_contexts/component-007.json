@@ -1,0 +1,73 @@
+{
+  "component_id": "component-007",
+  "artifact_count": 4,
+  "artifacts": [
+    {
+      "file_path": "experiments/ir/3cluster.spec",
+      "line_count": 40,
+      "content": "Role = :reply | :temporal | :bridge\nRelation = :reply | :temporal\nNode = { id: Symbol, role: Role }\nEdge = { from: Node, to: Node, relation: Relation, strength: Float[0.0, 1.0] }\nGraph = { nodes: Node[], edges: Edge[] }\nBasin = { attractor: Node[], nodes: Node[] }\n\nmake-3cluster-graph() -> Graph\ncompute-sccs(g: Graph) -> Node[][]\nfind-cycle(g: Graph) -> Node[]\nfind-attractor(g: Graph) -> Node[]\nbuild-basin-map(g: Graph) -> Basin[]\nrollout*(g: Graph, start: Node) -> Node[]\nnext-event(g: Graph, n: Node) -> Node\n\nG = make-3cluster-graph()\nG.nodes = [\n  {id:a1, role: :reply}, {id:a2, role: :reply}, {id:a3, role: :reply},\n  {id:b1, role: :temporal}, {id:b2, role: :temporal}, {id:b3, role: :temporal},\n  {id:c1, role: :bridge}, {id:c2, role: :bridge}\n]\n\nG.edges = [\n  {from:a1, to:a2, relation: :reply, strength: 0.9},\n  {from:a2, to:a3, relation: :reply, strength: 0.9},\n  {from:a3, to:a1, relation: :reply, strength: 0.9},\n  {from:b1, to:b2, relation: :temporal, strength: 0.3},\n  {from:b2, to:b3, relation: :temporal, strength: 0.3},\n  {from:b3, to:b1, relation: :temporal, strength: 0.3},\n  {from:c1, to:a1, relation: :reply, strength: 0.6},\n  {from:c1, to:b1, relation: :temporal, strength: 0.4},\n  {from:c2, to:a2, relation: :reply, strength: 0.4},\n  {from:c2, to:b2, relation: :temporal, strength: 0.6}\n]\n\nINV |G.nodes| = 8\nINV |G.edges| = 10\nINV SCCs(G) = [{a1,a2,a3}, {b1,b2,b3}, {c1}, {c2}]\nINV Attractors(G) = [{a1,a2,a3}, {b1,b2,b3}]\nINV Deterministic(G) = True"
+    },
+    {
+      "file_path": "experiments/ir/basin.spec",
+      "line_count": 30,
+      "content": "TYPES\nNode: ID\nGraph: Map[Node, Node]\nAttractor: Node\nBasin: { attractor: Attractor, nodes: [Node], mass: Int, ratio: Float }\n\nSTATE\nGraph: Immutable\nBasin: Derived\n\nOPERATIONS\nfind-attractor(g: Graph, n: Node, steps: Int) -> Attractor\nbuild-basin-map(g: Graph, nodes: [Node], steps: Int) -> Map[Attractor, [Node]]:\n  m = {}\n  FOR n IN nodes:\n    a = find-attractor(g, n, steps)\n    m[a] += [n]\n  RETURN m\nbuild-basin-structure(map: Map[Attractor, [Node]], total: Int) -> [Basin]:\n  RETURN [Basin(a, ns, LEN(ns), LEN(ns)/total) FOR (a, ns) IN map]\n\nPRE_POST_CONDITIONS\nbuild-basin-structure: PRE total > 0\nbuild-basin-structure: POST SUM(b.ratio FOR b IN result) == 1.0\n\nINVARIANTS\nINV-PARTITION: FORALL n IN nodes, EXISTS! b IN basins s.t. n IN b.nodes\nINV-MASS: FORALL b IN basins, b.mass == LEN(b.nodes)\nINV-RATIO: SUM(b.ratio FOR b IN basins) == 1.0\nINV-OBS: POST(g) == PRE(g)"
+    },
+    {
+      "file_path": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "line_count": 38,
+      "content": "TYPE Role = reply | temporal | bridge\nTYPE Node = { id: ID, role: Role }\nTYPE Edge = { from: ID, to: ID, rel: Role, strength: Float }\nTYPE Graph = { nodes: [Node], edges: [Edge] }\nTYPE Basin = { attractor: ID, nodes: [ID], mass: Int, ratio: Float }\nTYPE Path = [ID]\n\nOP next-event(g: Graph, u: ID) -> v: ID\n  PRE: exists e in g.edges : e.from == u\n  POST: v == argmax(e.to for e in g.edges where e.from == u by e.strength)\n\nOP rollout*(g: Graph, start: ID, steps: Int) -> p: Path\n  POST: len(p) == steps + 1\n  POST: p[0] == start\n  POST: forall i < steps : p[i+1] == next-event(g, p[i])\n\nOP find-attractor(g: Graph, start: ID, steps: Int) -> a: ID\n  POST: a == rollout*(g, start, steps)[-1]\n\nOP find-cycle(p: Path) -> c: Path\n  POST: c is subsequence of p\n  POST: c[0] == c[-1]\n  POST: len(c) > 1\n\nOP find-recurrent-cycle(g: Graph, start: ID, steps: Int) -> c: Path\n  POST: c == find-cycle(rollout*(g, start, steps))\n\nOP build-basin-map(g: Graph, nodes: [ID], steps: Int) -> m: Map<ID, Basin>\n  POST: forall n in nodes : m[find-attractor(g, n, steps)].nodes contains n\n  POST: forall b in m.values : b.mass == len(b.nodes)\n  POST: forall b in m.values : b.ratio == b.mass / len(nodes)\n\nOP compute-sccs(g: Graph, nodes: [ID]) -> sccs: [[ID]]\n  POST: partition(nodes) == sccs\n  POST: forall s in sccs : strongly_connected(g, s)\n\nINV Graph: forall e in g.edges : e.from in g.nodes AND e.to in g.nodes\nINV Basin: forall b in basins : forall n in b.nodes : find-attractor(g, n, steps) == b.attractor"
+    },
+    {
+      "file_path": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "line_count": 41,
+      "content": "TYPE Node = {id: ID, role: Role, ts: Time}\nTYPE Role = reply | temporal | bridge\nTYPE Edge = {from: ID, to: ID, rel: Role, str: Float[0,1], cnt: Int}\nTYPE Graph = {nodes: Node[], edges: Edge[], clusters: Cluster[], meta: Map}\nTYPE Cluster = {id: ID, type: Role, nodes: ID[], conns: Edge[], stab: Float}\nTYPE ThreeClusterGraph = {A: Cluster, B: Cluster, C: Cluster}\nTYPE Trajectory = {start: ID, steps: Int, path: ID[], term: ID, cycle: Cycle?, att: Attractor?}\nTYPE EventSelection = {curr: ID, edge: Edge, str: Float, alts: Edge[]}\nTYPE Cycle = {id: ID, nodes: ID[], len: Int, freq: Int, stab: Float, type: Role}\nTYPE CycleResult = {cycles: Cycle[], periodic: Bool, period: Int}\nTYPE SCC = {id: ID, nodes: ID[], reach: Bool, is_att: Bool, stable: Bool}\nTYPE SCCResult = {comps: SCC[], conn_score: Float}\nTYPE Attractor = {id: ID, type: cycle | fixed, nodes: ID[], stab: Float, rec: Int}\nTYPE Basin = {att: Attractor, nodes: ID[], mass: Int, ratio: Float[0,1], cov: Area}\nTYPE BasinResult = {basins: Basin[], total_att: Int, conv_rate: Float}\n\nOP next_event(g: Graph, n: Node, e: Event) -> EventSelection\nOP rollout*(g: Graph, n: Node, max_s: Int, thresh: Float) -> Trajectory\nOP find_cycle(t: Trajectory) -> Cycle\nOP find_recurrent_cycle(t: Trajectory) -> CycleResult\nOP find_attractor(t: Trajectory) -> Attractor\nOP analyze_scc(g: Graph) -> SCCResult\nOP build_basin_map(g: Graph, atts: Attractor[]) -> Basin[]\nOP build_basin_structure(bs: Basin[]) -> BasinResult\n\nINV SCC.is_att == False\nINV SCC -> Attractor IF SCC.stable > STAB_THRESH\nINV Basin.mass == len(Basin.nodes)\nINV Basin.ratio == Basin.mass / len(Graph.nodes)\nINV Cluster.type == reply IF recurrence > HIGH\nINV Cluster.type == temporal IF stability < LOW\nINV Cluster.type == bridge IF conns > 1_cluster\nINV Stability == cycle_reappearance / total_obs\nPRE rollout* requires Graph.connectedness > 0\nPOST Trajectory.term IN Graph.nodes\nPOST Trajectory.path[0] == Trajectory.start\nPOST Trajectory.path[end] == Trajectory.term\n\nMAP WorldState -> Node\nMAP Event -> Edge\nMAP Trace -> Trajectory"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_49.json",
+      "source": "experiments/ir/basin.spec",
+      "target": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity": 0.7943,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc B supersedes Doc A by incorporating essential features for Delta3 Kernel dynamical analysis: weighted edges (argmax transitions), node roles, and Strongly Connected Components (SCCs) for cycle detection. Doc A's deterministic map abstraction is insufficient for the stochastic nature of LLM reasoning traces."
+    },
+    {
+      "pair_id": "pair_71.json",
+      "source": "experiments/ir/basin.spec",
+      "target": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity": 0.7694,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc B represents the evolved Chron-LLM architecture (v0.2) where attractors are derived from SCCs and stability metrics, rendering Doc A's simpler traversal-based logic insufficient for Delta3 Kernel requirements. To maintain a single source of truth and ensure temporal consistency, Doc A should be deprecated in favor of the integrated model defined in Doc B."
+    },
+    {
+      "pair_id": "pair_2.json",
+      "source": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "target": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity": 0.9318,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc B fully encapsulates Doc A's dynamical definitions while integrating necessary temporal and structural context (Clusters, Timestamps) required for the Delta3 Kernel. Doc A should be deprecated as a preliminary draft."
+    },
+    {
+      "pair_id": "pair_13.json",
+      "source": "experiments/ir/3cluster.spec",
+      "target": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity": 0.8653,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the canonical type system and behavioral contract for the Delta3 Kernel IR layer. Doc A functions as a concrete test fixture or canonical example validating the 3-cluster topology dynamics. While their core type definitions overlap, they serve distinct purposes (Schema vs Instance). To ensure architectural consistency, Doc A should be refactored to import types from Doc B rather than redefining them locally, eliminating redundancy while preserving the specific graph instance G for regression testing and documentation."
+    },
+    {
+      "pair_id": "pair_21.json",
+      "source": "experiments/ir/3cluster.spec",
+      "target": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity": 0.84,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the formal contract for the Delta3 Kernel's dynamical analysis module (defining how attractors/basins are computed). Doc A acts as a canonical test case or configuration defining a specific recurrent topology to validate that logic. Merging would conflate general algorithmic contracts with specific experimental data constants."
+    }
+  ]
+}

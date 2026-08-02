@@ -1,0 +1,27 @@
+{
+  "component_id": "component-010",
+  "artifact_count": 2,
+  "artifacts": [
+    {
+      "file_path": "docs/ir/08-memory-model.spec",
+      "line_count": 14,
+      "content": "ShortTermMemory := History[last N Events]\nLongTermMemory := PersistentStore\nCanonicalMemory := AuthoritativeState\n\nMemoryRef := {short-term | long-term | canonical}\n\nmemory-read() -> Prompt : !mut(State), uses(Derived.MemoryRef)\nCommit(Event e) -> CanonicalMemory' = CanonicalMemory + {e}, MemoryRef.auth' = update(CanonicalMemory')\nrecover(ReplayCtx, MemoryRef) -> PrefillState\n\nINV CanonicalMemory.writer == Commit\nINV MemoryRef.authoritative.writer == Commit\nINV MemoryRef.is_deterministic == true\nINV Replay.requires(MemoryRef) == true"
+    },
+    {
+      "file_path": "docs/ir/12-recovery.spec",
+      "line_count": 15,
+      "content": "SPEC: Chron-LLM-Recovery-R1\nState: Canonical:Immutable, Runtime:Mutable, Cache:Mutable, KVCache:Mutable, Context:Mutable\nInput: {Canonical, MemoryRef}\nOutput: {Context}\nOps:\n  Recover(Input) -> Output\n  Recover = Replay(Canonical) -> ReconstructDerived -> ReconstructMemoryRef -> ReconstructWorking -> ResumeRuntime\n  Allowed = {Destroy(Cache), Destroy(KVCache), Reconstruct(Prefill), Reconstruct(Derived), Reconstruct(Working), Resume}\n  Forbidden = {Mutate(Canonical), Create(AuthoritativeEvent), Bypass(Commit)}\nINV: Canonical.mutate == False\nINV: Canonical.mutate -> Commit\nINV: Recover == Deterministic\nINV: Recover == ReplayCompatible\nINV: Canonical.History == Recoverable\nINV: Recover.Introduce(AuthoritativeInfo) == False"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_66.json",
+      "source": "docs/ir/08-memory-model.spec",
+      "target": "docs/ir/12-recovery.spec",
+      "similarity": 0.7764,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the schema definition for memory states and write constraints, while Doc B implements the specific algorithmic contract for state recovery using those definitions. Keeping them separate maintains separation of concerns within the IR layer: one defines 'what' the state is (and its invariants), the other defines 'how' to restore it deterministically without mutating authoritative history."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "component_id": "component-005",
+  "artifact_count": 2,
+  "artifacts": [
+    {
+      "file_path": "llama-agent/ir/chron-llm-immune.spec",
+      "line_count": 35,
+      "content": "Type WorldID = Int\nType NodeID = Int\nType EventKind = :branch\nType BranchEvent = {Kind: EventKind, CausalID: WorldID, Payload: {ParentNodeID: NodeID, ParentWorldID: WorldID}}\nType ImmuneStatus = :ok | :degraded\n\nState wal-world-counter: Int\nState Graph: {WorldID: Node}\nState WAL: Event[]\n\nOp stage-branch-world(Graph, WAL, ParentWorldID: WorldID) -> (NewWorldID: WorldID, BranchEvent)\nOp check-immune-status(Graph, WorldID: WorldID) -> ImmuneStatus\nOp get-latest-node-in-world(Graph, WorldID: WorldID) -> Node | Null\nOp stage-event(Kind: EventKind, CausalID: WorldID, Payload: Any) -> Event\nOp clean-history(Graph, WorldID: WorldID) -> History | Null\n\nstage-branch-world(Graph, WAL, ParentWorldID):\n  Pre: ParentWorldID valid\n  new-id = wal-world-counter++\n  latest = get-latest-node-in-world(Graph, ParentWorldID)\n  parent-node-id = (latest != Null) ? latest.event.node-id : 0\n  evt = stage-event(Kind=:branch, CausalID=new-id, Payload={ParentNodeID: parent-node-id, ParentWorldID: ParentWorldID})\n  Post: wal-world-counter = new-id\n  Post: evt.Status = Staged\n  return (new-id, evt)\n\ncheck-immune-status(Graph, WorldID):\n  h = clean-history(Graph, WorldID)\n  return (h != Null) ? :ok : :degraded\n\nINV(WorldID): Unique\nINV(BranchEvent): ParentWorldID = Immutable\nINV(BranchEvent): ParentNodeID -> CommittedNode\nINV(BranchEvent): Status = Staged\nINV(Immune): HistoryExists -> Status = :ok"
+    },
+    {
+      "file_path": "llama-agent/ir/chron-llm-world.spec",
+      "line_count": 44,
+      "content": "SPEC WorldService\nTYPES\n  WorldID = Int\n  NodeID = Int\n  BranchEvent = { kind: :branch, causal_id: WorldID, payload: { parent_node: NodeID, parent_world: WorldID } }\n  CausalNode = { id: NodeID, causal_id: WorldID, class: :fault | :valid }\nSTATE\n  wal_world_counter: WorldID\n  graph: [CausalNode]\n  wal: [Event]\nOPS\n  stage_branch_world(parent_world_id: WorldID) -> (WorldID, BranchEvent)\n  get_latest_node_in_world(world_id: WorldID) -> CausalNode | NIL\nPRE_POST\n  stage_branch_world:\n    PRE: parent_world_id valid\n    POST: wal_world_counter incremented\n    POST: BranchEvent staged in wal\n    POST: returned WorldID unique\n  get_latest_node_in_world:\n    PRE: world_id valid\n    POST: result.class != :fault\n    POST: result.id == max([n.id for n in graph if n.causal_id == world_id])\nALGORITHMS\n  stage_branch_world(p_wid):\n    n_wid = wal_world_counter + 1\n    wal_world_counter = n_wid\n    p_node = get_latest_node_in_world(p_wid)\n    p_nid = if p_node == NIL then 0 else p_node.id\n    evt = { kind: :branch, causal_id: n_wid, payload: { parent_node: p_nid, parent_world: p_wid } }\n    wal = wal + [evt]\n    return (n_wid, evt)\n  get_latest_node_in_world(wid):\n    cands = [n for n in graph if n.causal_id == wid && n.class != :fault]\n    return if cands == [] then NIL else max(cands, key=n.id)\nINVARIANTS\n  INV: wal_world_counter monotonic\n  INV: BranchEvent.kind == :branch\n  INV: RootParent == 0\n  INV: Query excludes :fault nodes\n  INV: Query returns single latest node per WorldID\nCONSTRAINTS\n  Phase1: Implemented=[stage_branch_world, get_latest_node_in_world]\n  Phase1: Omitted=[commit, merge, replay, validation]"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_26.json",
+      "source": "llama-agent/ir/chron-llm-immune.spec",
+      "target": "llama-agent/ir/chron-llm-world.spec",
+      "similarity": 0.83,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_A_INTO_B",
+      "rationale": "Doc B represents a more mature, implementation-ready specification (explicit Phase1 constraints and algorithms) with a robust data model (CausalNode classes). Doc A's branching logic is redundant. The 'Immune' status from Doc A should be integrated into Doc B as a derived query based on CausalNode validity/fault states to maintain a single source of truth for World operations in the Delta3 Kernel."
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "component_id": "component-004",
+  "artifact_count": 7,
+  "artifacts": [
+    {
+      "file_path": "docs/ir/13-worldline-branching.spec",
+      "line_count": 20,
+      "content": "TYPE CausalID\nTYPE Worldline = {id: CausalID, state: Any}\nTYPE Event = {type: {discontinuity, abort, drift, stagnation}, count: Int}\nSTATE S = {current_id: CausalID, canonical_id: CausalID, drift_cnt: Int, stag_cnt: Int, history: Map<CausalID, Worldline>}\nPRED branch(E) = (E.type in {discontinuity, abort}) | (E.type == drift & E.count >= 3) | (E.type == stagnation & E.count >= 5)\nOP Branch(S, E) -> S':\n  PRE: branch(E)\n  S'.current_id = gen_id()\n  KV_Cache = null\n  path = Traverse(Graph, causal_edges)\n  Prefill = Construct(path)\n  S'.history[S'.current_id] = {id: S'.current_id, state: Prefill}\n  S'.drift_cnt = 0\n  S'.stag_cnt = 0\nOP Commit(id, S) -> S':\n  S'.canonical_id = id\nINV: Branch deterministic\nINV: history replayable\nINV: w in S.history & w.id != S.current_id => w immutable\nINV: S.canonical_id mutable iff op == Commit"
+    },
+    {
+      "file_path": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "line_count": 63,
+      "content": "DOC: CHRON-R2.0-D-COMMIT-KERNEL-CONSTITUTION\nREV: 1.0\nSTATUS: FREEZE_CANDIDATE\nDEPS: [R2.0-A, R2.0-B, R2.0-C]\n\nTYPE ID = Hash\nTYPE Ref = Pointer\nTYPE Enum = Symbol\n\nTYPE CandidateEvent = { type: Enum, world-id: ID, parent-id: ID, payload-ref: Ref, metadata: Map, schema-version: Int }\nTYPE CanonicalEvent = { event-id: ID, causal-id: ID, parent-id: ID, world-id: ID, type: Enum, payload-ref: Ref, schema-version: Int }\nTYPE WALRecord = CanonicalEvent\nTYPE CommitResult = { status: Enum[:committed, :rejected, :fault], event-id: ID?, causal-id: ID?, world-id: ID?, reason: String? }\n\nSTATE Graph = List[CanonicalEvent]\nSTATE WAL = List[WALRecord]\nSTATE WorldHead = Map[ID -> CanonicalEvent]\nSTATE Memory = ImmutableStore\n\nFUNC GenEventID(c: CandidateEvent) -> ID = H(c.parent-id, c.world-id, c.type, c.payload-ref, c.schema-version)\nFUNC GenCausalID(c: CandidateEvent, p: CanonicalEvent) -> ID = H(p.causal-id, c.world-id, c.type, c.payload-ref, c.schema-version)\n\nOP Commit(c: CandidateEvent) -> CommitResult:\n  PRE: c.payload-ref IN Memory AND (c.parent-id IN Graph OR c.parent-id == ROOT) AND c.world-id IN WorldHead\n  STEPS:\n    1. head = WorldHead[c.world-id]\n    2. IF !ValidateParent(c, head) -> RETURN {status: :rejected, reason: \"invalid-parent\"}\n    3. eid = GenEventID(c)\n    4. cid = GenCausalID(c, head)\n    5. ce = CanonicalEvent{event-id: eid, causal-id: cid, parent-id: c.parent-id, world-id: c.world-id, type: c.type, payload-ref: c.payload-ref, schema-version: c.schema-version}\n    6. WAL.Append(ce)\n    7. Graph.Append(ce)\n    8. WorldHead[c.world-id] = ce\n    9. RETURN {status: :committed, event-id: eid, causal-id: cid, world-id: c.world-id}\n  POST:\n    IF status == :committed -> ce IN Graph AND ce IN WAL AND WorldHead[c.world-id] == ce\n    IF status != :committed -> Graph == Graph_old AND WAL == WAL_old AND WorldHead == WorldHead_old\n\nINV:\n  1. AUTHORITY: ONLY Commit OP modifies Graph, WAL, WorldHead\n  2. UNIQUENESS: !exists(e1, e2 IN Graph | e1.event-id == e2.event-id && e1 != e2)\n  3. APPEND_ONLY: Graph is strictly append-only\n  4. IMMUTABILITY: CanonicalEvent fields immutable post-creation\n  5. NO_TIMESTAMPS: CanonicalEvent excludes wall-clock time\n  6. WAL_ORDERING: WAL commit precedes Graph visibility\n  7. HEAD_VALIDITY: WorldHead[w].event-id IN Graph\n  8. DETERMINISM: Commit(c) == Commit(c) given identical inputs\n  9. IDEMPOTENCY: Repeated Commit(c) yields identical result\n  10. ISOLATION: Commit(w1) does not affect WorldHead[w2] where w1 != w2\n  11. MEMORY_REF: CanonicalEvent.payload-ref points to Immutable Memory\n  12. GRANULARITY: 1 Commit == 1 CanonicalEvent == 1 Graph Append\n\nTESTS:\n  D1: Valid Commit -> :committed\n  D2: Invalid Candidate -> :rejected, No Mutation\n  D3: Deterministic ID -> H(Inputs) == ID\n  D4: Graph Append Only -> Len(Graph) increases by 1\n  D5: Visibility Order -> WAL -> Graph -> WorldHead\n  D6: WAL Replay -> Reconstructs Graph\n  D7: Duplicate -> Same Result\n  D8: Crash Recovery -> No Corruption\n  D9: Cross World Isolation -> No Side Effects\n  D10: Memory Immutability -> Payload unchanged"
+    },
+    {
+      "file_path": "docs/ir/architecture-v1.1.spec",
+      "line_count": 33,
+      "content": "Type Event = { kind: Kind, index: U64, clock: U64, causal-id: UUID, timestamp: U64, stream_id: UUID, payload: Any }\nType Kind = :gen-token | :structural-fault | :tool-fault | :tool-call-start | :tool-call-timeout | :tool-call-abort | :tool-call-commit\nType Edge = { src: Event, dst: Event, type: :temporal | :causal }\nType SystemState = { wal: [Event], active-causal-id: UUID, clock: U64, kv-cache: Bytes, stream_fault: Bool, active_stream_id: UUID }\n\nOp init() -> SystemState = { wal: [], active-causal-id: UUID(), clock: 0, kv-cache: NULL, stream_fault: False, active_stream_id: NULL }\n\nOp emit(e: Event) -> SystemState:\n    e.clock = state.clock + 1\n    state.wal.append(e)\n    state.clock = e.clock\n\nOp handle_fault() -> SystemState:\n    new_id = UUID()\n    emit({ kind: :structural-fault, causal-id: new_id })\n    state.kv-cache = NULL\n    state.active-causal-id = new_id\n    state.stream_fault = True\n\nOp prefill() -> SystemState:\n    path = traverse_causal(state.wal, state.active-causal-id)\n    state.kv-cache = load(path)\n\nOp commit_stream(tokens: [Token]) -> SystemState:\n    PRE: !state.stream_fault\n    for t in tokens: emit({ kind: :gen-token, stream_id: state.active_stream_id, payload: t })\n\nOp tool_event(kind: Kind) -> SystemState:\n    emit({ kind: kind })\n\nINV1: forall e1, e2 in wal: e1.index < e2.index -> e1.clock <= e2.clock\nINV2: state.stream_fault -> !exists e in wal: e.kind == :gen-token && e.stream_id == state.active_stream_id\nINV3: state.kv-cache != NULL -> is_healthy(state.kv-cache)"
+    },
+    {
+      "file_path": "docs/ir/architecture-v1.spec",
+      "line_count": 60,
+      "content": "Type Event = { kind: Kind, index: U64, clock: U64, causal-id: UUID, timestamp: U64, payload: Any }\nType Kind = :dialogue | :tool | :meta | :structural-fault | :tool-fault\nType FaultRef = :echo | :stagnation | :drift | :discontinuity\nType Action = :commit | :discard | :retry | :retry-with-penalty | :abort\nType NodeClass = :dialogue | :tool | :meta | :fault\nType EdgeType = :temporal | :causal\n\nState System = { wal: []Event, graph: Graph, global_clock: U64, llm_state: LLM_State }\nState Graph = { nodes: Map<UUID, Node>, edges: Map<UUID, []Edge> }\nState Node = { id: UUID, class: NodeClass, event: Event }\nState Edge = { src: UUID, dst: UUID, type: EdgeType }\nState LLM_State = { kv_cache: Bytes, retry_count: U32 }\n\nOp Append_WAL(sys: System, e: Event) -> System\n  Pre: e.clock > sys.global_clock\n  Post: sys.wal.append(e); sys.global_clock = e.clock\n\nOp Classify(kind: Kind) -> NodeClass\n  :dialogue -> :dialogue\n  :tool | :tool-fault -> :tool\n  :meta -> :meta\n  :structural-fault -> :fault\n\nOp Lift_Graph(wal: []Event) -> Graph\n  g = Graph{}\n  last_node = NULL\n  last_healthy = NULL\n  For e in wal:\n    n = Node{id: e.causal-id, class: Classify(e.kind), event: e}\n    g.nodes[e.causal-id] = n\n    If last_node != NULL: g.edges.append({src: last_node.id, dst: n.id, type: :temporal})\n    If n.class != :fault:\n      last_healthy = n\n      If last_healthy_prev != NULL: g.edges.append({src: last_healthy_prev.id, dst: n.id, type: :causal})\n    last_node = n\n  Return g\n\nOp Control_Decide(obs: Obs, state: State) -> Action\n  If obs.ref in FaultRef: Return :abort\n  If obs.ref == :tool-fault: Return :retry\n  If obs.valid: Return :commit\n  If state.retry_count < MAX: Return :retry | :retry-with-penalty\n  Return :abort\n\nOp Handle_Abort(sys: System) -> System\n  sys.llm_state.kv_cache = NULL\n  clean_history = Trace_Causal(sys.graph)\n  sys.llm_state = Inject(clean_history)\n  fault_event = {kind: :structural-fault, clock: sys.global_clock + 1, ...}\n  Return Append_WAL(sys, fault_event)\n\nOp Trace_Causal(graph: Graph) -> []Event\n  Path = Backtrack(Root, :causal)\n  Return Filter(Path, n.class != :fault)\n\nINV Global_Clock_Monotonicity: Forall e1, e2 in WAL: e1.index < e2.index -> e1.clock < e2.clock\nINV No_Partial_Commit: If Action in [:discard, :abort]: Tokens not in WAL\nINV Retry_Idempotency: WAL contains only Final_Success OR Final_Fault\nINV Fault_Isolation: Node.class == :fault -> No outgoing :causal edges\nINV Tool_Fault_Independence: Event.kind == :tool-fault -> LLM_State.retry_count unchanged"
+    },
+    {
+      "file_path": "llama-agent/ir/causal-kernel.spec",
+      "line_count": 72,
+      "content": "TYPES:\nEvent = {idx: Int, clk: Int, wld: Int, kind: Sym, pay: {txt: Str, tgt: Str?, meta: Map}}\nWAL = {store: [Event], clk: Int, stage: [Event]}\nNodeCls = Dialogue | Tool | Fault | Meta\nNode = {id: Int, ev: Event, cls: NodeCls, clk: Int, wld: Int}\nEdge = {src: Int, dst: Int, typ: Temporal | Causal}\nGraph = {nodes: Map<Int, Node>, edges: [Edge], par: Map<Int, Int>}\nHTable = Map<Int, Int>\nKernel = {wal: WAL, cur-wld: Int}\n\nOPS:\nappend(k, kind, pay) -> Event:\n  k.wal.clk++\n  e = {idx: len(k.wal.store), clk: k.wal.clk, wld: k.cur-wld, kind: kind, pay: pay}\n  k.wal.store.append(e)\n  return e\n\nstage(k, kind, pay) -> Event:\n  e = {idx: len(k.wal.store)+len(k.wal.stage), clk: k.wal.clk+1, wld: k.cur-wld, kind: kind, pay: pay}\n  k.wal.stage.append(e)\n  return e\n\ndiscard(k) -> Void:\n  k.wal.stage = []\n\ncommit(k) -> Void:\n  for e in reverse(k.wal.stage):\n    k.wal.clk++\n    e.clk = k.wal.clk\n    e.idx = len(k.wal.store)\n    k.wal.store.append(e)\n  k.wal.stage = []\n\nbranch(k, new-wld) -> Void:\n  k.cur-wld = new-wld\n\nclassify(kind) -> NodeCls:\n  if kind in [:user-msg, :asst-reply] -> Dialogue\n  if kind in [:tool-start, :tool-timeout, :tool-abort, :tool-commit] -> Tool\n  if kind in [:struct-fault, :tool-fault] -> Fault\n  else -> Meta\n\nlift(k) -> Graph:\n  g = {nodes: {}, edges: [], par: {}}\n  ht = {}\n  last = null\n  for e in k.wal.store:\n    n = {id: e.idx, ev: e, cls: classify(e.kind), clk: e.clk, wld: e.wld}\n    g.nodes[n.id] = n\n    if last != null:\n      g.edges.append({src: last.id, dst: n.id, typ: Temporal})\n      g.par[n.id] = last.id\n    if n.cls != Fault:\n      if ht[e.wld] != null:\n        g.edges.append({src: ht[e.wld], dst: n.id, typ: Causal})\n      ht[e.wld] = n.id\n    last = n\n  return g\n\nclean(g, wld) -> [Event]:\n  curr = argmax n in g.nodes where n.wld == wld\n  hist = []\n  while curr != null:\n    if curr.cls == Dialogue: hist.prepend(curr.ev)\n    curr = g.par[curr.id]\n  return hist\n\nINV:\nmonotonic-clk: forall e1,e2 in WAL.store: e1.idx < e2.idx -> e1.clk < e2.clk\nfault-isolation: forall n in Graph.nodes: n.cls == Fault -> n not in clean(Graph, n.wld)\ncausal-scope: forall e in Graph.edges: e.typ == Causal -> g.nodes[e.src].wld == g.nodes[e.dst].wld\nhistory-recon: forall g in Graph: clean(g, wld) is deterministic"
+    },
+    {
+      "file_path": "llama-agent/ir/chron-llm-causal.spec",
+      "line_count": 49,
+      "content": "TYPE Event = { node-id: Int, causal-id: Int, kind: Symbol, payload: Any, clock: Int? }\nTYPE WAL = { storage: [Event], staged-events: [Event], clock: Int, node-counter: Int, world-counter: Int }\n\nINIT WAL = { storage: [], staged-events: [], clock: 0, node-counter: 1000, world-counter: 100 }\n\nOP invariant-check(wal: WAL) -> Bool\n  return true\n\nOP make-event(wal: WAL, kind: Symbol, payload: Any) -> Event\n  node-id = wal.node-counter++\n  return { node-id, causal-id: 0, kind, payload, clock: null }\n\nOP stage-event(wal: WAL, event: Event) -> WAL\n  wal.staged-events.push(event)\n  return wal\n\nOP commit-event(wal: WAL, event: Event) -> Event\n  wal.clock++\n  event.clock = wal.clock\n  wal.storage.push(event)\n  return event\n\nOP append-event(wal: WAL, kind: Symbol, payload: Any) -> Event\n  e = make-event(wal, kind, payload)\n  return commit-event(wal, e)\n\nOP rollback-stage(wal: WAL) -> WAL\n  wal.staged-events = []\n  return wal\n\nOP discard-staged(wal: WAL) -> WAL\n  wal.staged-events = []\n  return wal\n\nOP commit-staged(wal: WAL) -> { success: Bool, committed-events: [Event] }\n  PRE: invariant-check(wal)\n  committed = []\n  for e in wal.staged-events: committed.push(commit-event(wal, e))\n  wal.staged-events = []\n  POST: wal.staged-events.length == 0\n  return { success: true, committed-events: committed }\n\nOP clear-wal(wal: WAL) -> WAL\n  wal = INIT WAL\n  return wal\n\nINV clock-monotonic: forall i < j in wal.storage: wal.storage[i].clock < wal.storage[j].clock\nINV node-unique: forall i != j in wal.storage: wal.storage[i].node-id != wal.storage[j].node-id\nINV post-commit: after commit-staged: wal.staged-events.length == 0"
+    },
+    {
+      "file_path": "llama-agent/ir/chron-llm-graph.spec",
+      "line_count": 66,
+      "content": "TYPES\nEvent = {id, clock, causal_id, payload}\nNode = {id, clock, class, event, causal_id}\nEdge = {kind: :temporal | :causal, from: NodeID, to: NodeID}\nGraph = {nodes: Hash<NodeID, Node>, edges: Vector<Edge>, parents: Hash<NodeID, NodeID>, latest_healthy: Hash<WorldID, NodeID>}\nHealthyTable = Hash<CausalID, NodeID>\nHistory = Vector<Node>\n\nSTATE\nlast_temporal_id: NodeID | nil\nglobal_last_healthy_id: NodeID | nil\nht: HealthyTable\n\nOPERATIONS\nrebuild-graph-from-wal(wal: Vector<Event>) -> Graph\nlift-to-graph(wal: Vector<Event>) -> Graph\nadd-node-to-graph(g: Graph, e: Event) -> Node\ndetermine-node-class(e: Event) -> Class\nfind-parent-node-id(causal_id: ID, ht: HealthyTable, fallback: NodeID) -> NodeID\nadd-edge(g: Graph, kind: Kind, from: NodeID, to: NodeID)\ngraph-history(g: Graph, world_id: ID) -> History\nclean-history() -> History\n\nALGORITHMS\nlift-to-graph(wal):\n  g = Graph{}\n  last_temporal_id = nil\n  ht = HealthyTable{}\n  global_last_healthy_id = nil\n  for e in wal:\n    n = add-node-to-graph(g, e)\n    if last_temporal_id != nil: add-edge(g, :temporal, last_temporal_id, n.id)\n    parent_id = find-parent-node-id(n.causal_id, ht, global_last_healthy_id)\n    if parent_id != nil: add-edge(g, :causal, parent_id, n.id)\n    if n.class != :fault:\n      ht[n.causal_id] = n.id\n      global_last_healthy_id = n.id\n    last_temporal_id = n.id\n  return g\n\nadd-node-to-graph(g, e):\n  n = Node{id=e.id, clock=e.clock, class=determine-node-class(e), event=e, causal_id=e.causal_id}\n  g.nodes[n.id] = n\n  return n\n\nfind-parent-node-id(causal_id, ht, fallback):\n  if causal_id in ht: return ht[causal_id]\n  return fallback\n\nadd-edge(g, kind, from, to):\n  g.edges.append(Edge{kind, from, to})\n  if kind == :causal: g.parents[to] = from\n\ngraph-history(g, world_id):\n  curr = g.latest_healthy[world_id]\n  hist = []\n  while curr != nil:\n    if curr.class == :dialogue: hist.prepend(curr)\n    curr = g.parents[curr.id]\n  return hist\n\nINVARIANTS\nINV: forall e in WAL, exists n in Graph.nodes where n.event == e\nINV: Temporal edges form linear chain matching WAL order\nINV: forall n in Graph.nodes where n.class == :fault, n.id not in HealthyTable.values\nINV: Graph = f(WAL)"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_85.json",
+      "source": "docs/ir/13-worldline-branching.spec",
+      "target": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "similarity": 0.7502,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the foundational infrastructure (Phase D) for event persistence and consistency. Doc A represents a higher-level control policy (likely Phase E/Delta3 Kernel logic) that consumes Doc B's primitives. Integration requires updating Doc A to explicitly invoke Doc B's Commit operation for persisting branch states, rather than using abstract 'gen_id()' or simplified state updates."
+    },
+    {
+      "pair_id": "pair_82.json",
+      "source": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "target": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity": 0.7562,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc A establishes the authoritative Delta3 Kernel architecture (Phase D), enforcing deterministic hash-based identities and prohibiting wall-clock timestamps to ensure causal consistency. Doc B's reliance on integer node IDs and clock fields fundamentally conflicts with these invariants, indicating it is either a legacy draft or an incompatible abstraction that must be deprecated in favor of the Phase D Constitution."
+    },
+    {
+      "pair_id": "pair_80.json",
+      "source": "docs/ir/architecture-v1.spec",
+      "target": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.7595,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A serves as the architectural source of truth for the Delta3 Kernel. Doc B contains critical implementation details (HealthyTable, optimized parent lookup) that improve graph construction efficiency but currently exist in isolation with slightly divergent type definitions. Merging B into A ensures a single canonical specification that aligns high-level control logic with low-level graph optimization strategies, eliminating semantic drift between documentation and module specs."
+    },
+    {
+      "pair_id": "pair_47.json",
+      "source": "docs/ir/architecture-v1.1.spec",
+      "target": "docs/ir/architecture-v1.spec",
+      "similarity": 0.7974,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A (v1.1) supersedes Doc B (v1) by streamlining the state model for Delta3 Kernel efficiency, removing explicit graph storage in favor of WAL-based causal traversal, and adding necessary stream/tool granularity. B's control logic should be verified against current runtime specs but structurally B is obsolete."
+    },
+    {
+      "pair_id": "pair_20.json",
+      "source": "docs/ir/architecture-v1.spec",
+      "target": "llama-agent/ir/causal-kernel.spec",
+      "similarity": 0.8456,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc B introduces critical Delta3 Kernel features (staging, world-line isolation) missing in Doc A's simpler global-clock model. To ensure architectural consistency and kernel efficiency, Doc A should be updated to adopt Doc B's IR mechanics (Int IDs, staging, wld), while preserving Doc A's higher-level Control_Decide and Handle_Abort logic adapted to the new kernel primitives."
+    },
+    {
+      "pair_id": "pair_64.json",
+      "source": "llama-agent/ir/causal-kernel.spec",
+      "target": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity": 0.7783,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Document A represents the mature Delta3 Kernel specification (Phase D/E) where linear logs are transformed into causal graphs for agent reasoning. Document B appears to be an earlier draft or lower-level abstraction that was subsumed by the Kernel definition in A. Since A fully implements the 'causal' semantics implied by both filenames while B does not, retaining B creates redundancy and architectural ambiguity."
+    },
+    {
+      "pair_id": "pair_81.json",
+      "source": "docs/ir/architecture-v1.1.spec",
+      "target": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity": 0.7589,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A (architecture-v1.1.spec) is the canonical definition for Delta3 Kernel's causal state management, enforcing UUID lineage and stream-aware fault handling required for robust generation. Doc B conflicts with these type definitions (Int vs UUID causal-id) and lacks critical semantic fields (stream_id). While Doc B introduces transactional staging concepts, these should be encapsulated within a WAL implementation module compliant with Doc A's interface rather than existing as a competing top-level IR spec."
+    }
+  ]
+}

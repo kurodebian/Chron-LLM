@@ -1,0 +1,73 @@
+{
+  "component_id": "component-006",
+  "artifact_count": 4,
+  "artifacts": [
+    {
+      "file_path": "docs/ir/phase-a-charter.spec",
+      "line_count": 9,
+      "content": "STATE: H : History\nAXIOM: A = H\nINV: H.authoritative_causal_record\nINV: H.reproducible\nINV: H.inspectable\nINV: H.derivable\nINV: EventABI !in H\nINV: ResolutionSemantics !in H\nEXCLUDE: EventABI, Resolution, SemanticUnit, Interpretation, LLMRuntime"
+    },
+    {
+      "file_path": "docs/ir/phase-b-charter.spec",
+      "line_count": 11,
+      "content": "STATE: H : History, M : ProjectionModel, J : JustificationStructure, A : History\nOP: d(H) -> M, j(M) -> J\nAXIOM: A = H\nAXIOM: M = d(H)\nAXIOM: J = j(M)\nAXIOM: G(J, H)\nINV: d.deterministic\nINV: j.derived_exclusively_from(d)\nINV: d.semantically_neutral\nINV: d.reproducible\nEXCLUDE: EventABI, Resolution, SemanticUnit, Interpretation, Knowledge, LLMRuntime"
+    },
+    {
+      "file_path": "docs/ir/phase-c-charter.spec",
+      "line_count": 14,
+      "content": "STATE: H : History, M : ProjectionModel, ABI : EventABI, S : SemanticModel, J : JustificationStructure, A : History\nOP: interpret(M, ABI) -> S, justify(S) -> J\nAXIOM: A = H\nAXIOM: M = projection(H)\nAXIOM: S = interpret(M, ABI)\nAXIOM: J = justify(S)\nINV: interpret.deterministic_under(ABI)\nINV: ABI.explicit_and_versioned\nINV: S.derived_exclusively_from(M)\nINV: interpret.preserves_order(M)\nINV: J.derived_exclusively_from(S)\nINV: external_semantic_injection !in interpret\nINV: S.non_authoritative\nEXCLUDE: ProjectionGeneration, KnowledgeGeneration, Analysis, FullSemanticReasoning, WorldModeling, ExecutionSemantics, GraphConstruction, RuntimeEvaluation, CanonicalStateMutation"
+    },
+    {
+      "file_path": "docs/ir/phase-d-charter.spec",
+      "line_count": 12,
+      "content": "STATE: H : History, M : ProjectionModel, S : SemanticModel, G : RelationalGraph\nOP: graph(S) -> G\nAXIOM: G = graph(S)\nAXIOM: H -> M -> S -> G\nAXIOM: T(G)\nINV: graph.deterministic_from(S)\nINV: nodes.preserve_identity_consistency\nINV: edges.structural_relations_only\nINV: traversal.deterministic\nINV: interpretation !in G\nINV: G.non_authoritative\nEXCLUDE: SemanticInterpretation, EventABIProcessing, ObservationSemantics, MeaningAttribution, ExternalWorldBinding, KnowledgeGeneration, RuntimeExecution"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_30.json",
+      "source": "docs/ir/phase-c-charter.spec",
+      "target": "docs/ir/phase-d-charter.spec",
+      "similarity": 0.8159,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "These specifications define sequential dependencies within the Delta3 Kernel's IR pipeline. Phase C produces the SemanticModel (S) required by Phase D to generate the RelationalGraph (G). Merging them would violate separation of concerns between semantic interpretation and structural graph topology generation."
+    },
+    {
+      "pair_id": "pair_48.json",
+      "source": "docs/ir/phase-a-charter.spec",
+      "target": "docs/ir/phase-c-charter.spec",
+      "similarity": 0.7945,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Phase A establishes the immutable causal record and exclusion of interpretive logic. Phase C defines how interpretation (S) and justification (J) are deterministically derived from History via ABI without compromising authority. Both specs are essential for Delta3 Kernel's layered integrity."
+    },
+    {
+      "pair_id": "pair_5.json",
+      "source": "docs/ir/phase-b-charter.spec",
+      "target": "docs/ir/phase-c-charter.spec",
+      "similarity": 0.9018,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the structural projection layer (Phase B), while Doc B introduces the semantic interpretation layer via ABI (Phase C). Both are necessary to define the complete transformation from History to Semantic Justification within the Chron-LLM architecture."
+    },
+    {
+      "pair_id": "pair_56.json",
+      "source": "docs/ir/phase-b-charter.spec",
+      "target": "docs/ir/phase-d-charter.spec",
+      "similarity": 0.7853,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "These documents define separate architectural contracts for different pipeline stages within the Delta3 Kernel. Phase B establishes the foundational projection logic (H->M), while Phase D governs graph topology generation (S->G). Maintaining them separately preserves clear phase boundaries, invariant isolation, and modular verification capabilities."
+    },
+    {
+      "pair_id": "pair_8.json",
+      "source": "docs/ir/phase-a-charter.spec",
+      "target": "docs/ir/phase-b-charter.spec",
+      "similarity": 0.8891,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Distinct phase charters required for Delta3 Kernel layering; merging obscures the boundary between raw history recording (A) and derived projection logic (B)."
+    }
+  ]
+}

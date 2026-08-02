@@ -1,0 +1,27 @@
+{
+  "component_id": "component-012",
+  "artifact_count": 2,
+  "artifacts": [
+    {
+      "file_path": "docs/ir/09-runtime-scheduling.spec",
+      "line_count": 22,
+      "content": "Type Event\nType Execution { state: Working | Faulted, causalOrder: LamportClock, retryCount: Int }\n\nState IngressQueue: Queue<Event> []\nState ReadyQueue: Queue<Execution> []\nState IsolatedQueue: Queue<Execution> []\n\nConfig maxRetry = 3\nConfig maxPenaltyRetry = 2\n\nOp Schedule(ReadyQueue) -> Sort(e.causalOrder ASC, FIFO)\n\nOp retry(exec: Execution) -> if exec.retryCount < maxRetry then Requeue(exec) else Abort()\n\nOp retry-with-penalty(exec: Execution) -> Pre(exec.state == Working) -> if exec.retryCount < maxPenaltyRetry then { exec.temp += 0.2; exec.topP -= 0.1 } -> CanonicalState = Immutable -> Requeue(exec) else Abort()\n\nOp abort(event: FaultEvent) -> Terminate(Branch)\n\nINV Schedule == Deterministic(CanonicalState)\nINV Retry -> !Mutate(CanonicalState)\nINV NormalDialogueExecution !Depends(IsolatedQueue)\nINV FaultIsolation -> !Affect(NormalDialogueReplay)"
+    },
+    {
+      "file_path": "docs/ir/10-tool-execution.spec",
+      "line_count": 16,
+      "content": "enum ToolEvent = {START, TIMEOUT, ABORT, COMMIT}\ntype Context = { causal_id: ID }\ntype State = { canonical: CanonicalState, dialogue: DialogueState }\n\nop apply(evt: ToolEvent) -> State'\n\nINV(authority): State'.canonical != State.canonical <-> evt.type == COMMIT\nINV(isolation_fail): evt.type in {TIMEOUT, ABORT} -> State'.dialogue == State.dialogue\nINV(causal_id): forall e: ToolEvent, e.causal_id == Context.causal_id\n\nop retry() -> Stream<ToolEvent>\nINV(retry_scope): retry() subset_of tool_stream\nINV(retry_no_mutation): on(RETRY) -> State.canonical == prev(State.canonical)\n\nINV(no_bypass): evt.type != COMMIT -> State'.canonical == State.canonical\nINV(determinism): replay(Events) -> deterministic_outcome"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_78.json",
+      "source": "docs/ir/09-runtime-scheduling.spec",
+      "target": "docs/ir/10-tool-execution.spec",
+      "similarity": 0.7607,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc Aはオーケストレーション層（スケジューリング・キューイング）を、Doc Bはツールインタラクションの整合性層（状態遷移ルール）を担当するため、Delta3 Kernelにおける関心の分離（Separation of Concerns）を維持する観点から別個に保持すべきである。重複しているCanonicalState不変性の制約は、両モジュールが同じアーキテクチャ原則に従っていることを示すものであり、統合の理由にはならない。"
+    }
+  ]
+}

@@ -1,0 +1,1167 @@
+{
+  "metadata": {
+    "total_spec_nodes": 60,
+    "total_edges": 67,
+    "total_components": 13
+  },
+  "components": [
+    {
+      "id": "component-003",
+      "artifacts": [
+        "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+        "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+        "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+        "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+        "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+        "graph-runtime/ir/graph.spec",
+        "graph-runtime/ir/prefill.spec",
+        "graph-runtime/ir/projection.spec",
+        "memory/ir/store.spec",
+        "registry/ir/registry.spec",
+        "tests/md/ir/r2-0-b-tests.spec",
+        "world/ir/world.spec"
+      ],
+      "relations": [
+        {
+          "source": "graph-runtime/ir/graph.spec",
+          "target": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+          "observed_similarity": 0.7781,
+          "observation": "pair_65.json"
+        },
+        {
+          "source": "graph-runtime/ir/graph.spec",
+          "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+          "observed_similarity": 0.7621,
+          "observation": "pair_76.json"
+        },
+        {
+          "source": "graph-runtime/ir/graph.spec",
+          "target": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+          "observed_similarity": 0.8033,
+          "observation": "pair_40.json"
+        },
+        {
+          "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+          "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+          "observed_similarity": 0.7826,
+          "observation": "pair_58.json"
+        },
+        {
+          "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+          "target": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+          "observed_similarity": 0.9347,
+          "observation": "pair_1.json"
+        },
+        {
+          "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+          "target": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+          "observed_similarity": 0.8129,
+          "observation": "pair_32.json"
+        },
+        {
+          "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+          "target": "world/ir/world.spec",
+          "observed_similarity": 0.75,
+          "observation": "pair_86.json"
+        },
+        {
+          "source": "world/ir/world.spec",
+          "target": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+          "observed_similarity": 0.838,
+          "observation": "pair_22.json"
+        },
+        {
+          "source": "world/ir/world.spec",
+          "target": "tests/md/ir/r2-0-b-tests.spec",
+          "observed_similarity": 0.8014,
+          "observation": "pair_44.json"
+        },
+        {
+          "source": "graph-runtime/ir/projection.spec",
+          "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+          "observed_similarity": 0.7792,
+          "observation": "pair_63.json"
+        },
+        {
+          "source": "graph-runtime/ir/prefill.spec",
+          "target": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+          "observed_similarity": 0.7871,
+          "observation": "pair_54.json"
+        },
+        {
+          "source": "graph-runtime/ir/prefill.spec",
+          "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+          "observed_similarity": 0.8892,
+          "observation": "pair_7.json"
+        },
+        {
+          "source": "registry/ir/registry.spec",
+          "target": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+          "observed_similarity": 0.781,
+          "observation": "pair_61.json"
+        },
+        {
+          "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+          "target": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+          "observed_similarity": 0.8506,
+          "observation": "pair_15.json"
+        },
+        {
+          "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+          "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+          "observed_similarity": 0.8489,
+          "observation": "pair_16.json"
+        },
+        {
+          "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+          "target": "memory/ir/store.spec",
+          "observed_similarity": 0.7888,
+          "observation": "pair_51.json"
+        },
+        {
+          "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+          "target": "memory/ir/store.spec",
+          "observed_similarity": 0.8351,
+          "observation": "pair_25.json"
+        },
+        {
+          "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+          "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+          "observed_similarity": 0.7933,
+          "observation": "pair_50.json"
+        },
+        {
+          "source": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+          "target": "tests/md/ir/r2-0-b-tests.spec",
+          "observed_similarity": 0.8064,
+          "observation": "pair_37.json"
+        }
+      ]
+    },
+    {
+      "id": "component-002",
+      "artifacts": [
+        "llama-agent/ir/chron-llm-kernel.spec",
+        "llama-agent/ir/chron-llm-runtime.spec",
+        "llama-agent/ir/chron-llm.spec",
+        "llama-agent/ir/ffi-bindings-mock.spec",
+        "llama-agent/ir/ffi-bindings.spec",
+        "llama-agent/ir/generate.spec",
+        "runtime/r0/ir/chat-loop.spec",
+        "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec"
+      ],
+      "relations": [
+        {
+          "source": "runtime/r0/ir/chat-loop.spec",
+          "target": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+          "observed_similarity": 0.7808,
+          "observation": "pair_62.json"
+        },
+        {
+          "source": "llama-agent/ir/chron-llm.spec",
+          "target": "llama-agent/ir/ffi-bindings.spec",
+          "observed_similarity": 0.8099,
+          "observation": "pair_34.json"
+        },
+        {
+          "source": "llama-agent/ir/chron-llm.spec",
+          "target": "llama-agent/ir/generate.spec",
+          "observed_similarity": 0.8191,
+          "observation": "pair_29.json"
+        },
+        {
+          "source": "llama-agent/ir/chron-llm.spec",
+          "target": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+          "observed_similarity": 0.8014,
+          "observation": "pair_43.json"
+        },
+        {
+          "source": "llama-agent/ir/chron-llm-runtime.spec",
+          "target": "llama-agent/ir/chron-llm-kernel.spec",
+          "observed_similarity": 0.7682,
+          "observation": "pair_72.json"
+        },
+        {
+          "source": "llama-agent/ir/chron-llm-runtime.spec",
+          "target": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+          "observed_similarity": 0.7655,
+          "observation": "pair_73.json"
+        },
+        {
+          "source": "llama-agent/ir/ffi-bindings.spec",
+          "target": "llama-agent/ir/ffi-bindings-mock.spec",
+          "observed_similarity": 0.7826,
+          "observation": "pair_59.json"
+        }
+      ]
+    },
+    {
+      "id": "component-004",
+      "artifacts": [
+        "docs/ir/13-worldline-branching.spec",
+        "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+        "docs/ir/architecture-v1.1.spec",
+        "docs/ir/architecture-v1.spec",
+        "llama-agent/ir/causal-kernel.spec",
+        "llama-agent/ir/chron-llm-causal.spec",
+        "llama-agent/ir/chron-llm-graph.spec"
+      ],
+      "relations": [
+        {
+          "source": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+          "target": "docs/ir/13-worldline-branching.spec",
+          "observed_similarity": 0.7502,
+          "observation": "pair_85.json"
+        },
+        {
+          "source": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+          "target": "llama-agent/ir/chron-llm-causal.spec",
+          "observed_similarity": 0.7562,
+          "observation": "pair_82.json"
+        },
+        {
+          "source": "docs/ir/architecture-v1.spec",
+          "target": "llama-agent/ir/chron-llm-graph.spec",
+          "observed_similarity": 0.7595,
+          "observation": "pair_80.json"
+        },
+        {
+          "source": "docs/ir/architecture-v1.spec",
+          "target": "docs/ir/architecture-v1.1.spec",
+          "observed_similarity": 0.7974,
+          "observation": "pair_47.json"
+        },
+        {
+          "source": "docs/ir/architecture-v1.spec",
+          "target": "llama-agent/ir/causal-kernel.spec",
+          "observed_similarity": 0.8456,
+          "observation": "pair_20.json"
+        },
+        {
+          "source": "llama-agent/ir/causal-kernel.spec",
+          "target": "llama-agent/ir/chron-llm-causal.spec",
+          "observed_similarity": 0.7783,
+          "observation": "pair_64.json"
+        },
+        {
+          "source": "llama-agent/ir/chron-llm-causal.spec",
+          "target": "docs/ir/architecture-v1.1.spec",
+          "observed_similarity": 0.7589,
+          "observation": "pair_81.json"
+        }
+      ]
+    },
+    {
+      "id": "component-001",
+      "artifacts": [
+        "docs/ir/01-domain-model.spec",
+        "docs/ir/02-operational-semantics.spec",
+        "docs/ir/04-runtime-pipeline.spec",
+        "docs/ir/07-chron-mapping.spec",
+        "runtime/r1/ir/core.spec",
+        "runtime/r1/ir/package.spec"
+      ],
+      "relations": [
+        {
+          "source": "docs/ir/04-runtime-pipeline.spec",
+          "target": "docs/ir/02-operational-semantics.spec",
+          "observed_similarity": 0.8699,
+          "observation": "pair_11.json"
+        },
+        {
+          "source": "docs/ir/04-runtime-pipeline.spec",
+          "target": "docs/ir/07-chron-mapping.spec",
+          "observed_similarity": 0.7881,
+          "observation": "pair_52.json"
+        },
+        {
+          "source": "docs/ir/04-runtime-pipeline.spec",
+          "target": "docs/ir/01-domain-model.spec",
+          "observed_similarity": 0.802,
+          "observation": "pair_42.json"
+        },
+        {
+          "source": "docs/ir/07-chron-mapping.spec",
+          "target": "docs/ir/02-operational-semantics.spec",
+          "observed_similarity": 0.8128,
+          "observation": "pair_33.json"
+        },
+        {
+          "source": "docs/ir/07-chron-mapping.spec",
+          "target": "docs/ir/01-domain-model.spec",
+          "observed_similarity": 0.7712,
+          "observation": "pair_70.json"
+        },
+        {
+          "source": "runtime/r1/ir/package.spec",
+          "target": "runtime/r1/ir/core.spec",
+          "observed_similarity": 0.9019,
+          "observation": "pair_4.json"
+        },
+        {
+          "source": "docs/ir/02-operational-semantics.spec",
+          "target": "docs/ir/01-domain-model.spec",
+          "observed_similarity": 0.7749,
+          "observation": "pair_67.json"
+        },
+        {
+          "source": "runtime/r1/ir/core.spec",
+          "target": "docs/ir/01-domain-model.spec",
+          "observed_similarity": 0.7598,
+          "observation": "pair_79.json"
+        }
+      ]
+    },
+    {
+      "id": "component-011",
+      "artifacts": [
+        "runtime/ir/callback.spec",
+        "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+        "runtime/ir/divergence.spec",
+        "runtime/ir/ir.spec",
+        "runtime/ir/stream.spec"
+      ],
+      "relations": [
+        {
+          "source": "runtime/ir/stream.spec",
+          "target": "runtime/ir/ir.spec",
+          "observed_similarity": 0.7828,
+          "observation": "pair_57.json"
+        },
+        {
+          "source": "runtime/ir/stream.spec",
+          "target": "runtime/ir/callback.spec",
+          "observed_similarity": 0.7639,
+          "observation": "pair_74.json"
+        },
+        {
+          "source": "runtime/ir/divergence.spec",
+          "target": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+          "observed_similarity": 0.8544,
+          "observation": "pair_14.json"
+        },
+        {
+          "source": "runtime/ir/divergence.spec",
+          "target": "runtime/ir/ir.spec",
+          "observed_similarity": 0.7511,
+          "observation": "pair_84.json"
+        },
+        {
+          "source": "runtime/ir/callback.spec",
+          "target": "runtime/ir/ir.spec",
+          "observed_similarity": 0.8366,
+          "observation": "pair_24.json"
+        }
+      ]
+    },
+    {
+      "id": "component-006",
+      "artifacts": [
+        "docs/ir/phase-a-charter.spec",
+        "docs/ir/phase-b-charter.spec",
+        "docs/ir/phase-c-charter.spec",
+        "docs/ir/phase-d-charter.spec"
+      ],
+      "relations": [
+        {
+          "source": "docs/ir/phase-c-charter.spec",
+          "target": "docs/ir/phase-d-charter.spec",
+          "observed_similarity": 0.8159,
+          "observation": "pair_30.json"
+        },
+        {
+          "source": "docs/ir/phase-c-charter.spec",
+          "target": "docs/ir/phase-a-charter.spec",
+          "observed_similarity": 0.7945,
+          "observation": "pair_48.json"
+        },
+        {
+          "source": "docs/ir/phase-c-charter.spec",
+          "target": "docs/ir/phase-b-charter.spec",
+          "observed_similarity": 0.9018,
+          "observation": "pair_5.json"
+        },
+        {
+          "source": "docs/ir/phase-d-charter.spec",
+          "target": "docs/ir/phase-b-charter.spec",
+          "observed_similarity": 0.7853,
+          "observation": "pair_56.json"
+        },
+        {
+          "source": "docs/ir/phase-a-charter.spec",
+          "target": "docs/ir/phase-b-charter.spec",
+          "observed_similarity": 0.8891,
+          "observation": "pair_8.json"
+        }
+      ]
+    },
+    {
+      "id": "component-007",
+      "artifacts": [
+        "experiments/ir/3cluster.spec",
+        "experiments/ir/basin.spec",
+        "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+        "experiments/ir/chron-llm-spec-v0.2.spec"
+      ],
+      "relations": [
+        {
+          "source": "experiments/ir/basin.spec",
+          "target": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+          "observed_similarity": 0.7943,
+          "observation": "pair_49.json"
+        },
+        {
+          "source": "experiments/ir/basin.spec",
+          "target": "experiments/ir/chron-llm-spec-v0.2.spec",
+          "observed_similarity": 0.7694,
+          "observation": "pair_71.json"
+        },
+        {
+          "source": "experiments/ir/chron-llm-spec-v0.2.spec",
+          "target": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+          "observed_similarity": 0.9318,
+          "observation": "pair_2.json"
+        },
+        {
+          "source": "experiments/ir/chron-llm-spec-v0.2.spec",
+          "target": "experiments/ir/3cluster.spec",
+          "observed_similarity": 0.8653,
+          "observation": "pair_13.json"
+        },
+        {
+          "source": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+          "target": "experiments/ir/3cluster.spec",
+          "observed_similarity": 0.84,
+          "observation": "pair_21.json"
+        }
+      ]
+    },
+    {
+      "id": "component-008",
+      "artifacts": [
+        "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+        "docs/ir/r2-0-c-freeze-report.spec",
+        "observability/ir/world-snapshot.spec",
+        "tests/md/ir/r2-0-c-tests.spec"
+      ],
+      "relations": [
+        {
+          "source": "docs/ir/r2-0-c-freeze-report.spec",
+          "target": "observability/ir/world-snapshot.spec",
+          "observed_similarity": 0.8373,
+          "observation": "pair_23.json"
+        },
+        {
+          "source": "docs/ir/r2-0-c-freeze-report.spec",
+          "target": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+          "observed_similarity": 0.8048,
+          "observation": "pair_38.json"
+        },
+        {
+          "source": "docs/ir/r2-0-c-freeze-report.spec",
+          "target": "tests/md/ir/r2-0-c-tests.spec",
+          "observed_similarity": 0.8001,
+          "observation": "pair_45.json"
+        },
+        {
+          "source": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+          "target": "tests/md/ir/r2-0-c-tests.spec",
+          "observed_similarity": 0.7855,
+          "observation": "pair_55.json"
+        },
+        {
+          "source": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+          "target": "observability/ir/world-snapshot.spec",
+          "observed_similarity": 0.7737,
+          "observation": "pair_68.json"
+        },
+        {
+          "source": "observability/ir/world-snapshot.spec",
+          "target": "tests/md/ir/r2-0-c-tests.spec",
+          "observed_similarity": 0.7614,
+          "observation": "pair_77.json"
+        }
+      ]
+    },
+    {
+      "id": "component-005",
+      "artifacts": [
+        "llama-agent/ir/chron-llm-immune.spec",
+        "llama-agent/ir/chron-llm-world.spec"
+      ],
+      "relations": [
+        {
+          "source": "llama-agent/ir/chron-llm-world.spec",
+          "target": "llama-agent/ir/chron-llm-immune.spec",
+          "observed_similarity": 0.83,
+          "observation": "pair_26.json"
+        }
+      ]
+    },
+    {
+      "id": "component-009",
+      "artifacts": [
+        "llama-agent/ir/llama-agent.spec",
+        "llama-agent/ir/llama-agent2.spec"
+      ],
+      "relations": [
+        {
+          "source": "llama-agent/ir/llama-agent2.spec",
+          "target": "llama-agent/ir/llama-agent.spec",
+          "observed_similarity": 0.8473,
+          "observation": "pair_19.json"
+        }
+      ]
+    },
+    {
+      "id": "component-010",
+      "artifacts": [
+        "docs/ir/08-memory-model.spec",
+        "docs/ir/12-recovery.spec"
+      ],
+      "relations": [
+        {
+          "source": "docs/ir/08-memory-model.spec",
+          "target": "docs/ir/12-recovery.spec",
+          "observed_similarity": 0.7764,
+          "observation": "pair_66.json"
+        }
+      ]
+    },
+    {
+      "id": "component-012",
+      "artifacts": [
+        "docs/ir/09-runtime-scheduling.spec",
+        "docs/ir/10-tool-execution.spec"
+      ],
+      "relations": [
+        {
+          "source": "docs/ir/09-runtime-scheduling.spec",
+          "target": "docs/ir/10-tool-execution.spec",
+          "observed_similarity": 0.7607,
+          "observation": "pair_78.json"
+        }
+      ]
+    },
+    {
+      "id": "component-013",
+      "artifacts": [
+        "docs/ir/knowledge-system.spec",
+        "docs/reference/ir/knowledge-rationale.spec"
+      ],
+      "relations": [
+        {
+          "source": "docs/reference/ir/knowledge-rationale.spec",
+          "target": "docs/ir/knowledge-system.spec",
+          "observed_similarity": 0.8694,
+          "observation": "pair_12.json"
+        }
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "pair_id": "pair_11.json",
+      "source": "docs/ir/02-operational-semantics.spec",
+      "target": "docs/ir/04-runtime-pipeline.spec",
+      "similarity": 0.8699,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document A's formal Pre/Post conditions and invariants (e.g., atomic Commit, deterministic Replay) are superior for Delta3 Kernel verification compared to Document B's looser definitions. Merging B into A allows us to define the complete Runtime Pipeline (including PromptBuilder/Backend flow from B) while enforcing the rigorous operational semantics of A across all stages, eliminating redundant and potentially conflicting operation definitions."
+    },
+    {
+      "pair_id": "pair_72.json",
+      "source": "llama-agent/ir/chron-llm-kernel.spec",
+      "target": "llama-agent/ir/chron-llm-runtime.spec",
+      "similarity": 0.7682,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Maintains strict separation of concerns between the stateful Kernel and the orchestration Runtime as required by Delta3 architecture. The overlap in interface definitions should be resolved via module imports rather than merging files, preserving the constraint that Kernel remains agnostic to LLM/Runtime details."
+    },
+    {
+      "pair_id": "pair_65.json",
+      "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "graph-runtime/ir/graph.spec",
+      "similarity": 0.7781,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A represents the evolved R2.0 specification where Graph structures are tightly coupled with World semantics and Delta3 Kernel operations (e.g., kernel-commit-world!). Doc B's generic definitions lack the structural constraints (like PayloadRef) required by the Runtime Contract defined in A. To eliminate type fragmentation and ensure a single source of truth for the IR used by the Kernel, the graph primitives from B should be consolidated into A, aligning all graph operations with the World lifecycle requirements."
+    },
+    {
+      "pair_id": "pair_81.json",
+      "source": "docs/ir/architecture-v1.1.spec",
+      "target": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity": 0.7589,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A (architecture-v1.1.spec) is the canonical definition for Delta3 Kernel's causal state management, enforcing UUID lineage and stream-aware fault handling required for robust generation. Doc B conflicts with these type definitions (Int vs UUID causal-id) and lacks critical semantic fields (stream_id). While Doc B introduces transactional staging concepts, these should be encapsulated within a WAL implementation module compliant with Doc A's interface rather than existing as a competing top-level IR spec."
+    },
+    {
+      "pair_id": "pair_34.json",
+      "source": "llama-agent/ir/chron-llm.spec",
+      "target": "llama-agent/ir/ffi-bindings.spec",
+      "similarity": 0.8099,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A represents the semantic contract and kernel-managed logic (IR), whereas Doc B implements the Hardware Abstraction Layer (HAL) for native execution. Keeping them separate preserves the Delta3 Kernel's required boundary between logical correctness (Events/Worldlines) and physical implementation details (memory/layout). Merging would conflate high-level semantics with low-level FFI constraints."
+    },
+    {
+      "pair_id": "pair_63.json",
+      "source": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "graph-runtime/ir/projection.spec",
+      "similarity": 0.7792,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A represents the canonical v1.0 specification for Delta3 Kernel integration, ensuring EvalIsolation and deterministic hashing required for caching. Doc B's projection logic is subsumed by Doc A; its approach of materializing feedbacks into strings within the IR layer violates abstraction boundaries defined in Doc A."
+    },
+    {
+      "pair_id": "pair_26.json",
+      "source": "llama-agent/ir/chron-llm-immune.spec",
+      "target": "llama-agent/ir/chron-llm-world.spec",
+      "similarity": 0.83,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_A_INTO_B",
+      "rationale": "Doc B represents a more mature, implementation-ready specification (explicit Phase1 constraints and algorithms) with a robust data model (CausalNode classes). Doc A's branching logic is redundant. The 'Immune' status from Doc A should be integrated into Doc B as a derived query based on CausalNode validity/fault states to maintain a single source of truth for World operations in the Delta3 Kernel."
+    },
+    {
+      "pair_id": "pair_80.json",
+      "source": "docs/ir/architecture-v1.spec",
+      "target": "llama-agent/ir/chron-llm-graph.spec",
+      "similarity": 0.7595,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A serves as the architectural source of truth for the Delta3 Kernel. Doc B contains critical implementation details (HealthyTable, optimized parent lookup) that improve graph construction efficiency but currently exist in isolation with slightly divergent type definitions. Merging B into A ensures a single canonical specification that aligns high-level control logic with low-level graph optimization strategies, eliminating semantic drift between documentation and module specs."
+    },
+    {
+      "pair_id": "pair_62.json",
+      "source": "runtime/r0/ir/chat-loop.spec",
+      "target": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity": 0.7808,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B は R0/R1/Kernels のアーキテクチャ契約（Contract）および Delta3 Kernel とのインタフェース定義（RuntimeCommand ABI など）を規定しており、システム全体の整合性を担保する「設計基準」として機能する。一方、Doc A は Doc B で定義された R0_SessionExec レイヤー内部における具体的な実行フロー（chat-loop）を示す「実装仕様」である。両者を統合するとアーキテクチャの抽象度と実装の詳細が混在するため、Doc B を契約定義として維持し、Doc A をその契約に準拠するモジュール仕様として独立して保持することが推奨される。"
+    },
+    {
+      "pair_id": "pair_30.json",
+      "source": "docs/ir/phase-c-charter.spec",
+      "target": "docs/ir/phase-d-charter.spec",
+      "similarity": 0.8159,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "These specifications define sequential dependencies within the Delta3 Kernel's IR pipeline. Phase C produces the SemanticModel (S) required by Phase D to generate the RelationalGraph (G). Merging them would violate separation of concerns between semantic interpretation and structural graph topology generation."
+    },
+    {
+      "pair_id": "pair_49.json",
+      "source": "experiments/ir/basin.spec",
+      "target": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity": 0.7943,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc B supersedes Doc A by incorporating essential features for Delta3 Kernel dynamical analysis: weighted edges (argmax transitions), node roles, and Strongly Connected Components (SCCs) for cycle detection. Doc A's deterministic map abstraction is insufficient for the stochastic nature of LLM reasoning traces."
+    },
+    {
+      "pair_id": "pair_2.json",
+      "source": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "target": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity": 0.9318,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc B fully encapsulates Doc A's dynamical definitions while integrating necessary temporal and structural context (Clusters, Timestamps) required for the Delta3 Kernel. Doc A should be deprecated as a preliminary draft."
+    },
+    {
+      "pair_id": "pair_15.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "similarity": 0.8506,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A establishes the authoritative Delta3 Kernel rules (INV-AUTHORITY, INV-GRAPH-APPEND). Doc B's mutable graph operations (add-node!) contradict these invariants. World management logic should be refactored into a distinct Phase C/D specification that imports from Doc A, rather than maintaining this conflicting definition."
+    },
+    {
+      "pair_id": "pair_77.json",
+      "source": "observability/ir/world-snapshot.spec",
+      "target": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity": 0.7614,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the canonical specification for observation structures, while Doc B acts as its verification layer. Keeping them separate maintains a clear boundary between definition and testing, allowing Doc B to use simplified mock types (e.g., WOBS vs world-observation) without polluting the core IR spec."
+    },
+    {
+      "pair_id": "pair_19.json",
+      "source": "llama-agent/ir/llama-agent.spec",
+      "target": "llama-agent/ir/llama-agent2.spec",
+      "similarity": 0.8473,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document B supersedes A by enforcing critical Delta3 Kernel stability requirements (FailFast invariant, explicit dependency ordering) absent in A's lenient 'warn' logic. Merging B into the canonical llama-agent.spec ensures the bootloader adheres to Phase 1.1 constraints and prevents silent failures during system initialization."
+    },
+    {
+      "pair_id": "pair_48.json",
+      "source": "docs/ir/phase-a-charter.spec",
+      "target": "docs/ir/phase-c-charter.spec",
+      "similarity": 0.7945,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Phase A establishes the immutable causal record and exclusion of interpretive logic. Phase C defines how interpretation (S) and justification (J) are deterministically derived from History via ABI without compromising authority. Both specs are essential for Delta3 Kernel's layered integrity."
+    },
+    {
+      "pair_id": "pair_85.json",
+      "source": "docs/ir/13-worldline-branching.spec",
+      "target": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "similarity": 0.7502,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the foundational infrastructure (Phase D) for event persistence and consistency. Doc A represents a higher-level control policy (likely Phase E/Delta3 Kernel logic) that consumes Doc B's primitives. Integration requires updating Doc A to explicitly invoke Doc B's Commit operation for persisting branch states, rather than using abstract 'gen_id()' or simplified state updates."
+    },
+    {
+      "pair_id": "pair_58.json",
+      "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity": 0.7826,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A serves as the canonical specification for the World Runtime environment (Phase C), which inherently requires consistent Graph IR definitions. Doc B's graph operations and context logic are critical components of this runtime but currently exist in isolation with redundant type definitions. Merging B into A ensures a single source of truth for causal context generation within the Delta3 Kernel, aligning graph traversal logic directly with world lifecycle and observation contracts."
+    },
+    {
+      "pair_id": "pair_23.json",
+      "source": "docs/ir/r2-0-c-freeze-report.spec",
+      "target": "observability/ir/world-snapshot.spec",
+      "similarity": 0.8373,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_A_INTO_B",
+      "rationale": "Doc B contains the structural definitions required for Delta3 Kernel code generation, while Doc A holds critical ABI stability constraints and freeze metadata. Merging A's status and invariants into B creates a single, self-describing specification that ensures type safety and ABI compliance are enforced directly within the implementation definition, reducing cross-file dependency risks."
+    },
+    {
+      "pair_id": "pair_82.json",
+      "source": "docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "target": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity": 0.7562,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc A establishes the authoritative Delta3 Kernel architecture (Phase D), enforcing deterministic hash-based identities and prohibiting wall-clock timestamps to ensure causal consistency. Doc B's reliance on integer node IDs and clock fields fundamentally conflicts with these invariants, indicating it is either a legacy draft or an incompatible abstraction that must be deprecated in favor of the Phase D Constitution."
+    },
+    {
+      "pair_id": "pair_8.json",
+      "source": "docs/ir/phase-a-charter.spec",
+      "target": "docs/ir/phase-b-charter.spec",
+      "similarity": 0.8891,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Distinct phase charters required for Delta3 Kernel layering; merging obscures the boundary between raw history recording (A) and derived projection logic (B)."
+    },
+    {
+      "pair_id": "pair_66.json",
+      "source": "docs/ir/08-memory-model.spec",
+      "target": "docs/ir/12-recovery.spec",
+      "similarity": 0.7764,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the schema definition for memory states and write constraints, while Doc B implements the specific algorithmic contract for state recovery using those definitions. Keeping them separate maintains separation of concerns within the IR layer: one defines 'what' the state is (and its invariants), the other defines 'how' to restore it deterministically without mutating authoritative history."
+    },
+    {
+      "pair_id": "pair_57.json",
+      "source": "runtime/ir/ir.spec",
+      "target": "runtime/ir/stream.spec",
+      "similarity": 0.7828,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc B represents the runtime implementation of Doc A's abstract Stream type. Merging is recommended to eliminate redundant IR definitions (preventing schema drift) and unify the data contract with its execution context semantics within the Delta3 Kernel. The integration should normalize Doc B's Lisp-style state management into Doc A's interface, preserving the global buffer logic as a specific runtime behavior of the IR subsystem."
+    },
+    {
+      "pair_id": "pair_22.json",
+      "source": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "target": "world/ir/world.spec",
+      "similarity": 0.838,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A serves as the canonical Phase B Constitution and is FROZEN, establishing the authoritative contract for World isolation, determinism, and Kernel authority. Doc B redundantly redefines core types with implementation-specific syntax that conflicts with A (e.g., head-cell lists vs Node references). To ensure Delta3 Kernel consistency, Doc B's definitions must be superseded by Doc A; any implementation code should import from the Constitution Spec rather than maintaining a divergent local spec."
+    },
+    {
+      "pair_id": "pair_1.json",
+      "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "target": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity": 0.9347,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc B represents a more mature, Kernel-compliant specification. Doc A's shared mutable state model (INV: w.graph == Registry.graph) conflicts with the consistency requirements of Delta3 Kernel execution. The recommended action is to refactor Doc A to adopt Doc B's immutable snapshot semantics and kernel-commit constraints, while retaining Doc A's detailed context projection logic if it offers superior granularity for LLM prefilling."
+    },
+    {
+      "pair_id": "pair_54.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "graph-runtime/ir/prefill.spec",
+      "similarity": 0.7871,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the authoritative architectural contract defining canonical structures (CanonicalNode, PayloadRef) and critical invariants (causal separation, immutability) required by Delta3 Kernel. Doc B provides necessary implementation specifics for prompt construction that are too granular for a Constitution spec. Both should be retained to maintain separation of concerns between system constraints and module logic, provided Doc B is refactored to reference Doc A's canonical types rather than redefining simplified Node structures."
+    },
+    {
+      "pair_id": "pair_33.json",
+      "source": "docs/ir/02-operational-semantics.spec",
+      "target": "docs/ir/07-chron-mapping.spec",
+      "similarity": 0.8128,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Separation of concerns is critical for the Delta3 Kernel architecture. Doc A establishes invariant logic independent of implementation details, ensuring deterministic behavior across backends. Doc B provides necessary binding to physical structures (WAL, RefStore) without polluting the abstract specification. Merging would couple formal semantics with concrete runtime artifacts, reducing flexibility for kernel refactoring."
+    },
+    {
+      "pair_id": "pair_59.json",
+      "source": "llama-agent/ir/ffi-bindings-mock.spec",
+      "target": "llama-agent/ir/ffi-bindings.spec",
+      "similarity": 0.7826,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the production contract (PhysicalLayer HAL) for native code interaction, while Doc A is critical for unit testing and simulation of the Delta3 Kernel without external dependencies. The 'mock_compat' invariant in Doc B explicitly mandates their coexistence to ensure the kernel logic remains decoupled from the underlying C library implementation details."
+    },
+    {
+      "pair_id": "pair_25.json",
+      "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "target": "memory/ir/store.spec",
+      "similarity": 0.8351,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B represents the foundational IR/Memory layer (Phase A) of Delta3 Kernel, establishing canonical primitives and invariants. Doc A describes the Runtime execution model (Phase C/D) that consumes these primitives to manage World Graphs and context generation. While they redundantly define basic types like PayloadRef, they serve distinct architectural roles: B as the implementation contract for memory/IR, and A as the behavioral specification for runtime operations. Both must be retained to preserve system integrity across layers."
+    },
+    {
+      "pair_id": "pair_52.json",
+      "source": "docs/ir/04-runtime-pipeline.spec",
+      "target": "docs/ir/07-chron-mapping.spec",
+      "similarity": 0.7881,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A focuses on behavioral logic and pipeline orchestration, while Doc B serves as a semantic bridge linking abstract IR concepts to concrete Delta3 Kernel implementations. Keeping them separate maintains separation of concerns: Doc A remains focused on execution flow invariants, while Doc B acts as a reusable glossary/mapping layer that can be referenced by other system components (e.g., fault handling, session management) beyond just the runtime pipeline."
+    },
+    {
+      "pair_id": "pair_47.json",
+      "source": "docs/ir/architecture-v1.1.spec",
+      "target": "docs/ir/architecture-v1.spec",
+      "similarity": 0.7974,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A (v1.1) supersedes Doc B (v1) by streamlining the state model for Delta3 Kernel efficiency, removing explicit graph storage in favor of WAL-based causal traversal, and adding necessary stream/tool granularity. B's control logic should be verified against current runtime specs but structurally B is obsolete."
+    },
+    {
+      "pair_id": "pair_29.json",
+      "source": "llama-agent/ir/chron-llm.spec",
+      "target": "llama-agent/ir/generate.spec",
+      "similarity": 0.8191,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the canonical Runtime Interface ensuring strict state invariants and Kernel alignment. Doc B represents a specific Agent Policy/Orchestration layer that relies on A's primitives to implement safety-critical generation flows (immune sensors, rollback). Merging them would conflate core API definitions with domain-specific execution policies, violating separation of concerns required by the Delta3 architecture."
+    },
+    {
+      "pair_id": "pair_42.json",
+      "source": "docs/ir/01-domain-model.spec",
+      "target": "docs/ir/04-runtime-pipeline.spec",
+      "similarity": 0.802,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the canonical schema definition (Phase C) ensuring type safety and ownership constraints for Delta3 Kernel. Doc B describes the execution protocol (Phase D). While redundant in listing types, they must coexist to separate data structure definitions from control flow logic. Integration requires Doc B to formally reference Doc A's type definitions rather than loosely enumerating them."
+    },
+    {
+      "pair_id": "pair_64.json",
+      "source": "llama-agent/ir/causal-kernel.spec",
+      "target": "llama-agent/ir/chron-llm-causal.spec",
+      "similarity": 0.7783,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Document A represents the mature Delta3 Kernel specification (Phase D/E) where linear logs are transformed into causal graphs for agent reasoning. Document B appears to be an earlier draft or lower-level abstraction that was subsumed by the Kernel definition in A. Since A fully implements the 'causal' semantics implied by both filenames while B does not, retaining B creates redundancy and architectural ambiguity."
+    },
+    {
+      "pair_id": "pair_73.json",
+      "source": "llama-agent/ir/chron-llm-runtime.spec",
+      "target": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity": 0.7655,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc AはPhase Bにおける「Kernel隔離原則」と「Runtimeの論理的役割」を定義する抽象契約として有効であり、システム全体の設計指針を示す。Doc BはPhase C/DにおけるR0レイヤーの実装仕様として、Doc Aの概念を実際のトレース・履歴管理機能に具体化している。両者は異なる抽象度（アーキテクチャ契約 vs 実装詳細）で同一領域を記述しており、矛盾ではなく補完関係にあるため併存させる。ただし、Doc Aの簡易API（submit_user_input）はDoc BのR0処理フローを経由する必要があることを統合ドキュメントで明記し、一貫性を確保する。"
+    },
+    {
+      "pair_id": "pair_44.json",
+      "source": "tests/md/ir/r2-0-b-tests.spec",
+      "target": "world/ir/world.spec",
+      "similarity": 0.8014,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the executable acceptance criteria for Delta3 Kernel's World semantics, ensuring behavioral correctness through specific scenarios. Doc B defines the authoritative type system and operational contracts (pre/post conditions) required for implementation. Merging them would conflate test logic with interface specifications; maintaining separation ensures clear boundaries between verification (tests/md) and definition (world/ir)."
+    },
+    {
+      "pair_id": "pair_78.json",
+      "source": "docs/ir/09-runtime-scheduling.spec",
+      "target": "docs/ir/10-tool-execution.spec",
+      "similarity": 0.7607,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc Aはオーケストレーション層（スケジューリング・キューイング）を、Doc Bはツールインタラクションの整合性層（状態遷移ルール）を担当するため、Delta3 Kernelにおける関心の分離（Separation of Concerns）を維持する観点から別個に保持すべきである。重複しているCanonicalState不変性の制約は、両モジュールが同じアーキテクチャ原則に従っていることを示すものであり、統合の理由にはならない。"
+    },
+    {
+      "pair_id": "pair_55.json",
+      "source": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "target": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity": 0.7855,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A acts as the architectural contract for Delta3 Kernel observability, while Doc B serves as the executable test harness. Merging them would conflate high-level invariants with low-level test utilities (fixtures/assertions). They should remain separate to maintain separation of concerns; however, Doc B should ideally import types from Doc A via module references to prevent specification drift."
+    },
+    {
+      "pair_id": "pair_4.json",
+      "source": "runtime/r1/ir/core.spec",
+      "target": "runtime/r1/ir/package.spec",
+      "similarity": 0.9019,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document A is the authoritative specification for Delta3 Kernel compliance due to its rigorous invariant definitions and detailed kernel-transition logic. Document B should be merged into A to adopt its cleaner operation categorization (e.g., separating pure-ops from kernel-boundary) and to incorporate its inspection/testing interfaces, ensuring a single source of truth that combines structural clarity with behavioral precision."
+    },
+    {
+      "pair_id": "pair_21.json",
+      "source": "experiments/ir/3cluster.spec",
+      "target": "experiments/ir/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec",
+      "similarity": 0.84,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the formal contract for the Delta3 Kernel's dynamical analysis module (defining how attractors/basins are computed). Doc A acts as a canonical test case or configuration defining a specific recurrent topology to validate that logic. Merging would conflate general algorithmic contracts with specific experimental data constants."
+    },
+    {
+      "pair_id": "pair_12.json",
+      "source": "docs/ir/knowledge-system.spec",
+      "target": "docs/reference/ir/knowledge-rationale.spec",
+      "similarity": 0.8694,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Document A acts as the canonical source of truth for the IR structure and runtime contracts required by the Delta3 Kernel. Document B provides necessary architectural context by classifying these structures into layers, which aids in understanding system boundaries and responsibilities without cluttering the executable spec. Keeping both allows separation between 'what is defined' (A) and 'why/how it maps conceptually' (B), provided that any future changes to core types in A are reflected in B's layer mappings to prevent drift."
+    },
+    {
+      "pair_id": "pair_32.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity": 0.8129,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the critical data invariants and causal purity rules required for Delta3 Kernel's deterministic replay (Phase A). Doc B implements the runtime abstraction layer that manages graph instances as 'Worlds' with lifecycle states (Phase B/C). They represent distinct architectural concerns: Data Integrity vs. Runtime Management. Keeping them separate ensures modularity, allowing the Core Constitution to remain stable while World logic evolves."
+    },
+    {
+      "pair_id": "pair_24.json",
+      "source": "runtime/ir/callback.spec",
+      "target": "runtime/ir/ir.spec",
+      "similarity": 0.8366,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B acts as the Parent specification, defining the canonical IR schema essential for Delta3 Kernel's determinism and replay capabilities. Doc A is the Child implementation, providing the specific FFI bridge logic to ingest data into that schema. Maintaining separation ensures strict modularity: the core type system (B) remains stable and independent of runtime adapter details (A), while A enforces compliance with B via its invariants."
+    },
+    {
+      "pair_id": "pair_20.json",
+      "source": "docs/ir/architecture-v1.spec",
+      "target": "llama-agent/ir/causal-kernel.spec",
+      "similarity": 0.8456,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc B introduces critical Delta3 Kernel features (staging, world-line isolation) missing in Doc A's simpler global-clock model. To ensure architectural consistency and kernel efficiency, Doc A should be updated to adopt Doc B's IR mechanics (Int IDs, staging, wld), while preserving Doc A's higher-level Control_Decide and Handle_Abort logic adapted to the new kernel primitives."
+    },
+    {
+      "pair_id": "pair_50.json",
+      "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity": 0.7933,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A is positioned as the comprehensive Runtime Specification. Doc B provides necessary refinements regarding Eval isolation and deterministic serialization options that are critical for Delta3 Kernel stability but currently missing from A. Merging B's graph-specific logic into A ensures a single source of truth for IR types while preserving A's World management capabilities."
+    },
+    {
+      "pair_id": "pair_7.json",
+      "source": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "graph-runtime/ir/prefill.spec",
+      "similarity": 0.8892,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Document A (v1.0) is the authoritative specification for Delta3 Kernel's graph runtime, explicitly enforcing causal integrity and eval isolation which are critical architectural constraints. Document B lacks these semantic distinctions and appears to be an earlier draft or simplified interface; its specific serialization logic can be implemented as a concrete builder function under Document A's generic contract."
+    },
+    {
+      "pair_id": "pair_38.json",
+      "source": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "target": "docs/ir/r2-0-c-freeze-report.spec",
+      "similarity": 0.8048,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the canonical semantic contract and correctness invariants for Delta3 Kernel observability. Doc B captures version-specific implementation details (ABI, SBCL environment) and release status. Merging would conflate architectural design with transient release artifacts; maintaining both ensures traceability from formal requirements to frozen delivery."
+    },
+    {
+      "pair_id": "pair_37.json",
+      "source": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "target": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.8064,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A is the canonical source of truth for Delta3 Kernel's World Runtime logic. Doc B provides essential automated verification coverage mapped directly to Doc A's test cases (TEST B1-B12). Merging them would conflate requirements with validation logic, while deleting either compromises architectural integrity or system verifiability. The minor package naming inconsistency in Doc B ('r2-0-a') should be corrected to 'r2-0-b' for consistency."
+    },
+    {
+      "pair_id": "pair_43.json",
+      "source": "llama-agent/ir/chron-llm.spec",
+      "target": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity": 0.8014,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A represents the implementation details of the 'Backend' layer referenced in Doc B. However, to comply with Delta3 Kernel architecture defined in Doc B, Doc A's raw operations must be encapsulated behind the `RuntimeCommand` interface. Doc A should not expose direct llama_eval calls or Kernel-managed headers (WorldlineID) directly to agents; instead, it acts as an opaque execution engine controlled by the R0/Kernel layers specified in Doc B."
+    },
+    {
+      "pair_id": "pair_76.json",
+      "source": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "graph-runtime/ir/graph.spec",
+      "similarity": 0.7621,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Document B serves as the Phase A/B Delta3 Kernel core data model (CausalGraph), establishing structural invariants. Document A represents the Phase D Graph Runtime layer, utilizing graph structures for causal context assembly and prompt generation. Merging them would violate separation of concerns by coupling low-level kernel definitions with high-level inference logic. Future refactoring should align Doc A to import types from Doc B rather than duplicating base definitions."
+    },
+    {
+      "pair_id": "pair_70.json",
+      "source": "docs/ir/01-domain-model.spec",
+      "target": "docs/ir/07-chron-mapping.spec",
+      "similarity": 0.7712,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Maintain strict separation of concerns between the logical domain model (Phase C) and the physical kernel implementation mapping (Phase E). Document A serves as the source of truth for business logic and constraints, while Document B acts as the interface contract linking these concepts to Delta3 Kernel internals (WAL, Snapshots). Merging them would couple abstract rules to specific infrastructure details, reducing architectural flexibility. The invariant duplication in B should be resolved by referencing A's definitions rather than restating them."
+    },
+    {
+      "pair_id": "pair_61.json",
+      "source": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "target": "registry/ir/registry.spec",
+      "similarity": 0.781,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc A (R2.0-B Constitution) establishes the canonical architectural contract for Phase B, explicitly defining Registry as non-authoritative and enforcing Graph/Memory sharing via World references to maintain Delta3 Kernel consistency. Doc B's model of Registry owning Graph/Memory state contradicts these constitutional invariants and represents an obsolete design pattern that must be deprecated to prevent architectural drift."
+    },
+    {
+      "pair_id": "pair_67.json",
+      "source": "docs/ir/01-domain-model.spec",
+      "target": "docs/ir/02-operational-semantics.spec",
+      "similarity": 0.7749,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Maintaining separation between static schema (Doc A) and dynamic behavior (Doc B) supports Delta3 Kernel modularity. However, Doc B must be refactored to reference Doc A's type definitions rather than duplicating enums like RuntimeRequest, ensuring a single source of truth for the IR specification."
+    },
+    {
+      "pair_id": "pair_40.json",
+      "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "target": "graph-runtime/ir/graph.spec",
+      "similarity": 0.8033,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document A requires alignment with the Delta3 Kernel's persistent data structure requirements defined in Document B. By merging B's rigorous type definitions and immutability constraints into A, we eliminate semantic drift between the runtime design and core IR implementation. This ensures that World lifecycle operations (A) correctly utilize functional graph updates (B), maintaining consistency across the Chron-LLM architecture."
+    },
+    {
+      "pair_id": "pair_86.json",
+      "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "world/ir/world.spec",
+      "similarity": 0.75,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document A serves as the canonical architectural contract for the Delta3 Kernel's runtime interface. Document B contains specific IR implementation details (e.g., head-cell vs head, Shared refs) that must be reconciled into the Contract to ensure type safety and semantic consistency between the Kernel API and the underlying World IR. Merging B into A preserves the broader Registry/Observation context while refining the World definition."
+    },
+    {
+      "pair_id": "pair_71.json",
+      "source": "experiments/ir/basin.spec",
+      "target": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity": 0.7694,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc B represents the evolved Chron-LLM architecture (v0.2) where attractors are derived from SCCs and stability metrics, rendering Doc A's simpler traversal-based logic insufficient for Delta3 Kernel requirements. To maintain a single source of truth and ensure temporal consistency, Doc A should be deprecated in favor of the integrated model defined in Doc B."
+    },
+    {
+      "pair_id": "pair_45.json",
+      "source": "docs/ir/r2-0-c-freeze-report.spec",
+      "target": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity": 0.8001,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Maintain strict separation between the immutable ABI contract (A) and the mutable verification harness (B). Document A guarantees stability for Delta3 Kernel consumers; Document B ensures runtime compliance via SBCL tests. Merging them risks violating the 'FROZEN' status of the report or cluttering the test spec with administrative metadata."
+    },
+    {
+      "pair_id": "pair_74.json",
+      "source": "runtime/ir/callback.spec",
+      "target": "runtime/ir/stream.spec",
+      "similarity": 0.7639,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "These documents represent distinct layers of the Runtime IR pipeline: Doc A is the ingestion interface (Producer/Bridge), and Doc B is the storage mechanism (Consumer/Buffer). Merging them would violate separation of concerns, coupling the physical execution hook directly to the specific array-based implementation of the stream. They should remain separate modules linked by dependency."
+    },
+    {
+      "pair_id": "pair_5.json",
+      "source": "docs/ir/phase-b-charter.spec",
+      "target": "docs/ir/phase-c-charter.spec",
+      "similarity": 0.9018,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the structural projection layer (Phase B), while Doc B introduces the semantic interpretation layer via ABI (Phase C). Both are necessary to define the complete transformation from History to Semantic Justification within the Chron-LLM architecture."
+    },
+    {
+      "pair_id": "pair_13.json",
+      "source": "experiments/ir/3cluster.spec",
+      "target": "experiments/ir/chron-llm-spec-v0.2.spec",
+      "similarity": 0.8653,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the canonical type system and behavioral contract for the Delta3 Kernel IR layer. Doc A functions as a concrete test fixture or canonical example validating the 3-cluster topology dynamics. While their core type definitions overlap, they serve distinct purposes (Schema vs Instance). To ensure architectural consistency, Doc A should be refactored to import types from Doc B rather than redefining them locally, eliminating redundancy while preserving the specific graph instance G for regression testing and documentation."
+    },
+    {
+      "pair_id": "pair_16.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity": 0.8489,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A acts as the canonical 'Core Constitution'. Doc B's specific operational signatures (e.g., project-context, add-node!) and projection logic should be integrated into Doc A to unify the abstract specification with implementation details. This ensures a single source of truth for IR definitions within Phase A, preventing semantic drift between the constitution and runtime modules."
+    },
+    {
+      "pair_id": "pair_51.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "memory/ir/store.spec",
+      "similarity": 0.7888,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the architectural constraints and correctness criteria (e.g., INV-GRAPH-APPEND, INV-PREFILL-DET) required by the Delta3 Kernel. Doc B implements these concepts with necessary operational granularity (e.g., SHA-256 logic, world forking). They represent distinct layers of abstraction: Constitution vs. Implementation Interface. Keeping both ensures architectural integrity while providing executable specifications."
+    },
+    {
+      "pair_id": "pair_14.json",
+      "source": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "target": "runtime/ir/divergence.spec",
+      "similarity": 0.8544,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A is the superior architectural specification for the Chron-LLM Delta3 Kernel environment due to its native type alignment (token IDs vs Strings) and explicit definition of the runtime bridge mechanism. However, Doc B contains valuable concrete algorithmic logic for divergence calculation that is abstracted in Doc A. The recommended integration strategy is to retain Doc A as the canonical interface and data model while incorporating Doc B's specific profiling algorithms into Doc A's analysis operations."
+    },
+    {
+      "pair_id": "pair_84.json",
+      "source": "runtime/ir/divergence.spec",
+      "target": "runtime/ir/ir.spec",
+      "similarity": 0.7511,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the foundational schema (Parent) for IR within the Delta3 Kernel ecosystem, while Doc A implements specific analytical logic (Child/Consumer). Both must be retained to preserve core type definitions and analysis capabilities. Integration requires refactoring Doc A to import and utilize Doc B's canonical IR definition instead of its local simplified version, ensuring strict schema consistency across the ObservationAnalysisLayer."
+    },
+    {
+      "pair_id": "pair_68.json",
+      "source": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "target": "observability/ir/world-snapshot.spec",
+      "similarity": 0.7737,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Document A serves as the formal verification contract (Constitution) ensuring architectural integrity and correctness guarantees for the Delta3 Kernel, while Document B defines the specific serialization format required for runtime execution. Keeping them separate maintains a critical separation of concerns between abstract invariants and concrete data structures, allowing internal representation changes without violating external contracts."
+    },
+    {
+      "pair_id": "pair_56.json",
+      "source": "docs/ir/phase-b-charter.spec",
+      "target": "docs/ir/phase-d-charter.spec",
+      "similarity": 0.7853,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "These documents define separate architectural contracts for different pipeline stages within the Delta3 Kernel. Phase B establishes the foundational projection logic (H->M), while Phase D governs graph topology generation (S->G). Maintaining them separately preserves clear phase boundaries, invariant isolation, and modular verification capabilities."
+    },
+    {
+      "pair_id": "pair_79.json",
+      "source": "docs/ir/01-domain-model.spec",
+      "target": "runtime/r1/ir/core.spec",
+      "similarity": 0.7598,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the canonical interface definition (Phase B) ensuring consistency across all runtime versions, while Doc B details the specific Delta3 Kernel logic and state management for R1 (Phase D). Merging them would conflate architectural constraints with implementation details. The recommended integration strategy is to maintain both files but enforce that Doc B imports or strictly adheres to the type definitions in Doc A to eliminate semantic duplication."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "component_id": "component-011",
+  "artifact_count": 5,
+  "artifacts": [
+    {
+      "file_path": "runtime/ir/callback.spec",
+      "line_count": 6,
+      "content": "MOD ir-callback : Physical->IR Bridge; DEPS=[ir, ir-stream, cffi]\nSIG callback(ctx_id:Ptr, pos:Int, token:Int, score:Float, phase:Int)->Void\nTRANSITION(callback): ir=make_ir(ctx_id=ctx_id, pos=pos, token=token, score=score, phase=phase); Stream->push_ir(Stream, ir)\nINV(Determinism): callback(e1)==callback(e2)<=>e1==e2; INV(Lossless): ir.fields=={ctx_id, pos, token, score, phase}\nINV(Isolation): Delta(State)={IR_Stream}; Kernel=Const; Canonical=Const; Runtime=Const\nINV(Perf): Time=O(1); Mem=O(1); THREAD: Safe iff push_ir is Thread-Safe; ERROR: None"
+    },
+    {
+      "file_path": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "line_count": 42,
+      "content": "TYPE Phase = {0:prefill | 1:gen | 2:finalize}\nTYPE IR = {ctx-id: ptr, pos: int, phase: Phase, token: int, score: float}\nTYPE Stream = array[IR]\nTYPE DivRes = {step: int, all-same: bool, p-same: float}\n\nSTATE *ir-stream*: Stream = []\n\nOP init-bridge() -> void\n  PRE: RuntimeReady\n  POST: CallbackRegistered\n\nOP ir-callback(ctx-id: ptr, pos: int, token: int, score: float, phase: Phase) -> void\n  BODY: push(IR{ctx-id, pos, phase, token, score})\n  INV-NON-INVASIVE: !mod(RuntimeState)\n\nOP push(ir: IR) -> IR\n  PRE: ir != null\n  POST: *ir-stream* = append(*ir-stream*, [ir])\n\nOP clear() -> void\n  POST: *ir-stream* = []\n\nOP extract-actions(s: Stream) -> array[IR]\n  BODY: filter(ir in s | ir.phase == 1)\n  INV-ORDERED: forall i < len(result)-1, result[i].pos <= result[i+1].pos\n\nOP run-trial(prompt, n_trials) -> array[array[IR]]\n  BODY:\n    clear()\n    res = []\n    for _ in range(n_trials):\n      run_generation(prompt)\n      append(res, extract-actions(*ir-stream))\n    return res\n\nOP divergence-profile(trials: array[array[IR]]) -> array[DivRes]\n  BODY: map(step_idx, trials | calc_divergence_metrics(step_idx, trials))\n\nINV-IMMUTABLE: forall ir in Stream, !mod(ir.fields) post_creation\nINV-APPEND-ONLY: len(Stream') >= len(Stream) unless clear() called\nINV-DETERMINISTIC: run-trial(prompt, n) -> deterministic output given fixed seed/runtime\nINV-COUPLING: AnalysisOps != CollectionOps"
+    },
+    {
+      "file_path": "runtime/ir/divergence.spec",
+      "line_count": 19,
+      "content": "MODULE ir-divergence : ObservationAnalysisLayer | STATUS StableBaseline\nTYPE IR = { phase: Int, pos: Int, token: String }\nTYPE Profile = { step: Int, all-same: Bool, p-same: Float }\nTYPE Prompt = String\nSTATE *model*, *ctx* : ExternalContext\nOP extract-actions(stream: Vector<IR>) -> List<IR>\n  PRE stream != NULL\n  ALGO sorted=sort(copy(stream),key=pos); return filter(sorted,x.phase==1)\n  COST O(N log N)\nOP run-ir-trial(prompt: Prompt) -> Vector<IR>\n  PRE *model* valid AND *ctx* valid\n  ALGO clear(ir-stream); llama-run(*model*,*ctx*,prompt); return coerce(extract-actions(ir-stream),Vector)\nOP divergence-profile(prompt: Prompt, n-runs: Int) -> List<Profile>\n  PRE n-runs > 0\n  ALGO runs=[run-ir-trial(prompt) for _ in range(n-runs)]; L=min(len(r) for r in runs); profiles=[]; FOR s IN 0..L: tokens=[r[s].token for r in runs]; cnt=max(count(t) for t in unique(tokens)); p=cnt/n-runs; profiles.append({step:s,all-same:(p==1.0),p-same:p}); RETURN profiles\nINV INV_OBS_ONLY : !write(Runtime|Kernel|Candidate|Canonical|Prompt)\nINV INV_DET : Same inputs -> Same outputs; No RNG in analysis\nINV INV_LOSSLESS : IR immutable during processing\nINV INV_ISOLATION : Results not fed back to Runtime control"
+    },
+    {
+      "file_path": "runtime/ir/ir.spec",
+      "line_count": 21,
+      "content": "PKG ir\nEXPORTS [make-ir, ir-p, ir-ctx-id, ir-pos, ir-phase, ir-token, ir-score]\n\nTYPE Phase = {0:PREFILL | 1:GENERATION | 2:FINALIZE}\nTYPE IR = STRUCT { ctx-id:ID; pos:INT; phase:Phase; token:TOKEN_ID; score:FLOAT }\nTYPE Stream = [IR]\n\nOP make-ir(ctx-id:ID, pos:INT, phase:Phase, token:TOKEN_ID, score:FLOAT) -> IR\nOP ir-p(x) -> BOOL\nACC ir-ctx-id(IR) -> ID\nACC ir-pos(IR) -> INT\nACC ir-phase(IR) -> Phase\nACC ir-token(IR) -> TOKEN_ID\nACC ir-score(IR) -> FLOAT\n\nINV-PURITY: IR.role=OBSERVATION; !IR.decision_authority; !IR.semantic_meaning\nINV-IMMUTABLE: post(make-ir) -> immutable(IR.fields)\nINV-ORDERING: (A.pos < B.pos) -> emitted_before(A,B)\nINV-REPLAY: Stream(S1)==Stream(S2) -> analyze(S1)==analyze(S2)\n\nFLOW: LLM_BACKEND -> IR_CALLBACK -> IR_STREAM -> ANALYSIS/KERNEL"
+    },
+    {
+      "file_path": "runtime/ir/stream.spec",
+      "line_count": 28,
+      "content": "PKG ir-stream : USES(cl, ir)\n\nTYPE IR : Observation(token, pos, phase)\nTYPE Stream : Array[IR] { adjustable=T, fill-pointer=0 }\n\nSTATE:\n  *ir-stream* : Stream = []\n\nOPS:\n  push-ir(ir: IR) -> IR\n    PRE: ir-p(ir) == T\n    EFFECT: vector-push-extend(ir, *ir-stream*)\n    POST: last(*ir-stream*) == ir; len' == len + 1\n\n  clear-ir-stream() -> Stream\n    EFFECT: *ir-stream* = make-array(0, adjustable=T, fill-pointer=0)\n    POST: len(*ir-stream*) == 0\n\nINVARIANTS:\n  INV-S1 (Ordering): push(A).t < push(B).t => index(A) < index(B)\n  INV-S2 (Ephemeral): *ir-stream* != Truth; Authority=History/WAL\n  INV-S3 (Neutrality): !mutate(IR); !interpret(IR)\n  INV-S4 (Isolation): RunStart -> clear-ir-stream()\n\nLIFECYCLE:\n  Clear -> Decode { emit(IR) -> push-ir(IR) } -> Analyze(Stream) -> Clear\n\nTHREADING: UNSAFE(GlobalMutable(*ir-stream*))"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_57.json",
+      "source": "runtime/ir/ir.spec",
+      "target": "runtime/ir/stream.spec",
+      "similarity": 0.7828,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc B represents the runtime implementation of Doc A's abstract Stream type. Merging is recommended to eliminate redundant IR definitions (preventing schema drift) and unify the data contract with its execution context semantics within the Delta3 Kernel. The integration should normalize Doc B's Lisp-style state management into Doc A's interface, preserving the global buffer logic as a specific runtime behavior of the IR subsystem."
+    },
+    {
+      "pair_id": "pair_74.json",
+      "source": "runtime/ir/callback.spec",
+      "target": "runtime/ir/stream.spec",
+      "similarity": 0.7639,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "These documents represent distinct layers of the Runtime IR pipeline: Doc A is the ingestion interface (Producer/Bridge), and Doc B is the storage mechanism (Consumer/Buffer). Merging them would violate separation of concerns, coupling the physical execution hook directly to the specific array-based implementation of the stream. They should remain separate modules linked by dependency."
+    },
+    {
+      "pair_id": "pair_14.json",
+      "source": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "target": "runtime/ir/divergence.spec",
+      "similarity": 0.8544,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A is the superior architectural specification for the Chron-LLM Delta3 Kernel environment due to its native type alignment (token IDs vs Strings) and explicit definition of the runtime bridge mechanism. However, Doc B contains valuable concrete algorithmic logic for divergence calculation that is abstracted in Doc A. The recommended integration strategy is to retain Doc A as the canonical interface and data model while incorporating Doc B's specific profiling algorithms into Doc A's analysis operations."
+    },
+    {
+      "pair_id": "pair_84.json",
+      "source": "runtime/ir/divergence.spec",
+      "target": "runtime/ir/ir.spec",
+      "similarity": 0.7511,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the foundational schema (Parent) for IR within the Delta3 Kernel ecosystem, while Doc A implements specific analytical logic (Child/Consumer). Both must be retained to preserve core type definitions and analysis capabilities. Integration requires refactoring Doc A to import and utilize Doc B's canonical IR definition instead of its local simplified version, ensuring strict schema consistency across the ObservationAnalysisLayer."
+    },
+    {
+      "pair_id": "pair_24.json",
+      "source": "runtime/ir/callback.spec",
+      "target": "runtime/ir/ir.spec",
+      "similarity": 0.8366,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B acts as the Parent specification, defining the canonical IR schema essential for Delta3 Kernel's determinism and replay capabilities. Doc A is the Child implementation, providing the specific FFI bridge logic to ingest data into that schema. Maintaining separation ensures strict modularity: the core type system (B) remains stable and independent of runtime adapter details (A), while A enforces compliance with B via its invariants."
+    }
+  ]
+}

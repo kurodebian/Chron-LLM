@@ -1,0 +1,239 @@
+{
+  "component_id": "component-003",
+  "artifact_count": 12,
+  "artifacts": [
+    {
+      "file_path": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "line_count": 61,
+      "content": "Hash = sha256\nID = unique-identifier\nPayloadType = text | json | blob | meta\nStorageType = memory | disk | remote\nNodeType = system | prompt | assistant | eval | feedback\nEdgeType = causal | eval | feedback\n\nPayloadRef = {hash: Hash, type: PayloadType, size: Int, storage: StorageType}\nCanonicalNode = {id: ID, type: NodeType, payload-ref: PayloadRef, metadata: Map}\nGraphEdge = {from: ID, to: ID, type: EdgeType}\nCanonicalGraph = {nodes: Map[ID, CanonicalNode], edges: GraphEdge[], root-id: ID}\nContextNode = {id: ID, type: NodeType, content: String, feedbacks: String[]}\nPrefillState = {context: ContextNode[], target-id: ID, hash: Hash}\n\nMemoryStore: Map[Hash, Payload]\nGraphStore: CanonicalGraph\n\nstore-payload(content) -> Hash\nPRE: content != null\nPOST: MemoryStore[hash(content)] == content\n\nload-payload(hash) -> Payload\nPRE: payload-exists-p(hash)\n\npayload-exists-p(hash) -> Bool\n\ncausal-subgraph(graph: CanonicalGraph, target-id: ID) -> CanonicalNode[]\nPRE: target-id in graph.nodes\nPOST: result contains only nodes reachable via EdgeType=causal\n\nassociated-evaluations(graph: CanonicalGraph, node-id: ID) -> CanonicalNode[]\nPRE: node-id in graph.nodes\nPOST: result contains nodes linked via EdgeType=eval or EdgeType=feedback\n\nbuild-prompt(context-nodes: ContextNode[]) -> Prompt\nPRE: context-nodes != null\nPOST: result is deterministic; no side-effects\n\ncommit-proposal(proposal) -> CanonicalEvent\nPRE: proposal validated\nPOST: GraphStore appended with CanonicalEvent\n\nINV-MEM-IMMUTABLE: MemoryStore[h] == constant after write\nINV-MEM-HASH: hash(content) == h\nINV-GRAPH-APPEND: GraphStore.size >= previous_size; no node/edge mutation\nINV-GRAPH-ROOT: GraphStore.root-id == constant\nINV-GRAPH-REACH: forall n in GraphStore.nodes where n.type in {system, prompt, assistant}: reachable(GraphStore.edges, root-id, n.id)\nINV-CAUSAL-SEPARATION: causal-subgraph traverses only EdgeType=causal; excludes NodeType={eval, feedback}\nINV-PROMPT-PURE: build-prompt is deterministic; no side-effects; no external IO/random/timestamps\nINV-PREFILL-DET: PrefillState(Graph, Memory, Policy, Builder) -> unique hash\nINV-AUTHORITY: GraphStore mutation allowed ONLY via CommitKernel\nINV-EVAL-INDEP: Existence of NodeType={eval, feedback} does not alter causal-subgraph or causal PrefillState\n\nProposal -> Validation -> CommitKernel -> CanonicalEvent -> GraphAppend\n\nT1: Memory Determinism (content -> hash)\nT2: Graph Replay (Graph+Memory -> identical causal sequence)\nT3: View Separation (eval nodes excluded from causal projection)\nT4: Context Projection (Causal+Eval merge without mutation)\nT5: Prefill Hash Stability (Inputs -> identical hash)\nT6: Evaluation Independence (eval nodes -> no causal PrefillState change)"
+    },
+    {
+      "file_path": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "line_count": 83,
+      "content": "DOC_ID: CHRON-R2.0-B-WORLD-CONSTITUTION\nSTATUS: FROZEN\nDEPS: Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.md\n\nTYPE GlobalState := { canonical-graph: Graph, memory-store: Memory }\nTYPE World := {\n    id: UUID,\n    graph-ref: Graph,\n    memory-ref: Memory,\n    root-node: Node,\n    head-node: Node,\n    projection-policy: Policy,\n    metadata: Map,\n    lifecycle: LifecycleState\n}\nTYPE LifecycleState := CREATED | ACTIVE | INACTIVE | ARCHIVED\nTYPE Registry := {\n    worlds: Map<UUID, World>,\n    active-world: UUID,\n    ancestry: Map<UUID, UUID>\n}\n\nROLE Kernel := Authority\nROLE Graph := Truth\nROLE World := ExecutionView\n\nINV World.id UNIQUE & STABLE\nINV World.graph-ref == GlobalState.canonical-graph\nINV World.memory-ref == GlobalState.memory-store\nINV World.root-node IMMUTABLE after creation\nINV World.head-node REACHABLE(World.root-node, World.head-node, :causal)\nINV World.head-node COMMITTED\nINV World.projection-policy IMMUTABLE\nINV World.metadata COPY_ON_WRITE\nINV World ISOLATED (no direct mutation)\nINV Replay DETERMINISTIC(Graph, Memory, WorldState)\nINV Registry NON_AUTHORITATIVE\n\nOP make-world(inputs) -> World\n    PRE: inputs valid\n    POST: World.id UNIQUE\n    POST: World.root-node EXISTS(Graph)\n    POST: World.lifecycle == CREATED\n\nOP fork-world(parent: World) -> World\n    PRE: parent EXISTS\n    POST: child.root-node == parent.root-node\n    POST: child.head-node == parent.head-node\n    POST: child.projection-policy == parent.projection-policy\n    POST: child.metadata == CoW(parent.metadata)\n    POST: child.id != parent.id\n    POST: child.lifecycle == CREATED\n\nOP commit(node: Node) -> Void\n    SEQ: Update(Graph) -> Update(World.head-node)\n    PRE: node REACHABLE(World.root-node, node, :causal)\n    POST: World.head-node == node\n\nOP register-world(w: World) -> Void\nOP find-world(id: UUID) -> World\nOP active-world() -> World\nOP set-active-world(id: UUID) -> Void\nOP list-worlds() -> [World]\n\nTRANS LifecycleState:\n    CREATED -> ACTIVE\n    ACTIVE -> INACTIVE\n    INACTIVE -> ARCHIVED\n    ARCHIVED !-> ACTIVE\n\nTEST B1: make-world creates UNIQUE World\nTEST B2: fork-world preserves ancestry\nTEST B3: root-node IMMUTABLE\nTEST B3.1: head-node REACHABLE(root-node, :causal)\nTEST B4: child head updates !-> parent\nTEST B5: projection-policy ISOLATED\nTEST B6: metadata CoW\nTEST B7: Graph/Memory SHARED\nTEST B8: Replay DETERMINISTIC\nTEST B9: Worlds ISOLATED\nTEST B10: commit SEQ Graph -> World\nTEST B11: Registry persists ID/ancestry\nTEST B12: Kernel rejects unreachable head"
+    },
+    {
+      "file_path": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "line_count": 64,
+      "content": "TYPES:\nPayloadRef = {hash:Str, type:Kw, size:Int, storage:Kw}\nMemStore = Map<Str, Bytes>\nCausalNode = {id:Str, type:Kw, payload-ref:PayloadRef, meta:Any}\nCausalEdge = {from:Str, to:Str, type:Kw}\nCausalGraph = {nodes:Set<CausalNode>, edges:Set<CausalEdge>}\nContextNode = {id:Str, type:Kw, content:Str, feedbacks:List<Str>}\nPrefillState = {context:List<ContextNode>, target-id:Str, hash:Str}\nWorld = {id:Str, root:Str, head:Str, policy:Kw, meta:Any, lifecycle:Kw}\nRegistry = {worlds:Map<Str,World>, ancestry:Map<Str,Str>, active-id:Str?, graph:CausalGraph, memory:MemStore}\nObsWorld = {id:Str, root:Str, head:Str, policy:Kw, meta:Any, lifecycle:Kw, parent:Str?}\nObsRegistry = {ids:List<Str>, active:Str?, archived:List<Str>}\nObsAncestry = {child:Str, parent:Str, path:List<Str>}\nObsDiff = {changed:Bool, fields:List<Kw>}\n\nOPS:\nstore-payload(store:MemStore, content:Str) -> PayloadRef:\n  h = SHA256(content)\n  store[h] = content\n  return {hash:h, type:infer(content), size:len(content), storage:default}\n\nload-payload(store:MemStore, ref:PayloadRef) -> Str:\n  return store[ref.hash]\n\nadd-node!(graph:CausalGraph, node:CausalNode) -> Void:\n  PRE: node.id not in graph.nodes\n  graph.nodes += node\n\nadd-edge!(graph:CausalGraph, edge:CausalEdge) -> Void:\n  PRE: edge.from in graph.nodes AND edge.to in graph.nodes\n  graph.edges += edge\n\ncausal-subgraph(graph:CausalGraph, target:Str) -> List<CausalNode>:\n  return DFS(graph, target, filter=:causal) | sort(root-first)\n\nproject-context(graph:CausalGraph, store:MemStore, target:Str, evals:Bool) -> List<ContextNode>:\n  nodes = causal-subgraph(graph, target)\n  return map(n -> {id:n.id, type:n.type, content:load-payload(store, n.payload-ref), feedbacks:if(evals) get-evals(n) else []})\n\ncanonical-prompt(ctx:List<ContextNode>) -> Str:\n  return format(ctx)\n\nbuild-prefill-state(graph:CausalGraph, store:MemStore, target:Str) -> PrefillState:\n  ctx = project-context(graph, store, target, false)\n  return {context:ctx, target-id:target, hash:SHA256(canonical-prompt(ctx))}\n\nregister-world(reg:Registry, world:World) -> Void:\n  PRE: world.id not in reg.worlds\n  reg.worlds[world.id] = world\n\nset-active-world(reg:Registry, id:Str) -> Void:\n  PRE: id in reg.worlds\n  reg.active-id = id\n\narchive-world(reg:Registry, id:Str) -> Void:\n  w = reg.worlds[id]\n  w.lifecycle = :archived\n  if(reg.active-id == id) reg.active-id = nil\n\nINVS:\nINV: forall(w in Registry.worlds): w.graph == Registry.graph\nINV: forall(w in Registry.worlds): w.memory == Registry.memory\nINV: count(w in Registry.worlds where w.lifecycle == :active) <= 1\nINV: Observation types subset {Str, Num, Kw, Char, List}"
+    },
+    {
+      "file_path": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "line_count": 43,
+      "content": "TYPES:\nPayloadRef = {hash:SHA256, type:Str, size:U64, storage:Ref}\nMemStore = HashTable<Str, Payload>\nCausalNode = {id:ID, type:Type, payload:PayloadRef, meta:Map}\nCausalEdge = {from:ID, to:ID, type:{:causal|:eval}}\nCausalGraph = {nodes:[CausalNode], edges:[CausalEdge]}\nContextNode = {id:ID, type:Type, content:Str, feedbacks:[Str]}\nPrefillState = {context:[ContextNode], target:ID, hash:SHA256}\nWorld = {id:ID, graph:Ref, mem:Ref, root:ID, head:ID, policy:Map, meta:Map, lifecycle:{:created|:active|:inactive|:archived}}\nRegistry = {worlds:[World], ancestry:Map<ID,ID>, active:ID, graph:Ref, mem:Ref}\nWorldObs = {ver:1, world-id:ID, root-id:ID, head-id:ID, policy:Map, meta:Map, lifecycle:Enum, parent-id:ID}\nRegistryObs = {ver:1, world-ids:[ID], active-id:ID, archived-ids:[ID]}\nAncestryObs = {world-id:ID, parent-id:ID, path:[ID]}\nDiffObs = {changed:Bool, fields:[Str]}\n\nINVARIANTS:\nINV(Graph): Unique(node.id)\nINV(Mem): ContentAddr(hash=SHA256(content))\nINV(World): head in graph.nodes\nINV(Commit): Atomic(GraphAppend, HeadAdvance)\nINV(Obs): Type(x) in {null, bool, str, num, char, kw, list}\nINV(Truth): kernel-commit-world! == ONLY(head_advance)\nINV(Replay): Hash(Graph+Mem+Policy) == PrefillHash\n\nOPERATIONS:\nmake-memory-store() -> MemStore\nadd-node!(g, n) -> g' | Pre: !exists(g.nodes, n.id)\nadd-edge!(g, e) -> g' | Pre: exists(g.nodes, e.from) & exists(g.nodes, e.to)\ncausal-subgraph(g, target) -> [Node] | Filter: edge.type==:causal; Order: Root->Target\nproject-context(g, m, target, include_eval) -> [ContextNode] | Logic: ancestry->load->ctx; If include_eval: add :EVAL feedbacks\ncanonical-prompt(ctx) -> PrefillState | Rule: Deterministic\nmake-world(id, g, m, root, head, policy, meta) -> World | Pre: exists(g.nodes, root), exists(g.nodes, head)\nfork-world(parent, child_id) -> World | Post: child.graph==parent.graph, child.mem==parent.mem\nreplace-world-metadata!(w, meta) -> w' | Post: w'.meta==meta, w'.graph==w.graph (CoW)\nkernel-commit-world!(w, node) -> w' | Pre: valid(node); Post: w'.head==node.id, w'.graph.nodes+=[node]\nreplay-world(w) -> {id, head, policy, meta, hash}\nregister-world(r, w) -> r' | Pre: unique(w.id), exists(r.worlds, w.parent)\nset-active-world(r, id) -> r' | Pre: w.lifecycle!=:archived\narchive-world(r, id) -> r' | Post: w.lifecycle=:archived, r.active!=id\nsnapshot-world(w) -> WorldObs | Rule: Data-only, No mutation\nsnapshot-registry(r) -> RegistryObs | Rule: Data-only, No mutation\nsnapshot-ancestry(w) -> AncestryObs | Rule: Data-only, No mutation\nsnapshot-diff(w1, w2) -> DiffObs | Rule: Data-only, No mutation"
+    },
+    {
+      "file_path": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "line_count": 18,
+      "content": "TYPE Node = {id:Object, type:Keyword, payload-ref:Ref, metadata:Any} : immutable\nTYPE Edge = {from:Object, to:Object, type::causal|:eval}\nTYPE Graph = {nodes:[Node], edges:[Edge]}\nTYPE ContextNode = {id:Object, type:Keyword, content:Payload, feedbacks:[Eval]}\nTYPE PrefillState = {context:[ContextNode], target-id:Object, hash:String}\n\nOP get-node(g:Graph, id:Object) -> Node|nil\nOP add-node!(g:Graph, n:Node) : PRE(!exists(n' in g.nodes | n'.id==n.id))\nOP add-edge!(g:Graph, e:Edge) : PRE(get-node(g,e.from)!=nil && get-node(g,e.to)!=nil)\nOP causal-subgraph(g:Graph, target:Object) -> [Node] : traverse_incoming(:causal, target); INV(deterministic_order, cycle_safe)\nOP associated-evals(g:Graph, id:Object) -> [Eval] : traverse_outgoing(:eval, id)\nOP project-context(g:Graph, store:Store, target:Object, inc-evals:Boolean) -> [ContextNode] : nodes=causal-subgraph(g,target); map(n->{id:n.id, type:n.type, content:store.load(n.payload-ref), feedbacks:(inc-evals?associated-evals(g,n.id):[])}); INV(read_only_g)\nOP canonical-prompt(ctx:[ContextNode]) -> String : serialize(ctx); INV(deterministic_serialization)\nOP build-prefill-state(g:Graph, store:Store, target:Object, opts:{inc-evals:Boolean, builder:(ctx)->String}) -> PrefillState : ctx=project-context(g,store,target,opts.inc-evals); prompt=(opts.builder||canonical-prompt)(ctx); hash=SHA256(prompt); return{context:ctx, target-id:target, hash}; PRE(builder returns String)\n\nINV Determinism: inputs(g,store,builder,target)==inputs' -> output.hash==output'.hash\nINV CausalIntegrity: PrefillState.context derived exclusively from :causal edges\nINV EvalIsolation: Evaluation data is optional metadata; disjoint from causal ancestry logic"
+    },
+    {
+      "file_path": "graph-runtime/ir/graph.spec",
+      "line_count": 28,
+      "content": "TYPE ID = Symbol | String\nTYPE Keyword = Symbol\nTYPE Ref = Any\nTYPE Metadata = Map<String, Any>\n\nCausalNode = { id: ID [RO], type: Keyword [RO], payload-ref: Ref [RO], metadata: Metadata [RO] }\nCausalEdge = { from: ID [RO], to: ID [RO], type: Keyword [RO] }\nCausalGraph = { nodes: [CausalNode], edges: [CausalEdge] }\n\nmake-causal-node(id, type, payload-ref, metadata?) -> CausalNode\nmake-causal-edge(from, to, type) -> CausalEdge\nmake-causal-graph(nodes?, edges?) -> CausalGraph\n\nget-node(g: CausalGraph, id: ID) -> CausalNode | nil\n  PRE: true\n  POST: result = find(n in g.nodes where n.id == id) || nil\n\nadd-node!(g: CausalGraph, node: CausalNode) -> CausalGraph\n  PRE: is-causal-node(node) AND NOT exists(n in g.nodes where n.id == node.id)\n  POST: result.nodes = append(g.nodes, [node]) AND result.edges == g.edges\n\nadd-edge!(g: CausalGraph, edge: CausalEdge) -> CausalGraph\n  PRE: is-causal-edge(edge) AND exists(n in g.nodes where n.id == edge.from) AND exists(m in g.nodes where m.id == edge.to)\n  POST: result.edges = append(g.edges, [edge]) AND result.nodes == g.nodes\n\nINV NODE-UNIQUE: forall x,y in CausalGraph.nodes, x != y -> x.id != y.id\nINV EDGE-CLOSURE: forall e in CausalGraph.edges, exists n1,n2 in CausalGraph.nodes where (n1.id == e.from AND n2.id == e.to)\nINV FIELD-IMMUTABLE: all fields of CausalNode/CausalEdge are read-only post-construction"
+    },
+    {
+      "file_path": "graph-runtime/ir/prefill.spec",
+      "line_count": 22,
+      "content": "TYPE Node = {id: ID, type: Enum, content: String, feedback: Any}\nTYPE PrefillState = {context: [Node], target-id: ID, hash: String} : immutable\n\nFN project-context(graph: Graph, store: Store, target-id: ID) -> [Node]\n   PRE: graph.valid AND store.readable\n   POST: returns ordered causal context list for target-id\n\nFN canonical-prompt(context: [Node]) -> String\n   ALGO: concat(map(n->\"(prompt (:node {n.id} :type {n.type} :content {n.content} :feedback {n.feedback}))\", context))\n   INV: preserves_node_order AND deterministic\n\nFN build-prefill-state(graph, store, target-id, include-evals=false, builder=canonical-prompt) -> PrefillState\n   ctx = project-context(graph, store, target-id)\n   prompt = builder(ctx)\n   ASSERT type(prompt) == String\n   hash = sha256-string(prompt)\n   RETURN {context: ctx, target-id: target-id, hash: hash}\n\nINV Determinism: build-prefill-state(g,s,t,b) -> same(PrefillState) given identical inputs\nINV Immutability: PrefillState.fields are read-only post-construction\nINV Identity: hash == sha256(builder(context))\nINV Boundary: PrefillState != KVCache AND PrefillState != Generation"
+    },
+    {
+      "file_path": "graph-runtime/ir/projection.spec",
+      "line_count": 10,
+      "content": "TYPE context-node = { id: ID, type: Keyword, content: String, feedbacks: [String] }\nOP associated-evaluations(g: Graph, nid: ID) -> [ID]: collect(e.to FOR e IN g.edges IF e.type==`:eval` && e.from==nid) ORDER BY insertion\nOP project-context(g: Graph, s: Store, tid: ID, inc_evals: Bool=false) -> [context-node]:\n  ancestry = causal-subgraph(g, tid)\n  RETURN map(n IN ancestry -> {\n    id: n.id, type: n.type, content: load-payload(s, n.payload-ref)||\"\",\n    feedbacks: IF inc_evals THEN [load-payload(s, g.nodes[eid].payload-ref) FOR eid IN associated-evaluations(g, n.id)] ELSE nil\n  })\nINV project-context -> !mutate(g), !mutate(s), deterministic(inputs)\nINV context-node.content == materialized(payload-ref)"
+    },
+    {
+      "file_path": "memory/ir/store.spec",
+      "line_count": 68,
+      "content": "MOD chron-r2-0-a\n\nTYPE payload-ref = { hash:String, type:Keyword, size:Int>=0, storage:Keyword }\nINV(payload-ref): immutable_fields\n\nTYPE store = Map{test=equal}\nINV(store): explicit_reference; !global_singleton\n\nTYPE causal-node | causal-edge | context-node : Abstract\nTYPE causal-graph | causal-subgraph : Abstract\nTYPE world | world-registry : Abstract\n\nOP make-payload-ref(hash:String=\"\", type:Keyword=:text, size:Int>=0=0, storage:Keyword=:memory) -> payload-ref\n\nGET payload-ref.hash -> String\nGET payload-ref.type -> Keyword\nGET payload-ref.size -> Int\nGET payload-ref.storage -> Keyword\n\nOP make-memory-store() -> store\n\nOP %content-string(c:Any) -> String\n  POST: res = (IS_STRING(c) ? c : prin1-to-string(c))\n\nOP utf8-octets(s:String) -> [UInt8]\n\nOP sha256-string(s:String) -> String\n  LOGIC:\n    octets = utf8-octets(s)\n    padded = SHA256_PAD(octets, 0x80, len_bits)\n    digest = SHA256_BLOCKS(padded, +sha256-k+, %ror)\n    RETURN \"sha256:\" + HEX(digest)\n\nOP store-payload(store:store, content:Any, type:Keyword=:text, storage:Keyword=:memory) -> payload-ref\n  LOGIC:\n    s = %content-string(content)\n    h = sha256-string(s)\n    IF !EXISTS(store[h]) THEN store[h] = s ENDIF\n    RETURN make-payload-ref(h, type, LEN(UTF8(s)), storage)\n\nOP load-payload(store:store, ref:payload-ref|String) -> String|Nil\n  LOGIC:\n    h = (IS_TYPE(ref, payload-ref) ? ref.hash : ref)\n    RETURN store[h]\n\nOP payload-exists-p(store:store, ref:payload-ref|String) -> Bool\n  LOGIC:\n    h = (IS_TYPE(ref, payload-ref) ? ref.hash : ref)\n    RETURN EXISTS(store[h])\n\nOP add-node!(graph:causal-graph, node:causal-node) -> Void\nOP add-edge!(graph:causal-graph, src:causal-node, dst:causal-node) -> Void\nOP get-node(graph:causal-graph, id:Any) -> causal-node|Nil\nOP associated-evaluations(node:causal-node) -> [Any]\n\nOP fork-world(src:world) -> world\nOP replace-world-metadata!(w:world, meta:Any) -> Void\nOP kernel-commit-world!(w:world) -> Void\nOP replay-world(w:world) -> Void\nOP register-world(reg:world-registry, w:world) -> Void\nOP find-world(reg:world-registry, id:Any) -> world|Nil\nOP active-world() -> world\nOP set-active-world(w:world) -> Void\nOP list-worlds() -> [world]\nOP archive-world(w:world) -> Void\n\nOP prefill-state() -> Any\nOP canonical-prompt() -> String"
+    },
+    {
+      "file_path": "registry/ir/registry.spec",
+      "line_count": 8,
+      "content": "TYPES: ID=Int|Str; State={inactive,active,archived}; World={id:ID,state:State}; Registry={worlds:[(ID,World)],ancestry:[(ID,ID)],active-id:ID|NIL,graph:Graph,memory:Memory}\nOPS: find-world(r:Registry,i:ID)->w:World|NIL : assoc r.worlds i; list-worlds(r:Registry)->[World] : map cdr r.worlds; active-world(r:Registry)->w:World|NIL : find-world r r.active-id\nINTERNALS: %shared-p(w:World,r:Registry)->Bool : eq(w.graph,r.graph)&&eq(w.memory,r.memory)\nREGISTER-WORLD(r:Registry,w:World,p?:ID|NIL)->w':World PRE: world-p(w),!assoc(r.worlds,w.id),%shared-p(w,r),(p?!=NIL->assoc(r.worlds,p?)) POST: r'.worlds=append(r.worlds,[(w.id,w)]);if p?!=NIL then r'.ancestry=append(r.ancestry,[(w.id,p?)]);if r.graph==NIL then r'.graph=w.graph;r'.memory=w.memory\nSET-ACTIVE-WORLD(r:Registry,w:World)->w':World PRE: assoc(r.worlds,w.id),w.state!=archived POST: let old=r.active-id;if old!=NIL&&old!=w.id then set-state(find-world(r,old),inactive);set-state(w,active);r'.active-id=w.id\nARCHIVE-WORLD(r:Registry,w:World)->w':World PRE: assoc(r.worlds,w.id) POST: set-state(w,archived);if r.active-id==w.id then r'.active-id=NIL\nINVARIANTS: I1:unique(map car r.worlds);I2:order_preserved(r.worlds);I3:!w in r.worlds:eq(w.graph,r.graph)&&eq(w.memory,r.memory);I4:!(c,p) in r.ancestry:assoc(r.worlds,p);I5:count(filter(r.worlds,state=active))<=1;I6:!w in r.worlds:w.state==archived->w.id!=r.active-id\nLIFECYCLE: register->inactive;set-active(inactive|active)->active;archive(active|inactive)->archived;forbidden:archived->active"
+    },
+    {
+      "file_path": "tests/md/ir/r2-0-b-tests.spec",
+      "line_count": 57,
+      "content": "PKG chron-r2-0-a\n\nTYPES:\n  World = { id: UUID, root: NodeRef, head: NodeRef, meta: Map, policy: Policy }\n  Graph = { nodes: Set<Node>, edges: Set<Edge> }\n  Store = InMemMap\n  Registry = { worlds: Map<UUID, World>, active: UUID?, ancestry: Map<UUID, UUID> }\n  Policy = { include-evaluations: Bool }\n  Node = { id: String, payload: Any }\n\nUTILS:\n  %b-assert(cond: Bool, desc: Str) -> t | Error(\"R2.0-B invariant failed: ~A\")\n  %b-fixture() -> (graph: Graph, store: Store, policy: Policy, registry: Registry)\n    INIT graph.nodes = {\"root\", \"head\"}; graph.edges = {(root->head)}\n    INIT policy = (:include-evaluations nil); registry = new(graph, store)\n\nOPS:\n  make-world(registry, ...) -> World\n  fork-world(parent: World) -> ChildWorld\n  kernel-commit-world!(world: World, node: Node) -> Void\n  register-world(registry: Registry, world: World) -> Void | Error\n  list-worlds(registry: Registry) -> [World]\n  archive-world(registry: Registry, id: UUID) -> Void\n\nTESTS (Public API):\n  b1-world-creation() -> t\n    POST: make-world().id unique; register(dup_id) -> Error\n  b2-world-fork() -> t\n    POST: child.root == parent.root; child.head == parent.head; registry.ancestry[child.id] == parent.id\n  b3-root-stability() -> t\n    POST: kernel-commit-world!(w, n) => w.root unchanged\n  b4-head-independence() -> t\n    POST: kernel-commit-world!(child, n) => parent.head unchanged\n  b5-projection-isolation() -> t\n    POST: w1.policy != w2.policy => state disjoint\n  b6-metadata-cow() -> t\n    POST: update_meta(child, k, v) => parent.meta[k] == old_val\n  b7-graph-sharing() -> t\n    POST: child.graph eq parent.graph; child.store eq parent.store\n  b8-replay-independence() -> t\n    POST: replay(w1) == replay(w2) IF constitutional_input(w1) == constitutional_input(w2)\n  b9-world-isolation() -> t\n    POST: update_meta(w1, ...) => w2.meta unchanged\n  b10-commit-visibility() -> t\n    POST: kernel-commit-world!(w, n) => graph.nodes contains n; w.head == n\n  b11-registry-persistence() -> t\n    POST: list-worlds deterministic order; archive(w) => !active; set-active(archived) -> Error\n\nINVARIANTS (System Rules):\n  INV_ID_UNIQUE: forall w1,w2 in Registry.worlds: w1.id != w2.id\n  INV_ID_NO_REUSE: deleted_ids intersect active_ids == empty\n  INV_FORK_SHARE: fork(p) -> c.graph eq p.graph AND c.store eq p.store\n  INV_ROOT_IMMUTABLE: commit(w, n) -> w.root constant\n  INV_HEAD_LOCAL: commit(c, n) => parent.head unchanged\n  INV_META_COW: mutate_meta(c) => parent.meta structurally shared; logical isolation\n  INV_COMMIT_ATOMIC: kernel-commit-world!(w, n) -> (graph.add(n), w.head = n)\n  INV_REPLAY_PURE: replay(w) == f(constitutional_input(w))"
+    },
+    {
+      "file_path": "world/ir/world.spec",
+      "line_count": 31,
+      "content": "TYPE World = { id:Str, graph-ref:Ref<Graph>, mem-ref:Ref<Mem>, root-node:NodeID, head-cell:[NodeID], policy:Policy, meta:[Meta], lifecycle:[State] }\nTYPE Policy = { include-evals:Bool | ... }\nTYPE ReplayRes = { world-id:Str, head-node:NodeID, policy:Policy, meta:Meta, prefill-hash:Hash }\n\nINV-1: World.id != \"\"\nINV-2: World.graph-ref == Shared(Graph) // Never copied\nINV-3: World.mem-ref == Shared(Mem) // Never copied\nINV-4: Access(World.policy/meta) -> Copy() // Immutable view\nINV-5: Update(Head) ONLY via kernel-commit-world!\nINV-6: NodeID unique in Graph (Immutable once committed)\nINV-7: Replay deterministic\n\nOP make-world(id, graph, mem, root, head, policy, meta?) -> World\n  PRE: id != \"\" AND exists(root) AND exists(head)\n  POST: w.graph-ref=graph; w.mem-ref=mem; w.policy=copy(policy); w.meta=[copy(meta)]; w.head-cell=[head]; w.lifecycle=[Created]\n\nOP fork-world(parent) -> World\n  POST: child.id!=parent.id; child.graph-ref=parent.graph-ref; child.mem-ref=parent.mem-ref; child.root-node=parent.root-node; child.head-cell=[car parent.head-cell]; child.policy=copy(parent.policy); child.meta=copy(parent.meta)\n\nOP replace-world-metadata!(w, new-meta) -> Void\n  POST: w.meta = [copy(new-meta)] // CoW\n\nOP kernel-commit-world!(w, node) -> World\n  PRE: causal-node-p(node) AND !exists(get-node(w.graph-ref, node.id))\n  SEQ: add-node!(w.graph-ref, node); w.head-cell[0] = node.id\n  POST: return w\n\nOP replay-world(w) -> ReplayRes\n  PURE\n  STATE = build-prefill-state(w.graph-ref, w.mem-ref, car w.head-cell, w.policy)\n  RETURN { world-id:w.id, head-node:car w.head-cell, policy:w.policy, meta:car w.meta, prefill-hash:hash(STATE) }"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_65.json",
+      "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "graph-runtime/ir/graph.spec",
+      "similarity": 0.7781,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A represents the evolved R2.0 specification where Graph structures are tightly coupled with World semantics and Delta3 Kernel operations (e.g., kernel-commit-world!). Doc B's generic definitions lack the structural constraints (like PayloadRef) required by the Runtime Contract defined in A. To eliminate type fragmentation and ensure a single source of truth for the IR used by the Kernel, the graph primitives from B should be consolidated into A, aligning all graph operations with the World lifecycle requirements."
+    },
+    {
+      "pair_id": "pair_76.json",
+      "source": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "graph-runtime/ir/graph.spec",
+      "similarity": 0.7621,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Document B serves as the Phase A/B Delta3 Kernel core data model (CausalGraph), establishing structural invariants. Document A represents the Phase D Graph Runtime layer, utilizing graph structures for causal context assembly and prompt generation. Merging them would violate separation of concerns by coupling low-level kernel definitions with high-level inference logic. Future refactoring should align Doc A to import types from Doc B rather than duplicating base definitions."
+    },
+    {
+      "pair_id": "pair_40.json",
+      "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "target": "graph-runtime/ir/graph.spec",
+      "similarity": 0.8033,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document A requires alignment with the Delta3 Kernel's persistent data structure requirements defined in Document B. By merging B's rigorous type definitions and immutability constraints into A, we eliminate semantic drift between the runtime design and core IR implementation. This ensures that World lifecycle operations (A) correctly utilize functional graph updates (B), maintaining consistency across the Chron-LLM architecture."
+    },
+    {
+      "pair_id": "pair_58.json",
+      "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity": 0.7826,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A serves as the canonical specification for the World Runtime environment (Phase C), which inherently requires consistent Graph IR definitions. Doc B's graph operations and context logic are critical components of this runtime but currently exist in isolation with redundant type definitions. Merging B into A ensures a single source of truth for causal context generation within the Delta3 Kernel, aligning graph traversal logic directly with world lifecycle and observation contracts."
+    },
+    {
+      "pair_id": "pair_1.json",
+      "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "target": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity": 0.9347,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc B represents a more mature, Kernel-compliant specification. Doc A's shared mutable state model (INV: w.graph == Registry.graph) conflicts with the consistency requirements of Delta3 Kernel execution. The recommended action is to refactor Doc A to adopt Doc B's immutable snapshot semantics and kernel-commit constraints, while retaining Doc A's detailed context projection logic if it offers superior granularity for LLM prefilling."
+    },
+    {
+      "pair_id": "pair_32.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "similarity": 0.8129,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the critical data invariants and causal purity rules required for Delta3 Kernel's deterministic replay (Phase A). Doc B implements the runtime abstraction layer that manages graph instances as 'Worlds' with lifecycle states (Phase B/C). They represent distinct architectural concerns: Data Integrity vs. Runtime Management. Keeping them separate ensures modularity, allowing the Core Constitution to remain stable while World logic evolves."
+    },
+    {
+      "pair_id": "pair_86.json",
+      "source": "docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "world/ir/world.spec",
+      "similarity": 0.75,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document A serves as the canonical architectural contract for the Delta3 Kernel's runtime interface. Document B contains specific IR implementation details (e.g., head-cell vs head, Shared refs) that must be reconciled into the Contract to ensure type safety and semantic consistency between the Kernel API and the underlying World IR. Merging B into A preserves the broader Registry/Observation context while refining the World definition."
+    },
+    {
+      "pair_id": "pair_22.json",
+      "source": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "target": "world/ir/world.spec",
+      "similarity": 0.838,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A serves as the canonical Phase B Constitution and is FROZEN, establishing the authoritative contract for World isolation, determinism, and Kernel authority. Doc B redundantly redefines core types with implementation-specific syntax that conflicts with A (e.g., head-cell lists vs Node references). To ensure Delta3 Kernel consistency, Doc B's definitions must be superseded by Doc A; any implementation code should import from the Constitution Spec rather than maintaining a divergent local spec."
+    },
+    {
+      "pair_id": "pair_44.json",
+      "source": "tests/md/ir/r2-0-b-tests.spec",
+      "target": "world/ir/world.spec",
+      "similarity": 0.8014,
+      "relationship": "INDEPENDENT",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the executable acceptance criteria for Delta3 Kernel's World semantics, ensuring behavioral correctness through specific scenarios. Doc B defines the authoritative type system and operational contracts (pre/post conditions) required for implementation. Merging them would conflate test logic with interface specifications; maintaining separation ensures clear boundaries between verification (tests/md) and definition (world/ir)."
+    },
+    {
+      "pair_id": "pair_63.json",
+      "source": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "graph-runtime/ir/projection.spec",
+      "similarity": 0.7792,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A represents the canonical v1.0 specification for Delta3 Kernel integration, ensuring EvalIsolation and deterministic hashing required for caching. Doc B's projection logic is subsumed by Doc A; its approach of materializing feedbacks into strings within the IR layer violates abstraction boundaries defined in Doc A."
+    },
+    {
+      "pair_id": "pair_54.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "graph-runtime/ir/prefill.spec",
+      "similarity": 0.7871,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the authoritative architectural contract defining canonical structures (CanonicalNode, PayloadRef) and critical invariants (causal separation, immutability) required by Delta3 Kernel. Doc B provides necessary implementation specifics for prompt construction that are too granular for a Constitution spec. Both should be retained to maintain separation of concerns between system constraints and module logic, provided Doc B is refactored to reference Doc A's canonical types rather than redefining simplified Node structures."
+    },
+    {
+      "pair_id": "pair_7.json",
+      "source": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "graph-runtime/ir/prefill.spec",
+      "similarity": 0.8892,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Document A (v1.0) is the authoritative specification for Delta3 Kernel's graph runtime, explicitly enforcing causal integrity and eval isolation which are critical architectural constraints. Document B lacks these semantic distinctions and appears to be an earlier draft or simplified interface; its specific serialization logic can be implemented as a concrete builder function under Document A's generic contract."
+    },
+    {
+      "pair_id": "pair_61.json",
+      "source": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "target": "registry/ir/registry.spec",
+      "similarity": 0.781,
+      "relationship": "SUPERSEDED",
+      "recommended_action": "DEPRECATE_OBSOLETE",
+      "rationale": "Doc A (R2.0-B Constitution) establishes the canonical architectural contract for Phase B, explicitly defining Registry as non-authoritative and enforcing Graph/Memory sharing via World references to maintain Delta3 Kernel consistency. Doc B's model of Registry owning Graph/Memory state contradicts these constitutional invariants and represents an obsolete design pattern that must be deprecated to prevent architectural drift."
+    },
+    {
+      "pair_id": "pair_15.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "similarity": 0.8506,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_A_DELETE_B",
+      "rationale": "Doc A establishes the authoritative Delta3 Kernel rules (INV-AUTHORITY, INV-GRAPH-APPEND). Doc B's mutable graph operations (add-node!) contradict these invariants. World management logic should be refactored into a distinct Phase C/D specification that imports from Doc A, rather than maintaining this conflicting definition."
+    },
+    {
+      "pair_id": "pair_16.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity": 0.8489,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A acts as the canonical 'Core Constitution'. Doc B's specific operational signatures (e.g., project-context, add-node!) and projection logic should be integrated into Doc A to unify the abstract specification with implementation details. This ensures a single source of truth for IR definitions within Phase A, preventing semantic drift between the constitution and runtime modules."
+    },
+    {
+      "pair_id": "pair_51.json",
+      "source": "docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "target": "memory/ir/store.spec",
+      "similarity": 0.7888,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the architectural constraints and correctness criteria (e.g., INV-GRAPH-APPEND, INV-PREFILL-DET) required by the Delta3 Kernel. Doc B implements these concepts with necessary operational granularity (e.g., SHA-256 logic, world forking). They represent distinct layers of abstraction: Constitution vs. Implementation Interface. Keeping both ensures architectural integrity while providing executable specifications."
+    },
+    {
+      "pair_id": "pair_25.json",
+      "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "target": "memory/ir/store.spec",
+      "similarity": 0.8351,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B represents the foundational IR/Memory layer (Phase A) of Delta3 Kernel, establishing canonical primitives and invariants. Doc A describes the Runtime execution model (Phase C/D) that consumes these primitives to manage World Graphs and context generation. While they redundantly define basic types like PayloadRef, they serve distinct architectural roles: B as the implementation contract for memory/IR, and A as the behavioral specification for runtime operations. Both must be retained to preserve system integrity across layers."
+    },
+    {
+      "pair_id": "pair_50.json",
+      "source": "docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "target": "graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "similarity": 0.7933,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Doc A is positioned as the comprehensive Runtime Specification. Doc B provides necessary refinements regarding Eval isolation and deterministic serialization options that are critical for Delta3 Kernel stability but currently missing from A. Merging B's graph-specific logic into A ensures a single source of truth for IR types while preserving A's World management capabilities."
+    },
+    {
+      "pair_id": "pair_37.json",
+      "source": "docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "target": "tests/md/ir/r2-0-b-tests.spec",
+      "similarity": 0.8064,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A is the canonical source of truth for Delta3 Kernel's World Runtime logic. Doc B provides essential automated verification coverage mapped directly to Doc A's test cases (TEST B1-B12). Merging them would conflate requirements with validation logic, while deleting either compromises architectural integrity or system verifiability. The minor package naming inconsistency in Doc B ('r2-0-a') should be corrected to 'r2-0-b' for consistency."
+    }
+  ]
+}

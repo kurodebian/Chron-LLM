@@ -1,0 +1,111 @@
+{
+  "component_id": "component-002",
+  "artifact_count": 8,
+  "artifacts": [
+    {
+      "file_path": "llama-agent/ir/chron-llm-kernel.spec",
+      "line_count": 64,
+      "content": "TYPES:\nSymbol = :user-message | :assistant-reply | :branch | :ok | :degraded\nHistoryEntry = {kind: Symbol, text: String, clock: Integer}\nContextObject = {system_prompt: String?, history: [HistoryEntry], memory_context: Any?, metadata: Any?}\nKernelState = {world_id: Integer, health: Symbol, context: ContextObject}\nKernel = {wal: WAL, graph: Graph?, current_world: Integer}\n\nINIT:\nmake-chron-kernel() -> Kernel\n  wal = init_wal()\n  graph = nil\n  current_world = 100\n  return {wal, graph, current_world}\n\nOPS:\nkernel-submit-user-input(k: Kernel, text: String) -> KernelState\n  return %kernel-commit-event(k, :user-message, {text})\n\nkernel-submit-assistant-reply(k: Kernel, text: String) -> KernelState\n  return %kernel-commit-event(k, :assistant-reply, {text})\n\nkernel-create-world(k: Kernel) -> Integer\n  parent = k.current_world\n  new_world = k.wal.world_counter++\n  %kernel-commit-event(k, :branch, {parent_world: parent})\n  k.current_world = new_world\n  return new_world\n\nkernel-current-state(k: Kernel) -> KernelState\n  health = kernel-health(k)\n  ctx = kernel-build-context-view(k)\n  return {world_id: k.current_world, health, context: ctx}\n\nkernel-health(k: Kernel) -> Symbol\n  if k.graph == nil return :ok\n  return check-immune-status(k.graph)\n\n%kernel-commit-event(k: Kernel, kind: Symbol, payload: Map) -> KernelState\n  stage-event(k.wal, kind, payload)\n  commit-staged(k.wal)\n  refresh-projections(k)\n  return kernel-current-state(k)\n\nrefresh-projections(k: Kernel)\n  k.graph = rebuild-graph-from-wal(k.wal)\n\n%history->dto(g: Graph) -> [HistoryEntry]\n  nodes = graph-history(g)\n  return map(n -> {kind: n.kind, text: n.payload.text | \"\", clock: n.clock})\n\nkernel-build-context-view(k: Kernel) -> ContextObject\n  hist = %history->dto(k.graph)\n  return {system_prompt: nil, history: hist, memory_context: nil, metadata: nil}\n\nINVARIANTS:\nINV: Runtime -> Kernel API only\nINV: Kernel -> Sole State Mutator\nINV: Graph = f(WAL)\nINV: Post-Commit: WAL.persisted AND Graph.updated\n\nCOMPLEXITY:\nCommit: O(1)\nProjection: O(n)\nHistory: O(depth)"
+    },
+    {
+      "file_path": "llama-agent/ir/chron-llm-runtime.spec",
+      "line_count": 37,
+      "content": "MODULE: Chron-LLM/Runtime\nVER: Δ3-P1\n\nTYPES:\n  KernelState = { world_id: ID, health: Status, context: ContextObject }\n  RuntimeEnv = { kernel: Kernel }\n\nINV:\n  Runtime.logic_state == {}\n  Runtime.access(WAL | Graph | History | Event | Projection) == FALSE\n  Kernel == SingleSourceOfTruth\n\nOPS:\n  init() -> RuntimeEnv:\n    kernel = make-chron-kernel()\n    return { kernel }\n\n  main_loop(env: RuntimeEnv) -> Void:\n    loop:\n      input = console_read()\n      env.kernel.submit_user_input(input)\n      state = env.kernel.current_state()\n      console_write(state.world_id, state.health)\n      // P4: prompt = build_prompt(state.context)\n      // P4: reply = llm_generate(prompt)\n      // P4: env.kernel.submit_assistant_reply(reply)\n\nAPIS:\n  make-chron-kernel() -> Kernel\n  kernel.submit_user_input(str) -> Void\n  kernel.current_state() -> KernelState\n  kernel.submit_assistant_reply(str) -> Void\n\nCONSTRAINTS:\n  Runtime.knows(LLM) == TRUE\n  Kernel.knows(LLM) == FALSE\n  Runtime.knows(WAL | Graph | History) == FALSE"
+    },
+    {
+      "file_path": "llama-agent/ir/chron-llm.spec",
+      "line_count": 48,
+      "content": "TYPES:\nEvent: header:Header, payload:PropertyList [Persistent]\nHeader: index:WALPos, clock:LogicalClock, node-id:UUID, causal-id:WorldlineID, kind:Symbol [ManagedBy:Kernel]\nNode: id:ID, kind:Symbol, content:Any, parent:NodeRef, worldline:WorldlineID, status:Active|Fault [RuntimeObject]\nContext: model:ModelPtr, ctx:LLamaCtx, n-past:Int\nSampler: temp:Float, top-p:Float\n\nSTATE:\n*n-past*:Int = 0\n\nOPS:\ninit-chron-llm(path:String, size:Int) -> Context\n  PRE: path != NULL\n  POST: Context.n-past = 0\n\ntokenize(model:ModelPtr, text:String) -> List<Token>\n  ALGO: UTF8(text) -> Pass1(Size) -> Pass2(Tokens)\n  ERR: len(Tokens) <= 0\n\nprefill-prompt(ctx:Context, tokens:List<Token>) -> Void\n  EXEC: llama_eval(ctx.ctx, tokens)\n  POST: ctx.n-past += len(tokens)\n\ngenerate(ctx:Context, model:ModelPtr, temp:Float, top-p:Float, max:Int) -> String\n  PRE: ctx.n-past == len(PromptTokens)\n  EXEC:\n    sampler = create-sampler(temp, top-p)\n    buf = []\n    LOOP max:\n      id = sample(sampler, ctx.ctx)\n      IF my-llama-is-eog(id) BREAK\n      buf += print-token-stream(model, id)\n      llama_eval(ctx.ctx, [id])\n      ctx.n-past++\n    free(sampler)\n  POST: ctx.n-past == len(PromptTokens) + len(buf)\n  RET: UTF8(buf)\n\nprint-token-stream(model:ModelPtr, id:Token) -> ByteVector\n  EXEC: Token(id) -> Piece -> Bytes -> Console\n  RET: Bytes\n\nINV:\nINV(Event.Header): Writer == Kernel\nINV(Event.Payload): Writer == User\nINV(LLM.Runtime): Input == Prompt, Output == Text, Knowledge == {}\nINV(Sampler): Lifecycle == {Create -> Use -> Free}\nINV(n-past): Start == PromptLen, End == PromptLen + GenLen"
+    },
+    {
+      "file_path": "llama-agent/ir/ffi-bindings-mock.spec",
+      "line_count": 54,
+      "content": "MODULE ffi-bindings-mock.lisp : PhysicalLayerMock\n\nTYPE mock-model = { path: STRING }\nTYPE mock-ctx = { model: REF<mock-model>, context-size: INT, kv-past-tokens: INT }\nTYPE sampler-hdl = SYMBOL\n\nCONST SUCCESS_CODE = 0\nCONST MOCK_TOKEN_ID = 42\n\nOP my-llama-model-load(path: STRING) -> mock-model\n  POST: RET.path == path; SIDE: PRINT(\"Load\")\n\nOP my-llama-model-free(model: REF<mock-model>) -> BOOL\n  RET: TRUE\n\nOP my-llama-model-get-vocab(model: REF<mock-model>) -> SYMBOL\n  RET: :mock-vocab\n\nOP my-llama-init(model: REF<mock-model>, ctx_size: INT) -> mock-ctx\n  POST: RET.model == model; RET.context-size == ctx_size; RET.kv-past-tokens = 0\n\nOP my-llama-free(ctx: REF<mock-ctx>) -> BOOL\n  SIDE: PRINT(\"Free\"); RET: TRUE\n\nOP my-llama-eval(ctx: REF<mock-ctx>, tokens: ARRAY<INT>, count: INT, n_past: INT) -> INT\n  EFFECT: ctx.kv-past-tokens = n_past + count; RET: SUCCESS_CODE\n\nOP my-llama-kv-cache-seq-rm(ctx: REF<mock-ctx>, seq_id: INT, start: INT, end: INT) -> INT\n  EFFECT: ctx.kv-past-tokens = start; RET: SUCCESS_CODE\n\nOP my-llama-reset-kv(ctx: REF<mock-ctx>) -> BOOL\n  EFFECT: ctx.kv-past-tokens = 0; SIDE: PRINT(\"Reset\"); RET: TRUE\n\nOP my-llama-tokenize(...) -> INT\n  RET: 1\n\nOP my-llama-token-to-piece(...) -> INT\n  RET: 0\n\nOP my-llama-is-eog(token_id: INT) -> BOOL\n  RET: FALSE\n\nOP my-sampler-init(temp: FLOAT, top_p: FLOAT) -> sampler-hdl\n  RET: :mock-sampler\n\nOP my-sampler-sample(sampler: sampler-hdl) -> INT\n  RET: MOCK_TOKEN_ID\n\nOP my-sampler-free(sampler: sampler-hdl) -> BOOL\n  RET: TRUE\n\nINV ABI_COMPATIBLE_WITH_LLAMA_CPP\nINV ALL_OPS_COMPLEXITY == O(1)\nINV NO_EXCEPTIONS_RAISED"
+    },
+    {
+      "file_path": "llama-agent/ir/ffi-bindings.spec",
+      "line_count": 46,
+      "content": "MOD ffi-bindings.lisp : PhysicalLayer(HAL)\nPKG chron-llm\n\nTYPES:\n  llama-token = int32\n  ptr-model = pointer\n  ptr-ctx = pointer\n  ptr-vocab = pointer\n  ptr-sampler = pointer\n  event = struct(index:int, clock:int, causal-id:any, kind:symbol, payload:any)\n\nSTATE:\n  *n-past* : int32\n\nEXPORTS(KERNEL_ABI):\n  make-event -> event\n  ev-index(event), ev-clock(event), ev-causal-id(event), ev-kind(event), ev-payload(event)\n\nEXPORTS(RUNTIME_API):\n  init-chron-llm, tokenize, prefill-prompt, generate\n  start-delta3, start-delta3-stub\n\nFFI_OPS:\n  my-llama-model-load(path:str) -> ptr-model\n  my-llama-init(m:ptr-model, n_ctx:int) -> ptr-ctx\n  my-llama-model-get-vocab(m:ptr-model) -> ptr-vocab\n  my-llama-eval(ctx:ptr-ctx, buf:[llama-token], count:int, n_past:int) -> int32\n    POST ret=0 => success\n  my-llama-token-to-piece(m:ptr-model, tok:id, buf:str[], len:int) -> int\n  my-llama-tokenize(vocab:ptr-vocab, text:str, len:int, out:[llama-token], max_tok:int, add_special:bool, parse_special:bool) -> int\n  my-llama-is-eog(ctx:ptr-ctx, tok:id) -> bool\n  my-sampler-init(temp:f32, top_p:f32) -> ptr-sampler\n  my-sampler-sample(samp:ptr-sampler, ctx:ptr-ctx) -> llama-token\n  my-sampler-free(samp:ptr-sampler)\n  my-llama-free(ctx:ptr-ctx)\n  my-llama-model-free(m:ptr-model)\n  my-llama-reset-kv(ctx:ptr-ctx)\n\nINVARIANTS:\n  INV stateless : Module holds only native pointers. No inference logic.\n  INV abi_1to1 : FFI calls map 1:1 to C Wrapper -> llama.cpp.\n  INV error_pass_through : Return values passed up; no local handling.\n  INV mock_compat : ABI matches ffi-bindings-mock.lisp.\n\nLIFECYCLE_SEQ:\n  LoadModel -> CreateCtx -> Tokenize -> Prefill(Eval) -> Generate(Sample+Eval)* -> Reset(opt) -> FreeCtx -> FreeModel"
+    },
+    {
+      "file_path": "llama-agent/ir/generate.spec",
+      "line_count": 9,
+      "content": "MODULE run-llm-generation-with-sensors(model-path, prompt, max-tokens, wal) -> Result(:eos|:fault|NIL)\nTYPES: Status=:ok|:warning|:fault; ImmuneRes={status:Status, entropy:Float}; Config={temp:0.7, topp:0.9}\nSTATE S={model:Hdl, ctx:Ctxt, sampler:Smp, n_past:Int, step:Int}\nINIT: init-chron-llm() -> {S.model, S.ctx}; S.sampler = my-sampler-init(Config); prefill-prompt(S.ctx, tokenize(prompt)); S.n_past=0; S.step=1\nLOOP WHILE S.step <= max-tokens: tid=my-sampler-sample(S.sampler); IF my-llama-is-eog(tid): RETURN :eos; print(my-llama-token-to-piece(tid)); ir=check-immune-status(); IF ir.status==:fault OR ir.entropy>20: FAULT_RECOVERY() -> :fault; IF ir.status==:warning AND ir.entropy>5: log(\"Warn\"); my-llama-eval(S.ctx, tid); S.n_past++; S.step++\nRETURN NIL\nFAULT_RECOVERY(): my-llama-reset-kv(S.ctx); rollback-stage(wal); cleanup(); RETURN :fault\nCLEANUP(unwind): my-sampler-free(S.sampler); my-llama-free(S.ctx); my-llama-model-free(S.model)\nINV: Fault -> !Commit; Rollback -> Stage.Empty; Fault -> KV.Reset"
+    },
+    {
+      "file_path": "runtime/r0/ir/chat-loop.spec",
+      "line_count": 40,
+      "content": "MODULE chronos-r0.chat\nDEPS history, prompt, llama, trace\n\nTYPE Session = { model: ModelRef | Nil, history: History }\nTYPE Event = { role: 'user' | 'assistant', content: Str }\nTYPE Trace = { user-text: Str, prompt: Str, raw: Str, parsed: Str, h-before: Snap, h-after: Snap, p-len: Int, r-len: Int, hs-b: Int, hs-a: Int }\n\nOP make-new-session(model?: ModelRef) -> Session\n  RETURN { model: model | default(), history: history.make-history() }\n\nOP extract-generation(raw: Str) -> Str = raw\n\nOP make-assistant-event(text: Str) -> Event = { role: 'assistant', content: text }\n\nOP chat(session: Session, user-text: Str) -> Session\n  h = session.history\n  snap-b = history.snapshot(h)\n  history.append-user(h, user-text)\n  prompt = prompt.project-to-prompt(h)\n  raw = llama.llama-run(prompt)\n  parsed = extract-generation(raw)\n  history.append-event(h, make-assistant-event(parsed))\n  snap-a = history.snapshot(h)\n  trace.log({ user-text: user-text, prompt: prompt, raw: raw, parsed: parsed, h-before: snap-b, h-after: snap-a, p-len: len(prompt), r-len: len(parsed), hs-b: size(snap-b), hs-a: size(snap-a) })\n  RETURN session\n\nOP start-chat() -> Void\n  sess = make-new-session()\n  LOOP {\n    PRINT \"You>\"\n    inp = read-line()\n    IF inp == EOF | \":exit\" BREAK\n    chat(sess, inp)\n    evt = history.find-last-role(sess.history, 'assistant')\n    IF evt != Nil PRINT \"AI> \" + evt.content\n  }\n\nINV Session.fields == { model, history }\nINV chat.seq: append-user -> project-prompt -> llama-run -> append-assistant\nINV trace.snapshots: h-before AND h-after present"
+    },
+    {
+      "file_path": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "line_count": 33,
+      "content": "ARCH: Chron-LLM-R1-v1.0\nLAYERS = [User, R0_SessionExec, R1_IRObs, CausalKernel, Backend]\nPRINCIPLE = LLM_as_GenerationEngine; Process_as_ObservableStateTransition\n\nTYPE Session = { model: ModelRef, history: History }\nTYPE HistoryEvent = { role: Role, content: Text }\nTYPE History = [HistoryEvent]\nINV(History) = ordered ^ append_only ^ snapshot_capable\n\nTYPE R0Trace = { user_text: Text, prompt: Text, raw: RawData, parsed: ParsedData, history_before: History, history_after: History, prompt_len: Int, response_len: Int }\nPROP(R0Trace) = reconstructive_state; !deterministic_replay\n\nTYPE PhysicalEvent = { causal_id: ID, token_id: TokenID, kv_pos: Pos, entropy: Float, timestamp: Time }\nSOURCE(PhysicalEvent) = Backend\n\nTYPE IR = { ctx_id: ID, pos: Pos, phase: Phase, token: Token, score: Score }\nINV(IR) = immutable ^ ordered ^ semantic_free ^ non_authoritative\nPIPELINE(R1) = PhysicalEvent -> Normalize -> IR_Stream -> [Replay | Analysis]\n\nTYPE RuntimeCommand = { op: OpType, interventions: [Intervention], truncate_at: Pos?, delta_prefill: Prefill?, payload: Any, metadata: Meta }\nENUM OpType = [:commit, :retry, :rollback]\nINTERFACE(Kernel->Backend) = RuntimeCommand ONLY\n\nOPS(R0) = { start-chat -> Session; chat(input) -> R0Trace }\nSCOPE(R0) = +[SessionMgmt, HistoryMgmt, PromptGen, BackendCall, TraceGen]; -[TokenObs, CausalJudgment, Rollback, KV_Ops]\n\nOPS(Kernel) = { decide(trace: R0Trace, stream: IR_Stream) -> RuntimeCommand }\nSCOPE(Kernel) = [CausalGraph, Worldline, Rollback, PolicyDecision]\n\nANALYSIS(R1) = { extract-actions(phase=gen); divergence-profile(step, all_same, p_same) }\n\nFROZEN = { R0: [SessionStruct, HistoryEvent, TraceContract]; R1: [PhysicalEventFlow, IRFormat, ObsBoundary]; Kernel: [RuntimeCommandABI, PhaseBoundary] }\nFLEXIBLE = { PromptTemplate, BackendImpl, SensorAlgo, OmegaCalc, Visualization }"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_62.json",
+      "source": "runtime/r0/ir/chat-loop.spec",
+      "target": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity": 0.7808,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B は R0/R1/Kernels のアーキテクチャ契約（Contract）および Delta3 Kernel とのインタフェース定義（RuntimeCommand ABI など）を規定しており、システム全体の整合性を担保する「設計基準」として機能する。一方、Doc A は Doc B で定義された R0_SessionExec レイヤー内部における具体的な実行フロー（chat-loop）を示す「実装仕様」である。両者を統合するとアーキテクチャの抽象度と実装の詳細が混在するため、Doc B を契約定義として維持し、Doc A をその契約に準拠するモジュール仕様として独立して保持することが推奨される。"
+    },
+    {
+      "pair_id": "pair_34.json",
+      "source": "llama-agent/ir/chron-llm.spec",
+      "target": "llama-agent/ir/ffi-bindings.spec",
+      "similarity": 0.8099,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A represents the semantic contract and kernel-managed logic (IR), whereas Doc B implements the Hardware Abstraction Layer (HAL) for native execution. Keeping them separate preserves the Delta3 Kernel's required boundary between logical correctness (Events/Worldlines) and physical implementation details (memory/layout). Merging would conflate high-level semantics with low-level FFI constraints."
+    },
+    {
+      "pair_id": "pair_29.json",
+      "source": "llama-agent/ir/chron-llm.spec",
+      "target": "llama-agent/ir/generate.spec",
+      "similarity": 0.8191,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the canonical Runtime Interface ensuring strict state invariants and Kernel alignment. Doc B represents a specific Agent Policy/Orchestration layer that relies on A's primitives to implement safety-critical generation flows (immune sensors, rollback). Merging them would conflate core API definitions with domain-specific execution policies, violating separation of concerns required by the Delta3 architecture."
+    },
+    {
+      "pair_id": "pair_43.json",
+      "source": "llama-agent/ir/chron-llm.spec",
+      "target": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity": 0.8014,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A represents the implementation details of the 'Backend' layer referenced in Doc B. However, to comply with Delta3 Kernel architecture defined in Doc B, Doc A's raw operations must be encapsulated behind the `RuntimeCommand` interface. Doc A should not expose direct llama_eval calls or Kernel-managed headers (WorldlineID) directly to agents; instead, it acts as an opaque execution engine controlled by the R0/Kernel layers specified in Doc B."
+    },
+    {
+      "pair_id": "pair_72.json",
+      "source": "llama-agent/ir/chron-llm-kernel.spec",
+      "target": "llama-agent/ir/chron-llm-runtime.spec",
+      "similarity": 0.7682,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Maintains strict separation of concerns between the stateful Kernel and the orchestration Runtime as required by Delta3 architecture. The overlap in interface definitions should be resolved via module imports rather than merging files, preserving the constraint that Kernel remains agnostic to LLM/Runtime details."
+    },
+    {
+      "pair_id": "pair_73.json",
+      "source": "llama-agent/ir/chron-llm-runtime.spec",
+      "target": "runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "similarity": 0.7655,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc AはPhase Bにおける「Kernel隔離原則」と「Runtimeの論理的役割」を定義する抽象契約として有効であり、システム全体の設計指針を示す。Doc BはPhase C/DにおけるR0レイヤーの実装仕様として、Doc Aの概念を実際のトレース・履歴管理機能に具体化している。両者は異なる抽象度（アーキテクチャ契約 vs 実装詳細）で同一領域を記述しており、矛盾ではなく補完関係にあるため併存させる。ただし、Doc Aの簡易API（submit_user_input）はDoc BのR0処理フローを経由する必要があることを統合ドキュメントで明記し、一貫性を確保する。"
+    },
+    {
+      "pair_id": "pair_59.json",
+      "source": "llama-agent/ir/ffi-bindings-mock.spec",
+      "target": "llama-agent/ir/ffi-bindings.spec",
+      "similarity": 0.7826,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc B serves as the production contract (PhysicalLayer HAL) for native code interaction, while Doc A is critical for unit testing and simulation of the Delta3 Kernel without external dependencies. The 'mock_compat' invariant in Doc B explicitly mandates their coexistence to ensure the kernel logic remains decoupled from the underlying C library implementation details."
+    }
+  ]
+}

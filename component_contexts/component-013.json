@@ -1,0 +1,27 @@
+{
+  "component_id": "component-013",
+  "artifact_count": 2,
+  "artifacts": [
+    {
+      "file_path": "docs/ir/knowledge-system.spec",
+      "line_count": 24,
+      "content": "TYPE KnowledgeSystem = { meta: Meta, design: Design, executable: Executable }\nTYPE Meta = { foundation: Foundation, governance: Governance }\nTYPE Foundation = { purpose: Concept, philosophy: Concept, direction: Concept }\nTYPE Governance = { policies: [Lifecycle | Versioning | Freeze | Amendment | Compatibility | Review | ReferenceRules | Traceability] }\nTYPE Design = { constitution: Constitution, domainModel: DomainModel, charter: Charter, specification: Specification }\nTYPE Constitution = { principles: [Concept], invariants: [Rule] }\nTYPE DomainModel = { concepts: [Concept], entities: [Entity] }\nTYPE Charter = { responsibilities: [Responsibility], boundaries: [Boundary] }\nTYPE Specification = { interfaces: [Interface], contracts: [Contract], rules: [Rule] }\nTYPE Executable = { runtime: Runtime }\nTYPE Runtime = { implementations: [Implementation] }\n\nINV Independence: Architecture !-> RepoLayout | DirStructure | DocNames | Lang | Impl\nINV GovernanceScope: Governance -> Artifact && Governance !-> RuntimeBehavior\nINV RuntimeSatisfaction: Runtime -> Specification\nINV RuntimeVolatility: Runtime.evolution > Design.evolution\nINV Minimalism: Concepts = Min(Necessary)\nINV Neutrality: KnowledgeSystem !-> Product | Repo | Impl\nINV EvolutionRule: Introduce(NewCategory) -> !Exists(ExistingCategory -> Responsibility)\nINV ExtensionPriority: Extend(Existing) > Introduce(New)\n\nPROCESS KnowledgeLifecycle: Understand -> Analyze -> Design -> Implement -> Verify -> Record\n\nSTATE Baseline: status = StableFoundation; scope = MinimumRequired"
+    },
+    {
+      "file_path": "docs/reference/ir/knowledge-rationale.spec",
+      "line_count": 42,
+      "content": "Type Meta : GovernanceLayer\nType Design : ConceptualLayer\nType Runtime : ExecutionLayer\nType Governance : LifecycleLayer\nType Foundation : PurposeLayer\nType Constitution : InvariantLayer\nType Repository : PhysicalLayer\nType Architecture : StructuralLayer\nType Process : WorkflowLayer\nType Responsibility : SemanticUnit\nType EvolutionRule : Constraint\nType Content : KnowledgeUnit\nType Implementation : BehavioralUnit\nType Authority : TruthSource\nType Representation : ViewUnit\n\nMeta -> governs(KnowledgeStructure)\nDesign -> defines(ConceptualStructure, Responsibility[])\nRuntime -> implements(Design)\nGovernance -> manages(ArtifactLifecycle)\nFoundation -> defines(Purpose)\nConstitution -> defines(Invariant[])\nArchitecture -> defines(KnowledgeStructure)\nProcess -> defines(Workflow)\nAuthority -> defines(TruthState)\nRepresentation -> maps(Authority)\n\nINV: Meta != Design\nINV: Runtime != Design\nINV: Runtime.evolution independent_of Design.evolution\nINV: Governance != Design\nINV: Foundation != Constitution\nINV: Repository.Layout independent_of Architecture\nINV: Architecture != Process\nINV: Concept.definition depends_on(Responsibility)\nINV: Concept.definition NOT depends_on(Implementation)\nINV: NewConcept.introduction requires !Exists(r in Responsibility : r.canExpress(Meaning))\nINV: Content.definition precedes Implementation.expansion\nINV: Constitution != Implementation\nINV: Implementation.evolution preserves(Constitution)\nINV: Authority != Representation\nINV: Representation.derived != Authority"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_12.json",
+      "source": "docs/ir/knowledge-system.spec",
+      "target": "docs/reference/ir/knowledge-rationale.spec",
+      "similarity": 0.8694,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Document A acts as the canonical source of truth for the IR structure and runtime contracts required by the Delta3 Kernel. Document B provides necessary architectural context by classifying these structures into layers, which aids in understanding system boundaries and responsibilities without cluttering the executable spec. Keeping both allows separation between 'what is defined' (A) and 'why/how it maps conceptually' (B), provided that any future changes to core types in A are reflected in B's layer mappings to prevent drift."
+    }
+  ]
+}

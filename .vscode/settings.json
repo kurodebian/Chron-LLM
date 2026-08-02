@@ -1,3 +1,8 @@
 {
-  "alive.ignore": ["**/chron-llm.lisp", "**/src/**", "**/.vscode/alive/**"]
+  "alive.ignore": [
+    "**/chron-llm.lisp",
+    "**/src/**",
+    "**/.vscode/alive/**"
+  ],
+  "makefile.configureOnOpen": false
 }

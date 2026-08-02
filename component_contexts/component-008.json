@@ -1,0 +1,82 @@
+{
+  "component_id": "component-008",
+  "artifact_count": 4,
+  "artifacts": [
+    {
+      "file_path": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "line_count": 55,
+      "content": "SPEC_ID=CHRON-R2.0-C-OBSERVABILITY-CONSTITUTION\nREV=1.0\nSTATUS=DRAFT\nLAYER=R2.0-C\nDEPS=[R2.0-A, R2.0-B]\n\nTYPES:\nState={Kernel, Graph, Memory, World, Registry}\nObservation={id:UUID, logical_time:T, snapshot:StateSnapshot}\nStateSnapshot={world:WorldObs, registry:RegistryObs, kernel:KernelObs}\nWorldObs={id:ID, head:NodeID, root:NodeID, policy:Policy, meta:Map, lifecycle:State, parent:ID?}\nRegistryObs={worlds:[ID], active:ID, ancestry:Graph, archived:[ID]}\nDiffResult={added:Set, removed:Set, modified:Set}\n\nOPS:\nobserve(s:State)->o:Observation | PRE:true, POST:s==s'\ndiff(o1:Observation, o2:Observation)->d:DiffResult | PRE:true, POST:o1==o1', o2==o2'\nget_world_obs(id:ID)->WorldObs\nget_registry_obs()->RegistryObs\n\nINVARIANTS:\nINV_READ_ONLY: observe(s)->o | s==s'\nINV_DETERMINISTIC: observe(s)==observe(s)\nINV_ACCURATE: o.snapshot==snapshot(s)\nINV_NO_SIDE_EFFECTS: observe(s)->o | !mutate(s)\nINV_IMMUTABLE_OBS: created(o)->!mutate(o)\nINV_NON_AUTH: truth==Kernel\nINV_LAYER: Kernel->World->Obs->Presentation\nINV_VALUE_OBJ: o1==o2 | o1.snapshot==o2.snapshot\nINV_COMPLETE: o.snapshot contains all observable(s)\nINV_NO_INFER: o.snapshot==actual(s) & !infer(o) & !synthesize(o) & !approx(o) & !fabricate(o) & !hide(o)\nINV_PRESENTATION_INDEPENDENT: semantics(obs) independent of presentation_layer\n\nCONSTRAINTS:\nNO_DEPS=[WallClock, PID, ThreadID, MemAddr, RNG, OSTiming]\nNO_MUTATION=[Graph, Memory, World, Registry, Kernel]\nNO_EXEC: Observation contains no executable behavior\nNO_MUTABLE_REFS: Observation contains no mutable references\nNO_LAZY_MUT: Observation contains no lazy mutations\nNO_HIDDEN_STATE: Observation contains no hidden state\n\nLIFECYCLE:\nObservation: Created->Consumed->Discarded\n\nTESTS:\nD1: observe(w)->o | w==w'\nD2: observe(r)->o | r==r'\nD3: observe(s)==observe(s)\nD4: o.ancestry==runtime.ancestry\nD5: diff(o1, o2)==diff(o1, o2)\nD6: semantics(obs)==semantics(obs) | presentation\nD7: created(o)->!mutate(o)\n\nCONFORMANCE:\nPASS=[INVARIANTS, TESTS]"
+    },
+    {
+      "file_path": "docs/ir/r2-0-c-freeze-report.spec",
+      "line_count": 6,
+      "content": "STATE: STATUS=FROZEN, REV=1.0, DATE=2026-07-12, COMPAT=GUARANTEED, BREAKING=PROHIBITED\nSCOPE: INC=[ObsRuntime, ObsObjABI, ObsSemantics], EXC=[BackendABI, Evaluator, Scheduler, MergeRuntime, R2.1+]\nTYPES: world-observation, registry-observation, ancestry-observation, diff-observation\nOPS: build-world-observation->world-observation, build-registry-observation->registry-observation, build-ancestry-observation->ancestry-observation, build-diff-observation->diff-observation, describe-world->world-observation, describe-registry->registry-observation, describe-ancestry->ancestry-observation, describe-diff->diff-observation\nINV: D1=!mutate(world), D2=!mutate(registry), D3=deterministic(obs), D4=accurate(ancestry), D5=deterministic(diff), D6=repr_independent(obs), ABI=additive_only(extensions), DESC=read_only(return)\nVERIFY: ENV=SBCL_2.2.9, TESTS=PASS"
+    },
+    {
+      "file_path": "observability/ir/world-snapshot.spec",
+      "line_count": 41,
+      "content": "PKG chron-r2-0-c; DEP chron-r2-0-a\nCONST +observation-schema-version+ = 1\nTYPE PrimitiveLeaf = null | t | string | number | char | keyword\nTYPE PrimitiveTree = PrimitiveLeaf | (cons PrimitiveTree PrimitiveTree)\nINV: Obs fields subset PrimitiveTree. Accessors -> deep-copy(%copy-primitive-tree). Builders -> validate %require-primitive-tree.\n\nTYPE world-observation = [schema-version:int, world-id:PrimitiveTree, root-node-id:PrimitiveTree, head-node-id:PrimitiveTree, projection-policy:PrimitiveTree, metadata:PrimitiveTree, lifecycle:value, parent-world-id:PrimitiveTree]\nPRED world-observation-p(o) = vectorp(o) & len(o)=8 & o[0]==+observation-schema-version+\nOP world-observation-equal(a,b) = vector-equal(a,b)\n\nTYPE registry-observation = [schema-version:int, world-ids:PrimitiveTree, active-world-id:PrimitiveTree, archived-world-ids:PrimitiveTree]\nPRED registry-observation-p(o) = vectorp(o) & len(o)=4 & o[0]==+observation-schema-version+\nOP registry-observation-equal(a,b) = vector-equal(a,b)\n\nTYPE ancestry-observation = [schema-version:int, world-id:PrimitiveTree, parent-world-id:PrimitiveTree, ancestry-path:PrimitiveTree]\nPRED ancestry-observation-p(o) = vectorp(o) & len(o)=4 & o[0]==+observation-schema-version+\nOP ancestry-observation-equal(a,b) = vector-equal(a,b)\n\nTYPE diff-observation = [schema-version:int, changed-p:boolean, changed-fields:PrimitiveTree]\nPRED diff-observation-p(o) = vectorp(o) & len(o)=3 & o[0]==+observation-schema-version+\nOP diff-observation-equal(a,b) = vector-equal(a,b)\n\nFUNC build-world-observation(world, parent-world-id?) -> world-observation\n  PRE: world-p(world)\n  POST: result.world-id=world-id(world), result.root-node-id=root-node-id(world), result.head-node-id=head-node-id(world), result.projection-policy=projection-policy(world), result.metadata=metadata(world), result.lifecycle=lifecycle(world), result.parent-world-id=parent-world-id\n\nFUNC build-registry-observation(registry) -> registry-observation\n  PRE: world-registry-p(registry)\n  POST: result.world-ids=list-worlds(registry), result.active-world-id=active-world(registry), result.archived-world-ids=[w | w in list-worlds(registry) if lifecycle(w)==:archived]\n\nFUNC build-ancestry-observation(registry, world-id) -> ancestry-observation\n  PRE: world-registry-p(registry), exists-parent(registry, world-id)\n  POST: result.world-id=world-id, result.parent-world-id=get-parent(registry, world-id), result.ancestry-path=(cons world-id parent-world-id)\n\nFUNC build-diff-observation(left, right) -> diff-observation\n  LOGIC: type(left)!=type(right) -> changed-fields=(:type); else if known-obs-type(type(left)) -> compare fields; else changed-fields=[]\n\nALIAS describe-world = build-world-observation\nALIAS describe-registry = build-registry-observation\nALIAS describe-ancestry = build-ancestry-observation\nALIAS describe-diff = build-diff-observation"
+    },
+    {
+      "file_path": "tests/md/ir/r2-0-c-tests.spec",
+      "line_count": 83,
+      "content": "TYPES\n  Bool = t | nil\n  Str, Int, Map<K,V>, List[T]\n  Node { id: Str }\n  Edge { src: Node, dst: Node }\n  Graph { nodes: [Node], edges: [Edge] }\n  Store {}\n  Registry { worlds: [World], active_id: Str, ancestry: Map<Str, Str> }\n  World { id: Str, root_node: Node, head_node: Node, policy: Policy, meta: Meta, lifecycle: Lifecycle }\n\n  WOBS { schema_version: Int, world_id: Str, ... }\n  ROBS { world_ids: [Str], active_id: Str, ... }\n  AOBS { child_id: Str, parent_id: Str, path: [(Str . Str)] }\n  DOBS { changed_p: Bool, changed_fields: [Str] }\n\nUTILS\n  %c-assert(cond: Bool, desc: Str) -> t | Error\n    Pre: true\n    Post: !cond -> Error(desc); cond -> t\n\n  %c-fixture() -> (Graph, Store, Registry)\n    State: G.nodes=[\"root\",\"head\"]; G.edges=[(root->head)]\n    Returns: (G, S, R) bound(G,S)\n\nTESTS\n  d1-world-non-mutation() -> t | Error\n    Setup: W = World(policy={include-evals:nil}, meta={label:\"stable\"})\n    Op: Obs = describe-world(W)\n    Assert: world-observation-p(Obs)\n    Assert: W.id==W'.id & W.nodes==W'.nodes & W.policy==W'.policy & W.meta==W'.meta & W.lifecycle==W'.lifecycle\n    Assert: Obs.schema_version == +observation-schema-version+\n\n  d2-registry-non-mutation() -> t | Error\n    Setup: R.worlds=[\"first\",\"second\"]; R.active_id=\"second\"; R.archived=[\"first\"]\n    Op: Obs = describe-registry(R)\n    Assert: registry-observation-p(Obs)\n    Assert: R.worlds==R'.worlds & R.active_id==R'.active_id & R.ancestry==R'.ancestry\n\n  d3-deterministic-observation() -> t | Error\n    Setup: W, R\n    Op1: O1=describe-world(W); O2=describe-world(W)\n    Assert: O1.world_id == O2.world_id\n    Op2: R1=describe-registry(R); R2=describe-registry(R)\n    Assert: R1.world_ids == R2.world_ids\n\n  d4-accurate-ancestry() -> t | Error\n    Setup: P=World(\"parent\"); C=World(\"child\"); Link(P->C)\n    Op: Anc = describe-ancestry(C)\n    Assert: ancestry-observation-p(Anc)\n    Assert: Anc.child_id==\"child\" & Anc.parent_id==\"parent\"\n    Assert: Anc.path == [(\"child\" . \"parent\")]\n\n  d5-deterministic-difference() -> t | Error\n    Setup: A, B (Obs)\n    Op1: D=describe-diff(A,A)\n    Assert: diff-observation-p(D) & D.changed_p==nil & D.changed_fields==[]\n    Op2: D2=describe-diff(A,A)\n    Assert: D == D2\n    Op3: D3=describe-diff(WObs, RObs)\n    Assert: D3.changed_p == t\n\n  d6-representation-independence() -> t | Error\n    Setup: W1(params=\"same\"), W2(params=\"same\") distinct instances\n    Op: O1=describe-world(W1); O2=describe-world(W2)\n    Assert: O1.world_id==O2.world_id & O1.root_node_id==O2.root_node_id\n\n  d7-value-object-equality() -> t | Error\n    Setup: Same as d6 (W1, W2 equivalent params)\n    Op: O1=describe-world(W1); O2=describe-world(W2)\n    Assert: equal(O1,O2)==t & world-observation-equal(O1,O2)==t\n\nRUNNER\n  run-r2-0-c-tests() -> t | Error\n    Ops: For test in [d1..d7]: res=funcall(test); %c-assert(res!=nil)\n    Returns: t\n\nINVARIANTS (INV)\n  Immutability: describe(X) -> X' s.t. X == X'\n  Determinism: f(x)=y => f(x)=y\n  SchemaCompliance: WOBS.schema_version == +observation-schema-version+\n  AncestryAccuracy: AOBS.path reflects explicit edges\n  DiffSemantics: diff(a,a).changed_p==nil; diff(TypeA,TypeB).changed_p==t\n  ValueSemantics: equal(Obs1,Obs2) iff content(Obs1)==content(Obs2)"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_23.json",
+      "source": "docs/ir/r2-0-c-freeze-report.spec",
+      "target": "observability/ir/world-snapshot.spec",
+      "similarity": 0.8373,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_A_INTO_B",
+      "rationale": "Doc B contains the structural definitions required for Delta3 Kernel code generation, while Doc A holds critical ABI stability constraints and freeze metadata. Merging A's status and invariants into B creates a single, self-describing specification that ensures type safety and ABI compliance are enforced directly within the implementation definition, reducing cross-file dependency risks."
+    },
+    {
+      "pair_id": "pair_38.json",
+      "source": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "target": "docs/ir/r2-0-c-freeze-report.spec",
+      "similarity": 0.8048,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A establishes the canonical semantic contract and correctness invariants for Delta3 Kernel observability. Doc B captures version-specific implementation details (ABI, SBCL environment) and release status. Merging would conflate architectural design with transient release artifacts; maintaining both ensures traceability from formal requirements to frozen delivery."
+    },
+    {
+      "pair_id": "pair_45.json",
+      "source": "docs/ir/r2-0-c-freeze-report.spec",
+      "target": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity": 0.8001,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Maintain strict separation between the immutable ABI contract (A) and the mutable verification harness (B). Document A guarantees stability for Delta3 Kernel consumers; Document B ensures runtime compliance via SBCL tests. Merging them risks violating the 'FROZEN' status of the report or cluttering the test spec with administrative metadata."
+    },
+    {
+      "pair_id": "pair_55.json",
+      "source": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "target": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity": 0.7855,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A acts as the architectural contract for Delta3 Kernel observability, while Doc B serves as the executable test harness. Merging them would conflate high-level invariants with low-level test utilities (fixtures/assertions). They should remain separate to maintain separation of concerns; however, Doc B should ideally import types from Doc A via module references to prevent specification drift."
+    },
+    {
+      "pair_id": "pair_68.json",
+      "source": "docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "target": "observability/ir/world-snapshot.spec",
+      "similarity": 0.7737,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Document A serves as the formal verification contract (Constitution) ensuring architectural integrity and correctness guarantees for the Delta3 Kernel, while Document B defines the specific serialization format required for runtime execution. Keeping them separate maintains a critical separation of concerns between abstract invariants and concrete data structures, allowing internal representation changes without violating external contracts."
+    },
+    {
+      "pair_id": "pair_77.json",
+      "source": "observability/ir/world-snapshot.spec",
+      "target": "tests/md/ir/r2-0-c-tests.spec",
+      "similarity": 0.7614,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the canonical specification for observation structures, while Doc B acts as its verification layer. Keeping them separate maintains a clear boundary between definition and testing, allowing Doc B to use simplified mock types (e.g., WOBS vs world-observation) without polluting the core IR spec."
+    }
+  ]
+}

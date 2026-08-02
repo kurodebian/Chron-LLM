@@ -1,0 +1,110 @@
+{
+  "component_id": "component-001",
+  "artifact_count": 6,
+  "artifacts": [
+    {
+      "file_path": "docs/ir/01-domain-model.spec",
+      "line_count": 25,
+      "content": "ENUM Source={user,assistant,tool,system}\nENUM Intent={append,reflect,tool,memory-read,memory-write,recover,summarize}\nENUM ReqKind={commit-request,reject-request,defer-request,retry-request,retry-penalty-request,abort-request}\nENUM CmdKind={proceed,discard,sleep,regenerate,regenerate-with-penalty,terminate}\n\nTYPE Event={id,source:Source,content,meta:{ts,seq,causal-ref?}}\nTYPE Candidate={id,origin,intent:Intent,content,constraints,meta}\nTYPE ValidationReport={facts}\nTYPE RuntimeRequest={kind:ReqKind,payload}\nTYPE RuntimeCommand={kind:CmdKind,payload}\nTYPE FaultEvent={type,reason,meta}\n\nTYPE Session={canonical:Canonical,working:Working,derived:Derived,external:External}\nTYPE Canonical={evidence:[Event],config,mem-ref}\nTYPE Working={candidate:Candidate?,proc-state}\nTYPE Derived={projection,analysis}\nTYPE External={ext-ref}\nTYPE Context={canon-ref}\n\nINV(Canonical):mutate_only_via(Commit)\nINV(Derived):reproducible_from(Canonical),!authoritative\nINV(Evidence):subset_of(Canonical.evidence),ordered_by(causal|seq)\n\nPROD_CONS={Event:Commit->[Replay,History],Candidate:Backend->Validation,Report:Validation->PolicyRouter,Request:PolicyRouter->Kernel,Command:Kernel->Runtime,FaultEvent:Kernel->Observability,Derived:Replay->PromptBuilder,Canonical:Commit->[Replay,Validation]}\nOWNERSHIP={Candidate:Runtime(Read:[Validation,Kernel]),Report:Validation(Read:PolicyRouter),Request:PolicyRouter(Read:Kernel),Command:Kernel(Read:Runtime),FaultEvent:Kernel(Read:Observability),Canonical:Kernel(Read:[Replay,Validation]),Working:Runtime(Read:Runtime),Derived:Replay(Read:Runtime),External:Runtime(Read:Runtime)}"
+    },
+    {
+      "file_path": "docs/ir/02-operational-semantics.spec",
+      "line_count": 34,
+      "content": "Event | Canonical | Candidate | Config | ValidationReport | Projection | Graph | Summary | Derived | Analysis | MemoryRef | causal-id | KernelState\nRuntimeRequest = commit-request | reject-request | defer-request | retry-request | retry-penalty-request | abort-request\n\nCommit(Event, Canonical) -> Canonical'\n  PRE: Candidate.validated & PolicyRouter(Candidate)==commit-request\n  POST: Canonical'.History=Canonical.History+[Event] & Canonical'.Clock++ & MemoryRef updated\n  INV: Atomic; !Partial\n\nReplay(Canonical) -> {Projection, Graph, Summary}\n  PROP: Pure | Deterministic | SideEffectFree\n\nDerive(Canonical) -> Derived\n  PROP: Pure | Deterministic\n\nValidation(Candidate, Canonical, Config) -> ValidationReport\n  PROP: Pure | Deterministic | NoRouting | NoMutation\n\nLifecycle(Candidate): Generated->Validated->PolicyRouter->RuntimeRequest\n  commit-request -> Commit\n\nRecover(Canonical, MemoryRef) -> Context\n  INV: Canonical immutable\n\nBranch(Canonical, Condition) -> causal-id'\n  INV: Canonical immutable; Authoritative post-Commit\n\nTransition(KernelState x RuntimeRequest) -> KernelState'\n  AGENT: Kernel ONLY\n\nINV_Global:\n  Deterministic({Replay, Derive, Validation, PolicyRouter, Transition})\n  NonDeterministic(Backend)\n  CanonicalMutator == Commit\n  Derived == NonAuthoritative"
+    },
+    {
+      "file_path": "docs/ir/04-runtime-pipeline.spec",
+      "line_count": 28,
+      "content": "TYPES: Event | Canonical | Projection | Graph | Summary | Prompt | Candidate | ValidationReport | RuntimeRequest | RuntimeCommand | MemRef | Config\nSTATE: Canonical\nFLOW: Input -> Event -> Commit -> Replay -> [Projection, Graph, Summary] -> PromptBuilder -> Backend -> Candidate -> Validation -> ValidationReport -> PolicyRouter -> RuntimeRequest -> Kernel -> RuntimeCommand -> Runtime\n\nOP Commit(Event) -> Canonical'\n  PRE: Event.authoritative == true\n  POST: Canonical = Canonical + Event\n\nOP Replay(Canonical) -> (Projection, Graph, Summary)\n  INV: Deterministic(Replay)\n\nOP PromptBuilder(Summary, Graph, MemRef, Config) -> Prompt\n\nOP Backend(Prompt) -> Candidate\n  INV: Authoritative(Backend.output) == false\n\nOP Validation(Candidate) -> ValidationReport\n  INV: Mutate(State) == false\n\nOP PolicyRouter(ValidationReport) -> RuntimeRequest\n  INV: Mutate(State) == false\n\nOP Kernel(RuntimeRequest) -> RuntimeCommand\n  INV: Deterministic(Kernel.transition)\n\nOP Runtime(RuntimeCommand)\n\nINV CanonicalWriteAccess: Mutate(Canonical) => Stage == Commit"
+    },
+    {
+      "file_path": "docs/ir/07-chron-mapping.spec",
+      "line_count": 21,
+      "content": "Candidate = proposalIR\nValidationReport = Δ0_Report\nValidation = Δ0_Validator(proposalIR) -> ValidationReport (det)\nPolicyRouter = Δ0_Policy(ValidationReport) -> RuntimeRequest\nKernel = Runtime_Kernel\nCommit = op:mutate(CanonicalState)\nEvent = WAL_Entry\nHistory = WAL[]\nCanonical = CanonicalState\nDeferredQueue = DeferredProposalQ[]\nReplay = replay(snapshot) -> Context (det)\nDerived = snapshot | projection(Canonical)\nSession = kernel_state\nContext = replay_input\nMemoryRef = RefStore\nConfig = RuntimeConfig\nFaultEvent = FaultEvent\nExternal = ExtStore\nINV: write(CanonicalState) == Commit\nINV: Replay(History) -> deterministic(Context)\nINV: Derived ⊆ CanonicalState"
+    },
+    {
+      "file_path": "runtime/r1/ir/core.spec",
+      "line_count": 51,
+      "content": "MODULE chronos-r1\n\nTYPES\n  Source = {user, assistant, tool, system}\n  Intent = {append, reflect, tool, memory-read, memory-write, recover, summarize}\n  KernelAction = {accept, reject, defer, retry, retry-penalty, abort}\n  Event = {id: UUID, source: Source, payload: Any, metadata: Map} // Read-only\n  Candidate = {trigger: Any, constraints: List, metadata: Map} + Event // Non-Canonical\n  Canonical = {history: [Event], config: Config, memory-ref: Ref, clock: Int} // Immutable\n  ValidationReport = {syntax-errs: [], semantic-errs: [], inv-errs: [], obs: []}\n  RuntimeCommand = {kind: CmdKind, data: Any}\n  Fault = {id, clock, origin, cause, detector, candidate-id}\n  KernelState = {canonical: Canonical, deferred: [Candidate], working: Candidate?, faults: [Fault]}\n  Runtime = {ks: KernelState, next-cand-id: UUID, last-cmd: RuntimeCommand?}\n\nOPS\n  derive(c: Canonical) -> {proj, graph, summary: [Event]} // |summary| <= limit; Pure\n  replay(c) = derive(c)\n  build-prompt(d: Derived, m: Memory, cfg: Config) -> Prompt // Det; Inputs subset {Canonical, Memory, Config}\n\n  validate(cand: Candidate) -> Report // Pure. Checks Syntax/Sem/Inv/Obs(Echo/Stagnation/Disc). Recs:{Retry,Penalty,Abort}\n  policy-route(rpt: Report) -> Action // Priority: Syntax > Sem > FatalInv > RecovInv > Obs(Abort>Penalty>Retry) > Accept\n\n  commit(evt: Event) -> {new-canonical, committed} // Updates Clock++, Lamport, History+, Memory+. Only Canonical writer.\n  cand-to-event(cand) = evt(metadata += {candidate-id, intent})\n\n  kernel-transition(action: KernelAction, cand?, state: KernelState) -> {next-state, cmd}\n    accept: commit(cand->event()) -> remove working; Proceed\n    reject: remove working; Discard\n    defer: add deferred; Sleep\n    retry: Regenerate (no change)\n    retry-penalty: policy(temp+0.2, top-p-0.1); RegenPenalty\n    abort: create Fault; Terminate\n\n  wake-deferred(state) // Triggered by CommitSuccess only. Re-eval deferred via Validate->Policy->Kernel.\n  recover(canonical) -> {derived, memory, prefill} // Pure.\n  branch-worldline() -> Candidate(metadata={causal-id}) // Standard path.\n\n  runtime-run-candidate(cand) -> Validate -> Policy -> Kernel -> WakeDeferred; Returns {Runtime, Report, Action, Command}\n  runtime-submit(inp) -> CreateCand -> run-candidate\n  runtime-run-backend() -> Replay -> BuildPrompt -> Gen(P->T) -> Submit // Gen no Canonical access.\n\nINVARIANTS\n  INV1: Canonical immutable; new instance only via commit().\n  INV2: validate(), policy-route() side-effect free.\n  INV3: kernel-transition() sole Runtime state mutator.\n  INV4: commit() sole Canonical updater.\n  INV5: wake-deferred() trigger == CommitSuccess (no time-based).\n  INV6: build-prompt() inputs subset {Canonical, Memory, Config}; excludes Obs/Fault/Metrics.\n  INV7: Backend non-authoritative; output -> Candidate -> Validation pipeline mandatory.\n  INV8: Worldline Branch uses standard Candidate->Validation->Commit path."
+    },
+    {
+      "file_path": "runtime/r1/ir/package.spec",
+      "line_count": 21,
+      "content": "PKG chronos-r1 : USE(cl)\n\nTYPE event = { id, source, payload, metadata } INV immutable\nTYPE candidate = { id, source, trigger, intent, payload, constraints, metadata }\nTYPE canonical = { history: [event], config, memory-ref, clock } INV single-authority\nTYPE kernel-state = { canonical, deferred-queue: [candidate], working, faults }\nTYPE validation-report = { candidate-id, syntax-violations, semantic-violations, invariant-violations, observations }\nTYPE runtime-command = { kind, data }\n\nOPS domain-api : make-event(event), event-p(x)->bool | make-candidate(candidate), candidate-p(x)->bool | make-canonical(canonical), canonical-p(x)->bool | make-kernel-state(kernel-state) | validation-report-p(x)->bool | runtime-command-p(x)->bool\n\nOPS pure-ops : derive(canonical) -> info | replay(history: [event]) -> state | build-prompt(...) -> prompt | validate(candidate, canonical) -> validation-report | policy-router(validation-report) -> action | recover(state) -> config INV no-side-effects\n\nOPS kernel-boundary : commit(canonical, event) -> canonical' | kernel-transition(kernel-state, action) -> kernel-state' | wake-deferred(kernel-state) -> kernel-state' | branch-worldline(canonical) -> new-canonical INV authoritative-update\n\nTYPE runtime = { state, next-candidate-id, last-command }\nOPS runtime-facade : make-runtime() -> runtime | runtime-submit(runtime, input) -> runtime' | runtime-run-candidate(runtime, candidate) -> runtime' | runtime-run-backend(runtime) -> runtime'\n\nOPS inspection : runtime-state(runtime) -> state | runtime-next-candidate-id(runtime) -> id | runtime-last-command(runtime) -> command\n\nOPS testing : chronos-r1-self-test() -> result INV validates-commit-validation-kernel-runtime"
+    }
+  ],
+  "observed_relationships": [
+    {
+      "pair_id": "pair_11.json",
+      "source": "docs/ir/02-operational-semantics.spec",
+      "target": "docs/ir/04-runtime-pipeline.spec",
+      "similarity": 0.8699,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document A's formal Pre/Post conditions and invariants (e.g., atomic Commit, deterministic Replay) are superior for Delta3 Kernel verification compared to Document B's looser definitions. Merging B into A allows us to define the complete Runtime Pipeline (including PromptBuilder/Backend flow from B) while enforcing the rigorous operational semantics of A across all stages, eliminating redundant and potentially conflicting operation definitions."
+    },
+    {
+      "pair_id": "pair_52.json",
+      "source": "docs/ir/04-runtime-pipeline.spec",
+      "target": "docs/ir/07-chron-mapping.spec",
+      "similarity": 0.7881,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A focuses on behavioral logic and pipeline orchestration, while Doc B serves as a semantic bridge linking abstract IR concepts to concrete Delta3 Kernel implementations. Keeping them separate maintains separation of concerns: Doc A remains focused on execution flow invariants, while Doc B acts as a reusable glossary/mapping layer that can be referenced by other system components (e.g., fault handling, session management) beyond just the runtime pipeline."
+    },
+    {
+      "pair_id": "pair_42.json",
+      "source": "docs/ir/01-domain-model.spec",
+      "target": "docs/ir/04-runtime-pipeline.spec",
+      "similarity": 0.802,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the canonical schema definition (Phase C) ensuring type safety and ownership constraints for Delta3 Kernel. Doc B describes the execution protocol (Phase D). While redundant in listing types, they must coexist to separate data structure definitions from control flow logic. Integration requires Doc B to formally reference Doc A's type definitions rather than loosely enumerating them."
+    },
+    {
+      "pair_id": "pair_33.json",
+      "source": "docs/ir/02-operational-semantics.spec",
+      "target": "docs/ir/07-chron-mapping.spec",
+      "similarity": 0.8128,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Separation of concerns is critical for the Delta3 Kernel architecture. Doc A establishes invariant logic independent of implementation details, ensuring deterministic behavior across backends. Doc B provides necessary binding to physical structures (WAL, RefStore) without polluting the abstract specification. Merging would couple formal semantics with concrete runtime artifacts, reducing flexibility for kernel refactoring."
+    },
+    {
+      "pair_id": "pair_70.json",
+      "source": "docs/ir/01-domain-model.spec",
+      "target": "docs/ir/07-chron-mapping.spec",
+      "similarity": 0.7712,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Maintain strict separation of concerns between the logical domain model (Phase C) and the physical kernel implementation mapping (Phase E). Document A serves as the source of truth for business logic and constraints, while Document B acts as the interface contract linking these concepts to Delta3 Kernel internals (WAL, Snapshots). Merging them would couple abstract rules to specific infrastructure details, reducing architectural flexibility. The invariant duplication in B should be resolved by referencing A's definitions rather than restating them."
+    },
+    {
+      "pair_id": "pair_4.json",
+      "source": "runtime/r1/ir/core.spec",
+      "target": "runtime/r1/ir/package.spec",
+      "similarity": 0.9019,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "MERGE_B_INTO_A",
+      "rationale": "Document A is the authoritative specification for Delta3 Kernel compliance due to its rigorous invariant definitions and detailed kernel-transition logic. Document B should be merged into A to adopt its cleaner operation categorization (e.g., separating pure-ops from kernel-boundary) and to incorporate its inspection/testing interfaces, ensuring a single source of truth that combines structural clarity with behavioral precision."
+    },
+    {
+      "pair_id": "pair_67.json",
+      "source": "docs/ir/01-domain-model.spec",
+      "target": "docs/ir/02-operational-semantics.spec",
+      "similarity": 0.7749,
+      "relationship": "PARTIAL_OVERLAP",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Maintaining separation between static schema (Doc A) and dynamic behavior (Doc B) supports Delta3 Kernel modularity. However, Doc B must be refactored to reference Doc A's type definitions rather than duplicating enums like RuntimeRequest, ensuring a single source of truth for the IR specification."
+    },
+    {
+      "pair_id": "pair_79.json",
+      "source": "docs/ir/01-domain-model.spec",
+      "target": "runtime/r1/ir/core.spec",
+      "similarity": 0.7598,
+      "relationship": "PARENT_CHILD",
+      "recommended_action": "KEEP_BOTH",
+      "rationale": "Doc A serves as the canonical interface definition (Phase B) ensuring consistency across all runtime versions, while Doc B details the specific Delta3 Kernel logic and state management for R1 (Phase D). Merging them would conflate architectural constraints with implementation details. The recommended integration strategy is to maintain both files but enforce that Doc B imports or strictly adheres to the type definitions in Doc A to eliminate semantic duplication."
+    }
+  ]
+}
