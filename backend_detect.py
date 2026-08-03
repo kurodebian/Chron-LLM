@@ -1,6 +1,7 @@
 import os
 import json
 import urllib.request
+import subprocess
 
 def http_ok(url):
     try:
@@ -10,36 +11,44 @@ def http_ok(url):
     except:
         return False
 
-def detect_embedding_api():
-    # 1. OLLAMA_HOST が指定されている場合
-    ollama_host = os.getenv("OLLAMA_HOST")
-    if ollama_host:
-        base = ollama_host.rstrip("/")
-        url = f"{base}/api/embeddings"
-        return url, "nomic-embed-text"
-
-    # 2. Ollama の /api/tags が生きているか
-    for host in ["http://localhost:11434", "http://127.0.0.1:11434"]:
-        if http_ok(f"{host}/api/tags"):
-            return f"{host}/api/embeddings", "nomic-embed-text"
-
-    # 3. llama.cpp の /v1/embeddings が生きているか
-    for host in ["http://localhost:8081", "http://127.0.0.1:8081"]:
-        if http_ok(f"{host}/v1/embeddings"):
-            return f"{host}/v1/embeddings", os.getenv("LLAMA_EMBED_MODEL")
-
-    raise RuntimeError("No embedding backend found")
+def get_windows_ip():
+    try:
+        out = subprocess.check_output(["ipconfig.exe"]).decode("utf-8", errors="ignore")
+        for line in out.splitlines():
+            if "IPv4 Address" in line or "IPv4 アドレス" in line:
+                return line.split(":")[1].strip()
+    except:
+        pass
+    return None
 
 def detect_inference_api():
-    # 1. Ollama の /api/generate
+    # 1. Ollama (WSL2)
     for host in ["http://localhost:11434", "http://127.0.0.1:11434"]:
         if http_ok(f"{host}/api/generate"):
             return f"{host}/api/generate"
 
-    # 2. llama.cpp の /v1/chat/completions
+    # 2. llama.cpp (WSL2)
     for host in ["http://localhost:8080", "http://127.0.0.1:8080"]:
         if http_ok(f"{host}/v1/chat/completions"):
             return f"{host}/v1/chat/completions"
 
+    # 3. Ollama (Windows host)
+    win_ip = get_windows_ip()
+    if win_ip:
+        host = f"http://{win_ip}:11434"
+        if http_ok(f"{host}/api/generate"):
+            return f"{host}/api/generate"
+
     raise RuntimeError("No inference backend found")
 
+# -------------------------
+# 実行部（表示用）
+# -------------------------
+if __name__ == "__main__":
+    print("🔍 Detecting inference backend...")
+
+    try:
+        url = detect_inference_api()
+        print(f"✅ Inference backend detected: {url}")
+    except Exception as e:
+        print(f"❌ Detection failed: {e}")

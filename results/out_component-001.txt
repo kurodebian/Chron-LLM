@@ -1,0 +1,186 @@
+Here's a thinking process:
+
+1.  **Understand User Goal:** The user wants me to analyze a set of component specification artifacts, understand their relationships (MERGE, KEEP_BOTH, etc.), and output a structured plan covering:
+    *   Optimal merge strategy based on relationships
+    *   Architectural consistency analysis
+    *   Concrete improvement proposals
+
+2.  **Analyze Input Data:**
+    *   **Component ID:** `component-001`
+    *   **Artifacts (6 files):**
+        1.  `docs/ir/01-domain-model.spec` (Types, Enums, Invariants, Prod/Cons, Ownership) - Abstract domain model & schema.
+        2.  `docs/ir/02-operational-semantics.spec` (Pre/Post conditions, Lifecycle, Global Invariants, Pure/Deterministic props) - Formal operational semantics.
+        3.  `docs/ir/04-runtime-pipeline.spec` (Types list, State, Flow, Operations with PRE/POST/INV, CanonicalWriteAccess INV) - Runtime pipeline & execution flow.
+        4.  `docs/ir/07-chron-mapping.spec` (Mapping abstract types to concrete/kernel terms like WAL_Entry, RefStore, etc.) - Semantic bridge/mapping layer.
+        5.  `runtime/r1/ir/core.spec` (MODULE chronos-r1, detailed TYPES, OPS with logic, INVARIANTS) - Concrete R1 implementation spec / authoritative kernel compliance doc.
+        6.  `runtime/r1/ir/package.spec` (PKG chronos-r1, categorized OPS: domain-api, pure-ops, kernel-boundary, runtime-facade, inspection, testing) - Package/interface definition for R1.
+    *   **Observed Relationships (8 pairs):**
+        *   `02` & `04`: PARTIAL_OVERLAP -> MERGE_B_INTO_A (`04` into `02`)
+        *   `04` & `07`: PARTIAL_OVERLAP -> KEEP_BOTH
+        *   `01` & `04`: PARTIAL_OVERLAP -> KEEP_BOTH (with reference integration)
+        *   `02` & `07`: PARTIAL_OVERLAP -> KEEP_BOTH
+        *   `01` & `07`: PARENT_CHILD -> KEEP_BOTH (reference instead of duplicate INV)
+        *   `r1/core` & `r1/package`: PARTIAL_OVERLAP -> MERGE_B_INTO_A (`package` into `core`)
+        *   `01` & `02`: PARTIAL_OVERLAP -> KEEP_BOTH (refactor B to reference A's types)
+        *   `01` & `r1/core`: PARENT_CHILD -> KEEP_BOTH (B imports/adheres to A's types)
+
+3.  **Synthesize Merge Strategy:**
+    *   Group artifacts logically:
+        *   **Group 1: Abstract/Design Specs (`docs/ir/`)**: `01`, `02`, `04`, `07`
+        *   **Group 2: Concrete Implementation Spec (`runtime/r1/ir/`)**: `core.spec`, `package.spec`
+    *   Apply relationships within groups:
+        *   `docs/ir/`: Merge `04` into `02`. Keep `01` and `07` separate but establish cross-references. Result: `02-operational-semantics.spec` (merged), `01-domain-model.spec`, `07-chron-mapping.spec`.
+        *   `runtime/r1/ir/`: Merge `package.spec` into `core.spec`. Result: `r1/core.spec` (enhanced with package structure).
+    *   Cross-group relationships: `01` is parent to `r1/core`. Enforce type import/reference.
+
+4.  **Analyze Architectural Consistency:**
+    *   *Strengths:* Clear separation of concerns (Domain Model vs. Semantics vs. Pipeline vs. Mapping vs. Implementation). Strong emphasis on immutability (`Canonical`), determinism, and pure functions. Explicit invariants (`INV1-8`).
+    *   *Weaknesses/Inconsistencies:*
+        *   Type duplication across `01`, `02`, `04`, `r1/core`. Need a single source of truth (SOT) for types.
+        *   Naming inconsistencies: `RuntimeRequest` vs `KernelAction`, `ValidationReport` fields differ slightly, `Event` structure varies (`{id,source,content,meta}` vs `{id,source,payload,metadata}`).
+        *   Invariant duplication/conflict: `INV(Canonical):mutate_only_via(Commit)` in `01` vs `INV4: commit() sole Canonical updater.` in `r1/core`. Consistent but redundant.
+        *   Flow vs. Semantics overlap: `02` and `04` both define `Replay`, `Validation`, etc. Merging is correct, but needs careful unification of PRE/POST/INV syntax.
+        *   Mapping layer (`07`) uses concrete names (`WAL_Entry`, `RefStore`) which might leak implementation details into abstract specs if not handled carefully.
+
+5.  **Formulate Improvement Proposals:**
+    *   *Structural:* Adopt a modular spec format (e.g., Markdown with YAML/JSON schemas, or formal DSL like TLA+/Alloy). Use explicit `IMPORT` statements for types.
+    *   *Semantic Unification:* Standardize type definitions in `01-domain-model.spec`. Make it the absolute SOT. Update all other docs to reference it (e.g., `TYPE Event = ir::Event`).
+    *   *Merge Execution Plan:*
+        1.  Merge `04` into `02`: Combine flow, PRE/POST, INV. Resolve syntax differences. Keep `PromptBuilder` and `Backend` from `04`.
+        2.  Merge `package.spec` into `core.spec`: Add categorized OPS sections (`domain-api`, `pure-ops`, etc.) to `core.spec`. Ensure all invariants are preserved.
+    *   *Cross-Reference Strategy:* Create a `references.md` or use spec-level includes. Define mapping rules for `07` (abstract -> concrete).
+    *   *Invariant & Consistency Checks:* Add automated validation scripts (e.g., AST parser, type checker) to ensure no drift between SOT and implementations. Clarify `KernelAction` vs `RuntimeRequest` naming. Align `Event` payload/metadata fields.
+
+6.  **Structure the Output:**
+    I'll organize the response into clear sections as requested:
+    *   📊 マージ計画 (Merge Plan) - Grouped, prioritized, with rationale
+    *   🏗️ アーキテクチャ整合性分析 (Architectural Consistency Analysis) - Strengths, Risks/Inconsistencies, SOT strategy
+    *   💡 具体的改善提案 (Concrete Improvement Proposals) - Structural, Semantic, Process/Automation, Naming/Type alignment
+    *   📝 実行ロードマップ (Execution Roadmap) - Step-by-step actions
+
+    I will ensure the tone is professional, technical, and directly addresses the input data. I'll use markdown formatting effectively. I'll cross-reference the specific file paths and relationship IDs from the prompt to show precise analysis.
+
+    *Self-Correction/Refinement during thought:*
+    - Check merge direction: `MERGE_B_INTO_A` means keep A, absorb B's unique content into A. I need to explicitly state what gets kept vs merged.
+    - For `02` & `04`: Keep `02`, merge `04`'s pipeline flow (`PromptBuilder`, `Backend`) and specific INV into `02`.
+    - For `r1/core` & `r1/package`: Keep `core`, merge `package`'s categorized OPS and facade/testing interfaces.
+    - Highlight the type inconsistency: `Event` in `01` has `{id,source,content,meta:{ts,seq,causal-ref?}}`, while `r1/core` has `{id: UUID, source: Source, payload: Any, metadata: Map}`. This needs explicit alignment.
+    - Emphasize the "Single Source of Truth" (SOT) for types in `01-domain-model.spec`.
+    - Structure matches standard engineering deliverables.
+
+    Draft structure:
+    1. 最適マージ計画 (Optimal Merge Plan)
+       - グループ分けと実行順序
+       - 具体的なマージ操作（保持/統合/削除対象）
+    2. アーキテクチャ上の整合性分析 (Architectural Consistency Analysis)
+       - 設計原則の適合性
+       - 懸念点・矛盾箇所（型定義、不変条件、命名規則）
+       - 単一真実源(SOT)戦略
+    3. 具体的な改善提案 (Concrete Improvement Proposals)
+       - 仕様書構造の標準化
+       - 型・命名の統一ルール
+       - 検証・自動化プロセス
+    4. 実行ロードマップ (Execution Roadmap)
+
+    I will now generate the response carefully, ensuring all constraints and data points are addressed.✅
+    *Self-Correction/Verification during drafting:*
+    - Check relationship IDs: `pair_11`, `pair_52`, etc. I'll reference them implicitly or explicitly to show traceability.
+    - Ensure technical terms match the input (e.g., `Canonical`, `Replay`, `PolicyRouter`, `Delta3 Kernel`).
+    - The output should be in Japanese as requested.
+    - Structure is logical and actionable.
+
+    All good. Proceeding. 
+    Output Generation matches the refined structure. 
+    *Output Generation* (matches the final response)
+    - Starts with a clear executive summary/table of merge actions.
+    - Details architectural analysis focusing on SOT, invariants, and separation of concerns.
+    - Provides concrete, actionable proposals for type unification, spec formatting, and validation.
+    - Ends with a phased roadmap.
+    - Uses precise terminology from the prompt.✅
+    Ready. 
+    *Output Generation* (Proceeds)
+</think>
+
+提供された仕様書コンポーネントデータと関係性分析に基づき、マージ計画・アーキテクチャ整合性・改善提案を構造化して出力します。
+
+---
+## 📊 1. 最適マージ計画 (Optimal Merge Plan)
+
+関係性分析(`observed_relationships`)と各ファイルの役割を考慮し、**「抽象設計層(Docs)」と「実装定義層(Runtime)」で分離**した上で、以下の順序で統合を行います。
+
+| マージ対象ペア | 推奨アクション | 統合先ファイル | 統合内容・処理方針 |
+|:---|:---|:---|:---|
+| `02-operational-semantics` & `04-runtime-pipeline` (`pair_11`) | `MERGE_B_INTO_A` | `docs/ir/02-operational-semantics.spec` | **保持:** Aの厳格なPre/Post条件、Global INV。<br>**統合:** Bの`PromptBuilder`/`Backend`フロー、`INV CanonicalWriteAccess`をAのオペレーション定義に追加。重複する`Replay`/`Validation`はAの形式で統一。 |
+| `runtime/r1/core` & `package` (`pair_4`) | `MERGE_B_INTO_A` | `runtime/r1/ir/core.spec` | **保持:** Aの厳密なINV(1~8)、詳細な`kernel-transition`ロジック。<br>**統合:** Bのカテゴリ分け(`domain-api`, `pure-ops`, `kernel-boundary`)、`runtime-facade`、`inspection`/`testing`インターフェースをAに追加。 |
+| `01-domain-model` & 他抽象ファイル (`pair_42,67,79`) | `KEEP_BOTH` (参照統合) | `docs/ir/01-domain-model.spec` を **SOT** に固定 | 型定義(`Event`, `Canonical`, `Candidate`等)は`01`に集約。他ファイルでは列挙せず、`IMPORT ir::Event`等形式で参照する。不変条件(INV)も`01`を基準とし、実装層は`INV4/7`等で追従。 |
+| `07-chron-mapping` & 他 (`pair_52,33,70`) | `KEEP_BOTH` (分離維持) | `docs/ir/07-chron-mapping.spec` を独立維持 | 抽象IRからDelta3 Kernel内部構造(WAL, RefStore等)へのマッピング層として機能。実装詳細が抽象仕様を汚染しないよう、`01`の型定義を参照する形式に調整。 |
+
+### 🔄 マージ実行順序
+1. **Phase 1:** `runtime/r1/ir/package.spec` → `core.spec` に統合（実装層の単一化）
+2. **Phase 2:** `docs/ir/04-runtime-pipeline.spec` → `02-operational-semantics.spec` に統合（動作セマンティクス統一）
+3. **Phase 3:** 全ファイルから型定義を削除し、`01-domain-model.spec` を唯一の型SOTとして参照構造に置換
+4. **Phase 4:** `07-chron-mapping.spec` の実装依存用語を定数/エイリアス化し、抽象層との境界を明確化
+
+---
+## 🏗️ 2. アーキテクチャ上の整合性分析 (Architectural Consistency Analysis)
+
+### ✅ 設計原則の適合性
+- **分離の徹底:** `Domain Model(01)` → `Operational Semantics(02/04)` → `Mapping(07)` → `Implementation(core/package)` の階層構造が明確。不変条件(`INV`)と純粋関数(`Pure/Deterministic`)の明示により、Delta3 Kernelの検証可能性が確保されている。
+- **状態遷移の厳格化:** `Canonical`の不変性(`INV1/4`)、`Commit`のみによる更新権限、`wake-deferred()`のイベント駆動トリガーなど、競合とデッドロックを排除する設計がなされている。
+
+### ⚠️ 懸念点・整合性ギャップ
+| 項目 | 現状の問題点 | アーキテクチャへの影響 |
+|:---|:---|:---|
+| **型定義の重複** | `Event`構造が`01`(`{id,source,content,meta:{ts,seq}}`)と`r1/core`(`{id,payload,metadata}`)で不一致。`RuntimeRequest` vs `KernelAction`命名も分岐。 | 実装時のマッピングコスト増、型チェックのバイパスリスク、SOT崩壊による仕様 drift |
+| **不変条件(INV)の散在** | `INV(Canonical):mutate_only_via(Commit)`(`01`)と`INV4: commit() sole Canonical updater.`(`core`)が事実上重複。`02`と`04`も`Replay`のDeterminismを別々に定義。 | 検証ツールのルール衝突、修正時の漏れ発生リスク |
+| **マッピング層の漏洩** | `07-chron-mapping.spec` が`WAL_Entry`, `RefStore`等、物理実装用語を直接使用。抽象セマンティクス(`02`)と混在するとリファクタリング時に影響範囲が広範化。 | 抽象レイヤーの再利用性低下、カーネルバージョン間での互換性維持コスト増 |
+
+### 🎯 Single Source of Truth (SOT) 戦略
+- **型・列挙型:** `docs/ir/01-domain-model.spec` を絶対的SOTとする。
+- **動作セマンティクス:** マージ後の `02-operational-semantics.spec` をSOTとする。
+- **実装契約:** `runtime/r1/ir/core.spec` をDelta3 Kernel R1準拠のSOTとする。
+- 他ファイルはすべてこれらのSOTを**明示的インポート**または**エイリアス参照**する形式に統一。
+
+---
+## 💡 3. 具体的な改善提案 (Concrete Improvement Proposals)
+
+### 🔹 A. 仕様書構造の標準化
+1. **モジュール化構文の導入:** 
+   ```yaml
+   IMPORT ir::Event, ir::Canonical, ir::Candidate
+   EXPORT ops::validate, ops::policy-route
+   INVARIANT canonical_immutable: mutate(canonical) => stage == commit
+   ```
+   既存の自由記述形式から、AST解析可能な構文へ移行し、型チェックと不変条件検証を自動化可能にする。
+
+2. **セクション統一テンプレート:**
+   - `TYPES` → `OPERATIONS` (PRE/POST/INV) → `LIFECYCLE` → `MAPPING` の固定順序を採用。重複定義は禁止とし、`@ref file::type` で参照するルールを強制。
+
+### 🔹 B. 型・命名の統一ルール
+| 分岐箇所 | 推奨統一名 | 理由 |
+|:---|:---|:---|
+| `Event.payload` vs `Event.content` | `payload: Any` (core形式) | メタデータ(`metadata`)と本文を分離する現代的な設計に適合。`01`を更新してSOT化。 |
+| `RuntimeRequest` vs `KernelAction` | `KernelAction` (`accept`, `reject`, `defer`等) | 内部遷移ロジックに特化した命名が明確。外部API向けは`RuntimeCommand`としてラップ。 |
+| `ValidationReport` フィールド | `{syntax_errs, semantic_errs, inv_violations, observations}` | `r1/core`の構造をSOT化し、`01`/`02`でエイリアス参照。 |
+
+### 🔹 C. 検証・自動化プロセス
+1. **仕様ドリフト検知スクリプト:** 
+   - `git diff` で型定義が変更された場合、全参照ファイルをスキャンし未更新箇所を警告するCIパイプライン構築。
+2. **不変条件自動検証:** 
+   - TLA+ または Alloy へ `INV1~8` と `PRE/POST` を抽出し、モデル検査で状態爆発を防ぐ制約チェックを実施。
+3. **マッピング層の抽象化:** 
+   - `07-chron-mapping.spec` の実装用語を定数定義(`WAL_ENTRY = ir::Event`)に置き換え、カーネル内部構造の変更が抽象セマンティクスに影響しないように隔離。
+
+---
+## 📝 4. 実行ロードマップ (Execution Roadmap)
+
+| フェーズ | 作業内容 | 成果物 | 所要目安 |
+|:---|:---|:---|:---|
+| **P1: 実装層統合** | `package.spec` → `core.spec` マージ。カテゴリ分けとfacadeインターフェースを反映。INV1~8を維持。 | `runtime/r1/ir/core.spec` (v2) | 1日 |
+| **P2: セマンティクス統合** | `04-runtime-pipeline.spec` → `02-operational-semantics.spec` マージ。フローとPre/Post/INVを統一。 | `docs/ir/02-operational-semantics.spec` (v2) | 1日 |
+| **P3: SOT固定化** | `01-domain-model.spec` を型SOTに昇格。他ファイルの列挙型定義を削除し、参照構文へ置換。命名統一(`payload`, `KernelAction`)適用。 | 全ドキュメントの型参照統一 | 2日 |
+| **P4: 検証基盤構築** | CIパイプラインに仕様ドリフト検知・INVモデル検査を追加。`07-chron-mapping.spec` の実装用語を定数化。 | 自動化テストスイート、更新ドキュメント | 3日 |
+
+---
+### 📌 まとめ
+本コンポーネントは**「抽象セマンティクスと実装契約の明確な分離」**という優れた設計思想を持っていますが、型定義の重複と不変条件の散在が技術負債化しつつあります。上記のマージ計画に従い `01` と `core.spec` を絶対的SOTに固定し、参照構造へ移行することで、Delta3 Kernelの検証可能性・拡張性・保守性を大幅に向上できます。特に `MERGE_B_INTO_A` の適用と `KEEP_BOTH` の境界維持を厳格に実行すれば、アーキテクチャ上の整合性は自動的に担保されます。

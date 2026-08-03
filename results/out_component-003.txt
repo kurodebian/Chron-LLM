@@ -1,0 +1,200 @@
+Here's a thinking process:
+
+1.  **Understand User Goal:** The user wants me to analyze a set of component data (specification files/artifacts) and their observed relationships. Based on these relationships, I need to produce a structured output containing:
+    *   Optimal merge plan based on relationship types (MERGE, KEEP_BOTH, DELETE, etc.)
+    *   Architectural consistency analysis
+    *   Concrete improvement proposals
+
+2.  **Analyze Input Data:**
+    *   **Component ID:** `component-003`
+    *   **Artifact Count:** 12
+    *   **Artifacts:** 12 specification files covering different layers/aspects of a system called "Chron-LLM R2.0" (Graph Runtime, World Runtime, Memory Store, Registry, Prefill/Projection, Tests).
+    *   **Observed Relationships:** 38 pairs with similarity scores, relationship types (`PARTIAL_OVERLAP`, `PARENT_CHILD`, `SUPERSEDED`, `INDEPENDENT`), recommended actions (`MERGE_B_INTO_A`, `KEEP_BOTH`, `KEEP_A_DELETE_B`, `DEPRECATE_OBSOLETE`).
+
+    Let's categorize the artifacts and their roles based on file paths and content:
+    *   `docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec` -> Core Constitution (Phase A), defines invariants, canonical types, kernel authority. High-level architectural contract.
+    *   `docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec` -> World Runtime Constitution (Phase B/Frozen), defines World lifecycle, Registry roles, isolation rules.
+    *   `docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec` -> World Graph Runtime Spec (v1.0), operational specs for worlds, registry, context projection.
+    *   `docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec` -> Observation Contract (Phase C), defines observation types, invariants, operations like snapshot/diff.
+    *   `graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec` -> Graph Runtime Context Spec (v1.0), causal context assembly, prefill state building, eval isolation.
+    *   `graph-runtime/ir/graph.spec` -> Core Graph IR, basic types (`CausalNode`, `CausalEdge`, `CausalGraph`), immutability invariants.
+    *   `graph-runtime/ir/prefill.spec` -> Prefill logic spec, deterministic prompt building, hash generation.
+    *   `graph-runtime/ir/projection.spec` -> Context projection logic, causal subgraph traversal, eval feedback inclusion.
+    *   `memory/ir/store.spec` -> Memory Store IR, payload refs, SHA256 hashing, store operations, world ops stubs.
+    *   `registry/ir/registry.spec` -> Registry IR, world management, ancestry, lifecycle states, invariants.
+    *   `tests/md/ir/r2-0-b-tests.spec` -> Test suite for R2.0-B, acceptance criteria, fixtures, invariant checks.
+    *   `world/ir/world.spec` -> World IR implementation details, head-cell, shared refs, replay logic.
+
+3.  **Synthesize Relationships & Actions:**
+    I need to group the relationships and deduplicate/conflict resolutions where necessary. The recommended actions are mostly consistent with standard spec management:
+    *   `MERGE_B_INTO_A`: Consolidate overlapping specs into a canonical source (usually A).
+    *   `KEEP_BOTH`: Maintain separation of concerns (e.g., Constitution vs Implementation, Tests vs Spec).
+    *   `KEEP_A_DELETE_B` / `DEPRECATE_OBSOLETE`: Remove superseded or conflicting definitions.
+
+    Let's map out the merge plan logically by architectural layer:
+    *   **Layer 1: Core IR & Graph Primitives** (`graph.spec`, `chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec`, `prefill.spec`, `projection.spec`)
+        *   Relationships indicate `graph.spec` is the base. `causal-context-spec` supersedes `prefill.spec` and `projection.spec`. Some suggest merging context spec into core or keeping separate for separation of concerns. I'll recommend consolidating graph primitives into a single canonical IR file, and moving projection/prefill logic to a dedicated runtime module while referencing the core IR.
+    *   **Layer 2: Memory & Storage** (`memory/ir/store.spec`)
+        *   Acts as an implementation contract for payload storage. Should be kept but aligned with `Core_Constitution_Spec` invariants (hash immutability, content-addressable).
+    *   **Layer 3: World & Registry Runtime** (`World_Runtime_Constitution_Spec`, `World_Graph_Runtime_Specification-v1.0.spec`, `Observation_Contract_v1.0.spec`, `world/ir/world.spec`, `registry/ir/registry.spec`)
+        *   `World_Runtime_Constitution_Spec` is FROZEN and authoritative. It supersedes `world/ir/world.spec`.
+        *   `Registry_IR` contradicts the Constitution (Registry owning Graph/Mem vs World refs). Should be deprecated/refactored to match Constitution.
+        *   `Observation_Contract` and `Runtime_Specification` overlap heavily. Merge into a unified Runtime Contract, adopting immutable snapshot semantics from Observation Contract.
+    *   **Layer 4: Tests** (`tests/md/ir/r2-0-b-tests.spec`)
+        *   Independent but maps to Constitution. Keep separate for CI/CD. Fix package name mismatch.
+
+4.  **Structure the Output:**
+    I'll organize the response into clear sections as requested:
+    *   1. マージ計画 (Merge Plan) - Grouped by layer/component, with specific actions per artifact pair/group.
+    *   2. アーキテクチャ上の整合性分析 (Architectural Consistency Analysis) - Identify conflicts, drifts, and alignment issues across layers.
+    *   3. 具体的な改善提案 (Concrete Improvement Proposals) - Actionable steps for refactoring, naming, invariants, CI/CD integration.
+
+    I will use a structured format (markdown tables/lists) for clarity. I'll ensure the terminology matches the input (MERGE_B_INTO_A, KEEP_BOTH, etc.) and explain the rationale based on the provided relationships.
+
+5.  **Draft - Section by Section (Mental Refinement):**
+
+    *   **Merge Plan:**
+        *   Group artifacts into logical modules: Core Graph IR, World/Registry Runtime, Memory/Payload, Prefill/Projection, Tests.
+        *   For each group, specify the target artifact and actions for others.
+        *   Example: `graph-runtime/ir/graph.spec` becomes the canonical base. `prefill.spec` & `projection.spec` are superseded by `chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec`. Merge context spec into a unified Graph Runtime module, but keep separation of concerns if needed per `KEEP_BOTH` rationale. Actually, the input says `KEEP_BOTH` for graph vs context due to separation of concerns (Kernel core vs Inference layer). I'll respect that: Keep `graph.spec` as Kernel IR, merge `prefill` & `projection` into `causal-context-spec`, or keep them separate but aligned via imports.
+        *   World/Registry: `World_Runtime_Constitution_Spec` is FROZEN authority. `world/ir/world.spec` -> DELETE/SUPERSEDED. `registry/ir/registry.spec` -> DEPRECATE (contradicts Constitution). Merge `Runtime_Specification` & `Observation_Contract` into a single Runtime Contract, adopting immutable semantics.
+        *   Memory: Keep `store.spec`, align with Core Constitution invariants.
+        *   Tests: Keep separate, fix naming.
+
+    *   **Architectural Consistency Analysis:**
+        *   Identify key conflicts: Mutable vs Immutable state (Runtime Spec vs Constitution), Registry ownership of Graph/Mem vs World references, Type fragmentation across layers.
+        *   Highlight alignment strengths: Determinism/Hash invariants are consistent across Core and Runtime. Eval isolation is well-defined.
+        *   Note phase progression: Phase A (Core) -> Phase B (World Const) -> Phase C/D (Runtime/Observation). The specs reflect this but have cross-phase drift.
+
+    *   **Improvement Proposals:**
+        *   Standardize type definitions (PayloadRef, Node types) across all files via a shared IR module or explicit imports.
+        *   Resolve Registry contradiction: Change to reference-based sharing as per Constitution.
+        *   Enforce immutability & CoW explicitly in code generation from specs.
+        *   Update test suite package name (`r2-0-a` -> `r2-0-b`).
+        *   Establish a spec versioning/dependency graph (e.g., using Mermaid or explicit dependency lists).
+        *   Add formal verification hooks for critical invariants (INV-AUTHORITY, INV-GRAPH-APPEND, etc.).
+
+6.  **Self-Correction/Verification during drafting:**
+    *   *Check:* Did I address all relationship types? Yes: MERGE_B_INTO_A, KEEP_BOTH, SUPERSEDED/DELETE, DEPRECATE_OBSOLETE, PARENT_CHILD, INDEPENDENT.
+    *   *Check:* Is the merge plan actionable? Yes, structured by architectural layer with clear target/source actions.
+    *   *Check:* Does it match the input rationale? Yes, I'm synthesizing the provided rationales into a cohesive strategy rather than just repeating them.
+    *   *Refinement on Merge Plan:* I'll create a table mapping Source -> Target -> Action -> Rationale/Notes for clarity. Then group by module.
+    *   *Architectural Consistency:* Focus on 3 key dimensions: Data Model Integrity, Lifecycle & Authority, Determinism & Isolation. Point out where specs conflict (e.g., Registry ownership) and how to fix it.
+    *   *Improvements:* Make them concrete: naming fixes, import strategies, invariant enforcement, CI/CD integration, documentation structure.
+
+    Structure looks solid. I will now generate the response in Japanese as requested. I'll ensure technical terms match the input (e.g., `MERGE_B_INTO_A`, `INV-AUTHORITY`, `CoW`, `Delta3 Kernel`). I'll maintain a professional, analytical tone suitable for software architecture/specification management.
+
+    Draft Generation (Mental Translation to Japanese):
+    - マージ計画: モジュール別分類、アクション一覧表、統合後のアーキテクチャ図（概念）
+    - 整合性分析: データモデルの断片化、Registryの所有権矛盾、不変性/決定性の乖離、フェーズ横断的な一貫性
+    - 改善提案: 型定義の一元化、Registry設計の見直し、テストパッケージ名修正、CI/CD連携、インバリアント検証自動化
+
+    All points align with the input data. I will produce the final output. 
+    Self-Correction/Note during thought: The input has many pairs. I should summarize them logically rather than listing all 38. I'll group by architectural layer and highlight key decisions. I'll explicitly map the recommended actions to a phased execution plan.
+
+    Structure of Output:
+    1. 最適マージ計画 (Optimal Merge Plan)
+       - モジュール別統合戦略
+       - アーティファクト別アクション一覧表
+    2. アーキテクチャ上の整合性分析 (Architectural Consistency Analysis)
+       - 設計原則との適合度
+       - 矛盾点・乖離の特定
+       - 階層間依存関係の評価
+    3. 具体的な改善提案 (Concrete Improvement Proposals)
+       - 即時対応事項（Quick Wins）
+       - 中長期的リファクタリング計画
+       - 品質保証・CI/CD統合案
+
+    I will now generate the response carefully. 
+    *Self-Correction/Verification during generation prep:* 
+    Check relationship `pair_61.json`: Registry spec contradicts Constitution -> DEPRECATE_OBSOLETE. Correct.
+    Check `pair_22.json`: world.spec superseded by B_Constitution -> KEEP_A_DELETE_B. Correct.
+    Check `pair_7.json` & `pair_63.json`: prefill/projection superseded by causal-context-spec -> DELETE. Correct.
+    Check `pair_1.json`, `pair_50.json`: Runtime Spec vs Observation Contract -> MERGE_B_INTO_A (adopt immutable semantics). Correct.
+    All aligns. I will produce the structured output now. 
+    Output matches the refined structure. Language: Japanese. Tone: Professional/Architectural Analysis. Format: Markdown.✅
+    Proceeds. 
+    [Output Generation] -> *See response.* 
+    *(Note: I'll ensure precise mapping to the provided JSON fields and maintain technical accuracy regarding Delta3 Kernel, Chron-LLM R2.0, invariants, etc.)* 
+    All steps verified. Output generation ready. 
+    *[Done.]*
+</think>
+
+提供された仕様書コンポーネントデータと関係性分析結果に基づき、アーキテクチャの整合性を最大化し、技術的負債を最小化するマージ計画・整合性分析・改善提案を構造化して出力します。
+
+---
+## 1. 最適マージ計画 (Optimal Merge Plan)
+
+関係性の推奨アクション（`MERGE_B_INTO_A`, `KEEP_BOTH`, `SUPERSEDED/DELETE`, `DEPRECATE_OBSOLETE`）をアーキテクチャ層ごとに統合し、単一真実源（Single Source of Truth, SSOT）と関心の分離（Separation of Concerns）を両立する計画です。
+
+### 1.1 モジュール別統合戦略
+| アーキテクチャ層 | 維持/統合先 (Target) | 処理対象 (Source) | アクション | 統合方針 |
+|:---|:---|:---|:---|:---|
+| **Core Graph IR** | `graph-runtime/ir/graph.spec` | `chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec`<br>`prefill.spec`<br>`projection.spec` | `KEEP_BOTH` / `SUPERSEDED→DELETE` | `graph.spec`をKernel層の基盤IRとして維持。`prefill`と`projection`は`causal-context-spec`に統合し削除。Context仕様は推論レイヤーとして独立保持（インポート経由で型参照）。 |
+| **World & Registry** | `docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec` (FROZEN) | `world/ir/world.spec`<br>`registry/ir/registry.spec` | `KEEP_A_DELETE_B` / `DEPRECATE_OBSOLETE` | Constitutionを絶対的権威とする。`world.spec`は定義重複かつ構文乖離のため削除。`registry.spec`はGraph/Memory所有権の矛盾により廃止し、Constitutionの参照共有モデルに準拠した設計へ書き換え。 |
+| **Runtime Contract** | `docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec` | `Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec` | `MERGE_B_INTO_A` | Observation Contractをランタイム契約のSSOTとする。Runtime Specの可変状態モデルを削除し、Observation Contractの不変スナップショット・Kernelコミット制約を採用。文脈投影ロジックは必要に応じてサブモジュール化。 |
+| **Memory Store** | `memory/ir/store.spec` | *(他層との重複型定義)* | `KEEP_BOTH` / 型エイリアス統一 | メモリレイヤーの操作契約を維持。他層で再定義されている`PayloadRef`などはConstitution/Core IRへの参照へ置き換え、実装粒度（SHA256/CoW）はそのまま保持。 |
+| **Verification** | `tests/md/ir/r2-0-b-tests.spec` | *(テストロジック)* | `KEEP_BOTH` / `INDEPENDENT` | 要件定義と検証ロジックの分離を維持。パッケージ名誤記(`r2-0-a`)のみ修正し、ConstitutionのTEST B1~B12にマッピングするCI/CDパイプラインとして独立管理。 |
+
+### 1.2 マージ実行順序（フェーズ）
+1. **Phase 1: 型定義の正規化** → `graph.spec`と`store.spec`を基盤とし、他ファイルの重複型定義をエイリアスまたはインポートへ置換。
+2. **Phase 2: 矛盾アーティファクトの削除/廃止** → `world.spec`, `prefill.spec`, `projection.spec`, `registry.spec`をアーカイブし、参照チェーンを切断。
+3. **Phase 3: Runtime Contract統合** → Observation ContractをSSOTとし、Runtime Specの機能差分をマージ。ImmutableスナップショットとKernelコミット原子性を正式採用。
+4. **Phase 4: テスト・ドキュメント更新** → `r2-0-b-tests.spec`のパッケージ名修正、Constitution/FROZENステータスとの整合性確認、CI/CDメタデータ連携。
+
+---
+## 2. アーキテクチャ上の整合性分析 (Architectural Consistency Analysis)
+
+### 2.1 設計原則との適合度評価
+| 設計原則 | 適合状況 | 根拠・乖離箇所 |
+|:---|:---|:---|
+| **Kernel Authority & Immutability** (`INV-AUTHORITY`, `INV-GRAPH-APPEND`) | ⚠️ 部分的に乖離 | `Runtime_Specification`は可変グラフ操作(`add-node!`)を定義しているが、Core Constitutionは`CommitKernel`経由の追記のみを許可。Observation Contractの不変スナップショットモデルへ収束させる必要がある。 |
+| **World Isolation & CoW** (`INV World.ISOLATED`, `INV_META_COW`) | ✅ 高適合 | `B_Constitution`と`tests/md/ir/r2-0-b-tests.spec`(TEST B6, B9)が明確に定義。`world.spec`の`head-cell`リスト構造はConstitutionの参照モデルと矛盾するため削除対象。 |
+| **Determinism & Replay** (`INV-PREFILL-DET`, `INV Replay`) | ✅ 高適合 | Core ConstitutionとCausal Context SpecがSHA256ハッシュ安定性・因果経路分離を厳格に定義。`prefill.spec`の簡易シリアライズは削除され、`causal-context-spec`の決定論的ビルダー契約へ統合されるべき。 |
+| **Registry Ownership Model** | ❌ 重大な矛盾 | `registry.spec`は`Registry`が`graph`と`memory`を直接所有する設計だが、`B_Constitution`(INV: `World.graph-ref == GlobalState.canonical-graph`)はWorld間での共有参照を要求。この乖離はDelta3 Kernelの並列実行・リプレイ決定性を破壊するリスクがある。 |
+
+### 2.2 階層間依存関係マップ（概念）
+```
+[Core Constitution (Phase A)] ← authority, invariants
+       ↓ imports/types
+[World Runtime Constitution (Phase B/FROZEN)] ← lifecycle, isolation, CoW
+       ↓ contracts/ops
+[Observation Contract (Phase C/D)] ← snapshots, diffs, kernel-commit atomicity
+       ↙          ↘
+[Graph IR]      [Memory Store]      [Prefill/Projection Runtime]
+   (immutable)     (content-addr)    (deterministic builder)
+```
+*整合性ポイント:* 下位レイヤーは上位レイヤーのインバリアントを前提とするが、現状では`registry.spec`と`Runtime_Specification`が上位制約を無視した実装モデルを定義している。マージ計画により依存方向を正し、SSOTへ収束させる。
+
+---
+## 3. 具体的な改善提案 (Concrete Improvement Proposals)
+
+### 3.1 即時対応事項（Quick Wins）
+| 項目 | 現状 | 改善案 | 期待効果 |
+|:---|:---|:---|:---|
+| **パッケージ名誤記** | `tests/md/ir/r2-0-b-tests.spec`のPKGが`chron-r2-0-a` | `chron-r2-0-b`へ修正し、ConstitutionのTEST B1~B12と明示的マッピングを追加 | テスト実行時のスコープ誤認防止、CI/CDパイプラインの安定化 |
+| **型定義の断片化** | `PayloadRef`, `CausalNode`, `PrefillState`が5ファイル以上で再定義 | 全ファイルから重複型定義を削除し、`graph.spec`と`store.spec`へのエイリアス参照またはモジュールインポートへ統一 | コンパイル時エラーの削減、IRドリフトの完全排除 |
+| **Registry設計の見直し** | `registry.spec`がGraph/Memoryを所有する可変モデルを採用 | Constitutionの`INV World.graph-ref == GlobalState.canonical-graph`に準拠し、World間での共有参照(`Ref<Graph>`)へ変更。RegistryはID/ancestry/lifecycle管理のみを担当 | Delta3 Kernelのリプレイ決定性確保、並列World実行時の競合回避 |
+
+### 3.2 中長期的リファクタリング計画
+1. **Spec-to-Code Generation Pipelineの構築**
+   - `graph.spec`, `store.spec`, `Observation_Contract`をコード生成のトリガーとする。
+   - インバリアント(`INV-*`)を静的解析ルール（例: Clippy, ESLint, or custom AST checker）へ変換し、コミット時に自動検証する。
+2. **フェーズ横断ドキュメントの統合**
+   - `docs/ir/`と`docs/spec/ir/`の重複を解消し、`ARCHITECTURE.md`でPhase A→B→C/Dの遷移図とSSOTマッピングを明示。
+   - FROZENステータスの仕様書は変更管理プロセス（RFC/ADR）を経由する制約をREADMEに明記。
+3. **テスト駆動設計(TDD)との連携強化**
+   - `tests/md/ir/r2-0-b-tests.spec`の各テストケース(`b1-world-creation`, `b8-replay-independence`等)に対応するプロパティベーステスト(PBT)を生成。
+   - `INV_REPLAY_PURE`と`INV_COMMIT_ATOMIC`をランダム状態生成器で検証し、エッジケース（例: 循環参照、空グラフ、Archived→Active禁止）を網羅。
+
+### 3.3 アーキテクチャ品質指標（推奨KPI）
+| 指標 | 目標値 | 測定方法 |
+|:---|:---|:---|
+| **型重複率** | `< 5%` | AST解析による型定義のユニーク数カウント |
+| **インバリアント違反検知率** | `100%` (CI内) | Spec記載の`INV-*`を静的チェッカーへマッピングし、ビルド時に検証 |
+| **SSOT準拠度** | `≥ 95%` | 全アーティファクトがConstitution/Contractへの参照を持っている割合 |
+| **テストカバレッジ（要件）** | `100%` (TEST B1~B12) | テストケースと仕様書インデックスの自動マッピング確認 |
+
+---
+### ✅ まとめ
+本コンポーネント群は**Delta3 Kernelの決定性・不変性・World分離**という明確な設計哲学を持っていますが、実装レイヤーと契約レイヤーの間に型断片化と所有権モデルの乖離が存在します。提示したマージ計画により、`B_Constitution`(FROZEN)を頂点とした階層型SSOTへ収束させ、`KEEP_BOTH`で関心の分離を維持しつつ、矛盾する定義は体系的に削除・廃止することで、アーキテクチャの整合性と拡張性を同時に確保できます。即時対応事項から着手し、Spec-to-Code検証パイプラインを構築することで、長期的な技術的負債を未然に防げます。
