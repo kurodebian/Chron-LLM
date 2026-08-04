@@ -1,4 +1,4 @@
-PKG chron-r2-0-a
+PKG chron-r2-0-b
 
 TYPES:
   World = { id: UUID, root: NodeRef, head: NodeRef, meta: Map, policy: Policy }
