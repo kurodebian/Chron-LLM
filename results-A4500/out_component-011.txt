@@ -1,0 +1,215 @@
+Here's a thinking process:
+
+1.  **Understand User Goal:** The user wants me to analyze a set of component specifications (artifacts) for `component-011`. Based on the provided relationships and recommended actions, I need to generate an optimal merge plan, ensure architectural consistency, and provide concrete improvement suggestions in a structured format.
+
+2.  **Analyze Input Data:**
+    *   **Component ID:** `component-011`
+    *   **Artifacts (5 files):**
+        1.  `runtime/ir/callback.spec` (6 lines) - Defines the physical-to-IR bridge callback, transitions, invariants (determinism, lossless, isolation, perf).
+        2.  `runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec` (42 lines) - Comprehensive spec defining types (`Phase`, `IR`, `Stream`, `DivRes`), state (`*ir-stream*`), operations (`init-bridge`, `ir-callback`, `push`, `clear`, `extract-actions`, `run-trial`, `divergence-profile`), and invariants.
+        3.  `runtime/ir/divergence.spec` (19 lines) - Defines analysis layer for divergence, types (`IR`, `Profile`, `Prompt`), state (`*model*`, `*ctx*`), operations (`extract-actions`, `run-ir-trial`, `divergence-profile`), and invariants.
+        4.  `runtime/ir/ir.spec` (21 lines) - Core package defining `Phase`, `IR` struct, `Stream`, operations (`make-ir`, accessors), and invariants (purity, immutability, ordering, replay). Defines the data flow.
+        5.  `runtime/ir/stream.spec` (28 lines) - Defines `PKG ir-stream`, types (`IR`, `Stream`), state (`*ir-stream*`), operations (`push-ir`, `clear-ir-stream`), invariants (ordering, ephemeral, neutrality, isolation), lifecycle, and threading notes.
+    *   **Observed Relationships & Recommended Actions:**
+        1.  `ir.spec` -> `stream.spec`: `PARTIAL_OVERLAP` -> `MERGE_B_INTO_A` (Merge stream into ir)
+        2.  `callback.spec` -> `stream.spec`: `INDEPENDENT` -> `KEEP_BOTH`
+        3.  `chron-llm-r1...spec` -> `divergence.spec`: `PARTIAL_OVERLAP` -> `MERGE_B_INTO_A` (Merge divergence into chron)
+        4.  `divergence.spec` -> `ir.spec`: `PARTIAL_OVERLAP` -> `KEEP_BOTH` (Refactor divergence to import ir's canonical IR)
+        5.  `callback.spec` -> `ir.spec`: `PARENT_CHILD` -> `KEEP_BOTH`
+
+3.  **Synthesize & Resolve Conflicts/Dependencies:**
+    Let's map out the dependencies and merge recommendations logically:
+    *   `ir.spec` is the core schema/type definition (Parent).
+    *   `stream.spec` should be merged into `ir.spec` (`MERGE_B_INTO_A`). This means `ir.spec` will absorb stream management logic.
+    *   `chron-llm-r1...spec` is a comprehensive spec that overlaps with `divergence.spec`. Recommendation: Merge divergence into chron (`MERGE_B_INTO_A`). So `chron-llm-r1...spec` becomes the unified analysis/observation layer spec.
+    *   `callback.spec` and `ir.spec` are Parent-Child, keep both. Callback depends on IR schema.
+    *   `divergence.spec` and `ir.spec` overlap but should be kept separate (`KEEP_BOTH`). Divergence needs to import canonical IR from `ir.spec`.
+    *   `callback.spec` and `stream.spec` are independent layers (Producer vs Consumer), keep both. But since `stream.spec` is being merged into `ir.spec`, the dependency will effectively be between `callback.spec` and `ir.spec` (or a new unified file).
+
+    Let's construct a coherent merge plan:
+    *   **Target 1:** `runtime/ir/core-ir-and-stream.spec` (Merged from `ir.spec` + `stream.spec`)
+        *   Contains canonical types (`Phase`, `IR`, `Stream`), core operations (`make-ir`, accessors, `push-ir`, `clear-ir-stream`), and unified invariants.
+    *   **Target 2:** `runtime/ir/callback-bridge.spec` (Unchanged from `callback.spec`)
+        *   Remains as the FFI/Physical bridge. Depends on Target 1 for IR types and stream operations.
+    *   **Target 3:** `runtime/ir/observation-analysis.spec` (Merged from `chron-llm-r1...spec` + `divergence.spec`)
+        *   Contains analysis operations (`extract-actions`, `run-trial`, `divergence-profile`), refined types (`DivRes`), and invariants. Will import canonical IR from Target 1 instead of defining its own simplified version.
+    *   **Dependency Graph:**
+        `callback-bridge.spec` -> uses -> `core-ir-and-stream.spec`
+        `observation-analysis.spec` -> imports -> `core-ir-and-stream.spec`
+        (Callback and Analysis are independent layers as per relationship 2)
+
+4.  **Check Architectural Consistency & Resolve Issues:**
+    *   *Type Definitions:* `ir.spec` defines `IR = STRUCT { ctx-id:ID; pos:INT; phase:Phase; token:TOKEN_ID; score:FLOAT }`. `divergence.spec` defines `IR = { phase: Int, pos: Int, token: String }`. This is a major schema drift. The merge plan correctly addresses this by having the analysis layer import the canonical IR from `ir.spec`.
+    *   *State Management:* `stream.spec` uses Lisp-style global state `*ir-stream*`. `chron-llm-r1...spec` also uses it. `callback.spec` mentions `Stream->push_ir(Stream, ir)`. The merge into `ir.spec` should standardize this as a module-level buffer or explicit context parameter to avoid hidden global state issues (noted in `stream.spec` threading: UNSAFE).
+    *   *Threading/Safety:* `stream.spec` explicitly says `THREADING: UNSAFE(GlobalMutable(*ir-stream*))`. `callback.spec` says `THREAD: Safe iff push_ir is Thread-Safe`. This needs a concrete improvement suggestion: introduce thread-local storage or explicit synchronization primitives, or document the required FFI boundary safety.
+    *   *Lifecycle/Flow:* The flow in `ir.spec` is `LLM_BACKEND -> IR_CALLBACK -> IR_STREAM -> ANALYSIS/KERNEL`. This matches the separation of concerns between callback (ingestion) and analysis (consumption).
+    *   *Naming/Structure:* The merged files should follow a consistent naming convention. I'll propose standardizing paths/names.
+
+5.  **Draft Structure for Output:**
+    I will structure the response as requested:
+    *   **1. マージ計画 (Merge Plan)** - Target artifacts, source mapping, rationale.
+    *   **2. アーキテクチャ整合性分析 (Architectural Consistency Analysis)** - Dependency graph, type/schema alignment, state/lifecycle management, concurrency model.
+    *   **3. 具体的な改善提案 (Concrete Improvement Suggestions)** - Actionable items for schema drift, thread safety, API design, documentation/testing.
+    *   **4. 最終構成図/フロー (Final Architecture Diagram/Flow)** - Text-based representation of the merged structure and data flow.
+
+6.  **Flesh out Content (Mental Refinement):**
+
+    *(1) マージ計画*
+    - Target A: `runtime/ir/core-ir-and-stream.spec` (Merge `ir.spec` + `stream.spec`)
+      - Action: `MERGE_B_INTO_A`
+      - Rationale: Unifies canonical type definitions with runtime stream management. Eliminates redundancy.
+    - Target B: `runtime/ir/callback-bridge.spec` (Keep `callback.spec`)
+      - Action: `KEEP_BOTH`
+      - Rationale: Distinct ingestion layer. Depends on Target A.
+    - Target C: `runtime/ir/observation-analysis.spec` (Merge `chron-llm-r1...spec` + `divergence.spec`)
+      - Action: `MERGE_B_INTO_A`
+      - Rationale: Unifies observation analysis logic. Imports canonical IR from Target A to fix schema drift.
+    - Resulting Artifact Count: 3 (down from 5)
+
+    *(2) アーキテクチャ整合性分析*
+    - **依存関係グラフ:** `callback-bridge` -> `core-ir-and-stream` <- `observation-analysis`. Clear separation of Ingestion, Core/Storage, and Analysis.
+    - **スキーマ整合性:** Resolves the `IR` type mismatch (`TOKEN_ID/FLOAT` vs `String`). Enforces single source of truth via import/reference.
+    - **状態管理とライフサイクル:** Standardizes `*ir-stream*` handling. Aligns lifecycle: Clear -> Decode (push) -> Analyze -> Clear. Addresses `INV-S4` and `run-trial` clear logic.
+    - **並行性モデル:** Acknowledges `UNSAFE` global mutable state. Proposes thread-local or explicit context passing for safety, aligning with `callback.spec`'s `Safe iff push_ir is Thread-Safe`.
+
+    *(3) 具体的な改善提案*
+    - **Schema Drift 解消:** Explicitly mandate `import core-ir-and-stream; use IR` in analysis layer. Remove local `IR` definition in divergence spec.
+    - **スレッドセーフティ強化:** Replace implicit global state with explicit context/context-manager pattern or add mutex/atomic operations. Document FFI boundary requirements.
+    - **API 設計の標準化:** Unify naming (`push-ir` vs `push`, `clear-ir-stream` vs `clear`). Adopt consistent parameter passing (e.g., pass stream explicitly instead of relying on global state where possible, or clearly document the global buffer contract).
+    - **不変条件の統合:** Merge overlapping invariants. E.g., `INV-IMMUTABLE` appears in multiple places. Consolidate into core spec. Ensure `INV-ORDERING` and `INV-S1` are aligned.
+    - **テスト/検証戦略:** Add property-based tests for determinism (`run-trial`), ordering, and thread safety. Define clear contracts for `extract-actions` filtering logic (phase==1).
+
+    *(4) 構造化出力形式*
+    I will format it professionally in Japanese as requested, using markdown tables/lists where appropriate. I'll ensure all constraints from the prompt are met.
+
+    Let's draft carefully.
+    *Self-Correction/Verification during drafting:*
+    - Check relationship `pair_57`: `ir.spec` -> `stream.spec`, MERGE_B_INTO_A. Correct.
+    - Check relationship `pair_14`: `chron...spec` -> `divergence.spec`, MERGE_B_INTO_A. Correct.
+    - Check relationship `pair_84`: `divergence.spec` -> `ir.spec`, KEEP_BOTH, but refactor to import canonical IR. I'll incorporate this into the analysis layer target.
+    - Check relationship `pair_24`: `callback.spec` -> `ir.spec`, PARENT_CHILD, KEEP_BOTH. Correct.
+    - Check relationship `pair_74`: `callback.spec` -> `stream.spec`, INDEPENDENT, KEEP_BOTH. Since stream is merged into ir, callback will depend on the merged core spec. This maintains independence of concerns (bridge vs storage/analysis).
+    - All relationships are logically consistent with a 3-file target structure.
+    - I need to explicitly map out how the invariants and types will be handled post-merge.
+    - The output should be highly structured: マージ計画, アーキテクチャ整合性, 改善提案, 最終構成.
+
+    Structure looks solid. I will generate the response now. 
+    I'll make sure to use precise technical Japanese terminology (e.g., スキーマドリフト, 依存関係グラフ, 不変条件の統合, スレッドローカルストレージ).
+    I will explicitly reference the provided `pair_id`s and `recommended_action`s to show direct alignment with the input.
+    Ready.✅
+</think>
+
+提供された仕様書データと関係性分析に基づき、`component-011` の最適マージ計画、アーキテクチャ整合性評価、および具体的な改善提案を構造化して出力します。
+
+---
+### 📦 1. 最適マージ計画 (Merge Plan)
+
+入力データの推奨アクションと依存関係を統合し、重複排除・関心事項の分離を実現する **3ファイル構成** に再編成します。
+
+| ターゲットファイル | 変換元アーティファクト | アクション | 統合方針 & 理由 |
+|:---|:---|:---|:---|
+| `runtime/ir/core-ir-and-stream.spec` | `ir.spec` + `stream.spec` | `MERGE_B_INTO_A` | **コア型定義＋ストリーム管理の統一**。`ir.spec`の抽象スキーマに`stream.spec`の実装コンテキスト（状態管理、ライフサイクル、不変条件）を統合。スキーマドリフト防止と実行時セマンティクスの一元化を図る。 |
+| `runtime/ir/callback-bridge.spec` | `callback.spec` | `KEEP_BOTH` | **物理層↔IR層のブリッジ（生産者）**。ストリーム実装の詳細から独立し、FFIフックとデータ変換ロジックのみを保持。依存先は上記ターゲットファイルへ変更。 |
+| `runtime/ir/observation-analysis.spec` | `chron-llm-r1...spec` + `divergence.spec` | `MERGE_B_INTO_A` | **観測分析層（消費者）**。`chron`仕様のアーキテクチャ骨格を維持し、`divergence`の具体的なアルゴリズム（プロファイル計算、フィルタリング）を組み込む。**重要：ローカル定義していた簡易版IR型を廃止し、`core-ir-and-stream.spec`から正規のIR型をインポート**する。 |
+
+🔹 **マージ後のアーティファクト数**: `5 → 3`
+🔹 **依存関係グラフ**:
+```mermaid
+graph LR
+  CB[callback-bridge.spec] -->|push_ir / clear| CS[core-ir-and-stream.spec]
+  OA[observation-analysis.spec] -->|import IR type| CS
+  style CS fill:#e1f5fe,stroke:#01579b
+  style CB fill:#fff3e0,stroke:#ff6f00
+  style OA fill:#e8f5e9,stroke:#2e7d32
+```
+
+---
+### 🏗️ 2. アーキテクチャ整合性分析 (Architectural Consistency)
+
+#### ✅ 1. スキーマと型定義の整合性
+- **現状の問題**: `divergence.spec` は `IR = { phase: Int, pos: Int, token: String }` と定義しているが、`ir.spec` では `token: TOKEN_ID; score: FLOAT` と厳密に定義されている。この差分はマージ時に重大なスキーマドリフトを引き起こす。
+- **整合性確保策**: 分析層（Target C）からローカル型定義を削除し、`use core_ir_and_stream.IR` で参照する。これにより `token` の型安全性と `score` フィールドの欠落リスクが解消される。
+
+#### ✅ 2. 状態管理とライフサイクル
+- **現状の問題**: `stream.spec` はグローバル変数 `*ir-stream*` を暗黙的に使用し、`chron`仕様も同様のLisp風ステート管理を採用している。`callback.spec` は `Stream->push_ir(Stream, ir)` と明示的なストリーム参照を想定しており、実装と仕様の乖離がある。
+- **整合性確保策**: マージ後の `core-ir-and-stream.spec` で **明示的コンテキスト渡し** または **モジュールレベルバッファの明確な契約化** を採用する。ライフサイクル `Clear → Decode(push) → Analyze(filter/extract) → Clear` を不変条件として統一し、`run-trial` 内の `clear()` 呼び出し位置を仕様書で厳密に定義する。
+
+#### ✅ 3. 並行性モデルとスレッドセーフティ
+- **現状の問題**: `stream.spec` は `THREADING: UNSAFE(GlobalMutable(*ir-stream*))` と明記されているが、`callback.spec` は `Safe iff push_ir is Thread-Safe` と条件付き安全性を提示している。LLMバックエンドの並列デコード時、グローバルミュータブル状態への競合が確実発生する。
+- **整合性確保策**: 仕様書レベルで `push_ir` のスレッドセーフ契約を強化。実装側ではスレッドローカルストレージ（TLS）または明示的なロック/アトミック操作の適用を要件として明文化し、`INV(Perf)` と `THREAD: Safe` の両立条件を定義する。
+
+---
+### 🛠️ 3. 具体的な改善提案 (Concrete Improvement Suggestions)
+
+| カテゴリ | 提案内容 | 期待効果 |
+|:---|:---|:---|
+| **📐 スキーマ統一** | `observation-analysis.spec` から `TYPE IR = ...` を削除し、`IMPORT core-ir-and-stream.IR` に置換。`token` と `score` の型制約をプロパティベーステストで検証する契約を追加。 | スキーマドリフトの完全排除、コンパイラ/リンカレベルでの型チェック有効化 |
+| **🔒 状態管理の明示化** | グローバル変数 `*ir-stream*` に依存する暗黙的結合を解消。`push_ir(stream, ir)` や `extract_actions(stream)` のようにストリーム参照を引数で渡すパターンへ仕様を移行（またはスレッドローカルバッファ契約を明文化）。 | テスト容易性の向上、並列実行時のデータ競合リスク低減 |
+| **🔄 不変条件の統合** | 重複する `INV-IMMUTABLE`、`INV-ORDERING`、`INV-S1` を `core-ir-and-stream.spec` に集約。分析層では `INV-OBS_ONLY: !write(Runtime|Kernel)` のみを残し、消費側として純粋関数的な振る舞いを保証する契約を明文化。 | 仕様書の冗長性解消、検証ロジックの一元管理 |
+| **⚡ パフォーマンス契約** | `callback.spec` の `Time=O(1); Mem=O(1)` と `divergence.spec` の `COST O(N log N)` を統合し、データフローごとの計算量バウンダリを定義。`extract-actions` のソート処理は安定ソートであることを明記。 | リアルタイム制約の検証可能化、ボトルネック予測の精度向上 |
+| **🧪 検証・テスト戦略** | `run-trial(prompt, n)` の決定性保証（`INV-DETERMINISTIC`）を検証するための固定シード付きプロパティテストを定義。`phase==1` のフィルタリングロジックと `pos` 順序保持をユニットテストで強制。 | 観測データの再現性担保、分析パイプラインの信頼性向上 |
+
+---
+### 📜 4. マージ後の仕様書構造イメージ (Target Artifact Outline)
+
+#### `runtime/ir/core-ir-and-stream.spec` (統合コア)
+```text
+PKG ir-core
+IMPORTS: [cffi, threading-primitives]
+
+TYPE Phase = {0:PREFILL | 1:GENERATION | 2:FINALIZE}
+TYPE IR = STRUCT { ctx-id:ID; pos:INT; phase:Phase; token:TOKEN_ID; score:FLOAT }
+TYPE Stream = Array[IR] { adjustable=T, fill-pointer=0 }
+
+STATE *ir-stream*: Stream = []  // Thread-Local or Mutex-Guarded per spec contract
+
+OP make-ir(...) -> IR
+OP push-ir(ir: IR) -> Void   // PRE: ir != null; POST: append(*ir-stream*, ir)
+OP clear-ir-stream() -> Void // POST: *ir-stream* = []
+ACC ir-{ctx-id,pos,phase,token,score}(IR)
+
+INVARIANTS:
+  INV-IMMUTABLE: post(make-ir) -> immutable(IR.fields)
+  INV-ORDERING: push(A).t < push(B).t => index(A) < index(B)
+  INV-ISOLATION: RunStart -> clear-ir-stream() // Lifecycle enforcement
+```
+
+#### `runtime/ir/callback-bridge.spec` (ブリッジ層)
+```text
+MODULE ir-callback : Physical->IR Bridge
+DEPS=[ir-core, cffi]
+
+SIG callback(ctx_id:Ptr, pos:Int, token:Int, score:Float, phase:Int)->Void
+TRANSITION(callback): 
+  ir = make_ir(ctx_id=ctx_id, pos=pos, token=token, score=score, phase=phase)
+  push-ir(ir) // Delegates to core
+
+INVARIANTS:
+  INV-Determinism: callback(e1)==callback(e2)<=>e1==e2
+  INV-Lossless: ir.fields == {ctx_id, pos, token, score, phase}
+  INV-Perf: Time=O(1); Mem=O(1)
+```
+
+#### `runtime/ir/observation-analysis.spec` (分析層)
+```text
+MODULE ir-analysis : ObservationAnalysisLayer
+IMPORTS [ir-core] // Uses canonical IR type only
+
+TYPE DivRes = {step: int, all-same: bool, p-same: float}
+
+OP extract-actions(stream: Stream) -> List<IR>
+  BODY: filter(ir in stream | ir.phase == GENERATION)
+  INV-ORDERED: result[i].pos <= result[i+1].pos
+
+OP divergence-profile(prompt: Prompt, n-runs: Int) -> List[DivRes]
+  // Incorporates concrete algorithm from divergence.spec
+  // Uses run-trial internally which manages lifecycle via clear/push/extract
+
+INVARIANTS:
+  INV-OBS_ONLY: !write(Runtime|Kernel|Candidate|Canonical|Prompt)
+  INV-DET: Same inputs -> Same outputs; No RNG in analysis
+```
+
+---
+### 💡 まとめ
+本マージ計画は、**「コア型定義の単一真実源化（Single Source of Truth）」**と**「生産者/消費者層の関心事項分離」**を両立させます。`divergence.spec` のローカル型定義廃止と `stream.spec` の状態管理契約化を実施することで、Delta3 Kernel における観測パイプラインの決定性・再現性・スレッド安全性が仕様書レベルで保証されます。実装フェーズでは、上記改善提案をタスクチケット化し、プロパティベーステストと型チェックによる検証フローに組み込むことを強く推奨します。

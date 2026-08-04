@@ -7,14 +7,14 @@ TYPES:
   ptr-ctx = pointer
   ptr-vocab = pointer
   ptr-sampler = pointer
-  event = struct(index:int, clock:int, causal-id:any, kind:symbol, payload:any)
+  event = struct(index:int, causal-id:any, kind:symbol, payload:any)
 
 STATE:
   *n-past* : int32
 
 EXPORTS(KERNEL_ABI):
   make-event -> event
-  ev-index(event), ev-clock(event), ev-causal-id(event), ev-kind(event), ev-payload(event)
+  ev-index(event), ev-causal-id(event), ev-kind(event), ev-payload(event)
 
 EXPORTS(RUNTIME_API):
   init-chron-llm, tokenize, prefill-prompt, generate

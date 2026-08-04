@@ -28,8 +28,8 @@ causal-subgraph(graph: CanonicalGraph, target-id: ID) -> CanonicalNode[]
 PRE: target-id in graph.nodes
 POST: result contains only nodes reachable via EdgeType=causal
 
-associated-evaluations(graph: CanonicalGraph, node-id: ID) -> CanonicalNode[]
-PRE: node-id in graph.nodes
+associated-evaluations(graph: CanonicalGraph, causal_id: CausalID) -> CanonicalNode[]
+PRE: causal_id in graph.nodes
 POST: result contains nodes linked via EdgeType=eval or EdgeType=feedback
 
 build-prompt(context-nodes: ContextNode[]) -> Prompt

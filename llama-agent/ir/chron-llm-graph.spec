@@ -1,6 +1,6 @@
 TYPES
-Event = {id, clock, causal_id, payload}
-Node = {id, clock, class, event, causal_id}
+Event = {id, causal_id, payload}
+Node = {id, class, event, causal_id}
 Edge = {kind: :temporal | :causal, from: NodeID, to: NodeID}
 Graph = {nodes: Hash<NodeID, Node>, edges: Vector<Edge>, parents: Hash<NodeID, NodeID>, latest_healthy: Hash<WorldID, NodeID>}
 HealthyTable = Hash<CausalID, NodeID>
@@ -16,7 +16,7 @@ rebuild-graph-from-wal(wal: Vector<Event>) -> Graph
 lift-to-graph(wal: Vector<Event>) -> Graph
 add-node-to-graph(g: Graph, e: Event) -> Node
 determine-node-class(e: Event) -> Class
-find-parent-node-id(causal_id: ID, ht: HealthyTable, fallback: NodeID) -> NodeID
+find_parent_causal_id(causal_id: CausalID, ht: HealthyTable, fallback: CausalID) -> CausalID
 add-edge(g: Graph, kind: Kind, from: NodeID, to: NodeID)
 graph-history(g: Graph, world_id: ID) -> History
 clean-history() -> History
@@ -30,7 +30,7 @@ lift-to-graph(wal):
   for e in wal:
     n = add-node-to-graph(g, e)
     if last_temporal_id != nil: add-edge(g, :temporal, last_temporal_id, n.id)
-    parent_id = find-parent-node-id(n.causal_id, ht, global_last_healthy_id)
+    parent_id = find_parent_causal_id(n.causal_id, ht, global_last_healthy_id)
     if parent_id != nil: add-edge(g, :causal, parent_id, n.id)
     if n.class != :fault:
       ht[n.causal_id] = n.id
@@ -39,11 +39,11 @@ lift-to-graph(wal):
   return g
 
 add-node-to-graph(g, e):
-  n = Node{id=e.id, clock=e.clock, class=determine-node-class(e), event=e, causal_id=e.causal_id}
+  n = Node{id=e.id, class=determine-node-class(e), event=e, causal_id=e.causal_id}
   g.nodes[n.id] = n
   return n
 
-find-parent-node-id(causal_id, ht, fallback):
+find_parent_causal_id(causal_id, ht, fallback):
   if causal_id in ht: return ht[causal_id]
   return fallback
 

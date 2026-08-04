@@ -1,20 +1,70 @@
-TYPE CausalID
-TYPE Worldline = {id: CausalID, state: Any}
-TYPE Event = {type: {discontinuity, abort, drift, stagnation}, count: Int}
-STATE S = {current_id: CausalID, canonical_id: CausalID, drift_cnt: Int, stag_cnt: Int, history: Map<CausalID, Worldline>}
-PRED branch(E) = (E.type in {discontinuity, abort}) | (E.type == drift & E.count >= 3) | (E.type == stagnation & E.count >= 5)
-OP Branch(S, E) -> S':
-  PRE: branch(E)
-  S'.current_id = gen_id()
-  KV_Cache = null
-  path = Traverse(Graph, causal_edges)
-  Prefill = Construct(path)
-  S'.history[S'.current_id] = {id: S'.current_id, state: Prefill}
-  S'.drift_cnt = 0
-  S'.stag_cnt = 0
-OP Commit(id, S) -> S':
-  S'.canonical_id = id
-INV: Branch deterministic
-INV: history replayable
-INV: w in S.history & w.id != S.current_id => w immutable
-INV: S.canonical_id mutable iff op == Commit
+# 13-worldline-branching.spec (Worldline Branching Contract)
+
+MODULE WorldlineBranching
+  REQUIRES: [ architecture-v1.1, constitution ]
+
+## 1. TYPES
+
+Type DiscontinuityType = :discontinuity | :abort | :drift | :stagnation
+
+Type BranchTrigger = {
+    event_type: DiscontinuityType,
+    count: U32
+}
+
+Type BranchCandidate = {
+    parent_event: CandidateEvent,
+    target_world_id: WorldID,
+    derivation_hash: HashString
+}
+
+
+## 2. PREDICTING BRANCH CONDITIONS
+
+Pred NeedBranch(trigger: BranchTrigger) = 
+    (trigger.event_type in {:discontinuity, :abort}) | 
+    (trigger.event_type == :drift & trigger.count >= 3) | 
+    (trigger.event_type == :stagnation & trigger.count >= 5)
+
+
+## 3. OPERATIONS
+
+Op ExecuteBranch(
+    state: SystemState, 
+    parent_event: CandidateEvent, 
+    trigger: BranchTrigger,
+    new_world_id: WorldID
+) -> Result<SystemState, BranchError>
+
+  PRE: 
+    NeedBranch(trigger) AND
+    ExistsInWAL(state.wal, parent_event.parent_id) AND
+    NOT ExistsWorld(state.world_heads, new_world_id)
+
+  STEPS:
+    // 1. 因果ハッシュの決定論的計算（内部クロック/可変ID/gen_id()は使用しない）
+    derivation_hash = Hash(parent_event.parent_id || new_world_id || parent_event.kind)
+    
+    candidate = BranchCandidate {
+        parent_event: parent_event,
+        target_world_id: new_world_id,
+        derivation_hash: derivation_hash
+    }
+
+    // 2. Constitution (B) の Commit を呼び出し、不変条件検証とWAL追記をアトミック委任
+    commit_result = Constitution.Commit(state, candidate)
+
+    IF commit_result.is_success THEN
+        state.active_causal_id = derivation_hash
+        state.kv_cache = NULL  // 分岐に伴うキャッシュクリア
+        state.world_heads[new_world_id] = derivation_hash
+        RETURN Ok(state)
+    ELSE
+        RETURN Err(BranchError.ValidationFailed(commit_result.reason))
+
+
+## 4. INVARIANTS
+
+INV: Branch deterministic (derivation_hash depends only on parent_id, world_id, kind)
+INV: history replayable from WAL
+INV: forall w in state.world_heads: w.key != state.active_stream_id => w.value is immutable

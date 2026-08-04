@@ -4,69 +4,86 @@
 // ============================================================================
 
 // ----------------------------------------------------------------------------
-// 1. Domain Types & Data Structures
+// 1. Domain Types & Data Structures (01-domain-model.spec Aligned)
 // ----------------------------------------------------------------------------
 
+TYPE PayloadRef = {
+  hash: String,               // SHA-256 Hex string
+  size: U64,                  // Size in bytes
+  storage: Enum(:memory | :disk | :remote)
+} : immutable
+
+TYPE NodeID = String          // UUID v4 format
+TYPE Keyword = String
+
 TYPE Node = {
-  id: ID,
+  id: NodeID,
   type: Keyword,
-  payload_ref: Ref,
-  metadata: Any
+  payload_ref: PayloadRef,
+  causal_depth: U64,
+  metadata: Map<String, Any>
 } : immutable
 
 TYPE Edge = {
-  from: ID,
-  to: ID,
+  from: NodeID,
+  to: NodeID,
   type: Enum(:causal | :eval)
-}
+} : immutable
 
 TYPE Graph = {
-  nodes: [Node],
+  nodes: Map<NodeID, Node>,
   edges: [Edge]
-}
+} : immutable
 
 TYPE Eval = {
-  id: ID,
+  id: NodeID,
   score: Float,
   eval_type: Keyword,
   content: String
-}
+} : immutable
 
 TYPE ContextNode = {
-  id: ID,
+  id: NodeID,
   type: Keyword,
-  content: String,
-  feedbacks: [Eval]
-}
+  content: String
+} : immutable
+
+TYPE FeedbackContext = {
+  target_id: NodeID,
+  feedbacks: Map<NodeID, [Eval]>
+} : immutable
 
 TYPE PrefillState = {
   context: [ContextNode],
-  target_id: ID,
-  hash: String
+  target_id: NodeID,
+  hash: String                // SHA256 of materialized canonical prompt
 } : immutable
 
 
 // ----------------------------------------------------------------------------
-// 2. Fundamental Graph Primitive Operations
+// 2. Fundamental Graph Primitives & Kernel Authority
 // ----------------------------------------------------------------------------
 
-OP get-node(g: Graph, id: ID) -> Node | nil
+OP get-node(g: Graph, id: NodeID) -> Node | nil
+  : POST(RETURN g.nodes[id])
 
-OP add-node!(g: Graph, n: Node) 
-  : PRE(!exists(n' in g.nodes | n'.id == n.id))
+OP add-node!(g: Graph, n: Node) -> Graph
+  : PRE(!exists_key(g.nodes, n.id))
   : RESTRICTED(CommitKernel)
+  : INV(INV-GRAPH-APPEND)
 
-OP add-edge!(g: Graph, e: Edge) 
+OP add-edge!(g: Graph, e: Edge) -> Graph
   : PRE(get-node(g, e.from) != nil && get-node(g, e.to) != nil)
   : RESTRICTED(CommitKernel)
+  : INV(INV-GRAPH-APPEND)
 
-OP causal-subgraph(g: Graph, target: ID) -> [Node]
-  : traverse_incoming(:causal, target)
-  : INV(deterministic_order, cycle_safe)
+OP causal-subgraph(g: Graph, target: NodeID) -> [Node]
+  : ALGO(topological_sort(traverse_incoming(:causal, target)))
+  : INV(INV-DETERMINISTIC-ORDER, INV-CYCLE-SAFE)
 
-OP associated-evals(g: Graph, id: ID) -> [Eval]
-  : traverse_outgoing(:eval, id)
-  : INV(insertion_order_preserved)
+OP associated-evals(g: Graph, id: NodeID) -> [Eval]
+  : ALGO(traverse_outgoing(:eval, id))
+  : INV(INV-INSERTION-ORDER-PRESERVED)
 
 
 // ----------------------------------------------------------------------------
@@ -74,60 +91,69 @@ OP associated-evals(g: Graph, id: ID) -> [Eval]
 // ----------------------------------------------------------------------------
 
 [INVARIANT: INV-CAUSAL-INTEGRITY]
-"PrefillState.context MUST be derived exclusively from :causal edges and DAG traversal."
+"PrefillState.context MUST be derived exclusively from :causal edges via DAG traversal."
 
 [INVARIANT: INV-EVAL-ISOLATION]
-"Evaluation attachments (:eval edges) are optional metadata and MUST be kept completely
- disjoint from the causal ancestry graph structure and prefill prompt sequence ordering."
+"Evaluation attachments (:eval edges) MUST NOT enter the causal ancestry traversal
+ or affect the ordering and content of PrefillState."
 
 [INVARIANT: INV-READ-ONLY]
-"Operations project-context and build-prefill-state MUST NOT mutate Graph or Store."
+"Operations project-context, project-feedback-context, and build-prefill-state
+ MUST NOT mutate Graph or Store."
 
-OP project-context(g: Graph, store: Store, target: ID, inc_evals: Boolean = false) -> [ContextNode]
-  PRE: exists(n in g.nodes | n.id == target) && store.readable
+OP project-context(g: Graph, store: Store, target: NodeID) -> [ContextNode]
+  PRE: exists_key(g.nodes, target) && store.readable
   POST: 
     nodes = causal-subgraph(g, target)
     RETURN map(n -> {
       id: n.id,
       type: n.type,
-      content: store.load(n.payload_ref) || "",
-      feedbacks: IF inc_evals THEN associated-evals(g, n.id) ELSE []
+      content: store.load(n.payload_ref) || ""
     }, nodes)
+
+OP project-feedback-context(g: Graph, target: NodeID) -> FeedbackContext
+  PRE: exists_key(g.nodes, target)
+  POST:
+    nodes = causal-subgraph(g, target)
+    RETURN {
+      target_id: target,
+      feedbacks: reduce(acc, n -> acc.put(n.id, associated-evals(g, n.id)), {}, nodes)
+    }
 
 
 // ----------------------------------------------------------------------------
 // 4. Prefill State Construction & Determinism
 // ----------------------------------------------------------------------------
 
-[INVARIANT: INV-DETERMINISM]
-"Given identical Graph, Store, target ID, and builder, build-prefill-state MUST produce
- an identical PrefillState output and state hash."
+[INVARIANT: INV-PREFILL-DET]
+"Given identical Graph, Store, target NodeID, and custom builder, build-prefill-state
+ MUST produce identical PrefillState output and state hash across all executions."
 
 [INVARIANT: INV-HASH-IDENTITY]
-"PrefillState.hash MUST exactly equal SHA256(prompt)."
+"PrefillState.hash MUST exactly equal SHA256(materialized_prompt_string)."
 
 [INVARIANT: INV-BOUNDARY-ISOLATION]
 "PrefillState represents context topology and prompt materialization ONLY.
- It MUST NOT be confused with KV-Cache or LLM Generation Runtime tokens."
+ It MUST NOT contain KV-Cache pointers or LLM generation runtime token buffers."
 
 OP canonical-prompt(ctx: [ContextNode]) -> String
-  : ALGO(concat(map(n -> format("(prompt (:node {n.id} :type {n.type} :content {n.content}))", ctx))))
-  : INV(preserves_node_order, deterministic_serialization)
+  : ALGO(concat(map(n -> format("(prompt (:node {n.id} :type {n.type} :content {n.content}))"), ctx)))
+  : INV(INV-PRESERVES-NODE-ORDER, INV-DETERMINISTIC-SERIALIZATION)
 
 OP build-prefill-state(
   g: Graph, 
   store: Store, 
-  target: ID, 
-  opts: { inc_evals: Boolean, builder: Option<Function> }
+  target: NodeID, 
+  opts: { builder: Option<Function> } = { builder: nil }
 ) -> PrefillState
-  PRE: opts.builder == nil || returns_string(opts.builder)
+  PRE: exists_key(g.nodes, target) && (opts.builder == nil || returns_string(opts.builder))
   POST:
-    ctx = project-context(g, store, target, opts.inc_evals)
+    ctx = project-context(g, store, target)
     prompt_builder = opts.builder || canonical-prompt
     prompt = prompt_builder(ctx)
     hash_digest = SHA256(prompt)
     RETURN {
       context: ctx,
-      target-id: target,
+      target_id: target,
       hash: hash_digest
     }

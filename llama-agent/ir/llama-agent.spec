@@ -13,7 +13,7 @@ OP init_layers():
   phys := IF *use-mock-physical-p* THEN "ffi-bindings-mock.lisp" ELSE "ffi-bindings.lisp"
   load_system_file(phys)
   load_system_file("chron-llm.lisp")
-  load_system_file("chron-llm-causal.lisp")
+  // load_system_file("chron-llm-causal.lisp")  <- 廃止のため削除
   load_system_file("immune-system.lisp")
   load_system_file("chron-llm-runtime.lisp")
   load_system_file("generate.lisp")

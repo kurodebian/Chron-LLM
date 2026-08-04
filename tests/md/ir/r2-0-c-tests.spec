@@ -1,83 +1,65 @@
-TYPES
-  Bool = t | nil
-  Str, Int, Map<K,V>, List[T]
-  Node { id: Str }
-  Edge { src: Node, dst: Node }
-  Graph { nodes: [Node], edges: [Edge] }
-  Store {}
-  Registry { worlds: [World], active_id: Str, ancestry: Map<Str, Str> }
-  World { id: Str, root_node: Node, head_node: Node, policy: Policy, meta: Meta, lifecycle: Lifecycle }
+// ============================================================================
+// CHRON-LLM R2.0-C OBSERVATION CONTRACT TEST SPECIFICATION
+// Version: v1.0 (SSOT Harmonized)
+// Target File: tests/md/ir/r2-0-c-tests.spec
+// Single Source of Truth Alignment: chron-llm-r2-world-runtime-obs-v1.0
+// ============================================================================
 
-  WOBS { schema_version: Int, world_id: Str, ... }
-  ROBS { world_ids: [Str], active_id: Str, ... }
-  AOBS { child_id: Str, parent_id: Str, path: [(Str . Str)] }
-  DOBS { changed_p: Bool, changed_fields: [Str] }
+PKG chron-r2-0-c
 
-UTILS
-  %c-assert(cond: Bool, desc: Str) -> t | Error
-    Pre: true
-    Post: !cond -> Error(desc); cond -> t
+TYPES:
+  PayloadRef = { hash:SHA256, size:U64, storage:Enum{:memory, :disk, :remote} }
+  MemStore = HashTable<Str, PayloadRef>
+  Node = { id:ID, type:Kw, payload_ref:PayloadRef, causal_depth:U64, meta:Map }
+  Edge = { from:ID, to:ID, type:Enum{:causal, :eval} }
+  Graph = { nodes:Map<ID, Node>, edges:[Edge] }
+  
+  World = { id:ID, graph:Ref<Graph>, mem:Ref<MemStore>, root:ID, head:ID, policy:Map, meta:Map, lifecycle:Enum{:created, :active, :inactive, :archived} }
+  Registry = { worlds:[World], ancestry:Map<ID, ID>, active:ID|NIL, graph:Ref<Graph>, mem:Ref<MemStore> }
 
-  %c-fixture() -> (Graph, Store, Registry)
-    State: G.nodes=["root","head"]; G.edges=[(root->head)]
-    Returns: (G, S, R) bound(G,S)
+  WorldObs = { ver:U16, world_id:ID, root_id:ID, head_id:ID, policy:Map, meta:Map, lifecycle:Enum{:created, :active, :inactive, :archived}, parent_id:ID|NIL }
+  RegistryObs = { ver:U16, world_ids:[ID], active_id:ID|NIL, archived_ids:[ID] }
+  AncestryObs = { world_id:ID, parent_id:ID|NIL, path:[ID] }
+  DiffObs = { changed:Bool, fields:[Str] }
 
-TESTS
-  d1-world-non-mutation() -> t | Error
-    Setup: W = World(policy={include-evals:nil}, meta={label:"stable"})
-    Op: Obs = describe-world(W)
-    Assert: world-observation-p(Obs)
-    Assert: W.id==W'.id & W.nodes==W'.nodes & W.policy==W'.policy & W.meta==W'.meta & W.lifecycle==W'.lifecycle
-    Assert: Obs.schema_version == +observation-schema-version+
+UTILS:
+  %c-assert(cond:Bool, desc:Str) -> Bool | Error("R2.0-C invariant failed: ~A")
+  %c-fixture() -> (g:Ref<Graph>, m:Ref<MemStore>, w:World, r:Registry, child:World)
+    INIT g.nodes = {"root": {id:"root", type::root, payload_ref:{hash:"0", size:0, storage::memory}, causal_depth:0, meta:{}}};
+         g.edges = [];
+         m = make-memory-store();
+         w = make-world("w-0", g, m, "root", "root", {}, {});
+         r = register-world(new-registry(g, m), w);
+         child = fork-world(w, "w-child");
+         r' = register-world(r, child)
 
-  d2-registry-non-mutation() -> t | Error
-    Setup: R.worlds=["first","second"]; R.active_id="second"; R.archived=["first"]
-    Op: Obs = describe-registry(R)
-    Assert: registry-observation-p(Obs)
-    Assert: R.worlds==R'.worlds & R.active_id==R'.active_id & R.ancestry==R'.ancestry
+OPS:
+  snapshot-world(w:World) -> WorldObs
+  snapshot-registry(r:Registry) -> RegistryObs
+  snapshot-ancestry(w:World) -> AncestryObs
+  snapshot-diff(w1:World, w2:World) -> DiffObs
 
-  d3-deterministic-observation() -> t | Error
-    Setup: W, R
-    Op1: O1=describe-world(W); O2=describe-world(W)
-    Assert: O1.world_id == O2.world_id
-    Op2: R1=describe-registry(R); R2=describe-registry(R)
-    Assert: R1.world_ids == R2.world_ids
+TESTS (Public Observation API Validation):
+  c1-world-non-mutation() -> Bool
+    POST: snapshot-world(w) => w' eq w AND obs.ver == 1 AND obs.world_id == w.id AND obs.root_id == w.root AND obs.head_id == w.head
 
-  d4-accurate-ancestry() -> t | Error
-    Setup: P=World("parent"); C=World("child"); Link(P->C)
-    Op: Anc = describe-ancestry(C)
-    Assert: ancestry-observation-p(Anc)
-    Assert: Anc.child_id=="child" & Anc.parent_id=="parent"
-    Assert: Anc.path == [("child" . "parent")]
+  c2-registry-non-mutation() -> Bool
+    POST: snapshot-registry(r) => r' eq r AND obs.ver == 1 AND obs.world_ids contains w.id AND obs.active_id == r.active
 
-  d5-deterministic-difference() -> t | Error
-    Setup: A, B (Obs)
-    Op1: D=describe-diff(A,A)
-    Assert: diff-observation-p(D) & D.changed_p==nil & D.changed_fields==[]
-    Op2: D2=describe-diff(A,A)
-    Assert: D == D2
-    Op3: D3=describe-diff(WObs, RObs)
-    Assert: D3.changed_p == t
+  c3-deterministic-observation() -> Bool
+    POST: snapshot-world(w) == snapshot-world(w) AND snapshot-registry(r) == snapshot-registry(r)
 
-  d6-representation-independence() -> t | Error
-    Setup: W1(params="same"), W2(params="same") distinct instances
-    Op: O1=describe-world(W1); O2=describe-world(W2)
-    Assert: O1.world_id==O2.world_id & O1.root_node_id==O2.root_node_id
+  c4-accurate-ancestry() -> Bool
+    POST: snapshot-ancestry(child).world_id == child.id AND snapshot-ancestry(child).parent_id == w.id AND snapshot-ancestry(child).path == [w.id, child.id]
 
-  d7-value-object-equality() -> t | Error
-    Setup: Same as d6 (W1, W2 equivalent params)
-    Op: O1=describe-world(W1); O2=describe-world(W2)
-    Assert: equal(O1,O2)==t & world-observation-equal(O1,O2)==t
+  c5-deterministic-difference() -> Bool
+    POST: snapshot-diff(w, w).changed == false AND snapshot-diff(w, w).fields == [] AND (snapshot-diff(w1, w2).changed == true IF w1.meta != w2.meta)
 
-RUNNER
-  run-r2-0-c-tests() -> t | Error
-    Ops: For test in [d1..d7]: res=funcall(test); %c-assert(res!=nil)
-    Returns: t
+  c6-value-object-equality() -> Bool
+    POST: equal(snapshot-world(w1), snapshot-world(w2)) == true IF (w1.id == w2.id AND w1.root == w2.root AND w1.head == w2.head AND w1.meta == w2.meta)
 
-INVARIANTS (INV)
-  Immutability: describe(X) -> X' s.t. X == X'
-  Determinism: f(x)=y => f(x)=y
-  SchemaCompliance: WOBS.schema_version == +observation-schema-version+
-  AncestryAccuracy: AOBS.path reflects explicit edges
-  DiffSemantics: diff(a,a).changed_p==nil; diff(TypeA,TypeB).changed_p==t
-  ValueSemantics: equal(Obs1,Obs2) iff content(Obs1)==content(Obs2)
+INVARIANTS (System Observation Contract Mapping):
+  INV-5 (Obs-Primitive)       : All observation attributes MUST resolve strictly to primitive data types (null, bool, str, num, kw, list, map).
+  INV-9 (Obs-Read-Only)       : Snapshot & Observation operations MUST NOT mutate World, Registry, or Graph state.
+  INV_OBS_VER                 : Observation schema version MUST be fixed to version 1 (ver == 1).
+  INV_OBS_DETERMINISM         : Equal state produces identical observation data (Pure Observation Function).

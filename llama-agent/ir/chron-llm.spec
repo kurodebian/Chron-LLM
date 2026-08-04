@@ -1,6 +1,6 @@
 TYPES:
 Event: header:Header, payload:PropertyList [Persistent]
-Header: index:WALPos, clock:LogicalClock, node-id:UUID, causal-id:WorldlineID, kind:Symbol [ManagedBy:Kernel]
+Header: index:WALPos, causal-id:WorldlineID, kind:Symbol [ManagedBy:Kernel]
 Node: id:ID, kind:Symbol, content:Any, parent:NodeRef, worldline:WorldlineID, status:Active|Fault [RuntimeObject]
 Context: model:ModelPtr, ctx:LLamaCtx, n-past:Int
 Sampler: temp:Float, top-p:Float

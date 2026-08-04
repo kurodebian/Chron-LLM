@@ -1,6 +1,6 @@
 TYPES:
 Symbol = :user-message | :assistant-reply | :branch | :ok | :degraded
-HistoryEntry = {kind: Symbol, text: String, clock: Integer}
+HistoryEntry = {kind: Symbol, text: String}
 ContextObject = {system_prompt: String?, history: [HistoryEntry], memory_context: Any?, metadata: Any?}
 KernelState = {world_id: Integer, health: Symbol, context: ContextObject}
 Kernel = {wal: WAL, graph: Graph?, current_world: Integer}
@@ -46,7 +46,7 @@ refresh-projections(k: Kernel)
 
 %history->dto(g: Graph) -> [HistoryEntry]
   nodes = graph-history(g)
-  return map(n -> {kind: n.kind, text: n.payload.text | "", clock: n.clock})
+  return map(n -> {kind: n.kind, text: n.payload.text | ""})
 
 kernel-build-context-view(k: Kernel) -> ContextObject
   hist = %history->dto(k.graph)

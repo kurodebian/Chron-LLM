@@ -5,7 +5,7 @@ Chron-LLM Specification Invariant & Integrity Linter (spec_invariant_linter.py)
 Checks:
 1. Reference Integrity: Active specs must not reference deprecated/archived files.
 2. Package Declaration Alignment: Verifies PKG statements in active test specifications.
-3. Invariant Syntax & Naming: Validates [INVARIANT: ...] constructs in active specs.
+3. Invariant Syntax & Naming: Validates both legacy [INVARIANT: ...] and SSOT v1.0 INV-N constructs.
 """
 
 import os
@@ -31,7 +31,7 @@ def lint_spec_files(root_dir="."):
     for spec_path in spec_files:
         rel_path = spec_path.relative_to(root)
         
-        # archive/ 配下（退避ファイルおよびバックアップフォルダ）はアクティブチェック対象外とする
+        # archive/ 配下はアクティブチェック対象外
         is_archived = str(rel_path).startswith("archive/") or "archive" in rel_path.parts
         
         try:
@@ -74,13 +74,26 @@ def lint_spec_files(root_dir="."):
         # Check 3: Invariant definition syntax checking (active specs only)
         # ---------------------------------------------------------------------
         if not is_archived:
+            defined_inv_ids = set()
             for line_no, line in enumerate(lines, 1):
                 line_str = line.strip()
+                
+                # 旧形式: [INVARIANT: ...]
                 if line_str.startswith("[INVARIANT:"):
                     if not line_str.endswith("]"):
                         errors.append(
-                            f"[{rel_path}:{line_no}] Malformed [INVARIANT:] header: '{line_str}'"
+                            f"[{rel_path}:{line_no}] Malformed legacy [INVARIANT:] header: '{line_str}'"
                         )
+                
+                # 新形式: INV-1 (Name) : Condition
+                inv_match = re.match(r"^(INV-\d+)\s*\(([^)]+)\)\s*:(.+)$", line_str)
+                if inv_match:
+                    inv_id = inv_match.group(1)
+                    if inv_id in defined_inv_ids:
+                        errors.append(
+                            f"[{rel_path}:{line_no}] Duplicate Invariant ID '{inv_id}' found in same spec."
+                        )
+                    defined_inv_ids.add(inv_id)
 
     print(f"\n📊 Summary Report:")
     print(f"  ・ Files Scanned: {checked_count}")
