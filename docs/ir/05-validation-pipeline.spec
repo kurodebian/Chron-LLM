@@ -6,14 +6,14 @@ Violation : {type, severity:{recoverable|unrecoverable}}
 Observation : {detector, score, threshold, facts[]}
 ValidationReport : {cid: Candidate.id, syntax-violations: [Violation], semantic-violations: [Violation], invariant-violations: [Violation], observations: [Observation]}
 RuntimeRequestKind : commit | reject | defer | retry | retry-penalty | abort
-RuntimeRequest : {kind: RuntimeRequestKind}
+KernelAction : {kind: RuntimeRequestKind}
 
 OPS:
 Validation(Candidate c, Canonical canon) -> ValidationReport r
   Layers: SyntaxCheck(c) -> SemanticConsistencyCheck(c,canon) -> InvariantCheck(c,canon) -> ObservationCheck(c)
   Output: r = aggregate(Layers.facts)
 
-PolicyRouter(ValidationReport r, Config cfg) -> RuntimeRequest req
+PolicyRouter(ValidationReport r, Config cfg) -> KernelAction req
   Logic:
     IF len(r.syntax-violations) > 0 -> req.kind = reject
     ELSE IF len(r.semantic-violations) > 0 -> req.kind = reject
@@ -27,4 +27,4 @@ INV:
   FactOnly(ValidationReport): r contains NO routing-decision.
   FactOnly(Observation): o contains NO routing-logic/runtime-decision/rejection.
   ConfigBoundary: cfg modifies PolicyRouter ONLY; NOT Validation semantics/observation-measurement.
-  KernelExclusivity: RuntimeRequest consumed BY Kernel ONLY.
+  KernelExclusivity: KernelAction consumed BY Kernel ONLY.

@@ -1,220 +1,89 @@
-Here's a thinking process:
+# Structured Analysis Report: Component-005
 
-1.  **Understand User Input:**
-   - **Input Data:** A JSON object containing component metadata (`component_id`, `artifact_count`) and two artifacts (`.spec` files for a "llama-agent" system, specifically related to world/branching logic). It also includes an observed relationship between the two artifacts with similarity 0.83, relationship type `PARTIAL_OVERLAP`, recommended action `MERGE_A_INTO_B`, and rationale.
-   - **Task:** Analyze the component data, determine the optimal merge plan based on artifact relationships (like MERGE, KEEP_BOTH, etc.), assess architectural consistency, and provide concrete improvement suggestions in a structured format.
+## 1. Optimal Merge Plan
 
-2.  **Analyze Artifacts:**
-   - **Artifact A (`chron-llm-immune.spec`):**
-     - Defines types: `WorldID`, `NodeID`, `EventKind`, `BranchEvent`, `ImmuneStatus`.
-     - Defines states: `wal-world-counter`, `Graph`, `WAL`.
-     - Defines operations: `stage-branch-world`, `check-immune-status`, `get-latest-node-in-world`, `stage-event`, `clean-history`.
-     - Provides algorithm/pseudocode for `stage-branch-world` and `check-immune-status`.
-     - Defines invariants (INV) related to WorldID uniqueness, BranchEvent immutability/parent references, status, and Immune status.
-     - Style: More abstract/formal spec style, uses `Type`, `State`, `Op`, `Pre/Post`, `INV`.
-   - **Artifact B (`chron-llm-world.spec`):**
-     - Defines types: `WorldID`, `NodeID`, `BranchEvent`, `CausalNode`.
-     - Defines states: `wal_world_counter`, `graph`, `wal`.
-     - Defines ops: `stage_branch_world`, `get_latest_node_in_world`.
-     - Provides PRE/POST conditions and ALGORITHMS (pseudocode).
-     - Defines INVARIANTS and CONSTRAINTS (Phase1 implementation scope, omitted features).
-     - Style: More structured, explicit phase constraints, focuses on core world management, uses `CausalNode` with class (`:fault | :valid`).
+**Decision:** `MERGE_A_INTO_B`  
+**Target Artifact:** `llama-agent/ir/chron-llm-world.spec`  
+**Source Artifact:** `llama-agent/ir/chron-llm-immune.spec`  
+**Rationale:** Artifact B (`chron-llm-world.spec`) represents the canonical, implementation-ready specification. Itfeatures a robust data model (`CausalNode` with fault/valid classification), explicit phase constraints, and maturealgorithmic definitions. Artifact A (`chron-llm-immune.spec`) contains redundant branching logic and a less structured state model. The `ImmuneStatus` domain from A must be integrated into B as a derived query to maintain a single source of truth for World operations.
 
-3.  **Analyze Relationship & Recommended Action:**
-   - Similarity: 0.83 (High)
-   - Relationship: `PARTIAL_OVERLAP`
-   - Recommended Action: `MERGE_A_INTO_B`
-   - Rationale: B is more mature/implementation-ready, has explicit phase constraints, robust data model (`CausalNode`). A's branching logic is redundant. "Immune" status from A should be integrated into B as a derived query based on node validity/fault states to maintain a single source of truth for World operations in the Delta3 Kernel.
-
-4.  **Evaluate Merge Plan & Architectural Consistency:**
-   - *Merge Direction:* `MERGE_A_INTO_B` makes sense given the rationale. B has better structure, phase tracking, and explicit fault handling (`CausalNode.class`). A introduces `ImmuneStatus` which is conceptually useful but currently defined somewhat abstractly. Integrating it into B as a derived state/query aligns with modern architectural principles (derived state vs. redundant storage).
-   - *Consistency Check:*
-     - Types: Both define `WorldID`, `NodeID`, `BranchEvent`. B's `CausalNode` is more explicit than A's implicit `Node` in `Graph`. Need to unify type definitions.
-     - Operations: A has extra ops (`check-immune-status`, `stage-event`, `clean-history`). These can be folded into B or marked as Phase 2/3.
-     - Invariants: Both have similar invariants. B's are more concrete (monotonic counter, fault exclusion). A's mention of `Immune` status needs mapping to B's `CausalNode.class`.
-     - Architecture: The rationale mentions "Delta3 Kernel". This implies a kernel-level service managing world state. Single source of truth is critical. Merging into B supports this.
-
-5.  **Formulate Structure for Output:**
-   I need to output a structured analysis covering:
-   - マージ計画 (Merge Plan)
-   - アーキテクチャ整合性評価 (Architectural Consistency Assessment)
-   - 具体的な改善提案 (Concrete Improvement Suggestions)
-   - 実装ロードマップ/フェーズ化 (Implementation Roadmap/Phasing) - optional but useful given the Phase1 constraint in B.
-
-   I'll structure it logically with clear headings, bullet points, and actionable items.
-
-6.  **Draft Content - Section by Section:**
-
-   **(1) マージ計画 (Merge Plan)**
-   - *推奨アクション:* `MERGE_A_INTO_B` を採用。
-   - *理由:* Bは実装フェーズ制約（Phase1）と明確なデータモデル（`CausalNode.class`）を備え、Delta3 Kernelの単一真実源（Single Source of Truth）として成熟度が高い。Aの重複ロジックは統合し、A固有の概念（`ImmuneStatus`）はBの文脈に適合させる形で吸収する。
-   - *統合手順:*
-     1. タイプ定義の統一：`WorldID`, `NodeID`, `BranchEvent` をBの形式に準拠。Aの `EventKind = :branch` は `BranchEvent.kind` に統合。
-     2. 状態管理の統合：`wal-world-counter` → `wal_world_counter`, `Graph: {WorldID: Node}` → `graph: [CausalNode]` (Bの配列形式はクエリ効率とフェルト/バッチ処理に適しているため採用)。
-     3. 操作（Op）のマージ：Aの `check-immune-status` と `clean-history` をBのアルゴリズムに統合。`stage-event` は既存の `wal = wal + [evt]` に包含。
-     4. 不変条件（INV）の統一：両方のINVをマージし、矛盾や重複を解消。特に `ImmuneStatus` の定義を `CausalNode.class` と関連付ける。
-
-   **(2) アーキテクチャ整合性評価 (Architectural Consistency Assessment)**
-   - *単一真実源（SSOT）:* Bの `CausalNode` モデルは `:fault | :valid` を明示しており、Aの抽象的な `ImmuneStatus` よりも状態遷移と整合性が取れる。マージによりWorld操作の管理が一元化される。
-   - *状態派生 vs 冗長保存:* Aの `check-immune-status` は履歴をクリーンアップして判定するが、Bの `CausalNode.class` をクエリでフィルタリングする方が計算量を抑えられ、アーキテクチャ的に優れる。`ImmuneStatus` は「派生状態（Derived State）」として定義すべき。
-   - *フェーズ管理:* Bに明記された `Phase1: Implemented=[...], Omitted=[...]` は開発ライフサイクルと整合性が高い。Aの未実装/抽象的な操作は後続フェーズへ延期可能。
-   - *懸念点:* Aの `clean-history` とBのクエリロジックの衝突回避が必要。履歴クリーンアップはバッチ処理またはGCタスクとして分離し、リアルタイムクエリ（`get_latest_node_in_world`）とは責任を分けるべき。
-
-   **(3) 具体的な改善提案 (Concrete Improvement Suggestions)**
-   - *型定義の標準化:* `BranchEvent` のフィールド名を統一（A: `Kind/CausalID/Payload`, B: `kind/causal_id/payload`）。スネークケースまたはケバブケースでプロジェクト規約に合わせる。
-   - *ImmuneStatusの実装設計:* 直接保存するのではなく、クエリ関数として実装。例：`is_world_immune(world_id) => !graph.exists(n => n.causal_id == world_id && n.class == :fault)`
-   - *不変条件の厳密化:* `INV: RootParent == 0` はBにあるが、Aにはない。マージ後に `BranchEvent.payload.parent_node == 0` がルート世界を示すことを明文化し、バリデーションロジックに追加。
-   - *フェーズ管理の拡張:* Phase1の制約を明確にしつつ、Phase2で `commit`, `merge`, `replay` を定義するインターフェースをBのOPSセクションにプレースホルダーとして残す。これによりAの `stage-event` や `clean-history` の将来性を確保。
-   - *ドキュメント構造:* 両ファイルを1つの `chron-llm-world.spec` に統合し、セクションを `TYPES`, `STATE`, `OPS`, `ALGORITHMS`, `INVARIANTS`, `CONSTRAINTS/PHASES` で整理。Aの `Pre/Post` はBの `PRE_POST` と統一。
-
-   **(4) 統合後のアーティファクト構造例 (Optional but helpful)**
-   I'll sketch a brief merged structure to show how it looks.
-
-7.  **Refine & Self-Correction/Verification:**
-   - *Check against input:* Did I address MERGE/KEEP_BOTH? Yes, justified MERGE_A_INTO_B. Did I cover architectural consistency? Yes, SSOT, derived state, phase management. Concrete suggestions? Yes, naming, immune status implementation, invariants, phasing.
-   - *Tone/Format:* Professional, structured, technical Japanese as requested.
-   - *Accuracy:* The analysis correctly identifies that B is more mature, A has redundant logic but useful concepts (immune status), and merging them aligns with the rationale. I'll make sure to explicitly map A's features to B's structure in the suggestions.
-   - *Potential Improvement:* Add a decision matrix or clear merge strategy table if needed, but bullet points are fine. Ensure terminology matches the input (`Delta3 Kernel`, `CausalNode`, etc.).
-   - *Structure Check:* 
-     1. マージ計画 (Merge Plan)
-     2. アーキテクチャ整合性評価 (Architectural Consistency Assessment)
-     3. 具体的な改善提案 (Concrete Improvement Suggestions)
-     4. 統合後の推奨構造（参考）(Recommended Merged Structure - Optional)
-   All aligns well. I will draft the response carefully in Japanese.
-
-   Draft Generation (Mental Refinement):
-   - Start with a clear executive summary of the merge decision.
-   - Detail the merge plan step-by-step.
-   - Analyze architectural consistency focusing on SSOT, state management, and lifecycle/phasing.
-   - Provide actionable, specific improvements (naming, derived state, invariant tightening, phase roadmap).
-   - Conclude with a structured merged spec outline.
-   - Ensure all technical terms from the prompt are used correctly.
-   - Check for logical flow and completeness.
-
-   Everything looks solid. Proceed to output. 
-   Structure of output:
-   ### 1. マージ計画 (Merge Plan)
-   - 推奨アクションと判断基準
-   - 統合手順（ステップバイステップ）
-   ### 2. アーキテクチャ整合性評価 (Architectural Consistency Assessment)
-   - 単一真実源(SSOT)と状態管理
-   - フェーズ制約とライフサイクル整合性
-   - 潜在的なアーキテクチャリスクと緩和策
-   ### 3. 具体的な改善提案 (Concrete Improvement Suggestions)
-   - 型定義・命名規則の統一
-   - `ImmuneStatus` の実装設計（派生状態への変換）
-   - 不変条件(INV)の厳密化とバリデーション追加
-   - 開発ロードマップの明確化（Phase1〜3の规划）
-   ### 4. 統合後の推奨アーティファクト構造（参考）
-   (Brief outline showing how the merged spec should look)
-
-   All points covered logically and technically accurately based on the input JSON. Output matches response. 
-   Self-Correction/Verification during thought:
-   - Check `clean-history` vs B's query: A uses it in `check-immune-status`, but B filters by `class != :fault`. I should explicitly state that `clean-history` is likely a GC/maintenance task, not part of the critical path for immune status. This aligns with architectural best practices.
-   - Check `RootParent == 0`: It's in B's INV. I'll note it needs to be enforced during `stage_branch_world`.
-   - The prompt asks for "各アーティファクトの関係性（MERGEやKEEP_BOTHなど）に基づいた最適なマージ計画". I will explicitly state why MERGE_A_INTO_B is optimal over KEEP_BOTH or MERGE_B_INTO_A.
-   - All good. Output generation. 
-   [Output Generation] -> *Proceeds*
-</think>
-
-提供された仕様書コンポーネントデータに基づき、アーティファクト間の関係性、アーキテクチャ整合性、および実装最適化を構造化して分析します。
+### Merge Execution Steps
+1.  **Type Integration:**
+    *   Import `ImmuneStatus = :ok | :degraded` into B's `TYPES` section.
+    *   Retain B's `CausalNode` model; discard A's implicit `Node` type in favor of B's explicit `CausalNode` definition.
+    *   Align `BranchEvent` payload structure. Replace A's `{ParentNodeID, ParentWorldID}` with B's `{parent_node, parent_world}` to match B's naming convention and `CausalNode` references.
+2.  **Operation Integration:**
+    *   Add `check-immune-status(WorldID: WorldID) -> ImmuneStatus` to B's `OPS` section.
+    *   Implement `check-immune-status` logic in B's `ALGORITHMS` section:
+        *   Query `get_latest_node_in_world(WorldID)`.
+        *   Return `:ok` if result is non-NIL and `result.class == :valid`.
+        *   Return `:degraded` if result is NIL or `result.class == :fault`.
+    *   Subsume A's `clean-history` and `stage-event` into B's existing `wal` management or mark as Phase2/Omitted per B's constraints.
+3.  **State & Counter Alignment:**
+    *   Standardize state naming to B's convention: `wal_world_counter`, `graph`, `wal`.
+    *   Adopt B's `graph: [CausalNode]` list structure over A's `{WorldID: Node}` map for consistency with `get_latest_node_in_world` filtering logic.
+4.  **Invariant Consolidation:**
+    *   Merge A's `INV(BranchEvent): ParentNodeID -> CommittedNode` into B's `INV: Query excludes :fault nodes` and`INV: Query returns single latest node per WorldID`.
+    *   Retain B's `INV: RootParent == 0` (implicitly supported by A's fallback logic).
 
 ---
-### 1. マージ計画 (Merge Plan)
 
-| 項目 | 内容 |
-|------|------|
-| **推奨アクション** | `MERGE_A_INTO_B`（AをBに統合） |
-| **判断根拠** | 類似度0.83と高い重複率ながら、Bは実装フェーズ制約(`Phase1`)・明確なデータモデル(`CausalNode.class`)・クエリロジックが具体化されており、Delta3 Kernelの単一真実源(SSOT)として成熟度が高い。Aの分岐ロジックは冗長であり、A固有の概念(`ImmuneStatus`)はBの文脈に適合させる形で吸収する方が技術負債を最小化できる。 |
-| **統合手順** | 1. **型定義の統一**: `WorldID`, `NodeID`, `BranchEvent` をBの形式に準拠。<br>2. **状態管理のマージ**: `wal-world-counter` → `wal_world_counter`、`Graph: {WorldID: Node}` → `graph: [CausalNode]`（配列形式はフィルタリングとバッチ処理に適するため採用）。<br>3. **操作(Op)の統合**: Aの `check-immune-status`, `clean-history` をBのアルゴリズムセクションに再配置。`stage-event` は既存の `wal = wal + [evt]` に包含。<br>4. **不変条件(INV)の融合**: 両方のINVをマージし、重複・矛盾を解消。特に `ImmuneStatus` の定義を `CausalNode.class` と関連付ける。 |
+## 2. Architectural Consistency & Invariant Verification
 
----
-### 2. アーキテクチャ整合性評価 (Architectural Consistency Assessment)
+### Schema Alignment & Drift Analysis
+| Component | Artifact A (`chron-llm-immune.spec`) | Artifact B (`chron-llm-world.spec`) | Status | Action |
+| :--- | :--- | :--- | :--- | :--- |
+| **Types** | `EventKind = :branch` | Hardcoded `kind: :branch` in `BranchEvent` | **Drift** | Adopt B's inline definition; `EventKind` is redundant for current scope. |
+| **Payload Keys** | `ParentNodeID`, `ParentWorldID` | `parent_node`, `parent_world` | **Mismatch** | Standardize to B's snake_case/lowercase keys. |
+| **Graph Model** | `Graph: {WorldID: Node}` | `graph: [CausalNode]` | **Mismatch** | Adopt B's list model; enablesefficient fault filtering and max-ID queries. |
+| **Counter** | `wal-world-counter` | `wal_world_counter` | **Mismatch** | Standardize to B's naming. |
+| **Fault Handling** | Implicit via `ImmuneStatus` | Explicit `class: :fault | :valid` | **Enhancement** | B's model is superior; A's `ImmuneStatus` becomes a derived view of B's fault state. |
 
-| 観点 | 評価内容 |
-|------|----------|
-| **単一真実源(SSOT)** | Bの `CausalNode { class: :fault \| :valid }` モデルは、Aの抽象的な `ImmuneStatus` よりも状態遷移と整合性が取れる。マージによりWorld操作の管理が一元化され、カーネル内部での状態同期コストが削減される。 |
-| **状態派生 vs 冗長保存** | Aの `check-immune-status` は履歴クリーンアップを伴うが、Bのフィルタリングクエリ(`n.class != :fault`)の方が計算量を抑えられ、アーキテクチャ的に優れる。`ImmuneStatus` は「永続状態」ではなく「派生状態(Derived State)」として定義すべき。 |
-| **フェーズ管理とライフサイクル** | Bに明記された `Phase1: Implemented=[...], Omitted=[...]` は開発ライフサイクルと整合性が高い。Aの未実装/抽象的な操作(`commit`, `merge`, `replay`)は後続フェーズへ延期可能であり、Bの制約枠組みで管理できる。 |
-| **潜在的リスク** | Aの `clean-history` とBのリアルタイムクエリが混在すると、状態の一貫性(GC vs Read)に競合が発生する可能性がある。**緩和策**: `clean-history` はバッチGCタスクとして分離し、クリティカルパスのクエリとは責任を分ける。 |
+### SOT Consistency
+*   **Source of Truth:** `chron-llm-world.spec` is confirmed as SOT.
+*   **Logic Redundancy:** A's `stage-branch-world` logic duplicates B's `stage_branch_world` but lacks B's fault-aware filtering in `get_latest_node_in_world`. B's implementation is strictly more robust.
+*   **Phase Constraints:** B explicitly defines `Phase1: Implemented=[stage_branch_world, get_latest_node_in_world]`. A's `check-immune-status` should be evaluated against this. Since `check-immune-status` is a derived query over existing ops, it can be integrated into Phase1 without new state mutations, or marked as a Phase1 extension if complexity warrants.
 
----
-### 3. 具体的な改善提案 (Concrete Improvement Suggestions)
-
-#### 🔹 型定義・命名規則の統一
-- `BranchEvent` のフィールド名をプロジェクト規約に合わせ統一（例：スネークケース `kind`, `causal_id`, `payload`）。
-- Aの `Type EventKind = :branch` は冗長であるため、`BranchEvent.kind == :branch` として型定義から削除し、Bの構造に統合。
-
-#### 🔹 `ImmuneStatus` の実装設計（派生状態への変換）
-直接保存するのではなく、クエリ関数として実装し、アーキテクチャ上の依存関係を明確化：
-```text
-Op is_world_immune(world_id: WorldID) -> Bool
-  PRE: world_id valid
-  POST: result == !graph.exists(n => n.causal_id == world_id && n.class == :fault)
-ALGORITHM:
-  return graph.filter(n => n.causal_id == wid).all(n => n.class != :fault)
-```
-
-#### 🔹 不変条件(INV)の厳密化とバリデーション追加
-- Bの `INV: RootParent == 0` を明確化し、`stage_branch_world` のPRE条件に追加：
-  ```text
-  INV: BranchEvent.payload.parent_node == 0 ⇔ world_id == root_world_id
-  PRE(stage_branch_world): parent_world_id == 0 → new_world_id must be first non-root ID
-  ```
-- `INV: Unique` と `wal_world_counter monotonic` を統合し、カウンターインクリメントとWorldID生成の原子性を明文化。
-
-#### 🔹 開発ロードマップの明確化（Phase规划）
-Bの制約枠組みを拡張し、Aの概念を段階的に取り込む：
-| フェーズ | 実装対象 | 備考 |
-|----------|----------|------|
-| **Phase1** | `stage_branch_world`, `get_latest_node_in_world` | Bの既存範囲。`CausalNode.class` バリデーション追加 |
-| **Phase2** | `is_world_immune` (派生クエリ), `clean-history` (GCタスク) | Aの概念をBの文脈に適合。非同期処理として分離 |
-| **Phase3** | `commit`, `merge`, `replay`, `validation` | Delta3 Kernelのトランザクション層と連携 |
+### Invariant Verification
+*   **Monotonicity:** Both specs enforce `wal_world_counter` monotonicity. **PASS**.
+*   **Uniqueness:** B's `POST: returned WorldID unique` and `INV: wal_world_counter monotonic` ensure uniqueness. **PASS**.
+*   **Fault Exclusion:** B's `INV: Query excludes :fault nodes` and algorithm `n.class != :fault` ensure data integrity. A's `ParentNodeID -> CommittedNode` is satisfied by B's model where `CommittedNode` maps to `class: :valid`. **PASS**.
+*   **Immune Logic:** A's `INV(Immune): HistoryExists -> Status = :ok` requires verification against B.
+    *   *Verification:* If `HistoryExists` implies a valid node exists, B's `get_latest_node_in_world` returns a valid node. The derived `check-immune-status` will return `:ok`. If history is degraded (faults), B returns `:degraded`. **PASS** (with integration).
 
 ---
-### 4. 統合後の推奨アーティファクト構造（参考）
 
-```yaml
-SPEC WorldService
-TYPES
-  WorldID = Int
-  NodeID = Int
-  BranchEvent = { kind: :branch, causal_id: WorldID, payload: { parent_node: NodeID, parent_world: WorldID } }
-  CausalNode = { id: NodeID, causal_id: WorldID, class: :fault | :valid }
+## 3. Actionable Roadmap
 
-STATE
-  wal_world_counter: WorldID
-  graph: [CausalNode]
-  wal: [Event]
+### Automation & Integration
+1.  **Spec Refactoring Script:**
+    *   Execute merge of `chron-llm-immune.spec` into `chron-llm-world.spec`.
+    *   Apply field renaming: `Payload.ParentNodeID` → `payload.parent_node`, `Payload.ParentWorldID` → `payload.parent_world`.
+    *   Inject `ImmuneStatus` type and `check-immune-status` operation definition.
+    *   Inject `check-immune-status` algorithm body referencing `get_latest_node_in_world`.
+2.  **Constraint Update:**
+    *   Update `chron-llm-world.spec` `CONSTRAINTS` section:
+        ```markdown
+        Phase1: Implemented=[stage_branch_world, get_latest_node_in_world, check-immune-status]
+        Phase1: Omitted=[commit, merge, replay, validation]
+        ```
+3.  **Deprecation:**
+    *   Mark `chron-llm-immune.spec` as `DEPRECATED` in the component registry.
+    *   Remove file from active build pipeline; retain only for historical reference.
 
-OPS
-  stage_branch_world(parent_world_id: WorldID) -> (WorldID, BranchEvent)
-  get_latest_node_in_world(world_id: WorldID) -> CausalNode | NIL
-  is_world_immune(world_id: WorldID) -> Bool          # Phase2: Derived from CausalNode.class
+### Verification & Testing
+1.  **Invariant Checks:**
+    *   Verify `check-immune-status` returns `:ok` for worlds with `class: :valid` nodes.
+    *   Verify `check-immune-status` returns `:degraded` for worlds where `get_latest_node_in_world` returns `NIL` or `class: :fault`.
+    *   Ensure `RootParent == 0` invariant holds for root world creation.
+2.  **Type Safety:**
+    *   Validate that `BranchEvent` payload types strictly match `NodeID` and `WorldID`.
+    *   Confirm `CausalNode` class enum is exhaustive (`:fault | :valid`).
+3.  **Regression:**
+    *   Run existing tests for `stage_branch_world` and `get_latest_node_in_world` against the merged spec to ensure no behavioral drift in core operations.
+    *   Add unit tests for `check-immune-status` covering edge cases (empty graph, all faults, mixed faults).
 
-PRE_POST & ALGORITHMS
-  stage_branch_world(p_wid):
-    PRE: p_wid valid && (p_wid == 0 OR get_latest_node_in_world(p_wid).class != :fault)
-    n_wid = wal_world_counter + 1
-    wal_world_counter = n_wid
-    p_node = get_latest_node_in_world(p_wid)
-    p_nid = if p_node == NIL then 0 else p_node.id
-    evt = { kind: :branch, causal_id: n_wid, payload: { parent_node: p_nid, parent_world: p_wid } }
-    wal = wal + [evt]
-    return (n_wid, evt)
-
-INVARIANTS
-  INV: wal_world_counter monotonic
-  INV: BranchEvent.kind == :branch
-  INV: RootParent == 0 → world_id is root
-  INV: Query excludes :fault nodes
-  INV: Query returns single latest node per WorldID
-
-CONSTRAINTS / PHASES
-  Phase1: Implemented=[stage_branch_world, get_latest_node_in_world]
-  Phase2: Planned=[is_world_immune, clean_history_gc]
-  Phase3: Omitted=[commit, merge, replay, validation]
-```
-
-### ✅ 結論
-`MERGE_A_INTO_B` は、Delta3 KernelのSSOT原則とフェーズ管理の整合性から最適解です。Aの `ImmuneStatus` をBの `CausalNode.class` に基づく派生クエリへ変換し、冗長な状態保存を排除することで、カーネル内部の状態同期コストを削減し、拡張性を確保できます。上記構造に従って統合すれば、技術負債を最小化しつつ、Phase1〜3の開発ロードマップと完全に整合する仕様書が完成します。
+### Code/Spec Synchronization
+*   **Delta3 Kernel:** Update kernel implementation to expose `check-immune-status` as a read-only query derived from the `graph` state.
+*   **WAL Schema:** Ensure WAL serialization format aligns with B's `BranchEvent` structure (lowercase keys).
+*   **Documentation:** Update API documentation to reflect `ImmuneStatus` as a derived metric of `CausalNode` validity, removing any references to independent `Immune` state management.

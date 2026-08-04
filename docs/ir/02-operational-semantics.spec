@@ -1,34 +1,58 @@
-Event | Canonical | Candidate | Config | ValidationReport | Projection | Graph | Summary | Derived | Analysis | MemoryRef | causal-id | KernelState
-RuntimeRequest = commit-request | reject-request | defer-request | retry-request | retry-penalty-request | abort-request
+IMPORT ir::01-domain-model AS Schema
 
-Commit(Event, Canonical) -> Canonical'
-  PRE: Candidate.validated & PolicyRouter(Candidate)==commit-request
-  POST: Canonical'.History=Canonical.History+[Event] & Canonical'.Clock++ & MemoryRef updated
-  INV: Atomic; !Partial
+TYPES
+  Event | Canonical | Candidate | Config | ValidationReport | Projection | Graph | Summary | Derived | Analysis | MemoryRef | Prompt | RuntimeCommand | KernelState | KernelAction | causal-id
 
-Replay(Canonical) -> {Projection, Graph, Summary}
+PIPELINE_FLOW
+  Input -> Candidate -> Validation -> ValidationReport -> PolicyRouter -> KernelAction -> KernelTransition -> Commit -> Replay -> [Projection, Graph, Summary] -> PromptBuilder -> Backend -> Candidate
+
+OPERATIONS
+
+OP Commit(evt: Event, c: Canonical) -> Canonical'
+  PRE: Candidate.validated == true & PolicyRouter(ValidationReport) == accept
+  POST: Canonical'.history = Canonical.history + [evt] & Canonical'.clock++ & MemoryRef updated
+  INV: Atomic | !Partial | Sole Canonical Mutator
+
+OP Replay(c: Canonical) -> {Projection, Graph, Summary}
+  POST: derive(c)
   PROP: Pure | Deterministic | SideEffectFree
 
-Derive(Canonical) -> Derived
+OP Derive(c: Canonical) -> Derived
   PROP: Pure | Deterministic
 
-Validation(Candidate, Canonical, Config) -> ValidationReport
+OP PromptBuilder(summary: Summary, graph: Graph, m: MemoryRef, cfg: Config) -> Prompt
+  PRE: Inputs subset {Canonical, Memory, Config}
+  PROP: Pure | Deterministic
+
+OP Backend(p: Prompt) -> Candidate
+  PROP: NonDeterministic
+  INV: Authoritative(Backend.output) == false
+
+OP Validation(cand: Candidate, c: Canonical, cfg: Config) -> ValidationReport
   PROP: Pure | Deterministic | NoRouting | NoMutation
 
-Lifecycle(Candidate): Generated->Validated->PolicyRouter->RuntimeRequest
-  commit-request -> Commit
+OP PolicyRouter(rpt: ValidationReport) -> KernelAction
+  PROP: Pure | Deterministic | NoMutation
+  RULE: Priority: Syntax > Semantics > FatalInv > RecovInv > Obs > Accept
 
-Recover(Canonical, MemoryRef) -> Context
+OP KernelTransition(ks: KernelState, act: KernelAction) -> {KernelState', cmd: RuntimeCommand?}
+  AGENT: Kernel ONLY
+  POST: Mutate(KernelState)
+  INV: Deterministic | Sole Runtime State Mutator
+
+OP Recover(c: Canonical, m: MemoryRef) -> Context
+  PROP: Pure
   INV: Canonical immutable
 
-Branch(Canonical, Condition) -> causal-id'
-  INV: Canonical immutable; Authoritative post-Commit
+OP Branch(c: Canonical, cond: Condition) -> causal-id'
+  INV: Canonical immutable | Authoritative post-Commit | Standard Candidate->Validation->Commit path
 
-Transition(KernelState x RuntimeRequest) -> KernelState'
-  AGENT: Kernel ONLY
+CANDIDATE_LIFECYCLE
+  Generated -> Validated -> PolicyRouter -> KernelAction -> KernelTransition -> Commit
 
-INV_Global:
-  Deterministic({Replay, Derive, Validation, PolicyRouter, Transition})
+INV_GLOBAL
+  Deterministic({Replay, Derive, PromptBuilder, Validation, PolicyRouter, KernelTransition})
   NonDeterministic(Backend)
   CanonicalMutator == Commit
   Derived == NonAuthoritative
+  CanonicalWriteAccess: Mutate(Canonical) => Stage == Commit

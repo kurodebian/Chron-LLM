@@ -1,7 +1,10 @@
+IMPORT ir::01-domain-model AS Schema
+IMPORT runtime::r1::core AS Core
+
 Candidate = proposalIR
 ValidationReport = Δ0_Report
 Validation = Δ0_Validator(proposalIR) -> ValidationReport (det)
-PolicyRouter = Δ0_Policy(ValidationReport) -> RuntimeRequest
+PolicyRouter = Δ0_Policy(ValidationReport) -> KernelAction
 Kernel = Runtime_Kernel
 Commit = op:mutate(CanonicalState)
 Event = WAL_Entry

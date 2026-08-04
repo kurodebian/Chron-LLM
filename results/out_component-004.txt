@@ -1,224 +1,64 @@
-Here's a thinking process:
+# Component-004 Specification Analysis Report
 
-1.  **Understand User Goal:** The user wants me to analyze a set of component specifications (artifacts) and their observed relationships, then output a structured merge plan, architectural consistency analysis, and specific improvement proposals based on the provided relationship types (MERGE, KEEP_BOTH, DEPRECATE_OBSOLETE, etc.).
+## 1. Optimal Merge Plan
 
-2.  **Analyze Input Data:**
-    *   **Component ID:** `component-004`
-    *   **Artifacts (7 files):**
-        1.  `docs/ir/13-worldline-branching.spec` (A) - High-level branching policy, uses `CausalID`, `Worldline`, `Event`, `STATE S`. Mentions `gen_id()`, `Traverse(Graph)`, `Prefill`. Invariants: deterministic branch, replayable history, immutable non-current worldlines.
-        2.  `docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec` (B) - Foundational infrastructure for commit/kernel. Defines `CandidateEvent`, `CanonicalEvent`, `WALRecord`, `CommitResult`. Operations: `GenEventID`, `GenCausalID`, `Commit`. Invariants: authority, uniqueness, append-only, immutability, no timestamps, WAL ordering, determinism, idempotency, isolation, memory ref, granularity.
-        3.  `docs/ir/architecture-v1.1.spec` (C) - Streamlined architecture. Defines `Event`, `Kind`, `Edge`, `SystemState`. Ops: `init`, `emit`, `handle_fault`, `prefill`, `commit_stream`, `tool_event`. Invariants: clock monotonicity, fault isolation, kv-cache health.
-        4.  `docs/ir/architecture-v1.spec` (D) - Older architecture. Defines `Event`, `Kind`, `FaultRef`, `Action`, `NodeClass`, `EdgeType`, `System`, `Graph`, `LLM_State`. Ops: `Append_WAL`, `Classify`, `Lift_Graph`, `Control_Decide`, `Handle_Abort`, `Trace_Causal`. Invariants: global clock monotonicity, no partial commit, retry idempotency, fault isolation, tool fault independence.
-        5.  `llama-agent/ir/causal-kernel.spec` (E) - Kernel implementation details. Defines `Event`, `WAL`, `NodeCls`, `Node`, `Edge`, `Graph`, `Kernel`. Ops: `append`, `stage`, `discard`, `commit`, `branch`, `classify`, `lift`, `clean`. Invariants: monotonic clk, fault isolation, causal scope, history recon.
-        6.  `llama-agent/ir/chron-llm-causal.spec` (F) - Lower-level WAL/event ops. Defines `Event`, `WAL`. Ops: `invariant-check`, `make-event`, `stage-event`, `commit-event`, `append-event`, `rollback-stage`, `discard-staged`, `commit-staged`, `clear-wal`. Invariants: clock monotonic, node unique, post-commit.
-        7.  `llama-agent/ir/chron-llm-graph.spec` (G) - Graph construction from WAL. Defines `Event`, `Node`, `Edge`, `Graph`, `HealthyTable`, `History`. Ops: `rebuild-graph-from-wal`, `lift-to-graph`, `add-node-to-graph`, `determine-node-class`, `find-parent-node-id`, `add-edge`, `graph-history`, `clean-history`. Invariants: WAL-Graph mapping, temporal chain, fault isolation in HT, Graph = f(WAL).
+### Merge Hierarchy & Actions
+| Source Artifact | Target Artifact | Recommended Action | Execution Rationale |
+|---|---|---|---|
+| `architecture-v1.spec` | `architecture-v1.1.spec` | `DEPRECATE` | Superseded by v1.1 (stream/tool granularity, WAL-based traversal, simplified state model) |
+| `chron-llm-causal.spec` | `causal-kernel.spec` | `DEPRECATE` | Superseded by mature Phase D/E kernel; conflicts with UUID/Hash invariants and lacks causal semantics |
+| `chron-llm-graph.spec` | `architecture-v1.1.spec` | `MERGE_B_INTO_A` | Absorb `HealthyTable`, `find-parent-node-id`, and optimized parent lookup into canonical arch spec |
+| `causal-kernel.spec` | `architecture-v1.1.spec` | `MERGE_B_INTO_A` | Integrate staging, world-line isolation (`wld`), `classify`, and `lift` logic into arch SOT |
+| `13-worldline-branching.spec` | `Chron-LLM_R2.0-D_Commit...spec` | `INTEGRATE` | Branching policy must explicitlyinvoke Constitution's `Commit` operation for persistence instead of abstract `gen_id()` |
+| `Chron-LLM_R2.0-D_Commit...spec` | `architecture-v1.1.spec` | `ALIGN` | Constitution becomes authoritative persistence layer; arch spec adopts its invariants and state definitions |
 
-    *   **Observed Relationships (7 pairs):**
-        1.  A -> B: `PARENT_CHILD`, `KEEP_BOTH` (A consumes B's primitives for branching/committing)
-        2.  B -> F: `SUPERSEDED`, `DEPRECATE_OBSOLETE` (B is authoritative Phase D, F uses Int IDs/clocks conflicting with B's UUID/hash & no-timestamp invariants)
-        3.  D -> G: `PARTIAL_OVERLAP`, `MERGE_B_INTO_A` (Wait, source is D (`architecture-v1.spec`), target is G (`chron-llm-graph.spec`). Action: Merge G into D? The rationale says "Doc A serves as architectural source... Doc B contains critical implementation details... Merging B into A". So merge G into D.)
-        4.  C -> D: `SUPERSEDED`, `KEEP_A_DELETE_B` (C supersedes D)
-        5.  D -> E: `PARTIAL_OVERLAP`, `MERGE_B_INTO_A` (Source D, target E. Merge E into D? Rationale says "Doc A should be updated to adopt Doc B's IR mechanics... preserving Doc A's higher-level logic". So merge E into D.)
-        6.  E -> F: `SUPERSEDED`, `KEEP_A_DELETE_B` (E supersedes F)
-        7.  C -> F: `PARTIAL_OVERLAP`, `KEEP_A_DELETE_B` (C is canonical, F conflicts with types & lacks semantics. F's staging should be encapsulated in a WAL module compliant with C.)
-
-    *   **Relationship Graph Construction:**
-        Let's map out the dependencies and actions clearly:
-        - A (`13-worldline-branching.spec`) <-> B (`Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec`): KEEP_BOTH (Parent-Child)
-        - C (`architecture-v1.1.spec`) -> D (`architecture-v1.spec`): DELETE D, KEEP C
-        - D (`architecture-v1.spec`) <- G (`chron-llm-graph.spec`): MERGE G into D (but D is being deleted? Wait, if C supersedes D, and we merge G into D, then effectively G should be merged into C. The rationale says "Doc A serves as architectural source of truth...". Actually, pair 47 says C supersedes D. So D is obsolete. But pair 80 says merge G into D. This implies the *intended* target for merging is actually the current architecture spec (C), or we need to resolve this chain: C > D < G -> Merge G into C.)
-        - D (`architecture-v1.spec`) <- E (`causal-kernel.spec`): MERGE E into D (Again, D is obsolete per pair 47. So merge E into C.)
-        - B (`Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec`) -> F (`chron-llm-causal.spec`): DEPRECATE F
-        - E (`causal-kernel.spec`) -> F (`chron-llm-causal.spec`): DELETE F (KEEP E)
-        - C (`architecture-v1.1.spec`) -> F (`chron-llm-causal.spec`): DELETE F (KEEP C, encapsulate staging in WAL module)
-
-    Let's resolve the conflicts/chain logically:
-    - **Architecture Layer:** `C` supersedes `D`. So `D` is obsolete. `G` and `E` were meant to be merged into `D`, but since `C` is the current truth, they should be merged into `C`.
-    - **Kernel/Commit Layer:** `B` is the authoritative Constitution (Phase D). It defines strict invariants (UUID/hash IDs, no timestamps, deterministic commit).
-    - **Lower-level WAL/Causal Layer:** `F` conflicts with `B`, `E`, and `C` (uses Int IDs/clocks, lacks stream_id, staging concepts are better handled elsewhere). All relationships point to deprecating/deleting `F`.
-    - **Branching/Policy Layer:** `A` is a high-level policy that consumes `B`. They should coexist (`KEEP_BOTH`).
-
-    So the final set of active/canonical artifacts will be: `C`, `B`, `E`, `G`, `A`. (Wait, if we merge E and G into C, do we keep them separate or combine? The prompt asks for a "merge plan". I'll propose consolidating overlapping specs while maintaining logical separation if needed, but primarily resolving to a single canonical set.)
-    Actually, let's look at the roles:
-    - `C` (`architecture-v1.1.spec`): High-level system architecture & state machine.
-    - `B` (`Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec`): Core commit/kernel constitution (infrastructure).
-    - `A` (`13-worldline-branching.spec`): Branching control policy (consumes B).
-    - `E` (`causal-kernel.spec`) & `G` (`chron-llm-graph.spec`): Kernel implementation details (WAL staging, graph lifting, causal tracing). These should be merged into the architecture/kernel spec or kept as a unified "Kernel Implementation" module that aligns with C and B.
-    - `F`, `D`: Deprecated/Obsolete.
-
-3.  **Structure the Output:** The user wants:
-    - Optimal Merge Plan based on relationships
-    - Architectural Consistency Analysis
-    - Specific Improvement Proposals
-    I will structure it clearly with markdown headings, tables/lists for readability, and actionable steps.
-
-    Structure:
-    I. マージ計画 (Merge Plan)
-       - 統合対象アーティファクトの分類 (Active/Deprecated/Merged)
-       - 具体的なマージ手順と依存関係解決
-    II. アーキテクチャ上の整合性分析 (Architectural Consistency Analysis)
-       - 階層構造と責任分割 (Layered Architecture & Separation of Concerns)
-       - 不変条件・型定義の衝突解消 (Invariant & Type Alignment)
-       - 状態遷移と実行モデルの一貫性 (State Transition & Execution Model)
-    III. 具体的な改善提案 (Specific Improvement Proposals)
-       - 仕様書構造の標準化 (Spec Structure Standardization)
-       - 実装ガイドラインへの反映 (Implementation Guidelines)
-       - テスト・検証戦略の強化 (Testing & Verification Strategy)
-
-4.  **Draft Content - Section by Section (Mental Refinement):**
-
-    *I. マージ計画*
-    - Identify canonical artifacts: `C` (Architecture), `B` (Commit Constitution), `A` (Branching Policy), `E+G` (Kernel Implementation).
-    - Deprecated: `D`, `F`.
-    - Merge Actions:
-      1. `C` absorbs `D`'s legacy context but replaces it as the architectural baseline.
-      2. `E` and `G` are merged into a unified "Causal Kernel Module" spec, aligning with `C`'s state model (`SystemState`) and `B`'s commit invariants.
-      3. `A` remains separate but explicitly references `B` for persistence operations.
-      4. `D` and `F` are marked deprecated. Their concepts (staging, Int IDs) are either migrated to compliant modules or discarded.
-    - Provide a clear table mapping source -> target -> action.
-
-    *II. アーキテクチャ上の整合性分析*
-    - **Layering:** Policy (`A`) -> Architecture/State Machine (`C`) -> Core Constitution/Persistence (`B`) -> Kernel Implementation (`E`+`G`). This forms a clean vertical stack.
-    - **Type & Invariant Conflicts:** `F` uses `Int` IDs/clocks and allows timestamps, violating `B`'s strict "No Timestamps" and deterministic hash-based ID invariants. `C` uses `UUID` for causal-id, aligning with `B`. Resolution: Enforce UUID/Hash types across all active specs. Remove wall-clock dependencies; use logical clocks or causal ordering exclusively.
-    - **State Management:** `D` had explicit `Graph` storage. `C` removed it in favor of WAL-based traversal (efficient). `E` and `G` implement this lifting/tracing. Consistency achieved by adopting `C`'s WAL-centric model, using `E`/`G` for on-demand graph reconstruction (`lift-to-graph`, `clean-history`).
-    - **Concurrency & Isolation:** `B` enforces strict isolation (`WorldHead[w]`) and idempotency. `A` handles branching via world-line IDs. `C` handles stream/tool faults. Alignment: Branching creates new `world-id`; commits update `WorldHead`. Faults reset KV-cache but preserve WAL monotonicity.
-
-    *III. 具体的な改善提案*
-    - **仕様書の構造化:** Introduce a unified template (Types, State, Ops, Invariants, Tests). Standardize naming (`Event`, `WAL`, `Graph` vs `SystemState`).
-    - **実装インタフェースの明確化:** Define explicit contracts between layers. e.g., `A` calls `B.Commit()`. `C` exposes `emit()`, `prefill()`, `commit_stream()`. Kernel (`E`/`G`) implements these via WAL and on-demand graph lifting.
-    - **テストケースの統合:** Map the TESTS in `B` to concrete scenarios across layers. Add property-based tests for determinism, idempotency, and fault isolation. Ensure `F`'s staging logic is tested only if migrated to a compliant WAL module under `C`.
-    - **ドキュメント管理:** Implement versioning strategy (v1.1 -> v2.0). Archive deprecated specs (`D`, `F`) with migration notes.
-
-5.  **Self-Correction/Verification during drafting:**
-    - *Check relationships:* Did I handle the "MERGE_B_INTO_A" correctly? In pair 80, source is D, target is G. Action: Merge G into D. But C supersedes D. So logically, G should be merged into C. I will explicitly state this resolution to avoid confusion.
-    - *Check types:* `B` uses `Hash`/`UUID`, `C` uses `UUID`, `E` uses `Int`. `F` uses `Int`. The rationale says `B` is authoritative for Phase D, prohibiting timestamps and using deterministic hashes. I must emphasize migrating to UUID/Hash IDs and logical clocks across the board.
-    - *Check staging:* `E` has `stage`/`commit`/`discard`. `F` has similar. `C` doesn't explicitly have staging but implies stream commits. The rationale says F's staging should be encapsulated in a WAL module compliant with C. I'll propose integrating staging into the Kernel spec (`E`+`G`) as a transactional layer before calling `B.Commit()`.
-    - *Structure:* Ensure output matches requested format: 1. Merge Plan, 2. Architectural Consistency, 3. Improvement Proposals. Use professional Japanese technical writing style.
-
-    Draft looks solid. I will now generate the response carefully, ensuring all constraints and relationships are addressed logically. I'll structure it with clear headings, bullet points, and actionable tables where appropriate. I'll make sure to explicitly map the provided `recommended_action` values to a coherent final state.
-    One detail: The prompt says "MERGEやKEEP_BOTHなど". I will use these exact terms in the plan.
-    I will produce the output now. 
-    Structure of response:
-    # 1. 最適マージ計画 (Optimal Merge Plan)
-      - 統合マップ表
-      - 依存関係解決とフェーズ分け
-    # 2. アーキテクチャ上の整合性分析 (Architectural Consistency Analysis)
-      - レイヤー構造と責任分割
-      - 型・不変条件の衝突解消
-      - 状態遷移と実行モデルの一貫性
-    # 3. 具体的な改善提案 (Specific Improvement Proposals)
-      - 仕様標準化とインタフェース契約
-      - 実装ガイドラインとテスト戦略
-      - ドキュメントライフサイクル管理
-    All in Japanese. Technical terms preserved where appropriate. Logical flow maintained. Ready. 
-    Output Generation. 
-    *(Self-Correction/Refinement during thought)*: 
-    I need to be careful with the "MERGE_B_INTO_A" notation from the input. In pair 80, source is D, target is G. Action says MERGE_B_INTO_A (meaning merge target into source). But since C supersedes D, I will explicitly note that the merge target should actually be C to maintain architectural truth. I'll clarify this in the plan.
-    Also, pair 81 says KEEP_A_DELETE_B for C vs F. Pair 64 says KEEP_A_DELETE_B for E vs F. So F is definitely out.
-    I will structure the merge plan as a directed graph resolution leading to a canonical set: `[A, B, C, E+G]`. Deprecated: `[D, F]`.
-    The analysis will focus on how these 5 artifacts form a cohesive system.
-    Proposals will be actionable for engineering teams.
-    All good. Proceeds. 
-    Output matches the response. 
-    [Done.] 
-    *Output Generation* (matches the final response)
-    "以下に、提供された仕様書データと関係性に基づいた構造化分析を出力します。..." etc.✅
-    Structure checks out. Technical depth is appropriate. Language is professional Japanese. Relationships are correctly resolved. Invariants and types are analyzed. Proposals are concrete. Ready. 
-    [Output Generation] -> *Proceeds*
-</think>
-
-以下に、提供された仕様書データと関係性グラフに基づいた構造化分析を出力します。
+### Consolidated Architecture Structure
+- **Primary SOT:** `architecture-v1.1.spec` (Unified control flow, state management, and graph construction)
+- **Persistence Authority:** `Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec` (Phase D Constitution, immutable WAL/Graph rules)
+- **Deprecated/Removed:** `architecture-v1.spec`, `chron-llm-causal.spec`
 
 ---
-# 1. 最適マージ計画 (Optimal Merge Plan)
 
-関係性の衝突と階層依存を解決し、単一真理源（Single Source of Truth）を持つアーキテクチャへ統合するためのフェーズ別マージ計画です。
+## 2. Architectural Consistency & Invariant Verification
 
-### 📊 アーティファクト統合マップ
-| 分類 | ファイルパス | 最終状態 | 統合/移行先 | 理由・アクション |
-|:---|:---|:---|:---|:---|
-| **Policy Layer** | `docs/ir/13-worldline-branching.spec` (A) | ✅ KEEP | - | 高レベル制御ポリシー。Bのコミット操作を明示的に呼び出す形で維持。 |
-| **Constitution Layer** | `docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec` (B) | ✅ KEEP | - | Delta3 Kernelの基盤インフラ。厳格な不変条件・ID生成規則を定義。 |
-| **Architecture Layer** | `docs/ir/architecture-v1.1.spec` (C) | ✅ KEEP | D, E, G を吸収 | 現行アーキテクチャの真理源。WAL中心設計・ストリーム粒度対応が標準化済み。 |
-| **Kernel Impl.** | `llama-agent/ir/causal-kernel.spec` (E)<br>`llama-agent/ir/chron-llm-graph.spec` (G) | 🔀 MERGE | C に統合 | 実装詳細（ステージング、グラフリフト、因果追跡）。Cの型定義とBのコミット規約に準拠して1モジュール化。 |
-| **Deprecated** | `docs/ir/architecture-v1.spec` (D)<br>`llama-agent/ir/chron-llm-causal.spec` (F) | 🗑️ DELETE | - | 型衝突（Int ID/壁時計）、重複実装、C/E/Bの制約違反により廃止。 |
+### Schema Alignment & Type Mismatches
+- **Identity Types:** Constitution mandates `Hash`/`UUID` for deterministic, collision-resistant IDs. `causal-kernel.spec`, `chron-llm-causal.spec`, and `chron-llm-graph.spec` use `Int`/`node-id`/`idx`. This violates `UNIQUENESS` and `DETERMINISM` invariants under concurrent or distributed loads.
+- **Temporal Fields:** Constitution enforces `NO_TIMESTAMPS` and relies on cryptographic hashing for causal ordering. `architecture-v1.1.spec` and `causal-kernel.spec` explicitly track `clock: U64`/`Int` and `timestamp: U64`. This introduces non-deterministic mutation risks and conflicts with `DETERMINISM`/`IDEMPOTENCY`.
+- **Event Payload Structure:** Constitution uses `CandidateEvent` → `CanonicalEvent` with strict schema versioning.`v1.1` uses `Event` with `stream_id` and `payload: Any`. `causal-kernel` uses `pay: {txt, tgt, meta}`. Lack of unified schema risks serialization/deserialization failures during `WAL` replay.
 
-### 🔗 依存関係解決とマージ手順
-1. **Phase 1: 廃止アーティファクトの隔離**  
-   `D` と `F` をアーカイブディレクトリへ移動し、`DEPRECATE_OBSOLETE` / `KEEP_A_DELETE_B` の関係を記録。移行ノートに「UUID/Hash ID強制」「壁時計排除」「WAL中心設計」の変更点を明記。
-2. **Phase 2: Kernel実装層の統合 (`E` + `G` → `C`)**  
-   `MERGE_B_INTO_A`（入力データ表記）を修正し、**「Kernel実装詳細を Architecture-v1.1 に統合」**とする。`E` の `stage/commit/discard` トランザクション処理と `G` の `HealthyTable`/`lift-to-graph` アルゴリズムを、`C` の `SystemState` 定義内にモジュールとして配置する。
-3. **Phase 3: Policy-Constitution 連携の明確化 (`A` ↔ `B`)**  
-   `KEEP_BOTH` を維持しつつ、`A` の `OP Branch()` 内で抽象的な `gen_id()` や簡易状態更新を排除し、**`B.OP Commit()` を明示的に呼び出す**インターフェース契約を定義。
+### SOT Consistency
+- **Fragmented State Models:** Three competing state definitions exist: `SystemState` (v1.1), `System` (v1), and `Kernel` (causal-kernel). The Constitution defines `Graph`, `WAL`, and `WorldHead` as the canonical runtime state.
+- **Operation Divergence:** `commit_stream` (v1.1) vs `commit-staged` (chron-llm-causal) vs `commit` (causal-kernel) vs `Commit` (Constitution). Only the Constitution enforces strict `WAL_ORDERING` and `HEAD_VALIDITY`. Other specs allow implicit state mutations without formal pre/post conditions.
+
+### Invariant Conflict Analysis
+- **`APPEND_ONLY` vs `STAGING`:** Constitution enforces strict append-only WAL visibility. Kernel/Graph specs implement `stage`/`discard` buffers. *Resolution:* Staging must be treated as a pre-commit transient buffer, not part of the canonical WAL until `Commit` post-conditions are met.
+- **`ISOLATION` vs `WORLDLINE` TRACKING:** Constitution guarantees `Commit(w1)` does not affect `WorldHead[w2]`. Kernel tracks `cur-wld` globally, risking cross-world state leakage if not strictly scoped. Branching spec tracks `history: Map<CausalID, Worldline>`, which must align with Constitution's `WorldHead` map.
+- **`DETERMINISM` vs `clock`-based Mutation:** Invariant `Commit(c) == Commit(c)` requires pure functions. Clock increments (`k.wal.clk++`, `e.clock = state.clock + 1`) introduce side effects. Must be replaced with deterministic sequence counters or cryptographic derivation.
 
 ---
-# 2. アーキテクチャ上の整合性分析 (Architectural Consistency Analysis)
 
-統合後の5アーティファクトが形成するシステム構造と、既存の衝突点の解消状況を分析します。
+## 3. Actionable Roadmap
 
-### 🏗️ レイヤー構造と責任分割（Vertical Slice）
-```
-[Policy] 13-worldline-branching.spec (A)
-   ↓ consumes
-[Architecture] architecture-v1.1.spec (C) ← E/G統合モジュール内包
-   ↓ delegates persistence & invariants
-[Constitution] Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec (B)
-```
-- **A**: 分岐判定・世界線管理ポリシー。状態変更の「トリガー」を担当。
-- **C**: システム状態マシン・ストリーム/ツール粒度の制御フロー。「実行モデル」を担当。
-- **E/G**: WALステージング、因果グラフ構築、履歴追跡アルゴリズム。「計算最適化」を担当。
-- **B**: 永続性・整合性・ID生成の「憲法」。すべての状態変更はBの不変条件を満たす必要がある。
+### Phase 1: Deprecation & Consolidation (Week 1)
+1. Execute `git rm` for `architecture-v1.spec` and `chron-llm-causal.spec`.
+2. Extract `HealthyTable`, `find-parent-node-id`, and `graph-history` algorithms from `chron-llm-graph.spec` into `architecture-v1.1.spec` under a `GraphOptimization` module.
+3. Integrate `stage`, `discard`, `commit`, and `wld` isolation logic from `causal-kernel.spec` into `architecture-v1.1.spec`'s `SystemState` and `Op` definitions.
+4. Update `13-worldline-branching.spec` to replace abstract `gen_id()` and `S'.history[...]` with explicit calls to`Commit(c: CandidateEvent)` from the Constitution.
 
-### ⚖️ 型定義と不変条件の衝突解消
-| 項目 | 旧仕様 (`D`, `F`) の問題点 | 新統合仕様の解決策 |
-|:---|:---|:---|
-| **ID体系** | `Int` / `UUID` が混在。`F` は整数ノードIDを使用。 | `B` と `C` に準拠し、`causal-id` は `Hash/UUID` 一択化。`GenEventID`/`GenCausalID` の決定論的ハッシュ生成を強制。 |
-| **時間軸** | `timestamp: U64`（壁時計）が `Event` に含まれる。 | `B.INV5 (NO_TIMESTAMPS)` を全層に適用。順序は `clock`（論理クロック）または因果エッジのみで管理。 |
-| **グラフ保存** | `D` は明示的な `Graph` 状態を保持し、メモリ負荷が高い。 | `C` の「WALベースの因果走査」モデルを採用。グラフはオンデマンドで `lift-to-graph()` から再構築（Stateless Graph）。 |
-| **トランザクション** | `F` の `stage/commit` が `B` の原子性コミットと競合。 | `E/G` に統合し、`C` のストリーム単位コミットを介して `B.OP Commit()` を呼び出す2段階モデルへ統一。 |
+### Phase 2: Schema Unification & Type Alignment (Week 2)
+1. Replace all `Int`/`node-id`/`idx` identifiers with `UUID`/`Hash` types across merged specs to satisfy `UNIQUENESS` and `DETERMINISM`.
+2. Remove `clock` and `timestamp` fields from `Event` and `Node` types. Replace with deterministic causal counters derived from `H(parent-causal-id, world-id, type, payload-ref)`.
+3. Standardize `Event` payload schema to match Constitution's `CandidateEvent`/`CanonicalEvent` structure, enforcing `schema-version: Int` and `payload-ref: Pointer` to `ImmutableStore`.
+4. Run automated schema diff validation (e.g., `jsonschema` or `thrift`/`avro` linting) to ensure zero breaking changes post-merge.
 
-### 🔄 状態遷移と実行モデルの一貫性
-- **分岐とコミットの整合**: `A` で `branch(E)` が発火すると新しい `world-id` が生成され、`B` の `WorldHead[w]` が分離される。コミット時は `B.INV10 (ISOLATION)` に従い他世界線に影響を与えない。
-- **障害隔離**: `C.INV2` と `E.INV fault-isolation` が一致。`structural-fault` 発生時、KVキャッシュは破棄され (`state.kv-cache = NULL`)、因果履歴のみが `Trace_Causal()` でフィルタリングされる。
-- **決定論性**: `B.INV8 (DETERMINISM)` と `E.INV history-recon` が補完関係。同じ入力イベント列に対して、グラフ再構築とコミット結果が常に同一であることを保証するプロパティテストを共通化。
+### Phase 3: Invariant Enforcement & Verification (Week 3)
+1. Implement formal property tests for Constitution invariants: `WAL_ORDERING`, `HEAD_VALIDITY`, `ISOLATION`, and `IMMUTABILITY`.
+2. Refactor `stage`/`discard` operations to operate on isolated memory buffers, ensuring canonical `WAL` and `Graph` remain strictly append-only until `Commit` post-conditions are met.
+3. Add runtime invariant checkers to `Commit` and `Branch` operations to fail-fast on `WAL_ORDERING` or `HEAD_VALIDITY` violations.
+4. Execute crash-recovery simulation tests (D8) to verify `WAL` replay reconstructs `Graph` and `WorldHead` deterministically without corruption.
 
----
-# 3. 具体的な改善提案 (Specific Improvement Proposals)
-
-実装チームおよび仕様維持担当者が直ちに適用できる技術的アクションです。
-
-### 📐 1. 仕様書構造の標準化（Unified Spec Template）
-各アーティファクトを以下の統一フォーマットへリファクタリングしてください。
-```markdown
-## 1. Types & Constants
-- 厳密な型定義（UUID/Hash強制、Enumの列挙）
-## 2. System State & Invariants
-- `SystemState` の定義と、違反時にシステムが取るフォールバック動作
-## 3. Operations (Pre/Post/Steps)
-- 外部呼び出し可能なOPのみ公開。内部アルゴリズムは `Implementation Notes` に分離
-## 4. Integration Contracts
-- 上位層(A/C) ↔ 下位層(B/E/G) のインターフェース定義
-## 5. Property-Based Tests
-- 不変条件を自動検証するプロパティテストケース（例: `forall commits, Graph.append_count == 1`）
-```
-
-### 🔌 2. 実装インタフェースの明確化
-- **Commit Kernel (`B`) の公開API**:  
-  `commit(candidate_event) -> CommitResult` を唯一の状態変更入口とする。内部で `WAL.Append()` → `Graph.Append()` → `WorldHead.Update()` を原子実行する。
-- **Kernel Module (`E/G`) の役割限定**:  
-  グラフ構築・履歴追跡は**読み取り専用**または**一時ステージング**として実装。`B.Commit()` 呼び出し前に `validate_staged_events()` を実行し、不整合があれば早期拒否（`:rejected`）を返す設計へ変更。
-- **ストリーム粒度の統一**:  
-  `C` の `commit_stream(tokens)` は内部でイベント列を生成し、`B` に渡す。`stream_id` と `world-id` のマッピングは `SystemState` で一元管理する。
-
-### 🧪 3. テスト・検証戦略の強化
-- **決定論性テスト (`D3`, `D7`)**: ハッシュ関数と入力順序が固定された場合、`event-id` と `causal-id` が常に同一であることを保証するユニットテストを追加。
-- **障害復旧テスト (`D8`)**: WALの中途半端な書き込み（クラッシュシナリオ）に対し、`B.INV6 (WAL_ORDERING)` に従いコミット済みイベントのみをGraphに適用するリカバリロジックを検証。
-- **隔離性テスト (`D9`, `C.INV2`)**: 並列世界線での分岐・コミット実行時、KVキャッシュの汚染や因果エッジのクロスリークが発生しないことをプロパティテストで網羅。
-
-### 📦 4. ドキュメントライフサイクル管理
-- **バージョンタグ付け**: `architecture-v1.1.spec` を `v2.0` として昇格させ、`D` と `F` は `docs/ir/archive/` へ移動。移行ガイド（Migration Guide）に「Int ID → UUID」「壁時計排除」「WAL中心設計」の変更理由を明記。
-- **依存関係可視化**: 各仕様書の冒頭に `REQUIRES: [B, C]` や `CONSUMES: [A]` を記載し、静的解析ツールで循環参照や未定義型参照を検出するCIパイプラインを導入。
-
----
-✅ **結論**:  
-本マージ計画により、**「Policy(A) → Architecture(C+Kernel) → Constitution(B)」の明確な階層構造**が確立されます。`D` と `F` の廃止は技術的負債の解消に直結し、残る5アーティファクトは型・不変条件・実行モデルにおいて完全に整合した状態になります。実装フェーズでは、`B` のコミット憲法を絶対的な境界線とし、上位層はその制約内で最適化された制御フローを実装する設計が推奨されます。
+### Phase 4: Integration & Automation (Week 4)
+1. Update CI/CD pipeline to run spec validation, invariant property tests, and schema compatibility checks on everyPR.
+2. Generate runtime stubs/boilerplate from the unified `architecture-v1.1.spec` and `Constitution` using IDL-to-code generators.
+3. Align test suites (`D1`-`D10` from Constitution) with integration tests for `Branch`, `Commit`, and `Graph` operations.
+4. Freeze `architecture-v1.1.spec` and `Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec` as the official SOT for Phase D/E development.

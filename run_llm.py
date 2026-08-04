@@ -132,9 +132,14 @@ def main():
         with open(filepath, 'r', encoding='utf-8') as f:
             json_content = f.read()
 
-        prompt_text = f"""以下の仕様書コンポーネントデータを分析し、各アーティファクトの関係性（MERGEやKEEP_BOTHなど）に基づいた最適なマージ計画、アーキテクチャ上の整合性、および具体的な改善提案を構造化して出力してください。
+        prompt_text = f"""[System Instruction: Output ONLY the final structured analysis report directly in English. Do NOT include any conversational commentary.]
 
-### 入力データ:
+Analyze the following specification component data. Generate a structured analysis report in Markdown detailing:
+1. **Optimal Merge Plan:** Based on artifact relationships (e.g., MERGE, KEEP_BOTH, REFACTOR).
+2. **Architectural Consistency & Invariant Verification:** Check for schema alignment, SOT consistency, and type mismatches.
+3. **Actionable Roadmap:** Concrete steps for automation, verification, and code/spec integration.
+
+### Input Data:
 {json_content}
 """
 

@@ -1,237 +1,68 @@
-Here's a thinking process:
+# Structured Analysis Report
 
-1.  **Understand User Goal:** The user wants me to analyze a provided JSON specification containing component data (8 artifacts) and their observed relationships. Based on this, I need to output a structured analysis covering:
-    *   Optimal merge plan based on artifact relationships (MERGE, KEEP_BOTH, etc.)
-    *   Architectural consistency check
-    *   Specific improvement proposals
+## 1. Optimal Merge Plan
 
-2.  **Analyze Input Data:**
-    *   **Component ID:** `component-002`
-    *   **Artifacts (8 files):**
-        1. `llama-agent/ir/chron-llm-kernel.spec` (Kernel state, WAL, graph, events)
-        2. `llama-agent/ir/chron-llm-runtime.spec` (Runtime env, main loop, API wrapper around kernel)
-        3. `llama-agent/ir/chron-llm.spec` (Core LLM runtime interface: init, tokenize, prefill, generate, invariants)
-        4. `llama-agent/ir/ffi-bindings-mock.spec` (Mock FFI for testing llama.cpp ops)
-        5. `llama-agent/ir/ffi-bindings.spec` (Production FFI/HAL bindings to llama.cpp)
-        6. `llama-agent/ir/generate.spec` (Generation loop with sensors, fault recovery, rollback)
-        7. `runtime/r0/ir/chat-loop.spec` (R0 session execution: chat loop, history, trace)
-        8. `runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec` (Architecture spec: R0/R1/Kernels layers, contracts, interfaces)
-    *   **Observed Relationships (7 pairs):** All recommend `KEEP_BOTH`. The rationales emphasize separation of concerns, architectural boundaries (Kernel vs Runtime vs Backend/HAL), different abstraction levels (contract vs implementation), and explicit invariants requiring coexistence.
+Based on the provided artifact relationships and architectural constraints, a **`KEEP_BOTH`** strategy is mandated across all component pairs. Merging would violate explicit invariants, conflate abstraction layers, and break the Delta3 Kernel's separation of concerns. The optimal plan groups artifacts by architectural tier and defines cross-referencing protocols instead of file consolidation.
 
-3.  **Identify Key Architectural Themes:**
-    *   **Delta3 Architecture:** Explicitly mentioned. Emphasizes strict layering: Kernel (state/event management, WAL, graph) <-> Runtime/Session (orchestration, R0/R1 layers) <-> Backend/HAL (LLM inference via FFI).
-    *   **Separation of Concerns:** High-level semantics vs low-level FFI; Kernel isolation from LLM details; Mock vs Production bindings for testing; Contract vs Implementation.
-    *   **State & Event Management:** WAL, Graph projections, History, Events with causal IDs/worldlines.
-    *   **Generation & Safety:** Token generation loop, immune sensors, fault recovery, KV cache reset, rollback mechanisms.
-    *   **Layering/Phasing:** R0 (Session/Trace), R1 (Observation/IR Stream), Kernel (CausalGraph/Policies), Backend (LLM).
+| Architectural Tier | Artifacts | Merge Decision | Rationale & Integration Strategy |
+|:---|:---|:---|:---|
+| **Core State & Orchestration** | `chron-llm-kernel.spec`, `chron-llm-runtime.spec` | `KEEP_BOTH` | Kernel is the sole state mutator (`INV: Kernel -> Sole State Mutator`). Runtime orchestrates but must remain LLM/Graph-agnostic (`INV: Runtime.knows(LLM) == FALSE`). **Strategy:** Runtime imports Kernel API definitions. No shared mutable state. |
+| **Semantic IR & Backend HAL** | `chron-llm.spec`, `ffi-bindings.spec`, `ffi-bindings-mock.spec` | `KEEP_BOTH` | `chron-llm.spec` defines logical Events/Headers/Nodes. FFI specs handle physical memory/layout and C/llama.cpp mapping. Mock is required for deterministic testing (`INV: mock_compat`). **Strategy:** FFI specs auto-generate bindings from `chron-llm.spec` type definitions. Mock acts as a drop-in replacement for unit testing. |
+| **Execution Policy & Session Layer** | `generate.spec`, `chat-loop.spec`, `chron-llm-r0-session-execution-layer-spec-v1.0.spec` | `KEEP_BOTH` | R0/R1 spec is the architectural contract defining layer boundaries and `RuntimeCommand` ABI. `chat-loop.spec` implements R0 session flow. `generate.spec` implements agent policy/safety. **Strategy:** R0/R1 spec acts as the master interface contract. `chat-loop` and `generate` implement against it via explicit module imports. |
 
-4.  **Evaluate Merge Plan based on Relationships:**
-    *   All pairs recommend `KEEP_BOTH`. This strongly indicates that merging any of these files would violate architectural principles or mix abstraction levels.
-    *   I need to structure the merge plan logically, grouping artifacts by their functional layer and explaining why they remain separate but how they interact.
-    *   Grouping:
-        *   **Kernel Layer:** `chron-llm-kernel.spec`
-        *   **Runtime/Orchestration Layer:** `chron-llm-runtime.spec`, `runtime/r0/ir/chat-loop.spec`, `runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec`
-        *   **Backend/HAL & LLM Core:** `chron-llm.spec`, `ffi-bindings.spec`, `ffi-bindings-mock.spec`
-        *   **Agent Policy/Safety:** `generate.spec`
-    *   Merge Strategy: Explicitly state that no files should be merged. Instead, define a dependency/import graph and interface contracts to maintain cohesion while ensuring compatibility.
-
-5.  **Check Architectural Consistency:**
-    *   *Layering:* Matches Delta3 principles (Kernel isolates state/events, Runtime handles session/trace, Backend handles inference).
-    *   *Invariants:* `chron-llm-kernel.spec` enforces `Graph = f(WAL)`, `Runtime.knows(LLM) == FALSE`. `ffi-bindings.spec` enforces `stateless`, `abi_1to1`. `generate.spec` enforces fault/rollback invariants. All align.
-    *   *Data Flow:* User Input -> Runtime/Chat-Loop -> Kernel (submit_user_input) -> WAL/Graph -> Backend (tokenize/generate via FFI) -> Output -> Kernel (submit_assistant_reply) -> History/Trace update. Consistent.
-    *   *Potential Inconsistencies/Notes:*
-        *   `chron-llm-runtime.spec` has a simplified `main_loop` with commented-out P4 steps, while `chat-loop.spec` and `generate.spec` provide more detailed flows. This is fine (abstract vs concrete), but needs explicit mapping in the integration doc.
-        *   `chron-llm.spec` defines `init-chron-llm(path, size)`, but `ffi-bindings-mock.spec` has `my-llama-model-load`. The naming differs slightly (`init-chron-llm` vs `my-llama-*`). This is typical for HAL abstraction, but should be documented as a mapping layer.
-        *   `generate.spec` uses `check-immune-status()` and `rollback-stage(wal)`, which aren't defined in the kernel spec. They are likely external policy/sensor modules. Needs clarification.
-
-6.  **Formulate Improvement Proposals:**
-    *   **Interface Standardization:** Define a unified `RuntimeCommandABI` or `KernelAPI` interface file to avoid duplication across runtime/kernel specs.
-    *   **Dependency Graph & Import Rules:** Explicitly define which module imports what (e.g., Runtime imports Kernel, Backend imports FFI, Mock imports Production for type compatibility).
-    *   **Invariant Enforcement Mechanism:** Suggest adding a formal verification or linting step to check invariants like `Runtime.knows(LLM) == FALSE` and `Graph = f(WAL)` during CI.
-    *   **Trace & Event Schema Alignment:** Ensure `R0Trace` in chat-loop matches the event structure expected by the Kernel's history projection. Add a mapping spec if needed.
-    *   **Mock/Production Parity:** Strengthen the `mock_compat` invariant with automated diff checks or property-based testing to ensure mock FFI exactly mirrors production signatures.
-    *   **Fault Recovery & Rollback Semantics:** Clarify how `rollback-stage(wal)` interacts with `refresh-projections(k)`. Suggest atomic commit/rollback boundaries in the Kernel spec.
-
-7.  **Structure the Output:**
-    I'll organize the response into clear sections as requested:
-    *   📊 マージ計画 (Merge Plan) - Grouped by layer, explicit KEEP_BOTH rationale, dependency graph.
-    *   🏗️ アーキテクチャ整合性分析 (Architectural Consistency Analysis) - Layering, Invariants, Data Flow, Boundary checks.
-    *   💡 具体的な改善提案 (Specific Improvement Proposals) - Actionable items with priority/impact.
-    *   📝 統合ドキュメント構造案 (Suggested Integration Structure) - How to organize the kept artifacts cohesively.
-
-    I will use professional, technical Japanese as requested. I'll ensure all points directly reference the input data and relationships.
-
-    Draft Structure:
-    1. 最適マージ計画 (Optimal Merge Plan)
-       - グループ化と階層定義
-       - 関係性に基づく統合方針（KEEP_BOTHの正当化）
-       - モジュール依存グラフ
-    2. アーキテクチャ上の整合性検証 (Architectural Consistency Check)
-       - レイヤー分離と境界契約
-       - 不変条件（INV）の相互整合性
-       - データフローと状態遷移の一貫性
-       - 懸念点・潜在的矛盾
-    3. 具体的な改善提案 (Specific Improvement Proposals)
-       - インターフェース標準化
-       - 検証・CI統合
-       - エラー処理とロールバックの明確化
-       - モック/本番環境の自動整合性チェック
-    4. まとめ / 次のステップ
-
-    I will now flesh out each section with precise details from the JSON.
-    *Self-Correction/Refinement during thought:*
-    - Check relationship rationales: All say KEEP_BOTH. I must emphasize that merging would break Delta3's core principles (Kernel isolation, HAL abstraction, contract vs implementation separation).
-    - The `generate.spec` uses `check-immune-status()` and `rollback-stage(wal)`. These are likely external or part of a policy layer not fully specified here. I'll note this as an integration point.
-    - `chron-llm-runtime.spec` has commented P4 steps. I'll suggest moving them to a dedicated orchestration spec or marking them as TODO/Phase markers clearly.
-    - I need to explicitly map the 8 files to their roles in the architecture.
-    - Output must be structured, concise, and actionable.
-
-    Let's draft it carefully. 
-    Structure:
-    ### 1. 最適マージ計画 (Optimal Merge Plan)
-    - グループ化（Kernel / Runtime & Session / Backend & HAL / Policy & Safety）
-    - 統合方針：全ペアで `KEEP_BOTH` を採用。理由と代替手段（インターフェース契約、インポート規則）。
-    - 依存関係グラフ（Mermaid or text-based）
-    ### 2. アーキテクチャ整合性分析 (Architectural Consistency)
-    - レイヤー分離の遵守（Delta3原則）
-    - INV不変条件の相互検証
-    - データフローと状態管理の一貫性
-    - 潜在的な乖離・懸念点
-    ### 3. 具体的な改善提案 (Improvement Proposals)
-    - インターフェース契約の一元化
-    - 検証パイプラインの導入
-    - エラー/ロールバックセマンティクスの明確化
-    - モック整合性自動化
-    ### 4. 統合ドキュメント構造案
-    - How to present them together without merging.
-
-    All points will be grounded in the provided JSON data. I'll write it out now. 
-    *Self-Correction/Verification during drafting:*
-    - Check file paths and names: match exactly.
-    - Check relationships: 7 pairs, all KEEP_BOTH. Rationales are consistent with layered architecture.
-    - Ensure technical terms (WAL, Graph projection, FFI HAL, Delta3 Kernel, R0/R1 layers) are used correctly.
-    - Make sure the output is in Japanese as requested.
-    - Structure matches request: マージ計画, アーキテクチャ整合性, 改善提案.
-
-    Ready. Output matches the refined structure. 
-    Proceeds. 
-    [Output Generation] -> *See response.* 
-    *Self-Correction/Note during generation prep:* I will make sure to explicitly reference the `recommended_action` and `rationale` from the input to show direct analysis. I'll also add a dependency matrix/graph for clarity. The tone will be architectural/engineering focused. All constraints met.✅
-</think>
-
-提供された仕様書データと関係性分析に基づき、Delta3アーキテクチャの設計原則（Kernel隔離・HAL抽象化・契約/実装分離）を尊重した構造化出力を提示します。
+**Integration Protocol:**
+- Replace file merges with **module-level imports** and **interface contracts**.
+- Define a shared `DomainTypes` schema for cross-layer primitives (`Role`, `ID`, `Clock`, `Status`).
+- Enforce `RuntimeCommand` ABI as the sole communication channel between R0/R1 layers and the Kernel.
 
 ---
-### 📊 1. 最適マージ計画 (Optimal Merge Plan)
 
-全7ペアの関係性分析で `KEEP_BOTH` が推奨されており、これはアーキテクチャ上の境界線（Kernel vs Runtime vs Backend/HAL）と抽象度の差異が明確に定義されているためです。強制的なマージは「関心の分離」を破り、テスト不可能性や状態遷移の曖昧さを招きます。
+## 2. Architectural Consistency & Invariant Verification
 
-#### 🔹 モジュール階層別グループ化
-| レイヤー | 該当アーティファクト | 役割 |
-|:---|:---|:---|
-| **Kernel (State & Causal)** | `chron-llm-kernel.spec` | WAL永続化、Graph投影、Worldline管理、イベントコミット |
-| **Runtime / Session (Orchestration)** | `chron-llm-runtime.spec`, `chat-loop.spec`, `r0-session-execution-layer-spec-v1.0.spec` | セッション管理、プロンプト構築、トレース生成、R0/R1レイヤー契約 |
-| **Backend / HAL (Inference)** | `chron-llm.spec`, `ffi-bindings.spec`, `ffi-bindings-mock.spec` | LLM推論API定義、C Wrapper/FFIバインディング、テスト用モック |
-| **Policy & Safety (Agent)** | `generate.spec` | 生成ループ、免疫センサー監視、フォールトリカバリ、KVキャッシュ制御 |
+### Schema Alignment
+- **State Types:** `KernelState` (Kernel) and `KernelState` (Runtime) are structurally aligned but scoped differently. Runtime wraps Kernel state for API exposure. Consistent.
+- **History/Events:** Kernel uses `HistoryEntry` (WAL-backed, clocked). R0/Chat uses `HistoryEvent` (session-scoped, role-based). FFI uses `event` struct. Consistent via explicit DTO projection (`%history->dto` in Kernel spec).
+- **Context Objects:** Kernel's `ContextObject` (system prompt, history, metadata) is distinct from `chron-llm.spec`'s `Context` (LLM inference state: `model`, `ctx`, `n-past`). No conflict; different abstraction layers.
 
-#### 🔹 統合方針（KEEP_BOTHの適用ルール）
-- **契約と実装の分離**: `r0-session-execution-layer-spec-v1.0.spec` を「アーキテクチャ契約書」、他を「実装仕様」として独立管理。
-- **Kernel隔離原則**: `chron-llm-runtime.spec` は Kernel API のみを公開し、LLM/FFIの詳細を隠蔽。依存は `import kernel` に限定。
-- **HAL抽象化**: `ffi-bindings.spec`（本番）と `ffi-bindings-mock.spec`（テスト）は `INV mock_compat` によりABI互換を保証。マージせず、ビルドフラグで切り替え。
-- **代替手段**: ファイル統合の代わりに、**インターフェース定義ファイル（例: `kernel-api.contract`, `runtime-command.abi`）** を別途作成し、各モジュールから参照させる構成を推奨。
+### Single Source of Truth (SOT) Consistency
+- **Kernel as SOT:** `INV: Kernel == SingleSourceOfTruth` and `INV: Kernel -> Sole State Mutator` are upheld. All state mutations flow through `kernel-commit-event` -> `stage-event` -> `commit-staged`.
+- **Runtime Isolation:** Runtime accesses Kernel exclusively via API. It holds no direct references to WAL/Graph/History. Consistent.
+- **FFI Statelessness:** `INV: stateless` ensures FFI layer holds only native pointers. No inference logic or state persistence. Consistent.
+- **Session/Trace Scope:** `chat-loop.spec` and `generate.spec` operate on ephemeral session state. They do not conflict with Kernel SOT as they are transient execution contexts.
 
-#### 🔹 モジュール依存グラフ
-```mermaid
-graph TD
-  A[r0-session-execution-layer-spec-v1.0.spec] -->|契約定義| B[chat-loop.spec]
-  A -->|RuntimeCommand ABI| C[chron-llm-runtime.spec]
-  C -->|Kernel API| D[chron-llm-kernel.spec]
-  B -->|LLM推論呼び出し| E[generate.spec]
-  E -->|FFI HAL| F[ffi-bindings.spec]
-  F -.->|ABI互換検証| G[ffi-bindings-mock.spec]
-  D -->|Graph/WAL状態| H[Backend/Inference Engine]
-```
+### Type Mismatches & Resolution
+| Mismatch | Locations | Risk | Resolution |
+|:---|:---|:---|:---|
+| `Symbol` vs `Role` vs `Status` | Kernel (`:user-message`), R0 (`'user' | 'assistant'`), FFI (`symbol`) | Cross-layer serialization errors | Define unified `Role` enum in shared schema. Map Kernel symbols to R0 roles via adapter. |
+| `Integer` vs `ID` vs `WALPos` | Kernel (`world_id: Integer`), R1 (`ID`, `Pos`), FFI (`int32`) | Pointer/offset misalignment | Enforce `int64` for all positional/clock types in FFI. Cast explicitly at layer boundaries. |
+| `Any?` / `Any` / `PropertyList` | Kernel (`metadata: Any?`), `chron-llm.spec` (`payload: PropertyList`) | Type safety degradation | Replace `Any` with strict `Map<String, Value>` or JSON schema validation in production FFI bindings. |
+
+### Invariant Verification
+- ✅ `INV: Graph = f(WAL)` & `INV: Post-Commit: WAL.persisted AND Graph.updated` → Verified by `refresh-projections(k)` and `commit-staged(k.wal)`.
+- ✅ `INV: Fault -> !Commit; Rollback -> Stage.Empty` → Verified in `generate.spec` `FAULT_RECOVERY()`.
+- ⚠️ **Critical Conflict:** `generate.spec` calls `rollback-stage(wal)` directly. This violates `INV: Kernel -> Sole State Mutator`. **Fix:** `generate.spec` must invoke `kernel-rollback(k)` API instead of direct WAL manipulation.
+- ✅ `INV: abi_1to1` & `INV: mock_compat` → FFI and Mock specs are structurally aligned. Mock returns deterministic values (`MOCK_TOKEN_ID`, `SUCCESS_CODE`) matching production signatures.
 
 ---
-### 🏗️ 2. アーキテクチャ上の整合性分析 (Architectural Consistency)
 
-#### ✅ 整合性が保たれている点
-1. **レイヤー境界の明確化**  
-   `Runtime.knows(LLM) == FALSE`（runtime.spec）と `Kernel.knows(LLM) == FALSE`（r0-layer-spec）が明示されており、推論ロジックが Kernel/Runtime から完全に隔離されています。
-2. **状態遷移の不変条件（INV）の相互整合**  
-   - `Graph = f(WAL)` と `Post-Commit: WAL.persisted AND Graph.updated` が kernel.spec で定義され、generate.spec の `rollback-stage(wal)` と矛盾なく動作可能。
-   - `ffi-bindings.spec` の `stateless` INV は、Kernel が状態を持たずイベントのみを処理する設計と一致。
-3. **データフローの一貫性**  
-   `User Input → Runtime/Chat-Loop → Kernel(commit) → Backend(generate) → Output → Kernel(reply commit) → History/Trace update` の流れが、各仕様書の OPS 定義で追跡可能。
+## 3. Actionable Roadmap
 
-#### ⚠️ 潜在的な乖離・懸念点
-| 項目 | 現状 | 影響 |
-|:---|:---|:---|
-| **P4 コメント化フロー** | `chron-llm-runtime.spec` の `main_loop` に `// P4:` でコメントアウトされたステップが存在 | 実装ロードマップと現行仕様の乖離。CIで未実装APIの誤使用を防ぐ必要がある |
-| **外部ポリシー関数の未定義** | `generate.spec` で `check-immune-status()` と `rollback-stage(wal)` を呼出しているが、Kernel/Backend仕様で定義なし | 統合ビルド時にシンボル解決エラーまたはランタイム未定義リスク |
-| **トレース構造の非対称性** | `chat-loop.spec` の `R0Trace` は `h-before/h-after` スナップショットを持つが、Kernelの `HistoryEntry` は `clock/text/kind` のみ | トレース復元と Kernel 履歴投影間のマッピング仕様が未定義 |
+### Phase 1: Schema Unification & Type Alignment
+- [ ] **Create `shared/domain-types.spec`:** Define canonical enums for `Role`, `Status`, `Clock`, `ID`, and `Payload`. Export to all layers.
+- [ ] **Resolve Type Mismatches:** Update `chat-loop.spec` and `ffi-bindings.spec` to use canonical types. Implement explicit casting macros in FFI layer.
+- [ ] **Standardize Context Mapping:** Define `ContextObject` ↔ `LLM Context` transformation rules in `chron-llm-runtime.spec` to prevent semantic drift.
 
----
-### 💡 3. 具体的な改善提案 (Specific Improvement Proposals)
+### Phase 2: Invariant Enforcement & Static Verification
+- [ ] **Implement Invariant Linter:** Develop a static analysis tool to parse `INV:` statements and verify compliance across module boundaries (e.g., flag direct WAL access outside Kernel).
+- [ ] **Fix SOT Violation:** Refactor `generate.spec` to delegate `rollback-stage(wal)` to a new `kernel-rollback(k)` API. Update `chron-llm-kernel.spec` to expose this operation.
+- [ ] **Contract Validation Pipeline:** Add CI step to validate `RuntimeCommand` ABI compliance between R0/R1 specs and Kernel interface. Reject PRs that bypass the contract.
 
-#### 🔧 A. インターフェース契約の一元化（Priority: High）
-- **提案**: `chron-llm-runtime.spec` と `r0-session-execution-layer-spec-v1.0.spec` で重複する `RuntimeCommand ABI` および `Kernel API` を独立ファイル（例: `contracts/kernel-runtime.abi`）に抽出。
-- **効果**: 契約変更時の波及範囲を限定し、Delta3 Kernel の隔離原則を強制可能。
+### Phase 3: FFI & Mock Automation
+- [ ] **Generate FFI Bindings:** Build a code generator that parses `ffi-bindings.spec` and `ffi-bindings-mock.spec` to auto-produce C/LLVM bindings and mock implementations.
+- [ ] **ABI Parity Testing:** Implement property-based tests that run identical sequences against `ffi-bindings.spec` (production) and `ffi-bindings-mock.spec` (mock). Verify `INV: mock_compat` at runtime.
+- [ ] **Pointer Safety Checks:** Integrate `valgrind`/`AddressSanitizer` hooks into the FFI layer to enforce `INV: stateless` and prevent dangling native pointer references.
 
-#### 🔧 B. 不変条件・依存検証パイプラインの導入（Priority: High）
-- **提案**: 
-  - `INV Runtime.knows(LLM) == FALSE` および `INV stateless : Module holds only native pointers.` を静的解析ルールとして実装。
-  - `ffi-bindings-mock.spec` と `ffi-bindings.spec` のシグネチャ差分を CI で自動検知（`mock_compat` INV の自動化）。
-- **効果**: 意図せぬレイヤー侵入やモック/本番のABI不一致を早期発見。
-
-#### 🔧 C. エラー処理とロールバックセマンティクスの明確化（Priority: Medium）
-- **提案**: `generate.spec` の `FAULT_RECOVERY()` と Kernel の `refresh-projections(k)` の順序関係を定義。
-  ```text
-  Suggested Flow:
-  1. Fault detected → cancel current generation step
-  2. rollback-stage(wal) → revert WAL to pre-commit point
-  3. my-llama-reset-kv(ctx) → clear KV cache
-  4. refresh-projections(k) → rebuild Graph from consistent WAL state
-  ```
-- **効果**: 分岐コミット後の状態不整合（Graph/WAL drift）を防止。
-
-#### 🔧 D. トレースと履歴の統合マッピング定義（Priority: Medium）
-- **提案**: `R0Trace` と `HistoryEntry` の変換ルールを仕様書末尾に追加。
-  ```text
-  MAP R0Trace → HistoryEntry:
-    user_text → {kind: :user-message, text: user_text}
-    parsed → {kind: :assistant-reply, text: parsed}
-    h-before/h-after → snapshot metadata for replay validation
-  ```
-- **効果**: デバッグ・リプレイ機能の実装基盤を明確化。
-
----
-### 📝 4. 統合ドキュメント構造案（KEEP_BOTH前提）
-
-ファイル分割を維持しつつ、開発者が一貫して参照できるよう以下の構成で管理することを推奨します：
-
-```
-llama-agent/ir/
-├── contracts/                  # ★ 新規追加: 境界契約定義
-│   ├── kernel-runtime.abi      # Kernel ↔ Runtime 間インタフェース
-│   └── runtime-command.spec    # R0/R1 レイヤー間の操作型定義
-├── layer-kernel/               # 状態・因果管理
-│   └── chron-llm-kernel.spec
-├── layer-runtime/              # オーケストレーション・セッション
-│   ├── r0-session-execution-layer-spec-v1.0.spec
-│   ├── chat-loop.spec
-│   └── chron-llm-runtime.spec
-├── layer-backend/              # 推論エンジン・HAL
-│   ├── chron-llm.spec
-│   ├── ffi-bindings.spec
-│   └── ffi-bindings-mock.spec
-└── layer-policy/               # エージェント制御・安全機構
-    └── generate.spec
-```
-
-### ✅ まとめ
-- **マージ方針**: 全ペア `KEEP_BOTH`。抽象度・レイヤー境界・テスト分離の観点から統合は不適切。
-- **整合性**: Delta3アーキテクチャ原則（Kernel隔離、HAL抽象化、状態遷移の決定論的保証）をほぼ完全に遵守。一部外部関数定義とトレースマッピングに隙間あり。
-- **次ステップ**: 契約ファイルの抽出、CI検証ルールの追加、ロールバック順序の明確化を実施することで、実装フェーズでの整合性リスクを大幅に低減可能。
-
-必要に応じて、各アーティファクト間の `import/depends` マトリクスや、INV不変条件の自動チェックスクリプト仕様も別途提供可能です。
+### Phase 4: Integration & CI/CD Pipeline
+- [ ] **Module Import Registry:** Establish a central registry for cross-spec imports. Enforce dependency graphs to prevent circular references between Kernel, Runtime, and Backend.
+- [ ] **Automated Trace Reconstruction:** Implement a verification harness that uses `R0Trace` snapshots (`h-before`, `h-after`) to replay session flows and validate `INV: trace.snapshots`.
+- [ ] **Deployment Gate:** Require all spec changes to pass invariant checks, type alignment validation, and FFI mock parity tests before merging. Document architectural boundaries in `chron-llm-r0-session-execution-layer-spec-v1.0.spec` as the source of truth for layer contracts.

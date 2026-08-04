@@ -4,7 +4,7 @@ RuntimeCommand = proceed | discard | sleep | regenerate | regenerate-with-penalt
 Event = {intent:{memory-write|recover}}
 
 KERNEL_FUNC:
-Kernel(req:RuntimeRequest, s:KernelState, cfg:Config) -> (s':KernelState, cmd:RuntimeCommand)
+Kernel(req:KernelAction, s:KernelState, cfg:Config) -> (s':KernelState, cmd:RuntimeCommand)
 
 TRANSITIONS:
 req.type=commit -> events:=Map(Working.Candidate); Canonical.History+=events; if exists(e in events|e.intent in {memory-write,recover})->Canonical.MemoryRef++; Canonical.LamportClock++; Working:=Init(); cmd=proceed

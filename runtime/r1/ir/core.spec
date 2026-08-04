@@ -1,3 +1,5 @@
+IMPORT ir::01-domain-model AS Schema
+
 MODULE chronos-r1
 
 TYPES
@@ -13,33 +15,6 @@ TYPES
   KernelState = {canonical: Canonical, deferred: [Candidate], working: Candidate?, faults: [Fault]}
   Runtime = {ks: KernelState, next-cand-id: UUID, last-cmd: RuntimeCommand?}
 
-OPS
-  derive(c: Canonical) -> {proj, graph, summary: [Event]} // |summary| <= limit; Pure
-  replay(c) = derive(c)
-  build-prompt(d: Derived, m: Memory, cfg: Config) -> Prompt // Det; Inputs subset {Canonical, Memory, Config}
-
-  validate(cand: Candidate) -> Report // Pure. Checks Syntax/Sem/Inv/Obs(Echo/Stagnation/Disc). Recs:{Retry,Penalty,Abort}
-  policy-route(rpt: Report) -> Action // Priority: Syntax > Sem > FatalInv > RecovInv > Obs(Abort>Penalty>Retry) > Accept
-
-  commit(evt: Event) -> {new-canonical, committed} // Updates Clock++, Lamport, History+, Memory+. Only Canonical writer.
-  cand-to-event(cand) = evt(metadata += {candidate-id, intent})
-
-  kernel-transition(action: KernelAction, cand?, state: KernelState) -> {next-state, cmd}
-    accept: commit(cand->event()) -> remove working; Proceed
-    reject: remove working; Discard
-    defer: add deferred; Sleep
-    retry: Regenerate (no change)
-    retry-penalty: policy(temp+0.2, top-p-0.1); RegenPenalty
-    abort: create Fault; Terminate
-
-  wake-deferred(state) // Triggered by CommitSuccess only. Re-eval deferred via Validate->Policy->Kernel.
-  recover(canonical) -> {derived, memory, prefill} // Pure.
-  branch-worldline() -> Candidate(metadata={causal-id}) // Standard path.
-
-  runtime-run-candidate(cand) -> Validate -> Policy -> Kernel -> WakeDeferred; Returns {Runtime, Report, Action, Command}
-  runtime-submit(inp) -> CreateCand -> run-candidate
-  runtime-run-backend() -> Replay -> BuildPrompt -> Gen(P->T) -> Submit // Gen no Canonical access.
-
 INVARIANTS
   INV1: Canonical immutable; new instance only via commit().
   INV2: validate(), policy-route() side-effect free.
@@ -49,3 +24,39 @@ INVARIANTS
   INV6: build-prompt() inputs subset {Canonical, Memory, Config}; excludes Obs/Fault/Metrics.
   INV7: Backend non-authoritative; output -> Candidate -> Validation pipeline mandatory.
   INV8: Worldline Branch uses standard Candidate->Validation->Commit path.
+
+OPS domain-api
+  cand-to-event(cand: Candidate) -> Event // metadata += {candidate-id, intent}
+
+OPS pure-ops
+  derive(c: Canonical) -> {proj, graph, summary: [Event]} // |summary| <= limit; Pure
+  replay(c: Canonical) -> {proj, graph, summary: [Event]} // derive(c)
+  build-prompt(d: Derived, m: Memory, cfg: Config) -> Prompt // Det; Inputs subset {Canonical, Memory, Config}
+  validate(cand: Candidate) -> ValidationReport // Pure. Checks Syntax/Sem/Inv/Obs(Echo/Stagnation/Disc). Recs:{Retry,Penalty,Abort}
+  policy-route(rpt: ValidationReport) -> KernelAction // Priority: Syntax > Sem > FatalInv > RecovInv > Obs(Abort>Penalty>Retry) > Accept
+  recover(canonical: Canonical) -> {derived, memory, prefill} // Pure.
+
+OPS kernel-boundary
+  commit(evt: Event) -> {new-canonical, committed} // Updates Clock++, Lamport, History+, Memory+. Only Canonical writer.
+  kernel-transition(action: KernelAction, cand: Candidate?, state: KernelState) -> {next-state: KernelState, cmd: RuntimeCommand?}
+    accept: commit(cand->event()) -> remove working; Proceed
+    reject: remove working; Discard
+    defer: add deferred; Sleep
+    retry: Regenerate (no change)
+    retry-penalty: policy(temp+0.2, top-p-0.1); RegenPenalty
+    abort: create Fault; Terminate
+  wake-deferred(state: KernelState) -> KernelState // Triggered by CommitSuccess only. Re-eval deferred via Validate->Policy->Kernel.
+  branch-worldline() -> Candidate // Standard path (metadata={causal-id}).
+
+OPS runtime-facade
+  runtime-run-candidate(cand: Candidate) -> {Runtime, ValidationReport, KernelAction, RuntimeCommand} // Validate -> Policy -> Kernel -> WakeDeferred
+  runtime-submit(inp: Any) -> {Runtime, ValidationReport, KernelAction, RuntimeCommand} // CreateCand -> run-candidate
+  runtime-run-backend() -> {Runtime, ValidationReport, KernelAction, RuntimeCommand} // Replay -> BuildPrompt -> Gen(P->T) -> Submit // Gen no Canonical access.
+
+OPS inspection
+  runtime-state(rt: Runtime) -> KernelState
+  runtime-next-candidate-id(rt: Runtime) -> UUID
+  runtime-last-command(rt: Runtime) -> RuntimeCommand?
+
+OPS testing
+  chronos-r1-self-test() -> Boolean // Validates commit, validation, kernel, runtime pipelines

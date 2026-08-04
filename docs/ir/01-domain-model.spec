@@ -6,7 +6,7 @@ ENUM CmdKind={proceed,discard,sleep,regenerate,regenerate-with-penalty,terminate
 TYPE Event={id,source:Source,content,meta:{ts,seq,causal-ref?}}
 TYPE Candidate={id,origin,intent:Intent,content,constraints,meta}
 TYPE ValidationReport={facts}
-TYPE RuntimeRequest={kind:ReqKind,payload}
+TYPE KernelAction={kind:ReqKind,payload}
 TYPE RuntimeCommand={kind:CmdKind,payload}
 TYPE FaultEvent={type,reason,meta}
 
