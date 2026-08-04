@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Chron-LLM Unified Types (Phase 2)",
+  "definitions": {
+    "PayloadRef": {
+      "type": "object",
+      "required": ["hash", "size", "storage"],
+      "properties": {
+        "hash": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$", "description": "SHA-256 Hex" },
+        "size": { "type": "integer", "minimum": 0, "description": "U64 bytes" },
+        "storage": { "type": "string", "enum": ["memory", "disk", "remote"] }
+      },
+      "additionalProperties": false
+    },
+    "CausalNode": {
+      "type": "object",
+      "required": ["id", "parents", "payload_ref"],
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "parents": { "type": "array", "items": { "type": "string", "format": "uuid" } },
+        "payload_ref": { "$ref": "#/definitions/PayloadRef" }
+      }
+    },
+    "World": {
+      "type": "object",
+      "required": ["id", "head", "lifecycle_state", "graph_ref", "memory_ref"],
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "head": { "type": "string", "format": "uuid", "description": "単一の Node ID (旧 head-cell リストを排除)" },
+        "lifecycle_state": { "type": "string", "enum": ["CREATED", "ACTIVE", "INACTIVE", "ARCHIVED"] },
+        "graph_ref": { "type": "string", "description": "GlobalState.canonical-graph への不変参照" },
+        "memory_ref": { "type": "string", "description": "GlobalState.canonical-memory への不変参照" }
+      }
+    },
+    "Registry": {
+      "type": "object",
+      "required": ["worlds", "ancestry"],
+      "properties": {
+        "worlds": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/definitions/World" }
+        },
+        "ancestry": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "format": "uuid" }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
