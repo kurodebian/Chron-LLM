@@ -1,4 +1,14 @@
 ;; =============================================================================
+;; RELEASE & ABI GOVERNANCE
+;; =============================================================================
+;; STATUS          : FROZEN
+;; REV             : 1.0
+;; GOVERNANCE_REF  : docs/ir/r2-0-c-freeze-report.spec
+;; CONSTITUTION_REF: docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec
+;; ABI_POLICY      : additive_only
+;; BREAKING_CHANGE : PROHIBITED
+;; ENV_TARGET      : SBCL_2.2.9
+;; =============================================================================
 ;; TYPE MAPPING TABLE (Constitution Abstract Types -> Concrete IR Indices)
 ;; =============================================================================
 ;; Constitution Type   | Concrete IR Type      | Field / Index Mapping
