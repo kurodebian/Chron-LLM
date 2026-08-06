@@ -1,0 +1,39 @@
+{
+  "Graph": {
+    "nodes": [
+      {"id": "n1", "role": "reply", "ts": 0},
+      {"id": "n2", "role": "temporal", "ts": 1},
+      {"id": "n3", "role": "bridge", "ts": 2}
+    ],
+    "edges": [
+      {"from": "n1", "to": "n2", "rel": "reply", "str": 0.8, "cnt": 1},
+      {"from": "n2", "to": "n3", "rel": "temporal", "str": 0.5, "cnt": 1},
+      {"from": "n3", "to": "n1", "rel": "bridge", "str": 0.3, "cnt": 1}
+    ],
+    "clusters": [
+      {
+        "id": "A",
+        "type": "reply",
+        "nodes": ["n1"],
+        "conns": [],
+        "stab": 0.9
+      },
+      {
+        "id": "B",
+        "type": "temporal",
+        "nodes": ["n2"],
+        "conns": [],
+        "stab": 0.7
+      },
+      {
+        "id": "C",
+        "type": "bridge",
+        "nodes": ["n3"],
+        "conns": [],
+        "stab": 0.6
+      }
+    ],
+    "meta": {}
+  }
+}
+

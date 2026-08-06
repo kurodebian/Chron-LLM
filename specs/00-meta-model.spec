@@ -5,7 +5,7 @@ MODULE MetaModel DEFINES SpecOS::LanguageAST
 -- ===================================================================
 TYPE Identifier   = StringConstraint(Pattern: "^[a-z][a-z0-9\-_]*$")
 TYPE ModulePath   = List<Identifier>   -- 階層的モジュールID
-TYPE TypeSymbol   = StringConstraint(Pattern: "^[A-Z][a-zA-Z0-9]*$")
+TYPE TypeID   = StringConstraint(Pattern: "^[A-Z][a-zA-Z0-9]*$")
 TYPE VersionExpr  = StringConstraint(Pattern: "^v[0-9]+\.[0-9]+\.[0-9]+$")
 
 -- ===================================================================
@@ -45,8 +45,8 @@ VARIANT SpecNode {
 -- 4. TYPE SYSTEM
 -- ===================================================================
 VARIANT TypeExpr {
-  | PrimitiveType(TypeSymbol)
-  | SymbolType(TypeSymbol)
+  | PrimitiveType(TypeID)
+  | IDType(TypeID)
   | ListType(TypeExpr)
   | OptionalType(TypeExpr)
   | MapType(key: TypeExpr, value: TypeExpr)
@@ -56,7 +56,7 @@ VARIANT TypeExpr {
 }
 
 RECORD TypeDef {
-  name       : TypeSymbol,
+  name       : TypeID,
   body       : TypeExpr,
   attributes : List<Attribute>
 }
@@ -176,9 +176,9 @@ RECORD Attribute {
 -- ===================================================================
 -- 12. META INVARIANTS (LANGUAGE-LEVEL CONSTRAINTS)
 -- ===================================================================
-INVARIANT META_01: UniqueSymbolsPerFile {
+INVARIANT META_01: UniqueIDsPerFile {
   FORALL f IN SpecificationFile =>
-    IsUnique(AllSymbols(f.body))
+    IsUnique(AllIDs(f.body))
 }
 
 INVARIANT META_02: ImportGraphIsAcyclic {
@@ -189,9 +189,9 @@ INVARIANT META_02: ImportGraphIsAcyclic {
 INVARIANT META_03: NoUndefinedReference {
   FORALL r IN ReferenceDef =>
     ExistsModule(r.source.module)
-    AND ExistsSymbol(r.source)
+    AND ExistsID(r.source)
     AND ExistsModule(r.target.module)
-    AND ExistsSymbol(r.target)
+    AND ExistsID(r.target)
 }
 
 INVARIANT META_04: MetaDoesNotDependOnSemantic {

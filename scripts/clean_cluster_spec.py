@@ -1,4 +1,14 @@
-import "chron-llm-spec-v0.2.spec" as SOT;
+# scripts/clean_cluster_spec.py
+import os
+
+def clean_spec():
+    target_file = "experiments/ir/3cluster.spec"
+    if not os.path.exists(target_file):
+        print(f"❌ Target {target_file} not found.")
+        return
+
+    # SOT参照とインスタンス定義・アサーションのみを残したクリーンな内容
+    cleaned_content = """import "chron-llm-spec-v0.2.spec" as SOT;
 
 // Test Fixture: Concrete 3-Cluster Topology Instance & Regression Assertions
 
@@ -33,3 +43,11 @@ INV |G.edges| = 10
 INV SCCs(G) = [{a1, a2, a3}, {b1, b2, b3}, {c1}, {c2}]
 INV Attractors(G) = [{a1, a2, a3}, {b1, b2, b3}]
 INV Deterministic(G) = True
+"""
+
+    with open(target_file, "w", encoding="utf-8") as f:
+        f.write(cleaned_content)
+    print(f"✅ Successfully cleaned and refactored {target_file}")
+
+if __name__ == "__main__":
+    clean_spec()

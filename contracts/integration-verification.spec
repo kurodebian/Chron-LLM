@@ -1,102 +1,61 @@
 # integration-verification.spec
 SPEC: IntegrationVerification
-VERSION: 1.1.5
+VERSION: 1.6.0
 
 USES:
   BaseTypes
-  BaseInvariants
-  BaseExcludes
-  BaseHistory
-  ABIRegistry
-  PipelineOrchestration
 
 DESCRIPTION:
   統合検証規約。
-  Proposal Phase FSM、Inductive Pass Relation、および ProofOf 構造体項の展開。
+  End-to-End Proof-Carrying State Transition (Proposed → Validated → Committed)。
 
 TYPES:
-  TYPE ValidationJudgement = CheckSucceeded | CheckFailed
+  ENUM ValidationJudgement = CheckSucceeded | CheckFailed
 
   TYPE CheckEvidence = {
-    check_name : String,
-    result     : ValidationJudgement,
-    evidence   : DerivedData
+    proposal_id : String,
+    check_name  : String,
+    result      : ValidationJudgement,
+    evidence    : String
   }
 
-  TYPE ProposalPhaseKind = PhaseProposedKind | PhaseValidatedKind | PhaseCommittedKind
-  TYPE PhaseProposedMarker  = ScopeMarker<PhaseProposedKind>
-  TYPE PhaseValidatedMarker = ScopeMarker<PhaseValidatedKind>
-  TYPE PhaseCommittedMarker = ScopeMarker<PhaseCommittedKind>
+  ENUM ProposalPhaseKind = Proposed | Validated | Committed
 
-  TYPE StateProposal<Phase> = {
-    proposal_id  : String,
-    phase_marker : Phase,
-    payload      : DerivedData
+  # 状態ごとの Proof-Carrying データ構造
+  TYPE ProposedProposal = {
+    proposal_id : String,
+    payload     : String
   }
 
-  TYPE ProposedProposal  = StateProposal<PhaseProposedMarker>
-  TYPE ValidatedProposal = StateProposal<PhaseValidatedMarker>
-  TYPE CommittedProposal = StateProposal<PhaseCommittedMarker>
-
-  TYPE CheckIsSuccessful(e : CheckEvidence) = Inductive {
-    EvSucceeded(e : CheckEvidence)
-  }
-
-  TYPE CheckMatchesProposal(e : CheckEvidence, p : ValidatedProposal) = Inductive {
-    EvMatches(e : CheckEvidence, p : ValidatedProposal)
-  }
-
-  TYPE ChecksPass(p : ValidatedProposal, checks : List<CheckEvidence>) = Inductive {
-    NilPass(p : ValidatedProposal)
-
-    ConsPass(
-      head          : CheckEvidence,
-      tail          : List<CheckEvidence>,
-      head_ok       : CheckIsSuccessful(head),
-      head_matches  : CheckMatchesProposal(head, p),
-      tail_ok       : ChecksPass(p, tail)
-    )
-  }
-
-  TYPE ProofOf(p : ValidatedProposal) = {
+  # Validated 状態は「全件 Pass 証明」を内包する
+  TYPE ValidatedProposal = {
+    base   : ProposedProposal,
     checks : List<CheckEvidence>,
-    valid  : ChecksPass(p, checks)
+    proof  : Forall(e ∈ checks, (e.result == CheckSucceeded) ∧ (e.proposal_id == base.proposal_id))
   }
 
-  TYPE ValidationWitness = Sigma<{
-    proposal : ValidatedProposal,
-    proof    : ProofOf(proposal)
-  }>
-
-  TYPE ValidationError = ProofValidationFailed(String) | IncompleteCheck
-  TYPE CommitError      = InvalidProof | CapabilityInvalid | ScopeMismatch
-
-STATE:
-  CanonicalTruth : CanonicalAuthority
+  # Committed 状態は ValidatedProposal と CommitCapability を含む証明オブジェクト
+  TYPE CommittedProposal(graph : DelegationGraph) = {
+    validated  : ValidatedProposal,
+    capability : CommitCapability(graph)
+  }
 
 OPERATIONS:
-  DEF create_proposal(
-    id      : String,
-    payload : DerivedData
-  ) -> ProposedProposal
-
   DEF validate(
-    proposal : ProposedProposal
-  ) -> Result<ValidationWitness, ValidationError>
+    proposal : ProposedProposal,
+    checks   : List<CheckEvidence>,
+    proof    : Forall(e ∈ checks, (e.result == CheckSucceeded) ∧ (e.proposal_id == proposal.proposal_id))
+  ) -> ValidatedProposal
 
-  DEF commit<S : ValidCommitScope>(
-    witness    : ValidationWitness,
-    capability : CommitCapability<S>
-  ) -> Result<CommittedProposal, CommitError>
+  DEF commit(
+    graph      : DelegationGraph,
+    validated  : ValidatedProposal,
+    capability : CommitCapability(graph)
+  ) -> CommittedProposal(graph)
 
+# LAYER 0: LEAN KERNEL MATHEMATICAL THEOREMS
 THEOREMS:
-  THEOREM PROPOSAL.SIGMA.001:
-    ∀ w : ValidationWitness, TYPEOF(w.proof) == ProofOf(w.proposal)
-
-  THEOREM PROPOSAL.FSM.001:
-    (PhaseProposedMarker != PhaseValidatedMarker) ∧
-    (PhaseValidatedMarker != PhaseCommittedMarker) ∧
-    (PhaseProposedMarker != PhaseCommittedMarker)
-
-CONFORMANCE:
-  ASSERT: ∀ w cap, (commit(w, cap) == Success(c)) ⇒ (TYPEOF(w.proof) == ProofOf(w.proposal))
+  # End-to-End 不変量定理: CommittedProposal に含まれる証明は自動的に健全である
+  THEOREM PROPOSAL.TRANSITION_SOUNDNESS.001:
+    ∀ (graph : DelegationGraph) (c : CommittedProposal(graph)),
+    graph.allows(c.capability.grant.source, c.capability.grant.execution)

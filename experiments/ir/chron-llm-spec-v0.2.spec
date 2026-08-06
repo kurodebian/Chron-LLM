@@ -39,3 +39,11 @@ POST Trajectory.path[end] == Trajectory.term
 MAP WorldState -> Node
 MAP Event -> Edge
 MAP Trace -> Trajectory
+
+// ===================================================================
+// Universal Invariants & Global Contracts (Merged from basin.spec)
+// ===================================================================
+
+INV-PARTITION: forall n in Graph.nodes, exists unique b in Basin, n in b.nodes
+INV-MASS: forall b in Basin, b.mass == len(b.nodes)
+INV-RATIO: forall b in Basin, b.ratio == b.mass / len(Graph.nodes)

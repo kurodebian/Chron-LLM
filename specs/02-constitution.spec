@@ -16,7 +16,7 @@ Constitution defines the fundamental laws that govern:
 Constitution SHALL:
 
 - define CanonicalState as authoritative state
-- define Authority relations
+- define Authority rels
 - constrain how Events may mutate CanonicalState
 - constrain Replay and Worldline behavior
 

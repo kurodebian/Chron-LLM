@@ -1,15 +1,13 @@
 # abi-registry.spec
 SPEC: ABIRegistry
-VERSION: 1.1.5
+VERSION: 1.3.0
 
 USES:
   BaseTypes
-  BaseInvariants
-  BaseExcludes
 
 DESCRIPTION:
   Interpretation Authority の中央管理仕様。
-  Definitional Equality (`rfl`) で完結する Free Monoid Catamorphism。
+  Definitional Equality (`rfl`) で完結する Catamorphism 仕様。
 
 TYPES:
   TYPE EventType   = String
@@ -42,9 +40,6 @@ TYPES:
     op     : ABIRegistryEvent
   }
 
-  TYPE ABIRegistrationError = VersionConflict | DuplicateABI | InvalidSchema
-  TYPE ABIResolutionError   = ABINotFound | CorruptedSchema
-
 STATE:
   RegistryHistory   : ABIRegistryHistory
   RegistryAuthority : InterpretationAuthority
@@ -76,6 +71,7 @@ OPERATIONS:
   ) -> ABIRegistrySnapshot =
     fold_history(history, [], apply_event)
 
+# LAYER 0: LEAN KERNEL MATHEMATICAL THEOREMS
 THEOREMS:
   THEOREM ABI.PROJ.CATAMORPHISM.001:
     project_registry(EmptyHistory) == []
@@ -85,14 +81,13 @@ THEOREMS:
     ∀ h e, project_registry(AppendHistory(h, e)) == apply_event(project_registry(h), e)
     PROOF BY rfl
 
-INVARIANTS:
-  INV_DEF ABI.REG.001: registry_history_append_only(t : HistoryTransition)
-    THEOREM: t.after == AppendHistory(t.before, t.op)
+# LAYER 1: REPOSITORY CONSTITUTION
+POLICIES:
+  POLICY: ABI.APPEND_ONLY.001
+    DESCRIPTION: ABI 履歴の変更は常に末尾追加 (AppendHistory) のみによって行われなければならない。
 
-EXCLUDES:
-  EXCLUDE: WallClockTime
-  EXCLUDE: MutableGlobal
-  EXCLUDE: ExternalIO
-
-CONFORMANCE:
-  ASSERT: ∀ t : HistoryTransition, registry_history_append_only(t)
+# LAYER 2: BUILD & CI ENFORCEMENT
+ENFORCEMENT:
+  ENFORCE: CI.CATAMORPHISM_RFL_CHECK
+    METHOD: Lean Compiler Check
+    RULE: Confirm that projection theorems compile purely with `rfl`.

@@ -1,0 +1,72 @@
+{
+  "Node": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "Edge": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "Graph": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "Cluster": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "ThreeClusterGraph": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "Trajectory": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "EventSelection": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "Cycle": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "CycleResult": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "SCC": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "SCCResult": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "Attractor": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "Basin": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "BasinResult": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  }
+}

@@ -1,3 +1,5 @@
+// @deprecated - Superceded by chron-llm-spec-v0.2.spec
+
 TYPES
 Node: ID
 Graph: Map[Node, Node]

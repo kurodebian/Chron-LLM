@@ -1,3 +1,5 @@
+// @deprecated - Superceded by chron-llm-spec-v0.2.spec
+
 TYPE Role = reply | temporal | bridge
 TYPE Node = { id: ID, role: Role }
 TYPE Edge = { from: ID, to: ID, rel: Role, strength: Float }
