@@ -1,42 +1,71 @@
-TYPE Phase = {0:prefill | 1:gen | 2:finalize}
-TYPE IR = {ctx-id: ptr, pos: int, phase: Phase, token: int, score: float}
-TYPE Stream = array[IR]
-TYPE DivRes = {step: int, all-same: bool, p-same: float}
+PKG chron-observation-layer
+IMPORTS: [ir]
 
-STATE *ir-stream*: Stream = []
+;; 1. Unified Return Types
+TYPE DivRes = STRUCT {
+    step: INT,
+    all-same: BOOL,
+    p-same: FLOAT
+}
 
-OP init-bridge() -> void
-  PRE: RuntimeReady
-  POST: CallbackRegistered
+;; 2. State & Bridge Operations
+STATE *observation-buffer*: ir.IR_Buffer
 
-OP ir-callback(ctx-id: ptr, pos: int, token: int, score: float, phase: Phase) -> void
-  BODY: push(IR{ctx-id, pos, phase, token, score})
-  INV-NON-INVASIVE: !mod(RuntimeState)
+OP init-bridge(capacity: INT) -> VOID
+    PRE: capacity > 0
+    EFFECT: *observation-buffer* = ir.allocate-buffer(capacity)
 
-OP push(ir: IR) -> IR
-  PRE: ir != null
-  POST: *ir-stream* = append(*ir-stream*, [ir])
+OP ir-callback(ctx_id: ir.ID, pos: INT, phase: ir.Phase, token: ir.TOKEN_ID, score: FLOAT) -> VOID
+    BODY: ir_obj = ir.make-ir(ctx_id, pos, phase, token, score)
+          pushed = ir.push-ir(*observation-buffer*, ir_obj)
+          IF !pushed THEN
+              log_warning("IR_Buffer overflow: Token event dropped at pos", pos)
+          ENDIF
+    INV-NON-INVASIVE: !mod(RuntimeState)
 
-OP clear() -> void
-  POST: *ir-stream* = []
+;; 3. Standardized Extract Operations
+OP extract-actions(buf: ir.IR_Buffer) -> Array[ir.IR]
+    PRE: buf != NULL
+    BODY: raw_data = ir.snapshot-buffer(buf)
+          actions = filter(raw_data, lambda(x): ir.ir-phase(x) == 1) ;; 1 = GENERATION
+          return sort(actions, key=ir.ir-pos)
+    INV-ORDERED: forall i < len(result)-1: ir.ir-pos(result[i]) <= ir.ir-pos(result[i+1])
 
-OP extract-actions(s: Stream) -> array[IR]
-  BODY: filter(ir in s | ir.phase == 1)
-  INV-ORDERED: forall i < len(result)-1, result[i].pos <= result[i+1].pos
+;; 4. Trial Execution & Divergence Analysis Operations
+OP run-single-trial(prompt: STRING, seed: INT) -> Array[ir.IR]
+    BODY: ir.clear-buffer(*observation-buffer*) ;; Enforce INV-S4 (RunStart Isolation)
+          run_generation_with_seed(prompt, seed)
+          IF ir.buffer-overflow-p(*observation-buffer*) THEN
+              log_warning("Trial completed with buffer overflow; observations truncated.")
+          ENDIF
+          return extract-actions(*observation-buffer*)
 
-OP run-trial(prompt, n_trials) -> array[array[IR]]
-  BODY:
-    clear()
-    res = []
-    for _ in range(n_trials):
-      run_generation(prompt)
-      append(res, extract-actions(*ir-stream))
-    return res
+OP run-trial(prompt: STRING, n_trials: INT, seed_base: INT) -> Array[Array[ir.IR]]
+    PRE: n_trials > 0
+    BODY: res = []
+          for i in range(n_trials):
+              trial_res = run-single-trial(prompt, seed_base + i)
+              append(res, trial_res)
+          return res
 
-OP divergence-profile(trials: array[array[IR]]) -> array[DivRes]
-  BODY: map(step_idx, trials | calc_divergence_metrics(step_idx, trials))
+OP calc-divergence-at-step(step_idx: INT, trials: Array[Array[ir.IR]], n_trials: INT) -> DivRes
+    BODY: tokens = [trials[t][step_idx].token for t in range(n_trials)]
+          max_cnt = max(count(t, tokens) for t in unique(tokens))
+          p = max_cnt / n_trials
+          return DivRes{step: step_idx, all-same: (p == 1.0), p-same: p}
 
-INV-IMMUTABLE: forall ir in Stream, !mod(ir.fields) post_creation
-INV-APPEND-ONLY: len(Stream') >= len(Stream) unless clear() called
-INV-DETERMINISTIC: run-trial(prompt, n) -> deterministic output given fixed seed/runtime
-INV-COUPLING: AnalysisOps != CollectionOps
+OP divergence-profile(prompt: STRING, n_trials: INT, seed_base: INT) -> Array[DivRes]
+    PRE: n_trials > 0
+    BODY: trials = run-trial(prompt, n_trials, seed_base)
+          min_len = min(len(t) for t in trials)
+          return [calc-divergence-at-step(s, trials, n_trials) for s in range(min_len)]
+
+;; 5. Consolidated Invariants
+INVARIANTS:
+    INV-IMMUTABLE: forall ir in *observation-buffer*, !mod(ir.fields) post_creation
+    INV-THREAD-SAFE: Concurrent ir-callback invocations are safe and lock-free
+    INV-BOUNDED-NO-CRASH: Buffer overflows gracefully log without crashing LLM backend
+    INV-APPEND-ONLY: len(*observation-buffer*') >= len(*observation-buffer*) unless clear-buffer() called
+    INV-DETERMINISTIC: run-single-trial(prompt, seed) -> deterministic output
+    INV-COUPLING: AnalysisOps != CollectionOps
+    INV-OBS-ONLY: !write(Runtime|Kernel|Candidate|Canonical|Prompt)
