@@ -20,6 +20,11 @@ TYPE diff-observation = [schema-version:int, changed-p:boolean, changed-fields:P
 PRED diff-observation-p(o) = vectorp(o) & len(o)=3 & o[0]==+observation-schema-version+
 OP diff-observation-equal(a,b) = vector-equal(a,b)
 
+
+TYPE kernel-observation = [schema-version:int, kernel-id:PrimitiveTree, cycle-count:uint64, status-flags:uint32, memory-hash:PrimitiveTree, context-state:PrimitiveTree]
+PRED kernel-observation-p(o) = vectorp(o) & len(o)=6 & o[0]==+observation-schema-version+
+OP kernel-observation-equal(a,b) = vector-equal(a,b)
+
 FUNC build-world-observation(world, parent-world-id?) -> world-observation
   PRE: world-p(world)
   POST: result.world-id=world-id(world), result.root-node-id=root-node-id(world), result.head-node-id=head-node-id(world), result.projection-policy=projection-policy(world), result.metadata=metadata(world), result.lifecycle=lifecycle(world), result.parent-world-id=parent-world-id
@@ -35,7 +40,13 @@ FUNC build-ancestry-observation(registry, world-id) -> ancestry-observation
 FUNC build-diff-observation(left, right) -> diff-observation
   LOGIC: type(left)!=type(right) -> changed-fields=(:type); else if known-obs-type(type(left)) -> compare fields; else changed-fields=[]
 
+
+FUNC build-kernel-observation(kernel) -> kernel-observation
+  PRE: kernel-p(kernel)
+  POST: result.kernel-id=kernel-id(kernel), result.cycle-count=kernel-cycle-count(kernel), result.status-flags=kernel-status-flags(kernel), result.memory-hash=kernel-memory-hash(kernel), result.context-state=kernel-context-state(kernel)
+
 ALIAS describe-world = build-world-observation
 ALIAS describe-registry = build-registry-observation
 ALIAS describe-ancestry = build-ancestry-observation
 ALIAS describe-diff = build-diff-observation
+ALIAS describe-kernel = build-kernel-observation
