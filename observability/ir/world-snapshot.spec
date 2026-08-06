@@ -1,3 +1,13 @@
+;; =============================================================================
+;; TYPE MAPPING TABLE (Constitution Abstract Types -> Concrete IR Indices)
+;; =============================================================================
+;; Constitution Type   | Concrete IR Type      | Field / Index Mapping
+;; --------------------+-----------------------+-------------------------------------------------------------
+;; WorldObs            | world-observation     | [0]=schema, [1]=id, [2]=root, [3]=head, [4]=policy, [5]=meta...
+;; RegistryObs         | registry-observation  | [0]=schema, [1]=ids, [2]=active, [3]=archived
+;; KernelObs           | kernel-observation    | [0]=schema, [1]=kernel-id, [2]=cycle, [3]=flags, [4]=hash, [5]=context
+;; =============================================================================
+
 PKG chron-r2-0-c; DEP chron-r2-0-a
 CONST +observation-schema-version+ = 1
 TYPE PrimitiveLeaf = null | t | string | number | char | keyword
