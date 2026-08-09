@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Phase2SemanticFacts",
+  "type": "object",
+  "properties": {
+    "concepts_and_definitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "term": { "type": "string" },
+          "raw_text": { "type": "string" },
+          "section": { "type": "string" }
+        },
+        "required": ["term", "raw_text"]
+      }
+    },
+    "invariants_and_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string" },
+          "rule": { "type": "string" },
+          "section": { "type": "string" }
+        },
+        "required": ["type", "rule"]
+      }
+    },
+    "boundary_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_type": { "type": "string" },
+          "statement": { "type": "string" }
+        },
+        "required": ["claim_type", "statement"]
+      }
+    },
+    "dependencies_and_uses": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unresolved_statements": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "concepts_and_definitions",
+    "invariants_and_rules",
+    "boundary_claims",
+    "dependencies_and_uses",
+    "unresolved_statements"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-08-09T16:00:30.776652+00:00",
+  "root_directory": "/home/junu/Chron-LLM",
+  "total_spec_files": 103,
+  "non_empty_files": 101,
+  "empty_files": 2,
+  "facts_jsonl_path": "facts.jsonl",
+  "facts_jsonl_sha256": "418af3749b5af22bd1c3bc30821036692d1f53c9adeae92dbd62da42d280f6b0",
+  "schema_version": "1.0.0",
+  "phase": "PHASE_1_PREPROCESSOR_PHYSICAL_FACTS_ONLY"
+}

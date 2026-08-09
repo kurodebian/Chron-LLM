@@ -1,0 +1,148 @@
+{
+  "version": "1.0.0",
+  "root": "specs",
+  "count": 7,
+  "updated_at": "2026-08-09",
+  "description": "SPEC Inventory Index - SPEC体系に対する現在地点の機械可読インデックス (SSOTは各 .spec 本文)",
+  "items": [
+    {
+      "path": "specs/00-expression-grammar.spec",
+      "physical": {
+        "bytes": 0,
+        "lines": 0,
+        "is_empty": true
+      },
+      "semantic": null,
+      "status": {
+        "observed": true,
+        "body_read": false,
+        "semantic_extracted": false,
+        "decision": "SKIPPED_EMPTY"
+      }
+    },
+    {
+      "path": "specs/00-meta-model.spec",
+      "physical": {
+        "bytes": 6142,
+        "lines": 206,
+        "is_empty": false
+      },
+      "semantic": null,
+      "status": {
+        "observed": true,
+        "body_read": false,
+        "semantic_extracted": false,
+        "decision": "PENDING"
+      }
+    },
+    {
+      "path": "specs/00-type-system.spec",
+      "physical": {
+        "bytes": 0,
+        "lines": 0,
+        "is_empty": true
+      },
+      "semantic": null,
+      "status": {
+        "observed": true,
+        "body_read": false,
+        "semantic_extracted": false,
+        "decision": "SKIPPED_EMPTY"
+      }
+    },
+    {
+      "path": "specs/01-semantic-model.spec",
+      "physical": {
+        "bytes": 3264,
+        "lines": 173,
+        "is_empty": false
+      },
+      "semantic": {
+        "module": "SemanticModel",
+        "defines": "SpecOS::SemanticUniverse",
+        "scope": ["Event", "State", "Worldline", "Replay", "Projection"]
+      },
+      "status": {
+        "observed": true,
+        "body_read": true,
+        "semantic_extracted": true,
+        "decision": "PENDING"
+      }
+    },
+    {
+      "path": "specs/02-constitution.spec",
+      "physical": {
+        "bytes": 4893,
+        "lines": 229,
+        "is_empty": false
+      },
+      "semantic": {
+        "module": "Constitution",
+        "defines": "SpecOS::ConstitutionUniverse",
+        "scope": ["Authority", "Mutation", "Causality", "Replay"]
+      },
+      "status": {
+        "observed": true,
+        "body_read": true,
+        "semantic_extracted": true,
+        "decision": "PENDING"
+      }
+    },
+    {
+      "path": "specs/03-chron-semantic-extension.spec",
+      "physical": {
+        "bytes": 7106,
+        "lines": 352,
+        "is_empty": false
+      },
+      "semantic": {
+        "module": "ChronSemanticExtension",
+        "defines": "SpecOS::ChronUniverse",
+        "scope": [
+          "Evidence",
+          "Proposal",
+          "Commit",
+          "CommitResult",
+          "Branch",
+          "Fork",
+          "Merge",
+          "SharedPrefix"
+        ]
+      },
+      "status": {
+        "observed": true,
+        "body_read": true,
+        "semantic_extracted": true,
+        "decision": "PENDING"
+      }
+    },
+    {
+      "path": "specs/04-runtime-model.spec",
+      "physical": {
+        "bytes": 5416,
+        "lines": 291,
+        "is_empty": false
+      },
+      "semantic": {
+        "module": "RuntimeModel",
+        "defines": "SpecOS::RuntimeUniverse",
+        "scope": [
+          "Observation",
+          "Validator",
+          "PolicyRouter",
+          "RuntimeDecision",
+          "Scheduler",
+          "ExecutionTask",
+          "CommitRequest",
+          "PersistenceInterface"
+        ]
+      },
+      "status": {
+        "observed": true,
+        "body_read": true,
+        "semantic_extracted": true,
+        "decision": "PENDING"
+      }
+    }
+  ]
+}
