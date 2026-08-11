@@ -3,6 +3,7 @@ import json
 import urllib.request
 import subprocess
 
+
 def http_ok(url):
     try:
         req = urllib.request.Request(url)
@@ -10,6 +11,7 @@ def http_ok(url):
             return res.status == 200
     except:
         return False
+
 
 def get_windows_ip():
     try:
@@ -20,6 +22,7 @@ def get_windows_ip():
     except:
         pass
     return None
+
 
 def detect_inference_api():
     # 1. Ollama (WSL2)
@@ -40,6 +43,7 @@ def detect_inference_api():
             return f"{host}/api/generate"
 
     raise RuntimeError("No inference backend found")
+
 
 # -------------------------
 # 実行部（表示用）

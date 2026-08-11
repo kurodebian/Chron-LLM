@@ -31,15 +31,15 @@ with open(filepath, "r", encoding="utf-8") as f:
 payload = {
     "messages": [
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": content}
+        {"role": "user", "content": content},
     ],
-    "temperature": 0.0
+    "temperature": 0.0,
 }
 
 req = urllib.request.Request(
     API_URL,
     data=json.dumps(payload).encode("utf-8"),
-    headers={"Content-Type": "application/json"}
+    headers={"Content-Type": "application/json"},
 )
 
 print(f"Converting '{filepath}' via Qwen3.5-35B ...")
@@ -47,15 +47,17 @@ try:
     with urllib.request.urlopen(req) as res:
         result = json.loads(res.read().decode("utf-8"))
         ir_spec = result["choices"][0]["message"]["content"].strip()
-        
+
         out_path = filepath.replace(".md", ".spec")
         with open(out_path, "w", encoding="utf-8") as f_out:
             f_out.write(ir_spec)
-            
+
         print(f"✓ Converted successfully -> {out_path}")
         print("\n=== GENERATED SPEC (IR) ===\n")
         print(ir_spec)
         print("\n===========================\n")
-        print(f"Stats: {len(content)} bytes -> {len(ir_spec)} bytes (-{(1 - len(ir_spec)/len(content))*100:.1f}%)")
+        print(
+            f"Stats: {len(content)} bytes -> {len(ir_spec)} bytes (-{(1 - len(ir_spec) / len(content)) * 100:.1f}%)"
+        )
 except Exception as e:
-        print(f"✗ Error: {e}")
+    print(f"✗ Error: {e}")

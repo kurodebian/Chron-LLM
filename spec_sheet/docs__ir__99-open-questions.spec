@@ -1,0 +1,19 @@
+TYPE EventID = UUID | SeqID | LamportClock | CompositeID
+TYPE EventMeta = { ts: T, seq: N, lamport: N, parent: EventID?, impl: Map }
+TYPE CandidateRep = { op_ir_ver: V, ser: Fmt, compat: Strat }
+TYPE EvidenceRep = { enc: E, store: Fmt, replay_compat: Bool }
+TYPE Versioning = { event_abi: V, op_ir: V, val_report_abi: V, fault_event_abi: V }
+OP Commit(id: EventID) -> R
+INV Commit.idempotency = ?
+INV Commit.atomicity = ?
+TYPE ReplayScope = History | HistoryConfig | HistoryConfigMemRef
+TYPE Config = { routing: P, retry: S, penalty: S, detectors: T, logging: L, metrics: M, telemetry: T }
+TYPE ExtConsistency = { ltm_sync: M, storage_update: S }
+TYPE MemoryRef = { lifecycle: L, cache: S, persistence: M }
+TYPE Scheduling = { candidate: S, deferred_order: O, fairness: F, starvation: P }
+TYPE ToolExec = { mode: Sync|Async, retry: S, fail_prop: P, timeout: T }
+TYPE Recovery = { restart: B, crash: C, replay_guarantee: G }
+TYPE DistRuntime = { multi_agent_causality: ?, dist_sessions: ?, remote_commit: ?, shared_canonical: ?, fed_memory: ?, cross_agent_replay: ? }
+TYPE CausalModel = CausalDAG | VectorClocks | HybridLogicalClocks | ToolEventOrder | CrossSessionLink
+TYPE ValExt = { detectors: Set, inv_cats: Set, policy_router: Impl, routing_strat: S }
+TYPE RtExt = { backends: Set, dist_deferred_queue: ?, parallel_replay: ?, streaming_candidates: ? }

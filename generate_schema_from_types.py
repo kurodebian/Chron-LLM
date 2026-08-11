@@ -5,6 +5,7 @@ from pathlib import Path
 
 TARGET_NAME = "chron-llm-spec-v0.2.spec"
 
+
 def find_sot():
     """
     archive/ を除外して SOT を探す
@@ -13,6 +14,7 @@ def find_sot():
         if "archive" not in str(path):
             return path
     raise FileNotFoundError(f"{TARGET_NAME} not found outside archive/")
+
 
 SOT_FILE = find_sot()
 print(f"Using SOT file: {SOT_FILE}")
@@ -27,6 +29,7 @@ TYPE_MAP = {
     "Area": {"type": "number"},
 }
 
+
 def is_field_line(line):
     if ":" not in line:
         return False
@@ -35,6 +38,7 @@ def is_field_line(line):
     if any(x in line for x in ["=", "==", "IF", ">", "<"]):
         return False
     return True
+
 
 def parse_type_block(text):
     types = {}
@@ -55,7 +59,7 @@ def parse_type_block(text):
                 base = t[:-2]
                 schema["properties"][name] = {
                     "type": "array",
-                    "items": TYPE_MAP.get(base, {"type": "string"})
+                    "items": TYPE_MAP.get(base, {"type": "string"}),
                 }
             elif t.endswith("?"):
                 base = t[:-1]
@@ -64,7 +68,7 @@ def parse_type_block(text):
                 schema["properties"][name] = {
                     "type": "number",
                     "minimum": 0,
-                    "maximum": 1
+                    "maximum": 1,
                 }
             elif "|" in t:
                 opts = [x.strip() for x in t.split("|")]
@@ -78,6 +82,7 @@ def parse_type_block(text):
 
     return types
 
+
 def main():
     text = SOT_FILE.read_text()
     types = parse_type_block(text)
@@ -86,6 +91,7 @@ def main():
         json.dump(types, f, indent=2)
 
     print("Generated chron-llm-spec-v0.2.schema.json")
+
 
 if __name__ == "__main__":
     main()

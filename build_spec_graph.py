@@ -52,9 +52,7 @@ def main():
                             "target": file_b,
                             "similarity": sim,
                             "relationship": res.get("relationship"),
-                            "recommended_action": res.get(
-                                "recommended_action"
-                            ),
+                            "recommended_action": res.get("recommended_action"),
                             "rationale": res.get("integration_rationale"),
                         }
                     )
@@ -106,7 +104,9 @@ def main():
 
     print("\n✅ Spec Relation Components の抽出が完了しました！")
     print(f" ┣ 対象SPECファイル数: {components_output['metadata']['total_spec_nodes']}")
-    print(f" ┣ 抽出された独立コンポーネント数: {components_output['metadata']['total_components']}")
+    print(
+        f" ┣ 抽出された独立コンポーネント数: {components_output['metadata']['total_components']}"
+    )
     print(f" ┗ 出力ファイル: '{output_file}'")
 
 

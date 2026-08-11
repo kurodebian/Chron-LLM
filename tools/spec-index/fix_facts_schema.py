@@ -10,6 +10,7 @@ FACTS_PATH = PROJECT_ROOT / "spec-index" / "facts.jsonl"
 BACKUP_PATH = PROJECT_ROOT / "spec-index" / "facts.jsonl.bak"
 TMP_PATH = PROJECT_ROOT / "spec-index" / "facts.jsonl.tmp"
 
+
 def count_lines(filepath: Path) -> int:
     """指定されたパスの行数をカウント"""
     if not filepath.exists():
@@ -20,10 +21,11 @@ def count_lines(filepath: Path) -> int:
     except Exception:
         return 0
 
+
 def main():
     # バックアップが存在する場合は元データから読み込む
     source_path = BACKUP_PATH if BACKUP_PATH.exists() else FACTS_PATH
-    
+
     if not source_path.exists():
         print(f"Error: 変換元ファイルが見つかりません。({source_path})")
         return
@@ -63,7 +65,7 @@ def main():
                 "lines": lines,
                 "bytes": file_bytes,
                 "is_empty": (file_bytes == 0),
-                "sha256": data.get("sha256", "")
+                "sha256": data.get("sha256", ""),
             }
             cleaned_entries.append(cleaned_entry)
 
@@ -73,7 +75,10 @@ def main():
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
     TMP_PATH.replace(FACTS_PATH)
-    print(f"Successfully converted and updated {len(cleaned_entries)} entries in GATE-1 schema.")
+    print(
+        f"Successfully converted and updated {len(cleaned_entries)} entries in GATE-1 schema."
+    )
+
 
 if __name__ == "__main__":
     main()

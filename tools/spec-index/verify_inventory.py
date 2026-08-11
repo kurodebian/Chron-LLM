@@ -148,6 +148,7 @@ MAP_REQUIRED_PHYSICAL_FIELDS = {
 # Validation helpers
 # ============================================================================
 
+
 def validate_non_negative_int(value: Any) -> bool:
     """
     Strict non-negative integer validation.
@@ -174,15 +175,13 @@ def validate_sha256(value: Any) -> bool:
 
     exactly 64 lowercase hexadecimal characters.
     """
-    return (
-        isinstance(value, str)
-        and SHA256_PATTERN.fullmatch(value) is not None
-    )
+    return isinstance(value, str) and SHA256_PATTERN.fullmatch(value) is not None
 
 
 # ============================================================================
 # Physical observation
 # ============================================================================
+
 
 def compute_sha256(path: Path) -> str:
     """Compute SHA-256 of the physical file."""
@@ -235,9 +234,11 @@ def collect_actual_spec_paths() -> Set[str]:
         if p.is_file() and not any(part in exclude_dirs for part in p.parts)
     }
 
+
 # ============================================================================
 # JSON loading
 # ============================================================================
+
 
 def load_json_file(
     path: Path,
@@ -258,14 +259,10 @@ def load_json_file(
         )
 
     except UnicodeDecodeError as exc:
-        errors.append(
-            f"JSON_ENCODING_ERROR: {path}: {exc}"
-        )
+        errors.append(f"JSON_ENCODING_ERROR: {path}: {exc}")
 
     except OSError as exc:
-        errors.append(
-            f"FILE_READ_ERROR: {path}: {exc}"
-        )
+        errors.append(f"FILE_READ_ERROR: {path}: {exc}")
 
     return None
 
@@ -273,6 +270,7 @@ def load_json_file(
 # ============================================================================
 # spec-map.json validation
 # ============================================================================
+
 
 def load_and_validate_spec_map(
     errors: List[str],
@@ -308,43 +306,29 @@ def load_and_validate_spec_map(
         return map_paths, map_by_path
 
     if not isinstance(data, dict):
-        errors.append(
-            "SPEC_MAP_SCHEMA_ERROR: root must be a JSON object."
-        )
+        errors.append("SPEC_MAP_SCHEMA_ERROR: root must be a JSON object.")
         return map_paths, map_by_path
 
     if "items" not in data:
-        errors.append(
-            "SPEC_MAP_SCHEMA_ERROR: "
-            "missing required root field 'items'."
-        )
+        errors.append("SPEC_MAP_SCHEMA_ERROR: missing required root field 'items'.")
         return map_paths, map_by_path
 
     items = data["items"]
 
     if not isinstance(items, list):
-        errors.append(
-            "SPEC_MAP_SCHEMA_ERROR: "
-            "'items' must be an array."
-        )
+        errors.append("SPEC_MAP_SCHEMA_ERROR: 'items' must be an array.")
         return map_paths, map_by_path
 
     for index, item in enumerate(items):
-
         if not isinstance(item, dict):
-            errors.append(
-                f"SPEC_MAP_SCHEMA_ERROR: "
-                f"item[{index}] must be an object."
-            )
+            errors.append(f"SPEC_MAP_SCHEMA_ERROR: item[{index}] must be an object.")
             continue
 
         # ------------------------------------------------------------------
         # Required item fields
         # ------------------------------------------------------------------
 
-        missing_item_fields = (
-            MAP_REQUIRED_ITEM_FIELDS - set(item.keys())
-        )
+        missing_item_fields = MAP_REQUIRED_ITEM_FIELDS - set(item.keys())
 
         if missing_item_fields:
             errors.append(
@@ -364,8 +348,7 @@ def load_and_validate_spec_map(
 
         if not validate_non_empty_string(path_key):
             errors.append(
-                f"spec-map.json item[{index}]: "
-                f"'path' must be a non-empty string."
+                f"spec-map.json item[{index}]: 'path' must be a non-empty string."
             )
             continue
 
@@ -398,8 +381,7 @@ def load_and_validate_spec_map(
 
         if not isinstance(physical, dict):
             errors.append(
-                f"[{path_key}] SPEC_MAP_SCHEMA_ERROR: "
-                f"'physical' must be an object."
+                f"[{path_key}] SPEC_MAP_SCHEMA_ERROR: 'physical' must be an object."
             )
             continue
 
@@ -407,9 +389,7 @@ def load_and_validate_spec_map(
         # Required physical fields
         # ------------------------------------------------------------------
 
-        missing_physical_fields = (
-            MAP_REQUIRED_PHYSICAL_FIELDS - set(physical.keys())
-        )
+        missing_physical_fields = MAP_REQUIRED_PHYSICAL_FIELDS - set(physical.keys())
 
         if missing_physical_fields:
             errors.append(
@@ -461,9 +441,8 @@ def load_and_validate_spec_map(
         # It is a validity constraint on explicitly supplied fields.
         # ------------------------------------------------------------------
 
-        if (
-            validate_non_negative_int(physical.get("bytes"))
-            and validate_bool(physical.get("is_empty"))
+        if validate_non_negative_int(physical.get("bytes")) and validate_bool(
+            physical.get("is_empty")
         ):
             expected_empty = physical["bytes"] == 0
 
@@ -482,6 +461,7 @@ def load_and_validate_spec_map(
 # ============================================================================
 # facts.jsonl validation
 # ============================================================================
+
 
 def load_and_validate_phase1_facts(
     errors: List[str],
@@ -512,9 +492,7 @@ def load_and_validate_phase1_facts(
             "r",
             encoding="utf-8",
         ) as f:
-
             for line_num, line in enumerate(f, 1):
-
                 # Blank physical lines are not JSONL records.
                 if not line.strip():
                     continue
@@ -544,13 +522,9 @@ def load_and_validate_phase1_facts(
 
                 actual_fields = set(record.keys())
 
-                missing_fields = (
-                    FACT_REQUIRED_FIELDS - actual_fields
-                )
+                missing_fields = FACT_REQUIRED_FIELDS - actual_fields
 
-                extra_fields = (
-                    actual_fields - FACT_ALLOWED_FIELDS
-                )
+                extra_fields = actual_fields - FACT_ALLOWED_FIELDS
 
                 if missing_fields:
                     errors.append(
@@ -603,9 +577,7 @@ def load_and_validate_phase1_facts(
                 # ==========================================================
 
                 if "bytes" in record:
-                    if not validate_non_negative_int(
-                        record["bytes"]
-                    ):
+                    if not validate_non_negative_int(record["bytes"]):
                         errors.append(
                             f"[{path_key}] FACT_SCHEMA_ERROR: "
                             f"'bytes' must be a non-negative integer, "
@@ -617,9 +589,7 @@ def load_and_validate_phase1_facts(
                 # ==========================================================
 
                 if "lines" in record:
-                    if not validate_non_negative_int(
-                        record["lines"]
-                    ):
+                    if not validate_non_negative_int(record["lines"]):
                         errors.append(
                             f"[{path_key}] FACT_SCHEMA_ERROR: "
                             f"'lines' must be a non-negative integer, "
@@ -631,9 +601,7 @@ def load_and_validate_phase1_facts(
                 # ==========================================================
 
                 if "is_empty" in record:
-                    if not validate_bool(
-                        record["is_empty"]
-                    ):
+                    if not validate_bool(record["is_empty"]):
                         errors.append(
                             f"[{path_key}] FACT_SCHEMA_ERROR: "
                             f"'is_empty' must be boolean, "
@@ -645,9 +613,7 @@ def load_and_validate_phase1_facts(
                 # ==========================================================
 
                 if "sha256" in record:
-                    if not validate_sha256(
-                        record["sha256"]
-                    ):
+                    if not validate_sha256(record["sha256"]):
                         errors.append(
                             f"[{path_key}] FACT_SCHEMA_ERROR: "
                             f"'sha256' must be exactly 64 lowercase "
@@ -662,13 +628,8 @@ def load_and_validate_phase1_facts(
                 # No fallback or inference is performed.
                 # ==========================================================
 
-                if (
-                    validate_non_negative_int(
-                        record.get("bytes")
-                    )
-                    and validate_bool(
-                        record.get("is_empty")
-                    )
+                if validate_non_negative_int(record.get("bytes")) and validate_bool(
+                    record.get("is_empty")
                 ):
                     expected_empty = record["bytes"] == 0
 
@@ -685,14 +646,10 @@ def load_and_validate_phase1_facts(
                 p1_facts[path_key] = record
 
     except UnicodeDecodeError as exc:
-        errors.append(
-            f"FACT_ENCODING_ERROR: {FACTS_PATH}: {exc}"
-        )
+        errors.append(f"FACT_ENCODING_ERROR: {FACTS_PATH}: {exc}")
 
     except OSError as exc:
-        errors.append(
-            f"FILE_READ_ERROR: {FACTS_PATH}: {exc}"
-        )
+        errors.append(f"FILE_READ_ERROR: {FACTS_PATH}: {exc}")
 
     return p1_paths, p1_facts
 
@@ -700,6 +657,7 @@ def load_and_validate_phase1_facts(
 # ============================================================================
 # Main Gate
 # ============================================================================
+
 
 def main() -> int:
 
@@ -710,14 +668,10 @@ def main() -> int:
     # ------------------------------------------------------------------------
 
     if not MAP_PATH.is_file():
-        errors.append(
-            f"REQUIRED_FILE_MISSING: {MAP_PATH}"
-        )
+        errors.append(f"REQUIRED_FILE_MISSING: {MAP_PATH}")
 
     if not FACTS_PATH.is_file():
-        errors.append(
-            f"REQUIRED_FILE_MISSING: {FACTS_PATH}"
-        )
+        errors.append(f"REQUIRED_FILE_MISSING: {FACTS_PATH}")
 
     if errors:
         print_gate_result(errors, 0)
@@ -733,60 +687,36 @@ def main() -> int:
     # 2. spec-map.json
     # ------------------------------------------------------------------------
 
-    map_paths, map_by_path = (
-        load_and_validate_spec_map(errors)
-    )
+    map_paths, map_by_path = load_and_validate_spec_map(errors)
 
     # ------------------------------------------------------------------------
     # 3. Phase 1 facts.jsonl
     # ------------------------------------------------------------------------
 
-    p1_paths, p1_facts = (
-        load_and_validate_phase1_facts(errors)
-    )
+    p1_paths, p1_facts = load_and_validate_phase1_facts(errors)
 
     # ------------------------------------------------------------------------
     # 4. Three-way path-set equality
     # ------------------------------------------------------------------------
 
-    if not (
-        actual_spec_paths == map_paths
-        and map_paths == p1_paths
-    ):
+    if not (actual_spec_paths == map_paths and map_paths == p1_paths):
         errors.append(
-            "SET_MISMATCH: "
-            "ACTUAL_SPEC_PATHS != "
-            "SPEC_MAP_PATHS != "
-            "PHASE1_FACT_PATHS."
+            "SET_MISMATCH: ACTUAL_SPEC_PATHS != SPEC_MAP_PATHS != PHASE1_FACT_PATHS."
         )
 
-        errors.append(
-            "  Actual-only: "
-            f"{sorted(actual_spec_paths - map_paths)}"
-        )
+        errors.append(f"  Actual-only: {sorted(actual_spec_paths - map_paths)}")
 
-        errors.append(
-            "  Map-only: "
-            f"{sorted(map_paths - actual_spec_paths)}"
-        )
+        errors.append(f"  Map-only: {sorted(map_paths - actual_spec_paths)}")
 
-        errors.append(
-            "  Phase1-only: "
-            f"{sorted(p1_paths - actual_spec_paths)}"
-        )
+        errors.append(f"  Phase1-only: {sorted(p1_paths - actual_spec_paths)}")
 
     # ------------------------------------------------------------------------
     # 5. Physical identity verification
     # ------------------------------------------------------------------------
 
-    all_target_paths = (
-        actual_spec_paths
-        | map_paths
-        | p1_paths
-    )
+    all_target_paths = actual_spec_paths | map_paths | p1_paths
 
     for path_str in sorted(all_target_paths):
-
         path_obj = Path(path_str)
 
         # ====================================================================
@@ -811,9 +741,7 @@ def main() -> int:
             actual_sha256 = compute_sha256(path_obj)
 
         except OSError as exc:
-            errors.append(
-                f"[{path_str}] ACTUAL_FILE_READ_ERROR: {exc}"
-            )
+            errors.append(f"[{path_str}] ACTUAL_FILE_READ_ERROR: {exc}")
             continue
 
         # ====================================================================
@@ -823,9 +751,7 @@ def main() -> int:
         map_item = map_by_path.get(path_str)
 
         if map_item is None:
-            errors.append(
-                f"[{path_str}] SPEC_MAP_ENTRY_MISSING."
-            )
+            errors.append(f"[{path_str}] SPEC_MAP_ENTRY_MISSING.")
             continue
 
         map_physical = map_item.get("physical")
@@ -844,9 +770,7 @@ def main() -> int:
         p1_record = p1_facts.get(path_str)
 
         if p1_record is None:
-            errors.append(
-                f"[{path_str}] PHASE1_FACT_MISSING."
-            )
+            errors.append(f"[{path_str}] PHASE1_FACT_MISSING.")
             continue
 
         p1_bytes = p1_record.get("bytes")
@@ -858,15 +782,8 @@ def main() -> int:
         # Bytes
         # ====================================================================
 
-        if (
-            validate_non_negative_int(map_bytes)
-            and validate_non_negative_int(p1_bytes)
-        ):
-            if not (
-                actual_bytes
-                == map_bytes
-                == p1_bytes
-            ):
+        if validate_non_negative_int(map_bytes) and validate_non_negative_int(p1_bytes):
+            if not (actual_bytes == map_bytes == p1_bytes):
                 errors.append(
                     f"[{path_str}] MISMATCH_BYTES: "
                     f"actual={actual_bytes}, "
@@ -878,15 +795,8 @@ def main() -> int:
         # Lines
         # ====================================================================
 
-        if (
-            validate_non_negative_int(map_lines)
-            and validate_non_negative_int(p1_lines)
-        ):
-            if not (
-                actual_lines
-                == map_lines
-                == p1_lines
-            ):
+        if validate_non_negative_int(map_lines) and validate_non_negative_int(p1_lines):
+            if not (actual_lines == map_lines == p1_lines):
                 errors.append(
                     f"[{path_str}] MISMATCH_LINES: "
                     f"actual={actual_lines}, "
@@ -907,15 +817,8 @@ def main() -> int:
         #
         # ====================================================================
 
-        if (
-            validate_bool(map_is_empty)
-            and validate_bool(p1_is_empty)
-        ):
-            if not (
-                actual_is_empty
-                == map_is_empty
-                == p1_is_empty
-            ):
+        if validate_bool(map_is_empty) and validate_bool(p1_is_empty):
+            if not (actual_is_empty == map_is_empty == p1_is_empty):
                 errors.append(
                     f"[{path_str}] MISMATCH_IS_EMPTY: "
                     f"actual={actual_is_empty}, "
@@ -928,7 +831,6 @@ def main() -> int:
         # ====================================================================
 
         if validate_sha256(p1_sha256):
-
             if actual_sha256 != p1_sha256:
                 errors.append(
                     f"[{path_str}] MISMATCH_SHA256: "
@@ -947,9 +849,11 @@ def main() -> int:
 
     return 1 if errors else 0
 
+
 # ============================================================================
 # Output
 # ============================================================================
+
 
 def print_gate_result(
     errors: List[str],
@@ -961,65 +865,30 @@ def print_gate_result(
     print("=" * 72)
 
     if errors:
-
-        print(
-            f"FAILED: Found {len(errors)} integrity violation(s):"
-        )
+        print(f"FAILED: Found {len(errors)} integrity violation(s):")
         print()
 
         for error in errors:
             print(f"  [ERROR] {error}")
 
         print()
-        print(
-            "GATE-1 RESULT: FAIL "
-            "(Phase 2 is BLOCKED)"
-        )
+        print("GATE-1 RESULT: FAIL (Phase 2 is BLOCKED)")
 
     else:
-
-        print(
-            f"PASS: Verified {target_count} spec file(s)."
-        )
+        print(f"PASS: Verified {target_count} spec file(s).")
         print()
-        print(
-            "  - Path Sets:"
-            " ACTUAL == MAP == PHASE1"
-        )
-        print(
-            "  - Duplicate spec_path:"
-            " NONE"
-        )
-        print(
-            "  - Phase 1 Schema:"
-            " EXACT / STRICT"
-        )
-        print(
-            "  - spec-map Schema:"
-            " STRICT"
-        )
-        print(
-            "  - Bytes:"
-            " 100% CONSISTENT"
-        )
-        print(
-            "  - Lines:"
-            " 100% CONSISTENT"
-        )
-        print(
-            "  - is_empty:"
-            " EXPLICIT / COHERENT / NON-INFERRED / CONSISTENT"
-        )
-        print(
-            "  - SHA-256:"
-            " VALID FORMAT / 100% MATCH"
-        )
+        print("  - Path Sets: ACTUAL == MAP == PHASE1")
+        print("  - Duplicate spec_path: NONE")
+        print("  - Phase 1 Schema: EXACT / STRICT")
+        print("  - spec-map Schema: STRICT")
+        print("  - Bytes: 100% CONSISTENT")
+        print("  - Lines: 100% CONSISTENT")
+        print("  - is_empty: EXPLICIT / COHERENT / NON-INFERRED / CONSISTENT")
+        print("  - SHA-256: VALID FORMAT / 100% MATCH")
 
         print()
-        print(
-            "GATE-1 RESULT: PASS "
-            "(Phase 2 is CLEARED)"
-        )
+        print("GATE-1 RESULT: PASS (Phase 2 is CLEARED)")
+
 
 # ============================================================================
 # Entry point

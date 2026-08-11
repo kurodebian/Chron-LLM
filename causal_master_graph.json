@@ -1,0 +1,368 @@
+{
+  "nodes": {
+    "P001": {
+      "id": "P001",
+      "type": "authority_boundary",
+      "source": "INV: 1. AUTHORITY",
+      "target": "Commit OP",
+      "notes": "Defines exclusive mutation authority",
+      "confidence": 1.0
+    },
+    "P002": {
+      "id": "P002",
+      "type": "invariant",
+      "source": "INV: 3. APPEND_ONLY",
+      "target": "Graph",
+      "notes": "Enforces immutable history structure",
+      "confidence": 1.0
+    },
+    "P003": {
+      "id": "P003",
+      "type": "invariant",
+      "source": "INV: 8. DETERMINISM",
+      "target": "Commit(c)",
+      "notes": "Pure function property for reproducibility",
+      "confidence": 1.0
+    },
+    "P004": {
+      "id": "P004",
+      "type": "depends_on",
+      "source": "FUNC GenCausalID",
+      "target": "parent.causal-id",
+      "notes": "Causal ID derivation depends on parent's causal ID",
+      "confidence": 1.0
+    },
+    "P005": {
+      "id": "P005",
+      "type": "constrains",
+      "source": "OP Commit PRE",
+      "target": "c.parent-id",
+      "notes": "Parent must exist in history or be root",
+      "confidence": 1.0
+    },
+    "P006": {
+      "id": "P006",
+      "type": "invariant",
+      "source": "INV: 6. WAL_ORDERING",
+      "target": "WAL, Graph",
+      "notes": "Durability ordering constraint",
+      "confidence": 1.0
+    },
+    "P007": {
+      "id": "P007",
+      "type": "invariant",
+      "source": "INV: 10. ISOLATION",
+      "target": "WorldHead",
+      "notes": "World isolation invariant",
+      "confidence": 1.0
+    },
+    "P008": {
+      "id": "P008",
+      "type": "invariant",
+      "source": "INV: 4. IMMUTABILITY",
+      "target": "CanonicalEvent",
+      "notes": "Data immutability guarantee",
+      "confidence": 1.0
+    },
+    "P009": {
+      "id": "P009",
+      "type": "depends_on",
+      "source": "FUNC GenEventID",
+      "target": "c.payload-ref",
+      "notes": "Event ID depends on payload reference",
+      "confidence": 1.0
+    },
+    "P010": {
+      "id": "P010",
+      "type": "invariant",
+      "source": "INV: 12. GRANULARITY",
+      "target": "Commit, CanonicalEvent",
+      "notes": "Atomicity and granularity constraint",
+      "confidence": 1.0
+    },
+    "P011": {
+      "id": "P011",
+      "type": "defines",
+      "source": "TYPE Event",
+      "target": "causal_id",
+      "notes": "Event type definition includes causal_id.",
+      "confidence": 1.0
+    },
+    "P012": {
+      "id": "P012",
+      "type": "defines",
+      "source": "TYPE History",
+      "target": "Frozen<List<Event>>",
+      "notes": "History is defined as a frozen list of events, implying immutability and order.",
+      "confidence": 1.0
+    }
+  },
+  "edges": [
+    {
+      "from": "INV: 1. AUTHORITY",
+      "to": "Commit OP",
+      "dir": "Commit OP → Graph, WAL, WorldHead",
+      "proposal_id": "P001",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV: 3. APPEND_ONLY",
+      "to": "Graph",
+      "dir": "Graph → Append Only",
+      "proposal_id": "P002",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV: 8. DETERMINISM",
+      "to": "Commit(c)",
+      "dir": "Identical Inputs → Identical Output",
+      "proposal_id": "P003",
+      "confidence": 1.0
+    },
+    {
+      "from": "FUNC GenCausalID",
+      "to": "parent.causal-id",
+      "dir": "parent.causal-id → child.causal-id",
+      "proposal_id": "P004",
+      "confidence": 1.0
+    },
+    {
+      "from": "OP Commit PRE",
+      "to": "c.parent-id",
+      "dir": "c.parent-id → Graph OR ROOT",
+      "proposal_id": "P005",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV: 6. WAL_ORDERING",
+      "to": "WAL, Graph",
+      "dir": "WAL → Graph",
+      "proposal_id": "P006",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV: 10. ISOLATION",
+      "to": "WorldHead",
+      "dir": "WorldHead[w1] → WorldHead[w2]",
+      "proposal_id": "P007",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV: 4. IMMUTABILITY",
+      "to": "CanonicalEvent",
+      "dir": "CanonicalEvent → Immutable",
+      "proposal_id": "P008",
+      "confidence": 1.0
+    },
+    {
+      "from": "FUNC GenEventID",
+      "to": "c.payload-ref",
+      "dir": "c.payload-ref → event-id",
+      "proposal_id": "P009",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV: 12. GRANULARITY",
+      "to": "Commit, CanonicalEvent",
+      "dir": "1 Commit → 1 CanonicalEvent",
+      "proposal_id": "P010",
+      "confidence": 1.0
+    },
+    {
+      "from": "OPS: commit",
+      "to": "WAL.store",
+      "dir": "commit → WAL.store",
+      "proposal_id": "P001",
+      "confidence": 1.0
+    },
+    {
+      "from": "OPS: append",
+      "to": "WAL.store",
+      "dir": "append → WAL.store",
+      "proposal_id": "P002",
+      "confidence": 1.0
+    },
+    {
+      "from": "WAL.stage",
+      "to": "WAL.store",
+      "dir": "WAL.stage → WAL.store",
+      "proposal_id": "P003",
+      "confidence": 0.95
+    },
+    {
+      "from": "OPS: lift",
+      "to": "Graph.edges",
+      "dir": "WAL.store → Graph.edges",
+      "proposal_id": "P004",
+      "confidence": 1.0
+    },
+    {
+      "from": "OPS: lift",
+      "to": "Graph.edges",
+      "dir": "WAL.store → Graph.edges",
+      "proposal_id": "P005",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV: causal-scope",
+      "to": "Graph.edges",
+      "dir": "causal-scope → Graph.edges",
+      "proposal_id": "P006",
+      "confidence": 1.0
+    },
+    {
+      "from": "OPS: append",
+      "to": "WAL.store",
+      "dir": "append → WAL.store",
+      "proposal_id": "P007",
+      "confidence": 0.9
+    },
+    {
+      "from": "OPS: commit",
+      "to": "WAL.store",
+      "dir": "commit → WAL.store",
+      "proposal_id": "P008",
+      "confidence": 0.9
+    },
+    {
+      "from": "OPS: lift",
+      "to": "Graph",
+      "dir": "WAL.store → Graph",
+      "proposal_id": "P009",
+      "confidence": 0.85
+    },
+    {
+      "from": "CanonicalAuthority",
+      "to": "ExecutionAuthority",
+      "dir": "CanonicalAuthority → ExecutionAuthority",
+      "proposal_id": "P001",
+      "confidence": 1.0
+    },
+    {
+      "from": "EventFact",
+      "to": "Executable",
+      "dir": "EventFact → Executable",
+      "proposal_id": "P002",
+      "confidence": 1.0
+    },
+    {
+      "from": "EventFact",
+      "to": "Projection",
+      "dir": "EventFact → Projection",
+      "proposal_id": "P003",
+      "confidence": 1.0
+    },
+    {
+      "from": "Runtime(Consumed)",
+      "to": "Runtime(Available)",
+      "dir": "Runtime(Available) → Runtime(Consumed)",
+      "proposal_id": "P004",
+      "confidence": 1.0
+    },
+    {
+      "from": "History",
+      "to": "Projection",
+      "dir": "History → Projection",
+      "proposal_id": "P005",
+      "confidence": 1.0
+    },
+    {
+      "from": "InternalCapability",
+      "to": "Executable",
+      "dir": "InternalCapability → Executable",
+      "proposal_id": "P006",
+      "confidence": 1.0
+    },
+    {
+      "from": "step_runtime",
+      "to": "Event",
+      "dir": "step_runtime → Event",
+      "proposal_id": "P007",
+      "confidence": 0.9
+    },
+    {
+      "from": "OP Commit",
+      "to": "Canonical'",
+      "dir": "OP Commit → Canonical'",
+      "proposal_id": "P001",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV Mutate(Canonical)",
+      "to": "OP Commit",
+      "dir": "INV Mutate(Canonical) → OP Commit",
+      "proposal_id": "P002",
+      "confidence": 1.0
+    },
+    {
+      "from": "OP Derive",
+      "to": "Canonical",
+      "dir": "OP Derive → Canonical",
+      "proposal_id": "P003",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV DEF PUR-001",
+      "to": "pure(f: Function)",
+      "dir": "INV DEF PUR-001 → pure(f: Function)",
+      "proposal_id": "P004",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV DEF DET-001",
+      "to": "deterministic(f: Function)",
+      "dir": "INV DEF DET-001 → deterministic(f: Function)",
+      "proposal_id": "P005",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV DEF APP-001",
+      "to": "append_only(target: DataStore)",
+      "dir": "INV DEF APP-001 → append_only(target: DataStore)",
+      "proposal_id": "P006",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV DEF DER-001",
+      "to": "derived_exclusively_from(target: State, source: State)",
+      "dir": "INV DEF DER-001 → derived_exclusively_from(target: State, source: State)",
+      "proposal_id": "P007",
+      "confidence": 1.0
+    },
+    {
+      "from": "INV DEF AUTH-002",
+      "to": "non_authoritative(target: State)",
+      "dir": "INV DEF AUTH-002 → non_authoritative(target: State)",
+      "proposal_id": "P008",
+      "confidence": 1.0
+    },
+    {
+      "from": "HistoryStore",
+      "to": "AUTH-001",
+      "dir": "HistoryStore → AUTH-001",
+      "proposal_id": "P009",
+      "confidence": 1.0
+    },
+    {
+      "from": "HistoryStore",
+      "to": "APP-001",
+      "dir": "HistoryStore → APP-001",
+      "proposal_id": "P010",
+      "confidence": 1.0
+    },
+    {
+      "from": "TYPE Event",
+      "to": "causal_id",
+      "dir": "TYPE Event → causal_id",
+      "proposal_id": "P011",
+      "confidence": 1.0
+    },
+    {
+      "from": "TYPE History",
+      "to": "Frozen<List<Event>>",
+      "dir": "TYPE History → Frozen<List<Event>>",
+      "proposal_id": "P012",
+      "confidence": 1.0
+    }
+  ]
+}

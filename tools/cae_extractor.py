@@ -20,29 +20,41 @@ import math
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Optional, Tuple, Any
 
+
 # ---------------------------------------------------------------------
 # 0. Exceptions
 # ---------------------------------------------------------------------
 class PrepareError(RuntimeError):
     pass
 
+
 class CommitError(RuntimeError):
     pass
 
+
 class AbortError(RuntimeError):
     pass
+
 
 # ---------------------------------------------------------------------
 # 1. Kernel state vocabulary (seed). Populate from docs__ir__06-kernel-state-machine.spec.
 # ---------------------------------------------------------------------
 STATE_VOCAB: Dict[str, List[str]] = {
     "session.state": ["AUTHENTICATED", "UNAUTHENTICATED", "EXPIRED", "LOCKED"],
-    "tx.status": ["STAGED", "MOVED", "COMMITTED", "PUBLISHED", "QUARANTINED", "ABORTED"],
+    "tx.status": [
+        "STAGED",
+        "MOVED",
+        "COMMITTED",
+        "PUBLISHED",
+        "QUARANTINED",
+        "ABORTED",
+    ],
     "memory.state": ["CLEAN", "DIRTY", "FLUSHING", "PERSISTED"],
     "kernel.execution": ["IDLE", "RUNNING", "PAUSED", "PANIC", "RECOVERING"],
-    "auth.token": ["VALID", "INVALID", "REVOKED", "ABSENT"]
+    "auth.token": ["VALID", "INVALID", "REVOKED", "ABSENT"],
 }
 VALID_VARIABLES = set(STATE_VOCAB.keys())
+
 
 # ---------------------------------------------------------------------
 # 2. Data classes
@@ -55,6 +67,7 @@ class Condition:
 
     def to_dict(self) -> Dict[str, Any]:
         return {"variable": self.variable, "op": self.op, "value": self.value}
+
 
 @dataclass
 class CAENode:
@@ -83,19 +96,20 @@ class CAENode:
             "provenance": {
                 "pos": int(self.provenance.get("pos", 0)),
                 "phase": int(self.provenance.get("phase", 0)),
-                "token_score": float(self.provenance.get("token_score", 0.0))
+                "token_score": float(self.provenance.get("token_score", 0.0)),
             },
             "scope": {
                 "scope_id": str(self.scope.get("scope_id", "")),
-                "lamport_clock": int(self.scope.get("lamport_clock", 0))
+                "lamport_clock": int(self.scope.get("lamport_clock", 0)),
             },
-            "metadata": {k: self.metadata[k] for k in sorted(self.metadata.keys())}
+            "metadata": {k: self.metadata[k] for k in sorted(self.metadata.keys())},
         }
         payload = {
             "canonical_clock": int(self.scope.get("lamport_clock", 0)),
-            "node": node_obj
+            "node": node_obj,
         }
         return payload
+
 
 # ---------------------------------------------------------------------
 # 3. Canonicalization & Hashing (JCS / RFC 8785 style)
@@ -108,7 +122,10 @@ def canonical_json_bytes(obj: Any) -> bytes:
     - ensure_ascii=False preserves UTF-8
     Arrays preserve order as provided by the extractor.
     """
-    return json.dumps(obj, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode('utf-8')
+    return json.dumps(
+        obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+
 
 def compute_content_hash_and_len(node: CAENode) -> Tuple[str, int]:
     """
@@ -120,17 +137,42 @@ def compute_content_hash_and_len(node: CAENode) -> Tuple[str, int]:
     h = hashlib.sha256(b).hexdigest()
     return h, len(b)
 
+
 # ---------------------------------------------------------------------
 # 4. Rule-based extractor (unchanged core, but kept here for completeness)
 # ---------------------------------------------------------------------
 RULES: List[Tuple[re.Pattern, str]] = [
-    (re.compile(r'(?:\bif\b|\bwhen\b|\bgiven\b)\s+(?P<var>[\w\.]+)\s*(?:==|=|is)\s*(?P<val>[\w\-]+)', re.I), 'cause_assign'),
-    (re.compile(r'(?:\bif\b|\bwhen\b|\bgiven\b)\s+(?P<cause>[^,.;。]+)', re.I), 'cause_text'),
-    (re.compile(r'(?:\bthen\b|\bresult\b|\bso that\b)\s*(?:set\s+)?(?P<var>[\w\.]+)\s*(?:=|to)\s*(?P<val>[\w\-]+)', re.I), 'effect_assign'),
-    (re.compile(r'(?:\bthen\b|\bresult\b)\s+(?P<effect>[^,.;。]+)', re.I), 'effect_text'),
-    (re.compile(r'\b(commit|reject|defer|retry|abort|quarantine|publish|move)\b', re.I), 'action_verb'),
-    (re.compile(r'memory-write:(?P<target>\w+)=(?P<val>\w+)', re.I), 'memory_write')
+    (
+        re.compile(
+            r"(?:\bif\b|\bwhen\b|\bgiven\b)\s+(?P<var>[\w\.]+)\s*(?:==|=|is)\s*(?P<val>[\w\-]+)",
+            re.I,
+        ),
+        "cause_assign",
+    ),
+    (
+        re.compile(r"(?:\bif\b|\bwhen\b|\bgiven\b)\s+(?P<cause>[^,.;。]+)", re.I),
+        "cause_text",
+    ),
+    (
+        re.compile(
+            r"(?:\bthen\b|\bresult\b|\bso that\b)\s*(?:set\s+)?(?P<var>[\w\.]+)\s*(?:=|to)\s*(?P<val>[\w\-]+)",
+            re.I,
+        ),
+        "effect_assign",
+    ),
+    (
+        re.compile(r"(?:\bthen\b|\bresult\b)\s+(?P<effect>[^,.;。]+)", re.I),
+        "effect_text",
+    ),
+    (
+        re.compile(
+            r"\b(commit|reject|defer|retry|abort|quarantine|publish|move)\b", re.I
+        ),
+        "action_verb",
+    ),
+    (re.compile(r"memory-write:(?P<target>\w+)=(?P<val>\w+)", re.I), "memory_write"),
 ]
+
 
 def normalize_variable(var_candidate: str) -> str:
     cleaned = var_candidate.strip().lower()
@@ -139,26 +181,23 @@ def normalize_variable(var_candidate: str) -> str:
     aliases = {"session": "session.state", "tx": "tx.status", "memory": "memory.state"}
     if cleaned in aliases:
         return aliases[cleaned]
-    cleaned = cleaned.replace(' ', '_').replace('-', '_')
+    cleaned = cleaned.replace(" ", "_").replace("-", "_")
     return f"custom.{cleaned}"
+
 
 CONFIDENCE_BASE = 0.4
 CONFIDENCE_PER_MATCH = 0.2
 
+
 def rule_based_extract(
-    text: str,
-    pos: int,
-    phase: int,
-    score: float,
-    scope_id: str,
-    lamport_clock: int
+    text: str, pos: int, phase: int, score: float, scope_id: str, lamport_clock: int
 ) -> Tuple[Optional[CAENode], float]:
     causes: List[Condition] = []
     effects: List[Condition] = []
     action: str = "noop"
     matched = 0
 
-    sentences = re.split(r'[。\.；;]', text)
+    sentences = re.split(r"[。\.；;]", text)
     for s in sentences:
         s = s.strip()
         if not s:
@@ -169,23 +208,37 @@ def rule_based_extract(
                 continue
             matched += 1
             gd = m.groupdict()
-            if kind == 'cause_assign':
-                var = normalize_variable(gd['var'])
-                val = gd['val'].upper()
-                causes.append(Condition(variable=var, op='EQ', value=val))
-            elif kind == 'cause_text':
-                causes.append(Condition(variable='custom.condition', op='IS_TRUE', value=gd['cause'].strip()))
-            elif kind == 'effect_assign':
-                var = normalize_variable(gd['var'])
-                val = gd['val'].upper()
-                effects.append(Condition(variable=var, op='EQ', value=val))
-            elif kind == 'effect_text':
-                effects.append(Condition(variable='custom.effect', op='IS_TRUE', value=gd['effect'].strip()))
-            elif kind == 'action_verb':
+            if kind == "cause_assign":
+                var = normalize_variable(gd["var"])
+                val = gd["val"].upper()
+                causes.append(Condition(variable=var, op="EQ", value=val))
+            elif kind == "cause_text":
+                causes.append(
+                    Condition(
+                        variable="custom.condition",
+                        op="IS_TRUE",
+                        value=gd["cause"].strip(),
+                    )
+                )
+            elif kind == "effect_assign":
+                var = normalize_variable(gd["var"])
+                val = gd["val"].upper()
+                effects.append(Condition(variable=var, op="EQ", value=val))
+            elif kind == "effect_text":
+                effects.append(
+                    Condition(
+                        variable="custom.effect",
+                        op="IS_TRUE",
+                        value=gd["effect"].strip(),
+                    )
+                )
+            elif kind == "action_verb":
                 action = m.group(0).lower()
-            elif kind == 'memory_write':
-                tgt = normalize_variable('memory.' + gd['target'])
-                effects.append(Condition(variable=tgt, op='EQ', value=gd['val'].upper()))
+            elif kind == "memory_write":
+                tgt = normalize_variable("memory." + gd["target"])
+                effects.append(
+                    Condition(variable=tgt, op="EQ", value=gd["val"].upper())
+                )
 
     if matched == 0:
         return None, 0.0
@@ -194,20 +247,24 @@ def rule_based_extract(
     node = CAENode(
         node_id=f"node-{phase:02d}-{pos:04d}",
         title=(text[:200].strip()),
-        causes=causes or [Condition(variable="system.state", op="IS_TRUE", value="TRUE")],
+        causes=causes
+        or [Condition(variable="system.state", op="IS_TRUE", value="TRUE")],
         action=action,
         effects=effects,
         raw_text=text,
         provenance={"pos": pos, "phase": phase, "token_score": float(score)},
         scope={"scope_id": scope_id, "lamport_clock": int(lamport_clock)},
-        metadata={"extraction_method": "rule_based"}
+        metadata={"extraction_method": "rule_based"},
     )
     return node, confidence
+
 
 # ---------------------------------------------------------------------
 # 5. LLM fallback (stub)
 # ---------------------------------------------------------------------
-def llm_fallback_extract(text: str, pos: int, phase: int, score: float, scope_id: str, lamport_clock: int) -> CAENode:
+def llm_fallback_extract(
+    text: str, pos: int, phase: int, score: float, scope_id: str, lamport_clock: int
+) -> CAENode:
     node = CAENode(
         node_id=f"node-fallback-{phase:02d}-{pos:04d}",
         title=(text[:200].strip()),
@@ -217,25 +274,25 @@ def llm_fallback_extract(text: str, pos: int, phase: int, score: float, scope_id
         raw_text=text,
         provenance={"pos": pos, "phase": phase, "token_score": float(score)},
         scope={"scope_id": scope_id, "lamport_clock": int(lamport_clock)},
-        metadata={"extraction_method": "llm_fallback"}
+        metadata={"extraction_method": "llm_fallback"},
     )
     return node
 
+
 CONFIDENCE_THRESHOLD = 0.75
 
+
 def run_extraction_pipeline(
-    text: str,
-    pos: int,
-    phase: int,
-    score: float,
-    scope_id: str,
-    lamport_clock: int
+    text: str, pos: int, phase: int, score: float, scope_id: str, lamport_clock: int
 ) -> Tuple[CAENode, float]:
-    node, confidence = rule_based_extract(text, pos, phase, score, scope_id, lamport_clock)
+    node, confidence = rule_based_extract(
+        text, pos, phase, score, scope_id, lamport_clock
+    )
     if node and confidence >= CONFIDENCE_THRESHOLD:
         return node, confidence
     node = llm_fallback_extract(text, pos, phase, score, scope_id, lamport_clock)
     return node, 0.95
+
 
 # ---------------------------------------------------------------------
 # 6. Phase A 2PC integration helpers
@@ -245,6 +302,7 @@ def run_extraction_pipeline(
 # - commit(txid) -> {"rec": <record dict>, "status": "OK"|"CORRUPT"|...}
 # - abort(txid) -> {"rec": <record dict>, "status": "OK"|"CORRUPT"|...}
 # - recover() -> {"status": "OK"|"TRUNCATED"|...}
+
 
 def prepare_commit_payload(phase_a_engine: Any, node: CAENode) -> Dict[str, Any]:
     """
@@ -282,7 +340,9 @@ def prepare_commit_payload(phase_a_engine: Any, node: CAENode) -> Dict[str, Any]
             phase_a_engine.abort(txid)
         except Exception:
             pass
-        raise PrepareError(f"Payload length mismatch: local={payload_len} header={hdr_payload_len}")
+        raise PrepareError(
+            f"Payload length mismatch: local={payload_len} header={hdr_payload_len}"
+        )
 
     # Optionally validate CRC if rec contains crc/status
     if rec and rec.get("crc_status") == "BAD":
@@ -292,9 +352,17 @@ def prepare_commit_payload(phase_a_engine: Any, node: CAENode) -> Dict[str, Any]
             pass
         raise PrepareError("Phase A reported CRC failure on prepared record")
 
-    return {"txid": txid, "rec": rec, "content_hash": content_hash, "payload_len": payload_len}
+    return {
+        "txid": txid,
+        "rec": rec,
+        "content_hash": content_hash,
+        "payload_len": payload_len,
+    }
 
-def finalize_commit(phase_a_engine: Any, txid: Any, kernel_apply_hook: Optional[Any] = None) -> Dict[str, Any]:
+
+def finalize_commit(
+    phase_a_engine: Any, txid: Any, kernel_apply_hook: Optional[Any] = None
+) -> Dict[str, Any]:
     """
     Call Phase A commit(txid). On success, Phase A will apply_sm() and update header.clock.
     kernel_apply_hook (optional) is a callable invoked after commit to update Phase B's Kernel state:
@@ -322,6 +390,7 @@ def finalize_commit(phase_a_engine: Any, txid: Any, kernel_apply_hook: Optional[
 
     return res
 
+
 def abort_tx(phase_a_engine: Any, txid: Any) -> Dict[str, Any]:
     """
     Abort a prepared txid. Returns Phase A abort result or raises AbortError.
@@ -331,10 +400,13 @@ def abort_tx(phase_a_engine: Any, txid: Any) -> Dict[str, Any]:
         raise AbortError(f"Phase A abort failed: {res}")
     return res
 
+
 # ---------------------------------------------------------------------
 # 7. Example Kernel apply hook (user should implement real logic)
 # ---------------------------------------------------------------------
-def example_kernel_apply_hook(rec: Dict[str, Any], kernel_state: Dict[str, Any]) -> None:
+def example_kernel_apply_hook(
+    rec: Dict[str, Any], kernel_state: Dict[str, Any]
+) -> None:
     """
     Apply the committed record to local kernel state:
     - Append events to Canonical.History
@@ -350,6 +422,7 @@ def example_kernel_apply_hook(rec: Dict[str, Any], kernel_state: Dict[str, Any])
     header_clock = hdr.get("clock")
     if header_clock is not None:
         kernel_state.setdefault("Canonical", {})["LamportClock"] = int(header_clock)
+
 
 # ---------------------------------------------------------------------
 # 8. CLI demo / local test harness (lightweight)
@@ -372,10 +445,10 @@ if __name__ == "__main__":
                     "type": "PREPARED",
                     "txid": txid,
                     "payload_len": len(payload_bytes),
-                    "clock": 0
+                    "clock": 0,
                 },
                 "payload": payload_dict,
-                "crc_status": "OK"
+                "crc_status": "OK",
             }
             self.records[txid] = rec
             return {"txid": txid, "rec": rec, "status": "OK"}
@@ -403,7 +476,9 @@ if __name__ == "__main__":
 
     # Demo extraction + 2PC
     sample_text = "If session.state == AUTHENTICATED then set tx.status = COMMITTED with commit action"
-    node, conf = run_extraction_pipeline(sample_text, pos=1, phase=2, score=0.98, scope_id="session-001", lamport_clock=0)
+    node, conf = run_extraction_pipeline(
+        sample_text, pos=1, phase=2, score=0.98, scope_id="session-001", lamport_clock=0
+    )
     print("Extracted node id:", node.node_id, "confidence:", conf)
 
     engine = PhaseAMock()
@@ -411,7 +486,14 @@ if __name__ == "__main__":
     try:
         prep = prepare_commit_payload(engine, node)
         txid = prep["txid"]
-        print("Prepared txid:", txid, "content_hash:", prep["content_hash"], "payload_len:", prep["payload_len"])
+        print(
+            "Prepared txid:",
+            txid,
+            "content_hash:",
+            prep["content_hash"],
+            "payload_len:",
+            prep["payload_len"],
+        )
     except PrepareError as e:
         print("Prepare failed:", e)
         raise SystemExit(1)
@@ -419,7 +501,11 @@ if __name__ == "__main__":
     # finalize commit
     kernel_state = {}
     try:
-        res = finalize_commit(engine, txid, kernel_apply_hook=lambda rec: example_kernel_apply_hook(rec, kernel_state))
+        res = finalize_commit(
+            engine,
+            txid,
+            kernel_apply_hook=lambda rec: example_kernel_apply_hook(rec, kernel_state),
+        )
         print("Commit result:", res["status"])
         print("Kernel state after apply:", kernel_state)
     except CommitError as e:

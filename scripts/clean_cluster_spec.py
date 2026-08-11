@@ -1,6 +1,7 @@
 # scripts/clean_cluster_spec.py
 import os
 
+
 def clean_spec():
     target_file = "experiments/ir/3cluster.spec"
     if not os.path.exists(target_file):
@@ -48,6 +49,7 @@ INV Deterministic(G) = True
     with open(target_file, "w", encoding="utf-8") as f:
         f.write(cleaned_content)
     print(f"✅ Successfully cleaned and refactored {target_file}")
+
 
 if __name__ == "__main__":
     clean_spec()

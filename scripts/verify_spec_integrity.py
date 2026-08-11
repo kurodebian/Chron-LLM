@@ -10,7 +10,7 @@ OBSOLETE_KEYWORDS = [
     "architecture-v1.spec",
     "node-id",
     "timestamp",
-    "clock"
+    "clock",
 ]
 
 # 偽陽性（誤検知）を防止するための禁止規定文脈
@@ -21,8 +21,9 @@ EXCLUDE_PROHIBITION_PATTERNS = [
     "excludes wall-clock",
     "no timestamps",
     "no clock",
-    "without timestamps"
+    "without timestamps",
 ]
+
 
 def check_integrity():
     print("🔍 SPECファイル群の整合性検証を開始します...\n")
@@ -50,23 +51,34 @@ def check_integrity():
             stripped = line.strip()
 
             # コメント行（//, #, ;）はスキップ
-            if stripped.startswith("//") or stripped.startswith("#") or stripped.startswith(";"):
+            if (
+                stripped.startswith("//")
+                or stripped.startswith("#")
+                or stripped.startswith(";")
+            ):
                 continue
 
             # 1. 廃止キーワードのチェック
             for kw in OBSOLETE_KEYWORDS:
                 if kw in line:
                     # 禁止規定の文脈であれば偽陽性としてスキップ
-                    if any(pattern.lower() in line.lower() for pattern in EXCLUDE_PROHIBITION_PATTERNS):
+                    if any(
+                        pattern.lower() in line.lower()
+                        for pattern in EXCLUDE_PROHIBITION_PATTERNS
+                    ):
                         continue
 
-                    print(f"❌ 廃止表現検出: {sf} (Line {line_num}): '{kw}' が残っています")
+                    print(
+                        f"❌ 廃止表現検出: {sf} (Line {line_num}): '{kw}' が残っています"
+                    )
                     print(f"   > {stripped}")
                     errors += 1
 
             # 2. 未定義/型レベル不整合チェック (Int型/node-id等の残存など)
-            if re.search(r'\bnode[-_]id\s*:\s*(Int|ID)\b', line, re.IGNORECASE):
-                print(f"❌ 型不整合検出: {sf} (Line {line_num}): 整数/ID型 node-id が検出されました (CausalID/Hashへの統一が必要です)")
+            if re.search(r"\bnode[-_]id\s*:\s*(Int|ID)\b", line, re.IGNORECASE):
+                print(
+                    f"❌ 型不整合検出: {sf} (Line {line_num}): 整数/ID型 node-id が検出されました (CausalID/Hashへの統一が必要です)"
+                )
                 errors += 1
 
     print("-" * 50)
@@ -74,6 +86,7 @@ def check_integrity():
         print("✨ SPECの整合性チェックに合格しました！不整合・廃止参照はありません。")
     else:
         print(f"⚠️ 合計 {errors} 箇所の問題が検出されました。修正を行ってください。")
+
 
 if __name__ == "__main__":
     check_integrity()

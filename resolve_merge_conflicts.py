@@ -9,6 +9,7 @@ CANONICAL_REDIRECTS = {
     "docs/ir/architecture-v1.spec": "docs/ir/architecture-v1.1.spec",
 }
 
+
 def resolve_target(filepath):
     """リダイレクト辞書を辿って最終的な .spec ファイルを取得"""
     curr = filepath
@@ -18,15 +19,26 @@ def resolve_target(filepath):
         curr = CANONICAL_REDIRECTS[curr]
     return curr
 
-ACTION_KEYS = ["suggested_action", "recommendation", "recommended_action", "action", "decision", "relationship"]
+
+ACTION_KEYS = [
+    "suggested_action",
+    "recommendation",
+    "recommended_action",
+    "action",
+    "decision",
+    "relationship",
+]
 
 final_merge_map = defaultdict(set)
 ignored_non_specs = set()
 skipped_reasons = []
 
-for filepath in sorted(glob.glob("pair_results/pair_*.json"), key=lambda x: int(x.split('_')[-1].split('.')[0])):
+for filepath in sorted(
+    glob.glob("pair_results/pair_*.json"),
+    key=lambda x: int(x.split("_")[-1].split(".")[0]),
+):
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             data = json.load(f)
             items = data.get("results") or data.get("processed_pairs") or [data]
             if isinstance(items, dict):
@@ -39,11 +51,23 @@ for filepath in sorted(glob.glob("pair_results/pair_*.json"), key=lambda x: int(
                         rel = str(item[k])
                         break
 
-                rec_action = str(item.get("recommended_action") or item.get("suggested_action") or "")
+                rec_action = str(
+                    item.get("recommended_action") or item.get("suggested_action") or ""
+                )
 
                 if rel == "PARTIAL_OVERLAP" or "MERGE" in rec_action:
-                    file_a = item.get("file_a") or item.get("fileA") or item.get("file_1") or ""
-                    file_b = item.get("file_b") or item.get("fileB") or item.get("file_2") or ""
+                    file_a = (
+                        item.get("file_a")
+                        or item.get("fileA")
+                        or item.get("file_1")
+                        or ""
+                    )
+                    file_b = (
+                        item.get("file_b")
+                        or item.get("fileB")
+                        or item.get("file_2")
+                        or ""
+                    )
 
                     if not file_a and "pair" in item and isinstance(item["pair"], dict):
                         file_a = item["pair"].get("file_a", "")
@@ -59,7 +83,9 @@ for filepath in sorted(glob.glob("pair_results/pair_*.json"), key=lambda x: int(
                     final_src = resolve_target(src)
 
                     # 💡 .spec 以外は対象外とする
-                    if not final_src.endswith(".spec") or not final_tgt.endswith(".spec"):
+                    if not final_src.endswith(".spec") or not final_tgt.endswith(
+                        ".spec"
+                    ):
                         if not final_src.endswith(".spec"):
                             ignored_non_specs.add(final_src)
                         if not final_tgt.endswith(".spec"):
@@ -75,8 +101,10 @@ for filepath in sorted(glob.glob("pair_results/pair_*.json"), key=lambda x: int(
                         final_merge_map[final_tgt].add(final_src)
                     else:
                         missing = []
-                        if not os.path.exists(final_src): missing.append(f"統合元不在: {final_src}")
-                        if not os.path.exists(final_tgt): missing.append(f"統合先不在: {final_tgt}")
+                        if not os.path.exists(final_src):
+                            missing.append(f"統合元不在: {final_src}")
+                        if not os.path.exists(final_tgt):
+                            missing.append(f"統合先不在: {final_tgt}")
                         skipped_reasons.append(f"{filepath}: {', '.join(missing)}")
 
     except Exception as e:

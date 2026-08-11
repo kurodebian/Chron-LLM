@@ -15,10 +15,11 @@ from pathlib import Path
 
 DEPRECATED_FILES = ["prefill.spec", "projection.spec", "world.spec", "registry.spec"]
 
+
 def lint_spec_files(root_dir="."):
     root = Path(root_dir)
     spec_files = list(root.glob("**/*.spec"))
-    
+
     errors = []
     warnings = []
     checked_count = 0
@@ -30,10 +31,12 @@ def lint_spec_files(root_dir="."):
 
     for spec_path in spec_files:
         rel_path = spec_path.relative_to(root)
-        
+
         # archive/ 配下はアクティブチェック対象外
-        is_archived = str(rel_path).startswith("archive/") or "archive" in rel_path.parts
-        
+        is_archived = (
+            str(rel_path).startswith("archive/") or "archive" in rel_path.parts
+        )
+
         try:
             content = spec_path.read_text(encoding="utf-8")
         except Exception as e:
@@ -77,14 +80,14 @@ def lint_spec_files(root_dir="."):
             defined_inv_ids = set()
             for line_no, line in enumerate(lines, 1):
                 line_str = line.strip()
-                
+
                 # 旧形式: [INVARIANT: ...]
                 if line_str.startswith("[INVARIANT:"):
                     if not line_str.endswith("]"):
                         errors.append(
                             f"[{rel_path}:{line_no}] Malformed legacy [INVARIANT:] header: '{line_str}'"
                         )
-                
+
                 # 新形式: INV-1 (Name) : Condition
                 inv_match = re.match(r"^(INV-\d+)\s*\(([^)]+)\)\s*:(.+)$", line_str)
                 if inv_match:
@@ -113,8 +116,11 @@ def lint_spec_files(root_dir="."):
         print("\n💥 Spec Invariant Linting FAILED.")
         sys.exit(1)
     else:
-        print("\n✅ All Active Spec Invariants and Reference Rules Passed Successfully!")
+        print(
+            "\n✅ All Active Spec Invariants and Reference Rules Passed Successfully!"
+        )
         sys.exit(0)
+
 
 if __name__ == "__main__":
     lint_spec_files()

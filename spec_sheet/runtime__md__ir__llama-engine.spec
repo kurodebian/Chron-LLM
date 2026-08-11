@@ -1,0 +1,3 @@
+STATE *model*:Ptr|Nil=Nil; *ctx*:Ptr|Nil=Nil
+BINDINGS %llama-model-load-simple(path:Str)->Ptr=C("llama_model_load_simple"); %llama-init-context-safe(m:Ptr)->Ptr=C("llama_init_context_safe"); %llama-run-stream-simple(m:Ptr,c:Ptr,p:Str)->Void=C("llama_run_stream_simple")
+OPS load-model(path:Str)->Ptr={r=%llama-model-load-simple(path);*model*=r;r}; init-context()->Ptr=PRE(*model*!=Nil)->{r=%llama-init-context-safe(*model*);*ctx*=r;r}; llama-run(m:Ptr,c:Ptr,p:Str)->Void=%llama-run-stream-simple(m,c,p)

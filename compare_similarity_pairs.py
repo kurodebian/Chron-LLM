@@ -191,9 +191,7 @@ Vector Similarity Score: {similarity_score}
                 f"\n⚠️ HTTPエラー ({e.code}) [試行 {attempt}/{max_retries}]: {err_body}"
             )
         except json.JSONDecodeError as e:
-            print(
-                f"\n⚠️ JSONパース失敗 [試行 {attempt}/{max_retries}]: {e}"
-            )
+            print(f"\n⚠️ JSONパース失敗 [試行 {attempt}/{max_retries}]: {e}")
         except Exception as e:
             print(f"\n⚠️ 通信/対話解析エラー [試行 {attempt}/{max_retries}]: {e}")
 

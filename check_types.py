@@ -16,4 +16,3 @@ for path in Path("specs").rglob("*.spec"):
             exit(1)
 
 print("OK: No duplicate type definitions.")
-

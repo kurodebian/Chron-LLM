@@ -20,7 +20,9 @@ def main():
     os.makedirs(output_dir, exist_ok=True)
 
     if not os.path.exists(components_file):
-        print(f"❌ '{components_file}' が見つかりません。先に build_spec_graph.py を実行してください。")
+        print(
+            f"❌ '{components_file}' が見つかりません。先に build_spec_graph.py を実行してください。"
+        )
         return
 
     with open(components_file, "r", encoding="utf-8") as f:
@@ -45,7 +47,11 @@ def main():
         for path in artifacts:
             content = load_file_content(path)
             spec_payloads.append(
-                {"file_path": path, "line_count": len(content.splitlines()), "content": content}
+                {
+                    "file_path": path,
+                    "line_count": len(content.splitlines()),
+                    "content": content,
+                }
             )
 
         # 該当コンポーネントに関連する pair observation の収集

@@ -1,0 +1,187 @@
+{
+  "document_ids": [
+    "docs__ir__00-constitution.spec",
+    "contracts__base-invariants.spec",
+    "contracts__base-history.spec"
+  ],
+  "extraction_type": "causal_dependency",
+  "proposals": [
+    {
+      "id": "P001",
+      "type": "defines",
+      "source": "OP Commit",
+      "target": "Canonical'",
+      "direction": "OP Commit → Canonical'",
+      "evidence": "OP Commit(Canonical, Evidence) -> Canonical'",
+      "confidence": 1.0,
+      "related_invariants": [
+        "INV Canonical.authoritative == true"
+      ],
+      "notes": "Defines the transition operation for Canonical state."
+    },
+    {
+      "id": "P002",
+      "type": "constrains",
+      "source": "INV Mutate(Canonical)",
+      "target": "OP Commit",
+      "direction": "INV Mutate(Canonical) → OP Commit",
+      "evidence": "INV Mutate(Canonical) => Op == Commit",
+      "confidence": 1.0,
+      "related_invariants": [
+        "INV Canonical.authoritative == true"
+      ],
+      "notes": "Constrains any mutation of Canonical to only be performed via the Commit operation."
+    },
+    {
+      "id": "P003",
+      "type": "depends_on",
+      "source": "OP Derive",
+      "target": "Canonical",
+      "direction": "OP Derive → Canonical",
+      "evidence": "OP Derive(Canonical) -> Derived",
+      "confidence": 1.0,
+      "related_invariants": [
+        "INV Derived != Canonical",
+        "PRE Derive : Pure | Deterministic"
+      ],
+      "notes": "Derivation operation depends on Canonical as input."
+    },
+    {
+      "id": "P004",
+      "type": "defines",
+      "source": "INV DEF PUR-001",
+      "target": "pure(f: Function)",
+      "direction": "INV DEF PUR-001 → pure(f: Function)",
+      "evidence": "AXIOM: no_side_effects(f) = true; AXIOM: no_external_io(f) = true; AXIOM: deterministic(f) = true",
+      "confidence": 1.0,
+      "related_invariants": [
+        "PUR-001"
+      ],
+      "notes": "Defines purity via absence of side effects, IO, and environmental dependencies."
+    },
+    {
+      "id": "P005",
+      "type": "defines",
+      "source": "INV DEF DET-001",
+      "target": "deterministic(f: Function)",
+      "direction": "INV DEF DET-001 → deterministic(f: Function)",
+      "evidence": "AXIOM: ∀ x1 x2, (x1 = x2) ⇒ (f(x1) = f(x2))",
+      "confidence": 1.0,
+      "related_invariants": [
+        "DET-001"
+      ],
+      "notes": "Defines determinism as mathematical consistency of output for identical inputs."
+    },
+    {
+      "id": "P006",
+      "type": "defines",
+      "source": "INV DEF APP-001",
+      "target": "append_only(target: DataStore)",
+      "direction": "INV DEF APP-001 → append_only(target: DataStore)",
+      "evidence": "AXIOM: target.mutable = false; AXIOM: ∀ t1 t2, (t1 < t2) ⇒ is_prefix_of(target@t1, target@t2)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Defines append-only nature via immutability and prefix preservation."
+    },
+    {
+      "id": "P007",
+      "type": "defines",
+      "source": "INV DEF DER-001",
+      "target": "derived_exclusively_from(target: State, source: State)",
+      "direction": "INV DEF DER-001 → derived_exclusively_from(target: State, source: State)",
+      "evidence": "AXIOM: dependencies(target) = {source}",
+      "confidence": 1.0,
+      "related_invariants": [
+        "DER-001"
+      ],
+      "notes": "Defines exclusive dependency on source state for derivation."
+    },
+    {
+      "id": "P008",
+      "type": "constrains",
+      "source": "INV DEF AUTH-002",
+      "target": "non_authoritative(target: State)",
+      "direction": "INV DEF AUTH-002 → non_authoritative(target: State)",
+      "evidence": "AXIOM: ∀ auth_state, (authoritative(auth_state, _)) ⇒ (target CANNOT_MUTATE auth_state)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "AUTH-002"
+      ],
+      "notes": "Constrains non-authoritative states from mutating authoritative states."
+    },
+    {
+      "id": "P009",
+      "type": "depends_on",
+      "source": "HistoryStore",
+      "target": "AUTH-001",
+      "direction": "HistoryStore → AUTH-001",
+      "evidence": "AXIOM: AUTH-001(HistoryStore, Causal)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "AUTH-001"
+      ],
+      "notes": "HistoryStore is constrained by AUTH-001 invariants."
+    },
+    {
+      "id": "P010",
+      "type": "depends_on",
+      "source": "HistoryStore",
+      "target": "APP-001",
+      "direction": "HistoryStore → APP-001",
+      "evidence": "AXIOM: APP-001(HistoryStore)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "HistoryStore is constrained by APP-001 invariants."
+    },
+    {
+      "id": "P011",
+      "type": "defines",
+      "source": "TYPE Event",
+      "target": "causal_id",
+      "direction": "TYPE Event → causal_id",
+      "evidence": "TYPE Event = Frozen<{ causal_id : CausalID, ... }>",
+      "confidence": 1.0,
+      "related_invariants": [],
+      "notes": "Event type definition includes causal_id."
+    },
+    {
+      "id": "P012",
+      "type": "defines",
+      "source": "TYPE History",
+      "target": "Frozen<List<Event>>",
+      "direction": "TYPE History → Frozen<List<Event>>",
+      "evidence": "TYPE History = Frozen<List<Event>>",
+      "confidence": 1.0,
+      "related_invariants": [
+        "INV Evidence.causal_order == true"
+      ],
+      "notes": "History is defined as a frozen list of events, implying immutability and order."
+    }
+  ],
+  "key_invariants_detected": [
+    "PUR-001",
+    "DET-001",
+    "DET-002",
+    "APP-001",
+    "REP-001",
+    "REP-002",
+    "DER-001",
+    "DER-002",
+    "AUTH-001",
+    "AUTH-002"
+  ],
+  "authority_boundaries": [
+    "AUTH-001: Canonical Authority is Append-only and Authoritative",
+    "AUTH-002: Non-authoritative states cannot mutate authoritative states"
+  ],
+  "open_questions": [
+    "How is 'CausalID' generated to ensure global uniqueness and ordering across distributed nodes?",
+    "What is the specific mechanism for 'Evidence.causal_order' validation in the constitution?",
+    "How are 'environmental_dependencies' formally defined and checked for emptiness in PUR-001?",
+    "What constitutes a 'Context' for DET-002, and how is it passed to the function?"
+  ]
+}

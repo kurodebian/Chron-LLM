@@ -21,6 +21,7 @@ from typing import Dict, Any, List, Optional, Tuple
 # Helper Utilities & Invariant Helpers (I-15, I-18, I-21.1)
 # =============================================================================
 
+
 def sync_file(file_path: Path) -> None:
     """I-18: ファイルデータの不揮発バリア (file fsync)"""
     if file_path.exists() and file_path.is_file():
@@ -69,9 +70,11 @@ def is_canonical_sha256(h: str) -> bool:
         return False
     return bool(re.fullmatch(r"[0-9a-f]{64}", h))
 
+
 # =============================================================================
 # Core Exceptions
 # =============================================================================
+
 
 class QuarantineEngine(Exception):
     pass
@@ -85,11 +88,13 @@ class AuthorityViolation(Exception):
 # I-9 & I-17: Framed Commit Journal (WAL) with Cryptographic Hash Chain
 # =============================================================================
 
+
 class FramedJournalWriter:
     """
     I-9: Cryptographic Hash Chain Lineage (J_n = SHA256(J_{n-1} || Record_n))
     I-17: Durable Journal Append Integrity
     """
+
     def __init__(self, journal_path: Path):
         self.journal_path = journal_path
 
@@ -122,12 +127,14 @@ class FramedJournalWriter:
                     break  # ペイロード破損
 
                 try:
-                    record_entry = json.loads(payload.decode('utf-8'))
+                    record_entry = json.loads(payload.decode("utf-8"))
                     rec_prev = record_entry.get("prev_hash")
                     rec_data = record_entry.get("data")
                     rec_hash = record_entry.get("hash")
 
-                    expected_input = (rec_prev + json.dumps(rec_data, sort_keys=True)).encode('utf-8')
+                    expected_input = (
+                        rec_prev + json.dumps(rec_data, sort_keys=True)
+                    ).encode("utf-8")
                     calculated_hash = hashlib.sha256(expected_input).hexdigest()
 
                     if rec_prev != prev_hash or rec_hash != calculated_hash:
@@ -145,18 +152,18 @@ class FramedJournalWriter:
     def append_record(self, data: Dict[str, Any]) -> str:
         records, prev_hash, intact = self.read_valid_prefix()
         if not intact:
-            raise IOError("I-17/I-9 Violation: Cannot append to a corrupted journal line")
+            raise IOError(
+                "I-17/I-9 Violation: Cannot append to a corrupted journal line"
+            )
 
-        hash_input = (prev_hash + json.dumps(data, sort_keys=True)).encode('utf-8')
+        hash_input = (prev_hash + json.dumps(data, sort_keys=True)).encode("utf-8")
         curr_hash = hashlib.sha256(hash_input).hexdigest()
 
-        record_entry = {
-            "prev_hash": prev_hash,
-            "data": data,
-            "hash": curr_hash
-        }
+        record_entry = {"prev_hash": prev_hash, "data": data, "hash": curr_hash}
 
-        payload = json.dumps(record_entry, ensure_ascii=False, sort_keys=True).encode('utf-8')
+        payload = json.dumps(record_entry, ensure_ascii=False, sort_keys=True).encode(
+            "utf-8"
+        )
         length = len(payload)
         checksum = hashlib.sha256(payload).digest()
         frame = struct.pack(">I", length) + checksum + payload
@@ -167,7 +174,9 @@ class FramedJournalWriter:
             while written < len(frame):
                 n = os.write(fd, frame[written:])
                 if n == 0:
-                    raise IOError("I-17 Violation: Zero bytes written during journal append")
+                    raise IOError(
+                        "I-17 Violation: Zero bytes written during journal append"
+                    )
                 written += n
             os.fsync(fd)
         finally:
@@ -180,7 +189,10 @@ class FramedJournalWriter:
 # I-19: Escalated Quarantine Engine
 # =============================================================================
 
-def trigger_quarantine(tx_dir: Path, reason: str, journal: Optional[FramedJournalWriter] = None) -> None:
+
+def trigger_quarantine(
+    tx_dir: Path, reason: str, journal: Optional[FramedJournalWriter] = None
+) -> None:
     """
     I-19: Durable Quarantine Authority with Journal Failure Escalation
     """
@@ -198,7 +210,7 @@ def trigger_quarantine(tx_dir: Path, reason: str, journal: Optional[FramedJourna
         "status": status_str,
         "reason": reason,
         "escalated_due_to_journal_failure": escalated,
-        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
 
     audit_tmp = tx_dir / "quarantine-audit.json.tmp"
@@ -219,12 +231,15 @@ def trigger_quarantine(tx_dir: Path, reason: str, journal: Optional[FramedJourna
     os.replace(lock_tmp, lock_path)
     sync_dir(tx_dir)
 
-    raise QuarantineEngine(f"CRITICAL [I-19]: Transaction Quarantined ({status_str}): {reason}")
+    raise QuarantineEngine(
+        f"CRITICAL [I-19]: Transaction Quarantined ({status_str}): {reason}"
+    )
 
 
 # =============================================================================
 # Core Engine: DurableRepositoryEngine (v2.6.11)
 # =============================================================================
+
 
 # --- 1) コンストラクタを柔軟にする ---
 class DurableRepositoryEngine:
@@ -312,19 +327,35 @@ class DurableRepositoryEngine:
             with open(commit_seal_path, "r", encoding="utf-8") as f:
                 seal_data = json.load(f)
 
-            required_keys = ("tx_id", "commit_seq", "content_hash", "chain_height", "terminal_hash", "status", "verified_at_post_state")
+            required_keys = (
+                "tx_id",
+                "commit_seq",
+                "content_hash",
+                "chain_height",
+                "terminal_hash",
+                "status",
+                "verified_at_post_state",
+            )
             if not all(k in seal_data for k in required_keys):
                 return False, "COMMIT_SEAL payload fields incomplete", {}
 
-            if seal_data.get("status") != "COMMITTED" or not seal_data.get("verified_at_post_state"):
+            if seal_data.get("status") != "COMMITTED" or not seal_data.get(
+                "verified_at_post_state"
+            ):
                 return False, "COMMIT_SEAL status invalid", {}
 
             expected_hash = seal_data.get("content_hash")
             raw_terminal_hash = seal_data.get("terminal_hash")
 
             # I-21.1: Canonical Terminal Hash Validation
-            if not isinstance(raw_terminal_hash, str) or not is_canonical_sha256(raw_terminal_hash):
-                return False, "COMMIT_SEAL terminal_hash is non-canonical SHA-256", {}  # "is not" -> "is non-canonical"
+            if not isinstance(raw_terminal_hash, str) or not is_canonical_sha256(
+                raw_terminal_hash
+            ):
+                return (
+                    False,
+                    "COMMIT_SEAL terminal_hash is non-canonical SHA-256",
+                    {},
+                )  # "is not" -> "is non-canonical"
 
             terminal_hash = raw_terminal_hash
             seal_data["terminal_hash"] = terminal_hash
@@ -341,7 +372,11 @@ class DurableRepositoryEngine:
             return False, "Journal Hash Chain broken or corrupt", {}
 
         if last_chain_hash.lower() != terminal_hash.lower():
-            return False, f"Journal terminal hash mismatch: calculated {last_chain_hash}, seal has {terminal_hash}", {}
+            return (
+                False,
+                f"Journal terminal hash mismatch: calculated {last_chain_hash}, seal has {terminal_hash}",
+                {},
+            )
 
         ops = [r.get("op") for r in records]
         if "COMMIT_SEALED" not in ops or "MOVE_VERIFIED" not in ops:
@@ -357,13 +392,19 @@ class DurableRepositoryEngine:
             with open(pub_file, "rb") as f:
                 actual_hash = hashlib.sha256(f.read()).hexdigest()
             if actual_hash != expected_hash:
-                return False, f"Actual FS hash mismatch: expected {expected_hash}, got {actual_hash}", {}
+                return (
+                    False,
+                    f"Actual FS hash mismatch: expected {expected_hash}, got {actual_hash}",
+                    {},
+                )
         except Exception as e:
             return False, f"Actual FS read error: {str(e)}", {}
 
         return True, "VALID", seal_data
 
-    def validate_publish_seal(self, tx_dir: Path, commit_seal_data: Dict[str, Any]) -> Tuple[bool, str]:
+    def validate_publish_seal(
+        self, tx_dir: Path, commit_seal_data: Dict[str, Any]
+    ) -> Tuple[bool, str]:
         """
         I-11 Predicate (v2.6.11 3-Tier Content & Commit Binding):
         Validates FILE_EXISTS, FIELDS_VALID, COMMIT_BINDING, and CONTENT_BINDING
@@ -388,7 +429,10 @@ class DurableRepositoryEngine:
 
             # 2. CONTENT_BINDING
             if pub_data["content_hash"] != commit_seal_data["content_hash"]:
-                return False, "PUBLISH_SEAL content_hash binding mismatch with COMMIT_SEAL"
+                return (
+                    False,
+                    "PUBLISH_SEAL content_hash binding mismatch with COMMIT_SEAL",
+                )
 
             # 3. Target FS Content Double Check
             tx_id = tx_dir.name
@@ -400,7 +444,10 @@ class DurableRepositoryEngine:
                 actual_hash = hashlib.sha256(f.read()).hexdigest()
 
             if actual_hash != pub_data["content_hash"]:
-                return False, "PUBLISH_SEAL content_hash binding mismatch with actual FS"
+                return (
+                    False,
+                    "PUBLISH_SEAL content_hash binding mismatch with actual FS",
+                )
 
             return True, "VALID"
         except Exception as e:
@@ -470,7 +517,7 @@ class DurableRepositoryEngine:
             stage_dir,
             backup_dir,
             self.pub_dir,
-            target_pub_path
+            target_pub_path,
         )
 
         current_tx_dir.mkdir(parents=True, exist_ok=True)
@@ -488,10 +535,12 @@ class DurableRepositoryEngine:
             f.flush()
             os.fsync(f.fileno())  # File fsync (I-18)
 
-        sync_dir(stage_dir)       # Parent Dir fsync (I-18)
-        content_hash = hashlib.sha256(payload_data.encode('utf-8')).hexdigest()
+        sync_dir(stage_dir)  # Parent Dir fsync (I-18)
+        content_hash = hashlib.sha256(payload_data.encode("utf-8")).hexdigest()
 
-        journal.append_record({"op": "STAGE_CREATED", "tx_id": tx_id, "hash": content_hash})
+        journal.append_record(
+            {"op": "STAGE_CREATED", "tx_id": tx_id, "hash": content_hash}
+        )
 
         # ---- Step 2: Backup (旧データ存在時) ----
         if target_pub_path.exists():
@@ -500,14 +549,12 @@ class DurableRepositoryEngine:
             journal.append_record({"op": "BACKUP_CREATED", "tx_id": tx_id})
 
         # ---- Step 3: Physical Move WAL (MOVE Sandwich Loop - I-13) ----
-        journal.append_record({
-            "op": "MOVE_BEGIN",
-            "src": str(stage_dir),
-            "dst": str(target_pub_path)
-        })
+        journal.append_record(
+            {"op": "MOVE_BEGIN", "src": str(stage_dir), "dst": str(target_pub_path)}
+        )
 
         os.replace(stage_dir, target_pub_path)  # Atomic Directory Move
-        sync_dir(self.pub_dir)                 # Target Dir fsync
+        sync_dir(self.pub_dir)  # Target Dir fsync
 
         journal.append_record({"op": "TARGET_INSTALLED", "dst": str(target_pub_path)})
 
@@ -517,7 +564,9 @@ class DurableRepositoryEngine:
             actual_hash = hashlib.sha256(f.read()).hexdigest()
 
         if actual_hash != content_hash:
-            trigger_quarantine(current_tx_dir, "Post-mutation verification hash mismatch", journal)
+            trigger_quarantine(
+                current_tx_dir, "Post-mutation verification hash mismatch", journal
+            )
 
         journal.append_record({"op": "MOVE_VERIFIED", "actual_hash": actual_hash})
 
@@ -525,11 +574,9 @@ class DurableRepositoryEngine:
         commit_seq = self._get_next_commit_seq()
 
         # Journal append for COMMIT_SEALED milestone
-        journal.append_record({
-            "op": "COMMIT_SEALED",
-            "commit_seq": commit_seq,
-            "hash": content_hash
-        })
+        journal.append_record(
+            {"op": "COMMIT_SEALED", "commit_seq": commit_seq, "hash": content_hash}
+        )
 
         records, terminal_hash, intact = journal.read_valid_prefix()
         chain_height = len(records)
@@ -543,11 +590,11 @@ class DurableRepositoryEngine:
             "chain_height": chain_height,
             "terminal_hash": terminal_hash,
             "status": "COMMITTED",
-            "verified_at_post_state": True
+            "verified_at_post_state": True,
         }
 
         # Calculate seal_hash for binding
-        seal_bytes = json.dumps(seal_payload, sort_keys=True).encode('utf-8')
+        seal_bytes = json.dumps(seal_payload, sort_keys=True).encode("utf-8")
         seal_hash = hashlib.sha256(seal_bytes).hexdigest()
         seal_payload["seal_hash"] = seal_hash
 
@@ -564,7 +611,7 @@ class DurableRepositoryEngine:
             "tx_id": tx_id,
             "commit_seq": commit_seq,
             "content_hash": content_hash,
-            "seal_hash": seal_hash
+            "seal_hash": seal_hash,
         }
 
         with open(pub_seal_path, "w", encoding="utf-8") as f:
@@ -625,7 +672,7 @@ class DurableRepositoryEngine:
 
             current_ptr = getattr(self, "current_ptr", self.sys_dir / "CURRENT")
             os.replace(tmp_ptr, current_ptr)
-            
+
             if "sync_dir" in globals():
                 sync_dir(self.sys_dir)
             elif hasattr(self, "_sync_dir"):
@@ -635,7 +682,9 @@ class DurableRepositoryEngine:
 
         return latest_tx_id
 
-    def _recover_authority_pointer_strict(self, valid_candidates: List[Tuple[Tuple[int, int, str], str]]) -> None:
+    def _recover_authority_pointer_strict(
+        self, valid_candidates: List[Tuple[Tuple[int, int, str], str]]
+    ) -> None:
         """
         I-21: Strict Causal Total Ordering Authority Selection
         """
@@ -679,6 +728,7 @@ class DurableRepositoryEngine:
 
         return True, "VALID"
 
+
 # =============================================================================
 # CLI Simulation Entry Point
 # =============================================================================
@@ -687,10 +737,19 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Durable Engine v2.6.11 CLI Tool")
-    parser.add_argument("--repo", type=str, default="./demo_repo", help="Repository root path")
-    parser.add_argument("--cmd", type=str, choices=["tx", "recover"], required=True, help="Command")
+    parser.add_argument(
+        "--repo", type=str, default="./demo_repo", help="Repository root path"
+    )
+    parser.add_argument(
+        "--cmd", type=str, choices=["tx", "recover"], required=True, help="Command"
+    )
     parser.add_argument("--txid", type=str, default="tx_001", help="Transaction ID")
-    parser.add_argument("--payload", type=str, default="Hello Durable Storage v2.6.11", help="Payload text")
+    parser.add_argument(
+        "--payload",
+        type=str,
+        default="Hello Durable Storage v2.6.11",
+        help="Payload text",
+    )
 
     args = parser.parse_args()
     repo_path = Path(args.repo)

@@ -11,4 +11,3 @@ for path in Path("specs/active").rglob("*.spec"):
             exit(1)
 
 print("OK: No deprecated imports.")
-

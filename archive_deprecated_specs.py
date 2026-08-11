@@ -13,9 +13,10 @@ DEPRECATED_FILES = {
 
 ARCHIVE_DIR = Path("archive/deprecated")
 
+
 def archive_specs():
     ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     for file_str, target in DEPRECATED_FILES.items():
         src_path = Path(file_str)
         if not src_path.exists():
@@ -23,7 +24,7 @@ def archive_specs():
             continue
 
         dest_path = ARCHIVE_DIR / src_path.name
-        
+
         # デプロケーション・ヘッダーの挿入
         content = src_path.read_text(encoding="utf-8")
         header = (
@@ -33,10 +34,11 @@ def archive_specs():
             f"//   {target}\n"
             f"// ============================================================================\n\n"
         )
-        
+
         dest_path.write_text(header + content, encoding="utf-8")
-        src_path.unlink() # 元ファイルを削除
+        src_path.unlink()  # 元ファイルを削除
         print(f"✅ アーカイブ完了: {src_path} -> {dest_path}")
+
 
 if __name__ == "__main__":
     archive_specs()

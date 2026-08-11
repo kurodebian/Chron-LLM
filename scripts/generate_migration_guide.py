@@ -1,11 +1,12 @@
 # scripts/generate_migration_guide.py
 import os
 
+
 def generate_guide():
     docs_dir = "docs"
     os.makedirs(docs_dir, exist_ok=True)
     file_path = os.path.join(docs_dir, "migration-v0.1-to-v0.2.md")
-    
+
     content = """# Migration Guide: v0.1 to v0.2 Specification
 
 This guide outlines the migration path from deprecated v0.1 specifications (`basin.spec`, `chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.spec`) to the Single Source of Truth (SOT) `chron-llm-spec-v0.2.spec`.
@@ -37,6 +38,7 @@ This guide outlines the migration path from deprecated v0.1 specifications (`bas
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
     print(f"✅ Generated migration guide: {file_path}")
+
 
 if __name__ == "__main__":
     generate_guide()

@@ -1,0 +1,116 @@
+{
+  "document_ids": [
+    "SPEC:KernelWorld"
+  ],
+  "extraction_type": "causal_dependency",
+  "proposals": [
+    {
+      "id": "P001",
+      "type": "authority_boundary",
+      "source": "CanonicalAuthority",
+      "target": "ExecutionAuthority",
+      "direction": "CanonicalAuthority → ExecutionAuthority",
+      "evidence": "DelegationGraph allows : CanonicalAuthority -> ExecutionAuthority -> Prop",
+      "confidence": 1.0,
+      "related_invariants": [
+        "AUTH-001"
+      ],
+      "notes": "Defines the strict boundary where authority is delegated from canonical to execution contexts."
+    },
+    {
+      "id": "P002",
+      "type": "defines",
+      "source": "EventFact",
+      "target": "Executable",
+      "direction": "EventFact → Executable",
+      "evidence": "EventFact includes authority_proof : Executable(ctx, act)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "AUTH-001",
+        "DET-001"
+      ],
+      "notes": "Event facts are causally dependent on the prior determination of executability."
+    },
+    {
+      "id": "P003",
+      "type": "defines",
+      "source": "EventFact",
+      "target": "Projection",
+      "direction": "EventFact → Projection",
+      "evidence": "EventFact includes transition_proof : p2 == apply_intent(act.intent, p1)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "DET-001",
+        "PUR-001"
+      ],
+      "notes": "Deterministic transition from p1 to p2 is a core invariant of the event fact."
+    },
+    {
+      "id": "P004",
+      "type": "depends_on",
+      "source": "Runtime(Consumed)",
+      "target": "Runtime(Available)",
+      "direction": "Runtime(Available) → Runtime(Consumed)",
+      "evidence": "step_runtime takes Runtime(ctx, TokenState.Available) and returns Runtime(ctx, TokenState.Consumed)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "REP-002"
+      ],
+      "notes": "Token lifecycle transition: Available state is consumed to produce a new Available state and a Consumed token."
+    },
+    {
+      "id": "P005",
+      "type": "invariant",
+      "source": "History",
+      "target": "Projection",
+      "direction": "History → Projection",
+      "evidence": "THEOREM HISTORY.INDEX_HOMOMORPHISM.001: project(ctx, p, h) == p",
+      "confidence": 1.0,
+      "related_invariants": [
+        "PUR-001"
+      ],
+      "notes": "Projection is causally indexed by history; the projection of a history must equal its current state."
+    },
+    {
+      "id": "P006",
+      "type": "constrains",
+      "source": "InternalCapability",
+      "target": "Executable",
+      "direction": "InternalCapability → Executable",
+      "evidence": "executable : Forall(a : KernelAction(ctx), allowed_action(a) -> Executable(ctx, a))",
+      "confidence": 1.0,
+      "related_invariants": [
+        "AUTH-001"
+      ],
+      "notes": "Capabilities constrain which actions are considered executable within the context."
+    },
+    {
+      "id": "P007",
+      "type": "event_fact_candidate",
+      "source": "step_runtime",
+      "target": "Event",
+      "direction": "step_runtime → Event",
+      "evidence": "step_runtime produces nextP and nextRt, matching the structure of EventFact's transition and authority proofs",
+      "confidence": 0.9,
+      "related_invariants": [
+        "DET-001",
+        "REP-002"
+      ],
+      "notes": "The step_runtime operation appears to be the runtime mechanism generating EventFacts."
+    }
+  ],
+  "key_invariants_detected": [
+    "PUR-001",
+    "AUTH-001",
+    "DET-001",
+    "REP-002"
+  ],
+  "authority_boundaries": [
+    "CanonicalAuthority -> ExecutionAuthority"
+  ],
+  "open_questions": [
+    "How is the initial Projection defined for Empty History?",
+    "What constitutes the proof h_allowed in step_runtime?",
+    "How are scope_boundary strings in InternalCapability validated against CanonicalAuthority?"
+  ]
+}

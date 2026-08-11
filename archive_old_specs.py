@@ -8,12 +8,21 @@ from pathlib import Path
 ARCHIVE_DIR = Path("archive/superseded_specs")
 ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
 
-ACTION_KEYS = ["suggested_action", "recommendation", "action", "decision", "relationship"]
+ACTION_KEYS = [
+    "suggested_action",
+    "recommendation",
+    "action",
+    "decision",
+    "relationship",
+]
 archived_files = set()
 
-for filepath in sorted(glob.glob("pair_results/pair_*.json"), key=lambda x: int(x.split('_')[-1].split('.')[0])):
+for filepath in sorted(
+    glob.glob("pair_results/pair_*.json"),
+    key=lambda x: int(x.split("_")[-1].split(".")[0]),
+):
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             data = json.load(f)
             items = data.get("results") or data.get("processed_pairs") or [data]
             if isinstance(items, dict):
@@ -25,11 +34,17 @@ for filepath in sorted(glob.glob("pair_results/pair_*.json"), key=lambda x: int(
                     if k in item and item[k]:
                         rel = str(item[k])
                         break
-                
+
                 if rel in ["SUPERSEDED", "EXACT_DUPLICATE"]:
-                    file_b = item.get("file_b") or item.get("fileB") or item.get("file_2")
-                    deprecated_target = item.get("deprecated_file") or item.get("superseded_file") or file_b
-                    
+                    file_b = (
+                        item.get("file_b") or item.get("fileB") or item.get("file_2")
+                    )
+                    deprecated_target = (
+                        item.get("deprecated_file")
+                        or item.get("superseded_file")
+                        or file_b
+                    )
+
                     if deprecated_target and os.path.exists(deprecated_target):
                         archived_files.add(deprecated_target)
 

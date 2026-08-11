@@ -11,6 +11,7 @@ import json
 import argparse
 from pathlib import Path
 
+
 def lint_facts(facts_jsonl_path: Path) -> dict:
     records = []
     with open(facts_jsonl_path, "r", encoding="utf-8") as f:
@@ -32,7 +33,8 @@ def lint_facts(facts_jsonl_path: Path) -> dict:
 
     for r in records:
         p = r["path"]
-        if p in path_seen: duplicate_paths.append(p)
+        if p in path_seen:
+            duplicate_paths.append(p)
         path_seen.add(p)
 
         if r.get("content_state") == "EMPTY":
@@ -40,14 +42,21 @@ def lint_facts(facts_jsonl_path: Path) -> dict:
             continue
 
         mod = r.get("module")
-        if not mod: missing_modules.append(p)
-        else: module_to_paths.setdefault(mod, []).append(p)
+        if not mod:
+            missing_modules.append(p)
+        else:
+            module_to_paths.setdefault(mod, []).append(p)
 
-        if not r.get("version"): missing_versions.append(p)
+        if not r.get("version"):
+            missing_versions.append(p)
 
         deps = (r.get("extends") or []) + (r.get("uses") or [])
         for d in deps:
-            if d not in known_modules and d not in ["Constitution", "BaseTypes", "KernelWorld"]:
+            if d not in known_modules and d not in [
+                "Constitution",
+                "BaseTypes",
+                "KernelWorld",
+            ]:
                 unresolved_dependencies.append({"spec": p, "unresolved": d})
 
     for mod, paths in module_to_paths.items():
@@ -64,13 +73,19 @@ def lint_facts(facts_jsonl_path: Path) -> dict:
             "missing_modules": missing_modules,
             "missing_versions": missing_versions,
             "unresolved_dependencies_count": len(unresolved_dependencies),
-            "unresolved_dependencies_sample": unresolved_dependencies[:10]
-        }
+            "unresolved_dependencies_sample": unresolved_dependencies[:10],
+        },
     }
+
 
 def main():
     parser = argparse.ArgumentParser(description="Chron-LLM Physical Spec Fact Linter")
-    parser.add_argument("--index", type=str, default="spec-index/facts.jsonl", help="Path to facts.jsonl")
+    parser.add_argument(
+        "--index",
+        type=str,
+        default="spec-index/facts.jsonl",
+        help="Path to facts.jsonl",
+    )
     args = parser.parse_args()
 
     index_path = Path(args.index).resolve()
@@ -84,8 +99,11 @@ def main():
     print(f"Valid Structure: {report['valid']}")
     print(f"Empty Files: {len(report['findings']['empty_files'])}")
     print(f"Missing Module Declarations: {len(report['findings']['missing_modules'])}")
-    print(f"Missing Version Declarations: {len(report['findings']['missing_versions'])}")
+    print(
+        f"Missing Version Declarations: {len(report['findings']['missing_versions'])}"
+    )
     print(f"Duplicate Modules: {len(report['findings']['duplicate_modules'])}")
+
 
 if __name__ == "__main__":
     main()

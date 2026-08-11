@@ -29,11 +29,12 @@ SYSTEM_PROMPT = """あなたは Chron-LLM の仕様体系（PHASE A〜F）とモ
 }
 """
 
+
 def scan_target_files(target_dir=".", extensions=(".spec", ".md")):
     """指定ディレクトリ配下の解析対象ファイルを収集"""
     target_path = Path(target_dir)
     files = []
-    
+
     if target_path.is_file():
         return [str(target_path)]
 
@@ -41,27 +42,33 @@ def scan_target_files(target_dir=".", extensions=(".spec", ".md")):
         if path.is_file() and path.suffix in extensions:
             # バックアップや一時ファイルを除外
             path_str = str(path)
-            if "local-backup" in path_str or path.suffix == ".bak" or path.name.startswith("."):
+            if (
+                "local-backup" in path_str
+                or path.suffix == ".bak"
+                or path.name.startswith(".")
+            ):
                 continue
             files.append(path_str)
-            
+
     return sorted(files)
+
 
 def clean_json_response(raw_text):
     """LLMがMarkdownコードブロック等を含めた場合にJSON部分のみを抽出"""
     raw_text = raw_text.strip()
     # ```json ... ``` の囲みを除去
-    match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', raw_text, re.DOTALL)
+    match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", raw_text, re.DOTALL)
     if match:
         return match.group(1)
-    
+
     # 直接 JSON オブジェクトを探す
-    start = raw_text.find('{')
-    end = raw_text.rfind('}')
+    start = raw_text.find("{")
+    end = raw_text.rfind("}")
     if start != -1 and end != -1:
-        return raw_text[start:end+1]
-        
+        return raw_text[start : end + 1]
+
     return raw_text
+
 
 def analyze_file(filepath):
     """ファイル単体をローカルLLMに投げて結果を取得"""
@@ -82,15 +89,15 @@ def analyze_file(filepath):
         "model": MODEL_NAME,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_prompt}
+            {"role": "user", "content": user_prompt},
         ],
-        "temperature": 0.1
+        "temperature": 0.1,
     }
 
     req = urllib.request.Request(
         API_URL,
         data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"}
+        headers={"Content-Type": "application/json"},
     )
 
     try:
@@ -98,7 +105,7 @@ def analyze_file(filepath):
             res_data = json.loads(response.read().decode("utf-8"))
             raw_content = res_data["choices"][0]["message"]["content"]
             cleaned_json = clean_json_response(raw_content)
-            
+
             result = json.loads(cleaned_json)
             result["target_file"] = filepath  # パスを正規化
             return result
@@ -106,10 +113,17 @@ def analyze_file(filepath):
         print(f"⚠️ 解析エラー [{filepath}]: {e}")
         return None
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Chron-LLM Spec Classifier & Deduplicator")
-    parser.add_argument("--dir", default="docs/ir", help="解析対象ディレクトリ (デフォルト: docs/ir)")
-    parser.add_argument("--out", default="spec_analysis_report.json", help="出力JSONファイル名")
+    parser = argparse.ArgumentParser(
+        description="Chron-LLM Spec Classifier & Deduplicator"
+    )
+    parser.add_argument(
+        "--dir", default="docs/ir", help="解析対象ディレクトリ (デフォルト: docs/ir)"
+    )
+    parser.add_argument(
+        "--out", default="spec_analysis_report.json", help="出力JSONファイル名"
+    )
     args = parser.parse_args()
 
     files = scan_target_files(args.dir)
@@ -122,7 +136,9 @@ def main():
         res = analyze_file(filepath)
         if res:
             results.append(res)
-            print(f"✅ [{res.get('module', 'N/A')}] Phase {res.get('phase', 'N/A')} - Action: {res.get('suggested_action', 'N/A')}")
+            print(
+                f"✅ [{res.get('module', 'N/A')}] Phase {res.get('phase', 'N/A')} - Action: {res.get('suggested_action', 'N/A')}"
+            )
         else:
             print("❌ スキップ")
 
@@ -130,6 +146,7 @@ def main():
         json.dump(results, f, ensure_ascii=False, indent=2)
 
     print(f"\n🎉 完了! 解析結果を {args.out} に保存しました。")
+
 
 if __name__ == "__main__":
     main()

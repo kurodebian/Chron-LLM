@@ -43,9 +43,7 @@ def check_references():
                         matches = re.finditer(pattern, content)
                         for match in matches:
                             # 行番号の計算
-                            line_no = (
-                                content[: match.start()].count("\n") + 1
-                            )
+                            line_no = content[: match.start()].count("\n") + 1
                             print(
                                 f"❌ 残留検出: {file_path.relative_to(ROOT_DIR)} (Line {line_no}): '{match.group(0)}'"
                             )
@@ -56,7 +54,9 @@ def check_references():
     if found_issues == 0:
         print("✨ クリーンです！廃止されたファイルへの参照は見つかりませんでした。")
     else:
-        print(f"\n⚠️ 合計 {found_issues} 箇所の残留参照が検出されました。修正が必要です。")
+        print(
+            f"\n⚠️ 合計 {found_issues} 箇所の残留参照が検出されました。修正が必要です。"
+        )
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 # scripts/integrate_contracts.py
 import os
 
+
 def integrate_sot_contracts():
     sot_file = "experiments/ir/chron-llm-spec-v0.2.spec"
     if not os.path.exists(sot_file):
@@ -28,6 +29,7 @@ INV-RATIO: forall b in Basin, b.ratio == b.mass / len(Graph.nodes)
         print(f"✅ Successfully integrated universal contracts into {sot_file}")
     else:
         print(f"ℹ️ Universal contracts already present in {sot_file}")
+
 
 if __name__ == "__main__":
     integrate_sot_contracts()

@@ -25,9 +25,7 @@ DEPRECATED_TARGETS = [
 
 def create_backup():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_dir = (
-        ROOT_DIR / "archive" / f"backup_before_component004_merge_{timestamp}"
-    )
+    backup_dir = ROOT_DIR / "archive" / f"backup_before_component004_merge_{timestamp}"
     print(f"📦 事前バックアップを作成中: {backup_dir}")
 
     # docs と llama-agent をバックアップ
