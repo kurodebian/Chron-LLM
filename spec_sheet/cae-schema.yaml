@@ -1,0 +1,285 @@
+openapi: 3.1.0
+info:
+  title: Chron-LLM CAE (Causal Action Effect) Schema
+  version: 2.1.0-D
+  description: >
+    Phase B (CAE) node/edge schema and Phase A CommitSeal contract.
+    Finalized version: includes txid and payload_len to align with R2.1-D WAL header.
+paths:
+  /v1/causal/prepare:
+    post:
+      summary: Prepare CAE payload in Phase A durable WAL
+      operationId: prepareCausalNode
+      description: >
+        Phase B sends canonical payload for Phase A to create a PREPARED record.
+        Phase A returns txid and prepared record metadata for validation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreparePayload'
+      responses:
+        '200':
+          description: Prepare Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepareResult'
+        '400':
+          description: Validation failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/causal/commit:
+    post:
+      summary: Commit prepared txid in Phase A durable WAL
+      operationId: commitPreparedTx
+      description: >
+        Phase B requests Phase A to commit a previously prepared txid.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommitRequest'
+      responses:
+        '200':
+          description: Commit Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitSealResult'
+        '400':
+          description: Commit validation failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Duplicate node_id or causal cycle detected
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    NodeID:
+      type: string
+      pattern: '^[a-z][a-z0-9\-_]*$'
+      example: "node-01-0042"
+
+    ConditionOperator:
+      type: string
+      enum: [EQ, NEQ, GT, LT, GTE, LTE, CONTAINS, IS_TRUE, IS_FALSE]
+
+    Condition:
+      type: object
+      required: [variable, op, value]
+      additionalProperties: false
+      properties:
+        variable:
+          type: string
+          description: "Kernel state vocabulary or custom variable (e.g., session.state, tx.status)"
+        op:
+          $ref: '#/components/schemas/ConditionOperator'
+        value:
+          type: string
+
+    CAENode:
+      type: object
+      required:
+        - node_id
+        - title
+        - causes
+        - action
+        - effects
+        - raw_text
+        - provenance
+        - scope
+      additionalProperties: false
+      properties:
+        node_id:
+          $ref: '#/components/schemas/NodeID'
+        title:
+          type: string
+          maxLength: 256
+        causes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+        action:
+          type: string
+          description: "Canonicalized kernel action name"
+        effects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+        raw_text:
+          type: string
+          description: "Original source text used to extract this node"
+        provenance:
+          type: object
+          required: [pos, phase, token_score]
+          additionalProperties: false
+          properties:
+            pos:
+              type: integer
+              minimum: 0
+            phase:
+              type: integer
+              minimum: 0
+            token_score:
+              type: number
+              minimum: 0.0
+              maximum: 1.0
+        scope:
+          type: object
+          required: [scope_id, lamport_clock]
+          additionalProperties: false
+          properties:
+            scope_id:
+              type: string
+            lamport_clock:
+              type: integer
+              minimum: 0
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "Optional metadata: extraction_method, source_doc, author, review_required"
+
+    EdgeType:
+      type: string
+      enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]
+
+    CAEEdge:
+      type: object
+      required: [from_id, to_id, type]
+      additionalProperties: false
+      properties:
+        from_id:
+          $ref: '#/components/schemas/NodeID'
+        to_id:
+          $ref: '#/components/schemas/NodeID'
+        type:
+          $ref: '#/components/schemas/EdgeType'
+
+    ActionType:
+      type: string
+      enum: [commit, reject, defer, retry, retry-penalty, abort]
+
+    PreparePayload:
+      type: object
+      required:
+        - node
+        - edges
+        - content_hash
+        - payload_len
+      additionalProperties: false
+      properties:
+        node:
+          $ref: '#/components/schemas/CAENode'
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/CAEEdge'
+        content_hash:
+          type: string
+          pattern: '^[0-9a-f]{64}$'
+          description: "SHA-256 (lowercase hex) of canonicalized payload under RFC 8785 (JCS)"
+        payload_len:
+          type: integer
+          minimum: 0
+          description: "Exact byte length of canonical JSON payload"
+
+    PrepareResult:
+      type: object
+      required: [txid, rec, status]
+      additionalProperties: false
+      properties:
+        txid:
+          type: integer
+          description: "Phase A issued transaction id (u64)"
+        rec:
+          type: object
+          description: "Prepared record metadata returned by Phase A (hdr, payload_len, crc status, etc.)"
+        status:
+          type: string
+          enum: [OK, CORRUPT, TRUNCATED]
+
+    CommitRequest:
+      type: object
+      required: [txid, canonical_clock, action_type, content_hash]
+      additionalProperties: false
+      properties:
+        txid:
+          type: integer
+          description: "txid returned by Phase A prepare"
+        canonical_clock:
+          type: integer
+          minimum: 0
+          description: "Expected Lamport clock to be recorded on commit"
+        action_type:
+          $ref: '#/components/schemas/ActionType'
+        content_hash:
+          type: string
+          pattern: '^[0-9a-f]{64}$'
+
+    CommitStatus:
+      type: string
+      enum: [proceed, discard, sleep, regenerate, terminate]
+
+    CommitSealResult:
+      type: object
+      required: [status, wal_index, seal_hash, hdr_clock]
+      additionalProperties: false
+      properties:
+        status:
+          $ref: '#/components/schemas/CommitStatus'
+        wal_index:
+          type: integer
+          minimum: 0
+        seal_hash:
+          type: string
+          pattern: '^[0-9a-f]{64}$'
+          description: "Phase A system seal (e.g., signature or aggregated hash)"
+        hdr_clock:
+          type: integer
+          description: "Header clock value written by Phase A on commit"
+
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+
+# Normative canonicalization and Phase A integration notes
+# 1. Canonicalization input ordering included in content_hash:
+#    - node.node_id
+#    - node.title
+#    - node.causes (array order preserved; each condition serialized as {variable,op,value})
+#    - node.action
+#    - node.effects (array order preserved)
+#    - node.raw_text
+#    - node.provenance (pos, phase, token_score)
+#    - node.scope (scope_id, lamport_clock)
+#    - node.metadata (object keys sorted)
+#    - edges (sorted by from_id, to_id, type)
+# 2. Serialization: Use JCS RFC 8785 canonical JSON:
+#    - Object keys sorted lexicographically
+#    - Minimal separators ',' and ':'
+#    - UTF-8 encoding
+#    - No insignificant whitespace
+# 3. payload_len must equal the exact byte length of the canonical JSON bytes used to compute content_hash.
+# 4. Phase A prepare API must return txid and prepared record metadata including hdr.payload_len and crc status.
+# 5. Phase B must validate hdr.payload_len and crc status after prepare; on mismatch Phase B must call abort(txid).
+# 6. Phase A commit API writes COMMITTED record, calls apply_sm(), and updates header.clock; Phase A returns hdr_clock in CommitSealResult.
+# 7. Signatures if used must be computed over the same canonical JSON bytes and attached to COMMIT_SEAL metadata outside content_hash.
