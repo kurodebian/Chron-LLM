@@ -1,0 +1,97 @@
+{
+  "component_id": "component-001",
+  "nodes": [
+    {
+      "id": "docs_ir_01_domain_model_spec",
+      "label": "Domain Model Specification [State]",
+      "raw_label": "Domain Model Specification",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "docs_ir_02_operational_semantics_spec",
+      "label": "Operational Semantics Specification [State]",
+      "raw_label": "Operational Semantics Specification",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "docs_ir_04_runtime_pipeline_spec",
+      "label": "Runtime Pipeline Specification [State]",
+      "raw_label": "Runtime Pipeline Specification",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "docs_ir_07_chron_mapping_spec",
+      "label": "Chron Mapping Specification [State]",
+      "raw_label": "Chron Mapping Specification",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "runtime_r1_ir_core_spec",
+      "label": "Core Runtime Specification for R1 [State]",
+      "raw_label": "Core Runtime Specification for R1",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "runtime_r1_ir_package_spec",
+      "label": "Package Specification for R1 [State]",
+      "raw_label": "Package Specification for R1",
+      "type": "State",
+      "component_id": "component-001"
+    }
+  ],
+  "edges": [
+    {
+      "from": "docs_ir_02_operational_semantics_spec",
+      "to": "docs_ir_04_runtime_pipeline_spec",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "docs_ir_04_runtime_pipeline_spec",
+      "to": "docs_ir_07_chron_mapping_spec",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "docs_ir_01_domain_model_spec",
+      "to": "docs_ir_04_runtime_pipeline_spec",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "docs_ir_02_operational_semantics_spec",
+      "to": "docs_ir_07_chron_mapping_spec",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "docs_ir_01_domain_model_spec",
+      "to": "docs_ir_07_chron_mapping_spec",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "runtime_r1_ir_core_spec",
+      "to": "runtime_r1_ir_package_spec",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "docs_ir_01_domain_model_spec",
+      "to": "docs_ir_02_operational_semantics_spec",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "docs_ir_01_domain_model_spec",
+      "to": "runtime_r1_ir_core_spec",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    }
+  ]
+}

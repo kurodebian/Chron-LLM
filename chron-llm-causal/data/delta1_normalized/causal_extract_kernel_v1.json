@@ -1,0 +1,140 @@
+{
+  "document_ids": [
+    "SPEC-001"
+  ],
+  "extraction_type": "causal_dependency",
+  "proposals": [
+    {
+      "id": "P001",
+      "type": "defines",
+      "source": "OPS: commit",
+      "target": "WAL.store",
+      "direction": "commit → WAL.store",
+      "evidence": "commit(k) moves events from k.wal.stage to k.wal.store, incrementing clk and idx.",
+      "confidence": 1.0,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Commit is the sole mechanism for promoting staged events to the canonical append-only history."
+    },
+    {
+      "id": "P002",
+      "type": "defines",
+      "source": "OPS: append",
+      "target": "WAL.store",
+      "direction": "append → WAL.store",
+      "evidence": "append(k, ...) appends e to k.wal.store directly.",
+      "confidence": 1.0,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Append is the primary mutation path for immediate events."
+    },
+    {
+      "id": "P003",
+      "type": "authority_boundary",
+      "source": "WAL.stage",
+      "target": "WAL.store",
+      "direction": "WAL.stage → WAL.store",
+      "evidence": "stage() adds to stage; commit() moves stage to store; discard() clears stage. Store is the persistent history.",
+      "confidence": 0.95,
+      "related_invariants": [
+        "INV-002"
+      ],
+      "notes": "Authority boundary between transient derivation (stage) and canonical truth (store)."
+    },
+    {
+      "id": "P004",
+      "type": "defines",
+      "source": "OPS: lift",
+      "target": "Graph.edges",
+      "direction": "WAL.store → Graph.edges",
+      "evidence": "lift iterates k.wal.store to create Temporal edges between consecutive events.",
+      "confidence": 1.0,
+      "related_invariants": [
+        "INV-003"
+      ],
+      "notes": "Temporal causality is derived deterministically from the store order."
+    },
+    {
+      "id": "P005",
+      "type": "defines",
+      "source": "OPS: lift",
+      "target": "Graph.edges",
+      "direction": "WAL.store → Graph.edges",
+      "evidence": "lift uses ht[e.wld] to create Causal edges within the same world.",
+      "confidence": 1.0,
+      "related_invariants": [
+        "INV-004"
+      ],
+      "notes": "Causal edges link events within the same world context."
+    },
+    {
+      "id": "P006",
+      "type": "constrains",
+      "source": "INV: causal-scope",
+      "target": "Graph.edges",
+      "direction": "causal-scope → Graph.edges",
+      "evidence": "forall e in Graph.edges: e.typ == Causal -> g.nodes[e.src].wld == g.nodes[e.dst].wld",
+      "confidence": 1.0,
+      "related_invariants": [
+        "INV-004"
+      ],
+      "notes": "Causal edges cannot cross world boundaries."
+    },
+    {
+      "id": "P007",
+      "type": "invariant",
+      "source": "OPS: append",
+      "target": "WAL.store",
+      "direction": "append → WAL.store",
+      "evidence": "append increments clk and uses len(store) for idx, ensuring monotonicity.",
+      "confidence": 0.9,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Append preserves the monotonic-clock invariant."
+    },
+    {
+      "id": "P008",
+      "type": "invariant",
+      "source": "OPS: commit",
+      "target": "WAL.store",
+      "direction": "commit → WAL.store",
+      "evidence": "commit increments clk for each staged event before appending to store.",
+      "confidence": 0.9,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Commit preserves the monotonic-clock invariant."
+    },
+    {
+      "id": "P009",
+      "type": "event_fact_candidate",
+      "source": "OPS: lift",
+      "target": "Graph",
+      "direction": "WAL.store → Graph",
+      "evidence": "lift(k) returns a Graph derived deterministically from k.wal.store.",
+      "confidence": 0.85,
+      "related_invariants": [
+        "INV-005"
+      ],
+      "notes": "Graph is a pure, deterministic projection of the WAL store."
+    }
+  ],
+  "key_invariants_detected": [
+    "APP-001",
+    "INV-002",
+    "INV-003",
+    "INV-004",
+    "INV-005"
+  ],
+  "authority_boundaries": [
+    "WAL.stage → WAL.store"
+  ],
+  "open_questions": [
+    "How does branch() affect the causal history of existing events in WAL.store?",
+    "Is the 'clean' function strictly deterministic across all possible Graph states or only those produced by 'lift'?",
+    "What happens to Causal edges if a world is discarded or overwritten?"
+  ]
+}

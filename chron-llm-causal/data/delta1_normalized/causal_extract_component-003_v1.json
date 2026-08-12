@@ -1,0 +1,100 @@
+{
+  "component_id": "component-003",
+  "nodes": [
+    {
+      "id": "docs_ir_Chron_LLM_R2_0_A_Graph_Runtime_Core_Constitution_Spec_spec",
+      "label": "Core Constitution Spec (Phase A) [State]",
+      "raw_label": "Core Constitution Spec (Phase A)",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "graph_runtime_ir_prefill_spec",
+      "label": "Prefill Implementation Details [State]",
+      "raw_label": "Prefill Implementation Details",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "docs_spec_ir_Chron_R2_0_World_Graph_Runtime_Specification_v1_0_spec",
+      "label": "Runtime Specification (Phase C/D) [State]",
+      "raw_label": "Runtime Specification (Phase C/D)",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "memory_ir_store_spec",
+      "label": "Memory Layer Implementation Details [State]",
+      "raw_label": "Memory Layer Implementation Details",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "graph_runtime_ir_chron_llm_r2_graph_runtime_causal_context_spec_v1_0_spec",
+      "label": "Causal Context Specification (v1.0) [State]",
+      "raw_label": "Causal Context Specification (v1.0)",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "docs_ir_Chron_LLM_R2_0_B_World_Runtime_Constitution_Spec_spec",
+      "label": "World Runtime Constitution Spec (Phase B) [State]",
+      "raw_label": "World Runtime Constitution Spec (Phase B)",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "tests_md_ir_r2_0_b_tests_spec",
+      "label": "Executable Acceptance Criteria for World Semantics [State]",
+      "raw_label": "Executable Acceptance Criteria for World Semantics",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "world_ir_world_spec",
+      "label": "World Type System and Operational Contracts [State]",
+      "raw_label": "World Type System and Operational Contracts",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "registry_ir_registry_spec",
+      "label": "Registry Specification (Obsolete) [State]",
+      "raw_label": "Registry Specification (Obsolete)",
+      "type": "State",
+      "component_id": "component-003"
+    }
+  ],
+  "edges": [
+    {
+      "from": "docs_ir_Chron_LLM_R2_0_A_Graph_Runtime_Core_Constitution_Spec_spec",
+      "to": "graph_runtime_ir_prefill_spec",
+      "relation": "enforces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "docs_ir_Chron_LLM_R2_0_A_Graph_Runtime_Core_Constitution_Spec_spec",
+      "to": "memory_ir_store_spec",
+      "relation": "enforces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "graph_runtime_ir_chron_llm_r2_graph_runtime_causal_context_spec_v1_0_spec",
+      "to": "docs_spec_ir_Chron_R2_0_World_Graph_Runtime_Specification_v1_0_spec",
+      "relation": "enforces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "docs_ir_Chron_LLM_R2_0_B_World_Runtime_Constitution_Spec_spec",
+      "to": "tests_md_ir_r2_0_b_tests_spec",
+      "relation": "enforces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "docs_spec_ir_Chron_R2_0_World_Graph_Runtime_Specification_v1_0_spec",
+      "to": "world_ir_world_spec",
+      "relation": "enforces",
+      "component_id": "component-003"
+    }
+  ]
+}

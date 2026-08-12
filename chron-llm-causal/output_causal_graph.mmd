@@ -1,0 +1,13 @@
+flowchart TD
+    N1["c.parent-id/状態"]
+    N2["OP Commit/操作"]
+    N3["Canonical'/状態"]
+    N4["INV Mutate(Canonical)/不変条件"]
+    N5["OPS: commit/操作"]
+    N6["WAL.store/状態"]
+    N7["INV: 8. DETERMINISM/不変条件"]
+    N1 -- "依存関係" --> N2
+    N2 -- "更新" --> N3
+    N2 -- "満たす" --> N4
+    N6 -- "依存関係" --> N5
+    N5 -- "保証" --> N7

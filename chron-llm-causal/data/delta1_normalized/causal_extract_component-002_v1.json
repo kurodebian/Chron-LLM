@@ -1,0 +1,112 @@
+{
+  "component_id": "component-002",
+  "nodes": [
+    {
+      "id": "runtime_r0_ir_chat_loop_spec",
+      "label": "Chat Loop Specification [State]",
+      "raw_label": "Chat Loop Specification",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec",
+      "label": "Session Execution Layer Specification [State]",
+      "raw_label": "Session Execution Layer Specification",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "llama_agent_ir_chron_llm_spec",
+      "label": "Chron LLM Specification [State]",
+      "raw_label": "Chron LLM Specification",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "llama_agent_ir_ffi_bindings_spec",
+      "label": "FFI Bindings Specification [State]",
+      "raw_label": "FFI Bindings Specification",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "llama_agent_ir_generate_spec",
+      "label": "Generate Specification [State]",
+      "raw_label": "Generate Specification",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec_5",
+      "label": "Session Execution Layer Specification [State]",
+      "raw_label": "Session Execution Layer Specification",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "llama_agent_ir_chron_llm_kernel_spec",
+      "label": "Chron LLM Kernel Specification [State]",
+      "raw_label": "Chron LLM Kernel Specification",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "llama_agent_ir_chron_llm_runtime_spec",
+      "label": "Chron LLM Runtime Specification [State]",
+      "raw_label": "Chron LLM Runtime Specification",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "llama_agent_ir_ffi_bindings_mock_spec",
+      "label": "FFI Bindings Mock Specification [State]",
+      "raw_label": "FFI Bindings Mock Specification",
+      "type": "State",
+      "component_id": "component-002"
+    }
+  ],
+  "edges": [
+    {
+      "from": "runtime_r0_ir_chat_loop_spec",
+      "to": "runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "llama_agent_ir_chron_llm_spec",
+      "to": "llama_agent_ir_ffi_bindings_spec",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "llama_agent_ir_chron_llm_spec",
+      "to": "llama_agent_ir_generate_spec",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "llama_agent_ir_chron_llm_spec",
+      "to": "runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "llama_agent_ir_chron_llm_kernel_spec",
+      "to": "llama_agent_ir_chron_llm_runtime_spec",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "llama_agent_ir_chron_llm_runtime_spec",
+      "to": "runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "llama_agent_ir_ffi_bindings_mock_spec",
+      "to": "llama_agent_ir_ffi_bindings_spec",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    }
+  ]
+}

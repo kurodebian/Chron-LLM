@@ -1,0 +1,53 @@
+{
+  "component_id": "component-004",
+  "nodes": [
+    {
+      "id": "docs_ir_architecture_v1_1_spec",
+      "label": "Architecture v1.1 [State]",
+      "raw_label": "Architecture v1.1",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "llama_agent_ir_causal_kernel_spec",
+      "label": "Causal Kernel Spec [Operation]",
+      "raw_label": "Causal Kernel Spec",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "llama_agent_ir_chron_llm_graph_spec",
+      "label": "Chron LLM Graph Spec [Operation]",
+      "raw_label": "Chron LLM Graph Spec",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "docs_ir_architecture_v1_spec",
+      "label": "Architecture v1 [State]",
+      "raw_label": "Architecture v1",
+      "type": "State",
+      "component_id": "component-004"
+    }
+  ],
+  "edges": [
+    {
+      "from": "docs_ir_architecture_v1_1_spec",
+      "to": "llama_agent_ir_causal_kernel_spec",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "docs_ir_architecture_v1_1_spec",
+      "to": "llama_agent_ir_chron_llm_graph_spec",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "docs_ir_architecture_v1_1_spec",
+      "to": "docs_ir_architecture_v1_spec",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    }
+  ]
+}

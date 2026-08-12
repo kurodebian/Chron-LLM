@@ -1,0 +1,29 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    runtime_r0_ir_chat_loop_spec["Chat Loop Specification [State]"]
+    class runtime_r0_ir_chat_loop_spec state;
+    runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec["Session Execution Layer Specification [State]"]
+    class runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec state;
+    llama_agent_ir_chron_llm_spec["Chron LLM Specification [State]"]
+    class llama_agent_ir_chron_llm_spec state;
+    llama_agent_ir_ffi_bindings_spec["FFI Bindings Specification [State]"]
+    class llama_agent_ir_ffi_bindings_spec state;
+    llama_agent_ir_generate_spec["Generate Specification [State]"]
+    class llama_agent_ir_generate_spec state;
+    runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec_5["Session Execution Layer Specification [State]"]
+    class runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec_5 state;
+    llama_agent_ir_chron_llm_kernel_spec["Chron LLM Kernel Specification [State]"]
+    class llama_agent_ir_chron_llm_kernel_spec state;
+    llama_agent_ir_chron_llm_runtime_spec["Chron LLM Runtime Specification [State]"]
+    class llama_agent_ir_chron_llm_runtime_spec state;
+    llama_agent_ir_ffi_bindings_mock_spec["FFI Bindings Mock Specification [State]"]
+    class llama_agent_ir_ffi_bindings_mock_spec state;
+    runtime_r0_ir_chat_loop_spec -- "depends_on" --> runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec
+    llama_agent_ir_chron_llm_spec -- "depends_on" --> llama_agent_ir_ffi_bindings_spec
+    llama_agent_ir_chron_llm_spec -- "depends_on" --> llama_agent_ir_generate_spec
+    llama_agent_ir_chron_llm_spec -- "depends_on" --> runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec
+    llama_agent_ir_chron_llm_kernel_spec -- "depends_on" --> llama_agent_ir_chron_llm_runtime_spec
+    llama_agent_ir_chron_llm_runtime_spec -- "depends_on" --> runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec
+    llama_agent_ir_ffi_bindings_mock_spec -- "depends_on" --> llama_agent_ir_ffi_bindings_spec

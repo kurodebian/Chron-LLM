@@ -1,0 +1,142 @@
+{
+  "document_ids": [
+    "docs__ir__00-constitution.spec",
+    "contracts__base-invariants.spec",
+    "contracts__base-history.spec"
+  ],
+  "extraction_type": "causal_dependency",
+  "proposals": [
+    {
+      "id": "P001",
+      "type": "authority_boundary",
+      "source": "Canonical",
+      "target": "Derived",
+      "direction": "Canonical → Derived",
+      "evidence": "OP Derive(Canonical) -> Derived; INV Derived != Canonical",
+      "confidence": 1.0,
+      "related_invariants": [
+        "DER-001",
+        "AUTH-001"
+      ],
+      "notes": "Canonical is the sole authoritative source for Derived states."
+    },
+    {
+      "id": "P002",
+      "type": "defines",
+      "source": "Commit",
+      "target": "Canonical",
+      "direction": "Commit → Canonical",
+      "evidence": "OP Commit(Canonical, Evidence) -> Canonical'; INV Mutate(Canonical) => Op == Commit",
+      "confidence": 1.0,
+      "related_invariants": [
+        "AUTH-001",
+        "APP-001"
+      ],
+      "notes": "Commit is the exclusive mutation operator for Canonical state."
+    },
+    {
+      "id": "P003",
+      "type": "constrains",
+      "source": "Working",
+      "target": "Canonical",
+      "direction": "Working → Canonical",
+      "evidence": "INV Working.authoritative == false; INV Candidate.authoritative == false",
+      "confidence": 0.9,
+      "related_invariants": [
+        "AUTH-002"
+      ],
+      "notes": "Non-authoritative types cannot mutate Canonical."
+    },
+    {
+      "id": "P004",
+      "type": "depends_on",
+      "source": "Derived",
+      "target": "Canonical",
+      "direction": "Derived → Canonical",
+      "evidence": "OP Derive(Canonical) -> Derived; INV DER-001: dependencies(target) = {source}",
+      "confidence": 1.0,
+      "related_invariants": [
+        "DER-001",
+        "PUR-001"
+      ],
+      "notes": "Derived state depends exclusively on Canonical source."
+    },
+    {
+      "id": "P005",
+      "type": "invariant",
+      "source": "HistoryStore",
+      "target": "APP-001",
+      "direction": "HistoryStore → APP-001",
+      "evidence": "AXIOM: APP-001(HistoryStore); INV APP-001: append_only(target)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "HistoryStore must strictly adhere to append-only invariants."
+    },
+    {
+      "id": "P006",
+      "type": "invariant",
+      "source": "HistoryStore",
+      "target": "AUTH-001",
+      "direction": "HistoryStore → AUTH-001",
+      "evidence": "AXIOM: AUTH-001(HistoryStore, Causal)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "AUTH-001"
+      ],
+      "notes": "HistoryStore holds Causal Authority."
+    },
+    {
+      "id": "P007",
+      "type": "defines",
+      "source": "PUR-001",
+      "target": "Derive",
+      "direction": "PUR-001 → Derive",
+      "evidence": "PRE Derive : Pure | Deterministic; INV_DEF PUR-001: pure(f: Function)",
+      "confidence": 0.95,
+      "related_invariants": [
+        "PUR-001",
+        "DET-001"
+      ],
+      "notes": "Derivation operation must be pure and deterministic."
+    },
+    {
+      "id": "P008",
+      "type": "constrains",
+      "source": "Evidence",
+      "target": "Commit",
+      "direction": "Evidence → Commit",
+      "evidence": "OP Commit(Canonical, Evidence) -> Canonical'; INV Evidence.causal_order == true",
+      "confidence": 0.9,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Evidence provided to Commit must maintain causal order."
+    }
+  ],
+  "key_invariants_detected": [
+    "PUR-001",
+    "DET-001",
+    "DET-002",
+    "APP-001",
+    "REP-001",
+    "REP-002",
+    "DER-001",
+    "DER-002",
+    "AUTH-001",
+    "AUTH-002"
+  ],
+  "authority_boundaries": [
+    "Canonical (Authoritative)",
+    "Derived (NonAuthoritative)",
+    "Working (NonAuthoritative)",
+    "External (NonAuthoritative)",
+    "Candidate (NonAuthoritative)"
+  ],
+  "open_questions": [
+    "How is 'causal_order' of Evidence strictly enforced during Commit?",
+    "What is the specific mechanism for 'Deferred' or 'Rejected' candidates to interact with the Canonical store without mutation?",
+    "Does 'Derive' imply a snapshot or a live stream of Canonical data?"
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "document_ids": [
+    "CHRON-R2.0-D-COMMIT-KERNEL-CONSTITUTION"
+  ],
+  "extraction_type": "causal_dependency",
+  "proposals": [
+    {
+      "id": "P001",
+      "type": "authority_boundary",
+      "source": "INV: 1. AUTHORITY",
+      "target": "Commit OP",
+      "direction": "Commit OP → Graph, WAL, WorldHead",
+      "evidence": "ONLY Commit OP modifies Graph, WAL, WorldHead",
+      "confidence": 1.0,
+      "related_invariants": [
+        "AUTH-001"
+      ],
+      "notes": "Defines exclusive mutation authority"
+    },
+    {
+      "id": "P002",
+      "type": "invariant",
+      "source": "INV: 3. APPEND_ONLY",
+      "target": "Graph",
+      "direction": "Graph → Append Only",
+      "evidence": "Graph is strictly append-only",
+      "confidence": 1.0,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Enforces immutable history structure"
+    },
+    {
+      "id": "P003",
+      "type": "invariant",
+      "source": "INV: 8. DETERMINISM",
+      "target": "Commit(c)",
+      "direction": "Identical Inputs → Identical Output",
+      "evidence": "Commit(c) == Commit(c) given identical inputs",
+      "confidence": 1.0,
+      "related_invariants": [
+        "DET-001"
+      ],
+      "notes": "Pure function property for reproducibility"
+    },
+    {
+      "id": "P004",
+      "type": "depends_on",
+      "source": "FUNC GenCausalID",
+      "target": "parent.causal-id",
+      "direction": "parent.causal-id → child.causal-id",
+      "evidence": "GenCausalID(c, p) = H(p.causal-id, ...)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "PUR-001"
+      ],
+      "notes": "Causal ID derivation depends on parent's causal ID"
+    },
+    {
+      "id": "P005",
+      "type": "constrains",
+      "source": "OP Commit PRE",
+      "target": "c.parent-id",
+      "direction": "c.parent-id → Graph OR ROOT",
+      "evidence": "(c.parent-id IN Graph OR c.parent-id == ROOT)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "PUR-001"
+      ],
+      "notes": "Parent must exist in history or be root"
+    },
+    {
+      "id": "P006",
+      "type": "invariant",
+      "source": "INV: 6. WAL_ORDERING",
+      "target": "WAL, Graph",
+      "direction": "WAL → Graph",
+      "evidence": "WAL commit precedes Graph visibility",
+      "confidence": 1.0,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Durability ordering constraint"
+    },
+    {
+      "id": "P007",
+      "type": "invariant",
+      "source": "INV: 10. ISOLATION",
+      "target": "WorldHead",
+      "direction": "WorldHead[w1] → WorldHead[w2]",
+      "evidence": "Commit(w1) does not affect WorldHead[w2] where w1 != w2",
+      "confidence": 1.0,
+      "related_invariants": [
+        "DET-001"
+      ],
+      "notes": "World isolation invariant"
+    },
+    {
+      "id": "P008",
+      "type": "invariant",
+      "source": "INV: 4. IMMUTABILITY",
+      "target": "CanonicalEvent",
+      "direction": "CanonicalEvent → Immutable",
+      "evidence": "CanonicalEvent fields immutable post-creation",
+      "confidence": 1.0,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Data immutability guarantee"
+    },
+    {
+      "id": "P009",
+      "type": "depends_on",
+      "source": "FUNC GenEventID",
+      "target": "c.payload-ref",
+      "direction": "c.payload-ref → event-id",
+      "evidence": "GenEventID(c) = H(..., c.payload-ref, ...)",
+      "confidence": 1.0,
+      "related_invariants": [
+        "PUR-001"
+      ],
+      "notes": "Event ID depends on payload reference"
+    },
+    {
+      "id": "P010",
+      "type": "invariant",
+      "source": "INV: 12. GRANULARITY",
+      "target": "Commit, CanonicalEvent",
+      "direction": "1 Commit → 1 CanonicalEvent",
+      "evidence": "1 Commit == 1 CanonicalEvent == 1 Graph Append",
+      "confidence": 1.0,
+      "related_invariants": [
+        "APP-001"
+      ],
+      "notes": "Atomicity and granularity constraint"
+    }
+  ],
+  "key_invariants_detected": [
+    "AUTH-001",
+    "APP-001",
+    "DET-001",
+    "PUR-001"
+  ],
+  "authority_boundaries": [
+    "Commit OP is the sole modifier of Graph, WAL, and WorldHead"
+  ],
+  "open_questions": [
+    "How is ROOT defined and initialized?",
+    "What is the mechanism for WAL replay if Graph is lost?",
+    "How are conflicts resolved if multiple Commits target the same world-id concurrently?"
+  ]
+}

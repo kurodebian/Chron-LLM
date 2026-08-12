@@ -1,0 +1,24 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    docs_ir_01_domain_model_spec["Domain Model Specification [State]"]
+    class docs_ir_01_domain_model_spec state;
+    docs_ir_02_operational_semantics_spec["Operational Semantics Specification [State]"]
+    class docs_ir_02_operational_semantics_spec state;
+    docs_ir_04_runtime_pipeline_spec["Runtime Pipeline Specification [State]"]
+    class docs_ir_04_runtime_pipeline_spec state;
+    docs_ir_07_chron_mapping_spec["Chron Mapping Specification [State]"]
+    class docs_ir_07_chron_mapping_spec state;
+    runtime_r1_ir_core_spec["Core Runtime Specification for R1 [State]"]
+    class runtime_r1_ir_core_spec state;
+    runtime_r1_ir_package_spec["Package Specification for R1 [State]"]
+    class runtime_r1_ir_package_spec state;
+    docs_ir_02_operational_semantics_spec -- "depends_on" --> docs_ir_04_runtime_pipeline_spec
+    docs_ir_04_runtime_pipeline_spec -- "depends_on" --> docs_ir_07_chron_mapping_spec
+    docs_ir_01_domain_model_spec -- "depends_on" --> docs_ir_04_runtime_pipeline_spec
+    docs_ir_02_operational_semantics_spec -- "depends_on" --> docs_ir_07_chron_mapping_spec
+    docs_ir_01_domain_model_spec -- "depends_on" --> docs_ir_07_chron_mapping_spec
+    runtime_r1_ir_core_spec -- "depends_on" --> runtime_r1_ir_package_spec
+    docs_ir_01_domain_model_spec -- "depends_on" --> docs_ir_02_operational_semantics_spec
+    docs_ir_01_domain_model_spec -- "depends_on" --> runtime_r1_ir_core_spec
