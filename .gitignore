@@ -23,3 +23,6 @@ lisp/phi-lisp-pipeline-intent.lisp
 # 秘密鍵・環境変数ファイル
 .webui_secret_key
 *.env
+.venv/
+__pycache__/
+*.pyc
