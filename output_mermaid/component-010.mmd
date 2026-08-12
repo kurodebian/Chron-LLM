@@ -1,0 +1,93 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_ShortTermMemory["ShortTermMemory [State]"]
+    class ST_ShortTermMemory state;
+    ST_LongTermMemory["LongTermMemory [State]"]
+    class ST_LongTermMemory state;
+    ST_CanonicalMemory["CanonicalMemory [State]"]
+    class ST_CanonicalMemory state;
+    ST_MemoryRef["MemoryRef [State]"]
+    class ST_MemoryRef state;
+    ST_Runtime["Runtime [State]"]
+    class ST_Runtime state;
+    ST_Cache["Cache [State]"]
+    class ST_Cache state;
+    ST_KVCache["KVCache [State]"]
+    class ST_KVCache state;
+    ST_Context["Context [State]"]
+    class ST_Context state;
+    ST_PrefillState["PrefillState [State]"]
+    class ST_PrefillState state;
+    ST_Derived["Derived [State]"]
+    class ST_Derived state;
+    ST_Working["Working [State]"]
+    class ST_Working state;
+    OP_MemoryRead["memory-read [Operation]"]
+    class OP_MemoryRead op;
+    OP_Commit["Commit [Operation]"]
+    class OP_Commit op;
+    OP_Recover["Recover [Operation]"]
+    class OP_Recover op;
+    OP_Replay["Replay [Operation]"]
+    class OP_Replay op;
+    OP_ReconstructDerived["ReconstructDerived [Operation]"]
+    class OP_ReconstructDerived op;
+    OP_ReconstructMemoryRef["ReconstructMemoryRef [Operation]"]
+    class OP_ReconstructMemoryRef op;
+    OP_ReconstructWorking["ReconstructWorking [Operation]"]
+    class OP_ReconstructWorking op;
+    OP_ResumeRuntime["ResumeRuntime [Operation]"]
+    class OP_ResumeRuntime op;
+    OP_DestroyCache["DestroyCache [Operation]"]
+    class OP_DestroyCache op;
+    OP_DestroyKVCache["DestroyKVCache [Operation]"]
+    class OP_DestroyKVCache op;
+    OP_ReconstructPrefill["ReconstructPrefill [Operation]"]
+    class OP_ReconstructPrefill op;
+    INV_CanonicalMemoryWriter["CanonicalMemory.writer == Commit [Invariant]"]
+    class INV_CanonicalMemoryWriter inv;
+    INV_MemoryRefAuthoritativeWriter["MemoryRef.authoritative.writer == Commit [Invariant]"]
+    class INV_MemoryRefAuthoritativeWriter inv;
+    INV_MemoryRefDeterministic["MemoryRef.is_deterministic == true [Invariant]"]
+    class INV_MemoryRefDeterministic inv;
+    INV_ReplayRequiresMemoryRef["Replay.requires(MemoryRef) == true [Invariant]"]
+    class INV_ReplayRequiresMemoryRef inv;
+    INV_CanonicalImmutable["Canonical.mutate == False [Invariant]"]
+    class INV_CanonicalImmutable inv;
+    INV_CanonicalMutateRequiresCommit["Canonical.mutate -> Commit [Invariant]"]
+    class INV_CanonicalMutateRequiresCommit inv;
+    INV_RecoverDeterministic["Recover == Deterministic [Invariant]"]
+    class INV_RecoverDeterministic inv;
+    INV_RecoverReplayCompatible["Recover == ReplayCompatible [Invariant]"]
+    class INV_RecoverReplayCompatible inv;
+    INV_CanonicalHistoryRecoverable["Canonical.History == Recoverable [Invariant]"]
+    class INV_CanonicalHistoryRecoverable inv;
+    INV_RecoverNoAuthoritativeInfo["Recover.Introduce(AuthoritativeInfo) == False [Invariant]"]
+    class INV_RecoverNoAuthoritativeInfo inv;
+    OP_MemoryRead -- "depends_on" --> ST_MemoryRef
+    OP_Commit -- "mutates" --> ST_CanonicalMemory
+    OP_Commit -- "mutates" --> ST_MemoryRef
+    OP_Recover -- "triggers" --> OP_Replay
+    OP_Replay -- "depends_on" --> ST_CanonicalMemory
+    OP_Replay -- "produces" --> ST_Derived
+    OP_ReconstructDerived -- "mutates" --> ST_Derived
+    OP_ReconstructMemoryRef -- "mutates" --> ST_MemoryRef
+    OP_ReconstructWorking -- "mutates" --> ST_Working
+    OP_ResumeRuntime -- "mutates" --> ST_Runtime
+    OP_Recover -- "produces" --> ST_Context
+    OP_Recover -- "produces" --> ST_PrefillState
+    OP_DestroyCache -- "mutates" --> ST_Cache
+    OP_DestroyKVCache -- "mutates" --> ST_KVCache
+    INV_CanonicalMemoryWriter -- "enforces" --> ST_CanonicalMemory
+    INV_MemoryRefAuthoritativeWriter -- "enforces" --> ST_MemoryRef
+    INV_MemoryRefDeterministic -- "enforces" --> ST_MemoryRef
+    INV_ReplayRequiresMemoryRef -- "enforces" --> OP_Replay
+    INV_CanonicalImmutable -- "enforces" --> ST_CanonicalMemory
+    INV_CanonicalMutateRequiresCommit -- "enforces" --> ST_CanonicalMemory
+    INV_RecoverDeterministic -- "enforces" --> OP_Recover
+    INV_RecoverReplayCompatible -- "enforces" --> OP_Recover
+    INV_CanonicalHistoryRecoverable -- "enforces" --> ST_CanonicalMemory
+    INV_RecoverNoAuthoritativeInfo -- "enforces" --> OP_Recover
+    OP_Replay -- "triggers" --> OP_ReconstructDerived

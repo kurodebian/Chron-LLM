@@ -1,0 +1,72 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_Graph["Graph Structure [State]"]
+    class ST_Graph state;
+    ST_Basin["Basin Data [State]"]
+    class ST_Basin state;
+    ST_Attractor["Attractor State [State]"]
+    class ST_Attractor state;
+    ST_Trajectory["Trajectory Path [State]"]
+    class ST_Trajectory state;
+    ST_Cycle["Cycle State [State]"]
+    class ST_Cycle state;
+    ST_SCC["SCC State [State]"]
+    class ST_SCC state;
+    ST_Cluster["Cluster State [State]"]
+    class ST_Cluster state;
+    OP_MakeGraph["Make Graph [Operation]"]
+    class OP_MakeGraph op;
+    OP_NextEvent["Next Event [Operation]"]
+    class OP_NextEvent op;
+    OP_Rollout["Rollout Simulation [Operation]"]
+    class OP_Rollout op;
+    OP_FindAttractor["Find Attractor [Operation]"]
+    class OP_FindAttractor op;
+    OP_FindCycle["Find Cycle [Operation]"]
+    class OP_FindCycle op;
+    OP_BuildBasinMap["Build Basin Map [Operation]"]
+    class OP_BuildBasinMap op;
+    OP_BuildBasinStructure["Build Basin Structure [Operation]"]
+    class OP_BuildBasinStructure op;
+    OP_ComputeSCCs["Compute SCCs [Operation]"]
+    class OP_ComputeSCCs op;
+    INV_GraphConnectivity["Graph Connectivity [Invariant]"]
+    class INV_GraphConnectivity inv;
+    INV_BasinPartition["Basin Partition [Invariant]"]
+    class INV_BasinPartition inv;
+    INV_BasinMass["Basin Mass [Invariant]"]
+    class INV_BasinMass inv;
+    INV_BasinRatio["Basin Ratio [Invariant]"]
+    class INV_BasinRatio inv;
+    INV_AttractorStability["Attractor Stability [Invariant]"]
+    class INV_AttractorStability inv;
+    INV_CycleValidity["Cycle Validity [Invariant]"]
+    class INV_CycleValidity inv;
+    INV_SCCStability["SCC Stability [Invariant]"]
+    class INV_SCCStability inv;
+    INV_RoleClassification["Role Classification [Invariant]"]
+    class INV_RoleClassification inv;
+    OP_MakeGraph -- "produces" --> ST_Graph
+    ST_Graph -- "enforces" --> INV_GraphConnectivity
+    OP_NextEvent -- "triggers" --> ST_Trajectory
+    OP_Rollout -- "mutates" --> ST_Trajectory
+    OP_FindCycle -- "depends_on" --> ST_Trajectory
+    OP_FindCycle -- "produces" --> ST_Cycle
+    ST_Cycle -- "enforces" --> INV_CycleValidity
+    OP_FindAttractor -- "depends_on" --> ST_Trajectory
+    OP_FindAttractor -- "produces" --> ST_Attractor
+    ST_Attractor -- "enforces" --> INV_AttractorStability
+    OP_ComputeSCCs -- "depends_on" --> ST_Graph
+    OP_ComputeSCCs -- "produces" --> ST_SCC
+    ST_SCC -- "enforces" --> INV_SCCStability
+    ST_SCC -- "mutates" --> ST_Attractor
+    OP_BuildBasinMap -- "depends_on" --> ST_Graph
+    OP_BuildBasinMap -- "mutates" --> ST_Basin
+    ST_Basin -- "enforces" --> INV_BasinPartition
+    ST_Basin -- "enforces" --> INV_BasinMass
+    ST_Basin -- "enforces" --> INV_BasinRatio
+    OP_BuildBasinStructure -- "depends_on" --> ST_Basin
+    OP_BuildBasinStructure -- "produces" --> ST_Cluster
+    ST_Cluster -- "enforces" --> INV_RoleClassification

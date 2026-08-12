@@ -1,0 +1,300 @@
+{
+  "component_id": "component-007",
+  "nodes": [
+    {
+      "id": "ST_Graph",
+      "label": "Graph Structure [State]",
+      "raw_label": "Graph Structure",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Basin",
+      "label": "Basin Data [State]",
+      "raw_label": "Basin Data",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Attractor",
+      "label": "Attractor State [State]",
+      "raw_label": "Attractor State",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Trajectory",
+      "label": "Trajectory Path [State]",
+      "raw_label": "Trajectory Path",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Cycle",
+      "label": "Cycle State [State]",
+      "raw_label": "Cycle State",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_SCC",
+      "label": "SCC State [State]",
+      "raw_label": "SCC State",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Cluster",
+      "label": "Cluster State [State]",
+      "raw_label": "Cluster State",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_MakeGraph",
+      "label": "Make Graph [Operation]",
+      "raw_label": "Make Graph",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_NextEvent",
+      "label": "Next Event [Operation]",
+      "raw_label": "Next Event",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_Rollout",
+      "label": "Rollout Simulation [Operation]",
+      "raw_label": "Rollout Simulation",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_FindAttractor",
+      "label": "Find Attractor [Operation]",
+      "raw_label": "Find Attractor",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_FindCycle",
+      "label": "Find Cycle [Operation]",
+      "raw_label": "Find Cycle",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_BuildBasinMap",
+      "label": "Build Basin Map [Operation]",
+      "raw_label": "Build Basin Map",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_BuildBasinStructure",
+      "label": "Build Basin Structure [Operation]",
+      "raw_label": "Build Basin Structure",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_ComputeSCCs",
+      "label": "Compute SCCs [Operation]",
+      "raw_label": "Compute SCCs",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_GraphConnectivity",
+      "label": "Graph Connectivity [Invariant]",
+      "raw_label": "Graph Connectivity",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_BasinPartition",
+      "label": "Basin Partition [Invariant]",
+      "raw_label": "Basin Partition",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_BasinMass",
+      "label": "Basin Mass [Invariant]",
+      "raw_label": "Basin Mass",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_BasinRatio",
+      "label": "Basin Ratio [Invariant]",
+      "raw_label": "Basin Ratio",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_AttractorStability",
+      "label": "Attractor Stability [Invariant]",
+      "raw_label": "Attractor Stability",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_CycleValidity",
+      "label": "Cycle Validity [Invariant]",
+      "raw_label": "Cycle Validity",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_SCCStability",
+      "label": "SCC Stability [Invariant]",
+      "raw_label": "SCC Stability",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_RoleClassification",
+      "label": "Role Classification [Invariant]",
+      "raw_label": "Role Classification",
+      "type": "Invariant",
+      "component_id": "component-007"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_MakeGraph",
+      "to": "ST_Graph",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_Graph",
+      "to": "INV_GraphConnectivity",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_NextEvent",
+      "to": "ST_Trajectory",
+      "relation": "triggers",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_Rollout",
+      "to": "ST_Trajectory",
+      "relation": "mutates",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_FindCycle",
+      "to": "ST_Trajectory",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_FindCycle",
+      "to": "ST_Cycle",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_Cycle",
+      "to": "INV_CycleValidity",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_FindAttractor",
+      "to": "ST_Trajectory",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_FindAttractor",
+      "to": "ST_Attractor",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_Attractor",
+      "to": "INV_AttractorStability",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_ComputeSCCs",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_ComputeSCCs",
+      "to": "ST_SCC",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_SCC",
+      "to": "INV_SCCStability",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_SCC",
+      "to": "ST_Attractor",
+      "relation": "mutates",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_BuildBasinMap",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_BuildBasinMap",
+      "to": "ST_Basin",
+      "relation": "mutates",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_Basin",
+      "to": "INV_BasinPartition",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_Basin",
+      "to": "INV_BasinMass",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_Basin",
+      "to": "INV_BasinRatio",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_BuildBasinStructure",
+      "to": "ST_Basin",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_BuildBasinStructure",
+      "to": "ST_Cluster",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_Cluster",
+      "to": "INV_RoleClassification",
+      "relation": "enforces",
+      "component_id": "component-007"
+    }
+  ]
+}

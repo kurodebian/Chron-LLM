@@ -1,0 +1,65 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_Baseline["Baseline Status [State]"]
+    class ST_Baseline state;
+    OP_KnowledgeLifecycle["Knowledge Lifecycle Process [Operation]"]
+    class OP_KnowledgeLifecycle op;
+    INV_Independence["Architecture Independence [Invariant]"]
+    class INV_Independence inv;
+    INV_GovernanceScope["Governance Scope Limitation [Invariant]"]
+    class INV_GovernanceScope inv;
+    INV_RuntimeSatisfaction["Runtime Specification Satisfaction [Invariant]"]
+    class INV_RuntimeSatisfaction inv;
+    INV_RuntimeVolatility["Runtime Volatility Constraint [Invariant]"]
+    class INV_RuntimeVolatility inv;
+    INV_Minimalism["Concept Minimalism [Invariant]"]
+    class INV_Minimalism inv;
+    INV_Neutrality["System Neutrality [Invariant]"]
+    class INV_Neutrality inv;
+    INV_EvolutionRule["New Category Introduction Rule [Invariant]"]
+    class INV_EvolutionRule inv;
+    INV_ExtensionPriority["Extension Over Introduction Priority [Invariant]"]
+    class INV_ExtensionPriority inv;
+    INV_MetaDesignSeparation["Meta Design Separation [Invariant]"]
+    class INV_MetaDesignSeparation inv;
+    INV_RuntimeDesignSeparation["Runtime Design Separation [Invariant]"]
+    class INV_RuntimeDesignSeparation inv;
+    INV_GovernanceDesignSeparation["Governance Design Separation [Invariant]"]
+    class INV_GovernanceDesignSeparation inv;
+    INV_FoundationConstitutionSeparation["Foundation Constitution Separation [Invariant]"]
+    class INV_FoundationConstitutionSeparation inv;
+    INV_RepositoryLayoutIndependence["Repository Layout Independence [Invariant]"]
+    class INV_RepositoryLayoutIndependence inv;
+    INV_ArchitectureProcessSeparation["Architecture Process Separation [Invariant]"]
+    class INV_ArchitectureProcessSeparation inv;
+    INV_ConceptDefinitionDependency["Concept Definition Responsibility Dependency [Invariant]"]
+    class INV_ConceptDefinitionDependency inv;
+    INV_ConceptDefinitionImplementationIndependence["Concept Definition Implementation Independence [Invariant]"]
+    class INV_ConceptDefinitionImplementationIndependence inv;
+    INV_NewConceptIntroductionRequirement["New Concept Introduction Requirement [Invariant]"]
+    class INV_NewConceptIntroductionRequirement inv;
+    INV_ContentDefinitionPrecedence["Content Definition Precedence [Invariant]"]
+    class INV_ContentDefinitionPrecedence inv;
+    INV_ConstitutionImplementationSeparation["Constitution Implementation Separation [Invariant]"]
+    class INV_ConstitutionImplementationSeparation inv;
+    INV_ImplementationEvolutionPreservation["Implementation Evolution Preservation [Invariant]"]
+    class INV_ImplementationEvolutionPreservation inv;
+    INV_AuthorityRepresentationSeparation["Authority Representation Separation [Invariant]"]
+    class INV_AuthorityRepresentationSeparation inv;
+    INV_RepresentationDerivedIndependence["Representation Derived Independence [Invariant]"]
+    class INV_RepresentationDerivedIndependence inv;
+    OP_KnowledgeLifecycle -- "triggers" --> ST_Baseline
+    INV_Minimalism -- "enforces" --> ST_Baseline
+    INV_GovernanceScope -- "enforces" --> OP_KnowledgeLifecycle
+    INV_EvolutionRule -- "enforces" --> OP_KnowledgeLifecycle
+    INV_ExtensionPriority -- "enforces" --> OP_KnowledgeLifecycle
+    INV_RuntimeSatisfaction -- "enforces" --> OP_KnowledgeLifecycle
+    INV_ConceptDefinitionDependency -- "depends_on" --> INV_ConceptDefinitionImplementationIndependence
+    INV_NewConceptIntroductionRequirement -- "enforces" --> INV_EvolutionRule
+    INV_ImplementationEvolutionPreservation -- "enforces" --> INV_ConstitutionImplementationSeparation
+    INV_RepresentationDerivedIndependence -- "enforces" --> INV_AuthorityRepresentationSeparation
+    INV_RuntimeVolatility -- "enforces" --> INV_RuntimeDesignSeparation
+    INV_ContentDefinitionPrecedence -- "enforces" --> INV_ConceptDefinitionDependency
+    INV_Independence -- "enforces" --> INV_Neutrality

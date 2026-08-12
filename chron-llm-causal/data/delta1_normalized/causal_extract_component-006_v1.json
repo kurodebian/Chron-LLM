@@ -1,0 +1,436 @@
+{
+  "component_id": "component-006",
+  "nodes": [
+    {
+      "id": "ST_History",
+      "label": "History [State]",
+      "raw_label": "History",
+      "type": "State",
+      "component_id": "component-006"
+    },
+    {
+      "id": "ST_ProjectionModel",
+      "label": "ProjectionModel [State]",
+      "raw_label": "ProjectionModel",
+      "type": "State",
+      "component_id": "component-006"
+    },
+    {
+      "id": "ST_JustificationStructure",
+      "label": "JustificationStructure [State]",
+      "raw_label": "JustificationStructure",
+      "type": "State",
+      "component_id": "component-006"
+    },
+    {
+      "id": "ST_EventABI",
+      "label": "EventABI [State]",
+      "raw_label": "EventABI",
+      "type": "State",
+      "component_id": "component-006"
+    },
+    {
+      "id": "ST_SemanticModel",
+      "label": "SemanticModel [State]",
+      "raw_label": "SemanticModel",
+      "type": "State",
+      "component_id": "component-006"
+    },
+    {
+      "id": "ST_RelationalGraph",
+      "label": "RelationalGraph [State]",
+      "raw_label": "RelationalGraph",
+      "type": "State",
+      "component_id": "component-006"
+    },
+    {
+      "id": "OP_d",
+      "label": "d(H) -> M [Operation]",
+      "raw_label": "d(H) -> M",
+      "type": "Operation",
+      "component_id": "component-006"
+    },
+    {
+      "id": "OP_j",
+      "label": "j(M) -> J [Operation]",
+      "raw_label": "j(M) -> J",
+      "type": "Operation",
+      "component_id": "component-006"
+    },
+    {
+      "id": "OP_interpret",
+      "label": "interpret(M, ABI) -> S [Operation]",
+      "raw_label": "interpret(M, ABI) -> S",
+      "type": "Operation",
+      "component_id": "component-006"
+    },
+    {
+      "id": "OP_justify",
+      "label": "justify(S) -> J [Operation]",
+      "raw_label": "justify(S) -> J",
+      "type": "Operation",
+      "component_id": "component-006"
+    },
+    {
+      "id": "OP_graph",
+      "label": "graph(S) -> G [Operation]",
+      "raw_label": "graph(S) -> G",
+      "type": "Operation",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_H_authoritative_causal_record",
+      "label": "H.authoritative_causal_record [Invariant]",
+      "raw_label": "H.authoritative_causal_record",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_H_reproducible",
+      "label": "H.reproducible [Invariant]",
+      "raw_label": "H.reproducible",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_H_inspectable",
+      "label": "H.inspectable [Invariant]",
+      "raw_label": "H.inspectable",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_H_derivable",
+      "label": "H.derivable [Invariant]",
+      "raw_label": "H.derivable",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_EventABI_not_in_H",
+      "label": "EventABI !in H [Invariant]",
+      "raw_label": "EventABI !in H",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_ResolutionSemantics_not_in_H",
+      "label": "ResolutionSemantics !in H [Invariant]",
+      "raw_label": "ResolutionSemantics !in H",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_d_deterministic",
+      "label": "d.deterministic [Invariant]",
+      "raw_label": "d.deterministic",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_j_derived_exclusively_from_d",
+      "label": "j.derived_exclusively_from(d) [Invariant]",
+      "raw_label": "j.derived_exclusively_from(d)",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_d_semantically_neutral",
+      "label": "d.semantically_neutral [Invariant]",
+      "raw_label": "d.semantically_neutral",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_interpret_deterministic_under_ABI",
+      "label": "interpret.deterministic_under(ABI) [Invariant]",
+      "raw_label": "interpret.deterministic_under(ABI)",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_ABI_explicit_and_versioned",
+      "label": "ABI.explicit_and_versioned [Invariant]",
+      "raw_label": "ABI.explicit_and_versioned",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_S_derived_exclusively_from_M",
+      "label": "S.derived_exclusively_from(M) [Invariant]",
+      "raw_label": "S.derived_exclusively_from(M)",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_interpret_preserves_order_M",
+      "label": "interpret.preserves_order(M) [Invariant]",
+      "raw_label": "interpret.preserves_order(M)",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_J_derived_exclusively_from_S",
+      "label": "J.derived_exclusively_from(S) [Invariant]",
+      "raw_label": "J.derived_exclusively_from(S)",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_external_semantic_injection_not_in_interpret",
+      "label": "external_semantic_injection !in interpret [Invariant]",
+      "raw_label": "external_semantic_injection !in interpret",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_S_non_authoritative",
+      "label": "S.non_authoritative [Invariant]",
+      "raw_label": "S.non_authoritative",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_graph_deterministic_from_S",
+      "label": "graph.deterministic_from(S) [Invariant]",
+      "raw_label": "graph.deterministic_from(S)",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_nodes_preserve_identity_consistency",
+      "label": "nodes.preserve_identity_consistency [Invariant]",
+      "raw_label": "nodes.preserve_identity_consistency",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_edges_structural_relations_only",
+      "label": "edges.structural_relations_only [Invariant]",
+      "raw_label": "edges.structural_relations_only",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_traversal_deterministic",
+      "label": "traversal.deterministic [Invariant]",
+      "raw_label": "traversal.deterministic",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_interpretation_not_in_G",
+      "label": "interpretation !in G [Invariant]",
+      "raw_label": "interpretation !in G",
+      "type": "Invariant",
+      "component_id": "component-006"
+    },
+    {
+      "id": "INV_G_non_authoritative",
+      "label": "G.non_authoritative [Invariant]",
+      "raw_label": "G.non_authoritative",
+      "type": "Invariant",
+      "component_id": "component-006"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ST_History",
+      "to": "OP_d",
+      "relation": "depends_on",
+      "component_id": "component-006"
+    },
+    {
+      "from": "OP_d",
+      "to": "ST_ProjectionModel",
+      "relation": "produces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "ST_ProjectionModel",
+      "to": "OP_j",
+      "relation": "depends_on",
+      "component_id": "component-006"
+    },
+    {
+      "from": "OP_j",
+      "to": "ST_JustificationStructure",
+      "relation": "produces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "ST_ProjectionModel",
+      "to": "OP_interpret",
+      "relation": "depends_on",
+      "component_id": "component-006"
+    },
+    {
+      "from": "ST_EventABI",
+      "to": "OP_interpret",
+      "relation": "depends_on",
+      "component_id": "component-006"
+    },
+    {
+      "from": "OP_interpret",
+      "to": "ST_SemanticModel",
+      "relation": "produces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "ST_SemanticModel",
+      "to": "OP_justify",
+      "relation": "depends_on",
+      "component_id": "component-006"
+    },
+    {
+      "from": "OP_justify",
+      "to": "ST_JustificationStructure",
+      "relation": "produces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "ST_SemanticModel",
+      "to": "OP_graph",
+      "relation": "depends_on",
+      "component_id": "component-006"
+    },
+    {
+      "from": "OP_graph",
+      "to": "ST_RelationalGraph",
+      "relation": "produces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_H_authoritative_causal_record",
+      "to": "ST_History",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_H_reproducible",
+      "to": "ST_History",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_H_inspectable",
+      "to": "ST_History",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_H_derivable",
+      "to": "ST_History",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_EventABI_not_in_H",
+      "to": "ST_History",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_ResolutionSemantics_not_in_H",
+      "to": "ST_History",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_d_deterministic",
+      "to": "OP_d",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_j_derived_exclusively_from_d",
+      "to": "OP_j",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_d_semantically_neutral",
+      "to": "OP_d",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_interpret_deterministic_under_ABI",
+      "to": "OP_interpret",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_ABI_explicit_and_versioned",
+      "to": "ST_EventABI",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_S_derived_exclusively_from_M",
+      "to": "ST_SemanticModel",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_interpret_preserves_order_M",
+      "to": "OP_interpret",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_J_derived_exclusively_from_S",
+      "to": "ST_JustificationStructure",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_external_semantic_injection_not_in_interpret",
+      "to": "OP_interpret",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_S_non_authoritative",
+      "to": "ST_SemanticModel",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_graph_deterministic_from_S",
+      "to": "OP_graph",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_nodes_preserve_identity_consistency",
+      "to": "ST_RelationalGraph",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_edges_structural_relations_only",
+      "to": "ST_RelationalGraph",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_traversal_deterministic",
+      "to": "ST_RelationalGraph",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_interpretation_not_in_G",
+      "to": "ST_RelationalGraph",
+      "relation": "enforces",
+      "component_id": "component-006"
+    },
+    {
+      "from": "INV_G_non_authoritative",
+      "to": "ST_RelationalGraph",
+      "relation": "enforces",
+      "component_id": "component-006"
+    }
+  ]
+}

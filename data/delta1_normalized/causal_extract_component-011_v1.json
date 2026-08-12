@@ -1,0 +1,241 @@
+{
+  "component_id": "component-011",
+  "nodes": [
+    {
+      "id": "ST_ir_stream",
+      "label": "IR Stream Buffer [State]",
+      "raw_label": "IR Stream Buffer",
+      "type": "State",
+      "component_id": "component-011"
+    },
+    {
+      "id": "OP_init_bridge",
+      "label": "Initialize Bridge [Operation]",
+      "raw_label": "Initialize Bridge",
+      "type": "Operation",
+      "component_id": "component-011"
+    },
+    {
+      "id": "OP_make_ir",
+      "label": "Make IR [Operation]",
+      "raw_label": "Make IR",
+      "type": "Operation",
+      "component_id": "component-011"
+    },
+    {
+      "id": "OP_ir_callback",
+      "label": "IR Callback [Operation]",
+      "raw_label": "IR Callback",
+      "type": "Operation",
+      "component_id": "component-011"
+    },
+    {
+      "id": "OP_push_ir",
+      "label": "Push IR [Operation]",
+      "raw_label": "Push IR",
+      "type": "Operation",
+      "component_id": "component-011"
+    },
+    {
+      "id": "OP_clear_ir_stream",
+      "label": "Clear IR Stream [Operation]",
+      "raw_label": "Clear IR Stream",
+      "type": "Operation",
+      "component_id": "component-011"
+    },
+    {
+      "id": "OP_extract_actions",
+      "label": "Extract Actions [Operation]",
+      "raw_label": "Extract Actions",
+      "type": "Operation",
+      "component_id": "component-011"
+    },
+    {
+      "id": "OP_run_trial",
+      "label": "Run Trial [Operation]",
+      "raw_label": "Run Trial",
+      "type": "Operation",
+      "component_id": "component-011"
+    },
+    {
+      "id": "OP_divergence_profile",
+      "label": "Divergence Profile [Operation]",
+      "raw_label": "Divergence Profile",
+      "type": "Operation",
+      "component_id": "component-011"
+    },
+    {
+      "id": "INV_determinism",
+      "label": "Determinism [Invariant]",
+      "raw_label": "Determinism",
+      "type": "Invariant",
+      "component_id": "component-011"
+    },
+    {
+      "id": "INV_lossless",
+      "label": "Lossless Data [Invariant]",
+      "raw_label": "Lossless Data",
+      "type": "Invariant",
+      "component_id": "component-011"
+    },
+    {
+      "id": "INV_isolation",
+      "label": "Isolation [Invariant]",
+      "raw_label": "Isolation",
+      "type": "Invariant",
+      "component_id": "component-011"
+    },
+    {
+      "id": "INV_immutable",
+      "label": "Immutable Fields [Invariant]",
+      "raw_label": "Immutable Fields",
+      "type": "Invariant",
+      "component_id": "component-011"
+    },
+    {
+      "id": "INV_append_only",
+      "label": "Append Only [Invariant]",
+      "raw_label": "Append Only",
+      "type": "Invariant",
+      "component_id": "component-011"
+    },
+    {
+      "id": "INV_purity",
+      "label": "Purity [Invariant]",
+      "raw_label": "Purity",
+      "type": "Invariant",
+      "component_id": "component-011"
+    },
+    {
+      "id": "INV_ordering",
+      "label": "Ordering [Invariant]",
+      "raw_label": "Ordering",
+      "type": "Invariant",
+      "component_id": "component-011"
+    },
+    {
+      "id": "INV_obs_only",
+      "label": "Observation Only [Invariant]",
+      "raw_label": "Observation Only",
+      "type": "Invariant",
+      "component_id": "component-011"
+    },
+    {
+      "id": "INV_neutrality",
+      "label": "Neutrality [Invariant]",
+      "raw_label": "Neutrality",
+      "type": "Invariant",
+      "component_id": "component-011"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_init_bridge",
+      "to": "OP_ir_callback",
+      "relation": "triggers",
+      "component_id": "component-011"
+    },
+    {
+      "from": "OP_ir_callback",
+      "to": "OP_make_ir",
+      "relation": "produces",
+      "component_id": "component-011"
+    },
+    {
+      "from": "OP_ir_callback",
+      "to": "OP_push_ir",
+      "relation": "triggers",
+      "component_id": "component-011"
+    },
+    {
+      "from": "OP_push_ir",
+      "to": "ST_ir_stream",
+      "relation": "mutates",
+      "component_id": "component-011"
+    },
+    {
+      "from": "OP_clear_ir_stream",
+      "to": "ST_ir_stream",
+      "relation": "mutates",
+      "component_id": "component-011"
+    },
+    {
+      "from": "OP_run_trial",
+      "to": "OP_clear_ir_stream",
+      "relation": "triggers",
+      "component_id": "component-011"
+    },
+    {
+      "from": "OP_run_trial",
+      "to": "OP_extract_actions",
+      "relation": "triggers",
+      "component_id": "component-011"
+    },
+    {
+      "from": "OP_extract_actions",
+      "to": "ST_ir_stream",
+      "relation": "depends_on",
+      "component_id": "component-011"
+    },
+    {
+      "from": "OP_divergence_profile",
+      "to": "OP_run_trial",
+      "relation": "depends_on",
+      "component_id": "component-011"
+    },
+    {
+      "from": "INV_determinism",
+      "to": "OP_ir_callback",
+      "relation": "enforces",
+      "component_id": "component-011"
+    },
+    {
+      "from": "INV_lossless",
+      "to": "OP_make_ir",
+      "relation": "enforces",
+      "component_id": "component-011"
+    },
+    {
+      "from": "INV_isolation",
+      "to": "ST_ir_stream",
+      "relation": "enforces",
+      "component_id": "component-011"
+    },
+    {
+      "from": "INV_immutable",
+      "to": "ST_ir_stream",
+      "relation": "enforces",
+      "component_id": "component-011"
+    },
+    {
+      "from": "INV_append_only",
+      "to": "OP_push_ir",
+      "relation": "enforces",
+      "component_id": "component-011"
+    },
+    {
+      "from": "INV_purity",
+      "to": "OP_make_ir",
+      "relation": "enforces",
+      "component_id": "component-011"
+    },
+    {
+      "from": "INV_ordering",
+      "to": "OP_push_ir",
+      "relation": "enforces",
+      "component_id": "component-011"
+    },
+    {
+      "from": "INV_obs_only",
+      "to": "OP_divergence_profile",
+      "relation": "enforces",
+      "component_id": "component-011"
+    },
+    {
+      "from": "INV_neutrality",
+      "to": "ST_ir_stream",
+      "relation": "enforces",
+      "component_id": "component-011"
+    }
+  ]
+}

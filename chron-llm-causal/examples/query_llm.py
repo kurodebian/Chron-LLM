@@ -3,8 +3,16 @@ from causal_kernel.extractor.cae_extractor import generate_causal_mermaid
 
 
 def main():
-    ollama_host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
-    model = os.environ.get("OLLAMA_MODEL", "qwen2.5:32b")
+    # バックエンドの判定 (llamacpp / ollama)
+    backend = os.environ.get("LLM_BACKEND", "llamacpp").lower()
+
+    # バックエンドに応じた Host / Model の決定
+    if backend == "ollama":
+        host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
+        model = os.environ.get("OLLAMA_MODEL", "qwen2.5:32b")
+    else:  # default: llamacpp
+        host = os.environ.get("LLAMA_HOST", "http://127.0.0.1:8080")
+        model = os.environ.get("LLAMA_MODEL", "qwen2.5-32b")
 
     sample_context = """
     OP Commit PRE は c.parent-id に依存する。
@@ -12,9 +20,13 @@ def main():
     OPS: commit は WAL.store に依存し、WAL への正常記録が行われることで INV: 8. DETERMINISM が保証される。
     """
 
-    print("=== Ollama から因果 JSON 抽出 & Mermaid 生成中 ===")
+    print(f"=== LLM ({backend}) から因果 JSON 抽出 & Mermaid 生成中 ===")
+    print(f"  Host   : {host}")
+    print(f"  Model  : {model}")
+    print("--------------------------------------------------")
+
     mermaid_code = generate_causal_mermaid(
-        sample_context, ollama_host=ollama_host, model=model
+        sample_context, host=host, model=model, backend=backend
     )
 
     print("\n--- 生成された Mermaid コード ---")

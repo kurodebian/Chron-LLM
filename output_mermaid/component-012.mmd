@@ -1,0 +1,81 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_IngressQueue["IngressQueue [State]"]
+    class ST_IngressQueue state;
+    ST_ReadyQueue["ReadyQueue [State]"]
+    class ST_ReadyQueue state;
+    ST_IsolatedQueue["IsolatedQueue [State]"]
+    class ST_IsolatedQueue state;
+    ST_Execution["Execution [State]"]
+    class ST_Execution state;
+    ST_CanonicalState["CanonicalState [State]"]
+    class ST_CanonicalState state;
+    ST_DialogueState["DialogueState [State]"]
+    class ST_DialogueState state;
+    ST_Context["Context [State]"]
+    class ST_Context state;
+    ST_Temp["Temp [State]"]
+    class ST_Temp state;
+    ST_TopP["TopP [State]"]
+    class ST_TopP state;
+    OP_Schedule["Schedule [Operation]"]
+    class OP_Schedule op;
+    OP_retry["retry [Operation]"]
+    class OP_retry op;
+    OP_retry_with_penalty["retry-with-penalty [Operation]"]
+    class OP_retry_with_penalty op;
+    OP_abort["abort [Operation]"]
+    class OP_abort op;
+    OP_apply["apply [Operation]"]
+    class OP_apply op;
+    OP_Requeue["Requeue [Operation]"]
+    class OP_Requeue op;
+    OP_replay["replay [Operation]"]
+    class OP_replay op;
+    INV_Schedule_Deterministic["INV_Schedule_Deterministic [Invariant]"]
+    class INV_Schedule_Deterministic inv;
+    INV_Retry_NoMutate["INV_Retry_NoMutate [Invariant]"]
+    class INV_Retry_NoMutate inv;
+    INV_NormalDialogue_Isolation["INV_NormalDialogue_Isolation [Invariant]"]
+    class INV_NormalDialogue_Isolation inv;
+    INV_FaultIsolation["INV_FaultIsolation [Invariant]"]
+    class INV_FaultIsolation inv;
+    INV_Authority["INV_Authority [Invariant]"]
+    class INV_Authority inv;
+    INV_IsolationFail["INV_IsolationFail [Invariant]"]
+    class INV_IsolationFail inv;
+    INV_CausalId["INV_CausalId [Invariant]"]
+    class INV_CausalId inv;
+    INV_RetryScope["INV_RetryScope [Invariant]"]
+    class INV_RetryScope inv;
+    INV_RetryNoMutation["INV_RetryNoMutation [Invariant]"]
+    class INV_RetryNoMutation inv;
+    INV_NoBypass["INV_NoBypass [Invariant]"]
+    class INV_NoBypass inv;
+    INV_Determinism["INV_Determinism [Invariant]"]
+    class INV_Determinism inv;
+    OP_Schedule -- "mutates" --> ST_ReadyQueue
+    OP_retry -- "depends_on" --> ST_Execution
+    OP_retry -- "triggers" --> OP_Requeue
+    OP_retry_with_penalty -- "mutates" --> ST_Execution
+    OP_retry_with_penalty -- "mutates" --> ST_Temp
+    OP_retry_with_penalty -- "mutates" --> ST_TopP
+    OP_retry_with_penalty -- "triggers" --> OP_Requeue
+    OP_abort -- "mutates" --> ST_Execution
+    OP_apply -- "mutates" --> ST_CanonicalState
+    OP_apply -- "mutates" --> ST_DialogueState
+    OP_apply -- "depends_on" --> ST_Context
+    OP_replay -- "depends_on" --> ST_CanonicalState
+    INV_Schedule_Deterministic -- "enforces" --> ST_CanonicalState
+    INV_Retry_NoMutate -- "enforces" --> ST_CanonicalState
+    INV_NormalDialogue_Isolation -- "enforces" --> ST_IsolatedQueue
+    INV_FaultIsolation -- "enforces" --> ST_DialogueState
+    INV_Authority -- "enforces" --> ST_CanonicalState
+    INV_IsolationFail -- "enforces" --> ST_DialogueState
+    INV_CausalId -- "enforces" --> ST_Context
+    INV_RetryScope -- "enforces" --> OP_retry
+    INV_RetryNoMutation -- "enforces" --> ST_CanonicalState
+    INV_NoBypass -- "enforces" --> ST_CanonicalState
+    INV_Determinism -- "enforces" --> OP_replay

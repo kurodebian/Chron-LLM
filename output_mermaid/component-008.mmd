@@ -1,0 +1,175 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_Kernel["Kernel State [State]"]
+    class ST_Kernel state;
+    ST_Graph["Graph Structure [State]"]
+    class ST_Graph state;
+    ST_Memory["Memory Store [State]"]
+    class ST_Memory state;
+    ST_World["World Entity [State]"]
+    class ST_World state;
+    ST_Registry["Registry Store [State]"]
+    class ST_Registry state;
+    ST_Observation["Observation Object [State]"]
+    class ST_Observation state;
+    ST_StateSnapshot["State Snapshot [State]"]
+    class ST_StateSnapshot state;
+    ST_WorldObs["World Observation [State]"]
+    class ST_WorldObs state;
+    ST_RegistryObs["Registry Observation [State]"]
+    class ST_RegistryObs state;
+    ST_DiffResult["Diff Result [State]"]
+    class ST_DiffResult state;
+    ST_WorldObservation["World Observation Struct [State]"]
+    class ST_WorldObservation state;
+    ST_RegistryObservation["Registry Observation Struct [State]"]
+    class ST_RegistryObservation state;
+    ST_AncestryObservation["Ancestry Observation Struct [State]"]
+    class ST_AncestryObservation state;
+    ST_DiffObservation["Diff Observation Struct [State]"]
+    class ST_DiffObservation state;
+    ST_PrimitiveTree["Primitive Tree Data [State]"]
+    class ST_PrimitiveTree state;
+    ST_Store["Data Store [State]"]
+    class ST_Store state;
+    OP_observe["Observe State [Operation]"]
+    class OP_observe op;
+    OP_diff["Compute Diff [Operation]"]
+    class OP_diff op;
+    OP_get_world_obs["Get World Observation [Operation]"]
+    class OP_get_world_obs op;
+    OP_get_registry_obs["Get Registry Observation [Operation]"]
+    class OP_get_registry_obs op;
+    OP_build_world_observation["Build World Observation [Operation]"]
+    class OP_build_world_observation op;
+    OP_build_registry_observation["Build Registry Observation [Operation]"]
+    class OP_build_registry_observation op;
+    OP_build_ancestry_observation["Build Ancestry Observation [Operation]"]
+    class OP_build_ancestry_observation op;
+    OP_build_diff_observation["Build Diff Observation [Operation]"]
+    class OP_build_diff_observation op;
+    OP_describe_world["Describe World [Operation]"]
+    class OP_describe_world op;
+    OP_describe_registry["Describe Registry [Operation]"]
+    class OP_describe_registry op;
+    OP_describe_ancestry["Describe Ancestry [Operation]"]
+    class OP_describe_ancestry op;
+    OP_describe_diff["Describe Diff [Operation]"]
+    class OP_describe_diff op;
+    OP_world_observation_equal["World Observation Equal [Operation]"]
+    class OP_world_observation_equal op;
+    OP_registry_observation_equal["Registry Observation Equal [Operation]"]
+    class OP_registry_observation_equal op;
+    OP_ancestry_observation_equal["Ancestry Observation Equal [Operation]"]
+    class OP_ancestry_observation_equal op;
+    OP_diff_observation_equal["Diff Observation Equal [Operation]"]
+    class OP_diff_observation_equal op;
+    OP_run_tests["Run Observability Tests [Operation]"]
+    class OP_run_tests op;
+    INV_READ_ONLY["Read Only Observation [Invariant]"]
+    class INV_READ_ONLY inv;
+    INV_DETERMINISTIC["Deterministic Observation [Invariant]"]
+    class INV_DETERMINISTIC inv;
+    INV_ACCURATE["Accurate Snapshot [Invariant]"]
+    class INV_ACCURATE inv;
+    INV_NO_SIDE_EFFECTS["No Side Effects [Invariant]"]
+    class INV_NO_SIDE_EFFECTS inv;
+    INV_IMMUTABLE_OBS["Immutable Observation [Invariant]"]
+    class INV_IMMUTABLE_OBS inv;
+    INV_NON_AUTH["Non-Auth Truth [Invariant]"]
+    class INV_NON_AUTH inv;
+    INV_LAYER["Layer Hierarchy [Invariant]"]
+    class INV_LAYER inv;
+    INV_VALUE_OBJ["Value Object Equality [Invariant]"]
+    class INV_VALUE_OBJ inv;
+    INV_COMPLETE["Complete Snapshot [Invariant]"]
+    class INV_COMPLETE inv;
+    INV_NO_INFER["No Inference or Fabrication [Invariant]"]
+    class INV_NO_INFER inv;
+    INV_PRESENTATION_INDEPENDENT["Presentation Independent [Invariant]"]
+    class INV_PRESENTATION_INDEPENDENT inv;
+    INV_IMMUTABILITY["Immutability Guarantee [Invariant]"]
+    class INV_IMMUTABILITY inv;
+    INV_SCHEMA_COMPLIANCE["Schema Version Compliance [Invariant]"]
+    class INV_SCHEMA_COMPLIANCE inv;
+    INV_ANCESTRY_ACCURACY["Ancestry Path Accuracy [Invariant]"]
+    class INV_ANCESTRY_ACCURACY inv;
+    INV_DIFF_SEMANTICS["Diff Change Semantics [Invariant]"]
+    class INV_DIFF_SEMANTICS inv;
+    INV_VALUE_SEMANTICS["Value Semantics Equality [Invariant]"]
+    class INV_VALUE_SEMANTICS inv;
+    INV_NO_MUTATION["No Core Mutation [Invariant]"]
+    class INV_NO_MUTATION inv;
+    INV_NO_EXEC["No Executable Behavior [Invariant]"]
+    class INV_NO_EXEC inv;
+    INV_NO_MUTABLE_REFS["No Mutable References [Invariant]"]
+    class INV_NO_MUTABLE_REFS inv;
+    INV_NO_LAZY_MUT["No Lazy Mutations [Invariant]"]
+    class INV_NO_LAZY_MUT inv;
+    INV_NO_HIDDEN_STATE["No Hidden State [Invariant]"]
+    class INV_NO_HIDDEN_STATE inv;
+    OP_observe -- "produces" --> ST_Observation
+    OP_observe -- "produces" --> ST_StateSnapshot
+    OP_observe -- "depends_on" --> ST_Kernel
+    OP_observe -- "depends_on" --> ST_Graph
+    OP_observe -- "depends_on" --> ST_Memory
+    OP_observe -- "depends_on" --> ST_World
+    OP_observe -- "depends_on" --> ST_Registry
+    OP_observe -- "enforces" --> INV_READ_ONLY
+    OP_observe -- "enforces" --> INV_DETERMINISTIC
+    OP_observe -- "enforces" --> INV_ACCURATE
+    OP_observe -- "enforces" --> INV_NO_SIDE_EFFECTS
+    OP_diff -- "produces" --> ST_DiffResult
+    OP_diff -- "depends_on" --> ST_Observation
+    OP_get_world_obs -- "produces" --> ST_WorldObs
+    OP_get_world_obs -- "depends_on" --> ST_World
+    OP_get_registry_obs -- "produces" --> ST_RegistryObs
+    OP_get_registry_obs -- "depends_on" --> ST_Registry
+    OP_build_world_observation -- "produces" --> ST_WorldObservation
+    OP_build_world_observation -- "depends_on" --> ST_World
+    OP_build_world_observation -- "depends_on" --> ST_PrimitiveTree
+    OP_build_world_observation -- "enforces" --> INV_IMMUTABLE_OBS
+    OP_build_world_observation -- "enforces" --> INV_SCHEMA_COMPLIANCE
+    OP_build_registry_observation -- "produces" --> ST_RegistryObservation
+    OP_build_registry_observation -- "depends_on" --> ST_Registry
+    OP_build_registry_observation -- "enforces" --> INV_IMMUTABLE_OBS
+    OP_build_ancestry_observation -- "produces" --> ST_AncestryObservation
+    OP_build_ancestry_observation -- "depends_on" --> ST_Registry
+    OP_build_ancestry_observation -- "enforces" --> INV_ANCESTRY_ACCURACY
+    OP_build_diff_observation -- "produces" --> ST_DiffObservation
+    OP_build_diff_observation -- "depends_on" --> ST_WorldObservation
+    OP_build_diff_observation -- "depends_on" --> ST_RegistryObservation
+    OP_build_diff_observation -- "enforces" --> INV_DIFF_SEMANTICS
+    OP_describe_world -- "triggers" --> OP_build_world_observation
+    OP_describe_registry -- "triggers" --> OP_build_registry_observation
+    OP_describe_ancestry -- "triggers" --> OP_build_ancestry_observation
+    OP_describe_diff -- "triggers" --> OP_build_diff_observation
+    OP_world_observation_equal -- "depends_on" --> ST_WorldObservation
+    OP_world_observation_equal -- "enforces" --> INV_VALUE_OBJ
+    OP_registry_observation_equal -- "depends_on" --> ST_RegistryObservation
+    OP_registry_observation_equal -- "enforces" --> INV_VALUE_OBJ
+    OP_ancestry_observation_equal -- "depends_on" --> ST_AncestryObservation
+    OP_diff_observation_equal -- "depends_on" --> ST_DiffObservation
+    OP_run_tests -- "triggers" --> OP_describe_world
+    OP_run_tests -- "triggers" --> OP_describe_registry
+    OP_run_tests -- "triggers" --> OP_describe_ancestry
+    OP_run_tests -- "triggers" --> OP_describe_diff
+    INV_NO_MUTATION -- "enforces" --> ST_Graph
+    INV_NO_MUTATION -- "enforces" --> ST_Memory
+    INV_NO_MUTATION -- "enforces" --> ST_World
+    INV_NO_MUTATION -- "enforces" --> ST_Registry
+    INV_NO_MUTATION -- "enforces" --> ST_Kernel
+    INV_NO_EXEC -- "enforces" --> ST_Observation
+    INV_NO_MUTABLE_REFS -- "enforces" --> ST_Observation
+    INV_NO_LAZY_MUT -- "enforces" --> ST_Observation
+    INV_NO_HIDDEN_STATE -- "enforces" --> ST_Observation
+    INV_PRESENTATION_INDEPENDENT -- "enforces" --> ST_Observation
+    INV_COMPLETE -- "enforces" --> ST_StateSnapshot
+    INV_NO_INFER -- "enforces" --> ST_StateSnapshot
+    INV_LAYER -- "enforces" --> ST_Kernel
+    INV_LAYER -- "enforces" --> ST_World
+    INV_LAYER -- "enforces" --> ST_Observation
+    INV_VALUE_SEMANTICS -- "enforces" --> ST_WorldObservation
+    INV_VALUE_SEMANTICS -- "enforces" --> ST_RegistryObservation

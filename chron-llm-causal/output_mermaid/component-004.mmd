@@ -2,14 +2,3 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
-    docs_ir_architecture_v1_1_spec["Architecture v1.1 [State]"]
-    class docs_ir_architecture_v1_1_spec state;
-    llama_agent_ir_causal_kernel_spec["Causal Kernel Spec [Operation]"]
-    class llama_agent_ir_causal_kernel_spec op;
-    llama_agent_ir_chron_llm_graph_spec["Chron LLM Graph Spec [Operation]"]
-    class llama_agent_ir_chron_llm_graph_spec op;
-    docs_ir_architecture_v1_spec["Architecture v1 [State]"]
-    class docs_ir_architecture_v1_spec state;
-    docs_ir_architecture_v1_1_spec -- "depends_on" --> llama_agent_ir_causal_kernel_spec
-    docs_ir_architecture_v1_1_spec -- "depends_on" --> llama_agent_ir_chron_llm_graph_spec
-    docs_ir_architecture_v1_1_spec -- "depends_on" --> docs_ir_architecture_v1_spec

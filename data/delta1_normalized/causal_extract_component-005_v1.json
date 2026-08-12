@@ -1,0 +1,241 @@
+{
+  "component_id": "component-005",
+  "nodes": [
+    {
+      "id": "ST_WalWorldCounter",
+      "label": "WAL World Counter [State]",
+      "raw_label": "WAL World Counter",
+      "type": "State",
+      "component_id": "component-005"
+    },
+    {
+      "id": "ST_Graph",
+      "label": "Causal Graph [State]",
+      "raw_label": "Causal Graph",
+      "type": "State",
+      "component_id": "component-005"
+    },
+    {
+      "id": "ST_Wal",
+      "label": "Write-Ahead Log [State]",
+      "raw_label": "Write-Ahead Log",
+      "type": "State",
+      "component_id": "component-005"
+    },
+    {
+      "id": "OP_StageBranchWorld",
+      "label": "Stage Branch World [Operation]",
+      "raw_label": "Stage Branch World",
+      "type": "Operation",
+      "component_id": "component-005"
+    },
+    {
+      "id": "OP_GetLatestNodeInWorld",
+      "label": "Get Latest Node In World [Operation]",
+      "raw_label": "Get Latest Node In World",
+      "type": "Operation",
+      "component_id": "component-005"
+    },
+    {
+      "id": "OP_StageEvent",
+      "label": "Stage Event [Operation]",
+      "raw_label": "Stage Event",
+      "type": "Operation",
+      "component_id": "component-005"
+    },
+    {
+      "id": "OP_CleanHistory",
+      "label": "Clean History [Operation]",
+      "raw_label": "Clean History",
+      "type": "Operation",
+      "component_id": "component-005"
+    },
+    {
+      "id": "OP_CheckImmuneStatus",
+      "label": "Check Immune Status [Operation]",
+      "raw_label": "Check Immune Status",
+      "type": "Operation",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_WorldIDUnique",
+      "label": "WorldID Unique [Invariant]",
+      "raw_label": "WorldID Unique",
+      "type": "Invariant",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_WalCounterMonotonic",
+      "label": "WAL Counter Monotonic [Invariant]",
+      "raw_label": "WAL Counter Monotonic",
+      "type": "Invariant",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_BranchEventKind",
+      "label": "Branch Event Kind is Branch [Invariant]",
+      "raw_label": "Branch Event Kind is Branch",
+      "type": "Invariant",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_EventStatusStaged",
+      "label": "Event Status Staged [Invariant]",
+      "raw_label": "Event Status Staged",
+      "type": "Invariant",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_ParentWorldIDImmutable",
+      "label": "ParentWorldID Immutable [Invariant]",
+      "raw_label": "ParentWorldID Immutable",
+      "type": "Invariant",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_ParentNodeIDCommitted",
+      "label": "ParentNodeID Points to Committed Node [Invariant]",
+      "raw_label": "ParentNodeID Points to Committed Node",
+      "type": "Invariant",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_QueryExcludesFault",
+      "label": "Query Excludes Fault Nodes [Invariant]",
+      "raw_label": "Query Excludes Fault Nodes",
+      "type": "Invariant",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_QueryReturnsSingleLatest",
+      "label": "Query Returns Single Latest Node [Invariant]",
+      "raw_label": "Query Returns Single Latest Node",
+      "type": "Invariant",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_ImmuneStatusOk",
+      "label": "Immune Status OK if History Exists [Invariant]",
+      "raw_label": "Immune Status OK if History Exists",
+      "type": "Invariant",
+      "component_id": "component-005"
+    },
+    {
+      "id": "INV_RootParentZero",
+      "label": "Root Parent is Zero [Invariant]",
+      "raw_label": "Root Parent is Zero",
+      "type": "Invariant",
+      "component_id": "component-005"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_StageBranchWorld",
+      "to": "ST_WalWorldCounter",
+      "relation": "mutates",
+      "component_id": "component-005"
+    },
+    {
+      "from": "OP_StageBranchWorld",
+      "to": "ST_Wal",
+      "relation": "mutates",
+      "component_id": "component-005"
+    },
+    {
+      "from": "OP_StageBranchWorld",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-005"
+    },
+    {
+      "from": "OP_StageBranchWorld",
+      "to": "OP_GetLatestNodeInWorld",
+      "relation": "depends_on",
+      "component_id": "component-005"
+    },
+    {
+      "from": "OP_StageBranchWorld",
+      "to": "OP_StageEvent",
+      "relation": "triggers",
+      "component_id": "component-005"
+    },
+    {
+      "from": "OP_GetLatestNodeInWorld",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-005"
+    },
+    {
+      "from": "OP_CleanHistory",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-005"
+    },
+    {
+      "from": "OP_CheckImmuneStatus",
+      "to": "OP_CleanHistory",
+      "relation": "depends_on",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_WorldIDUnique",
+      "to": "ST_WalWorldCounter",
+      "relation": "enforces",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_WalCounterMonotonic",
+      "to": "ST_WalWorldCounter",
+      "relation": "enforces",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_BranchEventKind",
+      "to": "OP_StageBranchWorld",
+      "relation": "enforces",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_EventStatusStaged",
+      "to": "OP_StageBranchWorld",
+      "relation": "enforces",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_ParentWorldIDImmutable",
+      "to": "OP_StageBranchWorld",
+      "relation": "enforces",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_ParentNodeIDCommitted",
+      "to": "OP_GetLatestNodeInWorld",
+      "relation": "enforces",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_QueryExcludesFault",
+      "to": "OP_GetLatestNodeInWorld",
+      "relation": "enforces",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_QueryReturnsSingleLatest",
+      "to": "OP_GetLatestNodeInWorld",
+      "relation": "enforces",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_ImmuneStatusOk",
+      "to": "OP_CheckImmuneStatus",
+      "relation": "enforces",
+      "component_id": "component-005"
+    },
+    {
+      "from": "INV_RootParentZero",
+      "to": "OP_StageBranchWorld",
+      "relation": "enforces",
+      "component_id": "component-005"
+    }
+  ]
+}

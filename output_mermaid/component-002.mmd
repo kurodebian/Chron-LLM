@@ -1,0 +1,106 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_Kernel["Kernel Internal State [State]"]
+    class ST_Kernel state;
+    ST_KernelState["Kernel State Output [State]"]
+    class ST_KernelState state;
+    ST_Context["LLM Execution Context [State]"]
+    class ST_Context state;
+    ST_Session["Chat Session State [State]"]
+    class ST_Session state;
+    ST_History["Chat History Buffer [State]"]
+    class ST_History state;
+    ST_RuntimeEnv["Runtime Environment [State]"]
+    class ST_RuntimeEnv state;
+    ST_n_past["KV Cache Past Tokens [State]"]
+    class ST_n_past state;
+    ST_IR["Intermediate Representation [State]"]
+    class ST_IR state;
+    ST_RuntimeCommand["Kernel Runtime Command [State]"]
+    class ST_RuntimeCommand state;
+    OP_make_chron_kernel["Initialize Chron Kernel [Operation]"]
+    class OP_make_chron_kernel op;
+    OP_kernel_commit_event["Commit Event to WAL [Operation]"]
+    class OP_kernel_commit_event op;
+    OP_refresh_projections["Rebuild Graph from WAL [Operation]"]
+    class OP_refresh_projections op;
+    OP_kernel_current_state["Retrieve Kernel State [Operation]"]
+    class OP_kernel_current_state op;
+    OP_init_runtime["Initialize Runtime Env [Operation]"]
+    class OP_init_runtime op;
+    OP_main_loop["Main Runtime Loop [Operation]"]
+    class OP_main_loop op;
+    OP_init_chron_llm["Initialize LLM Context [Operation]"]
+    class OP_init_chron_llm op;
+    OP_tokenize["Tokenize Input Text [Operation]"]
+    class OP_tokenize op;
+    OP_prefill_prompt["Prefill Prompt [Operation]"]
+    class OP_prefill_prompt op;
+    OP_generate["Generate LLM Response [Operation]"]
+    class OP_generate op;
+    OP_my_sampler_sample["Sample Next Token [Operation]"]
+    class OP_my_sampler_sample op;
+    OP_my_llama_eval["Evaluate Tokens [Operation]"]
+    class OP_my_llama_eval op;
+    OP_chat["Execute Chat Flow [Operation]"]
+    class OP_chat op;
+    OP_decide["Kernel Decision Engine [Operation]"]
+    class OP_decide op;
+    OP_fault_recovery["Handle Generation Faults [Operation]"]
+    class OP_fault_recovery op;
+    INV_kernel_sole_mutator["Kernel Sole Mutator Rule [Invariant]"]
+    class INV_kernel_sole_mutator inv;
+    INV_graph_is_wal_function["Graph Deterministic from WAL [Invariant]"]
+    class INV_graph_is_wal_function inv;
+    INV_runtime_no_direct_access["Runtime No Direct Access [Invariant]"]
+    class INV_runtime_no_direct_access inv;
+    INV_n_past_bounds["N-Past Length Bounds [Invariant]"]
+    class INV_n_past_bounds inv;
+    INV_history_ordered_append_only["History Ordered Append-Only [Invariant]"]
+    class INV_history_ordered_append_only inv;
+    INV_ir_immutable_ordered["IR Immutable Ordered [Invariant]"]
+    class INV_ir_immutable_ordered inv;
+    INV_chat_sequence["Chat Flow Sequence [Invariant]"]
+    class INV_chat_sequence inv;
+    INV_fault_no_commit["Faults Prevent Commit [Invariant]"]
+    class INV_fault_no_commit inv;
+    INV_stateless_module["FFI Stateless Pointers [Invariant]"]
+    class INV_stateless_module inv;
+    INV_abi_1to1["FFI 1-to-1 ABI Mapping [Invariant]"]
+    class INV_abi_1to1 inv;
+    INV_sampler_lifecycle["Sampler Create-Use-Free [Invariant]"]
+    class INV_sampler_lifecycle inv;
+    OP_make_chron_kernel -- "produces" --> ST_Kernel
+    OP_kernel_commit_event -- "mutates" --> ST_Kernel
+    OP_kernel_commit_event -- "triggers" --> OP_refresh_projections
+    OP_refresh_projections -- "mutates" --> ST_Kernel
+    OP_kernel_current_state -- "produces" --> ST_KernelState
+    OP_kernel_current_state -- "depends_on" --> ST_Kernel
+    OP_init_runtime -- "produces" --> ST_RuntimeEnv
+    OP_main_loop -- "triggers" --> OP_kernel_commit_event
+    OP_main_loop -- "depends_on" --> OP_kernel_current_state
+    OP_init_chron_llm -- "produces" --> ST_Context
+    OP_tokenize -- "depends_on" --> ST_Context
+    OP_prefill_prompt -- "mutates" --> ST_Context
+    OP_generate -- "mutates" --> ST_Context
+    OP_generate -- "triggers" --> OP_my_sampler_sample
+    OP_generate -- "triggers" --> OP_my_llama_eval
+    OP_my_llama_eval -- "mutates" --> ST_n_past
+    OP_chat -- "mutates" --> ST_Session
+    OP_chat -- "mutates" --> ST_History
+    OP_decide -- "produces" --> ST_RuntimeCommand
+    OP_decide -- "depends_on" --> ST_IR
+    OP_fault_recovery -- "mutates" --> ST_n_past
+    INV_kernel_sole_mutator -- "enforces" --> ST_Kernel
+    INV_graph_is_wal_function -- "enforces" --> ST_Kernel
+    INV_runtime_no_direct_access -- "enforces" --> ST_RuntimeEnv
+    INV_n_past_bounds -- "enforces" --> ST_n_past
+    INV_history_ordered_append_only -- "enforces" --> ST_History
+    INV_ir_immutable_ordered -- "enforces" --> ST_IR
+    INV_chat_sequence -- "enforces" --> OP_chat
+    INV_fault_no_commit -- "enforces" --> OP_kernel_commit_event
+    INV_stateless_module -- "enforces" --> ST_Context
+    INV_abi_1to1 -- "enforces" --> OP_my_llama_eval
+    INV_sampler_lifecycle -- "enforces" --> OP_my_sampler_sample

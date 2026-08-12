@@ -1,0 +1,103 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_History["History [State]"]
+    class ST_History state;
+    ST_ProjectionModel["ProjectionModel [State]"]
+    class ST_ProjectionModel state;
+    ST_JustificationStructure["JustificationStructure [State]"]
+    class ST_JustificationStructure state;
+    ST_EventABI["EventABI [State]"]
+    class ST_EventABI state;
+    ST_SemanticModel["SemanticModel [State]"]
+    class ST_SemanticModel state;
+    ST_RelationalGraph["RelationalGraph [State]"]
+    class ST_RelationalGraph state;
+    OP_d["d(H) -> M [Operation]"]
+    class OP_d op;
+    OP_j["j(M) -> J [Operation]"]
+    class OP_j op;
+    OP_interpret["interpret(M, ABI) -> S [Operation]"]
+    class OP_interpret op;
+    OP_justify["justify(S) -> J [Operation]"]
+    class OP_justify op;
+    OP_graph["graph(S) -> G [Operation]"]
+    class OP_graph op;
+    INV_H_authoritative_causal_record["H.authoritative_causal_record [Invariant]"]
+    class INV_H_authoritative_causal_record inv;
+    INV_H_reproducible["H.reproducible [Invariant]"]
+    class INV_H_reproducible inv;
+    INV_H_inspectable["H.inspectable [Invariant]"]
+    class INV_H_inspectable inv;
+    INV_H_derivable["H.derivable [Invariant]"]
+    class INV_H_derivable inv;
+    INV_EventABI_not_in_H["EventABI !in H [Invariant]"]
+    class INV_EventABI_not_in_H inv;
+    INV_ResolutionSemantics_not_in_H["ResolutionSemantics !in H [Invariant]"]
+    class INV_ResolutionSemantics_not_in_H inv;
+    INV_d_deterministic["d.deterministic [Invariant]"]
+    class INV_d_deterministic inv;
+    INV_j_derived_exclusively_from_d["j.derived_exclusively_from(d) [Invariant]"]
+    class INV_j_derived_exclusively_from_d inv;
+    INV_d_semantically_neutral["d.semantically_neutral [Invariant]"]
+    class INV_d_semantically_neutral inv;
+    INV_interpret_deterministic_under_ABI["interpret.deterministic_under(ABI) [Invariant]"]
+    class INV_interpret_deterministic_under_ABI inv;
+    INV_ABI_explicit_and_versioned["ABI.explicit_and_versioned [Invariant]"]
+    class INV_ABI_explicit_and_versioned inv;
+    INV_S_derived_exclusively_from_M["S.derived_exclusively_from(M) [Invariant]"]
+    class INV_S_derived_exclusively_from_M inv;
+    INV_interpret_preserves_order_M["interpret.preserves_order(M) [Invariant]"]
+    class INV_interpret_preserves_order_M inv;
+    INV_J_derived_exclusively_from_S["J.derived_exclusively_from(S) [Invariant]"]
+    class INV_J_derived_exclusively_from_S inv;
+    INV_external_semantic_injection_not_in_interpret["external_semantic_injection !in interpret [Invariant]"]
+    class INV_external_semantic_injection_not_in_interpret inv;
+    INV_S_non_authoritative["S.non_authoritative [Invariant]"]
+    class INV_S_non_authoritative inv;
+    INV_graph_deterministic_from_S["graph.deterministic_from(S) [Invariant]"]
+    class INV_graph_deterministic_from_S inv;
+    INV_nodes_preserve_identity_consistency["nodes.preserve_identity_consistency [Invariant]"]
+    class INV_nodes_preserve_identity_consistency inv;
+    INV_edges_structural_relations_only["edges.structural_relations_only [Invariant]"]
+    class INV_edges_structural_relations_only inv;
+    INV_traversal_deterministic["traversal.deterministic [Invariant]"]
+    class INV_traversal_deterministic inv;
+    INV_interpretation_not_in_G["interpretation !in G [Invariant]"]
+    class INV_interpretation_not_in_G inv;
+    INV_G_non_authoritative["G.non_authoritative [Invariant]"]
+    class INV_G_non_authoritative inv;
+    ST_History -- "depends_on" --> OP_d
+    OP_d -- "produces" --> ST_ProjectionModel
+    ST_ProjectionModel -- "depends_on" --> OP_j
+    OP_j -- "produces" --> ST_JustificationStructure
+    ST_ProjectionModel -- "depends_on" --> OP_interpret
+    ST_EventABI -- "depends_on" --> OP_interpret
+    OP_interpret -- "produces" --> ST_SemanticModel
+    ST_SemanticModel -- "depends_on" --> OP_justify
+    OP_justify -- "produces" --> ST_JustificationStructure
+    ST_SemanticModel -- "depends_on" --> OP_graph
+    OP_graph -- "produces" --> ST_RelationalGraph
+    INV_H_authoritative_causal_record -- "enforces" --> ST_History
+    INV_H_reproducible -- "enforces" --> ST_History
+    INV_H_inspectable -- "enforces" --> ST_History
+    INV_H_derivable -- "enforces" --> ST_History
+    INV_EventABI_not_in_H -- "enforces" --> ST_History
+    INV_ResolutionSemantics_not_in_H -- "enforces" --> ST_History
+    INV_d_deterministic -- "enforces" --> OP_d
+    INV_j_derived_exclusively_from_d -- "enforces" --> OP_j
+    INV_d_semantically_neutral -- "enforces" --> OP_d
+    INV_interpret_deterministic_under_ABI -- "enforces" --> OP_interpret
+    INV_ABI_explicit_and_versioned -- "enforces" --> ST_EventABI
+    INV_S_derived_exclusively_from_M -- "enforces" --> ST_SemanticModel
+    INV_interpret_preserves_order_M -- "enforces" --> OP_interpret
+    INV_J_derived_exclusively_from_S -- "enforces" --> ST_JustificationStructure
+    INV_external_semantic_injection_not_in_interpret -- "enforces" --> OP_interpret
+    INV_S_non_authoritative -- "enforces" --> ST_SemanticModel
+    INV_graph_deterministic_from_S -- "enforces" --> OP_graph
+    INV_nodes_preserve_identity_consistency -- "enforces" --> ST_RelationalGraph
+    INV_edges_structural_relations_only -- "enforces" --> ST_RelationalGraph
+    INV_traversal_deterministic -- "enforces" --> ST_RelationalGraph
+    INV_interpretation_not_in_G -- "enforces" --> ST_RelationalGraph
+    INV_G_non_authoritative -- "enforces" --> ST_RelationalGraph

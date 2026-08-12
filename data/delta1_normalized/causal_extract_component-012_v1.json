@@ -1,0 +1,334 @@
+{
+  "component_id": "component-012",
+  "nodes": [
+    {
+      "id": "ST_IngressQueue",
+      "label": "IngressQueue [State]",
+      "raw_label": "IngressQueue",
+      "type": "State",
+      "component_id": "component-012"
+    },
+    {
+      "id": "ST_ReadyQueue",
+      "label": "ReadyQueue [State]",
+      "raw_label": "ReadyQueue",
+      "type": "State",
+      "component_id": "component-012"
+    },
+    {
+      "id": "ST_IsolatedQueue",
+      "label": "IsolatedQueue [State]",
+      "raw_label": "IsolatedQueue",
+      "type": "State",
+      "component_id": "component-012"
+    },
+    {
+      "id": "ST_Execution",
+      "label": "Execution [State]",
+      "raw_label": "Execution",
+      "type": "State",
+      "component_id": "component-012"
+    },
+    {
+      "id": "ST_CanonicalState",
+      "label": "CanonicalState [State]",
+      "raw_label": "CanonicalState",
+      "type": "State",
+      "component_id": "component-012"
+    },
+    {
+      "id": "ST_DialogueState",
+      "label": "DialogueState [State]",
+      "raw_label": "DialogueState",
+      "type": "State",
+      "component_id": "component-012"
+    },
+    {
+      "id": "ST_Context",
+      "label": "Context [State]",
+      "raw_label": "Context",
+      "type": "State",
+      "component_id": "component-012"
+    },
+    {
+      "id": "ST_Temp",
+      "label": "Temp [State]",
+      "raw_label": "Temp",
+      "type": "State",
+      "component_id": "component-012"
+    },
+    {
+      "id": "ST_TopP",
+      "label": "TopP [State]",
+      "raw_label": "TopP",
+      "type": "State",
+      "component_id": "component-012"
+    },
+    {
+      "id": "OP_Schedule",
+      "label": "Schedule [Operation]",
+      "raw_label": "Schedule",
+      "type": "Operation",
+      "component_id": "component-012"
+    },
+    {
+      "id": "OP_retry",
+      "label": "retry [Operation]",
+      "raw_label": "retry",
+      "type": "Operation",
+      "component_id": "component-012"
+    },
+    {
+      "id": "OP_retry_with_penalty",
+      "label": "retry-with-penalty [Operation]",
+      "raw_label": "retry-with-penalty",
+      "type": "Operation",
+      "component_id": "component-012"
+    },
+    {
+      "id": "OP_abort",
+      "label": "abort [Operation]",
+      "raw_label": "abort",
+      "type": "Operation",
+      "component_id": "component-012"
+    },
+    {
+      "id": "OP_apply",
+      "label": "apply [Operation]",
+      "raw_label": "apply",
+      "type": "Operation",
+      "component_id": "component-012"
+    },
+    {
+      "id": "OP_Requeue",
+      "label": "Requeue [Operation]",
+      "raw_label": "Requeue",
+      "type": "Operation",
+      "component_id": "component-012"
+    },
+    {
+      "id": "OP_replay",
+      "label": "replay [Operation]",
+      "raw_label": "replay",
+      "type": "Operation",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_Schedule_Deterministic",
+      "label": "INV_Schedule_Deterministic [Invariant]",
+      "raw_label": "INV_Schedule_Deterministic",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_Retry_NoMutate",
+      "label": "INV_Retry_NoMutate [Invariant]",
+      "raw_label": "INV_Retry_NoMutate",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_NormalDialogue_Isolation",
+      "label": "INV_NormalDialogue_Isolation [Invariant]",
+      "raw_label": "INV_NormalDialogue_Isolation",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_FaultIsolation",
+      "label": "INV_FaultIsolation [Invariant]",
+      "raw_label": "INV_FaultIsolation",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_Authority",
+      "label": "INV_Authority [Invariant]",
+      "raw_label": "INV_Authority",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_IsolationFail",
+      "label": "INV_IsolationFail [Invariant]",
+      "raw_label": "INV_IsolationFail",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_CausalId",
+      "label": "INV_CausalId [Invariant]",
+      "raw_label": "INV_CausalId",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_RetryScope",
+      "label": "INV_RetryScope [Invariant]",
+      "raw_label": "INV_RetryScope",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_RetryNoMutation",
+      "label": "INV_RetryNoMutation [Invariant]",
+      "raw_label": "INV_RetryNoMutation",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_NoBypass",
+      "label": "INV_NoBypass [Invariant]",
+      "raw_label": "INV_NoBypass",
+      "type": "Invariant",
+      "component_id": "component-012"
+    },
+    {
+      "id": "INV_Determinism",
+      "label": "INV_Determinism [Invariant]",
+      "raw_label": "INV_Determinism",
+      "type": "Invariant",
+      "component_id": "component-012"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_Schedule",
+      "to": "ST_ReadyQueue",
+      "relation": "mutates",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_retry",
+      "to": "ST_Execution",
+      "relation": "depends_on",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_retry",
+      "to": "OP_Requeue",
+      "relation": "triggers",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_retry_with_penalty",
+      "to": "ST_Execution",
+      "relation": "mutates",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_retry_with_penalty",
+      "to": "ST_Temp",
+      "relation": "mutates",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_retry_with_penalty",
+      "to": "ST_TopP",
+      "relation": "mutates",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_retry_with_penalty",
+      "to": "OP_Requeue",
+      "relation": "triggers",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_abort",
+      "to": "ST_Execution",
+      "relation": "mutates",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_apply",
+      "to": "ST_CanonicalState",
+      "relation": "mutates",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_apply",
+      "to": "ST_DialogueState",
+      "relation": "mutates",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_apply",
+      "to": "ST_Context",
+      "relation": "depends_on",
+      "component_id": "component-012"
+    },
+    {
+      "from": "OP_replay",
+      "to": "ST_CanonicalState",
+      "relation": "depends_on",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_Schedule_Deterministic",
+      "to": "ST_CanonicalState",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_Retry_NoMutate",
+      "to": "ST_CanonicalState",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_NormalDialogue_Isolation",
+      "to": "ST_IsolatedQueue",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_FaultIsolation",
+      "to": "ST_DialogueState",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_Authority",
+      "to": "ST_CanonicalState",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_IsolationFail",
+      "to": "ST_DialogueState",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_CausalId",
+      "to": "ST_Context",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_RetryScope",
+      "to": "OP_retry",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_RetryNoMutation",
+      "to": "ST_CanonicalState",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_NoBypass",
+      "to": "ST_CanonicalState",
+      "relation": "enforces",
+      "component_id": "component-012"
+    },
+    {
+      "from": "INV_Determinism",
+      "to": "OP_replay",
+      "relation": "enforces",
+      "component_id": "component-012"
+    }
+  ]
+}

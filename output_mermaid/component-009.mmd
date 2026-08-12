@@ -1,0 +1,92 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_SystemDir["System Directory Path [State]"]
+    class ST_SystemDir state;
+    ST_UseMockPhysical["Use Mock Physical Flag [State]"]
+    class ST_UseMockPhysical state;
+    ST_LoadSequence["Boot Load Sequence [State]"]
+    class ST_LoadSequence state;
+    ST_PostBootState["Post-Boot Bootloader State [State]"]
+    class ST_PostBootState state;
+    OP_InitQuicklisp["Initialize Quicklisp [Operation]"]
+    class OP_InitQuicklisp op;
+    OP_LoadLibs["Load External Libraries [Operation]"]
+    class OP_LoadLibs op;
+    OP_LoadSystemFile["Load System File [Operation]"]
+    class OP_LoadSystemFile op;
+    OP_InitLayers["Initialize Boot Layers [Operation]"]
+    class OP_InitLayers op;
+    OP_LoadPhysical["Load Physical Layer [Operation]"]
+    class OP_LoadPhysical op;
+    OP_LoadLlm["Load LLM Interface [Operation]"]
+    class OP_LoadLlm op;
+    OP_LoadCore["Load Core Module [Operation]"]
+    class OP_LoadCore op;
+    OP_LoadGraph["Load Graph Layer [Operation]"]
+    class OP_LoadGraph op;
+    OP_LoadWorld["Load World Module [Operation]"]
+    class OP_LoadWorld op;
+    OP_LoadImmune["Load Immune Module [Operation]"]
+    class OP_LoadImmune op;
+    OP_LoadRuntime["Load Runtime Module [Operation]"]
+    class OP_LoadRuntime op;
+    OP_LoadGeneration["Load Generation Module [Operation]"]
+    class OP_LoadGeneration op;
+    OP_LoadTest["Load Test Wrapper [Operation]"]
+    class OP_LoadTest op;
+    OP_StartDelta3["Start Delta3 Agent [Operation]"]
+    class OP_StartDelta3 op;
+    OP_StartDelta3Stub["Start Delta3 Stub [Operation]"]
+    class OP_StartDelta3Stub op;
+    OP_AgentMainLoop["Agent Main Loop [Operation]"]
+    class OP_AgentMainLoop op;
+    INV_BootSeq["Boot Sequence Match [Invariant]"]
+    class INV_BootSeq inv;
+    INV_Abi["ABI Signature Match [Invariant]"]
+    class INV_Abi inv;
+    INV_Purity["Bootloader Purity [Invariant]"]
+    class INV_Purity inv;
+    INV_Deps["Layer Dependency Order [Invariant]"]
+    class INV_Deps inv;
+    INV_LoadOrder["Explicit Load Order [Invariant]"]
+    class INV_LoadOrder inv;
+    INV_NoReverseDep["No Reverse Dependencies [Invariant]"]
+    class INV_NoReverseDep inv;
+    INV_PhysicalSwap["Physical Layer Swappability [Invariant]"]
+    class INV_PhysicalSwap inv;
+    INV_FailFast["Fail Fast on Missing Files [Invariant]"]
+    class INV_FailFast inv;
+    OP_InitQuicklisp -- "triggers" --> OP_LoadLibs
+    OP_InitLayers -- "triggers" --> OP_LoadPhysical
+    OP_InitLayers -- "triggers" --> OP_LoadLlm
+    OP_InitLayers -- "triggers" --> OP_LoadCore
+    OP_InitLayers -- "triggers" --> OP_LoadGraph
+    OP_InitLayers -- "triggers" --> OP_LoadWorld
+    OP_InitLayers -- "triggers" --> OP_LoadImmune
+    OP_InitLayers -- "triggers" --> OP_LoadRuntime
+    OP_InitLayers -- "triggers" --> OP_LoadGeneration
+    OP_InitLayers -- "triggers" --> OP_LoadTest
+    OP_LoadPhysical -- "depends_on" --> ST_UseMockPhysical
+    OP_LoadPhysical -- "depends_on" --> OP_LoadSystemFile
+    OP_LoadLlm -- "depends_on" --> OP_LoadSystemFile
+    OP_LoadCore -- "depends_on" --> OP_LoadSystemFile
+    OP_LoadGraph -- "depends_on" --> OP_LoadSystemFile
+    OP_LoadWorld -- "depends_on" --> OP_LoadSystemFile
+    OP_LoadImmune -- "depends_on" --> OP_LoadSystemFile
+    OP_LoadRuntime -- "depends_on" --> OP_LoadSystemFile
+    OP_LoadGeneration -- "depends_on" --> OP_LoadSystemFile
+    OP_LoadTest -- "depends_on" --> OP_LoadSystemFile
+    OP_LoadSystemFile -- "depends_on" --> ST_SystemDir
+    OP_StartDelta3 -- "triggers" --> OP_AgentMainLoop
+    OP_StartDelta3Stub -- "triggers" --> OP_AgentMainLoop
+    OP_StartDelta3Stub -- "depends_on" --> ST_UseMockPhysical
+    INV_BootSeq -- "enforces" --> ST_LoadSequence
+    INV_LoadOrder -- "enforces" --> ST_LoadSequence
+    INV_NoReverseDep -- "enforces" --> OP_InitLayers
+    INV_PhysicalSwap -- "enforces" --> OP_LoadPhysical
+    INV_FailFast -- "enforces" --> OP_LoadSystemFile
+    INV_Abi -- "enforces" --> OP_LoadPhysical
+    INV_Purity -- "enforces" --> ST_PostBootState
+    INV_Deps -- "enforces" --> OP_InitLayers

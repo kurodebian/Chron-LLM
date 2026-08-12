@@ -1,0 +1,763 @@
+{
+  "component_id": "component-008",
+  "nodes": [
+    {
+      "id": "ST_Kernel",
+      "label": "Kernel State [State]",
+      "raw_label": "Kernel State",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_Graph",
+      "label": "Graph Structure [State]",
+      "raw_label": "Graph Structure",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_Memory",
+      "label": "Memory Store [State]",
+      "raw_label": "Memory Store",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_World",
+      "label": "World Entity [State]",
+      "raw_label": "World Entity",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_Registry",
+      "label": "Registry Store [State]",
+      "raw_label": "Registry Store",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_Observation",
+      "label": "Observation Object [State]",
+      "raw_label": "Observation Object",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_StateSnapshot",
+      "label": "State Snapshot [State]",
+      "raw_label": "State Snapshot",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_WorldObs",
+      "label": "World Observation [State]",
+      "raw_label": "World Observation",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_RegistryObs",
+      "label": "Registry Observation [State]",
+      "raw_label": "Registry Observation",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_DiffResult",
+      "label": "Diff Result [State]",
+      "raw_label": "Diff Result",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_WorldObservation",
+      "label": "World Observation Struct [State]",
+      "raw_label": "World Observation Struct",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_RegistryObservation",
+      "label": "Registry Observation Struct [State]",
+      "raw_label": "Registry Observation Struct",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_AncestryObservation",
+      "label": "Ancestry Observation Struct [State]",
+      "raw_label": "Ancestry Observation Struct",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_DiffObservation",
+      "label": "Diff Observation Struct [State]",
+      "raw_label": "Diff Observation Struct",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_PrimitiveTree",
+      "label": "Primitive Tree Data [State]",
+      "raw_label": "Primitive Tree Data",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "ST_Store",
+      "label": "Data Store [State]",
+      "raw_label": "Data Store",
+      "type": "State",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_observe",
+      "label": "Observe State [Operation]",
+      "raw_label": "Observe State",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_diff",
+      "label": "Compute Diff [Operation]",
+      "raw_label": "Compute Diff",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_get_world_obs",
+      "label": "Get World Observation [Operation]",
+      "raw_label": "Get World Observation",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_get_registry_obs",
+      "label": "Get Registry Observation [Operation]",
+      "raw_label": "Get Registry Observation",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_build_world_observation",
+      "label": "Build World Observation [Operation]",
+      "raw_label": "Build World Observation",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_build_registry_observation",
+      "label": "Build Registry Observation [Operation]",
+      "raw_label": "Build Registry Observation",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_build_ancestry_observation",
+      "label": "Build Ancestry Observation [Operation]",
+      "raw_label": "Build Ancestry Observation",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_build_diff_observation",
+      "label": "Build Diff Observation [Operation]",
+      "raw_label": "Build Diff Observation",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_describe_world",
+      "label": "Describe World [Operation]",
+      "raw_label": "Describe World",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_describe_registry",
+      "label": "Describe Registry [Operation]",
+      "raw_label": "Describe Registry",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_describe_ancestry",
+      "label": "Describe Ancestry [Operation]",
+      "raw_label": "Describe Ancestry",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_describe_diff",
+      "label": "Describe Diff [Operation]",
+      "raw_label": "Describe Diff",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_world_observation_equal",
+      "label": "World Observation Equal [Operation]",
+      "raw_label": "World Observation Equal",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_registry_observation_equal",
+      "label": "Registry Observation Equal [Operation]",
+      "raw_label": "Registry Observation Equal",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_ancestry_observation_equal",
+      "label": "Ancestry Observation Equal [Operation]",
+      "raw_label": "Ancestry Observation Equal",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_diff_observation_equal",
+      "label": "Diff Observation Equal [Operation]",
+      "raw_label": "Diff Observation Equal",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "OP_run_tests",
+      "label": "Run Observability Tests [Operation]",
+      "raw_label": "Run Observability Tests",
+      "type": "Operation",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_READ_ONLY",
+      "label": "Read Only Observation [Invariant]",
+      "raw_label": "Read Only Observation",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_DETERMINISTIC",
+      "label": "Deterministic Observation [Invariant]",
+      "raw_label": "Deterministic Observation",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_ACCURATE",
+      "label": "Accurate Snapshot [Invariant]",
+      "raw_label": "Accurate Snapshot",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_NO_SIDE_EFFECTS",
+      "label": "No Side Effects [Invariant]",
+      "raw_label": "No Side Effects",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_IMMUTABLE_OBS",
+      "label": "Immutable Observation [Invariant]",
+      "raw_label": "Immutable Observation",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_NON_AUTH",
+      "label": "Non-Auth Truth [Invariant]",
+      "raw_label": "Non-Auth Truth",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_LAYER",
+      "label": "Layer Hierarchy [Invariant]",
+      "raw_label": "Layer Hierarchy",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_VALUE_OBJ",
+      "label": "Value Object Equality [Invariant]",
+      "raw_label": "Value Object Equality",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_COMPLETE",
+      "label": "Complete Snapshot [Invariant]",
+      "raw_label": "Complete Snapshot",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_NO_INFER",
+      "label": "No Inference or Fabrication [Invariant]",
+      "raw_label": "No Inference or Fabrication",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_PRESENTATION_INDEPENDENT",
+      "label": "Presentation Independent [Invariant]",
+      "raw_label": "Presentation Independent",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_IMMUTABILITY",
+      "label": "Immutability Guarantee [Invariant]",
+      "raw_label": "Immutability Guarantee",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_SCHEMA_COMPLIANCE",
+      "label": "Schema Version Compliance [Invariant]",
+      "raw_label": "Schema Version Compliance",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_ANCESTRY_ACCURACY",
+      "label": "Ancestry Path Accuracy [Invariant]",
+      "raw_label": "Ancestry Path Accuracy",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_DIFF_SEMANTICS",
+      "label": "Diff Change Semantics [Invariant]",
+      "raw_label": "Diff Change Semantics",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_VALUE_SEMANTICS",
+      "label": "Value Semantics Equality [Invariant]",
+      "raw_label": "Value Semantics Equality",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_NO_MUTATION",
+      "label": "No Core Mutation [Invariant]",
+      "raw_label": "No Core Mutation",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_NO_EXEC",
+      "label": "No Executable Behavior [Invariant]",
+      "raw_label": "No Executable Behavior",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_NO_MUTABLE_REFS",
+      "label": "No Mutable References [Invariant]",
+      "raw_label": "No Mutable References",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_NO_LAZY_MUT",
+      "label": "No Lazy Mutations [Invariant]",
+      "raw_label": "No Lazy Mutations",
+      "type": "Invariant",
+      "component_id": "component-008"
+    },
+    {
+      "id": "INV_NO_HIDDEN_STATE",
+      "label": "No Hidden State [Invariant]",
+      "raw_label": "No Hidden State",
+      "type": "Invariant",
+      "component_id": "component-008"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_observe",
+      "to": "ST_Observation",
+      "relation": "produces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "ST_StateSnapshot",
+      "relation": "produces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "ST_Kernel",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "ST_Memory",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "ST_World",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "ST_Registry",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "INV_READ_ONLY",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "INV_DETERMINISTIC",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "INV_ACCURATE",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_observe",
+      "to": "INV_NO_SIDE_EFFECTS",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_diff",
+      "to": "ST_DiffResult",
+      "relation": "produces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_diff",
+      "to": "ST_Observation",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_get_world_obs",
+      "to": "ST_WorldObs",
+      "relation": "produces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_get_world_obs",
+      "to": "ST_World",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_get_registry_obs",
+      "to": "ST_RegistryObs",
+      "relation": "produces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_get_registry_obs",
+      "to": "ST_Registry",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_world_observation",
+      "to": "ST_WorldObservation",
+      "relation": "produces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_world_observation",
+      "to": "ST_World",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_world_observation",
+      "to": "ST_PrimitiveTree",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_world_observation",
+      "to": "INV_IMMUTABLE_OBS",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_world_observation",
+      "to": "INV_SCHEMA_COMPLIANCE",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_registry_observation",
+      "to": "ST_RegistryObservation",
+      "relation": "produces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_registry_observation",
+      "to": "ST_Registry",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_registry_observation",
+      "to": "INV_IMMUTABLE_OBS",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_ancestry_observation",
+      "to": "ST_AncestryObservation",
+      "relation": "produces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_ancestry_observation",
+      "to": "ST_Registry",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_ancestry_observation",
+      "to": "INV_ANCESTRY_ACCURACY",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_diff_observation",
+      "to": "ST_DiffObservation",
+      "relation": "produces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_diff_observation",
+      "to": "ST_WorldObservation",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_diff_observation",
+      "to": "ST_RegistryObservation",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_build_diff_observation",
+      "to": "INV_DIFF_SEMANTICS",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_describe_world",
+      "to": "OP_build_world_observation",
+      "relation": "triggers",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_describe_registry",
+      "to": "OP_build_registry_observation",
+      "relation": "triggers",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_describe_ancestry",
+      "to": "OP_build_ancestry_observation",
+      "relation": "triggers",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_describe_diff",
+      "to": "OP_build_diff_observation",
+      "relation": "triggers",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_world_observation_equal",
+      "to": "ST_WorldObservation",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_world_observation_equal",
+      "to": "INV_VALUE_OBJ",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_registry_observation_equal",
+      "to": "ST_RegistryObservation",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_registry_observation_equal",
+      "to": "INV_VALUE_OBJ",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_ancestry_observation_equal",
+      "to": "ST_AncestryObservation",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_diff_observation_equal",
+      "to": "ST_DiffObservation",
+      "relation": "depends_on",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_run_tests",
+      "to": "OP_describe_world",
+      "relation": "triggers",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_run_tests",
+      "to": "OP_describe_registry",
+      "relation": "triggers",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_run_tests",
+      "to": "OP_describe_ancestry",
+      "relation": "triggers",
+      "component_id": "component-008"
+    },
+    {
+      "from": "OP_run_tests",
+      "to": "OP_describe_diff",
+      "relation": "triggers",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_MUTATION",
+      "to": "ST_Graph",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_MUTATION",
+      "to": "ST_Memory",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_MUTATION",
+      "to": "ST_World",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_MUTATION",
+      "to": "ST_Registry",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_MUTATION",
+      "to": "ST_Kernel",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_EXEC",
+      "to": "ST_Observation",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_MUTABLE_REFS",
+      "to": "ST_Observation",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_LAZY_MUT",
+      "to": "ST_Observation",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_HIDDEN_STATE",
+      "to": "ST_Observation",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_PRESENTATION_INDEPENDENT",
+      "to": "ST_Observation",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_COMPLETE",
+      "to": "ST_StateSnapshot",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_NO_INFER",
+      "to": "ST_StateSnapshot",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_LAYER",
+      "to": "ST_Kernel",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_LAYER",
+      "to": "ST_World",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_LAYER",
+      "to": "ST_Observation",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_VALUE_SEMANTICS",
+      "to": "ST_WorldObservation",
+      "relation": "enforces",
+      "component_id": "component-008"
+    },
+    {
+      "from": "INV_VALUE_SEMANTICS",
+      "to": "ST_RegistryObservation",
+      "relation": "enforces",
+      "component_id": "component-008"
+    }
+  ]
+}

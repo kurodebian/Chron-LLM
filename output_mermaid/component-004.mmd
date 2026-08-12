@@ -1,0 +1,91 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_WAL["Write-Ahead Log [State]"]
+    class ST_WAL state;
+    ST_Graph["Causal Graph [State]"]
+    class ST_Graph state;
+    ST_WorldHead["World Line Head [State]"]
+    class ST_WorldHead state;
+    ST_KVCache["LLM KV Cache [State]"]
+    class ST_KVCache state;
+    ST_History["Event History [State]"]
+    class ST_History state;
+    ST_HealthyTable["Healthy Parent Table [State]"]
+    class ST_HealthyTable state;
+    ST_LLMState["LLM Context State [State]"]
+    class ST_LLMState state;
+    ST_StreamState["Stream & Fault Flags [State]"]
+    class ST_StreamState state;
+    OP_AppendWAL["Append Event to WAL [Operation]"]
+    class OP_AppendWAL op;
+    OP_StageEvent["Stage Event for Commit [Operation]"]
+    class OP_StageEvent op;
+    OP_CommitWAL["Commit Staged Events [Operation]"]
+    class OP_CommitWAL op;
+    OP_LiftGraph["Lift WAL to Graph [Operation]"]
+    class OP_LiftGraph op;
+    OP_AddNodeToGraph["Add Node to Graph [Operation]"]
+    class OP_AddNodeToGraph op;
+    OP_AddEdgeToGraph["Add Edge to Graph [Operation]"]
+    class OP_AddEdgeToGraph op;
+    OP_BranchWorldline["Branch Worldline [Operation]"]
+    class OP_BranchWorldline op;
+    OP_CommitWorldline["Commit Worldline [Operation]"]
+    class OP_CommitWorldline op;
+    OP_HandleFault["Handle Fault [Operation]"]
+    class OP_HandleFault op;
+    OP_PrefillContext["Prefill Context [Operation]"]
+    class OP_PrefillContext op;
+    OP_TraceHistory["Trace Causal History [Operation]"]
+    class OP_TraceHistory op;
+    OP_ControlDecide["Control Decision Logic [Operation]"]
+    class OP_ControlDecide op;
+    INV_ClockMonotonicity["Clock Monotonicity [Invariant]"]
+    class INV_ClockMonotonicity inv;
+    INV_AppendOnlyGraph["Append-Only Graph [Invariant]"]
+    class INV_AppendOnlyGraph inv;
+    INV_FaultIsolation["Fault Isolation [Invariant]"]
+    class INV_FaultIsolation inv;
+    INV_WALOrdering["WAL Commit Ordering [Invariant]"]
+    class INV_WALOrdering inv;
+    INV_HistoryReplayable["History Replayability [Invariant]"]
+    class INV_HistoryReplayable inv;
+    INV_CausalScope["Causal Scope Consistency [Invariant]"]
+    class INV_CausalScope inv;
+    INV_HeadValidity["World Head Validity [Invariant]"]
+    class INV_HeadValidity inv;
+    INV_KVCacheHealth["KV Cache Health [Invariant]"]
+    class INV_KVCacheHealth inv;
+    OP_AppendWAL -- "mutates" --> ST_WAL
+    OP_StageEvent -- "mutates" --> ST_WAL
+    OP_CommitWAL -- "mutates" --> ST_WAL
+    OP_LiftGraph -- "mutates" --> ST_Graph
+    OP_AddNodeToGraph -- "mutates" --> ST_Graph
+    OP_AddEdgeToGraph -- "mutates" --> ST_Graph
+    OP_BranchWorldline -- "mutates" --> ST_WorldHead
+    OP_CommitWorldline -- "mutates" --> ST_WorldHead
+    OP_HandleFault -- "mutates" --> ST_KVCache
+    OP_HandleFault -- "mutates" --> ST_StreamState
+    OP_PrefillContext -- "mutates" --> ST_KVCache
+    OP_TraceHistory -- "produces" --> ST_History
+    OP_ControlDecide -- "triggers" --> OP_AppendWAL
+    OP_ControlDecide -- "triggers" --> OP_HandleFault
+    OP_ControlDecide -- "triggers" --> OP_CommitWAL
+    INV_ClockMonotonicity -- "enforces" --> ST_WAL
+    INV_AppendOnlyGraph -- "enforces" --> ST_Graph
+    INV_FaultIsolation -- "enforces" --> ST_Graph
+    INV_WALOrdering -- "enforces" --> ST_WAL
+    INV_HistoryReplayable -- "enforces" --> ST_History
+    INV_CausalScope -- "enforces" --> ST_Graph
+    INV_HeadValidity -- "enforces" --> ST_WorldHead
+    INV_KVCacheHealth -- "enforces" --> ST_KVCache
+    ST_WAL -- "depends_on" --> ST_Graph
+    ST_Graph -- "depends_on" --> ST_HealthyTable
+    ST_WorldHead -- "depends_on" --> ST_Graph
+    OP_LiftGraph -- "depends_on" --> ST_WAL
+    OP_AddNodeToGraph -- "depends_on" --> ST_Graph
+    OP_AddEdgeToGraph -- "depends_on" --> ST_Graph
+    OP_TraceHistory -- "depends_on" --> ST_Graph
+    OP_PrefillContext -- "depends_on" --> ST_History

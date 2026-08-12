@@ -1,0 +1,395 @@
+{
+  "component_id": "component-009",
+  "nodes": [
+    {
+      "id": "ST_SystemDir",
+      "label": "System Directory Path [State]",
+      "raw_label": "System Directory Path",
+      "type": "State",
+      "component_id": "component-009"
+    },
+    {
+      "id": "ST_UseMockPhysical",
+      "label": "Use Mock Physical Flag [State]",
+      "raw_label": "Use Mock Physical Flag",
+      "type": "State",
+      "component_id": "component-009"
+    },
+    {
+      "id": "ST_LoadSequence",
+      "label": "Boot Load Sequence [State]",
+      "raw_label": "Boot Load Sequence",
+      "type": "State",
+      "component_id": "component-009"
+    },
+    {
+      "id": "ST_PostBootState",
+      "label": "Post-Boot Bootloader State [State]",
+      "raw_label": "Post-Boot Bootloader State",
+      "type": "State",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_InitQuicklisp",
+      "label": "Initialize Quicklisp [Operation]",
+      "raw_label": "Initialize Quicklisp",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadLibs",
+      "label": "Load External Libraries [Operation]",
+      "raw_label": "Load External Libraries",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadSystemFile",
+      "label": "Load System File [Operation]",
+      "raw_label": "Load System File",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_InitLayers",
+      "label": "Initialize Boot Layers [Operation]",
+      "raw_label": "Initialize Boot Layers",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadPhysical",
+      "label": "Load Physical Layer [Operation]",
+      "raw_label": "Load Physical Layer",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadLlm",
+      "label": "Load LLM Interface [Operation]",
+      "raw_label": "Load LLM Interface",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadCore",
+      "label": "Load Core Module [Operation]",
+      "raw_label": "Load Core Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadGraph",
+      "label": "Load Graph Layer [Operation]",
+      "raw_label": "Load Graph Layer",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadWorld",
+      "label": "Load World Module [Operation]",
+      "raw_label": "Load World Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadImmune",
+      "label": "Load Immune Module [Operation]",
+      "raw_label": "Load Immune Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadRuntime",
+      "label": "Load Runtime Module [Operation]",
+      "raw_label": "Load Runtime Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadGeneration",
+      "label": "Load Generation Module [Operation]",
+      "raw_label": "Load Generation Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_LoadTest",
+      "label": "Load Test Wrapper [Operation]",
+      "raw_label": "Load Test Wrapper",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_StartDelta3",
+      "label": "Start Delta3 Agent [Operation]",
+      "raw_label": "Start Delta3 Agent",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_StartDelta3Stub",
+      "label": "Start Delta3 Stub [Operation]",
+      "raw_label": "Start Delta3 Stub",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_AgentMainLoop",
+      "label": "Agent Main Loop [Operation]",
+      "raw_label": "Agent Main Loop",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_BootSeq",
+      "label": "Boot Sequence Match [Invariant]",
+      "raw_label": "Boot Sequence Match",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_Abi",
+      "label": "ABI Signature Match [Invariant]",
+      "raw_label": "ABI Signature Match",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_Purity",
+      "label": "Bootloader Purity [Invariant]",
+      "raw_label": "Bootloader Purity",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_Deps",
+      "label": "Layer Dependency Order [Invariant]",
+      "raw_label": "Layer Dependency Order",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_LoadOrder",
+      "label": "Explicit Load Order [Invariant]",
+      "raw_label": "Explicit Load Order",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_NoReverseDep",
+      "label": "No Reverse Dependencies [Invariant]",
+      "raw_label": "No Reverse Dependencies",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_PhysicalSwap",
+      "label": "Physical Layer Swappability [Invariant]",
+      "raw_label": "Physical Layer Swappability",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_FailFast",
+      "label": "Fail Fast on Missing Files [Invariant]",
+      "raw_label": "Fail Fast on Missing Files",
+      "type": "Invariant",
+      "component_id": "component-009"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_InitQuicklisp",
+      "to": "OP_LoadLibs",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_InitLayers",
+      "to": "OP_LoadPhysical",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_InitLayers",
+      "to": "OP_LoadLlm",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_InitLayers",
+      "to": "OP_LoadCore",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_InitLayers",
+      "to": "OP_LoadGraph",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_InitLayers",
+      "to": "OP_LoadWorld",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_InitLayers",
+      "to": "OP_LoadImmune",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_InitLayers",
+      "to": "OP_LoadRuntime",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_InitLayers",
+      "to": "OP_LoadGeneration",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_InitLayers",
+      "to": "OP_LoadTest",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadPhysical",
+      "to": "ST_UseMockPhysical",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadPhysical",
+      "to": "OP_LoadSystemFile",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadLlm",
+      "to": "OP_LoadSystemFile",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadCore",
+      "to": "OP_LoadSystemFile",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadGraph",
+      "to": "OP_LoadSystemFile",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadWorld",
+      "to": "OP_LoadSystemFile",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadImmune",
+      "to": "OP_LoadSystemFile",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadRuntime",
+      "to": "OP_LoadSystemFile",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadGeneration",
+      "to": "OP_LoadSystemFile",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadTest",
+      "to": "OP_LoadSystemFile",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_LoadSystemFile",
+      "to": "ST_SystemDir",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_StartDelta3",
+      "to": "OP_AgentMainLoop",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_StartDelta3Stub",
+      "to": "OP_AgentMainLoop",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_StartDelta3Stub",
+      "to": "ST_UseMockPhysical",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_BootSeq",
+      "to": "ST_LoadSequence",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_LoadOrder",
+      "to": "ST_LoadSequence",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_NoReverseDep",
+      "to": "OP_InitLayers",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_PhysicalSwap",
+      "to": "OP_LoadPhysical",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_FailFast",
+      "to": "OP_LoadSystemFile",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_Abi",
+      "to": "OP_LoadPhysical",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_Purity",
+      "to": "ST_PostBootState",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_Deps",
+      "to": "OP_InitLayers",
+      "relation": "enforces",
+      "component_id": "component-009"
+    }
+  ]
+}

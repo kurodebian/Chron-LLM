@@ -1,0 +1,58 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_ir_stream["IR Stream Buffer [State]"]
+    class ST_ir_stream state;
+    OP_init_bridge["Initialize Bridge [Operation]"]
+    class OP_init_bridge op;
+    OP_make_ir["Make IR [Operation]"]
+    class OP_make_ir op;
+    OP_ir_callback["IR Callback [Operation]"]
+    class OP_ir_callback op;
+    OP_push_ir["Push IR [Operation]"]
+    class OP_push_ir op;
+    OP_clear_ir_stream["Clear IR Stream [Operation]"]
+    class OP_clear_ir_stream op;
+    OP_extract_actions["Extract Actions [Operation]"]
+    class OP_extract_actions op;
+    OP_run_trial["Run Trial [Operation]"]
+    class OP_run_trial op;
+    OP_divergence_profile["Divergence Profile [Operation]"]
+    class OP_divergence_profile op;
+    INV_determinism["Determinism [Invariant]"]
+    class INV_determinism inv;
+    INV_lossless["Lossless Data [Invariant]"]
+    class INV_lossless inv;
+    INV_isolation["Isolation [Invariant]"]
+    class INV_isolation inv;
+    INV_immutable["Immutable Fields [Invariant]"]
+    class INV_immutable inv;
+    INV_append_only["Append Only [Invariant]"]
+    class INV_append_only inv;
+    INV_purity["Purity [Invariant]"]
+    class INV_purity inv;
+    INV_ordering["Ordering [Invariant]"]
+    class INV_ordering inv;
+    INV_obs_only["Observation Only [Invariant]"]
+    class INV_obs_only inv;
+    INV_neutrality["Neutrality [Invariant]"]
+    class INV_neutrality inv;
+    OP_init_bridge -- "triggers" --> OP_ir_callback
+    OP_ir_callback -- "produces" --> OP_make_ir
+    OP_ir_callback -- "triggers" --> OP_push_ir
+    OP_push_ir -- "mutates" --> ST_ir_stream
+    OP_clear_ir_stream -- "mutates" --> ST_ir_stream
+    OP_run_trial -- "triggers" --> OP_clear_ir_stream
+    OP_run_trial -- "triggers" --> OP_extract_actions
+    OP_extract_actions -- "depends_on" --> ST_ir_stream
+    OP_divergence_profile -- "depends_on" --> OP_run_trial
+    INV_determinism -- "enforces" --> OP_ir_callback
+    INV_lossless -- "enforces" --> OP_make_ir
+    INV_isolation -- "enforces" --> ST_ir_stream
+    INV_immutable -- "enforces" --> ST_ir_stream
+    INV_append_only -- "enforces" --> OP_push_ir
+    INV_purity -- "enforces" --> OP_make_ir
+    INV_ordering -- "enforces" --> OP_push_ir
+    INV_obs_only -- "enforces" --> OP_divergence_profile
+    INV_neutrality -- "enforces" --> ST_ir_stream

@@ -1,0 +1,253 @@
+{
+  "component_id": "component-013",
+  "nodes": [
+    {
+      "id": "ST_Baseline",
+      "label": "Baseline Status [State]",
+      "raw_label": "Baseline Status",
+      "type": "State",
+      "component_id": "component-013"
+    },
+    {
+      "id": "OP_KnowledgeLifecycle",
+      "label": "Knowledge Lifecycle Process [Operation]",
+      "raw_label": "Knowledge Lifecycle Process",
+      "type": "Operation",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_Independence",
+      "label": "Architecture Independence [Invariant]",
+      "raw_label": "Architecture Independence",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_GovernanceScope",
+      "label": "Governance Scope Limitation [Invariant]",
+      "raw_label": "Governance Scope Limitation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_RuntimeSatisfaction",
+      "label": "Runtime Specification Satisfaction [Invariant]",
+      "raw_label": "Runtime Specification Satisfaction",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_RuntimeVolatility",
+      "label": "Runtime Volatility Constraint [Invariant]",
+      "raw_label": "Runtime Volatility Constraint",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_Minimalism",
+      "label": "Concept Minimalism [Invariant]",
+      "raw_label": "Concept Minimalism",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_Neutrality",
+      "label": "System Neutrality [Invariant]",
+      "raw_label": "System Neutrality",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_EvolutionRule",
+      "label": "New Category Introduction Rule [Invariant]",
+      "raw_label": "New Category Introduction Rule",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ExtensionPriority",
+      "label": "Extension Over Introduction Priority [Invariant]",
+      "raw_label": "Extension Over Introduction Priority",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_MetaDesignSeparation",
+      "label": "Meta Design Separation [Invariant]",
+      "raw_label": "Meta Design Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_RuntimeDesignSeparation",
+      "label": "Runtime Design Separation [Invariant]",
+      "raw_label": "Runtime Design Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_GovernanceDesignSeparation",
+      "label": "Governance Design Separation [Invariant]",
+      "raw_label": "Governance Design Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_FoundationConstitutionSeparation",
+      "label": "Foundation Constitution Separation [Invariant]",
+      "raw_label": "Foundation Constitution Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_RepositoryLayoutIndependence",
+      "label": "Repository Layout Independence [Invariant]",
+      "raw_label": "Repository Layout Independence",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ArchitectureProcessSeparation",
+      "label": "Architecture Process Separation [Invariant]",
+      "raw_label": "Architecture Process Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ConceptDefinitionDependency",
+      "label": "Concept Definition Responsibility Dependency [Invariant]",
+      "raw_label": "Concept Definition Responsibility Dependency",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ConceptDefinitionImplementationIndependence",
+      "label": "Concept Definition Implementation Independence [Invariant]",
+      "raw_label": "Concept Definition Implementation Independence",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_NewConceptIntroductionRequirement",
+      "label": "New Concept Introduction Requirement [Invariant]",
+      "raw_label": "New Concept Introduction Requirement",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ContentDefinitionPrecedence",
+      "label": "Content Definition Precedence [Invariant]",
+      "raw_label": "Content Definition Precedence",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ConstitutionImplementationSeparation",
+      "label": "Constitution Implementation Separation [Invariant]",
+      "raw_label": "Constitution Implementation Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ImplementationEvolutionPreservation",
+      "label": "Implementation Evolution Preservation [Invariant]",
+      "raw_label": "Implementation Evolution Preservation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_AuthorityRepresentationSeparation",
+      "label": "Authority Representation Separation [Invariant]",
+      "raw_label": "Authority Representation Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_RepresentationDerivedIndependence",
+      "label": "Representation Derived Independence [Invariant]",
+      "raw_label": "Representation Derived Independence",
+      "type": "Invariant",
+      "component_id": "component-013"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_KnowledgeLifecycle",
+      "to": "ST_Baseline",
+      "relation": "triggers",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_Minimalism",
+      "to": "ST_Baseline",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_GovernanceScope",
+      "to": "OP_KnowledgeLifecycle",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_EvolutionRule",
+      "to": "OP_KnowledgeLifecycle",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_ExtensionPriority",
+      "to": "OP_KnowledgeLifecycle",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_RuntimeSatisfaction",
+      "to": "OP_KnowledgeLifecycle",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_ConceptDefinitionDependency",
+      "to": "INV_ConceptDefinitionImplementationIndependence",
+      "relation": "depends_on",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_NewConceptIntroductionRequirement",
+      "to": "INV_EvolutionRule",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_ImplementationEvolutionPreservation",
+      "to": "INV_ConstitutionImplementationSeparation",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_RepresentationDerivedIndependence",
+      "to": "INV_AuthorityRepresentationSeparation",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_RuntimeVolatility",
+      "to": "INV_RuntimeDesignSeparation",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_ContentDefinitionPrecedence",
+      "to": "INV_ConceptDefinitionDependency",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_Independence",
+      "to": "INV_Neutrality",
+      "relation": "enforces",
+      "component_id": "component-013"
+    }
+  ]
+}

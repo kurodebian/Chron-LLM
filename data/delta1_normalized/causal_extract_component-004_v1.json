@@ -1,0 +1,389 @@
+{
+  "component_id": "component-004",
+  "nodes": [
+    {
+      "id": "ST_WAL",
+      "label": "Write-Ahead Log [State]",
+      "raw_label": "Write-Ahead Log",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_Graph",
+      "label": "Causal Graph [State]",
+      "raw_label": "Causal Graph",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_WorldHead",
+      "label": "World Line Head [State]",
+      "raw_label": "World Line Head",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_KVCache",
+      "label": "LLM KV Cache [State]",
+      "raw_label": "LLM KV Cache",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_History",
+      "label": "Event History [State]",
+      "raw_label": "Event History",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_HealthyTable",
+      "label": "Healthy Parent Table [State]",
+      "raw_label": "Healthy Parent Table",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_LLMState",
+      "label": "LLM Context State [State]",
+      "raw_label": "LLM Context State",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_StreamState",
+      "label": "Stream & Fault Flags [State]",
+      "raw_label": "Stream & Fault Flags",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_AppendWAL",
+      "label": "Append Event to WAL [Operation]",
+      "raw_label": "Append Event to WAL",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_StageEvent",
+      "label": "Stage Event for Commit [Operation]",
+      "raw_label": "Stage Event for Commit",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_CommitWAL",
+      "label": "Commit Staged Events [Operation]",
+      "raw_label": "Commit Staged Events",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_LiftGraph",
+      "label": "Lift WAL to Graph [Operation]",
+      "raw_label": "Lift WAL to Graph",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_AddNodeToGraph",
+      "label": "Add Node to Graph [Operation]",
+      "raw_label": "Add Node to Graph",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_AddEdgeToGraph",
+      "label": "Add Edge to Graph [Operation]",
+      "raw_label": "Add Edge to Graph",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_BranchWorldline",
+      "label": "Branch Worldline [Operation]",
+      "raw_label": "Branch Worldline",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_CommitWorldline",
+      "label": "Commit Worldline [Operation]",
+      "raw_label": "Commit Worldline",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_HandleFault",
+      "label": "Handle Fault [Operation]",
+      "raw_label": "Handle Fault",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_PrefillContext",
+      "label": "Prefill Context [Operation]",
+      "raw_label": "Prefill Context",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_TraceHistory",
+      "label": "Trace Causal History [Operation]",
+      "raw_label": "Trace Causal History",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_ControlDecide",
+      "label": "Control Decision Logic [Operation]",
+      "raw_label": "Control Decision Logic",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_ClockMonotonicity",
+      "label": "Clock Monotonicity [Invariant]",
+      "raw_label": "Clock Monotonicity",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_AppendOnlyGraph",
+      "label": "Append-Only Graph [Invariant]",
+      "raw_label": "Append-Only Graph",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_FaultIsolation",
+      "label": "Fault Isolation [Invariant]",
+      "raw_label": "Fault Isolation",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_WALOrdering",
+      "label": "WAL Commit Ordering [Invariant]",
+      "raw_label": "WAL Commit Ordering",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_HistoryReplayable",
+      "label": "History Replayability [Invariant]",
+      "raw_label": "History Replayability",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_CausalScope",
+      "label": "Causal Scope Consistency [Invariant]",
+      "raw_label": "Causal Scope Consistency",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_HeadValidity",
+      "label": "World Head Validity [Invariant]",
+      "raw_label": "World Head Validity",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_KVCacheHealth",
+      "label": "KV Cache Health [Invariant]",
+      "raw_label": "KV Cache Health",
+      "type": "Invariant",
+      "component_id": "component-004"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_AppendWAL",
+      "to": "ST_WAL",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_StageEvent",
+      "to": "ST_WAL",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_CommitWAL",
+      "to": "ST_WAL",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_LiftGraph",
+      "to": "ST_Graph",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_AddNodeToGraph",
+      "to": "ST_Graph",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_AddEdgeToGraph",
+      "to": "ST_Graph",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_BranchWorldline",
+      "to": "ST_WorldHead",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_CommitWorldline",
+      "to": "ST_WorldHead",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_HandleFault",
+      "to": "ST_KVCache",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_HandleFault",
+      "to": "ST_StreamState",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_PrefillContext",
+      "to": "ST_KVCache",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_TraceHistory",
+      "to": "ST_History",
+      "relation": "produces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_ControlDecide",
+      "to": "OP_AppendWAL",
+      "relation": "triggers",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_ControlDecide",
+      "to": "OP_HandleFault",
+      "relation": "triggers",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_ControlDecide",
+      "to": "OP_CommitWAL",
+      "relation": "triggers",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_ClockMonotonicity",
+      "to": "ST_WAL",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_AppendOnlyGraph",
+      "to": "ST_Graph",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_FaultIsolation",
+      "to": "ST_Graph",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_WALOrdering",
+      "to": "ST_WAL",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_HistoryReplayable",
+      "to": "ST_History",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_CausalScope",
+      "to": "ST_Graph",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_HeadValidity",
+      "to": "ST_WorldHead",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_KVCacheHealth",
+      "to": "ST_KVCache",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "ST_WAL",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "ST_Graph",
+      "to": "ST_HealthyTable",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "ST_WorldHead",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_LiftGraph",
+      "to": "ST_WAL",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_AddNodeToGraph",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_AddEdgeToGraph",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_TraceHistory",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_PrefillContext",
+      "to": "ST_History",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    }
+  ]
+}

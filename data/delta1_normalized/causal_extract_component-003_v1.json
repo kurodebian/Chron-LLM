@@ -1,0 +1,132 @@
+{
+  "component_id": "component-003",
+  "nodes": [
+    {
+      "id": "ST_MemoryStore",
+      "label": "Memory Store [State]",
+      "raw_label": "Memory Store",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "ST_GraphStore",
+      "label": "Graph Store [State]",
+      "raw_label": "Graph Store",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "ST_PrefillState",
+      "label": "Prefill State [State]",
+      "raw_label": "Prefill State",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "ST_World",
+      "label": "World Instance [State]",
+      "raw_label": "World Instance",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "ST_Registry",
+      "label": "World Registry [State]",
+      "raw_label": "World Registry",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_StorePayload",
+      "label": "Store Payload [Operation]",
+      "raw_label": "Store Payload",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_LoadPayload",
+      "label": "Load Payload [Operation]",
+      "raw_label": "Load Payload",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_CausalSubgraph",
+      "label": "Causal Subgraph [Operation]",
+      "raw_label": "Causal Subgraph",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_ProjectContext",
+      "label": "Project Context [Operation]",
+      "raw_label": "Project Context",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_BuildPrefillState",
+      "label": "Build Prefill State [Operation]",
+      "raw_label": "Build Prefill State",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_CommitProposal",
+      "label": "Commit Proposal [Operation]",
+      "raw_label": "Commit Proposal",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_MakeWorld",
+      "label": "Make World [Operation]",
+      "raw_label": "Make World",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_ForkWorld",
+      "label": "Fork World [Operation]",
+      "raw_label": "Fork World",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_CommitNode",
+      "label": "Commit Node [Operation]",
+      "raw_label": "Commit Node",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_KernelCommitWorld",
+      "label": "Kernel Commit World [Operation]",
+      "raw_label": "Kernel Commit World",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "INV_MemImmutable",
+      "label": "Memory Immutability [Invariant]",
+      "raw_label": "Memory Immutability",
+      "type": "Invariant",
+      "component_id": "component-003"
+    },
+    {
+      "id": "INV_GraphAppend",
+      "label": "Graph Append Rule [Invariant]",
+      "raw_label": "Graph Append Rule",
+      "type": "Invariant",
+      "component_id": "component-003"
+    },
+    {
+      "id": "INV_Authority",
+      "label": "Mutation Authority [Invariant]",
+      "raw_label": "Mutation Authority",
+      "type": "Invariant",
+      "component_id": "component-003"
+    }
+  ],
+  "edges": []
+}

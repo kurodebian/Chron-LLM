@@ -1,0 +1,58 @@
+graph TD
+    classDef state fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef op fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_WalWorldCounter["WAL World Counter [State]"]
+    class ST_WalWorldCounter state;
+    ST_Graph["Causal Graph [State]"]
+    class ST_Graph state;
+    ST_Wal["Write-Ahead Log [State]"]
+    class ST_Wal state;
+    OP_StageBranchWorld["Stage Branch World [Operation]"]
+    class OP_StageBranchWorld op;
+    OP_GetLatestNodeInWorld["Get Latest Node In World [Operation]"]
+    class OP_GetLatestNodeInWorld op;
+    OP_StageEvent["Stage Event [Operation]"]
+    class OP_StageEvent op;
+    OP_CleanHistory["Clean History [Operation]"]
+    class OP_CleanHistory op;
+    OP_CheckImmuneStatus["Check Immune Status [Operation]"]
+    class OP_CheckImmuneStatus op;
+    INV_WorldIDUnique["WorldID Unique [Invariant]"]
+    class INV_WorldIDUnique inv;
+    INV_WalCounterMonotonic["WAL Counter Monotonic [Invariant]"]
+    class INV_WalCounterMonotonic inv;
+    INV_BranchEventKind["Branch Event Kind is Branch [Invariant]"]
+    class INV_BranchEventKind inv;
+    INV_EventStatusStaged["Event Status Staged [Invariant]"]
+    class INV_EventStatusStaged inv;
+    INV_ParentWorldIDImmutable["ParentWorldID Immutable [Invariant]"]
+    class INV_ParentWorldIDImmutable inv;
+    INV_ParentNodeIDCommitted["ParentNodeID Points to Committed Node [Invariant]"]
+    class INV_ParentNodeIDCommitted inv;
+    INV_QueryExcludesFault["Query Excludes Fault Nodes [Invariant]"]
+    class INV_QueryExcludesFault inv;
+    INV_QueryReturnsSingleLatest["Query Returns Single Latest Node [Invariant]"]
+    class INV_QueryReturnsSingleLatest inv;
+    INV_ImmuneStatusOk["Immune Status OK if History Exists [Invariant]"]
+    class INV_ImmuneStatusOk inv;
+    INV_RootParentZero["Root Parent is Zero [Invariant]"]
+    class INV_RootParentZero inv;
+    OP_StageBranchWorld -- "mutates" --> ST_WalWorldCounter
+    OP_StageBranchWorld -- "mutates" --> ST_Wal
+    OP_StageBranchWorld -- "depends_on" --> ST_Graph
+    OP_StageBranchWorld -- "depends_on" --> OP_GetLatestNodeInWorld
+    OP_StageBranchWorld -- "triggers" --> OP_StageEvent
+    OP_GetLatestNodeInWorld -- "depends_on" --> ST_Graph
+    OP_CleanHistory -- "depends_on" --> ST_Graph
+    OP_CheckImmuneStatus -- "depends_on" --> OP_CleanHistory
+    INV_WorldIDUnique -- "enforces" --> ST_WalWorldCounter
+    INV_WalCounterMonotonic -- "enforces" --> ST_WalWorldCounter
+    INV_BranchEventKind -- "enforces" --> OP_StageBranchWorld
+    INV_EventStatusStaged -- "enforces" --> OP_StageBranchWorld
+    INV_ParentWorldIDImmutable -- "enforces" --> OP_StageBranchWorld
+    INV_ParentNodeIDCommitted -- "enforces" --> OP_GetLatestNodeInWorld
+    INV_QueryExcludesFault -- "enforces" --> OP_GetLatestNodeInWorld
+    INV_QueryReturnsSingleLatest -- "enforces" --> OP_GetLatestNodeInWorld
+    INV_ImmuneStatusOk -- "enforces" --> OP_CheckImmuneStatus
+    INV_RootParentZero -- "enforces" --> OP_StageBranchWorld

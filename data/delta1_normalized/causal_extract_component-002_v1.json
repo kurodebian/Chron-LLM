@@ -1,0 +1,444 @@
+{
+  "component_id": "component-002",
+  "nodes": [
+    {
+      "id": "ST_Kernel",
+      "label": "Kernel Internal State [State]",
+      "raw_label": "Kernel Internal State",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "ST_KernelState",
+      "label": "Kernel State Output [State]",
+      "raw_label": "Kernel State Output",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "ST_Context",
+      "label": "LLM Execution Context [State]",
+      "raw_label": "LLM Execution Context",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "ST_Session",
+      "label": "Chat Session State [State]",
+      "raw_label": "Chat Session State",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "ST_History",
+      "label": "Chat History Buffer [State]",
+      "raw_label": "Chat History Buffer",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "ST_RuntimeEnv",
+      "label": "Runtime Environment [State]",
+      "raw_label": "Runtime Environment",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "ST_n_past",
+      "label": "KV Cache Past Tokens [State]",
+      "raw_label": "KV Cache Past Tokens",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "ST_IR",
+      "label": "Intermediate Representation [State]",
+      "raw_label": "Intermediate Representation",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "ST_RuntimeCommand",
+      "label": "Kernel Runtime Command [State]",
+      "raw_label": "Kernel Runtime Command",
+      "type": "State",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_make_chron_kernel",
+      "label": "Initialize Chron Kernel [Operation]",
+      "raw_label": "Initialize Chron Kernel",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_kernel_commit_event",
+      "label": "Commit Event to WAL [Operation]",
+      "raw_label": "Commit Event to WAL",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_refresh_projections",
+      "label": "Rebuild Graph from WAL [Operation]",
+      "raw_label": "Rebuild Graph from WAL",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_kernel_current_state",
+      "label": "Retrieve Kernel State [Operation]",
+      "raw_label": "Retrieve Kernel State",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_init_runtime",
+      "label": "Initialize Runtime Env [Operation]",
+      "raw_label": "Initialize Runtime Env",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_main_loop",
+      "label": "Main Runtime Loop [Operation]",
+      "raw_label": "Main Runtime Loop",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_init_chron_llm",
+      "label": "Initialize LLM Context [Operation]",
+      "raw_label": "Initialize LLM Context",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_tokenize",
+      "label": "Tokenize Input Text [Operation]",
+      "raw_label": "Tokenize Input Text",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_prefill_prompt",
+      "label": "Prefill Prompt [Operation]",
+      "raw_label": "Prefill Prompt",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_generate",
+      "label": "Generate LLM Response [Operation]",
+      "raw_label": "Generate LLM Response",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_my_sampler_sample",
+      "label": "Sample Next Token [Operation]",
+      "raw_label": "Sample Next Token",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_my_llama_eval",
+      "label": "Evaluate Tokens [Operation]",
+      "raw_label": "Evaluate Tokens",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_chat",
+      "label": "Execute Chat Flow [Operation]",
+      "raw_label": "Execute Chat Flow",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_decide",
+      "label": "Kernel Decision Engine [Operation]",
+      "raw_label": "Kernel Decision Engine",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "OP_fault_recovery",
+      "label": "Handle Generation Faults [Operation]",
+      "raw_label": "Handle Generation Faults",
+      "type": "Operation",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_kernel_sole_mutator",
+      "label": "Kernel Sole Mutator Rule [Invariant]",
+      "raw_label": "Kernel Sole Mutator Rule",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_graph_is_wal_function",
+      "label": "Graph Deterministic from WAL [Invariant]",
+      "raw_label": "Graph Deterministic from WAL",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_runtime_no_direct_access",
+      "label": "Runtime No Direct Access [Invariant]",
+      "raw_label": "Runtime No Direct Access",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_n_past_bounds",
+      "label": "N-Past Length Bounds [Invariant]",
+      "raw_label": "N-Past Length Bounds",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_history_ordered_append_only",
+      "label": "History Ordered Append-Only [Invariant]",
+      "raw_label": "History Ordered Append-Only",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_ir_immutable_ordered",
+      "label": "IR Immutable Ordered [Invariant]",
+      "raw_label": "IR Immutable Ordered",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_chat_sequence",
+      "label": "Chat Flow Sequence [Invariant]",
+      "raw_label": "Chat Flow Sequence",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_fault_no_commit",
+      "label": "Faults Prevent Commit [Invariant]",
+      "raw_label": "Faults Prevent Commit",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_stateless_module",
+      "label": "FFI Stateless Pointers [Invariant]",
+      "raw_label": "FFI Stateless Pointers",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_abi_1to1",
+      "label": "FFI 1-to-1 ABI Mapping [Invariant]",
+      "raw_label": "FFI 1-to-1 ABI Mapping",
+      "type": "Invariant",
+      "component_id": "component-002"
+    },
+    {
+      "id": "INV_sampler_lifecycle",
+      "label": "Sampler Create-Use-Free [Invariant]",
+      "raw_label": "Sampler Create-Use-Free",
+      "type": "Invariant",
+      "component_id": "component-002"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_make_chron_kernel",
+      "to": "ST_Kernel",
+      "relation": "produces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_kernel_commit_event",
+      "to": "ST_Kernel",
+      "relation": "mutates",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_kernel_commit_event",
+      "to": "OP_refresh_projections",
+      "relation": "triggers",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_refresh_projections",
+      "to": "ST_Kernel",
+      "relation": "mutates",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_kernel_current_state",
+      "to": "ST_KernelState",
+      "relation": "produces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_kernel_current_state",
+      "to": "ST_Kernel",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_init_runtime",
+      "to": "ST_RuntimeEnv",
+      "relation": "produces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_main_loop",
+      "to": "OP_kernel_commit_event",
+      "relation": "triggers",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_main_loop",
+      "to": "OP_kernel_current_state",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_init_chron_llm",
+      "to": "ST_Context",
+      "relation": "produces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_tokenize",
+      "to": "ST_Context",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_prefill_prompt",
+      "to": "ST_Context",
+      "relation": "mutates",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_generate",
+      "to": "ST_Context",
+      "relation": "mutates",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_generate",
+      "to": "OP_my_sampler_sample",
+      "relation": "triggers",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_generate",
+      "to": "OP_my_llama_eval",
+      "relation": "triggers",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_my_llama_eval",
+      "to": "ST_n_past",
+      "relation": "mutates",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_chat",
+      "to": "ST_Session",
+      "relation": "mutates",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_chat",
+      "to": "ST_History",
+      "relation": "mutates",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_decide",
+      "to": "ST_RuntimeCommand",
+      "relation": "produces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_decide",
+      "to": "ST_IR",
+      "relation": "depends_on",
+      "component_id": "component-002"
+    },
+    {
+      "from": "OP_fault_recovery",
+      "to": "ST_n_past",
+      "relation": "mutates",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_kernel_sole_mutator",
+      "to": "ST_Kernel",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_graph_is_wal_function",
+      "to": "ST_Kernel",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_runtime_no_direct_access",
+      "to": "ST_RuntimeEnv",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_n_past_bounds",
+      "to": "ST_n_past",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_history_ordered_append_only",
+      "to": "ST_History",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_ir_immutable_ordered",
+      "to": "ST_IR",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_chat_sequence",
+      "to": "OP_chat",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_fault_no_commit",
+      "to": "OP_kernel_commit_event",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_stateless_module",
+      "to": "ST_Context",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_abi_1to1",
+      "to": "OP_my_llama_eval",
+      "relation": "enforces",
+      "component_id": "component-002"
+    },
+    {
+      "from": "INV_sampler_lifecycle",
+      "to": "OP_my_sampler_sample",
+      "relation": "enforces",
+      "component_id": "component-002"
+    }
+  ]
+}

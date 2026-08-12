@@ -2,7 +2,7 @@
 src/causal_kernel/extractor/extract_component.py
 -------------------------------------------------
 component-001〜013 の仕様書から Δ1 因果トポロジー (Node / Edge) を抽出するモジュール
-(XML構造分離 + JSON Schema構造強制版)
+(XML構造分離 + JSON Schema構造強制版 / 途切れデータの強力救出処理付き)
 """
 
 import json
@@ -13,8 +13,7 @@ import urllib.request
 from typing import Any, Dict, List
 
 # ----------------------------------------------------------------------
-# Ollama サンプリングエンジンに直接渡す JSON Schema
-# これにより nodes と edges 以外の不要なキー (integration_plan 等) の生成を物理的に遮断する
+# LLM に渡す JSON Schema
 # ----------------------------------------------------------------------
 CAUSAL_JSON_SCHEMA = {
     "type": "object",
@@ -65,10 +64,7 @@ CAUSAL_JSON_SCHEMA = {
 
 
 def build_component_prompt(spec_text: str, component_id: str) -> str:
-    """
-    抽象度（粒度）を「ドメイン内部の因果要素」に固定するプロンプト。
-    ファイルパスや仕様書メタデータへの脱線を厳格に禁止する。
-    """
+    """抽象度（粒度）を「ドメイン内部の因果要素」に固定するプロンプト"""
     return f"""
 <task_definition>
 Extract the internal causal system graph (State, Operation, Invariant) from <spec_content>.
@@ -112,8 +108,37 @@ CRITICAL RULES TO PREVENT META-DATA LEAKAGE:
 """
 
 
+def repair_truncated_json(json_str: str) -> str:
+    """
+    途中で途切れた JSON を強力に復旧する関数。
+    未完成な末尾要素（オブジェクトや文字列）をバッサリ切り落とし、
+    完成済みのデータ構造まで巻き戻して括弧を補完する。
+    """
+    s = json_str.strip()
+
+    # 1. 途中で切れている最後の不完全な要素を探して削る
+    # 最後の完全な要素の区切り（カンマ ',' や 配列の開き '[' など）を探す
+    last_valid_pos = max(s.rfind("}"), s.rfind("]"))
+
+    if last_valid_pos != -1:
+        # 完成している最後の要素以降のゴミ（ちぎれた要素）をバッサリ削除
+        s = s[: last_valid_pos + 1].strip()
+
+    # 末尾に残った余計なカンマを除去
+    s = re.sub(r",\s*$", "", s)
+
+    # 2. 不足している閉じ括弧を補完する
+    open_curly = s.count("{") - s.count("}")
+    open_square = s.count("[") - s.count("]")
+
+    s += "]" * max(0, open_square)
+    s += "}" * max(0, open_curly)
+
+    return s
+
+
 def parse_llm_json_response(raw_response: str) -> Dict[str, Any]:
-    """LLMからのレスポンス文字列から安全にJSONをパースする"""
+    """LLMからのレスポンス文字列から安全にJSONをパースする（強力な自動修復機能付き）"""
     if not raw_response or not raw_response.strip():
         return {}
 
@@ -123,15 +148,26 @@ def parse_llm_json_response(raw_response: str) -> Dict[str, Any]:
     )
     cleaned = re.sub(r"\s*```$", "", cleaned, flags=re.MULTILINE).strip()
 
-    # 最初に出現する '{' から最後に出現する '}' までを抽出
-    match = re.search(r"\{.*\}", cleaned, re.DOTALL)
+    # 最初に出現する '{' 以降を抽出
+    match = re.search(r"\{.*", cleaned, re.DOTALL)
     if match:
         cleaned = match.group(0)
 
+    # まずそのままパースを試みる
     try:
         return json.loads(cleaned)
+    except json.JSONDecodeError:
+        pass
+
+    # パース失敗時：途切れ復旧を試みる
+    repaired = repair_truncated_json(cleaned)
+    try:
+        parsed = json.loads(repaired)
+        print("\n[Warning] JSONが途中で切れていたため、生成済みの要素（Node/Edge）まで救出してパースしました。")
+        return parsed
     except json.JSONDecodeError as e:
-        print(f"\n[Debug JSON Error] パース失敗:\n{cleaned[:400]}\n---")
+        print(f"\n[Debug JSON Error] パース失敗 (修復不可): {e}")
+        print(f"修復試行後の文字列:\n{repaired[:400]}\n---")
         return {}
 
 
@@ -142,7 +178,6 @@ def normalize_component_graph(
     if not isinstance(raw_graph, dict):
         return {"component_id": component_id, "nodes": [], "edges": []}
 
-    # 表記揺れの網羅的吸収
     raw_nodes = (
         raw_graph.get("nodes")
         or raw_graph.get("Nodes")
@@ -236,30 +271,55 @@ def normalize_component_graph(
 def extract_component_delta1(
     spec_text: str,
     component_id: str,
-    ollama_host: str = "http://localhost:11434",
-    model: str = "qwen2.5:32b",
-    timeout: int = 600,
+    host: str = "http://127.0.0.1:8080",
+    model: str = "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    backend: str = "llamacpp",
+    timeout: int = 1200,
 ) -> Dict[str, Any]:
-    """Ollama API を呼び出してコンポーネントの Δ1 因果構造を取得"""
+    """llama.cpp または Ollama API を呼び出してコンポーネントの Δ1 因果構造を取得"""
 
     if not spec_text or not spec_text.strip():
         print(f"[Error] {component_id}: 入力仕様書テキスト(spec_text) が空です！")
         return {"component_id": component_id, "nodes": [], "edges": []}
 
     prompt = build_component_prompt(spec_text, component_id)
+    backend_type = backend.lower()
 
-    url = f"{ollama_host.rstrip('/')}/api/generate"
-    payload = {
-        "model": model,
-        "system": "You are a deterministic structural AST/graph extractor. Parse the input and output valid JSON matching the schema precisely.",
-        "prompt": prompt,
-        "format": CAUSAL_JSON_SCHEMA,  # JSON Schemaを指定し、Ollama側で構造を強制
-        "stream": False,
-        "options": {
-            "temperature": 0.0,  # 0.0で挙動を完全固定
-            "num_ctx": 4096,
-        },
-    }
+    if backend_type == "ollama":
+        url = f"{host.rstrip('/')}/api/generate"
+        payload = {
+            "model": model,
+            "system": "You are a deterministic structural AST/graph extractor. Parse the input and output valid JSON matching the schema precisely.",
+            "prompt": prompt,
+            "format": CAUSAL_JSON_SCHEMA,
+            "stream": False,
+            "options": {
+                "temperature": 0.0,
+                "num_ctx": 16384,
+                "num_predict": 8192,
+            },
+        }
+    else:  # default: llamacpp
+        url = f"{host.rstrip('/')}/v1/chat/completions"
+        payload = {
+            "model": model,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "You are a deterministic structural AST/graph extractor. Parse the input and output valid JSON matching the schema precisely.",
+                },
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": 0.0,
+            "max_tokens": 8192,
+            "response_format": {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "causal_graph",
+                    "schema": CAUSAL_JSON_SCHEMA,
+                },
+            },
+        }
 
     req = urllib.request.Request(
         url,
@@ -270,10 +330,26 @@ def extract_component_delta1(
     try:
         with urllib.request.urlopen(req, timeout=timeout) as response:
             res_body = json.loads(response.read().decode("utf-8"))
-            raw_response_text = res_body.get("response", "")
 
-            # 生レスポンスのデバッグ表示
-            print(f"\n--- [{component_id} LLM 生レスポンス (先頭 300 文字)] ---")
+            raw_response_text = ""
+            if isinstance(res_body, dict):
+                if "response" in res_body and isinstance(res_body["response"], str):
+                    raw_response_text = res_body["response"]
+                elif "choices" in res_body and len(res_body["choices"]) > 0:
+                    choice = res_body["choices"][0]
+                    if isinstance(choice, dict):
+                        if "message" in choice and isinstance(choice["message"], dict):
+                            raw_response_text = choice["message"].get("content", "")
+                        elif "text" in choice:
+                            raw_response_text = choice.get("text", "")
+                elif "message" in res_body and isinstance(res_body["message"], dict):
+                    raw_response_text = res_body["message"].get("content", "")
+                elif "content" in res_body and isinstance(res_body["content"], str):
+                    raw_response_text = res_body["content"]
+
+            print(
+                f"\n--- [{component_id} LLM 生レスポンス (先頭 300 文字)] ---"
+            )
             print(raw_response_text[:300].strip())
             print("--------------------------------------------------")
 
@@ -284,6 +360,17 @@ def extract_component_delta1(
                 f"[Info] {component_id}: 抽出結果 -> Nodes: {len(result['nodes'])}, Edges: {len(result['edges'])}"
             )
             return result
+
+    except urllib.error.HTTPError as e:
+        err_body = e.read().decode("utf-8", errors="ignore")
+        print(f"[Error] Component {component_id} HTTP Error {e.code}: {e.reason}")
+        print(f"  └─ 詳細: {err_body}")
+        return {
+            "component_id": component_id,
+            "nodes": [],
+            "edges": [],
+            "error": f"HTTP {e.code}: {err_body}",
+        }
     except Exception as e:
         print(f"[Error] Component {component_id} の抽出失敗: {e}")
         return {

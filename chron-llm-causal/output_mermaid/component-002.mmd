@@ -2,28 +2,114 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
-    runtime_r0_ir_chat_loop_spec["Chat Loop Specification [State]"]
-    class runtime_r0_ir_chat_loop_spec state;
-    runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec["Session Execution Layer Specification [State]"]
-    class runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec state;
-    llama_agent_ir_chron_llm_spec["Chron LLM Specification [State]"]
-    class llama_agent_ir_chron_llm_spec state;
-    llama_agent_ir_ffi_bindings_spec["FFI Bindings Specification [State]"]
-    class llama_agent_ir_ffi_bindings_spec state;
-    llama_agent_ir_generate_spec["Generate Specification [State]"]
-    class llama_agent_ir_generate_spec state;
-    runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec_5["Session Execution Layer Specification [State]"]
-    class runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec_5 state;
-    llama_agent_ir_chron_llm_kernel_spec["Chron LLM Kernel Specification [State]"]
-    class llama_agent_ir_chron_llm_kernel_spec state;
-    llama_agent_ir_chron_llm_runtime_spec["Chron LLM Runtime Specification [State]"]
-    class llama_agent_ir_chron_llm_runtime_spec state;
-    llama_agent_ir_ffi_bindings_mock_spec["FFI Bindings Mock Specification [State]"]
-    class llama_agent_ir_ffi_bindings_mock_spec state;
-    runtime_r0_ir_chat_loop_spec -- "depends_on" --> runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec
-    llama_agent_ir_chron_llm_spec -- "depends_on" --> llama_agent_ir_ffi_bindings_spec
-    llama_agent_ir_chron_llm_spec -- "depends_on" --> llama_agent_ir_generate_spec
-    llama_agent_ir_chron_llm_spec -- "depends_on" --> runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec
-    llama_agent_ir_chron_llm_kernel_spec -- "depends_on" --> llama_agent_ir_chron_llm_runtime_spec
-    llama_agent_ir_chron_llm_runtime_spec -- "depends_on" --> runtime_r0_ir_chron_llm_r0_session_execution_layer_spec_v1_0_spec
-    llama_agent_ir_ffi_bindings_mock_spec -- "depends_on" --> llama_agent_ir_ffi_bindings_spec
+    ST_Kernel["Kernel Instance [State]"]
+    class ST_Kernel state;
+    ST_WAL["Write-Ahead Log [State]"]
+    class ST_WAL state;
+    ST_Graph["Causal Graph [State]"]
+    class ST_Graph state;
+    ST_KernelState["Kernel State Snapshot [State]"]
+    class ST_KernelState state;
+    ST_RuntimeEnv["Runtime Environment [State]"]
+    class ST_RuntimeEnv state;
+    ST_Context["LLM Context [State]"]
+    class ST_Context state;
+    ST_Session["Chat Session [State]"]
+    class ST_Session state;
+    ST_History["Event History [State]"]
+    class ST_History state;
+    ST_Sampler["Token Sampler [State]"]
+    class ST_Sampler state;
+    ST_ImmuneStatus["Immune Health Status [State]"]
+    class ST_ImmuneStatus state;
+    OP_InitKernel["Initialize Kernel [Operation]"]
+    class OP_InitKernel op;
+    OP_SubmitUserInput["Submit User Input [Operation]"]
+    class OP_SubmitUserInput op;
+    OP_CommitEvent["Commit Event [Operation]"]
+    class OP_CommitEvent op;
+    OP_RefreshProjections["Refresh Projections [Operation]"]
+    class OP_RefreshProjections op;
+    OP_GetCurrentState["Get Current State [Operation]"]
+    class OP_GetCurrentState op;
+    OP_InitRuntime["Initialize Runtime [Operation]"]
+    class OP_InitRuntime op;
+    OP_MainLoop["Main Execution Loop [Operation]"]
+    class OP_MainLoop op;
+    OP_InitLLM["Initialize LLM [Operation]"]
+    class OP_InitLLM op;
+    OP_Tokenize["Tokenize Input [Operation]"]
+    class OP_Tokenize op;
+    OP_PrefillPrompt["Prefill Prompt [Operation]"]
+    class OP_PrefillPrompt op;
+    OP_Generate["Generate Tokens [Operation]"]
+    class OP_Generate op;
+    OP_MySamplerSample["Sample Next Token [Operation]"]
+    class OP_MySamplerSample op;
+    OP_MyLlamaEval["Evaluate Context [Operation]"]
+    class OP_MyLlamaEval op;
+    OP_RunGenerationWithSensors["Run Generation with Sensors [Operation]"]
+    class OP_RunGenerationWithSensors op;
+    OP_FaultRecovery["Fault Recovery [Operation]"]
+    class OP_FaultRecovery op;
+    OP_Chat["Execute Chat [Operation]"]
+    class OP_Chat op;
+    OP_StartChat["Start Chat Session [Operation]"]
+    class OP_StartChat op;
+    OP_Decide["Kernel Decision [Operation]"]
+    class OP_Decide op;
+    INV_KernelSoleMutator["Kernel Sole Mutator [Invariant]"]
+    class INV_KernelSoleMutator inv;
+    INV_GraphFromWAL["Graph Derived from WAL [Invariant]"]
+    class INV_GraphFromWAL inv;
+    INV_PostCommitPersisted["Post-Commit Persistence [Invariant]"]
+    class INV_PostCommitPersisted inv;
+    INV_RuntimeNoDirectAccess["Runtime No Direct Access [Invariant]"]
+    class INV_RuntimeNoDirectAccess inv;
+    INV_SamplerLifecycle["Sampler Lifecycle [Invariant]"]
+    class INV_SamplerLifecycle inv;
+    INV_NPastInvariant["N-Past Counter Invariant [Invariant]"]
+    class INV_NPastInvariant inv;
+    INV_HistoryOrderedAppendOnly["History Ordered Append-Only [Invariant]"]
+    class INV_HistoryOrderedAppendOnly inv;
+    INV_FaultNoCommit["Fault Prevents Commit [Invariant]"]
+    class INV_FaultNoCommit inv;
+    INV_StatelessFFI["Stateless FFI Layer [Invariant]"]
+    class INV_StatelessFFI inv;
+    INV_Abi1to1["ABI 1-to-1 Mapping [Invariant]"]
+    class INV_Abi1to1 inv;
+    OP_InitKernel -- "mutates" --> ST_Kernel
+    OP_InitKernel -- "produces" --> ST_WAL
+    OP_SubmitUserInput -- "triggers" --> OP_CommitEvent
+    OP_CommitEvent -- "mutates" --> ST_WAL
+    OP_CommitEvent -- "triggers" --> OP_RefreshProjections
+    OP_RefreshProjections -- "mutates" --> ST_Graph
+    OP_GetCurrentState -- "depends_on" --> ST_Kernel
+    OP_GetCurrentState -- "produces" --> ST_KernelState
+    OP_InitRuntime -- "mutates" --> ST_RuntimeEnv
+    OP_MainLoop -- "triggers" --> OP_SubmitUserInput
+    OP_InitLLM -- "mutates" --> ST_Context
+    OP_Tokenize -- "depends_on" --> ST_Context
+    OP_PrefillPrompt -- "mutates" --> ST_Context
+    OP_Generate -- "depends_on" --> ST_Context
+    OP_Generate -- "triggers" --> OP_MySamplerSample
+    OP_Generate -- "triggers" --> OP_MyLlamaEval
+    OP_RunGenerationWithSensors -- "triggers" --> OP_Generate
+    OP_RunGenerationWithSensors -- "triggers" --> OP_FaultRecovery
+    OP_FaultRecovery -- "mutates" --> ST_Context
+    OP_Chat -- "mutates" --> ST_Session
+    OP_Chat -- "triggers" --> OP_Tokenize
+    OP_Chat -- "triggers" --> OP_PrefillPrompt
+    OP_Chat -- "triggers" --> OP_Generate
+    OP_StartChat -- "triggers" --> OP_Chat
+    OP_Decide -- "depends_on" --> ST_Session
+    INV_KernelSoleMutator -- "enforces" --> OP_CommitEvent
+    INV_GraphFromWAL -- "enforces" --> OP_RefreshProjections
+    INV_PostCommitPersisted -- "enforces" --> OP_CommitEvent
+    INV_RuntimeNoDirectAccess -- "enforces" --> OP_MainLoop
+    INV_SamplerLifecycle -- "enforces" --> OP_Generate
+    INV_NPastInvariant -- "enforces" --> OP_PrefillPrompt
+    INV_HistoryOrderedAppendOnly -- "enforces" --> OP_Chat
+    INV_FaultNoCommit -- "enforces" --> OP_FaultRecovery
+    INV_StatelessFFI -- "enforces" --> OP_MyLlamaEval
+    INV_Abi1to1 -- "enforces" --> OP_MyLlamaEval
