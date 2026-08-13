@@ -2,3 +2,68 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_Baseline["Baseline Status [State]"]
+    class ST_Baseline state;
+    OP_Understand["Understand [Operation]"]
+    class OP_Understand op;
+    OP_Analyze["Analyze [Operation]"]
+    class OP_Analyze op;
+    OP_Design["Design [Operation]"]
+    class OP_Design op;
+    OP_Implement["Implement [Operation]"]
+    class OP_Implement op;
+    OP_Verify["Verify [Operation]"]
+    class OP_Verify op;
+    OP_Record["Record [Operation]"]
+    class OP_Record op;
+    INV_Independence["Architecture Independence [Invariant]"]
+    class INV_Independence inv;
+    INV_GovernanceScope["Governance Scope [Invariant]"]
+    class INV_GovernanceScope inv;
+    INV_RuntimeSatisfaction["Runtime Satisfaction [Invariant]"]
+    class INV_RuntimeSatisfaction inv;
+    INV_EvolutionRule["Evolution Rule [Invariant]"]
+    class INV_EvolutionRule inv;
+    INV_ExtensionPriority["Extension Priority [Invariant]"]
+    class INV_ExtensionPriority inv;
+    INV_Minimalism["Minimalism [Invariant]"]
+    class INV_Minimalism inv;
+    INV_Neutrality["Neutrality [Invariant]"]
+    class INV_Neutrality inv;
+    INV_MetaDesignSeparation["Meta-Design Separation [Invariant]"]
+    class INV_MetaDesignSeparation inv;
+    INV_RuntimeDesignSeparation["Runtime-Design Separation [Invariant]"]
+    class INV_RuntimeDesignSeparation inv;
+    INV_ConceptResponsibilityDependency["Concept-Responsibility Dependency [Invariant]"]
+    class INV_ConceptResponsibilityDependency inv;
+    INV_ConceptImplementationIndependence["Concept-Implementation Independence [Invariant]"]
+    class INV_ConceptImplementationIndependence inv;
+    INV_NewConceptResponsibilityRequirement["New Concept Responsibility Requirement [Invariant]"]
+    class INV_NewConceptResponsibilityRequirement inv;
+    INV_ContentImplementationPrecedence["Content-Implementation Precedence [Invariant]"]
+    class INV_ContentImplementationPrecedence inv;
+    INV_ImplementationConstitutionPreservation["Implementation Constitution Preservation [Invariant]"]
+    class INV_ImplementationConstitutionPreservation inv;
+    INV_AuthorityRepresentationSeparation["Authority-Representation Separation [Invariant]"]
+    class INV_AuthorityRepresentationSeparation inv;
+    OP_Understand -- "triggers" --> OP_Analyze
+    OP_Analyze -- "triggers" --> OP_Design
+    OP_Design -- "triggers" --> OP_Implement
+    OP_Implement -- "triggers" --> OP_Verify
+    OP_Verify -- "triggers" --> OP_Record
+    OP_Record -- "mutates" --> ST_Baseline
+    INV_EvolutionRule -- "enforces" --> OP_Implement
+    INV_NewConceptResponsibilityRequirement -- "enforces" --> OP_Design
+    INV_ContentImplementationPrecedence -- "enforces" --> OP_Implement
+    INV_ImplementationConstitutionPreservation -- "enforces" --> OP_Implement
+    INV_ConceptResponsibilityDependency -- "enforces" --> OP_Design
+    INV_ConceptImplementationIndependence -- "enforces" --> OP_Implement
+    INV_RuntimeSatisfaction -- "enforces" --> OP_Implement
+    INV_GovernanceScope -- "enforces" --> OP_Design
+    INV_Independence -- "enforces" --> OP_Design
+    INV_ExtensionPriority -- "enforces" --> OP_Design
+    INV_Minimalism -- "enforces" --> OP_Design
+    INV_Neutrality -- "enforces" --> OP_Design
+    INV_MetaDesignSeparation -- "enforces" --> OP_Design
+    INV_RuntimeDesignSeparation -- "enforces" --> OP_Implement
+    INV_AuthorityRepresentationSeparation -- "enforces" --> OP_Design

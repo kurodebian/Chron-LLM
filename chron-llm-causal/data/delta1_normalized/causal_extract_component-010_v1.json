@@ -1,6 +1,398 @@
 {
   "component_id": "component-010",
-  "nodes": [],
-  "edges": [],
-  "error": "<urlopen error [Errno 111] Connection refused>"
+  "nodes": [
+    {
+      "id": "ST_CanonicalMemory",
+      "label": "Canonical Memory [State]",
+      "raw_label": "Canonical Memory",
+      "type": "State",
+      "component_id": "component-010"
+    },
+    {
+      "id": "ST_ShortTermMemory",
+      "label": "Short Term Memory [State]",
+      "raw_label": "Short Term Memory",
+      "type": "State",
+      "component_id": "component-010"
+    },
+    {
+      "id": "ST_LongTermMemory",
+      "label": "Long Term Memory [State]",
+      "raw_label": "Long Term Memory",
+      "type": "State",
+      "component_id": "component-010"
+    },
+    {
+      "id": "ST_MemoryRef",
+      "label": "Memory Reference [State]",
+      "raw_label": "Memory Reference",
+      "type": "State",
+      "component_id": "component-010"
+    },
+    {
+      "id": "ST_Runtime",
+      "label": "Runtime State [State]",
+      "raw_label": "Runtime State",
+      "type": "State",
+      "component_id": "component-010"
+    },
+    {
+      "id": "ST_Cache",
+      "label": "Cache [State]",
+      "raw_label": "Cache",
+      "type": "State",
+      "component_id": "component-010"
+    },
+    {
+      "id": "ST_KVCache",
+      "label": "KV Cache [State]",
+      "raw_label": "KV Cache",
+      "type": "State",
+      "component_id": "component-010"
+    },
+    {
+      "id": "ST_Context",
+      "label": "Context [State]",
+      "raw_label": "Context",
+      "type": "State",
+      "component_id": "component-010"
+    },
+    {
+      "id": "ST_PrefillState",
+      "label": "Prefill State [State]",
+      "raw_label": "Prefill State",
+      "type": "State",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_MemoryRead",
+      "label": "Memory Read [Operation]",
+      "raw_label": "Memory Read",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_Commit",
+      "label": "Commit Event [Operation]",
+      "raw_label": "Commit Event",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_Recover",
+      "label": "Recover [Operation]",
+      "raw_label": "Recover",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_Replay",
+      "label": "Replay [Operation]",
+      "raw_label": "Replay",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_ReconstructDerived",
+      "label": "Reconstruct Derived [Operation]",
+      "raw_label": "Reconstruct Derived",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_ReconstructMemoryRef",
+      "label": "Reconstruct MemoryRef [Operation]",
+      "raw_label": "Reconstruct MemoryRef",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_ReconstructWorking",
+      "label": "Reconstruct Working [Operation]",
+      "raw_label": "Reconstruct Working",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_ResumeRuntime",
+      "label": "Resume Runtime [Operation]",
+      "raw_label": "Resume Runtime",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_DestroyCache",
+      "label": "Destroy Cache [Operation]",
+      "raw_label": "Destroy Cache",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_DestroyKVCache",
+      "label": "Destroy KVCache [Operation]",
+      "raw_label": "Destroy KVCache",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_ReconstructPrefill",
+      "label": "Reconstruct Prefill [Operation]",
+      "raw_label": "Reconstruct Prefill",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "OP_Resume",
+      "label": "Resume [Operation]",
+      "raw_label": "Resume",
+      "type": "Operation",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_CanonicalMemoryWriter",
+      "label": "Canonical Memory Writer [Invariant]",
+      "raw_label": "Canonical Memory Writer",
+      "type": "Invariant",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_MemoryRefAuthoritativeWriter",
+      "label": "MemoryRef Authoritative Writer [Invariant]",
+      "raw_label": "MemoryRef Authoritative Writer",
+      "type": "Invariant",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_MemoryRefDeterministic",
+      "label": "MemoryRef Deterministic [Invariant]",
+      "raw_label": "MemoryRef Deterministic",
+      "type": "Invariant",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_ReplayRequiresMemoryRef",
+      "label": "Replay Requires MemoryRef [Invariant]",
+      "raw_label": "Replay Requires MemoryRef",
+      "type": "Invariant",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_CanonicalImmutable",
+      "label": "Canonical Immutable [Invariant]",
+      "raw_label": "Canonical Immutable",
+      "type": "Invariant",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_CanonicalMutateRequiresCommit",
+      "label": "Canonical Mutate Requires Commit [Invariant]",
+      "raw_label": "Canonical Mutate Requires Commit",
+      "type": "Invariant",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_RecoverDeterministic",
+      "label": "Recover Deterministic [Invariant]",
+      "raw_label": "Recover Deterministic",
+      "type": "Invariant",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_RecoverReplayCompatible",
+      "label": "Recover Replay Compatible [Invariant]",
+      "raw_label": "Recover Replay Compatible",
+      "type": "Invariant",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_CanonicalHistoryRecoverable",
+      "label": "Canonical History Recoverable [Invariant]",
+      "raw_label": "Canonical History Recoverable",
+      "type": "Invariant",
+      "component_id": "component-010"
+    },
+    {
+      "id": "INV_RecoverNoAuthoritativeInfo",
+      "label": "Recover No Authoritative Info [Invariant]",
+      "raw_label": "Recover No Authoritative Info",
+      "type": "Invariant",
+      "component_id": "component-010"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_MemoryRead",
+      "to": "ST_MemoryRef",
+      "relation": "depends_on",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Commit",
+      "to": "ST_CanonicalMemory",
+      "relation": "mutates",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Commit",
+      "to": "ST_MemoryRef",
+      "relation": "mutates",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Commit",
+      "to": "INV_CanonicalMemoryWriter",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Commit",
+      "to": "INV_MemoryRefAuthoritativeWriter",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Recover",
+      "to": "OP_Replay",
+      "relation": "triggers",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Recover",
+      "to": "OP_ReconstructPrefill",
+      "relation": "triggers",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Recover",
+      "to": "INV_RecoverDeterministic",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Recover",
+      "to": "INV_RecoverReplayCompatible",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Recover",
+      "to": "INV_RecoverNoAuthoritativeInfo",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Replay",
+      "to": "ST_CanonicalMemory",
+      "relation": "depends_on",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Replay",
+      "to": "OP_ReconstructDerived",
+      "relation": "triggers",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_ReconstructDerived",
+      "to": "ST_Context",
+      "relation": "produces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_ReconstructDerived",
+      "to": "OP_ReconstructMemoryRef",
+      "relation": "triggers",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_ReconstructMemoryRef",
+      "to": "ST_MemoryRef",
+      "relation": "mutates",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_ReconstructMemoryRef",
+      "to": "OP_ReconstructWorking",
+      "relation": "triggers",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_ReconstructWorking",
+      "to": "ST_Context",
+      "relation": "mutates",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_ReconstructWorking",
+      "to": "OP_ResumeRuntime",
+      "relation": "triggers",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_ResumeRuntime",
+      "to": "ST_Runtime",
+      "relation": "mutates",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_ResumeRuntime",
+      "to": "OP_Resume",
+      "relation": "triggers",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_Resume",
+      "to": "ST_Runtime",
+      "relation": "mutates",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_DestroyCache",
+      "to": "ST_Cache",
+      "relation": "mutates",
+      "component_id": "component-010"
+    },
+    {
+      "from": "OP_DestroyKVCache",
+      "to": "ST_KVCache",
+      "relation": "mutates",
+      "component_id": "component-010"
+    },
+    {
+      "from": "INV_CanonicalImmutable",
+      "to": "ST_CanonicalMemory",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "INV_CanonicalImmutable",
+      "to": "OP_Commit",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "INV_CanonicalMutateRequiresCommit",
+      "to": "OP_Commit",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "INV_MemoryRefDeterministic",
+      "to": "ST_MemoryRef",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "INV_ReplayRequiresMemoryRef",
+      "to": "OP_Replay",
+      "relation": "enforces",
+      "component_id": "component-010"
+    },
+    {
+      "from": "INV_CanonicalHistoryRecoverable",
+      "to": "ST_CanonicalMemory",
+      "relation": "enforces",
+      "component_id": "component-010"
+    }
+  ]
 }

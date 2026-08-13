@@ -2,3 +2,87 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_World["World State &#91;State&#93;"]
+    class ST_World state;
+    ST_Registry["Registry State &#91;State&#93;"]
+    class ST_Registry state;
+    ST_Kernel["Kernel State &#91;State&#93;"]
+    class ST_Kernel state;
+    ST_Graph["Graph State &#91;State&#93;"]
+    class ST_Graph state;
+    ST_Memory["Memory State &#91;State&#93;"]
+    class ST_Memory state;
+    ST_Observation["Observation State &#91;State&#93;"]
+    class ST_Observation state;
+    ST_Snapshot["State Snapshot &#91;State&#93;"]
+    class ST_Snapshot state;
+    ST_DiffResult["Diff Result &#91;State&#93;"]
+    class ST_DiffResult state;
+    ST_Lifecycle["Observation Lifecycle &#91;State&#93;"]
+    class ST_Lifecycle state;
+    OP_Observe["Observe &#91;Operation&#93;"]
+    class OP_Observe op;
+    OP_BuildWorldObservation["Build World Observation &#91;Operation&#93;"]
+    class OP_BuildWorldObservation op;
+    OP_BuildRegistryObservation["Build Registry Observation &#91;Operation&#93;"]
+    class OP_BuildRegistryObservation op;
+    OP_BuildAncestryObservation["Build Ancestry Observation &#91;Operation&#93;"]
+    class OP_BuildAncestryObservation op;
+    OP_BuildDiffObservation["Build Diff Observation &#91;Operation&#93;"]
+    class OP_BuildDiffObservation op;
+    OP_Diff["Diff Observations &#91;Operation&#93;"]
+    class OP_Diff op;
+    OP_GetWorldObs["Get World Observation &#91;Operation&#93;"]
+    class OP_GetWorldObs op;
+    OP_GetRegistryObs["Get Registry Observation &#91;Operation&#93;"]
+    class OP_GetRegistryObs op;
+    OP_WorldObservationEqual["World Observation Equal &#91;Operation&#93;"]
+    class OP_WorldObservationEqual op;
+    OP_RegistryObservationEqual["Registry Observation Equal &#91;Operation&#93;"]
+    class OP_RegistryObservationEqual op;
+    OP_AncestryObservationEqual["Ancestry Observation Equal &#91;Operation&#93;"]
+    class OP_AncestryObservationEqual op;
+    OP_DiffObservationEqual["Diff Observation Equal &#91;Operation&#93;"]
+    class OP_DiffObservationEqual op;
+    OP_RunTests["Run R2.0-C Tests &#91;Operation&#93;"]
+    class OP_RunTests op;
+    INV_ReadOnly["Read Only Observation &#91;Invariant&#93;"]
+    class INV_ReadOnly inv;
+    INV_Deterministic["Deterministic Observation &#91;Invariant&#93;"]
+    class INV_Deterministic inv;
+    INV_Accurate["Accurate Ancestry &#91;Invariant&#93;"]
+    class INV_Accurate inv;
+    INV_NoSideEffects["No Side Effects &#91;Invariant&#93;"]
+    class INV_NoSideEffects inv;
+    INV_ValueObjectEquality["Value Object Equality &#91;Invariant&#93;"]
+    class INV_ValueObjectEquality inv;
+    INV_CompleteObservation["Complete Observation &#91;Invariant&#93;"]
+    class INV_CompleteObservation inv;
+    INV_NoInference["No Inference or Fabrication &#91;Invariant&#93;"]
+    class INV_NoInference inv;
+    INV_PresentationIndependent["Presentation Independent &#91;Invariant&#93;"]
+    class INV_PresentationIndependent inv;
+    INV_SchemaCompliance["Schema Compliance &#91;Invariant&#93;"]
+    class INV_SchemaCompliance inv;
+    INV_DiffSemantics["Diff Semantics &#91;Invariant&#93;"]
+    class INV_DiffSemantics inv;
+    INV_NonAuth["Non-Auth Truth Kernel &#91;Invariant&#93;"]
+    class INV_NonAuth inv;
+    INV_Layer["Layer Hierarchy &#91;Invariant&#93;"]
+    class INV_Layer inv;
+    OP_Observe -- "depends_on" --> ST_World
+    OP_Observe -- "depends_on" --> ST_Registry
+    OP_Observe -- "depends_on" --> ST_Kernel
+    OP_Observe -- "produces" --> ST_Observation
+    OP_Observe -- "produces" --> ST_Snapshot
+    OP_Observe -- "enforces" --> INV_ReadOnly
+    OP_Observe -- "enforces" --> INV_Deterministic
+    OP_Observe -- "enforces" --> INV_Accurate
+    OP_Observe -- "enforces" --> INV_NoSideEffects
+    OP_BuildWorldObservation -- "depends_on" --> ST_World
+    OP_BuildWorldObservation -- "produces" --> ST_Observation
+    OP_BuildWorldObservation -- "enforces" --> INV_ReadOnly
+    OP_BuildRegistryObservation -- "depends_on" --> ST_Registry
+    OP_BuildRegistryObservation -- "produces" --> ST_Observation
+    OP_BuildRegistryObservation -- "enforces" --> INV_ReadOnly
+    OP_BuildAncestryObservation -- "depends_on" --> ST_Registry

@@ -1,6 +1,196 @@
 {
   "component_id": "component-004",
-  "nodes": [],
-  "edges": [],
-  "error": "timed out"
+  "nodes": [
+    {
+      "id": "ST_WAL",
+      "label": "Write-Ahead Log [State]",
+      "raw_label": "Write-Ahead Log",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_Graph",
+      "label": "Causal Graph [State]",
+      "raw_label": "Causal Graph",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_HealthyTable",
+      "label": "Healthy Node Table [State]",
+      "raw_label": "Healthy Node Table",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_SystemState",
+      "label": "System State [State]",
+      "raw_label": "System State",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "ST_KVCache",
+      "label": "Key-Value Cache [State]",
+      "raw_label": "Key-Value Cache",
+      "type": "State",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_AppendWAL",
+      "label": "Append WAL [Operation]",
+      "raw_label": "Append WAL",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_CommitEvent",
+      "label": "Commit Event [Operation]",
+      "raw_label": "Commit Event",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_LiftGraph",
+      "label": "Lift Graph [Operation]",
+      "raw_label": "Lift Graph",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_HandleFault",
+      "label": "Handle Fault [Operation]",
+      "raw_label": "Handle Fault",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_BranchWorld",
+      "label": "Branch World [Operation]",
+      "raw_label": "Branch World",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "OP_Prefill",
+      "label": "Prefill Cache [Operation]",
+      "raw_label": "Prefill Cache",
+      "type": "Operation",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_MonotonicClock",
+      "label": "Monotonic Clock [Invariant]",
+      "raw_label": "Monotonic Clock",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_AppendOnly",
+      "label": "Append Only Graph [Invariant]",
+      "raw_label": "Append Only Graph",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_FaultIsolation",
+      "label": "Fault Isolation [Invariant]",
+      "raw_label": "Fault Isolation",
+      "type": "Invariant",
+      "component_id": "component-004"
+    },
+    {
+      "id": "INV_CausalScope",
+      "label": "Causal Scope [Invariant]",
+      "raw_label": "Causal Scope",
+      "type": "Invariant",
+      "component_id": "component-004"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_AppendWAL",
+      "to": "ST_WAL",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_CommitEvent",
+      "to": "ST_WAL",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_LiftGraph",
+      "to": "ST_WAL",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_LiftGraph",
+      "to": "ST_HealthyTable",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_LiftGraph",
+      "to": "ST_Graph",
+      "relation": "produces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_HandleFault",
+      "to": "ST_KVCache",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_HandleFault",
+      "to": "ST_WAL",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_BranchWorld",
+      "to": "ST_SystemState",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_Prefill",
+      "to": "ST_WAL",
+      "relation": "depends_on",
+      "component_id": "component-004"
+    },
+    {
+      "from": "OP_Prefill",
+      "to": "ST_KVCache",
+      "relation": "mutates",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_MonotonicClock",
+      "to": "OP_AppendWAL",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_AppendOnly",
+      "to": "ST_Graph",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_FaultIsolation",
+      "to": "OP_LiftGraph",
+      "relation": "enforces",
+      "component_id": "component-004"
+    },
+    {
+      "from": "INV_CausalScope",
+      "to": "OP_LiftGraph",
+      "relation": "enforces",
+      "component_id": "component-004"
+    }
+  ]
 }

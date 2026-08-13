@@ -2,3 +2,57 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_ir_stream["IR Stream Buffer [State]"]
+    class ST_ir_stream state;
+    ST_model_context["Model & Context State [State]"]
+    class ST_model_context state;
+    ST_runtime_state["Runtime Execution State [State]"]
+    class ST_runtime_state state;
+    OP_init_bridge["Initialize Bridge [Operation]"]
+    class OP_init_bridge op;
+    OP_make_ir["Construct IR Object [Operation]"]
+    class OP_make_ir op;
+    OP_ir_callback["IR Callback Handler [Operation]"]
+    class OP_ir_callback op;
+    OP_push_ir["Push IR to Stream [Operation]"]
+    class OP_push_ir op;
+    OP_clear_stream["Clear IR Stream [Operation]"]
+    class OP_clear_stream op;
+    OP_validate_ir["Validate IR Integrity [Operation]"]
+    class OP_validate_ir op;
+    OP_extract_actions["Extract Generation Actions [Operation]"]
+    class OP_extract_actions op;
+    OP_run_trial["Run Generation Trial [Operation]"]
+    class OP_run_trial op;
+    OP_divergence_profile["Compute Divergence Profile [Operation]"]
+    class OP_divergence_profile op;
+    INV_ir_immutable["IR Immutability Post-Creation [Invariant]"]
+    class INV_ir_immutable inv;
+    INV_stream_append_only["Stream Append-Only Growth [Invariant]"]
+    class INV_stream_append_only inv;
+    INV_stream_ordering["Stream Position Ordering [Invariant]"]
+    class INV_stream_ordering inv;
+    INV_callback_determinism["Callback Determinism [Invariant]"]
+    class INV_callback_determinism inv;
+    INV_analysis_isolation["Analysis Isolation [Invariant]"]
+    class INV_analysis_isolation inv;
+    INV_observation_neutrality["Observation Neutrality [Invariant]"]
+    class INV_observation_neutrality inv;
+    OP_init_bridge -- "mutates" --> ST_runtime_state
+    OP_ir_callback -- "triggers" --> OP_make_ir
+    OP_ir_callback -- "triggers" --> OP_push_ir
+    OP_make_ir -- "depends_on" --> OP_validate_ir
+    OP_push_ir -- "mutates" --> ST_ir_stream
+    OP_clear_stream -- "mutates" --> ST_ir_stream
+    OP_extract_actions -- "depends_on" --> ST_ir_stream
+    OP_run_trial -- "triggers" --> OP_clear_stream
+    OP_run_trial -- "depends_on" --> OP_extract_actions
+    OP_run_trial -- "depends_on" --> ST_model_context
+    OP_divergence_profile -- "depends_on" --> OP_run_trial
+    INV_ir_immutable -- "enforces" --> OP_make_ir
+    INV_ir_immutable -- "enforces" --> OP_push_ir
+    INV_stream_append_only -- "enforces" --> ST_ir_stream
+    INV_stream_ordering -- "enforces" --> OP_push_ir
+    INV_callback_determinism -- "enforces" --> OP_ir_callback
+    INV_analysis_isolation -- "enforces" --> OP_divergence_profile
+    INV_observation_neutrality -- "enforces" --> OP_extract_actions

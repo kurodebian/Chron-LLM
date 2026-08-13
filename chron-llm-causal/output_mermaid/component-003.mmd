@@ -2,3 +2,78 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_MemoryStore["Memory Store [State]"]
+    class ST_MemoryStore state;
+    ST_GraphStore["Graph Store [State]"]
+    class ST_GraphStore state;
+    ST_World["World Instance [State]"]
+    class ST_World state;
+    ST_Registry["World Registry [State]"]
+    class ST_Registry state;
+    ST_PrefillState["Prefill State [State]"]
+    class ST_PrefillState state;
+    ST_LifecycleState["Lifecycle State [State]"]
+    class ST_LifecycleState state;
+    OP_StorePayload["Store Payload [Operation]"]
+    class OP_StorePayload op;
+    OP_LoadPayload["Load Payload [Operation]"]
+    class OP_LoadPayload op;
+    OP_AddNode["Add Node [Operation]"]
+    class OP_AddNode op;
+    OP_AddEdge["Add Edge [Operation]"]
+    class OP_AddEdge op;
+    OP_CausalSubgraph["Causal Subgraph [Operation]"]
+    class OP_CausalSubgraph op;
+    OP_ProjectContext["Project Context [Operation]"]
+    class OP_ProjectContext op;
+    OP_BuildPrefillState["Build Prefill State [Operation]"]
+    class OP_BuildPrefillState op;
+    OP_MakeWorld["Make World [Operation]"]
+    class OP_MakeWorld op;
+    OP_ForkWorld["Fork World [Operation]"]
+    class OP_ForkWorld op;
+    OP_KernelCommitWorld["Kernel Commit World [Operation]"]
+    class OP_KernelCommitWorld op;
+    OP_RegisterWorld["Register World [Operation]"]
+    class OP_RegisterWorld op;
+    OP_SetActiveWorld["Set Active World [Operation]"]
+    class OP_SetActiveWorld op;
+    OP_ArchiveWorld["Archive World [Operation]"]
+    class OP_ArchiveWorld op;
+    INV_MemoryImmutable["Memory Immutability [Invariant]"]
+    class INV_MemoryImmutable inv;
+    INV_GraphAppend["Graph Append Integrity [Invariant]"]
+    class INV_GraphAppend inv;
+    INV_WorldIsolation["World Isolation [Invariant]"]
+    class INV_WorldIsolation inv;
+    INV_CausalSeparation["Causal Separation [Invariant]"]
+    class INV_CausalSeparation inv;
+    INV_Determinism["Deterministic Prefill [Invariant]"]
+    class INV_Determinism inv;
+    INV_CommitAtomic["Atomic Commit [Invariant]"]
+    class INV_CommitAtomic inv;
+    OP_StorePayload -- "mutates" --> ST_MemoryStore
+    OP_LoadPayload -- "depends_on" --> ST_MemoryStore
+    OP_AddNode -- "mutates" --> ST_GraphStore
+    OP_AddEdge -- "mutates" --> ST_GraphStore
+    OP_CausalSubgraph -- "depends_on" --> ST_GraphStore
+    OP_ProjectContext -- "depends_on" --> ST_GraphStore
+    OP_ProjectContext -- "depends_on" --> ST_MemoryStore
+    OP_BuildPrefillState -- "produces" --> ST_PrefillState
+    OP_BuildPrefillState -- "depends_on" --> OP_ProjectContext
+    OP_MakeWorld -- "produces" --> ST_World
+    OP_MakeWorld -- "depends_on" --> ST_GraphStore
+    OP_MakeWorld -- "depends_on" --> ST_MemoryStore
+    OP_ForkWorld -- "produces" --> ST_World
+    OP_ForkWorld -- "depends_on" --> ST_World
+    OP_KernelCommitWorld -- "mutates" --> ST_World
+    OP_KernelCommitWorld -- "mutates" --> ST_GraphStore
+    OP_KernelCommitWorld -- "enforces" --> INV_CommitAtomic
+    OP_RegisterWorld -- "mutates" --> ST_Registry
+    OP_SetActiveWorld -- "mutates" --> ST_Registry
+    OP_ArchiveWorld -- "mutates" --> ST_Registry
+    INV_MemoryImmutable -- "enforces" --> ST_MemoryStore
+    INV_GraphAppend -- "enforces" --> ST_GraphStore
+    INV_WorldIsolation -- "enforces" --> ST_World
+    INV_CausalSeparation -- "enforces" --> OP_CausalSubgraph
+    INV_Determinism -- "enforces" --> OP_BuildPrefillState

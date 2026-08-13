@@ -1,5 +1,332 @@
 {
   "component_id": "component-001",
-  "nodes": [],
-  "edges": []
+  "nodes": [
+    {
+      "id": "ST_Canonical",
+      "label": "Canonical State [State]",
+      "raw_label": "Canonical State",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "ST_KernelState",
+      "label": "Kernel State [State]",
+      "raw_label": "Kernel State",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "ST_Candidate",
+      "label": "Candidate Proposal [State]",
+      "raw_label": "Candidate Proposal",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "ST_Event",
+      "label": "Event Entry [State]",
+      "raw_label": "Event Entry",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "ST_ValidationReport",
+      "label": "Validation Report [State]",
+      "raw_label": "Validation Report",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "ST_RuntimeRequest",
+      "label": "Runtime Request [State]",
+      "raw_label": "Runtime Request",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "ST_RuntimeCommand",
+      "label": "Runtime Command [State]",
+      "raw_label": "Runtime Command",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "ST_Derived",
+      "label": "Derived Context [State]",
+      "raw_label": "Derived Context",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "ST_Prompt",
+      "label": "Generated Prompt [State]",
+      "raw_label": "Generated Prompt",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "ST_Fault",
+      "label": "Fault Event [State]",
+      "raw_label": "Fault Event",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_Commit",
+      "label": "Commit Event [Operation]",
+      "raw_label": "Commit Event",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_Replay",
+      "label": "Replay Snapshot [Operation]",
+      "raw_label": "Replay Snapshot",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_Derive",
+      "label": "Derive Context [Operation]",
+      "raw_label": "Derive Context",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_Validate",
+      "label": "Validate Candidate [Operation]",
+      "raw_label": "Validate Candidate",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_PolicyRouter",
+      "label": "Policy Router [Operation]",
+      "raw_label": "Policy Router",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_KernelTransition",
+      "label": "Kernel Transition [Operation]",
+      "raw_label": "Kernel Transition",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_WakeDeferred",
+      "label": "Wake Deferred [Operation]",
+      "raw_label": "Wake Deferred",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_BuildPrompt",
+      "label": "Build Prompt [Operation]",
+      "raw_label": "Build Prompt",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_Backend",
+      "label": "Backend Generation [Operation]",
+      "raw_label": "Backend Generation",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "INV_CanonicalImmutable",
+      "label": "Canonical Immutability [Invariant]",
+      "raw_label": "Canonical Immutability",
+      "type": "Invariant",
+      "component_id": "component-001"
+    },
+    {
+      "id": "INV_PureOps",
+      "label": "Pure Operations [Invariant]",
+      "raw_label": "Pure Operations",
+      "type": "Invariant",
+      "component_id": "component-001"
+    },
+    {
+      "id": "INV_KernelStateMutator",
+      "label": "Kernel State Mutator [Invariant]",
+      "raw_label": "Kernel State Mutator",
+      "type": "Invariant",
+      "component_id": "component-001"
+    },
+    {
+      "id": "INV_CommitSoleUpdater",
+      "label": "Commit Sole Updater [Invariant]",
+      "raw_label": "Commit Sole Updater",
+      "type": "Invariant",
+      "component_id": "component-001"
+    },
+    {
+      "id": "INV_WakeDeferredTrigger",
+      "label": "Wake Deferred Trigger [Invariant]",
+      "raw_label": "Wake Deferred Trigger",
+      "type": "Invariant",
+      "component_id": "component-001"
+    },
+    {
+      "id": "INV_BackendNonAuthoritative",
+      "label": "Backend Non-Authoritative [Invariant]",
+      "raw_label": "Backend Non-Authoritative",
+      "type": "Invariant",
+      "component_id": "component-001"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_Commit",
+      "to": "ST_Canonical",
+      "relation": "mutates",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_Commit",
+      "to": "OP_WakeDeferred",
+      "relation": "triggers",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_WakeDeferred",
+      "to": "ST_KernelState",
+      "relation": "mutates",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_Replay",
+      "to": "ST_Derived",
+      "relation": "produces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_Derive",
+      "to": "ST_Derived",
+      "relation": "produces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_BuildPrompt",
+      "to": "ST_Derived",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_BuildPrompt",
+      "to": "ST_Prompt",
+      "relation": "produces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_Backend",
+      "to": "ST_Prompt",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_Backend",
+      "to": "ST_Candidate",
+      "relation": "produces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_Validate",
+      "to": "ST_Candidate",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_Validate",
+      "to": "ST_Canonical",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_Validate",
+      "to": "ST_ValidationReport",
+      "relation": "produces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_PolicyRouter",
+      "to": "ST_ValidationReport",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_PolicyRouter",
+      "to": "ST_RuntimeRequest",
+      "relation": "produces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_KernelTransition",
+      "to": "ST_KernelState",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_KernelTransition",
+      "to": "ST_RuntimeRequest",
+      "relation": "depends_on",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_KernelTransition",
+      "to": "ST_KernelState",
+      "relation": "mutates",
+      "component_id": "component-001"
+    },
+    {
+      "from": "OP_KernelTransition",
+      "to": "ST_RuntimeCommand",
+      "relation": "produces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "INV_CanonicalImmutable",
+      "to": "OP_Commit",
+      "relation": "enforces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "INV_PureOps",
+      "to": "OP_Validate",
+      "relation": "enforces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "INV_PureOps",
+      "to": "OP_PolicyRouter",
+      "relation": "enforces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "INV_KernelStateMutator",
+      "to": "OP_KernelTransition",
+      "relation": "enforces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "INV_CommitSoleUpdater",
+      "to": "OP_Commit",
+      "relation": "enforces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "INV_WakeDeferredTrigger",
+      "to": "OP_WakeDeferred",
+      "relation": "enforces",
+      "component_id": "component-001"
+    },
+    {
+      "from": "INV_BackendNonAuthoritative",
+      "to": "OP_Backend",
+      "relation": "enforces",
+      "component_id": "component-001"
+    }
+  ]
 }

@@ -2,3 +2,47 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_WAL["Write-Ahead Log &#91;State&#93;"]
+    class ST_WAL state;
+    ST_Graph["Causal Graph &#91;State&#93;"]
+    class ST_Graph state;
+    ST_HealthyTable["Healthy Node Table &#91;State&#93;"]
+    class ST_HealthyTable state;
+    ST_SystemState["System State &#91;State&#93;"]
+    class ST_SystemState state;
+    ST_KVCache["Key-Value Cache &#91;State&#93;"]
+    class ST_KVCache state;
+    OP_AppendWAL["Append WAL &#91;Operation&#93;"]
+    class OP_AppendWAL op;
+    OP_CommitEvent["Commit Event &#91;Operation&#93;"]
+    class OP_CommitEvent op;
+    OP_LiftGraph["Lift Graph &#91;Operation&#93;"]
+    class OP_LiftGraph op;
+    OP_HandleFault["Handle Fault &#91;Operation&#93;"]
+    class OP_HandleFault op;
+    OP_BranchWorld["Branch World &#91;Operation&#93;"]
+    class OP_BranchWorld op;
+    OP_Prefill["Prefill Cache &#91;Operation&#93;"]
+    class OP_Prefill op;
+    INV_MonotonicClock["Monotonic Clock &#91;Invariant&#93;"]
+    class INV_MonotonicClock inv;
+    INV_AppendOnly["Append Only Graph &#91;Invariant&#93;"]
+    class INV_AppendOnly inv;
+    INV_FaultIsolation["Fault Isolation &#91;Invariant&#93;"]
+    class INV_FaultIsolation inv;
+    INV_CausalScope["Causal Scope &#91;Invariant&#93;"]
+    class INV_CausalScope inv;
+    OP_AppendWAL -- "mutates" --> ST_WAL
+    OP_CommitEvent -- "mutates" --> ST_WAL
+    OP_LiftGraph -- "depends_on" --> ST_WAL
+    OP_LiftGraph -- "depends_on" --> ST_HealthyTable
+    OP_LiftGraph -- "produces" --> ST_Graph
+    OP_HandleFault -- "mutates" --> ST_KVCache
+    OP_HandleFault -- "mutates" --> ST_WAL
+    OP_BranchWorld -- "mutates" --> ST_SystemState
+    OP_Prefill -- "depends_on" --> ST_WAL
+    OP_Prefill -- "mutates" --> ST_KVCache
+    INV_MonotonicClock -- "enforces" --> OP_AppendWAL
+    INV_AppendOnly -- "enforces" --> ST_Graph
+    INV_FaultIsolation -- "enforces" --> OP_LiftGraph
+    INV_CausalScope -- "enforces" --> OP_LiftGraph

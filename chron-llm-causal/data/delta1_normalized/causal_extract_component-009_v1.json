@@ -1,6 +1,346 @@
 {
   "component_id": "component-009",
-  "nodes": [],
-  "edges": [],
-  "error": "<urlopen error [Errno 111] Connection refused>"
+  "nodes": [
+    {
+      "id": "ST_system_dir",
+      "label": "System Directory Path [State]",
+      "raw_label": "System Directory Path",
+      "type": "State",
+      "component_id": "component-009"
+    },
+    {
+      "id": "ST_use_mock_physical_p",
+      "label": "Use Mock Physical Flag [State]",
+      "raw_label": "Use Mock Physical Flag",
+      "type": "State",
+      "component_id": "component-009"
+    },
+    {
+      "id": "ST_boot_sequence",
+      "label": "Boot Layer Order [State]",
+      "raw_label": "Boot Layer Order",
+      "type": "State",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_init_quicklisp",
+      "label": "Initialize Quicklisp [Operation]",
+      "raw_label": "Initialize Quicklisp",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_libs",
+      "label": "Load External Libraries [Operation]",
+      "raw_label": "Load External Libraries",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_system_file",
+      "label": "Load System File [Operation]",
+      "raw_label": "Load System File",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_init_layers",
+      "label": "Initialize Boot Layers [Operation]",
+      "raw_label": "Initialize Boot Layers",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_physical",
+      "label": "Load Physical Layer [Operation]",
+      "raw_label": "Load Physical Layer",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_llm",
+      "label": "Load LLM Interface [Operation]",
+      "raw_label": "Load LLM Interface",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_core",
+      "label": "Load Core Module [Operation]",
+      "raw_label": "Load Core Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_graph",
+      "label": "Load Graph Layer [Operation]",
+      "raw_label": "Load Graph Layer",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_world",
+      "label": "Load World Module [Operation]",
+      "raw_label": "Load World Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_immune",
+      "label": "Load Immune Module [Operation]",
+      "raw_label": "Load Immune Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_runtime",
+      "label": "Load Runtime Module [Operation]",
+      "raw_label": "Load Runtime Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_generation",
+      "label": "Load Generation Module [Operation]",
+      "raw_label": "Load Generation Module",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_load_test",
+      "label": "Load Test Wrapper [Operation]",
+      "raw_label": "Load Test Wrapper",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_start_delta3",
+      "label": "Start Delta3 Agent [Operation]",
+      "raw_label": "Start Delta3 Agent",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_start_delta3_stub",
+      "label": "Start Delta3 Stub [Operation]",
+      "raw_label": "Start Delta3 Stub",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "OP_agent_main_loop",
+      "label": "Agent Main Loop [Operation]",
+      "raw_label": "Agent Main Loop",
+      "type": "Operation",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_boot_seq",
+      "label": "Boot Sequence Order [Invariant]",
+      "raw_label": "Boot Sequence Order",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_abi",
+      "label": "ABI Signature Match [Invariant]",
+      "raw_label": "ABI Signature Match",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_purity",
+      "label": "Post-Boot State Purity [Invariant]",
+      "raw_label": "Post-Boot State Purity",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_deps",
+      "label": "Layer Dependency Ordering [Invariant]",
+      "raw_label": "Layer Dependency Ordering",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_load_order",
+      "label": "Explicit Load Order [Invariant]",
+      "raw_label": "Explicit Load Order",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_no_reverse_dep",
+      "label": "No Reverse Dependencies [Invariant]",
+      "raw_label": "No Reverse Dependencies",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_physical_swap",
+      "label": "Physical Layer Swappability [Invariant]",
+      "raw_label": "Physical Layer Swappability",
+      "type": "Invariant",
+      "component_id": "component-009"
+    },
+    {
+      "id": "INV_fail_fast",
+      "label": "Fail Fast on Missing Files [Invariant]",
+      "raw_label": "Fail Fast on Missing Files",
+      "type": "Invariant",
+      "component_id": "component-009"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_init_quicklisp",
+      "to": "OP_load_libs",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_libs",
+      "to": "OP_init_layers",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_init_layers",
+      "to": "OP_load_physical",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_physical",
+      "to": "OP_load_llm",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_llm",
+      "to": "OP_load_core",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_core",
+      "to": "OP_load_graph",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_graph",
+      "to": "OP_load_world",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_world",
+      "to": "OP_load_immune",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_immune",
+      "to": "OP_load_runtime",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_runtime",
+      "to": "OP_load_generation",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_generation",
+      "to": "OP_load_test",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_test",
+      "to": "OP_start_delta3",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_load_test",
+      "to": "OP_start_delta3_stub",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_start_delta3",
+      "to": "OP_agent_main_loop",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "OP_start_delta3_stub",
+      "to": "OP_agent_main_loop",
+      "relation": "triggers",
+      "component_id": "component-009"
+    },
+    {
+      "from": "ST_use_mock_physical_p",
+      "to": "OP_load_physical",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "ST_system_dir",
+      "to": "OP_load_system_file",
+      "relation": "depends_on",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_boot_seq",
+      "to": "OP_init_layers",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_load_order",
+      "to": "OP_init_layers",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_deps",
+      "to": "OP_load_core",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_no_reverse_dep",
+      "to": "OP_load_graph",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_physical_swap",
+      "to": "OP_load_physical",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_abi",
+      "to": "OP_load_physical",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_fail_fast",
+      "to": "OP_load_system_file",
+      "relation": "enforces",
+      "component_id": "component-009"
+    },
+    {
+      "from": "INV_purity",
+      "to": "OP_init_quicklisp",
+      "relation": "enforces",
+      "component_id": "component-009"
+    }
+  ]
 }

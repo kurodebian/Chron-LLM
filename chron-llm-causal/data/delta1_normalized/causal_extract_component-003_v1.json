@@ -1,5 +1,332 @@
 {
   "component_id": "component-003",
-  "nodes": [],
-  "edges": []
+  "nodes": [
+    {
+      "id": "ST_MemoryStore",
+      "label": "Memory Store [State]",
+      "raw_label": "Memory Store",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "ST_GraphStore",
+      "label": "Graph Store [State]",
+      "raw_label": "Graph Store",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "ST_World",
+      "label": "World Instance [State]",
+      "raw_label": "World Instance",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "ST_Registry",
+      "label": "World Registry [State]",
+      "raw_label": "World Registry",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "ST_PrefillState",
+      "label": "Prefill State [State]",
+      "raw_label": "Prefill State",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "ST_LifecycleState",
+      "label": "Lifecycle State [State]",
+      "raw_label": "Lifecycle State",
+      "type": "State",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_StorePayload",
+      "label": "Store Payload [Operation]",
+      "raw_label": "Store Payload",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_LoadPayload",
+      "label": "Load Payload [Operation]",
+      "raw_label": "Load Payload",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_AddNode",
+      "label": "Add Node [Operation]",
+      "raw_label": "Add Node",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_AddEdge",
+      "label": "Add Edge [Operation]",
+      "raw_label": "Add Edge",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_CausalSubgraph",
+      "label": "Causal Subgraph [Operation]",
+      "raw_label": "Causal Subgraph",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_ProjectContext",
+      "label": "Project Context [Operation]",
+      "raw_label": "Project Context",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_BuildPrefillState",
+      "label": "Build Prefill State [Operation]",
+      "raw_label": "Build Prefill State",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_MakeWorld",
+      "label": "Make World [Operation]",
+      "raw_label": "Make World",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_ForkWorld",
+      "label": "Fork World [Operation]",
+      "raw_label": "Fork World",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_KernelCommitWorld",
+      "label": "Kernel Commit World [Operation]",
+      "raw_label": "Kernel Commit World",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_RegisterWorld",
+      "label": "Register World [Operation]",
+      "raw_label": "Register World",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_SetActiveWorld",
+      "label": "Set Active World [Operation]",
+      "raw_label": "Set Active World",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "OP_ArchiveWorld",
+      "label": "Archive World [Operation]",
+      "raw_label": "Archive World",
+      "type": "Operation",
+      "component_id": "component-003"
+    },
+    {
+      "id": "INV_MemoryImmutable",
+      "label": "Memory Immutability [Invariant]",
+      "raw_label": "Memory Immutability",
+      "type": "Invariant",
+      "component_id": "component-003"
+    },
+    {
+      "id": "INV_GraphAppend",
+      "label": "Graph Append Integrity [Invariant]",
+      "raw_label": "Graph Append Integrity",
+      "type": "Invariant",
+      "component_id": "component-003"
+    },
+    {
+      "id": "INV_WorldIsolation",
+      "label": "World Isolation [Invariant]",
+      "raw_label": "World Isolation",
+      "type": "Invariant",
+      "component_id": "component-003"
+    },
+    {
+      "id": "INV_CausalSeparation",
+      "label": "Causal Separation [Invariant]",
+      "raw_label": "Causal Separation",
+      "type": "Invariant",
+      "component_id": "component-003"
+    },
+    {
+      "id": "INV_Determinism",
+      "label": "Deterministic Prefill [Invariant]",
+      "raw_label": "Deterministic Prefill",
+      "type": "Invariant",
+      "component_id": "component-003"
+    },
+    {
+      "id": "INV_CommitAtomic",
+      "label": "Atomic Commit [Invariant]",
+      "raw_label": "Atomic Commit",
+      "type": "Invariant",
+      "component_id": "component-003"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_StorePayload",
+      "to": "ST_MemoryStore",
+      "relation": "mutates",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_LoadPayload",
+      "to": "ST_MemoryStore",
+      "relation": "depends_on",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_AddNode",
+      "to": "ST_GraphStore",
+      "relation": "mutates",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_AddEdge",
+      "to": "ST_GraphStore",
+      "relation": "mutates",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_CausalSubgraph",
+      "to": "ST_GraphStore",
+      "relation": "depends_on",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_ProjectContext",
+      "to": "ST_GraphStore",
+      "relation": "depends_on",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_ProjectContext",
+      "to": "ST_MemoryStore",
+      "relation": "depends_on",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_BuildPrefillState",
+      "to": "ST_PrefillState",
+      "relation": "produces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_BuildPrefillState",
+      "to": "OP_ProjectContext",
+      "relation": "depends_on",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_MakeWorld",
+      "to": "ST_World",
+      "relation": "produces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_MakeWorld",
+      "to": "ST_GraphStore",
+      "relation": "depends_on",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_MakeWorld",
+      "to": "ST_MemoryStore",
+      "relation": "depends_on",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_ForkWorld",
+      "to": "ST_World",
+      "relation": "produces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_ForkWorld",
+      "to": "ST_World",
+      "relation": "depends_on",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_KernelCommitWorld",
+      "to": "ST_World",
+      "relation": "mutates",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_KernelCommitWorld",
+      "to": "ST_GraphStore",
+      "relation": "mutates",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_KernelCommitWorld",
+      "to": "INV_CommitAtomic",
+      "relation": "enforces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_RegisterWorld",
+      "to": "ST_Registry",
+      "relation": "mutates",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_SetActiveWorld",
+      "to": "ST_Registry",
+      "relation": "mutates",
+      "component_id": "component-003"
+    },
+    {
+      "from": "OP_ArchiveWorld",
+      "to": "ST_Registry",
+      "relation": "mutates",
+      "component_id": "component-003"
+    },
+    {
+      "from": "INV_MemoryImmutable",
+      "to": "ST_MemoryStore",
+      "relation": "enforces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "INV_GraphAppend",
+      "to": "ST_GraphStore",
+      "relation": "enforces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "INV_WorldIsolation",
+      "to": "ST_World",
+      "relation": "enforces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "INV_CausalSeparation",
+      "to": "OP_CausalSubgraph",
+      "relation": "enforces",
+      "component_id": "component-003"
+    },
+    {
+      "from": "INV_Determinism",
+      "to": "OP_BuildPrefillState",
+      "relation": "enforces",
+      "component_id": "component-003"
+    }
+  ]
 }

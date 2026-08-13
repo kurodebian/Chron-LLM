@@ -1,6 +1,345 @@
 {
   "component_id": "component-007",
-  "nodes": [],
-  "edges": [],
-  "error": "Remote end closed connection without response"
+  "nodes": [
+    {
+      "id": "ST_Graph",
+      "label": "Graph Structure [State]",
+      "raw_label": "Graph Structure",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Basin",
+      "label": "Basin Data [State]",
+      "raw_label": "Basin Data",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Attractor",
+      "label": "Attractor Node [State]",
+      "raw_label": "Attractor Node",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Trajectory",
+      "label": "Trajectory Path [State]",
+      "raw_label": "Trajectory Path",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Cycle",
+      "label": "Cycle Data [State]",
+      "raw_label": "Cycle Data",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_SCC",
+      "label": "Strongly Connected Components [State]",
+      "raw_label": "Strongly Connected Components",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_Cluster",
+      "label": "Cluster Data [State]",
+      "raw_label": "Cluster Data",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_EventSelection",
+      "label": "Event Selection Context [State]",
+      "raw_label": "Event Selection Context",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "ST_BasinResult",
+      "label": "Basin Analysis Result [State]",
+      "raw_label": "Basin Analysis Result",
+      "type": "State",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_next_event",
+      "label": "Next Event Selection [Operation]",
+      "raw_label": "Next Event Selection",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_rollout",
+      "label": "Graph Rollout [Operation]",
+      "raw_label": "Graph Rollout",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_find_attractor",
+      "label": "Find Attractor [Operation]",
+      "raw_label": "Find Attractor",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_find_cycle",
+      "label": "Find Cycle [Operation]",
+      "raw_label": "Find Cycle",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_find_recurrent_cycle",
+      "label": "Find Recurrent Cycle [Operation]",
+      "raw_label": "Find Recurrent Cycle",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_compute_sccs",
+      "label": "Compute SCCs [Operation]",
+      "raw_label": "Compute SCCs",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_analyze_scc",
+      "label": "Analyze SCCs [Operation]",
+      "raw_label": "Analyze SCCs",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_build_basin_map",
+      "label": "Build Basin Map [Operation]",
+      "raw_label": "Build Basin Map",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "OP_build_basin_structure",
+      "label": "Build Basin Structure [Operation]",
+      "raw_label": "Build Basin Structure",
+      "type": "Operation",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_Graph_Edge_Nodes",
+      "label": "Graph Edge Node Validity [Invariant]",
+      "raw_label": "Graph Edge Node Validity",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_Basin_Mass",
+      "label": "Basin Mass Consistency [Invariant]",
+      "raw_label": "Basin Mass Consistency",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_Basin_Ratio",
+      "label": "Basin Ratio Normalization [Invariant]",
+      "raw_label": "Basin Ratio Normalization",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_Partition",
+      "label": "Basin Partition Completeness [Invariant]",
+      "raw_label": "Basin Partition Completeness",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_SCC_Attractor",
+      "label": "SCC Attractor Stability [Invariant]",
+      "raw_label": "SCC Attractor Stability",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_Cluster_Type",
+      "label": "Cluster Type Classification [Invariant]",
+      "raw_label": "Cluster Type Classification",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_Stability",
+      "label": "Stability Metric Definition [Invariant]",
+      "raw_label": "Stability Metric Definition",
+      "type": "Invariant",
+      "component_id": "component-007"
+    },
+    {
+      "id": "INV_Rollout_Path",
+      "label": "Rollout Path Validity [Invariant]",
+      "raw_label": "Rollout Path Validity",
+      "type": "Invariant",
+      "component_id": "component-007"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_next_event",
+      "to": "ST_EventSelection",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_rollout",
+      "to": "OP_next_event",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_rollout",
+      "to": "ST_Trajectory",
+      "relation": "mutates",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_find_attractor",
+      "to": "OP_rollout",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_find_attractor",
+      "to": "ST_Attractor",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_find_cycle",
+      "to": "ST_Trajectory",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_find_cycle",
+      "to": "ST_Cycle",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_find_recurrent_cycle",
+      "to": "OP_rollout",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_find_recurrent_cycle",
+      "to": "OP_find_cycle",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_compute_sccs",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_compute_sccs",
+      "to": "ST_SCC",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_analyze_scc",
+      "to": "ST_SCC",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_build_basin_map",
+      "to": "OP_find_attractor",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_build_basin_map",
+      "to": "ST_Basin",
+      "relation": "mutates",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_build_basin_structure",
+      "to": "ST_Basin",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "OP_build_basin_structure",
+      "to": "ST_BasinResult",
+      "relation": "produces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "INV_Graph_Edge_Nodes",
+      "to": "ST_Graph",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "INV_Basin_Mass",
+      "to": "ST_Basin",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "INV_Basin_Ratio",
+      "to": "ST_Basin",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "INV_Partition",
+      "to": "ST_Basin",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "INV_SCC_Attractor",
+      "to": "ST_SCC",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "INV_Cluster_Type",
+      "to": "ST_Cluster",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "INV_Stability",
+      "to": "ST_Cycle",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "INV_Rollout_Path",
+      "to": "ST_Trajectory",
+      "relation": "enforces",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_Attractor",
+      "to": "ST_SCC",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    },
+    {
+      "from": "ST_Cluster",
+      "to": "ST_Graph",
+      "relation": "depends_on",
+      "component_id": "component-007"
+    }
+  ]
 }

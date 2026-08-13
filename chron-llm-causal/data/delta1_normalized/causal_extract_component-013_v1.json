@@ -1,6 +1,287 @@
 {
   "component_id": "component-013",
-  "nodes": [],
-  "edges": [],
-  "error": "<urlopen error [Errno 111] Connection refused>"
+  "nodes": [
+    {
+      "id": "ST_Baseline",
+      "label": "Baseline Status [State]",
+      "raw_label": "Baseline Status",
+      "type": "State",
+      "component_id": "component-013"
+    },
+    {
+      "id": "OP_Understand",
+      "label": "Understand [Operation]",
+      "raw_label": "Understand",
+      "type": "Operation",
+      "component_id": "component-013"
+    },
+    {
+      "id": "OP_Analyze",
+      "label": "Analyze [Operation]",
+      "raw_label": "Analyze",
+      "type": "Operation",
+      "component_id": "component-013"
+    },
+    {
+      "id": "OP_Design",
+      "label": "Design [Operation]",
+      "raw_label": "Design",
+      "type": "Operation",
+      "component_id": "component-013"
+    },
+    {
+      "id": "OP_Implement",
+      "label": "Implement [Operation]",
+      "raw_label": "Implement",
+      "type": "Operation",
+      "component_id": "component-013"
+    },
+    {
+      "id": "OP_Verify",
+      "label": "Verify [Operation]",
+      "raw_label": "Verify",
+      "type": "Operation",
+      "component_id": "component-013"
+    },
+    {
+      "id": "OP_Record",
+      "label": "Record [Operation]",
+      "raw_label": "Record",
+      "type": "Operation",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_Independence",
+      "label": "Architecture Independence [Invariant]",
+      "raw_label": "Architecture Independence",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_GovernanceScope",
+      "label": "Governance Scope [Invariant]",
+      "raw_label": "Governance Scope",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_RuntimeSatisfaction",
+      "label": "Runtime Satisfaction [Invariant]",
+      "raw_label": "Runtime Satisfaction",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_EvolutionRule",
+      "label": "Evolution Rule [Invariant]",
+      "raw_label": "Evolution Rule",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ExtensionPriority",
+      "label": "Extension Priority [Invariant]",
+      "raw_label": "Extension Priority",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_Minimalism",
+      "label": "Minimalism [Invariant]",
+      "raw_label": "Minimalism",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_Neutrality",
+      "label": "Neutrality [Invariant]",
+      "raw_label": "Neutrality",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_MetaDesignSeparation",
+      "label": "Meta-Design Separation [Invariant]",
+      "raw_label": "Meta-Design Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_RuntimeDesignSeparation",
+      "label": "Runtime-Design Separation [Invariant]",
+      "raw_label": "Runtime-Design Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ConceptResponsibilityDependency",
+      "label": "Concept-Responsibility Dependency [Invariant]",
+      "raw_label": "Concept-Responsibility Dependency",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ConceptImplementationIndependence",
+      "label": "Concept-Implementation Independence [Invariant]",
+      "raw_label": "Concept-Implementation Independence",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_NewConceptResponsibilityRequirement",
+      "label": "New Concept Responsibility Requirement [Invariant]",
+      "raw_label": "New Concept Responsibility Requirement",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ContentImplementationPrecedence",
+      "label": "Content-Implementation Precedence [Invariant]",
+      "raw_label": "Content-Implementation Precedence",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_ImplementationConstitutionPreservation",
+      "label": "Implementation Constitution Preservation [Invariant]",
+      "raw_label": "Implementation Constitution Preservation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    },
+    {
+      "id": "INV_AuthorityRepresentationSeparation",
+      "label": "Authority-Representation Separation [Invariant]",
+      "raw_label": "Authority-Representation Separation",
+      "type": "Invariant",
+      "component_id": "component-013"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_Understand",
+      "to": "OP_Analyze",
+      "relation": "triggers",
+      "component_id": "component-013"
+    },
+    {
+      "from": "OP_Analyze",
+      "to": "OP_Design",
+      "relation": "triggers",
+      "component_id": "component-013"
+    },
+    {
+      "from": "OP_Design",
+      "to": "OP_Implement",
+      "relation": "triggers",
+      "component_id": "component-013"
+    },
+    {
+      "from": "OP_Implement",
+      "to": "OP_Verify",
+      "relation": "triggers",
+      "component_id": "component-013"
+    },
+    {
+      "from": "OP_Verify",
+      "to": "OP_Record",
+      "relation": "triggers",
+      "component_id": "component-013"
+    },
+    {
+      "from": "OP_Record",
+      "to": "ST_Baseline",
+      "relation": "mutates",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_EvolutionRule",
+      "to": "OP_Implement",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_NewConceptResponsibilityRequirement",
+      "to": "OP_Design",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_ContentImplementationPrecedence",
+      "to": "OP_Implement",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_ImplementationConstitutionPreservation",
+      "to": "OP_Implement",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_ConceptResponsibilityDependency",
+      "to": "OP_Design",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_ConceptImplementationIndependence",
+      "to": "OP_Implement",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_RuntimeSatisfaction",
+      "to": "OP_Implement",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_GovernanceScope",
+      "to": "OP_Design",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_Independence",
+      "to": "OP_Design",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_ExtensionPriority",
+      "to": "OP_Design",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_Minimalism",
+      "to": "OP_Design",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_Neutrality",
+      "to": "OP_Design",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_MetaDesignSeparation",
+      "to": "OP_Design",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_RuntimeDesignSeparation",
+      "to": "OP_Implement",
+      "relation": "enforces",
+      "component_id": "component-013"
+    },
+    {
+      "from": "INV_AuthorityRepresentationSeparation",
+      "to": "OP_Design",
+      "relation": "enforces",
+      "component_id": "component-013"
+    }
+  ]
 }

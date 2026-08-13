@@ -2,39 +2,3 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
-    ST_MemoryStore["Memory Store [State]"]
-    class ST_MemoryStore state;
-    ST_GraphStore["Graph Store [State]"]
-    class ST_GraphStore state;
-    ST_PrefillState["Prefill State [State]"]
-    class ST_PrefillState state;
-    ST_World["World Instance [State]"]
-    class ST_World state;
-    ST_Registry["World Registry [State]"]
-    class ST_Registry state;
-    OP_StorePayload["Store Payload [Operation]"]
-    class OP_StorePayload op;
-    OP_LoadPayload["Load Payload [Operation]"]
-    class OP_LoadPayload op;
-    OP_CausalSubgraph["Causal Subgraph [Operation]"]
-    class OP_CausalSubgraph op;
-    OP_ProjectContext["Project Context [Operation]"]
-    class OP_ProjectContext op;
-    OP_BuildPrefillState["Build Prefill State [Operation]"]
-    class OP_BuildPrefillState op;
-    OP_CommitProposal["Commit Proposal [Operation]"]
-    class OP_CommitProposal op;
-    OP_MakeWorld["Make World [Operation]"]
-    class OP_MakeWorld op;
-    OP_ForkWorld["Fork World [Operation]"]
-    class OP_ForkWorld op;
-    OP_CommitNode["Commit Node [Operation]"]
-    class OP_CommitNode op;
-    OP_KernelCommitWorld["Kernel Commit World [Operation]"]
-    class OP_KernelCommitWorld op;
-    INV_MemImmutable["Memory Immutability [Invariant]"]
-    class INV_MemImmutable inv;
-    INV_GraphAppend["Graph Append Rule [Invariant]"]
-    class INV_GraphAppend inv;
-    INV_Authority["Mutation Authority [Invariant]"]
-    class INV_Authority inv;

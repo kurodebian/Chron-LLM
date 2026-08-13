@@ -2,3 +2,85 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_IngressQueue["Ingress Queue [State]"]
+    class ST_IngressQueue state;
+    ST_ReadyQueue["Ready Queue [State]"]
+    class ST_ReadyQueue state;
+    ST_IsolatedQueue["Isolated Queue [State]"]
+    class ST_IsolatedQueue state;
+    ST_ExecutionState["Execution State [State]"]
+    class ST_ExecutionState state;
+    ST_CausalOrder["Causal Order [State]"]
+    class ST_CausalOrder state;
+    ST_RetryCount["Retry Count [State]"]
+    class ST_RetryCount state;
+    ST_MaxRetry["Max Retry Limit [State]"]
+    class ST_MaxRetry state;
+    ST_MaxPenaltyRetry["Max Penalty Retry Limit [State]"]
+    class ST_MaxPenaltyRetry state;
+    ST_CanonicalState["Canonical State [State]"]
+    class ST_CanonicalState state;
+    ST_DialogueState["Dialogue State [State]"]
+    class ST_DialogueState state;
+    ST_CausalId["Causal ID [State]"]
+    class ST_CausalId state;
+    ST_ToolEvent["Tool Event [State]"]
+    class ST_ToolEvent state;
+    OP_Schedule["Schedule [Operation]"]
+    class OP_Schedule op;
+    OP_Retry["Retry [Operation]"]
+    class OP_Retry op;
+    OP_RetryWithPenalty["Retry With Penalty [Operation]"]
+    class OP_RetryWithPenalty op;
+    OP_Abort["Abort [Operation]"]
+    class OP_Abort op;
+    OP_Apply["Apply Tool Event [Operation]"]
+    class OP_Apply op;
+    OP_ToolRetry["Tool Retry [Operation]"]
+    class OP_ToolRetry op;
+    INV_ScheduleDeterministic["Schedule Determinism [Invariant]"]
+    class INV_ScheduleDeterministic inv;
+    INV_RetryNoMutation["Retry No Mutation [Invariant]"]
+    class INV_RetryNoMutation inv;
+    INV_NormalDialogueIsolation["Normal Dialogue Isolation [Invariant]"]
+    class INV_NormalDialogueIsolation inv;
+    INV_FaultIsolation["Fault Isolation [Invariant]"]
+    class INV_FaultIsolation inv;
+    INV_AuthorityCommit["Authority Commit [Invariant]"]
+    class INV_AuthorityCommit inv;
+    INV_IsolationFail["Isolation Fail [Invariant]"]
+    class INV_IsolationFail inv;
+    INV_CausalIdConsistency["Causal ID Consistency [Invariant]"]
+    class INV_CausalIdConsistency inv;
+    INV_RetryScope["Retry Scope [Invariant]"]
+    class INV_RetryScope inv;
+    INV_NoBypass["No Bypass [Invariant]"]
+    class INV_NoBypass inv;
+    INV_Determinism["Replay Determinism [Invariant]"]
+    class INV_Determinism inv;
+    OP_Schedule -- "depends_on" --> ST_ReadyQueue
+    OP_Schedule -- "depends_on" --> ST_CausalOrder
+    OP_Schedule -- "produces" --> ST_ExecutionState
+    INV_ScheduleDeterministic -- "enforces" --> OP_Schedule
+    OP_Retry -- "depends_on" --> ST_RetryCount
+    OP_Retry -- "depends_on" --> ST_MaxRetry
+    OP_Retry -- "mutates" --> ST_ReadyQueue
+    OP_Retry -- "triggers" --> OP_Abort
+    INV_RetryNoMutation -- "enforces" --> OP_Retry
+    OP_RetryWithPenalty -- "depends_on" --> ST_RetryCount
+    OP_RetryWithPenalty -- "depends_on" --> ST_MaxPenaltyRetry
+    OP_RetryWithPenalty -- "depends_on" --> ST_CanonicalState
+    OP_RetryWithPenalty -- "enforces" --> INV_RetryNoMutation
+    OP_Abort -- "mutates" --> ST_ExecutionState
+    INV_NormalDialogueIsolation -- "enforces" --> ST_ReadyQueue
+    INV_FaultIsolation -- "enforces" --> OP_Abort
+    OP_Apply -- "depends_on" --> ST_ToolEvent
+    OP_Apply -- "mutates" --> ST_CanonicalState
+    OP_Apply -- "mutates" --> ST_DialogueState
+    INV_AuthorityCommit -- "enforces" --> OP_Apply
+    INV_IsolationFail -- "enforces" --> OP_Apply
+    INV_CausalIdConsistency -- "enforces" --> OP_Apply
+    INV_NoBypass -- "enforces" --> OP_Apply
+    OP_ToolRetry -- "produces" --> ST_ToolEvent
+    INV_RetryScope -- "enforces" --> OP_ToolRetry
+    INV_Determinism -- "enforces" --> OP_Apply

@@ -2,3 +2,82 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_system_dir["System Directory Path [State]"]
+    class ST_system_dir state;
+    ST_use_mock_physical_p["Use Mock Physical Flag [State]"]
+    class ST_use_mock_physical_p state;
+    ST_boot_sequence["Boot Layer Order [State]"]
+    class ST_boot_sequence state;
+    OP_init_quicklisp["Initialize Quicklisp [Operation]"]
+    class OP_init_quicklisp op;
+    OP_load_libs["Load External Libraries [Operation]"]
+    class OP_load_libs op;
+    OP_load_system_file["Load System File [Operation]"]
+    class OP_load_system_file op;
+    OP_init_layers["Initialize Boot Layers [Operation]"]
+    class OP_init_layers op;
+    OP_load_physical["Load Physical Layer [Operation]"]
+    class OP_load_physical op;
+    OP_load_llm["Load LLM Interface [Operation]"]
+    class OP_load_llm op;
+    OP_load_core["Load Core Module [Operation]"]
+    class OP_load_core op;
+    OP_load_graph["Load Graph Layer [Operation]"]
+    class OP_load_graph op;
+    OP_load_world["Load World Module [Operation]"]
+    class OP_load_world op;
+    OP_load_immune["Load Immune Module [Operation]"]
+    class OP_load_immune op;
+    OP_load_runtime["Load Runtime Module [Operation]"]
+    class OP_load_runtime op;
+    OP_load_generation["Load Generation Module [Operation]"]
+    class OP_load_generation op;
+    OP_load_test["Load Test Wrapper [Operation]"]
+    class OP_load_test op;
+    OP_start_delta3["Start Delta3 Agent [Operation]"]
+    class OP_start_delta3 op;
+    OP_start_delta3_stub["Start Delta3 Stub [Operation]"]
+    class OP_start_delta3_stub op;
+    OP_agent_main_loop["Agent Main Loop [Operation]"]
+    class OP_agent_main_loop op;
+    INV_boot_seq["Boot Sequence Order [Invariant]"]
+    class INV_boot_seq inv;
+    INV_abi["ABI Signature Match [Invariant]"]
+    class INV_abi inv;
+    INV_purity["Post-Boot State Purity [Invariant]"]
+    class INV_purity inv;
+    INV_deps["Layer Dependency Ordering [Invariant]"]
+    class INV_deps inv;
+    INV_load_order["Explicit Load Order [Invariant]"]
+    class INV_load_order inv;
+    INV_no_reverse_dep["No Reverse Dependencies [Invariant]"]
+    class INV_no_reverse_dep inv;
+    INV_physical_swap["Physical Layer Swappability [Invariant]"]
+    class INV_physical_swap inv;
+    INV_fail_fast["Fail Fast on Missing Files [Invariant]"]
+    class INV_fail_fast inv;
+    OP_init_quicklisp -- "triggers" --> OP_load_libs
+    OP_load_libs -- "triggers" --> OP_init_layers
+    OP_init_layers -- "triggers" --> OP_load_physical
+    OP_load_physical -- "depends_on" --> OP_load_llm
+    OP_load_llm -- "depends_on" --> OP_load_core
+    OP_load_core -- "depends_on" --> OP_load_graph
+    OP_load_graph -- "depends_on" --> OP_load_world
+    OP_load_world -- "depends_on" --> OP_load_immune
+    OP_load_immune -- "depends_on" --> OP_load_runtime
+    OP_load_runtime -- "depends_on" --> OP_load_generation
+    OP_load_generation -- "depends_on" --> OP_load_test
+    OP_load_test -- "triggers" --> OP_start_delta3
+    OP_load_test -- "triggers" --> OP_start_delta3_stub
+    OP_start_delta3 -- "triggers" --> OP_agent_main_loop
+    OP_start_delta3_stub -- "triggers" --> OP_agent_main_loop
+    ST_use_mock_physical_p -- "depends_on" --> OP_load_physical
+    ST_system_dir -- "depends_on" --> OP_load_system_file
+    INV_boot_seq -- "enforces" --> OP_init_layers
+    INV_load_order -- "enforces" --> OP_init_layers
+    INV_deps -- "enforces" --> OP_load_core
+    INV_no_reverse_dep -- "enforces" --> OP_load_graph
+    INV_physical_swap -- "enforces" --> OP_load_physical
+    INV_abi -- "enforces" --> OP_load_physical
+    INV_fail_fast -- "enforces" --> OP_load_system_file
+    INV_purity -- "enforces" --> OP_init_quicklisp

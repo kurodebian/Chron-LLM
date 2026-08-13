@@ -2,3 +2,81 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_Graph["Graph Structure [State]"]
+    class ST_Graph state;
+    ST_Basin["Basin Data [State]"]
+    class ST_Basin state;
+    ST_Attractor["Attractor Node [State]"]
+    class ST_Attractor state;
+    ST_Trajectory["Trajectory Path [State]"]
+    class ST_Trajectory state;
+    ST_Cycle["Cycle Data [State]"]
+    class ST_Cycle state;
+    ST_SCC["Strongly Connected Components [State]"]
+    class ST_SCC state;
+    ST_Cluster["Cluster Data [State]"]
+    class ST_Cluster state;
+    ST_EventSelection["Event Selection Context [State]"]
+    class ST_EventSelection state;
+    ST_BasinResult["Basin Analysis Result [State]"]
+    class ST_BasinResult state;
+    OP_next_event["Next Event Selection [Operation]"]
+    class OP_next_event op;
+    OP_rollout["Graph Rollout [Operation]"]
+    class OP_rollout op;
+    OP_find_attractor["Find Attractor [Operation]"]
+    class OP_find_attractor op;
+    OP_find_cycle["Find Cycle [Operation]"]
+    class OP_find_cycle op;
+    OP_find_recurrent_cycle["Find Recurrent Cycle [Operation]"]
+    class OP_find_recurrent_cycle op;
+    OP_compute_sccs["Compute SCCs [Operation]"]
+    class OP_compute_sccs op;
+    OP_analyze_scc["Analyze SCCs [Operation]"]
+    class OP_analyze_scc op;
+    OP_build_basin_map["Build Basin Map [Operation]"]
+    class OP_build_basin_map op;
+    OP_build_basin_structure["Build Basin Structure [Operation]"]
+    class OP_build_basin_structure op;
+    INV_Graph_Edge_Nodes["Graph Edge Node Validity [Invariant]"]
+    class INV_Graph_Edge_Nodes inv;
+    INV_Basin_Mass["Basin Mass Consistency [Invariant]"]
+    class INV_Basin_Mass inv;
+    INV_Basin_Ratio["Basin Ratio Normalization [Invariant]"]
+    class INV_Basin_Ratio inv;
+    INV_Partition["Basin Partition Completeness [Invariant]"]
+    class INV_Partition inv;
+    INV_SCC_Attractor["SCC Attractor Stability [Invariant]"]
+    class INV_SCC_Attractor inv;
+    INV_Cluster_Type["Cluster Type Classification [Invariant]"]
+    class INV_Cluster_Type inv;
+    INV_Stability["Stability Metric Definition [Invariant]"]
+    class INV_Stability inv;
+    INV_Rollout_Path["Rollout Path Validity [Invariant]"]
+    class INV_Rollout_Path inv;
+    OP_next_event -- "produces" --> ST_EventSelection
+    OP_rollout -- "depends_on" --> OP_next_event
+    OP_rollout -- "mutates" --> ST_Trajectory
+    OP_find_attractor -- "depends_on" --> OP_rollout
+    OP_find_attractor -- "produces" --> ST_Attractor
+    OP_find_cycle -- "depends_on" --> ST_Trajectory
+    OP_find_cycle -- "produces" --> ST_Cycle
+    OP_find_recurrent_cycle -- "depends_on" --> OP_rollout
+    OP_find_recurrent_cycle -- "depends_on" --> OP_find_cycle
+    OP_compute_sccs -- "depends_on" --> ST_Graph
+    OP_compute_sccs -- "produces" --> ST_SCC
+    OP_analyze_scc -- "depends_on" --> ST_SCC
+    OP_build_basin_map -- "depends_on" --> OP_find_attractor
+    OP_build_basin_map -- "mutates" --> ST_Basin
+    OP_build_basin_structure -- "depends_on" --> ST_Basin
+    OP_build_basin_structure -- "produces" --> ST_BasinResult
+    INV_Graph_Edge_Nodes -- "enforces" --> ST_Graph
+    INV_Basin_Mass -- "enforces" --> ST_Basin
+    INV_Basin_Ratio -- "enforces" --> ST_Basin
+    INV_Partition -- "enforces" --> ST_Basin
+    INV_SCC_Attractor -- "enforces" --> ST_SCC
+    INV_Cluster_Type -- "enforces" --> ST_Cluster
+    INV_Stability -- "enforces" --> ST_Cycle
+    INV_Rollout_Path -- "enforces" --> ST_Trajectory
+    ST_Attractor -- "depends_on" --> ST_SCC
+    ST_Cluster -- "depends_on" --> ST_Graph

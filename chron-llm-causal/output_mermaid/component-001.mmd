@@ -2,3 +2,78 @@ graph TD
     classDef state fill:#f9f,stroke:#333,stroke-width:1px;
     classDef op fill:#bbf,stroke:#333,stroke-width:1px;
     classDef inv fill:#ff9,stroke:#333,stroke-width:1px;
+    ST_Canonical["Canonical State [State]"]
+    class ST_Canonical state;
+    ST_KernelState["Kernel State [State]"]
+    class ST_KernelState state;
+    ST_Candidate["Candidate Proposal [State]"]
+    class ST_Candidate state;
+    ST_Event["Event Entry [State]"]
+    class ST_Event state;
+    ST_ValidationReport["Validation Report [State]"]
+    class ST_ValidationReport state;
+    ST_RuntimeRequest["Runtime Request [State]"]
+    class ST_RuntimeRequest state;
+    ST_RuntimeCommand["Runtime Command [State]"]
+    class ST_RuntimeCommand state;
+    ST_Derived["Derived Context [State]"]
+    class ST_Derived state;
+    ST_Prompt["Generated Prompt [State]"]
+    class ST_Prompt state;
+    ST_Fault["Fault Event [State]"]
+    class ST_Fault state;
+    OP_Commit["Commit Event [Operation]"]
+    class OP_Commit op;
+    OP_Replay["Replay Snapshot [Operation]"]
+    class OP_Replay op;
+    OP_Derive["Derive Context [Operation]"]
+    class OP_Derive op;
+    OP_Validate["Validate Candidate [Operation]"]
+    class OP_Validate op;
+    OP_PolicyRouter["Policy Router [Operation]"]
+    class OP_PolicyRouter op;
+    OP_KernelTransition["Kernel Transition [Operation]"]
+    class OP_KernelTransition op;
+    OP_WakeDeferred["Wake Deferred [Operation]"]
+    class OP_WakeDeferred op;
+    OP_BuildPrompt["Build Prompt [Operation]"]
+    class OP_BuildPrompt op;
+    OP_Backend["Backend Generation [Operation]"]
+    class OP_Backend op;
+    INV_CanonicalImmutable["Canonical Immutability [Invariant]"]
+    class INV_CanonicalImmutable inv;
+    INV_PureOps["Pure Operations [Invariant]"]
+    class INV_PureOps inv;
+    INV_KernelStateMutator["Kernel State Mutator [Invariant]"]
+    class INV_KernelStateMutator inv;
+    INV_CommitSoleUpdater["Commit Sole Updater [Invariant]"]
+    class INV_CommitSoleUpdater inv;
+    INV_WakeDeferredTrigger["Wake Deferred Trigger [Invariant]"]
+    class INV_WakeDeferredTrigger inv;
+    INV_BackendNonAuthoritative["Backend Non-Authoritative [Invariant]"]
+    class INV_BackendNonAuthoritative inv;
+    OP_Commit -- "mutates" --> ST_Canonical
+    OP_Commit -- "triggers" --> OP_WakeDeferred
+    OP_WakeDeferred -- "mutates" --> ST_KernelState
+    OP_Replay -- "produces" --> ST_Derived
+    OP_Derive -- "produces" --> ST_Derived
+    OP_BuildPrompt -- "depends_on" --> ST_Derived
+    OP_BuildPrompt -- "produces" --> ST_Prompt
+    OP_Backend -- "depends_on" --> ST_Prompt
+    OP_Backend -- "produces" --> ST_Candidate
+    OP_Validate -- "depends_on" --> ST_Candidate
+    OP_Validate -- "depends_on" --> ST_Canonical
+    OP_Validate -- "produces" --> ST_ValidationReport
+    OP_PolicyRouter -- "depends_on" --> ST_ValidationReport
+    OP_PolicyRouter -- "produces" --> ST_RuntimeRequest
+    OP_KernelTransition -- "depends_on" --> ST_KernelState
+    OP_KernelTransition -- "depends_on" --> ST_RuntimeRequest
+    OP_KernelTransition -- "mutates" --> ST_KernelState
+    OP_KernelTransition -- "produces" --> ST_RuntimeCommand
+    INV_CanonicalImmutable -- "enforces" --> OP_Commit
+    INV_PureOps -- "enforces" --> OP_Validate
+    INV_PureOps -- "enforces" --> OP_PolicyRouter
+    INV_KernelStateMutator -- "enforces" --> OP_KernelTransition
+    INV_CommitSoleUpdater -- "enforces" --> OP_Commit
+    INV_WakeDeferredTrigger -- "enforces" --> OP_WakeDeferred
+    INV_BackendNonAuthoritative -- "enforces" --> OP_Backend
