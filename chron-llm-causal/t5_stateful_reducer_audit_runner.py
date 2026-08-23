@@ -1,15 +1,18 @@
 """
-t5_stateful_reducer_test_runner.py — T5: Stateful ContextReducer Trajectory Invariants Audit (Strictly Strengthened)
+t5_stateful_reducer_test_runner.py — T5: Stateful ContextReducer Trajectory Invariants Audit
+(STRICT + HISTORICAL VALUE PRESERVATION)
 """
 
+import copy
 from step0_ssot import ParseStatus, ClaimType
 from step2_production_parser import parse_production, ProductionParseResult
 from step3_context_reducer import ContextReducer, ContextState
 
 
-def run_t5_stateful_audit() -> bool:
+def run_t5_stateful_trajectory_audit() -> bool:
     print("=" * 75)
-    print("T5 AUDIT: STATEFUL CONTEXT REDUCER TRAJECTORY INVARIANTS (STRICT)")
+    print("T5 AUDIT: STATEFUL REDUCER TRAJECTORY INVARIANTS")
+    print("          (STRICT + HISTORICAL VALUE PRESERVATION)")
     print("=" * 75)
 
     all_passed = True
@@ -18,12 +21,12 @@ def run_t5_stateful_audit() -> bool:
     # Sub-Test 1: Transition & Retention Invariants (Including INVALID_CONTEXT)
     # -------------------------------------------------------------------------
     print("\n[Sub-Test 1] Transition & Retention Invariants")
-    
+
     s0 = ContextState(current_unit=None)
-    
+
     r_unit_a = parse_production("unit: ModuleA", None)
     s1 = ContextReducer.reduce(s0, r_unit_a)
-    
+
     r_req_x = parse_production("requires: LibX", s1.current_unit)
     s2 = ContextReducer.reduce(s1, r_req_x)
 
@@ -50,13 +53,15 @@ def run_t5_stateful_audit() -> bool:
         all_passed = False
 
     # -------------------------------------------------------------------------
-    # Sub-Test 2: Historical State Immutability & Structural Identity Audit (A. Historical Identity)
+    # Sub-Test 2: Historical State Immutability & Value Preservation Audit
     # -------------------------------------------------------------------------
-    print("\n[Sub-Test 2] Historical State Immutability & Structural Identity (id() Uniqueness)")
-    
-    history = []
+    print("\n[Sub-Test 2] Historical State Immutability & Value Preservation Audit")
+
+    # (live_state_reference, independent_deep_snapshot) のタプル配列を保持
+    trajectory = []
+
     curr_state = ContextState(current_unit=None)
-    history.append(curr_state)
+    trajectory.append((curr_state, copy.deepcopy(curr_state)))
 
     lines_sequence = [
         "unit: App.Base",
@@ -73,27 +78,41 @@ def run_t5_stateful_audit() -> bool:
         prev_state = curr_state
         p_res = parse_production(line, curr_state.current_unit)
         curr_state = ContextReducer.reduce(curr_state, p_res)
-        
-        # 連続する状態間でのオブジェクト非同一性 (is not)
+
+        # 1. 連続する状態間でのインプレース変更（非同一性 is not）を検証
         if curr_state is prev_state:
             print(f"  [FAIL] State mutation in place detected at line: '{line}'")
             all_passed = False
-        
-        history.append(curr_state)
 
-    # 履歴全体のすべてのオブジェクト ID が完全に一意であることの検証
-    history_ids = [id(s) for s in history]
-    if len(set(history_ids)) == len(history):
-        print(f"  [PASS] All {len(history)} trajectory snapshots possess strictly unique object identities (no state recycling).")
+        trajectory.append((curr_state, copy.deepcopy(curr_state)))
+
+    # 2. 履歴全体のすべてのオブジェクト ID が完全に一意であることの検証 (Identity Uniqueness)
+    history_ids = [id(s_ref) for s_ref, _ in trajectory]
+    identity_unique = (len(set(history_ids)) == len(trajectory))
+
+    # 3. 全遷移完了後、過去の全オブジェクトが不当に追突・破壊的改変されていないか検証 (Value Preservation)
+    value_preserved = True
+    for idx, (s_ref, snapshot) in enumerate(trajectory):
+        if s_ref != snapshot:
+            value_preserved = False
+            print(f"   ├─ [FAIL] State snapshot value mismatch at step {idx}: Live={s_ref}, Exp={snapshot}")
+
+    t2_pass = identity_unique and value_preserved
+    if t2_pass:
+        print(f"  [PASS] All {len(trajectory)} trajectory snapshots possess strictly unique object identities AND preserved historical values.")
     else:
-        print("  [FAIL] State object identity collision detected across history.")
+        print("  [FAIL] Historical Immutability or Value Preservation Audit failed.")
+        if not identity_unique:
+            print("   ├─ Reason: State object identity collision detected across history.")
+        if not value_preserved:
+            print("   ├─ Reason: Retrospective state mutation detected.")
         all_passed = False
 
     # -------------------------------------------------------------------------
     # Sub-Test 3: Adversarial Boundary Isolation
     # -------------------------------------------------------------------------
     print("\n[Sub-Test 3] Adversarial Boundary Isolation")
-    
+
     state = ContextState(current_unit="ModuleInitial")
     adversarial_inputs = [
         ("requires: Evil1", "ModuleInitial"),
@@ -122,10 +141,10 @@ def run_t5_stateful_audit() -> bool:
         print("  [PASS] State boundaries remained fully isolated under adversarial sequences.")
 
     # -------------------------------------------------------------------------
-    # Sub-Test 4: True Composition Audit (B. True Composition / Path-Consistency)
+    # Sub-Test 4: True Composition Audit (Independent Path Convergence)
     # -------------------------------------------------------------------------
     print("\n[Sub-Test 4] True Composition Audit (Independent Path Convergence)")
-    
+
     # 経路 A: S0 -> (unit: ModuleA) -> S1_A -> (requires: DB) -> S2_A
     s0 = ContextState(current_unit="Root")
     r1 = parse_production("unit: ModuleA", s0.current_unit)
@@ -144,12 +163,11 @@ def run_t5_stateful_audit() -> bool:
         all_passed = False
 
     # -------------------------------------------------------------------------
-    # Sub-Test 5: Parser-Reducer Separation Audit (C. Parser-Reducer Contract Isolation)
+    # Sub-Test 5: Parser-Reducer Separation Audit (Typed IR Consumption)
     # -------------------------------------------------------------------------
     print("\n[Sub-Test 5] Parser-Reducer Separation Audit (Typed IR Consumption)")
-    
-    # 偽装された複数の Typed IR（ProductionParseResult）を生成し、Reducer が
-    # 「文字列の解析」を行わず、渡された IR のみを厳密に評価しているかを検証
+
+    # 既存の ProductionParseResult パラメータ形式を厳密に維持
     forged_units = ["TargetX", "TargetY", "TargetZ.Sub"]
     separation_passed = True
 
@@ -160,10 +178,10 @@ def run_t5_stateful_audit() -> bool:
             target=target,
             trace=("P1", "P2", "P3", "P4", "P5")
         )
-        
+
         initial = ContextState(current_unit="BaseUnit")
         next_state = ContextReducer.reduce(initial, forged_result)
-        
+
         if next_state.current_unit != target:
             print(f"  [FAIL] Reducer failed to strictly consume target '{target}', got '{next_state.current_unit}'")
             separation_passed = False
@@ -178,7 +196,7 @@ def run_t5_stateful_audit() -> bool:
     )
     safe_state = ContextState(current_unit="ImmutableBase")
     safe_next_state = ContextReducer.reduce(safe_state, invalid_forged_result)
-    
+
     if safe_next_state.current_unit == "ImmutableBase":
         print("  [PASS] Reducer rejects non-VALID_CLAIM IR structures regardless of inner fields.")
     else:
@@ -196,4 +214,4 @@ def run_t5_stateful_audit() -> bool:
 
 
 if __name__ == "__main__":
-    run_t5_stateful_audit()
+    run_t5_stateful_trajectory_audit()

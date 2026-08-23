@@ -29,10 +29,24 @@ def test_t1_b_differential_equivalence(line_text: str):
     )
 
 
-if __name__ == "__main__":
-    import pytest
-    import sys
+def run_t1b_fuzzing() -> bool:
+    """
+    Final Freeze Audit 一元実行用エントリーポイント関数。
+    Hypothesis による 10,000 サンプルのプロパティベースファジングを直接実行し、結果を bool で返却。
+    """
     print("=" * 75)
     print("T1-B HYPOTHESIS PROPERTY-BASED FUZZING EXECUTION (10,000 Samples)")
     print("=" * 75)
-    sys.exit(pytest.main([__file__, "-v", "-s"]))
+    try:
+        test_t1_b_differential_equivalence()
+        print("  [PASS] Hypothesis differential fuzzing audit: Zero discrepancy detected.")
+        return True
+    except Exception as e:
+        print(f"  [FAIL] Hypothesis differential fuzzing audit failed: {e}")
+        return False
+
+
+if __name__ == "__main__":
+    import sys
+    success = run_t1b_fuzzing()
+    sys.exit(0 if success else 1)
