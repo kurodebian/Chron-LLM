@@ -1,6 +1,6 @@
 """
 Causal Extract (CAE) モジュール
-(llama.cpp / Ollama 完全対応 & 後方互換維持 & 思考プロセス・途切れ除去堅牢化版)
+(MasterGraph v2.0 / C6 Canonical スキーマ完全準拠版)
 """
 
 import json
@@ -16,34 +16,26 @@ from builders.mermaid_builder import build_mermaid_from_json
 # ----------------------------------------------------------------------
 SYSTEM_PROMPT = (
     "You are a deterministic structural causal graph extractor. "
-    "Output valid JSON matching the schema precisely. "
+    "Output valid JSON matching the MasterGraph v2.0 Causal Core schema precisely. "
     "CRITICAL: Do NOT output any preamble, thinking process, introduction, or explanatory text. "
     "Output ONLY the JSON object starting with '{' and ending with '}'."
 )
 
 
 def repair_truncated_json(json_str: str) -> str:
-    """
-    途中で途切れた JSON を強力に復旧する関数。
-    未完成な末尾要素（オブジェクトや文字列）を切り落とし、
-    完成済みのデータ構造まで巻き戻して括弧を補完する。
-    """
+    """途中で途切れた JSON を復旧する関数"""
     s = json_str.strip()
 
-    # 1. 開いたまま閉じられていない文字列リテラル（ダブルクォート）の自動クローズ
     quote_count = len(re.findall(r'(?<!\\)"', s))
     if quote_count % 2 != 0:
         s += '"'
 
-    # 2. 途中で切れている最後の完成済みオブジェクト/配列を探して切り詰める
     last_valid_pos = max(s.rfind("}"), s.rfind("]"))
     if last_valid_pos != -1:
         s = s[: last_valid_pos + 1].strip()
 
-    # 末尾に残った余計なカンマを除去
     s = re.sub(r",\s*$", "", s)
 
-    # 3. 不足している閉じ括弧を補完する
     open_curly = s.count("{") - s.count("}")
     open_square = s.count("[") - s.count("]")
 
@@ -53,47 +45,128 @@ def repair_truncated_json(json_str: str) -> str:
     return s
 
 
+def normalize_canonical_graph(raw_data: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    LLMから抽出したデータ、または旧形式データを
+    MasterGraph v2.0 / C6 Canonical 検証仕様に適合する形へ正規化・補完する。
+    """
+    normalized_nodes = []
+    normalized_edges = []
+
+    # 1. ノードの正規化
+    raw_nodes = raw_data.get("nodes", [])
+    if isinstance(raw_nodes, dict):
+        # 辞書形式 {"P001": {...}} の吸収
+        node_items = list(raw_nodes.values())
+    elif isinstance(raw_nodes, list):
+        node_items = raw_nodes
+    else:
+        node_items = []
+
+    for idx, n in enumerate(node_items):
+        if not isinstance(n, dict):
+            continue
+
+        node_id = n.get("id") or f"N{idx+1:03d}"
+        node_type = n.get("type", "component")
+        name = n.get("name") or n.get("label") or node_id
+        properties = n.get("properties", {})
+        if not isinstance(properties, dict):
+            properties = {}
+
+        # 権限インバリアント・境界ノードに対する guard_token の自動定義
+        if ("AUTH" in node_id.upper() or "AUTHORITY" in name.upper() or node_type == "authority_boundary") and "guard_token" not in properties:
+            properties["guard_token"] = f"AUTH-{idx+1:03d}"
+
+        normalized_nodes.append({
+            "id": node_id,
+            "global_id": n.get("global_id", node_id),
+            "local_id": n.get("local_id", node_id),
+            "type": node_type,
+            "name": name,
+            "description": n.get("description") or n.get("notes") or "",
+            "properties": properties
+        })
+
+    # 2. エッジの正規化
+    raw_edges = raw_data.get("edges", [])
+    if not isinstance(raw_edges, list):
+        raw_edges = []
+
+    for idx, e in enumerate(raw_edges):
+        if not isinstance(e, dict):
+            continue
+
+        edge_id = e.get("id") or f"E{idx+1:03d}"
+        from_node = e.get("from") or e.get("source") or ""
+        to_node = e.get("to") or e.get("target") or ""
+        morphism_type = e.get("morphism_type") or e.get("relation") or "invariant"
+
+        # C6 Morphism Type の推論・変換
+        if morphism_type not in ["authority_boundary", "invariant", "dependency", "constraint", "defines"]:
+            if "AUTH" in from_node.upper() or "AUTH" in to_node.upper():
+                morphism_type = "authority_boundary"
+            elif "FUNC" in from_node.upper() or "depends" in str(e.get("relation", "")).lower():
+                morphism_type = "dependency"
+            elif "TYPE" in from_node.upper():
+                morphism_type = "defines"
+            else:
+                morphism_type = "invariant"
+
+        # guard_invariant 配列の調整
+        guard_inv = e.get("guard_invariant", [])
+        if not guard_inv and morphism_type == "authority_boundary":
+            # from_node がインバリアント指定であれば自動バインド
+            guard_inv = [from_node] if from_node else []
+
+        normalized_edges.append({
+            "id": edge_id,
+            "from": from_node,
+            "to": to_node,
+            "pipeline": e.get("pipeline", "CommitPipeline"),
+            "morphism_type": morphism_type,
+            "guard_invariant": guard_inv,
+            "delta_level": e.get("delta_level", "DELTA_1")
+        })
+
+    return {
+        "nodes": normalized_nodes,
+        "edges": normalized_edges
+    }
+
+
 def parse_llm_json_response(raw_response: str) -> Dict[str, Any]:
-    """LLMからのレスポンス文字列から安全にJSONをパースする（思考テキスト除去・自動修復機能付き）"""
+    """LLMからのレスポンス文字列から安全にJSONをパースし正規化する"""
     if not raw_response or not raw_response.strip():
         return {"nodes": [], "edges": []}
 
     cleaned = raw_response.strip()
 
-    # <think>...</think> タグ（思考プロセス）の強固な除去
     cleaned = re.sub(r"<think>.*?</think>", "", cleaned, flags=re.DOTALL).strip()
-
-    # Markdown の ```json ... ``` ブロックを除去
     cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned, flags=re.MULTILINE)
     cleaned = re.sub(r"\s*```$", "", cleaned, flags=re.MULTILINE).strip()
 
-    # 最初に出現する '{' から最後に出現する '}' までを抽出（前後の思考テキスト・解説を削ぎ落とす）
     match = re.search(r"\{.*\}", cleaned, re.DOTALL)
     if match:
         cleaned = match.group(0)
     else:
-        # 途切れ等の理由で閉じ括弧がない場合は '{' 以降を取得
         match_start = re.search(r"\{.*", cleaned, re.DOTALL)
         if match_start:
             cleaned = match_start.group(0)
 
-    # まずそのままパースを試みる
     try:
-        return json.loads(cleaned)
+        parsed = json.loads(cleaned)
+        return normalize_canonical_graph(parsed)
     except json.JSONDecodeError:
         pass
 
-    # パース失敗時：途切れ復旧を試みる
     repaired = repair_truncated_json(cleaned)
     try:
         parsed = json.loads(repaired)
-        print(
-            "\n[Warning] JSONが途中で切れていたため、生成済みの要素まで救出してパースしました。"
-        )
-        return parsed
+        print("\n[Warning] JSONが途中で切れていたため、生成済みの要素まで救出してパースしました。")
+        return normalize_canonical_graph(parsed)
     except json.JSONDecodeError as e:
         print(f"\n[Debug JSON Error] パース失敗 (修復不可): {e}")
-        print(f"修復試行後の文字列:\n{repaired[:400]}\n---")
         return {"nodes": [], "edges": []}
 
 
@@ -102,45 +175,62 @@ def extract_causal_json(
     host: Optional[str] = None,
     model: Optional[str] = None,
     backend: Optional[str] = None,
-    ollama_host: Optional[str] = None,  # 旧コードとの互換用
+    ollama_host: Optional[str] = None,
     timeout: int = 300,
 ) -> dict:
-    """LLM (llama.cpp / Ollama) API を呼び出し、因果グラフの JSON オブジェクトを取得する"""
+    """LLM API を呼び出し、MasterGraph v2.0 スキーマに準拠した JSON を取得する"""
 
-    # 1. バックエンドの自動判定 (指定なしなら環境変数、それもなければ llamacpp)
     if backend is None:
         backend = os.environ.get("LLM_BACKEND", "llamacpp").lower()
     else:
         backend = backend.lower()
 
-    # 2. 旧引数 ollama_host が渡された場合の互換吸収
     if ollama_host and not host:
         host = ollama_host
         backend = "ollama"
 
-    # 3. バックエンドに応じたデフォルト Host / Model の自動補完
     if backend == "ollama":
         if not host:
             host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
         if not model:
             model = os.environ.get("OLLAMA_MODEL", "qwen2.5:32b")
-    else:  # llamacpp
+    else:
         if not host:
-            host = os.environ.get("LLAMA_HOST", "[http://127.0.0.1:8080](http://127.0.0.1:8080)")
+            host = os.environ.get("LLAMA_HOST", "http://127.0.0.1:8080")
         if not model:
             model = os.environ.get("LLAMA_MODEL", "qwen2.5-32b")
 
     prompt = f"""
-以下のテキストから因果関係（原因、操作、状態、不変条件とそれらの依存関係）を抽出し、指定のJSONスキーマに従って出力してください。
+以下のテキストから因果関係（原因、操作、状態、不変条件とそれらの依存関係）を抽出し、MasterGraph v2.0 スキーマに従って出力してください。
 
-【JSONスキーマ】
+【MasterGraph v2.0 JSONスキーマ】
 {{
   "nodes": [
-    {{"id": "識別子(例: N1)", "label": "ノード名/状態/不変条件"}},
-    {{"id": "識別子(例: N2)", "label": "ノード名/操作"}}
+    {{
+      "id": "INV_AUTH_001",
+      "type": "invariant",
+      "name": "権限チェックインバリアント",
+      "description": "説明",
+      "properties": {{ "guard_token": "AUTH-001" }}
+    }},
+    {{
+      "id": "OP_COMMIT",
+      "type": "operation",
+      "name": "コミット操作",
+      "description": "説明",
+      "properties": {{}}
+    }}
   ],
   "edges": [
-    {{"from": "N1", "to": "N2", "relation": "因果関係/依存関係の説明"}}
+    {{
+      "id": "E001",
+      "from": "INV_AUTH_001",
+      "to": "OP_COMMIT",
+      "pipeline": "CommitPipeline",
+      "morphism_type": "authority_boundary",
+      "guard_invariant": ["INV_AUTH_001"],
+      "delta_level": "DELTA_0"
+    }}
   ]
 }}
 
@@ -151,7 +241,8 @@ def extract_causal_json(
 CRITICAL OUTPUT RULES:
 1. Output STRICTLY a valid raw JSON object starting with '{{' and ending with '}}'.
 2. Do NOT output any preamble, thinking process, analysis, explanation, or markdown wrapper.
-3. Absolutely NO conversational text before or after the JSON.
+3. 'morphism_type' must be one of: ['authority_boundary', 'invariant', 'dependency', 'constraint', 'defines'].
+4. Authority nodes/invariants MUST have a 'guard_token' property starting with 'AUTH-'.
 </output_instructions>
 """
 
@@ -165,15 +256,12 @@ CRITICAL OUTPUT RULES:
             "stream": False,
             "options": {"temperature": 0.0},
         }
-    else:  # llamacpp (OpenAI Chat Completions 互換)
+    else:
         url = f"{host.rstrip('/')}/v1/chat/completions"
         payload = {
             "model": model,
             "messages": [
-                {
-                    "role": "system",
-                    "content": SYSTEM_PROMPT,
-                },
+                {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": prompt},
             ],
             "temperature": 0.0,
@@ -200,12 +288,7 @@ CRITICAL OUTPUT RULES:
                         if "message" in choice and isinstance(choice["message"], dict):
                             msg = choice["message"]
                             content = msg.get("content")
-                            if content is not None and str(content).strip():
-                                raw_response_text = str(content)
-                            else:
-                                raw_response_text = str(
-                                    msg.get("reasoning_content") or content or ""
-                                )
+                            raw_response_text = str(content) if content else str(msg.get("reasoning_content") or "")
                         elif "text" in choice:
                             raw_response_text = choice.get("text", "")
                 elif "message" in res_body and isinstance(res_body["message"], dict):
@@ -227,7 +310,7 @@ def generate_causal_mermaid(
     backend: Optional[str] = None,
     ollama_host: Optional[str] = None,
 ) -> str:
-    """テキストから因果関係を抽出して Mermaid 構文文字列を返す高レベル関数"""
+    """テキストから因果関係を抽出して Mermaid 構文文字列を返す"""
     data = extract_causal_json(
         text,
         host=host,

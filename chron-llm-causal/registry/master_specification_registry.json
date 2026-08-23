@@ -1,0 +1,2535 @@
+{
+  "registry_version": "1.0.0",
+  "total_evidence_count": 102,
+  "domain_coverage": "13 domains",
+  "items": [
+    {
+      "evidence_id": "EVID-001",
+      "source_path": "source/bindings/llama_cffi.spec",
+      "semantic_metadata": {
+        "title": "SECTION 1: CFFI TYPE MAPPING & OPAQUE HANDLES",
+        "domain": "bindings",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "llama_cffi"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-072",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-002",
+      "source_path": "source/config/sbcl_policy.spec",
+      "semantic_metadata": {
+        "title": "SECTION 1: GLOBAL COMPILER OPTIMIZATION POLICIES",
+        "domain": "config",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "sbcl_policy"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-003",
+      "source_path": "source/contracts/abi-registry.spec",
+      "semantic_metadata": {
+        "title": "abi-registry.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "abi-registry"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-007",
+          "EVID-014",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-004",
+      "source_path": "source/contracts/base-excludes.spec",
+      "semantic_metadata": {
+        "title": "base-excludes.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "base-excludes"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-005",
+      "source_path": "source/contracts/base-history.spec",
+      "semantic_metadata": {
+        "title": "base-history.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "base-history"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-004",
+          "EVID-006",
+          "EVID-007",
+          "EVID-014",
+          "EVID-054",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-006",
+      "source_path": "source/contracts/base-invariants.spec",
+      "semantic_metadata": {
+        "title": "base-invariants.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "base-invariants"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-007",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-007",
+      "source_path": "source/contracts/base-types.spec",
+      "semantic_metadata": {
+        "title": "base-types.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "base-types"
+        ],
+        "depends_on": [
+          "ChronLLM.Internal",
+          "METHOD"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [
+          "EVID-063"
+        ],
+        "unresolved_symbols": [
+          "METHOD"
+        ],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-008",
+      "source_path": "source/contracts/integration-verification.spec",
+      "semantic_metadata": {
+        "title": "integration-verification.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "integration-verification"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-007",
+          "EVID-014",
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-009",
+      "source_path": "source/contracts/kernel-world.spec",
+      "semantic_metadata": {
+        "title": "kernel-world.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "kernel-world"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-061",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-010",
+      "source_path": "source/contracts/pipeline-orchestration.spec",
+      "semantic_metadata": {
+        "title": "pipeline-orchestration.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "pipeline-orchestration"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-003",
+          "EVID-004",
+          "EVID-005",
+          "EVID-006",
+          "EVID-007",
+          "EVID-014",
+          "EVID-056",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-011",
+      "source_path": "source/contracts/spec/v2.8.0-C-persistence.spec",
+      "semantic_metadata": {
+        "title": "v2.8.0-C-persistence.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "2.8.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "v2.8.0-C-persistence"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-012",
+      "source_path": "source/contracts/spec/v2.8.0-D-replay.spec",
+      "semantic_metadata": {
+        "title": "v2.8.0-D-replay.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "2.8.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "v2.8.0-D-replay"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-013",
+      "source_path": "source/contracts/spec-metamodel.spec",
+      "semantic_metadata": {
+        "title": "spec-metamodel.spec",
+        "domain": "contracts",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "spec-metamodel"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-007",
+          "EVID-014"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-014",
+      "source_path": "source/core/types.spec",
+      "semantic_metadata": {
+        "title": "SECTION 1: SYSTEM INVARIANTS & BASE TYPES",
+        "domain": "core",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "types"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [
+          "weight"
+        ],
+        "references": [
+          "EVID-054",
+          "EVID-056",
+          "EVID-082",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-015",
+      "source_path": "source/docs/ir/00-constitution.spec",
+      "semantic_metadata": {
+        "title": "00-constitution.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "00-constitution"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-016",
+      "source_path": "source/docs/ir/01-domain-model.spec",
+      "semantic_metadata": {
+        "title": "01-domain-model.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "01-domain-model"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-054",
+          "EVID-061",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-017",
+      "source_path": "source/docs/ir/02-operational-semantics.spec",
+      "semantic_metadata": {
+        "title": "02-operational-semantics.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "02-operational-semantics"
+        ],
+        "depends_on": [
+          "ir",
+          "updated"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [
+          "EVID-076"
+        ],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056",
+          "EVID-061",
+          "EVID-082",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-018",
+      "source_path": "source/docs/ir/03-reference-runtime.spec",
+      "semantic_metadata": {
+        "title": "SPEC RuntimeR1: REFERENCE_IMPL",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "03-reference-runtime"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-080"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-019",
+      "source_path": "source/docs/ir/05-validation-pipeline.spec",
+      "semantic_metadata": {
+        "title": "05-validation-pipeline.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "05-validation-pipeline"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-061"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-020",
+      "source_path": "source/docs/ir/06-kernel-state-machine.spec",
+      "semantic_metadata": {
+        "title": "06-kernel-state-machine.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "06-kernel-state-machine"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-021",
+      "source_path": "source/docs/ir/07-chron-mapping.spec",
+      "semantic_metadata": {
+        "title": "07-chron-mapping.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "07-chron-mapping"
+        ],
+        "depends_on": [
+          "-",
+          "ir",
+          "runtime"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [
+          "EVID-061",
+          "EVID-076"
+        ],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-022",
+      "source_path": "source/docs/ir/08-memory-model.spec",
+      "semantic_metadata": {
+        "title": "08-memory-model.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "08-memory-model"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-082",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-023",
+      "source_path": "source/docs/ir/09-runtime-scheduling.spec",
+      "semantic_metadata": {
+        "title": "09-runtime-scheduling.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "09-runtime-scheduling"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-024",
+      "source_path": "source/docs/ir/10-tool-execution.spec",
+      "semantic_metadata": {
+        "title": "10-tool-execution.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "10-tool-execution"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-077"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-025",
+      "source_path": "source/docs/ir/11-prompt-builder.spec",
+      "semantic_metadata": {
+        "title": "11-prompt-builder.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "11-prompt-builder"
+        ],
+        "depends_on": [
+          "Set"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-056",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-026",
+      "source_path": "source/docs/ir/12-recovery.spec",
+      "semantic_metadata": {
+        "title": "SPEC: Chron-LLM-Recovery-R1",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "12-recovery"
+        ],
+        "depends_on": [
+          "-"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-061",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-027",
+      "source_path": "source/docs/ir/13-worldline-branching.spec",
+      "semantic_metadata": {
+        "title": "13-worldline-branching.spec (Worldline Branching Contract)",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "13-worldline-branching"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-028",
+      "source_path": "source/docs/ir/99-open-questions.spec",
+      "semantic_metadata": {
+        "title": "99-open-questions.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "99-open-questions"
+        ],
+        "depends_on": [
+          "TYPE"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-070",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-029",
+      "source_path": "source/docs/ir/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "semantic_metadata": {
+        "title": "Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-054",
+          "EVID-056",
+          "EVID-070",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-030",
+      "source_path": "source/docs/ir/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "semantic_metadata": {
+        "title": "DOC_ID: CHRON-R2.0-B-WORLD-CONSTITUTION",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-054",
+          "EVID-056",
+          "EVID-070"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-031",
+      "source_path": "source/docs/ir/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "semantic_metadata": {
+        "title": "SPEC_ID=CHRON-R2.0-C-OBSERVABILITY-CONSTITUTION",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-056",
+          "EVID-061"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-032",
+      "source_path": "source/docs/ir/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "semantic_metadata": {
+        "title": "DOC: CHRON-R2.0-D-COMMIT-KERNEL-CONSTITUTION",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec"
+        ],
+        "depends_on": [
+          "IN",
+          "points"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-054",
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-033",
+      "source_path": "source/docs/ir/architecture-v1.1.spec",
+      "semantic_metadata": {
+        "title": "Architecture Specification v2.0 (Unified Core SOT)",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.1."
+      },
+      "specification_graph": {
+        "defines": [
+          "architecture-v1.1"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-034",
+      "source_path": "source/docs/ir/chron-llm-r1-interface-spec-v1.2.spec",
+      "semantic_metadata": {
+        "title": "chron-llm-r1-interface-spec-v1.2.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.2."
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-r1-interface-spec-v1.2"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-054",
+          "EVID-056",
+          "EVID-067",
+          "EVID-077"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-035",
+      "source_path": "source/docs/ir/knowledge-system.spec",
+      "semantic_metadata": {
+        "title": "knowledge-system.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "knowledge-system"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-061"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-036",
+      "source_path": "source/docs/ir/phase-a-charter.spec",
+      "semantic_metadata": {
+        "title": "phase-a-charter.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "phase-a-charter"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-037",
+      "source_path": "source/docs/ir/phase-b-charter.spec",
+      "semantic_metadata": {
+        "title": "phase-b-charter.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "phase-b-charter"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-038",
+      "source_path": "source/docs/ir/phase-c-charter.spec",
+      "semantic_metadata": {
+        "title": "phase-c-charter.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "phase-c-charter"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-039",
+      "source_path": "source/docs/ir/phase-d-charter.spec",
+      "semantic_metadata": {
+        "title": "phase-d-charter.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "phase-d-charter"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-056",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-040",
+      "source_path": "source/docs/ir/phase-e-charter.spec",
+      "semantic_metadata": {
+        "title": "phase-e-charter.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "phase-e-charter"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-041",
+      "source_path": "source/docs/ir/phase-f-charter.spec",
+      "semantic_metadata": {
+        "title": "phase-f-charter.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "phase-f-charter"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-056",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-042",
+      "source_path": "source/docs/ir/pull_request_template.spec",
+      "semantic_metadata": {
+        "title": "pull_request_template.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "pull_request_template"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-043",
+      "source_path": "source/docs/ir/r2-0-c-freeze-report.spec",
+      "semantic_metadata": {
+        "title": "r2-0-c-freeze-report.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "r2-0-c-freeze-report"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-044",
+      "source_path": "source/docs/reference/ir/knowledge-rationale.spec",
+      "semantic_metadata": {
+        "title": "knowledge-rationale.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "knowledge-rationale"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-061"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-045",
+      "source_path": "source/docs/spec/ir/Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "semantic_metadata": {
+        "title": "Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-046",
+      "source_path": "source/docs/spec/ir/Chron-LLM_R2.1-Kernel_Freeze_Spec.spec",
+      "semantic_metadata": {
+        "title": "Chron-LLM_R2.1-Kernel_Freeze_Spec.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "Chron-LLM_R2.1-Kernel_Freeze_Spec"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-047",
+      "source_path": "source/docs/spec/ir/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "semantic_metadata": {
+        "title": "Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0."
+      },
+      "specification_graph": {
+        "defines": [
+          "Chron-R2.0-World-Graph-Runtime-Specification-v1.0"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056",
+          "EVID-070",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-048",
+      "source_path": "source/docs/spec/ir/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "semantic_metadata": {
+        "title": "R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+        "domain": "docs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0."
+      },
+      "specification_graph": {
+        "defines": [
+          "R2.0-B_C_World_Runtime_Observation_Contract_v1.0"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056",
+          "EVID-061",
+          "EVID-070",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-049",
+      "source_path": "source/experiments/ir/3cluster.spec",
+      "semantic_metadata": {
+        "title": "3cluster.spec",
+        "domain": "experiments",
+        "authority": "experimental",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "3cluster"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [
+          "EVID-050"
+        ],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-050",
+      "source_path": "source/experiments/ir/chron-llm-spec-v0.2.spec",
+      "semantic_metadata": {
+        "title": "chron-llm-spec-v0.2.spec",
+        "domain": "experiments",
+        "authority": "experimental",
+        "status": "active",
+        "version": "0.2."
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-spec-v0.2"
+        ],
+        "depends_on": [
+          "Graph.connectedness"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [
+          "EVID-056"
+        ],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-051",
+          "EVID-085"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-051",
+      "source_path": "source/experiments/ir/cycle.spec",
+      "semantic_metadata": {
+        "title": "cycle.spec",
+        "domain": "experiments",
+        "authority": "experimental",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "cycle"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-052",
+      "source_path": "source/experiments/ir/dynamics.spec",
+      "semantic_metadata": {
+        "title": "dynamics.spec",
+        "domain": "experiments",
+        "authority": "experimental",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "dynamics"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-053",
+      "source_path": "source/experiments/ir/scc.spec",
+      "semantic_metadata": {
+        "title": "scc.spec",
+        "domain": "experiments",
+        "authority": "experimental",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "scc"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-054",
+      "source_path": "source/graph-runtime/ir/causal.spec",
+      "semantic_metadata": {
+        "title": "SPEC causal-subgraph v1.0",
+        "domain": "graph-runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "causal"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-055",
+      "source_path": "source/graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "semantic_metadata": {
+        "title": "chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+        "domain": "graph-runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-r2-graph-runtime-causal-context-spec-v1.0"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-051",
+          "EVID-054",
+          "EVID-056",
+          "EVID-061",
+          "EVID-070",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-056",
+      "source_path": "source/graph-runtime/ir/graph.spec",
+      "semantic_metadata": {
+        "title": "graph.spec",
+        "domain": "graph-runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "graph"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-054"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-057",
+      "source_path": "source/llama-agent/ir/causal-kernel.spec",
+      "semantic_metadata": {
+        "title": "causal-kernel.spec",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "causal-kernel"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056",
+          "EVID-070",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-058",
+      "source_path": "source/llama-agent/ir/chron-llm-graph.spec",
+      "semantic_metadata": {
+        "title": "chron-llm-graph.spec",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-graph"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-059",
+      "source_path": "source/llama-agent/ir/chron-llm-immune.spec",
+      "semantic_metadata": {
+        "title": "chron-llm-immune.spec",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-immune"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-056",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-060",
+      "source_path": "source/llama-agent/ir/chron-llm-kernel.spec",
+      "semantic_metadata": {
+        "title": "chron-llm-kernel.spec",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-kernel"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-056",
+          "EVID-061",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-061",
+      "source_path": "source/llama-agent/ir/chron-llm-runtime.spec",
+      "semantic_metadata": {
+        "title": "MODULE: Chron-LLM/Runtime",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-runtime"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-056",
+          "EVID-082",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-062",
+      "source_path": "source/llama-agent/ir/chron-llm-world.spec",
+      "semantic_metadata": {
+        "title": "SPEC WorldService",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-world"
+        ],
+        "depends_on": [
+          "allocate_world_id"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [
+          "allocate_world_id"
+        ],
+        "references": [
+          "EVID-014",
+          "EVID-056"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-063",
+      "source_path": "source/llama-agent/ir/chron-llm.spec",
+      "semantic_metadata": {
+        "title": "chron-llm.spec",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-061",
+          "EVID-067",
+          "EVID-077",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-064",
+      "source_path": "source/llama-agent/ir/delta3-agent.spec",
+      "semantic_metadata": {
+        "title": "delta3-agent.spec",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "delta3-agent"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-065",
+      "source_path": "source/llama-agent/ir/ffi-bindings-mock.spec",
+      "semantic_metadata": {
+        "title": "MODULE ffi-bindings-mock.lisp : PhysicalLayerMock",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "ffi-bindings-mock"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-066",
+      "source_path": "source/llama-agent/ir/ffi-bindings.spec",
+      "semantic_metadata": {
+        "title": "ffi-bindings.spec",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "ffi-bindings"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-067",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-067",
+      "source_path": "source/llama-agent/ir/generate.spec",
+      "semantic_metadata": {
+        "title": "generate.spec",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "generate"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-068",
+      "source_path": "source/llama-agent/ir/immune-system.spec",
+      "semantic_metadata": {
+        "title": "immune-system.spec",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "immune-system"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-069",
+      "source_path": "source/llama-agent/ir/llama-agent.spec",
+      "semantic_metadata": {
+        "title": "MODULE: llama-agent.lisp",
+        "domain": "llama-agent",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "llama-agent"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-056",
+          "EVID-061",
+          "EVID-067",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-070",
+      "source_path": "source/memory/ir/store.spec",
+      "semantic_metadata": {
+        "title": "store.spec",
+        "domain": "memory",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "store"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-054",
+          "EVID-056",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-071",
+      "source_path": "source/observability/ir/world-snapshot.spec",
+      "semantic_metadata": {
+        "title": "world-snapshot.spec",
+        "domain": "observability",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "world-snapshot"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-051"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-072",
+      "source_path": "source/runtime/ir/callback.spec",
+      "semantic_metadata": {
+        "title": "callback.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "callback"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-061",
+          "EVID-077"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-073",
+      "source_path": "source/runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "semantic_metadata": {
+        "title": "chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-r1-ir-observation-layer-spec-v1.0"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-061",
+          "EVID-072",
+          "EVID-074",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-074",
+      "source_path": "source/runtime/ir/divergence.spec",
+      "semantic_metadata": {
+        "title": "MODULE ir-divergence : ObservationAnalysisLayer | STATUS Deprecated",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "divergence"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-061",
+          "EVID-077",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-075",
+      "source_path": "source/runtime/ir/ffi.spec",
+      "semantic_metadata": {
+        "title": "ffi.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "ffi"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-072"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-076",
+      "source_path": "source/runtime/ir/ir.spec",
+      "semantic_metadata": {
+        "title": "ir.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "ir"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-077"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-077",
+      "source_path": "source/runtime/ir/stream.spec",
+      "semantic_metadata": {
+        "title": "stream.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "stream"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-078",
+      "source_path": "source/runtime/md/ir/llama-engine.spec",
+      "semantic_metadata": {
+        "title": "llama-engine.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "llama-engine"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-077"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-079",
+      "source_path": "source/runtime/r0/ir/api.spec",
+      "semantic_metadata": {
+        "title": "CONTRACT(start-chat):",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "api"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-061",
+          "EVID-082",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-080",
+      "source_path": "source/runtime/r0/ir/chat-loop.spec",
+      "semantic_metadata": {
+        "title": "MODULE chronos-r0.chat",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chat-loop"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-082",
+          "EVID-084",
+          "EVID-085"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-081",
+      "source_path": "source/runtime/r0/ir/chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "semantic_metadata": {
+        "title": "chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-r0-session-execution-layer-spec-v1.0"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-057",
+          "EVID-074",
+          "EVID-077",
+          "EVID-082",
+          "EVID-084",
+          "EVID-085"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-082",
+      "source_path": "source/runtime/r0/ir/history.spec",
+      "semantic_metadata": {
+        "title": "MODULE chronos-r0.history",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "history"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-083",
+      "source_path": "source/runtime/r0/ir/llama-run.spec",
+      "semantic_metadata": {
+        "title": "llama-run.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "llama-run"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-084",
+      "source_path": "source/runtime/r0/ir/prompt.spec",
+      "semantic_metadata": {
+        "title": "prompt.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "prompt"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-085",
+      "source_path": "source/runtime/r0/ir/trace.spec",
+      "semantic_metadata": {
+        "title": "trace.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "trace"
+        ],
+        "depends_on": [
+          "snapshot"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [
+          "snapshot"
+        ],
+        "references": [
+          "EVID-082",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-086",
+      "source_path": "source/runtime/r1/ir/chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "semantic_metadata": {
+        "title": "chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-087",
+      "source_path": "source/runtime/r1/ir/core.spec",
+      "semantic_metadata": {
+        "title": "MODULE chronos-r1",
+        "domain": "runtime",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "core"
+        ],
+        "depends_on": [
+          "ir",
+          "standard"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [
+          "EVID-076"
+        ],
+        "unresolved_symbols": [
+          "standard"
+        ],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056",
+          "EVID-061",
+          "EVID-082",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-088",
+      "source_path": "source/specs/00-expression-grammar.spec",
+      "semantic_metadata": {
+        "title": "SPEC: 00-expression-grammar.spec",
+        "domain": "specs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "00-expression-grammar"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-089",
+      "source_path": "source/specs/00-meta-model.spec",
+      "semantic_metadata": {
+        "title": "MODULE MetaModel",
+        "domain": "specs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "00-meta-model"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-090",
+      "source_path": "source/specs/00-type-system.spec",
+      "semantic_metadata": {
+        "title": "SPEC: 00-type-system.spec",
+        "domain": "specs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "00-type-system"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-091",
+      "source_path": "source/specs/01-semantic-model.spec",
+      "semantic_metadata": {
+        "title": "MODULE SemanticModel",
+        "domain": "specs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "01-semantic-model"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-061"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-092",
+      "source_path": "source/specs/02-constitution.spec",
+      "semantic_metadata": {
+        "title": "MODULE Constitution",
+        "domain": "specs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "02-constitution"
+        ],
+        "depends_on": [
+          "SemanticModel"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [
+          "SemanticModel"
+        ],
+        "references": [
+          "EVID-054",
+          "EVID-061"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-093",
+      "source_path": "source/specs/03-chron-semantic-extension.spec",
+      "semantic_metadata": {
+        "title": "MODULE ChronSemanticExtension",
+        "domain": "specs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "03-chron-semantic-extension"
+        ],
+        "depends_on": [
+          "Constitution"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [
+          "Constitution"
+        ],
+        "references": [
+          "EVID-054",
+          "EVID-061"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-094",
+      "source_path": "source/specs/04-runtime-model.spec",
+      "semantic_metadata": {
+        "title": "MODULE RuntimeModel",
+        "domain": "specs",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "04-runtime-model"
+        ],
+        "depends_on": [
+          "ChronSemanticExtension"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [
+          "ChronSemanticExtension"
+        ],
+        "references": [
+          "EVID-061",
+          "EVID-067"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-095",
+      "source_path": "source/tests/md/ir/phase0-big-bang-test.spec",
+      "semantic_metadata": {
+        "title": "phase0-big-bang-test.spec",
+        "domain": "tests",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "phase0-big-bang-test"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-096",
+      "source_path": "source/tests/md/ir/r2-0-a-tests.spec",
+      "semantic_metadata": {
+        "title": "r2-0-a-tests.spec",
+        "domain": "tests",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "r2-0-a-tests"
+        ],
+        "depends_on": [
+          "where"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-054",
+          "EVID-056",
+          "EVID-070"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-097",
+      "source_path": "source/tests/md/ir/r2-0-b-tests.spec",
+      "semantic_metadata": {
+        "title": "r2-0-b-tests.spec",
+        "domain": "tests",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "r2-0-b-tests"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056",
+          "EVID-061",
+          "EVID-070",
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-098",
+      "source_path": "source/tests/md/ir/r2-0-c-tests.spec",
+      "semantic_metadata": {
+        "title": "r2-0-c-tests.spec",
+        "domain": "tests",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "r2-0-c-tests"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056",
+          "EVID-061",
+          "EVID-070"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-099",
+      "source_path": "source/tests/md/ir/r2-1-b-tests.spec",
+      "semantic_metadata": {
+        "title": "r2-1-b-tests.spec",
+        "domain": "tests",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "r2-1-b-tests"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-084"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-100",
+      "source_path": "source/tests/md/ir/r2-2-e-tests.spec",
+      "semantic_metadata": {
+        "title": "r2-2-e-tests.spec",
+        "domain": "tests",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "r2-2-e-tests"
+        ],
+        "depends_on": [
+          "evaluate-observation"
+        ],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [
+          "evaluate-observation"
+        ],
+        "references": []
+      }
+    },
+    {
+      "evidence_id": "EVID-101",
+      "source_path": "source/tests/md/ir/r2-3-s-tests.spec",
+      "semantic_metadata": {
+        "title": "r2-3-s-tests.spec",
+        "domain": "tests",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "r2-3-s-tests"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-054",
+          "EVID-082"
+        ]
+      }
+    },
+    {
+      "evidence_id": "EVID-102",
+      "source_path": "source/tests/pipeline_test.spec",
+      "semantic_metadata": {
+        "title": "SECTION 1: MOCK CFFI INTERFACE & TEST SETUP",
+        "domain": "tests",
+        "authority": "canonical",
+        "status": "active",
+        "version": "1.0.0"
+      },
+      "specification_graph": {
+        "defines": [
+          "pipeline_test"
+        ],
+        "depends_on": [],
+        "supersedes": [],
+        "resolved_depends_on": [],
+        "unresolved_symbols": [],
+        "references": [
+          "EVID-014",
+          "EVID-054",
+          "EVID-056",
+          "EVID-082",
+          "EVID-084"
+        ]
+      }
+    }
+  ]
+}

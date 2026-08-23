@@ -1,0 +1,14 @@
+{
+  "authority_rules": {
+    "Canonical": "authoritative",
+    "History": "canonical_evidence",
+    "Event": "canonical_evidence",
+    "Projection": "derived",
+    "World": "derived",
+    "Working": "non_authoritative",
+    "Candidate": "non_authoritative",
+    "External": "non_authoritative"
+  },
+  "canonical_mutation_paths": [],
+  "non_authoritative_to_canonical_paths": []
+}

@@ -1,0 +1,692 @@
+flowchart TD
+    subgraph component_001 ["Component: component_001"]
+        component_001__ST_Canonical[("&#91;State&#93; ST_Canonical")]
+        component_001__ST_KernelState[("&#91;State&#93; ST_KernelState")]
+        component_001__ST_Candidate[("&#91;State&#93; ST_Candidate")]
+        component_001__ST_Event[("&#91;State&#93; ST_Event")]
+        component_001__ST_ValidationReport[("&#91;State&#93; ST_ValidationReport")]
+        component_001__ST_RuntimeRequest[("&#91;State&#93; ST_RuntimeRequest")]
+        component_001__ST_RuntimeCommand[("&#91;State&#93; ST_RuntimeCommand")]
+        component_001__ST_Derived[("&#91;State&#93; ST_Derived")]
+        component_001__ST_Prompt[("&#91;State&#93; ST_Prompt")]
+        component_001__ST_Fault[("&#91;State&#93; ST_Fault")]
+        component_001__OP_Commit["&#91;Operation&#93; OP_Commit"]
+        component_001__OP_Replay["&#91;Operation&#93; OP_Replay"]
+        component_001__OP_Derive["&#91;Operation&#93; OP_Derive"]
+        component_001__OP_Validate["&#91;Operation&#93; OP_Validate"]
+        component_001__OP_PolicyRouter["&#91;Operation&#93; OP_PolicyRouter"]
+        component_001__OP_KernelTransition["&#91;Operation&#93; OP_KernelTransition"]
+        component_001__OP_WakeDeferred["&#91;Operation&#93; OP_WakeDeferred"]
+        component_001__OP_BuildPrompt["&#91;Operation&#93; OP_BuildPrompt"]
+        component_001__OP_Backend["&#91;Operation&#93; OP_Backend"]
+        component_001__INV_CanonicalImmutable{"&#91;Invariant&#93; INV_CanonicalImmutable"}
+        component_001__INV_PureOps{"&#91;Invariant&#93; INV_PureOps"}
+        component_001__INV_KernelStateMutator{"&#91;Invariant&#93; INV_KernelStateMutator"}
+        component_001__INV_CommitSoleUpdater{"&#91;Invariant&#93; INV_CommitSoleUpdater"}
+        component_001__INV_WakeDeferredTrigger{"&#91;Invariant&#93; INV_WakeDeferredTrigger"}
+        component_001__INV_BackendNonAuthoritative{"&#91;Invariant&#93; INV_BackendNonAuthoritative"}
+    end
+
+    subgraph component_002 ["Component: component_002"]
+        component_002__ST_Kernel[("&#91;State&#93; ST_Kernel")]
+        component_002__ST_WAL[("&#91;State&#93; ST_WAL")]
+        component_002__ST_Graph[("&#91;State&#93; ST_Graph")]
+        component_002__ST_KernelState[("&#91;State&#93; ST_KernelState")]
+        component_002__ST_RuntimeEnv[("&#91;State&#93; ST_RuntimeEnv")]
+        component_002__ST_Context[("&#91;State&#93; ST_Context")]
+        component_002__ST_Session[("&#91;State&#93; ST_Session")]
+        component_002__ST_History[("&#91;State&#93; ST_History")]
+        component_002__ST_Sampler[("&#91;State&#93; ST_Sampler")]
+        component_002__ST_ImmuneStatus[("&#91;State&#93; ST_ImmuneStatus")]
+        component_002__OP_InitKernel["&#91;Operation&#93; OP_InitKernel"]
+        component_002__OP_SubmitUserInput["&#91;Operation&#93; OP_SubmitUserInput"]
+        component_002__OP_CommitEvent["&#91;Operation&#93; OP_CommitEvent"]
+        component_002__OP_RefreshProjections["&#91;Operation&#93; OP_RefreshProjections"]
+        component_002__OP_GetCurrentState["&#91;Operation&#93; OP_GetCurrentState"]
+        component_002__OP_InitRuntime["&#91;Operation&#93; OP_InitRuntime"]
+        component_002__OP_MainLoop["&#91;Operation&#93; OP_MainLoop"]
+        component_002__OP_InitLLM["&#91;Operation&#93; OP_InitLLM"]
+        component_002__OP_Tokenize["&#91;Operation&#93; OP_Tokenize"]
+        component_002__OP_PrefillPrompt["&#91;Operation&#93; OP_PrefillPrompt"]
+        component_002__OP_Generate["&#91;Operation&#93; OP_Generate"]
+        component_002__OP_MySamplerSample["&#91;Operation&#93; OP_MySamplerSample"]
+        component_002__OP_MyLlamaEval["&#91;Operation&#93; OP_MyLlamaEval"]
+        component_002__OP_RunGenerationWithSensors["&#91;Operation&#93; OP_RunGenerationWithSensors"]
+        component_002__OP_FaultRecovery["&#91;Operation&#93; OP_FaultRecovery"]
+        component_002__OP_Chat["&#91;Operation&#93; OP_Chat"]
+        component_002__OP_StartChat["&#91;Operation&#93; OP_StartChat"]
+        component_002__OP_Decide["&#91;Operation&#93; OP_Decide"]
+        component_002__INV_KernelSoleMutator{"&#91;Invariant&#93; INV_KernelSoleMutator"}
+        component_002__INV_GraphFromWAL{"&#91;Invariant&#93; INV_GraphFromWAL"}
+        component_002__INV_PostCommitPersisted{"&#91;Invariant&#93; INV_PostCommitPersisted"}
+        component_002__INV_RuntimeNoDirectAccess{"&#91;Invariant&#93; INV_RuntimeNoDirectAccess"}
+        component_002__INV_SamplerLifecycle{"&#91;Invariant&#93; INV_SamplerLifecycle"}
+        component_002__INV_NPastInvariant{"&#91;Invariant&#93; INV_NPastInvariant"}
+        component_002__INV_HistoryOrderedAppendOnly{"&#91;Invariant&#93; INV_HistoryOrderedAppendOnly"}
+        component_002__INV_FaultNoCommit{"&#91;Invariant&#93; INV_FaultNoCommit"}
+        component_002__INV_StatelessFFI{"&#91;Invariant&#93; INV_StatelessFFI"}
+        component_002__INV_Abi1to1{"&#91;Invariant&#93; INV_Abi1to1"}
+    end
+
+    subgraph component_003 ["Component: component_003"]
+        component_003__ST_MemoryStore[("&#91;State&#93; ST_MemoryStore")]
+        component_003__ST_GraphStore[("&#91;State&#93; ST_GraphStore")]
+        component_003__ST_World[("&#91;State&#93; ST_World")]
+        component_003__ST_Registry[("&#91;State&#93; ST_Registry")]
+        component_003__ST_PrefillState[("&#91;State&#93; ST_PrefillState")]
+        component_003__ST_LifecycleState[("&#91;State&#93; ST_LifecycleState")]
+        component_003__OP_StorePayload["&#91;Operation&#93; OP_StorePayload"]
+        component_003__OP_LoadPayload["&#91;Operation&#93; OP_LoadPayload"]
+        component_003__OP_AddNode["&#91;Operation&#93; OP_AddNode"]
+        component_003__OP_AddEdge["&#91;Operation&#93; OP_AddEdge"]
+        component_003__OP_CausalSubgraph["&#91;Operation&#93; OP_CausalSubgraph"]
+        component_003__OP_ProjectContext["&#91;Operation&#93; OP_ProjectContext"]
+        component_003__OP_BuildPrefillState["&#91;Operation&#93; OP_BuildPrefillState"]
+        component_003__OP_MakeWorld["&#91;Operation&#93; OP_MakeWorld"]
+        component_003__OP_ForkWorld["&#91;Operation&#93; OP_ForkWorld"]
+        component_003__OP_KernelCommitWorld["&#91;Operation&#93; OP_KernelCommitWorld"]
+        component_003__OP_RegisterWorld["&#91;Operation&#93; OP_RegisterWorld"]
+        component_003__OP_SetActiveWorld["&#91;Operation&#93; OP_SetActiveWorld"]
+        component_003__OP_ArchiveWorld["&#91;Operation&#93; OP_ArchiveWorld"]
+        component_003__INV_MemoryImmutable{"&#91;Invariant&#93; INV_MemoryImmutable"}
+        component_003__INV_GraphAppend{"&#91;Invariant&#93; INV_GraphAppend"}
+        component_003__INV_WorldIsolation{"&#91;Invariant&#93; INV_WorldIsolation"}
+        component_003__INV_CausalSeparation{"&#91;Invariant&#93; INV_CausalSeparation"}
+        component_003__INV_Determinism{"&#91;Invariant&#93; INV_Determinism"}
+        component_003__INV_CommitAtomic{"&#91;Invariant&#93; INV_CommitAtomic"}
+    end
+
+    subgraph component_004 ["Component: component_004"]
+        component_004__ST_WAL[("&#91;State&#93; ST_WAL")]
+        component_004__ST_Graph[("&#91;State&#93; ST_Graph")]
+        component_004__ST_HealthyTable[("&#91;State&#93; ST_HealthyTable")]
+        component_004__ST_SystemState[("&#91;State&#93; ST_SystemState")]
+        component_004__ST_KVCache[("&#91;State&#93; ST_KVCache")]
+        component_004__OP_AppendWAL["&#91;Operation&#93; OP_AppendWAL"]
+        component_004__OP_CommitEvent["&#91;Operation&#93; OP_CommitEvent"]
+        component_004__OP_LiftGraph["&#91;Operation&#93; OP_LiftGraph"]
+        component_004__OP_HandleFault["&#91;Operation&#93; OP_HandleFault"]
+        component_004__OP_BranchWorld["&#91;Operation&#93; OP_BranchWorld"]
+        component_004__OP_Prefill["&#91;Operation&#93; OP_Prefill"]
+        component_004__INV_MonotonicClock{"&#91;Invariant&#93; INV_MonotonicClock"}
+        component_004__INV_AppendOnly{"&#91;Invariant&#93; INV_AppendOnly"}
+        component_004__INV_FaultIsolation{"&#91;Invariant&#93; INV_FaultIsolation"}
+        component_004__INV_CausalScope{"&#91;Invariant&#93; INV_CausalScope"}
+    end
+
+    subgraph component_005 ["Component: component_005"]
+        component_005__ST_WalWorldCounter[("&#91;State&#93; ST_WalWorldCounter")]
+        component_005__ST_Graph[("&#91;State&#93; ST_Graph")]
+        component_005__ST_Wal[("&#91;State&#93; ST_Wal")]
+        component_005__OP_StageBranchWorld["&#91;Operation&#93; OP_StageBranchWorld"]
+        component_005__OP_GetLatestNodeInWorld["&#91;Operation&#93; OP_GetLatestNodeInWorld"]
+        component_005__OP_CheckImmuneStatus["&#91;Operation&#93; OP_CheckImmuneStatus"]
+        component_005__OP_CleanHistory["&#91;Operation&#93; OP_CleanHistory"]
+        component_005__OP_StageEvent["&#91;Operation&#93; OP_StageEvent"]
+        component_005__INV_WorldIdUnique{"&#91;Invariant&#93; INV_WorldIdUnique"}
+        component_005__INV_WalWorldCounterMonotonic{"&#91;Invariant&#93; INV_WalWorldCounterMonotonic"}
+        component_005__INV_BranchEventKindBranch{"&#91;Invariant&#93; INV_BranchEventKindBranch"}
+        component_005__INV_RootParentZero{"&#91;Invariant&#93; INV_RootParentZero"}
+        component_005__INV_QueryExcludesFaultNodes{"&#91;Invariant&#93; INV_QueryExcludesFaultNodes"}
+        component_005__INV_QueryReturnsSingleLatest{"&#91;Invariant&#93; INV_QueryReturnsSingleLatest"}
+        component_005__INV_BranchEventParentWorldImmutable{"&#91;Invariant&#93; INV_BranchEventParentWorldImmutable"}
+        component_005__INV_BranchEventParentNodeCommitted{"&#91;Invariant&#93; INV_BranchEventParentNodeCommitted"}
+        component_005__INV_BranchEventStatusStaged{"&#91;Invariant&#93; INV_BranchEventStatusStaged"}
+        component_005__INV_ImmuneHistoryExists{"&#91;Invariant&#93; INV_ImmuneHistoryExists"}
+    end
+
+    subgraph component_006 ["Component: component_006"]
+        component_006__ST_History[("&#91;State&#93; ST_History")]
+        component_006__ST_ProjectionModel[("&#91;State&#93; ST_ProjectionModel")]
+        component_006__ST_JustificationStructure[("&#91;State&#93; ST_JustificationStructure")]
+        component_006__ST_EventABI[("&#91;State&#93; ST_EventABI")]
+        component_006__ST_SemanticModel[("&#91;State&#93; ST_SemanticModel")]
+        component_006__ST_RelationalGraph[("&#91;State&#93; ST_RelationalGraph")]
+        component_006__OP_d["&#91;Operation&#93; OP_d"]
+        component_006__OP_j["&#91;Operation&#93; OP_j"]
+        component_006__OP_interpret["&#91;Operation&#93; OP_interpret"]
+        component_006__OP_justify["&#91;Operation&#93; OP_justify"]
+        component_006__OP_graph["&#91;Operation&#93; OP_graph"]
+        component_006__INV_H_authoritative_causal_record{"&#91;Invariant&#93; INV_H_authoritative_causal_record"}
+        component_006__INV_H_reproducible{"&#91;Invariant&#93; INV_H_reproducible"}
+        component_006__INV_H_inspectable{"&#91;Invariant&#93; INV_H_inspectable"}
+        component_006__INV_H_derivable{"&#91;Invariant&#93; INV_H_derivable"}
+        component_006__INV_EventABI_not_in_H{"&#91;Invariant&#93; INV_EventABI_not_in_H"}
+        component_006__INV_ResolutionSemantics_not_in_H{"&#91;Invariant&#93; INV_ResolutionSemantics_not_in_H"}
+        component_006__INV_d_deterministic{"&#91;Invariant&#93; INV_d_deterministic"}
+        component_006__INV_j_derived_exclusively_from_d{"&#91;Invariant&#93; INV_j_derived_exclusively_from_d"}
+        component_006__INV_d_semantically_neutral{"&#91;Invariant&#93; INV_d_semantically_neutral"}
+        component_006__INV_interpret_deterministic_under_ABI{"&#91;Invariant&#93; INV_interpret_deterministic_under_ABI"}
+        component_006__INV_ABI_explicit_and_versioned{"&#91;Invariant&#93; INV_ABI_explicit_and_versioned"}
+        component_006__INV_S_derived_exclusively_from_M{"&#91;Invariant&#93; INV_S_derived_exclusively_from_M"}
+        component_006__INV_interpret_preserves_order_M{"&#91;Invariant&#93; INV_interpret_preserves_order_M"}
+        component_006__INV_J_derived_exclusively_from_S{"&#91;Invariant&#93; INV_J_derived_exclusively_from_S"}
+        component_006__INV_external_semantic_injection_not_in_interpret{"&#91;Invariant&#93; INV_external_semantic_injection_not_in_interpret"}
+        component_006__INV_S_non_authoritative{"&#91;Invariant&#93; INV_S_non_authoritative"}
+        component_006__INV_graph_deterministic_from_S{"&#91;Invariant&#93; INV_graph_deterministic_from_S"}
+        component_006__INV_nodes_preserve_identity_consistency{"&#91;Invariant&#93; INV_nodes_preserve_identity_consistency"}
+        component_006__INV_edges_structural_relations_only{"&#91;Invariant&#93; INV_edges_structural_relations_only"}
+        component_006__INV_traversal_deterministic{"&#91;Invariant&#93; INV_traversal_deterministic"}
+        component_006__INV_interpretation_not_in_G{"&#91;Invariant&#93; INV_interpretation_not_in_G"}
+        component_006__INV_G_non_authoritative{"&#91;Invariant&#93; INV_G_non_authoritative"}
+    end
+
+    subgraph component_007 ["Component: component_007"]
+        component_007__ST_Graph[("&#91;State&#93; ST_Graph")]
+        component_007__ST_Basin[("&#91;State&#93; ST_Basin")]
+        component_007__ST_Attractor[("&#91;State&#93; ST_Attractor")]
+        component_007__ST_Trajectory[("&#91;State&#93; ST_Trajectory")]
+        component_007__ST_Cycle[("&#91;State&#93; ST_Cycle")]
+        component_007__ST_SCC[("&#91;State&#93; ST_SCC")]
+        component_007__ST_Cluster[("&#91;State&#93; ST_Cluster")]
+        component_007__ST_EventSelection[("&#91;State&#93; ST_EventSelection")]
+        component_007__ST_BasinResult[("&#91;State&#93; ST_BasinResult")]
+        component_007__OP_next_event["&#91;Operation&#93; OP_next_event"]
+        component_007__OP_rollout["&#91;Operation&#93; OP_rollout"]
+        component_007__OP_find_attractor["&#91;Operation&#93; OP_find_attractor"]
+        component_007__OP_find_cycle["&#91;Operation&#93; OP_find_cycle"]
+        component_007__OP_find_recurrent_cycle["&#91;Operation&#93; OP_find_recurrent_cycle"]
+        component_007__OP_compute_sccs["&#91;Operation&#93; OP_compute_sccs"]
+        component_007__OP_analyze_scc["&#91;Operation&#93; OP_analyze_scc"]
+        component_007__OP_build_basin_map["&#91;Operation&#93; OP_build_basin_map"]
+        component_007__OP_build_basin_structure["&#91;Operation&#93; OP_build_basin_structure"]
+        component_007__INV_Graph_Edge_Nodes{"&#91;Invariant&#93; INV_Graph_Edge_Nodes"}
+        component_007__INV_Basin_Mass{"&#91;Invariant&#93; INV_Basin_Mass"}
+        component_007__INV_Basin_Ratio{"&#91;Invariant&#93; INV_Basin_Ratio"}
+        component_007__INV_Partition{"&#91;Invariant&#93; INV_Partition"}
+        component_007__INV_SCC_Attractor{"&#91;Invariant&#93; INV_SCC_Attractor"}
+        component_007__INV_Cluster_Type{"&#91;Invariant&#93; INV_Cluster_Type"}
+        component_007__INV_Stability{"&#91;Invariant&#93; INV_Stability"}
+        component_007__INV_Rollout_Path{"&#91;Invariant&#93; INV_Rollout_Path"}
+    end
+
+    subgraph component_008 ["Component: component_008"]
+        component_008__ST_World[("&#91;State&#93; ST_World")]
+        component_008__ST_Registry[("&#91;State&#93; ST_Registry")]
+        component_008__ST_Kernel[("&#91;State&#93; ST_Kernel")]
+        component_008__ST_Graph[("&#91;State&#93; ST_Graph")]
+        component_008__ST_Memory[("&#91;State&#93; ST_Memory")]
+        component_008__ST_Observation[("&#91;State&#93; ST_Observation")]
+        component_008__ST_Snapshot[("&#91;State&#93; ST_Snapshot")]
+        component_008__ST_DiffResult[("&#91;State&#93; ST_DiffResult")]
+        component_008__ST_Lifecycle[("&#91;State&#93; ST_Lifecycle")]
+        component_008__OP_Observe["&#91;Operation&#93; OP_Observe"]
+        component_008__OP_BuildWorldObservation["&#91;Operation&#93; OP_BuildWorldObservation"]
+        component_008__OP_BuildRegistryObservation["&#91;Operation&#93; OP_BuildRegistryObservation"]
+        component_008__OP_BuildAncestryObservation["&#91;Operation&#93; OP_BuildAncestryObservation"]
+        component_008__OP_BuildDiffObservation["&#91;Operation&#93; OP_BuildDiffObservation"]
+        component_008__OP_Diff["&#91;Operation&#93; OP_Diff"]
+        component_008__OP_GetWorldObs["&#91;Operation&#93; OP_GetWorldObs"]
+        component_008__OP_GetRegistryObs["&#91;Operation&#93; OP_GetRegistryObs"]
+        component_008__OP_WorldObservationEqual["&#91;Operation&#93; OP_WorldObservationEqual"]
+        component_008__OP_RegistryObservationEqual["&#91;Operation&#93; OP_RegistryObservationEqual"]
+        component_008__OP_AncestryObservationEqual["&#91;Operation&#93; OP_AncestryObservationEqual"]
+        component_008__OP_DiffObservationEqual["&#91;Operation&#93; OP_DiffObservationEqual"]
+        component_008__OP_RunTests["&#91;Operation&#93; OP_RunTests"]
+        component_008__INV_ReadOnly{"&#91;Invariant&#93; INV_ReadOnly"}
+        component_008__INV_Deterministic{"&#91;Invariant&#93; INV_Deterministic"}
+        component_008__INV_Accurate{"&#91;Invariant&#93; INV_Accurate"}
+        component_008__INV_NoSideEffects{"&#91;Invariant&#93; INV_NoSideEffects"}
+        component_008__INV_ValueObjectEquality{"&#91;Invariant&#93; INV_ValueObjectEquality"}
+        component_008__INV_CompleteObservation{"&#91;Invariant&#93; INV_CompleteObservation"}
+        component_008__INV_NoInference{"&#91;Invariant&#93; INV_NoInference"}
+        component_008__INV_PresentationIndependent{"&#91;Invariant&#93; INV_PresentationIndependent"}
+        component_008__INV_SchemaCompliance{"&#91;Invariant&#93; INV_SchemaCompliance"}
+        component_008__INV_DiffSemantics{"&#91;Invariant&#93; INV_DiffSemantics"}
+        component_008__INV_NonAuth{"&#91;Invariant&#93; INV_NonAuth"}
+        component_008__INV_Layer{"&#91;Invariant&#93; INV_Layer"}
+    end
+
+    subgraph component_009 ["Component: component_009"]
+        component_009__ST_system_dir[("&#91;State&#93; ST_system_dir")]
+        component_009__ST_use_mock_physical_p[("&#91;State&#93; ST_use_mock_physical_p")]
+        component_009__ST_boot_sequence[("&#91;State&#93; ST_boot_sequence")]
+        component_009__OP_init_quicklisp["&#91;Operation&#93; OP_init_quicklisp"]
+        component_009__OP_load_libs["&#91;Operation&#93; OP_load_libs"]
+        component_009__OP_load_system_file["&#91;Operation&#93; OP_load_system_file"]
+        component_009__OP_init_layers["&#91;Operation&#93; OP_init_layers"]
+        component_009__OP_load_physical["&#91;Operation&#93; OP_load_physical"]
+        component_009__OP_load_llm["&#91;Operation&#93; OP_load_llm"]
+        component_009__OP_load_core["&#91;Operation&#93; OP_load_core"]
+        component_009__OP_load_graph["&#91;Operation&#93; OP_load_graph"]
+        component_009__OP_load_world["&#91;Operation&#93; OP_load_world"]
+        component_009__OP_load_immune["&#91;Operation&#93; OP_load_immune"]
+        component_009__OP_load_runtime["&#91;Operation&#93; OP_load_runtime"]
+        component_009__OP_load_generation["&#91;Operation&#93; OP_load_generation"]
+        component_009__OP_load_test["&#91;Operation&#93; OP_load_test"]
+        component_009__OP_start_delta3["&#91;Operation&#93; OP_start_delta3"]
+        component_009__OP_start_delta3_stub["&#91;Operation&#93; OP_start_delta3_stub"]
+        component_009__OP_agent_main_loop["&#91;Operation&#93; OP_agent_main_loop"]
+        component_009__INV_boot_seq{"&#91;Invariant&#93; INV_boot_seq"}
+        component_009__INV_abi{"&#91;Invariant&#93; INV_abi"}
+        component_009__INV_purity{"&#91;Invariant&#93; INV_purity"}
+        component_009__INV_deps{"&#91;Invariant&#93; INV_deps"}
+        component_009__INV_load_order{"&#91;Invariant&#93; INV_load_order"}
+        component_009__INV_no_reverse_dep{"&#91;Invariant&#93; INV_no_reverse_dep"}
+        component_009__INV_physical_swap{"&#91;Invariant&#93; INV_physical_swap"}
+        component_009__INV_fail_fast{"&#91;Invariant&#93; INV_fail_fast"}
+    end
+
+    subgraph component_010 ["Component: component_010"]
+        component_010__ST_CanonicalMemory[("&#91;State&#93; ST_CanonicalMemory")]
+        component_010__ST_ShortTermMemory[("&#91;State&#93; ST_ShortTermMemory")]
+        component_010__ST_LongTermMemory[("&#91;State&#93; ST_LongTermMemory")]
+        component_010__ST_MemoryRef[("&#91;State&#93; ST_MemoryRef")]
+        component_010__ST_Runtime[("&#91;State&#93; ST_Runtime")]
+        component_010__ST_Cache[("&#91;State&#93; ST_Cache")]
+        component_010__ST_KVCache[("&#91;State&#93; ST_KVCache")]
+        component_010__ST_Context[("&#91;State&#93; ST_Context")]
+        component_010__ST_PrefillState[("&#91;State&#93; ST_PrefillState")]
+        component_010__OP_MemoryRead["&#91;Operation&#93; OP_MemoryRead"]
+        component_010__OP_Commit["&#91;Operation&#93; OP_Commit"]
+        component_010__OP_Recover["&#91;Operation&#93; OP_Recover"]
+        component_010__OP_Replay["&#91;Operation&#93; OP_Replay"]
+        component_010__OP_ReconstructDerived["&#91;Operation&#93; OP_ReconstructDerived"]
+        component_010__OP_ReconstructMemoryRef["&#91;Operation&#93; OP_ReconstructMemoryRef"]
+        component_010__OP_ReconstructWorking["&#91;Operation&#93; OP_ReconstructWorking"]
+        component_010__OP_ResumeRuntime["&#91;Operation&#93; OP_ResumeRuntime"]
+        component_010__OP_DestroyCache["&#91;Operation&#93; OP_DestroyCache"]
+        component_010__OP_DestroyKVCache["&#91;Operation&#93; OP_DestroyKVCache"]
+        component_010__OP_ReconstructPrefill["&#91;Operation&#93; OP_ReconstructPrefill"]
+        component_010__OP_Resume["&#91;Operation&#93; OP_Resume"]
+        component_010__INV_CanonicalMemoryWriter{"&#91;Invariant&#93; INV_CanonicalMemoryWriter"}
+        component_010__INV_MemoryRefAuthoritativeWriter{"&#91;Invariant&#93; INV_MemoryRefAuthoritativeWriter"}
+        component_010__INV_MemoryRefDeterministic{"&#91;Invariant&#93; INV_MemoryRefDeterministic"}
+        component_010__INV_ReplayRequiresMemoryRef{"&#91;Invariant&#93; INV_ReplayRequiresMemoryRef"}
+        component_010__INV_CanonicalImmutable{"&#91;Invariant&#93; INV_CanonicalImmutable"}
+        component_010__INV_CanonicalMutateRequiresCommit{"&#91;Invariant&#93; INV_CanonicalMutateRequiresCommit"}
+        component_010__INV_RecoverDeterministic{"&#91;Invariant&#93; INV_RecoverDeterministic"}
+        component_010__INV_RecoverReplayCompatible{"&#91;Invariant&#93; INV_RecoverReplayCompatible"}
+        component_010__INV_CanonicalHistoryRecoverable{"&#91;Invariant&#93; INV_CanonicalHistoryRecoverable"}
+        component_010__INV_RecoverNoAuthoritativeInfo{"&#91;Invariant&#93; INV_RecoverNoAuthoritativeInfo"}
+    end
+
+    subgraph component_011 ["Component: component_011"]
+        component_011__ST_ir_stream[("&#91;State&#93; ST_ir_stream")]
+        component_011__ST_model_context[("&#91;State&#93; ST_model_context")]
+        component_011__ST_runtime_state[("&#91;State&#93; ST_runtime_state")]
+        component_011__OP_init_bridge["&#91;Operation&#93; OP_init_bridge"]
+        component_011__OP_make_ir["&#91;Operation&#93; OP_make_ir"]
+        component_011__OP_ir_callback["&#91;Operation&#93; OP_ir_callback"]
+        component_011__OP_push_ir["&#91;Operation&#93; OP_push_ir"]
+        component_011__OP_clear_stream["&#91;Operation&#93; OP_clear_stream"]
+        component_011__OP_validate_ir["&#91;Operation&#93; OP_validate_ir"]
+        component_011__OP_extract_actions["&#91;Operation&#93; OP_extract_actions"]
+        component_011__OP_run_trial["&#91;Operation&#93; OP_run_trial"]
+        component_011__OP_divergence_profile["&#91;Operation&#93; OP_divergence_profile"]
+        component_011__INV_ir_immutable{"&#91;Invariant&#93; INV_ir_immutable"}
+        component_011__INV_stream_append_only{"&#91;Invariant&#93; INV_stream_append_only"}
+        component_011__INV_stream_ordering{"&#91;Invariant&#93; INV_stream_ordering"}
+        component_011__INV_callback_determinism{"&#91;Invariant&#93; INV_callback_determinism"}
+        component_011__INV_analysis_isolation{"&#91;Invariant&#93; INV_analysis_isolation"}
+        component_011__INV_observation_neutrality{"&#91;Invariant&#93; INV_observation_neutrality"}
+    end
+
+    subgraph component_012 ["Component: component_012"]
+        component_012__ST_IngressQueue[("&#91;State&#93; ST_IngressQueue")]
+        component_012__ST_ReadyQueue[("&#91;State&#93; ST_ReadyQueue")]
+        component_012__ST_IsolatedQueue[("&#91;State&#93; ST_IsolatedQueue")]
+        component_012__ST_ExecutionState[("&#91;State&#93; ST_ExecutionState")]
+        component_012__ST_CausalOrder[("&#91;State&#93; ST_CausalOrder")]
+        component_012__ST_RetryCount[("&#91;State&#93; ST_RetryCount")]
+        component_012__ST_MaxRetry[("&#91;State&#93; ST_MaxRetry")]
+        component_012__ST_MaxPenaltyRetry[("&#91;State&#93; ST_MaxPenaltyRetry")]
+        component_012__ST_CanonicalState[("&#91;State&#93; ST_CanonicalState")]
+        component_012__ST_DialogueState[("&#91;State&#93; ST_DialogueState")]
+        component_012__ST_CausalId[("&#91;State&#93; ST_CausalId")]
+        component_012__ST_ToolEvent[("&#91;State&#93; ST_ToolEvent")]
+        component_012__OP_Schedule["&#91;Operation&#93; OP_Schedule"]
+        component_012__OP_Retry["&#91;Operation&#93; OP_Retry"]
+        component_012__OP_RetryWithPenalty["&#91;Operation&#93; OP_RetryWithPenalty"]
+        component_012__OP_Abort["&#91;Operation&#93; OP_Abort"]
+        component_012__OP_Apply["&#91;Operation&#93; OP_Apply"]
+        component_012__OP_ToolRetry["&#91;Operation&#93; OP_ToolRetry"]
+        component_012__INV_ScheduleDeterministic{"&#91;Invariant&#93; INV_ScheduleDeterministic"}
+        component_012__INV_RetryNoMutation{"&#91;Invariant&#93; INV_RetryNoMutation"}
+        component_012__INV_NormalDialogueIsolation{"&#91;Invariant&#93; INV_NormalDialogueIsolation"}
+        component_012__INV_FaultIsolation{"&#91;Invariant&#93; INV_FaultIsolation"}
+        component_012__INV_AuthorityCommit{"&#91;Invariant&#93; INV_AuthorityCommit"}
+        component_012__INV_IsolationFail{"&#91;Invariant&#93; INV_IsolationFail"}
+        component_012__INV_CausalIdConsistency{"&#91;Invariant&#93; INV_CausalIdConsistency"}
+        component_012__INV_RetryScope{"&#91;Invariant&#93; INV_RetryScope"}
+        component_012__INV_NoBypass{"&#91;Invariant&#93; INV_NoBypass"}
+        component_012__INV_Determinism{"&#91;Invariant&#93; INV_Determinism"}
+    end
+
+    subgraph component_013 ["Component: component_013"]
+        component_013__ST_Baseline[("&#91;State&#93; ST_Baseline")]
+        component_013__OP_Understand["&#91;Operation&#93; OP_Understand"]
+        component_013__OP_Analyze["&#91;Operation&#93; OP_Analyze"]
+        component_013__OP_Design["&#91;Operation&#93; OP_Design"]
+        component_013__OP_Implement["&#91;Operation&#93; OP_Implement"]
+        component_013__OP_Verify["&#91;Operation&#93; OP_Verify"]
+        component_013__OP_Record["&#91;Operation&#93; OP_Record"]
+        component_013__INV_Independence{"&#91;Invariant&#93; INV_Independence"}
+        component_013__INV_GovernanceScope{"&#91;Invariant&#93; INV_GovernanceScope"}
+        component_013__INV_RuntimeSatisfaction{"&#91;Invariant&#93; INV_RuntimeSatisfaction"}
+        component_013__INV_EvolutionRule{"&#91;Invariant&#93; INV_EvolutionRule"}
+        component_013__INV_ExtensionPriority{"&#91;Invariant&#93; INV_ExtensionPriority"}
+        component_013__INV_Minimalism{"&#91;Invariant&#93; INV_Minimalism"}
+        component_013__INV_Neutrality{"&#91;Invariant&#93; INV_Neutrality"}
+        component_013__INV_MetaDesignSeparation{"&#91;Invariant&#93; INV_MetaDesignSeparation"}
+        component_013__INV_RuntimeDesignSeparation{"&#91;Invariant&#93; INV_RuntimeDesignSeparation"}
+        component_013__INV_ConceptResponsibilityDependency{"&#91;Invariant&#93; INV_ConceptResponsibilityDependency"}
+        component_013__INV_ConceptImplementationIndependence{"&#91;Invariant&#93; INV_ConceptImplementationIndependence"}
+        component_013__INV_NewConceptResponsibilityRequirement{"&#91;Invariant&#93; INV_NewConceptResponsibilityRequirement"}
+        component_013__INV_ContentImplementationPrecedence{"&#91;Invariant&#93; INV_ContentImplementationPrecedence"}
+        component_013__INV_ImplementationConstitutionPreservation{"&#91;Invariant&#93; INV_ImplementationConstitutionPreservation"}
+        component_013__INV_AuthorityRepresentationSeparation{"&#91;Invariant&#93; INV_AuthorityRepresentationSeparation"}
+    end
+
+    component_001__OP_Commit --> component_001__ST_Canonical
+    component_001__OP_Commit --> component_001__OP_WakeDeferred
+    component_001__OP_WakeDeferred --> component_001__ST_KernelState
+    component_001__OP_Replay --> component_001__ST_Derived
+    component_001__OP_Derive --> component_001__ST_Derived
+    component_001__OP_BuildPrompt --> component_001__ST_Derived
+    component_001__OP_BuildPrompt --> component_001__ST_Prompt
+    component_001__OP_Backend --> component_001__ST_Prompt
+    component_001__OP_Backend --> component_001__ST_Candidate
+    component_001__OP_Validate --> component_001__ST_Candidate
+    component_001__OP_Validate --> component_001__ST_Canonical
+    component_001__OP_Validate --> component_001__ST_ValidationReport
+    component_001__OP_PolicyRouter --> component_001__ST_ValidationReport
+    component_001__OP_PolicyRouter --> component_001__ST_RuntimeRequest
+    component_001__OP_KernelTransition --> component_001__ST_KernelState
+    component_001__OP_KernelTransition --> component_001__ST_RuntimeRequest
+    component_001__OP_KernelTransition --> component_001__ST_KernelState
+    component_001__OP_KernelTransition --> component_001__ST_RuntimeCommand
+    component_001__INV_CanonicalImmutable --> component_001__OP_Commit
+    component_001__INV_PureOps --> component_001__OP_Validate
+    component_001__INV_PureOps --> component_001__OP_PolicyRouter
+    component_001__INV_KernelStateMutator --> component_001__OP_KernelTransition
+    component_001__INV_CommitSoleUpdater --> component_001__OP_Commit
+    component_001__INV_WakeDeferredTrigger --> component_001__OP_WakeDeferred
+    component_001__INV_BackendNonAuthoritative --> component_001__OP_Backend
+    component_002__OP_InitKernel --> component_002__ST_Kernel
+    component_002__OP_InitKernel --> component_002__ST_WAL
+    component_002__OP_SubmitUserInput --> component_002__OP_CommitEvent
+    component_002__OP_CommitEvent --> component_002__ST_WAL
+    component_002__OP_CommitEvent --> component_002__OP_RefreshProjections
+    component_002__OP_RefreshProjections --> component_002__ST_Graph
+    component_002__OP_GetCurrentState --> component_002__ST_Kernel
+    component_002__OP_GetCurrentState --> component_002__ST_KernelState
+    component_002__OP_InitRuntime --> component_002__ST_RuntimeEnv
+    component_002__OP_MainLoop --> component_002__OP_SubmitUserInput
+    component_002__OP_InitLLM --> component_002__ST_Context
+    component_002__OP_Tokenize --> component_002__ST_Context
+    component_002__OP_PrefillPrompt --> component_002__ST_Context
+    component_002__OP_Generate --> component_002__ST_Context
+    component_002__OP_Generate --> component_002__OP_MySamplerSample
+    component_002__OP_Generate --> component_002__OP_MyLlamaEval
+    component_002__OP_RunGenerationWithSensors --> component_002__OP_Generate
+    component_002__OP_RunGenerationWithSensors --> component_002__OP_FaultRecovery
+    component_002__OP_FaultRecovery --> component_002__ST_Context
+    component_002__OP_Chat --> component_002__ST_Session
+    component_002__OP_Chat --> component_002__OP_Tokenize
+    component_002__OP_Chat --> component_002__OP_PrefillPrompt
+    component_002__OP_Chat --> component_002__OP_Generate
+    component_002__OP_StartChat --> component_002__OP_Chat
+    component_002__OP_Decide --> component_002__ST_Session
+    component_002__INV_KernelSoleMutator --> component_002__OP_CommitEvent
+    component_002__INV_GraphFromWAL --> component_002__OP_RefreshProjections
+    component_002__INV_PostCommitPersisted --> component_002__OP_CommitEvent
+    component_002__INV_RuntimeNoDirectAccess --> component_002__OP_MainLoop
+    component_002__INV_SamplerLifecycle --> component_002__OP_Generate
+    component_002__INV_NPastInvariant --> component_002__OP_PrefillPrompt
+    component_002__INV_HistoryOrderedAppendOnly --> component_002__OP_Chat
+    component_002__INV_FaultNoCommit --> component_002__OP_FaultRecovery
+    component_002__INV_StatelessFFI --> component_002__OP_MyLlamaEval
+    component_002__INV_Abi1to1 --> component_002__OP_MyLlamaEval
+    component_003__OP_StorePayload --> component_003__ST_MemoryStore
+    component_003__OP_LoadPayload --> component_003__ST_MemoryStore
+    component_003__OP_AddNode --> component_003__ST_GraphStore
+    component_003__OP_AddEdge --> component_003__ST_GraphStore
+    component_003__OP_CausalSubgraph --> component_003__ST_GraphStore
+    component_003__OP_ProjectContext --> component_003__ST_GraphStore
+    component_003__OP_ProjectContext --> component_003__ST_MemoryStore
+    component_003__OP_BuildPrefillState --> component_003__ST_PrefillState
+    component_003__OP_BuildPrefillState --> component_003__OP_ProjectContext
+    component_003__OP_MakeWorld --> component_003__ST_World
+    component_003__OP_MakeWorld --> component_003__ST_GraphStore
+    component_003__OP_MakeWorld --> component_003__ST_MemoryStore
+    component_003__OP_ForkWorld --> component_003__ST_World
+    component_003__OP_ForkWorld --> component_003__ST_World
+    component_003__OP_KernelCommitWorld --> component_003__ST_World
+    component_003__OP_KernelCommitWorld --> component_003__ST_GraphStore
+    component_003__OP_KernelCommitWorld --> component_003__INV_CommitAtomic
+    component_003__OP_RegisterWorld --> component_003__ST_Registry
+    component_003__OP_SetActiveWorld --> component_003__ST_Registry
+    component_003__OP_ArchiveWorld --> component_003__ST_Registry
+    component_003__INV_MemoryImmutable --> component_003__ST_MemoryStore
+    component_003__INV_GraphAppend --> component_003__ST_GraphStore
+    component_003__INV_WorldIsolation --> component_003__ST_World
+    component_003__INV_CausalSeparation --> component_003__OP_CausalSubgraph
+    component_003__INV_Determinism --> component_003__OP_BuildPrefillState
+    component_004__OP_AppendWAL --> component_004__ST_WAL
+    component_004__OP_CommitEvent --> component_004__ST_WAL
+    component_004__OP_LiftGraph --> component_004__ST_WAL
+    component_004__OP_LiftGraph --> component_004__ST_HealthyTable
+    component_004__OP_LiftGraph --> component_004__ST_Graph
+    component_004__OP_HandleFault --> component_004__ST_KVCache
+    component_004__OP_HandleFault --> component_004__ST_WAL
+    component_004__OP_BranchWorld --> component_004__ST_SystemState
+    component_004__OP_Prefill --> component_004__ST_WAL
+    component_004__OP_Prefill --> component_004__ST_KVCache
+    component_004__INV_MonotonicClock --> component_004__OP_AppendWAL
+    component_004__INV_AppendOnly --> component_004__ST_Graph
+    component_004__INV_FaultIsolation --> component_004__OP_LiftGraph
+    component_004__INV_CausalScope --> component_004__OP_LiftGraph
+    component_005__OP_StageBranchWorld --> component_005__OP_GetLatestNodeInWorld
+    component_005__OP_StageBranchWorld --> component_005__OP_StageEvent
+    component_005__OP_StageBranchWorld --> component_005__ST_WalWorldCounter
+    component_005__OP_StageBranchWorld --> component_005__ST_Wal
+    component_005__OP_StageBranchWorld --> component_005__ST_Graph
+    component_005__OP_GetLatestNodeInWorld --> component_005__ST_Graph
+    component_005__OP_CheckImmuneStatus --> component_005__OP_CleanHistory
+    component_005__OP_CleanHistory --> component_005__ST_Graph
+    component_005__OP_StageEvent --> component_005__ST_Wal
+    component_005__INV_WorldIdUnique --> component_005__OP_StageBranchWorld
+    component_005__INV_WalWorldCounterMonotonic --> component_005__ST_WalWorldCounter
+    component_005__INV_BranchEventKindBranch --> component_005__OP_StageBranchWorld
+    component_005__INV_RootParentZero --> component_005__OP_StageBranchWorld
+    component_005__INV_QueryExcludesFaultNodes --> component_005__OP_GetLatestNodeInWorld
+    component_005__INV_QueryReturnsSingleLatest --> component_005__OP_GetLatestNodeInWorld
+    component_005__INV_BranchEventParentWorldImmutable --> component_005__OP_StageBranchWorld
+    component_005__INV_BranchEventParentNodeCommitted --> component_005__OP_StageBranchWorld
+    component_005__INV_BranchEventStatusStaged --> component_005__OP_StageEvent
+    component_005__INV_ImmuneHistoryExists --> component_005__OP_CheckImmuneStatus
+    component_006__ST_History --> component_006__OP_d
+    component_006__OP_d --> component_006__ST_ProjectionModel
+    component_006__ST_ProjectionModel --> component_006__OP_j
+    component_006__OP_j --> component_006__ST_JustificationStructure
+    component_006__ST_ProjectionModel --> component_006__OP_interpret
+    component_006__ST_EventABI --> component_006__OP_interpret
+    component_006__OP_interpret --> component_006__ST_SemanticModel
+    component_006__ST_SemanticModel --> component_006__OP_justify
+    component_006__OP_justify --> component_006__ST_JustificationStructure
+    component_006__ST_SemanticModel --> component_006__OP_graph
+    component_006__OP_graph --> component_006__ST_RelationalGraph
+    component_006__INV_H_authoritative_causal_record --> component_006__ST_History
+    component_006__INV_H_reproducible --> component_006__ST_History
+    component_006__INV_H_inspectable --> component_006__ST_History
+    component_006__INV_H_derivable --> component_006__ST_History
+    component_006__INV_EventABI_not_in_H --> component_006__ST_History
+    component_006__INV_ResolutionSemantics_not_in_H --> component_006__ST_History
+    component_006__INV_d_deterministic --> component_006__OP_d
+    component_006__INV_j_derived_exclusively_from_d --> component_006__OP_j
+    component_006__INV_d_semantically_neutral --> component_006__OP_d
+    component_006__INV_interpret_deterministic_under_ABI --> component_006__OP_interpret
+    component_006__INV_ABI_explicit_and_versioned --> component_006__ST_EventABI
+    component_006__INV_S_derived_exclusively_from_M --> component_006__ST_SemanticModel
+    component_006__INV_interpret_preserves_order_M --> component_006__OP_interpret
+    component_006__INV_J_derived_exclusively_from_S --> component_006__ST_JustificationStructure
+    component_006__INV_external_semantic_injection_not_in_interpret --> component_006__OP_interpret
+    component_006__INV_S_non_authoritative --> component_006__ST_SemanticModel
+    component_006__INV_graph_deterministic_from_S --> component_006__OP_graph
+    component_006__INV_nodes_preserve_identity_consistency --> component_006__ST_RelationalGraph
+    component_006__INV_edges_structural_relations_only --> component_006__ST_RelationalGraph
+    component_006__INV_traversal_deterministic --> component_006__ST_RelationalGraph
+    component_006__INV_interpretation_not_in_G --> component_006__ST_RelationalGraph
+    component_006__INV_G_non_authoritative --> component_006__ST_RelationalGraph
+    component_007__OP_next_event --> component_007__ST_EventSelection
+    component_007__OP_rollout --> component_007__OP_next_event
+    component_007__OP_rollout --> component_007__ST_Trajectory
+    component_007__OP_find_attractor --> component_007__OP_rollout
+    component_007__OP_find_attractor --> component_007__ST_Attractor
+    component_007__OP_find_cycle --> component_007__ST_Trajectory
+    component_007__OP_find_cycle --> component_007__ST_Cycle
+    component_007__OP_find_recurrent_cycle --> component_007__OP_rollout
+    component_007__OP_find_recurrent_cycle --> component_007__OP_find_cycle
+    component_007__OP_compute_sccs --> component_007__ST_Graph
+    component_007__OP_compute_sccs --> component_007__ST_SCC
+    component_007__OP_analyze_scc --> component_007__ST_SCC
+    component_007__OP_build_basin_map --> component_007__OP_find_attractor
+    component_007__OP_build_basin_map --> component_007__ST_Basin
+    component_007__OP_build_basin_structure --> component_007__ST_Basin
+    component_007__OP_build_basin_structure --> component_007__ST_BasinResult
+    component_007__INV_Graph_Edge_Nodes --> component_007__ST_Graph
+    component_007__INV_Basin_Mass --> component_007__ST_Basin
+    component_007__INV_Basin_Ratio --> component_007__ST_Basin
+    component_007__INV_Partition --> component_007__ST_Basin
+    component_007__INV_SCC_Attractor --> component_007__ST_SCC
+    component_007__INV_Cluster_Type --> component_007__ST_Cluster
+    component_007__INV_Stability --> component_007__ST_Cycle
+    component_007__INV_Rollout_Path --> component_007__ST_Trajectory
+    component_007__ST_Attractor --> component_007__ST_SCC
+    component_007__ST_Cluster --> component_007__ST_Graph
+    component_008__OP_Observe --> component_008__ST_World
+    component_008__OP_Observe --> component_008__ST_Registry
+    component_008__OP_Observe --> component_008__ST_Kernel
+    component_008__OP_Observe --> component_008__ST_Observation
+    component_008__OP_Observe --> component_008__ST_Snapshot
+    component_008__OP_Observe --> component_008__INV_ReadOnly
+    component_008__OP_Observe --> component_008__INV_Deterministic
+    component_008__OP_Observe --> component_008__INV_Accurate
+    component_008__OP_Observe --> component_008__INV_NoSideEffects
+    component_008__OP_BuildWorldObservation --> component_008__ST_World
+    component_008__OP_BuildWorldObservation --> component_008__ST_Observation
+    component_008__OP_BuildWorldObservation --> component_008__INV_ReadOnly
+    component_008__OP_BuildRegistryObservation --> component_008__ST_Registry
+    component_008__OP_BuildRegistryObservation --> component_008__ST_Observation
+    component_008__OP_BuildRegistryObservation --> component_008__INV_ReadOnly
+    component_008__OP_BuildAncestryObservation --> component_008__ST_Registry
+    component_009__OP_init_quicklisp --> component_009__OP_load_libs
+    component_009__OP_load_libs --> component_009__OP_init_layers
+    component_009__OP_init_layers --> component_009__OP_load_physical
+    component_009__OP_load_physical --> component_009__OP_load_llm
+    component_009__OP_load_llm --> component_009__OP_load_core
+    component_009__OP_load_core --> component_009__OP_load_graph
+    component_009__OP_load_graph --> component_009__OP_load_world
+    component_009__OP_load_world --> component_009__OP_load_immune
+    component_009__OP_load_immune --> component_009__OP_load_runtime
+    component_009__OP_load_runtime --> component_009__OP_load_generation
+    component_009__OP_load_generation --> component_009__OP_load_test
+    component_009__OP_load_test --> component_009__OP_start_delta3
+    component_009__OP_load_test --> component_009__OP_start_delta3_stub
+    component_009__OP_start_delta3 --> component_009__OP_agent_main_loop
+    component_009__OP_start_delta3_stub --> component_009__OP_agent_main_loop
+    component_009__ST_use_mock_physical_p --> component_009__OP_load_physical
+    component_009__ST_system_dir --> component_009__OP_load_system_file
+    component_009__INV_boot_seq --> component_009__OP_init_layers
+    component_009__INV_load_order --> component_009__OP_init_layers
+    component_009__INV_deps --> component_009__OP_load_core
+    component_009__INV_no_reverse_dep --> component_009__OP_load_graph
+    component_009__INV_physical_swap --> component_009__OP_load_physical
+    component_009__INV_abi --> component_009__OP_load_physical
+    component_009__INV_fail_fast --> component_009__OP_load_system_file
+    component_009__INV_purity --> component_009__OP_init_quicklisp
+    component_010__OP_MemoryRead --> component_010__ST_MemoryRef
+    component_010__OP_Commit --> component_010__ST_CanonicalMemory
+    component_010__OP_Commit --> component_010__ST_MemoryRef
+    component_010__OP_Commit --> component_010__INV_CanonicalMemoryWriter
+    component_010__OP_Commit --> component_010__INV_MemoryRefAuthoritativeWriter
+    component_010__OP_Recover --> component_010__OP_Replay
+    component_010__OP_Recover --> component_010__OP_ReconstructPrefill
+    component_010__OP_Recover --> component_010__INV_RecoverDeterministic
+    component_010__OP_Recover --> component_010__INV_RecoverReplayCompatible
+    component_010__OP_Recover --> component_010__INV_RecoverNoAuthoritativeInfo
+    component_010__OP_Replay --> component_010__ST_CanonicalMemory
+    component_010__OP_Replay --> component_010__OP_ReconstructDerived
+    component_010__OP_ReconstructDerived --> component_010__ST_Context
+    component_010__OP_ReconstructDerived --> component_010__OP_ReconstructMemoryRef
+    component_010__OP_ReconstructMemoryRef --> component_010__ST_MemoryRef
+    component_010__OP_ReconstructMemoryRef --> component_010__OP_ReconstructWorking
+    component_010__OP_ReconstructWorking --> component_010__ST_Context
+    component_010__OP_ReconstructWorking --> component_010__OP_ResumeRuntime
+    component_010__OP_ResumeRuntime --> component_010__ST_Runtime
+    component_010__OP_ResumeRuntime --> component_010__OP_Resume
+    component_010__OP_Resume --> component_010__ST_Runtime
+    component_010__OP_DestroyCache --> component_010__ST_Cache
+    component_010__OP_DestroyKVCache --> component_010__ST_KVCache
+    component_010__INV_CanonicalImmutable --> component_010__ST_CanonicalMemory
+    component_010__INV_CanonicalImmutable --> component_010__OP_Commit
+    component_010__INV_CanonicalMutateRequiresCommit --> component_010__OP_Commit
+    component_010__INV_MemoryRefDeterministic --> component_010__ST_MemoryRef
+    component_010__INV_ReplayRequiresMemoryRef --> component_010__OP_Replay
+    component_010__INV_CanonicalHistoryRecoverable --> component_010__ST_CanonicalMemory
+    component_011__OP_init_bridge --> component_011__ST_runtime_state
+    component_011__OP_ir_callback --> component_011__OP_make_ir
+    component_011__OP_ir_callback --> component_011__OP_push_ir
+    component_011__OP_make_ir --> component_011__OP_validate_ir
+    component_011__OP_push_ir --> component_011__ST_ir_stream
+    component_011__OP_clear_stream --> component_011__ST_ir_stream
+    component_011__OP_extract_actions --> component_011__ST_ir_stream
+    component_011__OP_run_trial --> component_011__OP_clear_stream
+    component_011__OP_run_trial --> component_011__OP_extract_actions
+    component_011__OP_run_trial --> component_011__ST_model_context
+    component_011__OP_divergence_profile --> component_011__OP_run_trial
+    component_011__INV_ir_immutable --> component_011__OP_make_ir
+    component_011__INV_ir_immutable --> component_011__OP_push_ir
+    component_011__INV_stream_append_only --> component_011__ST_ir_stream
+    component_011__INV_stream_ordering --> component_011__OP_push_ir
+    component_011__INV_callback_determinism --> component_011__OP_ir_callback
+    component_011__INV_analysis_isolation --> component_011__OP_divergence_profile
+    component_011__INV_observation_neutrality --> component_011__OP_extract_actions
+    component_012__OP_Schedule --> component_012__ST_ReadyQueue
+    component_012__OP_Schedule --> component_012__ST_CausalOrder
+    component_012__OP_Schedule --> component_012__ST_ExecutionState
+    component_012__INV_ScheduleDeterministic --> component_012__OP_Schedule
+    component_012__OP_Retry --> component_012__ST_RetryCount
+    component_012__OP_Retry --> component_012__ST_MaxRetry
+    component_012__OP_Retry --> component_012__ST_ReadyQueue
+    component_012__OP_Retry --> component_012__OP_Abort
+    component_012__INV_RetryNoMutation --> component_012__OP_Retry
+    component_012__OP_RetryWithPenalty --> component_012__ST_RetryCount
+    component_012__OP_RetryWithPenalty --> component_012__ST_MaxPenaltyRetry
+    component_012__OP_RetryWithPenalty --> component_012__ST_CanonicalState
+    component_012__OP_RetryWithPenalty --> component_012__INV_RetryNoMutation
+    component_012__OP_Abort --> component_012__ST_ExecutionState
+    component_012__INV_NormalDialogueIsolation --> component_012__ST_ReadyQueue
+    component_012__INV_FaultIsolation --> component_012__OP_Abort
+    component_012__OP_Apply --> component_012__ST_ToolEvent
+    component_012__OP_Apply --> component_012__ST_CanonicalState
+    component_012__OP_Apply --> component_012__ST_DialogueState
+    component_012__INV_AuthorityCommit --> component_012__OP_Apply
+    component_012__INV_IsolationFail --> component_012__OP_Apply
+    component_012__INV_CausalIdConsistency --> component_012__OP_Apply
+    component_012__INV_NoBypass --> component_012__OP_Apply
+    component_012__OP_ToolRetry --> component_012__ST_ToolEvent
+    component_012__INV_RetryScope --> component_012__OP_ToolRetry
+    component_012__INV_Determinism --> component_012__OP_Apply
+    component_013__OP_Understand --> component_013__OP_Analyze
+    component_013__OP_Analyze --> component_013__OP_Design
+    component_013__OP_Design --> component_013__OP_Implement
+    component_013__OP_Implement --> component_013__OP_Verify
+    component_013__OP_Verify --> component_013__OP_Record
+    component_013__OP_Record --> component_013__ST_Baseline
+    component_013__INV_EvolutionRule --> component_013__OP_Implement
+    component_013__INV_NewConceptResponsibilityRequirement --> component_013__OP_Design
+    component_013__INV_ContentImplementationPrecedence --> component_013__OP_Implement
+    component_013__INV_ImplementationConstitutionPreservation --> component_013__OP_Implement
+    component_013__INV_ConceptResponsibilityDependency --> component_013__OP_Design
+    component_013__INV_ConceptImplementationIndependence --> component_013__OP_Implement
+    component_013__INV_RuntimeSatisfaction --> component_013__OP_Implement
+    component_013__INV_GovernanceScope --> component_013__OP_Design
+    component_013__INV_Independence --> component_013__OP_Design
+    component_013__INV_ExtensionPriority --> component_013__OP_Design
+    component_013__INV_Minimalism --> component_013__OP_Design
+    component_013__INV_Neutrality --> component_013__OP_Design
+    component_013__INV_MetaDesignSeparation --> component_013__OP_Design
+    component_013__INV_RuntimeDesignSeparation --> component_013__OP_Implement
+    component_013__INV_AuthorityRepresentationSeparation --> component_013__OP_Design

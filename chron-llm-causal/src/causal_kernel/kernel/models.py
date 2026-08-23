@@ -76,3 +76,20 @@ class MasterGraphContainer(BaseModel):
     nodes: Dict[str, CausalNode]
     edges: List[CausalEdge]
     version: str = "2.0"
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_nodes(cls, data: Any) -> Any:
+        if isinstance(data, dict):
+            raw_nodes = data.get("nodes")
+            # JSON側がリスト形式 (List) の場合、ノードの "id" をキーにした辞書 (Dict) に変換する
+            if isinstance(raw_nodes, list):
+                nodes_dict = {}
+                for idx, n in enumerate(raw_nodes):
+                    if isinstance(n, dict):
+                        node_id = n.get("id") or f"N{idx+1:03d}"
+                        nodes_dict[node_id] = n
+                    else:
+                        nodes_dict[f"N{idx+1:03d}"] = n
+                data["nodes"] = nodes_dict
+        return data

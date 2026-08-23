@@ -1,0 +1,733 @@
+{
+  "total_records": 104,
+  "provenance": [
+    {
+      "unit_id": "UNIT_0001_bindings__llama_cffi",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/bindings__llama_cffi.spec",
+      "relative_path": "bindings__llama_cffi.spec",
+      "line_start": 1,
+      "line_end": 254
+    },
+    {
+      "unit_id": "UNIT_0002_cae-schema",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/cae-schema.yaml",
+      "relative_path": "cae-schema.yaml",
+      "line_start": 1,
+      "line_end": 285
+    },
+    {
+      "unit_id": "UNIT_0003_config__sbcl_policy",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/config__sbcl_policy.spec",
+      "relative_path": "config__sbcl_policy.spec",
+      "line_start": 1,
+      "line_end": 138
+    },
+    {
+      "unit_id": "UNIT_0004_contracts__abi-registry",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__abi-registry.spec",
+      "relative_path": "contracts__abi-registry.spec",
+      "line_start": 1,
+      "line_end": 93
+    },
+    {
+      "unit_id": "UNIT_0005_contracts__base-excludes",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__base-excludes.spec",
+      "relative_path": "contracts__base-excludes.spec",
+      "line_start": 1,
+      "line_end": 26
+    },
+    {
+      "unit_id": "UNIT_0006_contracts__base-history",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__base-history.spec",
+      "relative_path": "contracts__base-history.spec",
+      "line_start": 1,
+      "line_end": 31
+    },
+    {
+      "unit_id": "UNIT_0007_contracts__base-invariants",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__base-invariants.spec",
+      "relative_path": "contracts__base-invariants.spec",
+      "line_start": 1,
+      "line_end": 63
+    },
+    {
+      "unit_id": "UNIT_0008_contracts__base-types",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__base-types.spec",
+      "relative_path": "contracts__base-types.spec",
+      "line_start": 1,
+      "line_end": 95
+    },
+    {
+      "unit_id": "UNIT_0009_contracts__integration-verification",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__integration-verification.spec",
+      "relative_path": "contracts__integration-verification.spec",
+      "line_start": 1,
+      "line_end": 61
+    },
+    {
+      "unit_id": "UNIT_0010_contracts__kernel-world",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__kernel-world.spec",
+      "relative_path": "contracts__kernel-world.spec",
+      "line_start": 1,
+      "line_end": 120
+    },
+    {
+      "unit_id": "UNIT_0011_contracts__pipeline-orchestration",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__pipeline-orchestration.spec",
+      "relative_path": "contracts__pipeline-orchestration.spec",
+      "line_start": 1,
+      "line_end": 72
+    },
+    {
+      "unit_id": "UNIT_0012_contracts__spec-metamodel",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__spec-metamodel.spec",
+      "relative_path": "contracts__spec-metamodel.spec",
+      "line_start": 1,
+      "line_end": 31
+    },
+    {
+      "unit_id": "UNIT_0013_contracts__spec__v2.8.0-C-persistence",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__spec__v2.8.0-C-persistence.spec",
+      "relative_path": "contracts__spec__v2.8.0-C-persistence.spec",
+      "line_start": 1,
+      "line_end": 26
+    },
+    {
+      "unit_id": "UNIT_0014_contracts__spec__v2.8.0-D-replay",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/contracts__spec__v2.8.0-D-replay.spec",
+      "relative_path": "contracts__spec__v2.8.0-D-replay.spec",
+      "line_start": 1,
+      "line_end": 15
+    },
+    {
+      "unit_id": "UNIT_0015_core__types",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/core__types.spec",
+      "relative_path": "core__types.spec",
+      "line_start": 1,
+      "line_end": 202
+    },
+    {
+      "unit_id": "UNIT_0016_docs__ir__00-constitution",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__00-constitution.spec",
+      "relative_path": "docs__ir__00-constitution.spec",
+      "line_start": 1,
+      "line_end": 22
+    },
+    {
+      "unit_id": "UNIT_0017_docs__ir__01-domain-model",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__01-domain-model.spec",
+      "relative_path": "docs__ir__01-domain-model.spec",
+      "line_start": 1,
+      "line_end": 59
+    },
+    {
+      "unit_id": "UNIT_0018_docs__ir__02-operational-semantics",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__02-operational-semantics.spec",
+      "relative_path": "docs__ir__02-operational-semantics.spec",
+      "line_start": 1,
+      "line_end": 67
+    },
+    {
+      "unit_id": "UNIT_0019_docs__ir__03-reference-runtime",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__03-reference-runtime.spec",
+      "relative_path": "docs__ir__03-reference-runtime.spec",
+      "line_start": 1,
+      "line_end": 17
+    },
+    {
+      "unit_id": "UNIT_0020_docs__ir__05-validation-pipeline",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__05-validation-pipeline.spec",
+      "relative_path": "docs__ir__05-validation-pipeline.spec",
+      "line_start": 1,
+      "line_end": 30
+    },
+    {
+      "unit_id": "UNIT_0021_docs__ir__06-kernel-state-machine",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__06-kernel-state-machine.spec",
+      "relative_path": "docs__ir__06-kernel-state-machine.spec",
+      "line_start": 1,
+      "line_end": 25
+    },
+    {
+      "unit_id": "UNIT_0022_docs__ir__07-chron-mapping",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__07-chron-mapping.spec",
+      "relative_path": "docs__ir__07-chron-mapping.spec",
+      "line_start": 1,
+      "line_end": 40
+    },
+    {
+      "unit_id": "UNIT_0023_docs__ir__08-memory-model",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__08-memory-model.spec",
+      "relative_path": "docs__ir__08-memory-model.spec",
+      "line_start": 1,
+      "line_end": 14
+    },
+    {
+      "unit_id": "UNIT_0024_docs__ir__09-runtime-scheduling",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__09-runtime-scheduling.spec",
+      "relative_path": "docs__ir__09-runtime-scheduling.spec",
+      "line_start": 1,
+      "line_end": 22
+    },
+    {
+      "unit_id": "UNIT_0025_docs__ir__10-tool-execution",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__10-tool-execution.spec",
+      "relative_path": "docs__ir__10-tool-execution.spec",
+      "line_start": 1,
+      "line_end": 16
+    },
+    {
+      "unit_id": "UNIT_0026_docs__ir__11-prompt-builder",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__11-prompt-builder.spec",
+      "relative_path": "docs__ir__11-prompt-builder.spec",
+      "line_start": 1,
+      "line_end": 12
+    },
+    {
+      "unit_id": "UNIT_0027_docs__ir__12-recovery",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__12-recovery.spec",
+      "relative_path": "docs__ir__12-recovery.spec",
+      "line_start": 1,
+      "line_end": 15
+    },
+    {
+      "unit_id": "UNIT_0028_docs__ir__13-worldline-branching",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__13-worldline-branching.spec",
+      "relative_path": "docs__ir__13-worldline-branching.spec",
+      "line_start": 1,
+      "line_end": 70
+    },
+    {
+      "unit_id": "UNIT_0029_docs__ir__99-open-questions",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__99-open-questions.spec",
+      "relative_path": "docs__ir__99-open-questions.spec",
+      "line_start": 1,
+      "line_end": 19
+    },
+    {
+      "unit_id": "UNIT_0030_docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "relative_path": "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "line_start": 1,
+      "line_end": 61
+    },
+    {
+      "unit_id": "UNIT_0031_docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "relative_path": "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "line_start": 1,
+      "line_end": 83
+    },
+    {
+      "unit_id": "UNIT_0032_docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "relative_path": "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "line_start": 1,
+      "line_end": 55
+    },
+    {
+      "unit_id": "UNIT_0033_docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "relative_path": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "line_start": 1,
+      "line_end": 63
+    },
+    {
+      "unit_id": "UNIT_0034_docs__ir__architecture-v1.1",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__architecture-v1.1.spec",
+      "relative_path": "docs__ir__architecture-v1.1.spec",
+      "line_start": 1,
+      "line_end": 100
+    },
+    {
+      "unit_id": "UNIT_0035_docs__ir__chron-llm-r1-interface-spec-v1.2",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "relative_path": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "line_start": 1,
+      "line_end": 30
+    },
+    {
+      "unit_id": "UNIT_0036_docs__ir__knowledge-system",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__knowledge-system.spec",
+      "relative_path": "docs__ir__knowledge-system.spec",
+      "line_start": 1,
+      "line_end": 24
+    },
+    {
+      "unit_id": "UNIT_0037_docs__ir__phase-a-charter",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__phase-a-charter.spec",
+      "relative_path": "docs__ir__phase-a-charter.spec",
+      "line_start": 1,
+      "line_end": 9
+    },
+    {
+      "unit_id": "UNIT_0038_docs__ir__phase-b-charter",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__phase-b-charter.spec",
+      "relative_path": "docs__ir__phase-b-charter.spec",
+      "line_start": 1,
+      "line_end": 11
+    },
+    {
+      "unit_id": "UNIT_0039_docs__ir__phase-c-charter",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__phase-c-charter.spec",
+      "relative_path": "docs__ir__phase-c-charter.spec",
+      "line_start": 1,
+      "line_end": 14
+    },
+    {
+      "unit_id": "UNIT_0040_docs__ir__phase-d-charter",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__phase-d-charter.spec",
+      "relative_path": "docs__ir__phase-d-charter.spec",
+      "line_start": 1,
+      "line_end": 12
+    },
+    {
+      "unit_id": "UNIT_0041_docs__ir__phase-e-charter",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__phase-e-charter.spec",
+      "relative_path": "docs__ir__phase-e-charter.spec",
+      "line_start": 1,
+      "line_end": 42
+    },
+    {
+      "unit_id": "UNIT_0042_docs__ir__phase-f-charter",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__phase-f-charter.spec",
+      "relative_path": "docs__ir__phase-f-charter.spec",
+      "line_start": 1,
+      "line_end": 35
+    },
+    {
+      "unit_id": "UNIT_0043_docs__ir__pull_request_template",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__pull_request_template.spec",
+      "relative_path": "docs__ir__pull_request_template.spec",
+      "line_start": 1,
+      "line_end": 8
+    },
+    {
+      "unit_id": "UNIT_0044_docs__ir__r2-0-c-freeze-report",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__ir__r2-0-c-freeze-report.spec",
+      "relative_path": "docs__ir__r2-0-c-freeze-report.spec",
+      "line_start": 1,
+      "line_end": 6
+    },
+    {
+      "unit_id": "UNIT_0045_docs__reference__ir__knowledge-rationale",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__reference__ir__knowledge-rationale.spec",
+      "relative_path": "docs__reference__ir__knowledge-rationale.spec",
+      "line_start": 1,
+      "line_end": 42
+    },
+    {
+      "unit_id": "UNIT_0046_docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "relative_path": "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "line_start": 1,
+      "line_end": 92
+    },
+    {
+      "unit_id": "UNIT_0047_docs__spec__ir__Chron-LLM_R2.1-Kernel_Freeze_Spec",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__spec__ir__Chron-LLM_R2.1-Kernel_Freeze_Spec.spec",
+      "relative_path": "docs__spec__ir__Chron-LLM_R2.1-Kernel_Freeze_Spec.spec",
+      "line_start": 1,
+      "line_end": 49
+    },
+    {
+      "unit_id": "UNIT_0048_docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "relative_path": "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "line_start": 1,
+      "line_end": 64
+    },
+    {
+      "unit_id": "UNIT_0049_docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "relative_path": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "line_start": 1,
+      "line_end": 125
+    },
+    {
+      "unit_id": "UNIT_0050_experiments__ir__3cluster",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/experiments__ir__3cluster.spec",
+      "relative_path": "experiments__ir__3cluster.spec",
+      "line_start": 1,
+      "line_end": 35
+    },
+    {
+      "unit_id": "UNIT_0051_experiments__ir__chron-llm-spec-v0.2",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/experiments__ir__chron-llm-spec-v0.2.spec",
+      "relative_path": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "line_start": 1,
+      "line_end": 49
+    },
+    {
+      "unit_id": "UNIT_0052_experiments__ir__cycle",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/experiments__ir__cycle.spec",
+      "relative_path": "experiments__ir__cycle.spec",
+      "line_start": 1,
+      "line_end": 26
+    },
+    {
+      "unit_id": "UNIT_0053_experiments__ir__dynamics",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/experiments__ir__dynamics.spec",
+      "relative_path": "experiments__ir__dynamics.spec",
+      "line_start": 1,
+      "line_end": 31
+    },
+    {
+      "unit_id": "UNIT_0054_experiments__ir__scc",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/experiments__ir__scc.spec",
+      "relative_path": "experiments__ir__scc.spec",
+      "line_start": 1,
+      "line_end": 49
+    },
+    {
+      "unit_id": "UNIT_0055_graph-runtime__ir__causal",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/graph-runtime__ir__causal.spec",
+      "relative_path": "graph-runtime__ir__causal.spec",
+      "line_start": 1,
+      "line_end": 36
+    },
+    {
+      "unit_id": "UNIT_0056_graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "relative_path": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "line_start": 1,
+      "line_end": 159
+    },
+    {
+      "unit_id": "UNIT_0057_graph-runtime__ir__graph",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/graph-runtime__ir__graph.spec",
+      "relative_path": "graph-runtime__ir__graph.spec",
+      "line_start": 1,
+      "line_end": 28
+    },
+    {
+      "unit_id": "UNIT_0058_llama-agent__ir__causal-kernel",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__causal-kernel.spec",
+      "relative_path": "llama-agent__ir__causal-kernel.spec",
+      "line_start": 1,
+      "line_end": 72
+    },
+    {
+      "unit_id": "UNIT_0059_llama-agent__ir__chron-llm-graph",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__chron-llm-graph.spec",
+      "relative_path": "llama-agent__ir__chron-llm-graph.spec",
+      "line_start": 1,
+      "line_end": 66
+    },
+    {
+      "unit_id": "UNIT_0060_llama-agent__ir__chron-llm-immune",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__chron-llm-immune.spec",
+      "relative_path": "llama-agent__ir__chron-llm-immune.spec",
+      "line_start": 1,
+      "line_end": 35
+    },
+    {
+      "unit_id": "UNIT_0061_llama-agent__ir__chron-llm-kernel",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__chron-llm-kernel.spec",
+      "relative_path": "llama-agent__ir__chron-llm-kernel.spec",
+      "line_start": 1,
+      "line_end": 64
+    },
+    {
+      "unit_id": "UNIT_0062_llama-agent__ir__chron-llm-runtime",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__chron-llm-runtime.spec",
+      "relative_path": "llama-agent__ir__chron-llm-runtime.spec",
+      "line_start": 1,
+      "line_end": 37
+    },
+    {
+      "unit_id": "UNIT_0063_llama-agent__ir__chron-llm-world",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__chron-llm-world.spec",
+      "relative_path": "llama-agent__ir__chron-llm-world.spec",
+      "line_start": 1,
+      "line_end": 143
+    },
+    {
+      "unit_id": "UNIT_0064_llama-agent__ir__chron-llm",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__chron-llm.spec",
+      "relative_path": "llama-agent__ir__chron-llm.spec",
+      "line_start": 1,
+      "line_end": 48
+    },
+    {
+      "unit_id": "UNIT_0065_llama-agent__ir__delta3-agent",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__delta3-agent.spec",
+      "relative_path": "llama-agent__ir__delta3-agent.spec",
+      "line_start": 1,
+      "line_end": 76
+    },
+    {
+      "unit_id": "UNIT_0066_llama-agent__ir__ffi-bindings-mock",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__ffi-bindings-mock.spec",
+      "relative_path": "llama-agent__ir__ffi-bindings-mock.spec",
+      "line_start": 1,
+      "line_end": 54
+    },
+    {
+      "unit_id": "UNIT_0067_llama-agent__ir__ffi-bindings",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__ffi-bindings.spec",
+      "relative_path": "llama-agent__ir__ffi-bindings.spec",
+      "line_start": 1,
+      "line_end": 46
+    },
+    {
+      "unit_id": "UNIT_0068_llama-agent__ir__generate",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__generate.spec",
+      "relative_path": "llama-agent__ir__generate.spec",
+      "line_start": 1,
+      "line_end": 42
+    },
+    {
+      "unit_id": "UNIT_0069_llama-agent__ir__immune-system",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__immune-system.spec",
+      "relative_path": "llama-agent__ir__immune-system.spec",
+      "line_start": 1,
+      "line_end": 41
+    },
+    {
+      "unit_id": "UNIT_0070_llama-agent__ir__llama-agent",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/llama-agent__ir__llama-agent.spec",
+      "relative_path": "llama-agent__ir__llama-agent.spec",
+      "line_start": 1,
+      "line_end": 91
+    },
+    {
+      "unit_id": "UNIT_0071_macros__dsl",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/macros__dsl.spec",
+      "relative_path": "macros__dsl.spec",
+      "line_start": 1,
+      "line_end": 219
+    },
+    {
+      "unit_id": "UNIT_0072_memory__ir__store",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/memory__ir__store.spec",
+      "relative_path": "memory__ir__store.spec",
+      "line_start": 1,
+      "line_end": 68
+    },
+    {
+      "unit_id": "UNIT_0073_observability__ir__world-snapshot",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/observability__ir__world-snapshot.spec",
+      "relative_path": "observability__ir__world-snapshot.spec",
+      "line_start": 1,
+      "line_end": 72
+    },
+    {
+      "unit_id": "UNIT_0074_runtime__ir__callback",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__ir__callback.spec",
+      "relative_path": "runtime__ir__callback.spec",
+      "line_start": 1,
+      "line_end": 6
+    },
+    {
+      "unit_id": "UNIT_0075_runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "relative_path": "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "line_start": 1,
+      "line_end": 71
+    },
+    {
+      "unit_id": "UNIT_0076_runtime__ir__divergence",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__ir__divergence.spec",
+      "relative_path": "runtime__ir__divergence.spec",
+      "line_start": 1,
+      "line_end": 9
+    },
+    {
+      "unit_id": "UNIT_0077_runtime__ir__ffi",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__ir__ffi.spec",
+      "relative_path": "runtime__ir__ffi.spec",
+      "line_start": 1,
+      "line_end": 19
+    },
+    {
+      "unit_id": "UNIT_0078_runtime__ir__ir",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__ir__ir.spec",
+      "relative_path": "runtime__ir__ir.spec",
+      "line_start": 1,
+      "line_end": 84
+    },
+    {
+      "unit_id": "UNIT_0079_runtime__ir__stream",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__ir__stream.spec",
+      "relative_path": "runtime__ir__stream.spec",
+      "line_start": 1,
+      "line_end": 14
+    },
+    {
+      "unit_id": "UNIT_0080_runtime__md__ir__llama-engine",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__md__ir__llama-engine.spec",
+      "relative_path": "runtime__md__ir__llama-engine.spec",
+      "line_start": 1,
+      "line_end": 3
+    },
+    {
+      "unit_id": "UNIT_0081_runtime__r0__ir__api",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__r0__ir__api.spec",
+      "relative_path": "runtime__r0__ir__api.spec",
+      "line_start": 1,
+      "line_end": 20
+    },
+    {
+      "unit_id": "UNIT_0082_runtime__r0__ir__chat-loop",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__r0__ir__chat-loop.spec",
+      "relative_path": "runtime__r0__ir__chat-loop.spec",
+      "line_start": 1,
+      "line_end": 40
+    },
+    {
+      "unit_id": "UNIT_0083_runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "relative_path": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "line_start": 1,
+      "line_end": 33
+    },
+    {
+      "unit_id": "UNIT_0084_runtime__r0__ir__history",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__r0__ir__history.spec",
+      "relative_path": "runtime__r0__ir__history.spec",
+      "line_start": 1,
+      "line_end": 15
+    },
+    {
+      "unit_id": "UNIT_0085_runtime__r0__ir__llama-run",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__r0__ir__llama-run.spec",
+      "relative_path": "runtime__r0__ir__llama-run.spec",
+      "line_start": 1,
+      "line_end": 24
+    },
+    {
+      "unit_id": "UNIT_0086_runtime__r0__ir__prompt",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__r0__ir__prompt.spec",
+      "relative_path": "runtime__r0__ir__prompt.spec",
+      "line_start": 1,
+      "line_end": 22
+    },
+    {
+      "unit_id": "UNIT_0087_runtime__r0__ir__trace",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__r0__ir__trace.spec",
+      "relative_path": "runtime__r0__ir__trace.spec",
+      "line_start": 1,
+      "line_end": 41
+    },
+    {
+      "unit_id": "UNIT_0088_runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "relative_path": "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "line_start": 1,
+      "line_end": 22
+    },
+    {
+      "unit_id": "UNIT_0089_runtime__r1__ir__core",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/runtime__r1__ir__core.spec",
+      "relative_path": "runtime__r1__ir__core.spec",
+      "line_start": 1,
+      "line_end": 69
+    },
+    {
+      "unit_id": "UNIT_0090_specs__00-expression-grammar",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/specs__00-expression-grammar.spec",
+      "relative_path": "specs__00-expression-grammar.spec",
+      "line_start": 1,
+      "line_end": 0
+    },
+    {
+      "unit_id": "UNIT_0091_specs__00-meta-model",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/specs__00-meta-model.spec",
+      "relative_path": "specs__00-meta-model.spec",
+      "line_start": 1,
+      "line_end": 206
+    },
+    {
+      "unit_id": "UNIT_0092_specs__00-type-system",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/specs__00-type-system.spec",
+      "relative_path": "specs__00-type-system.spec",
+      "line_start": 1,
+      "line_end": 0
+    },
+    {
+      "unit_id": "UNIT_0093_specs__01-semantic-model",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/specs__01-semantic-model.spec",
+      "relative_path": "specs__01-semantic-model.spec",
+      "line_start": 1,
+      "line_end": 173
+    },
+    {
+      "unit_id": "UNIT_0094_specs__02-constitution",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/specs__02-constitution.spec",
+      "relative_path": "specs__02-constitution.spec",
+      "line_start": 1,
+      "line_end": 229
+    },
+    {
+      "unit_id": "UNIT_0095_specs__03-chron-semantic-extension",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/specs__03-chron-semantic-extension.spec",
+      "relative_path": "specs__03-chron-semantic-extension.spec",
+      "line_start": 1,
+      "line_end": 352
+    },
+    {
+      "unit_id": "UNIT_0096_specs__04-runtime-model",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/specs__04-runtime-model.spec",
+      "relative_path": "specs__04-runtime-model.spec",
+      "line_start": 1,
+      "line_end": 291
+    },
+    {
+      "unit_id": "UNIT_0097_tests__md__ir__phase0-big-bang-test",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/tests__md__ir__phase0-big-bang-test.spec",
+      "relative_path": "tests__md__ir__phase0-big-bang-test.spec",
+      "line_start": 1,
+      "line_end": 40
+    },
+    {
+      "unit_id": "UNIT_0098_tests__md__ir__r2-0-a-tests",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/tests__md__ir__r2-0-a-tests.spec",
+      "relative_path": "tests__md__ir__r2-0-a-tests.spec",
+      "line_start": 1,
+      "line_end": 43
+    },
+    {
+      "unit_id": "UNIT_0099_tests__md__ir__r2-0-b-tests",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/tests__md__ir__r2-0-b-tests.spec",
+      "relative_path": "tests__md__ir__r2-0-b-tests.spec",
+      "line_start": 1,
+      "line_end": 83
+    },
+    {
+      "unit_id": "UNIT_0100_tests__md__ir__r2-0-c-tests",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/tests__md__ir__r2-0-c-tests.spec",
+      "relative_path": "tests__md__ir__r2-0-c-tests.spec",
+      "line_start": 1,
+      "line_end": 65
+    },
+    {
+      "unit_id": "UNIT_0101_tests__md__ir__r2-1-b-tests",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/tests__md__ir__r2-1-b-tests.spec",
+      "relative_path": "tests__md__ir__r2-1-b-tests.spec",
+      "line_start": 1,
+      "line_end": 42
+    },
+    {
+      "unit_id": "UNIT_0102_tests__md__ir__r2-2-e-tests",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/tests__md__ir__r2-2-e-tests.spec",
+      "relative_path": "tests__md__ir__r2-2-e-tests.spec",
+      "line_start": 1,
+      "line_end": 41
+    },
+    {
+      "unit_id": "UNIT_0103_tests__md__ir__r2-3-s-tests",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/tests__md__ir__r2-3-s-tests.spec",
+      "relative_path": "tests__md__ir__r2-3-s-tests.spec",
+      "line_start": 1,
+      "line_end": 43
+    },
+    {
+      "unit_id": "UNIT_0104_tests__pipeline_test",
+      "source_path": "/home/junu/Chron-LLM/spec_sheet/tests__pipeline_test.spec",
+      "relative_path": "tests__pipeline_test.spec",
+      "line_start": 1,
+      "line_end": 175
+    }
+  ]
+}

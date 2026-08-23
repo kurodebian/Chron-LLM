@@ -1,0 +1,19 @@
+{
+  "nodes": [
+    {
+      "id": "PHASE6_UNIT_0001",
+      "label": "cae-schema.yaml",
+      "domain": "cae",
+      "authority_class": "Canonical",
+      "ast_stats": {
+        "invariants": 0,
+        "authority_constraints": 0,
+        "dependencies": 1
+      }
+    }
+  ],
+  "edges": [],
+  "node_set": [
+    "PHASE6_UNIT_0001"
+  ]
+}

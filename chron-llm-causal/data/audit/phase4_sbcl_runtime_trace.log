@@ -1,0 +1,8 @@
+
+---SBCL_TRACE_BEGIN---
+[
+  {"test_id": "TC1_VALID_PATH", "status": "ACCEPT"},
+  {"test_id": "TC2_INVALID_AUTH", "status": "REJECT", "reason": "ERR_MISSING_AUTH_GUARD"},
+  {"test_id": "TC3_DERIVE_PURITY_VIOLATION", "status": "REJECT", "reason": "ERR_DERIVE_PURITY_FAIL"}
+]
+---SBCL_TRACE_END---

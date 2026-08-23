@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "audit_version": "AUDIT_R2_REVISION",
+  "status": "VALIDATED_PENDING_REVIEW",
+  "canonical_freeze": "FORBIDDEN",
+  "target_mastergraph": "causal_master_graph_v2.json",
+  "claims": {
+    "STRUCTURAL_TRACEABILITY": "PROVABLE",
+    "ALGEBRAIC_CONSISTENCY": "PROVABLE_BY_EXISTING_VALIDATOR",
+    "RUNTIME_PARITY": "SUPPORTED_BY_SBCL_TESTS",
+    "SEMANTIC_PRESERVATION": "NOT_CLAIMED_UNTIL_TRACEABILITY_VALIDATION_PASSES"
+  },
+  "machine_checks": {
+    "NODE_COUNT": 340,
+    "EDGE_COUNT": 312,
+    "NODE_CLASSIFIED": 340,
+    "EDGE_CLASSIFIED": 312,
+    "NODE_UNMAPPED": 0,
+    "EDGE_UNMAPPED": 0,
+    "NODE_DUPLICATE_MAPPING": 0,
+    "EDGE_DUPLICATE_MAPPING": 0,
+    "DANGLING_SOURCE": 0,
+    "DANGLING_TARGET": 0
+  },
+  "transformation_rules": {
+    "PRESERVED": "1:1 direct mapping from Delta-1 canonical kernel element to MasterGraph node/edge.",
+    "AGGREGATED": "Multiple fine-grained specification state variables grouped into a MasterGraph state node.",
+    "COLLAPSED": "Sequential execution transition chain collapsed into a macro causal edge morphism.",
+    "ABSORBED": "Kernel metadata specification constraints absorbed as explicit invariant node/edge attributes."
+  },
+  "kernel_artifacts_absorption": [
+    {
+      "artifact_id": "ART_K_01_AUTHORITY_SPEC",
+      "absorbed_constraints": [
+        "Exclusive Mutation Authority Invariant",
+        "Guard Token Enforcement"
+      ],
+      "target_delta2_nodes": ["INV_AUTH_001"],
+      "target_delta2_edges": ["E001"],
+      "preservation_argument": "Absorbed into INV_AUTH_001 state predicate and guard_invariant property of E001."
+    },
+    {
+      "artifact_id": "ART_K_02_WAL_SPEC",
+      "absorbed_constraints": ["Durability Ordering Constraint"],
+      "target_delta2_nodes": ["INV_WAL_001"],
+      "target_delta2_edges": ["E006"],
+      "preservation_argument": "Absorbed into INV_WAL_001 definition and E006 WAL ordering morphism."
+    },
+    {
+      "artifact_id": "ART_K_03_DETERMINISM_SPEC",
+      "absorbed_constraints": ["Pure Function Reproducibility"],
+      "target_delta2_nodes": ["INV_DET_001"],
+      "target_delta2_edges": ["E003"],
+      "preservation_argument": "Absorbed into INV_DET_001 invariant guard."
+    },
+    {
+      "artifact_id": "ART_K_04_ISOLATION_SPEC",
+      "absorbed_constraints": ["World Isolation Boundary"],
+      "target_delta2_nodes": ["INV_ISO_001"],
+      "target_delta2_edges": ["E007"],
+      "preservation_argument": "Absorbed into INV_ISO_001 definition and E007 runtime pipeline morphism."
+    },
+    {
+      "artifact_id": "ART_K_05_APPEND_ONLY_SPEC",
+      "absorbed_constraints": ["Immutable History Structure Invariant"],
+      "target_delta2_nodes": ["INV_APP_001"],
+      "target_delta2_edges": ["E002"],
+      "preservation_argument": "Absorbed into INV_APP_001 invariant and E002 graph datastore target edge."
+    }
+  ],
+  "delta1_nodes_summary": {
+    "total": 340,
+    "classification_counts": {
+      "PRESERVED": 14,
+      "AGGREGATED": 321,
+      "COLLAPSED": 0,
+      "ABSORBED": 5
+    }
+  },
+  "delta1_edges_summary": {
+    "total": 312,
+    "classification_counts": {
+      "PRESERVED": 11,
+      "COLLAPSED": 301,
+      "ABSORBED": 0
+    }
+  },
+  "delta2_nodes_provenance": [
+    {
+      "delta2_node_id": "INV_AUTH_001",
+      "source_delta1_nodes_count": 22,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "INV_APP_001",
+      "source_delta1_nodes_count": 18,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "INV_DET_001",
+      "source_delta1_nodes_count": 15,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "FUNC_GEN_CAUSAL_ID",
+      "source_delta1_nodes_count": 31,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "OP_COMMIT_PRE",
+      "source_delta1_nodes_count": 24,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "INV_WAL_001",
+      "source_delta1_nodes_count": 19,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "INV_ISO_001",
+      "source_delta1_nodes_count": 16,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "INV_IMM_001",
+      "source_delta1_nodes_count": 20,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "FUNC_GEN_EVENT_ID",
+      "source_delta1_nodes_count": 29,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "INV_GRA_001",
+      "source_delta1_nodes_count": 17,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "TYPE_EVENT",
+      "source_delta1_nodes_count": 35,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "TYPE_HISTORY",
+      "source_delta1_nodes_count": 28,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "OP_COMMIT",
+      "source_delta1_nodes_count": 42,
+      "provenance_complete": true
+    },
+    {
+      "delta2_node_id": "TARGET_GRAPH",
+      "source_delta1_nodes_count": 24,
+      "provenance_complete": true
+    }
+  ],
+  "delta2_edges_provenance": [
+    {
+      "delta2_edge_id": "E001",
+      "source_delta1_edges_count": 28,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E002",
+      "source_delta1_edges_count": 25,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E003",
+      "source_delta1_edges_count": 22,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E004",
+      "source_delta1_edges_count": 34,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E005",
+      "source_delta1_edges_count": 30,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E006",
+      "source_delta1_edges_count": 26,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E007",
+      "source_delta1_edges_count": 21,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E008",
+      "source_delta1_edges_count": 27,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E009",
+      "source_delta1_edges_count": 32,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E010",
+      "source_delta1_edges_count": 23,
+      "provenance_complete": true
+    },
+    {
+      "delta2_edge_id": "E011",
+      "source_delta1_edges_count": 44,
+      "provenance_complete": true
+    }
+  ]
+}

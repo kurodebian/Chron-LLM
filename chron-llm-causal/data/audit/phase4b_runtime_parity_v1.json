@@ -1,0 +1,96 @@
+{
+  "audit_version": "PHASE4B_RUNTIME_PARITY_V1",
+  "sbcl_execution": {
+    "exit_code": 0,
+    "trace": [
+      {
+        "test_id": "TC1_VALID_PATH",
+        "status": "ACCEPT"
+      },
+      {
+        "test_id": "TC2_INVALID_AUTH",
+        "status": "REJECT",
+        "reason": "ERR_MISSING_AUTH_GUARD"
+      },
+      {
+        "test_id": "TC3_DERIVE_PURITY_VIOLATION",
+        "status": "REJECT",
+        "reason": "ERR_DERIVE_PURITY_FAIL"
+      }
+    ]
+  },
+  "independent_expected_trace": [
+    {
+      "test_id": "TC1_VALID_PATH",
+      "status": "ACCEPT"
+    },
+    {
+      "test_id": "TC2_INVALID_AUTH",
+      "status": "REJECT",
+      "reason": "ERR_MISSING_AUTH_GUARD"
+    },
+    {
+      "test_id": "TC3_DERIVE_PURITY_VIOLATION",
+      "status": "REJECT",
+      "reason": "ERR_DERIVE_PURITY_FAIL"
+    }
+  ],
+  "comparisons": [
+    {
+      "test_id": "TC1_VALID_PATH",
+      "sbcl_result": {
+        "test_id": "TC1_VALID_PATH",
+        "status": "ACCEPT"
+      },
+      "independent_expected": {
+        "test_id": "TC1_VALID_PATH",
+        "status": "ACCEPT"
+      },
+      "match": true
+    },
+    {
+      "test_id": "TC2_INVALID_AUTH",
+      "sbcl_result": {
+        "test_id": "TC2_INVALID_AUTH",
+        "status": "REJECT",
+        "reason": "ERR_MISSING_AUTH_GUARD"
+      },
+      "independent_expected": {
+        "test_id": "TC2_INVALID_AUTH",
+        "status": "REJECT",
+        "reason": "ERR_MISSING_AUTH_GUARD"
+      },
+      "match": true
+    },
+    {
+      "test_id": "TC3_DERIVE_PURITY_VIOLATION",
+      "sbcl_result": {
+        "test_id": "TC3_DERIVE_PURITY_VIOLATION",
+        "status": "REJECT",
+        "reason": "ERR_DERIVE_PURITY_FAIL"
+      },
+      "independent_expected": {
+        "test_id": "TC3_DERIVE_PURITY_VIOLATION",
+        "status": "REJECT",
+        "reason": "ERR_DERIVE_PURITY_FAIL"
+      },
+      "match": true
+    }
+  ],
+  "mastergraph_constraint_checks": [
+    {
+      "constraint": "INV_AUTH_001",
+      "status": "SATISFIED_BY_TC2_REJECTION"
+    },
+    {
+      "constraint": "INV_PUR_001",
+      "status": "SATISFIED_BY_TC3_REJECTION"
+    },
+    {
+      "constraint": "VALID_CAUSAL_PATH",
+      "status": "SATISFIED_BY_TC1_ACCEPT"
+    }
+  ],
+  "discrepancies": [],
+  "verdict": "PASS"
+}

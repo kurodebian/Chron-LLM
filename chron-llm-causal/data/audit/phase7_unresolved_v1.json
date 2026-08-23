@@ -1,0 +1,15 @@
+[
+  {
+    "unresolved_id": "UNRESOLVED_0001",
+    "source_unit": "PHASE6_UNIT_0001",
+    "target_reference": "enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]",
+    "type": "UNRESOLVED_DEPENDENCY",
+    "reason": "Import target 'enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]' declared at line 156 not found in spec corpus",
+    "provenance": {
+      "source_file": "cae-schema.yaml",
+      "line_number_start": 1,
+      "line_number_end": 285,
+      "provenance_complete": true
+    }
+  }
+]

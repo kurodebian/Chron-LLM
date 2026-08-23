@@ -1,0 +1,630 @@
+{
+  "source_root": "/home/junu/Chron-LLM/spec_sheet",
+  "total_source_files": 104,
+  "inventory": [
+    {
+      "file": "bindings__llama_cffi.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 254
+    },
+    {
+      "file": "cae-schema.yaml",
+      "status": "EXTRACTED",
+      "extension": ".yaml",
+      "line_count": 285
+    },
+    {
+      "file": "config__sbcl_policy.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 138
+    },
+    {
+      "file": "contracts__abi-registry.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 93
+    },
+    {
+      "file": "contracts__base-excludes.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 26
+    },
+    {
+      "file": "contracts__base-history.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 31
+    },
+    {
+      "file": "contracts__base-invariants.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 63
+    },
+    {
+      "file": "contracts__base-types.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 95
+    },
+    {
+      "file": "contracts__integration-verification.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 61
+    },
+    {
+      "file": "contracts__kernel-world.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 120
+    },
+    {
+      "file": "contracts__pipeline-orchestration.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 72
+    },
+    {
+      "file": "contracts__spec-metamodel.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 31
+    },
+    {
+      "file": "contracts__spec__v2.8.0-C-persistence.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 26
+    },
+    {
+      "file": "contracts__spec__v2.8.0-D-replay.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 15
+    },
+    {
+      "file": "core__types.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 202
+    },
+    {
+      "file": "docs__ir__00-constitution.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 22
+    },
+    {
+      "file": "docs__ir__01-domain-model.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 59
+    },
+    {
+      "file": "docs__ir__02-operational-semantics.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 67
+    },
+    {
+      "file": "docs__ir__03-reference-runtime.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 17
+    },
+    {
+      "file": "docs__ir__05-validation-pipeline.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 30
+    },
+    {
+      "file": "docs__ir__06-kernel-state-machine.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 25
+    },
+    {
+      "file": "docs__ir__07-chron-mapping.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 40
+    },
+    {
+      "file": "docs__ir__08-memory-model.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 14
+    },
+    {
+      "file": "docs__ir__09-runtime-scheduling.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 22
+    },
+    {
+      "file": "docs__ir__10-tool-execution.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 16
+    },
+    {
+      "file": "docs__ir__11-prompt-builder.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 12
+    },
+    {
+      "file": "docs__ir__12-recovery.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 15
+    },
+    {
+      "file": "docs__ir__13-worldline-branching.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 70
+    },
+    {
+      "file": "docs__ir__99-open-questions.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 19
+    },
+    {
+      "file": "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 61
+    },
+    {
+      "file": "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 83
+    },
+    {
+      "file": "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 55
+    },
+    {
+      "file": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 63
+    },
+    {
+      "file": "docs__ir__architecture-v1.1.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 100
+    },
+    {
+      "file": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 30
+    },
+    {
+      "file": "docs__ir__knowledge-system.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 24
+    },
+    {
+      "file": "docs__ir__phase-a-charter.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 9
+    },
+    {
+      "file": "docs__ir__phase-b-charter.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 11
+    },
+    {
+      "file": "docs__ir__phase-c-charter.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 14
+    },
+    {
+      "file": "docs__ir__phase-d-charter.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 12
+    },
+    {
+      "file": "docs__ir__phase-e-charter.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 42
+    },
+    {
+      "file": "docs__ir__phase-f-charter.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 35
+    },
+    {
+      "file": "docs__ir__pull_request_template.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 8
+    },
+    {
+      "file": "docs__ir__r2-0-c-freeze-report.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 6
+    },
+    {
+      "file": "docs__reference__ir__knowledge-rationale.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 42
+    },
+    {
+      "file": "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 92
+    },
+    {
+      "file": "docs__spec__ir__Chron-LLM_R2.1-Kernel_Freeze_Spec.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 49
+    },
+    {
+      "file": "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 64
+    },
+    {
+      "file": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 125
+    },
+    {
+      "file": "experiments__ir__3cluster.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 35
+    },
+    {
+      "file": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 49
+    },
+    {
+      "file": "experiments__ir__cycle.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 26
+    },
+    {
+      "file": "experiments__ir__dynamics.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 31
+    },
+    {
+      "file": "experiments__ir__scc.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 49
+    },
+    {
+      "file": "graph-runtime__ir__causal.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 36
+    },
+    {
+      "file": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 159
+    },
+    {
+      "file": "graph-runtime__ir__graph.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 28
+    },
+    {
+      "file": "llama-agent__ir__causal-kernel.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 72
+    },
+    {
+      "file": "llama-agent__ir__chron-llm-graph.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 66
+    },
+    {
+      "file": "llama-agent__ir__chron-llm-immune.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 35
+    },
+    {
+      "file": "llama-agent__ir__chron-llm-kernel.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 64
+    },
+    {
+      "file": "llama-agent__ir__chron-llm-runtime.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 37
+    },
+    {
+      "file": "llama-agent__ir__chron-llm-world.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 143
+    },
+    {
+      "file": "llama-agent__ir__chron-llm.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 48
+    },
+    {
+      "file": "llama-agent__ir__delta3-agent.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 76
+    },
+    {
+      "file": "llama-agent__ir__ffi-bindings-mock.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 54
+    },
+    {
+      "file": "llama-agent__ir__ffi-bindings.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 46
+    },
+    {
+      "file": "llama-agent__ir__generate.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 42
+    },
+    {
+      "file": "llama-agent__ir__immune-system.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 41
+    },
+    {
+      "file": "llama-agent__ir__llama-agent.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 91
+    },
+    {
+      "file": "macros__dsl.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 219
+    },
+    {
+      "file": "memory__ir__store.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 68
+    },
+    {
+      "file": "observability__ir__world-snapshot.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 72
+    },
+    {
+      "file": "runtime__ir__callback.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 6
+    },
+    {
+      "file": "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 71
+    },
+    {
+      "file": "runtime__ir__divergence.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 9
+    },
+    {
+      "file": "runtime__ir__ffi.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 19
+    },
+    {
+      "file": "runtime__ir__ir.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 84
+    },
+    {
+      "file": "runtime__ir__stream.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 14
+    },
+    {
+      "file": "runtime__md__ir__llama-engine.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 3
+    },
+    {
+      "file": "runtime__r0__ir__api.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 20
+    },
+    {
+      "file": "runtime__r0__ir__chat-loop.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 40
+    },
+    {
+      "file": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 33
+    },
+    {
+      "file": "runtime__r0__ir__history.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 15
+    },
+    {
+      "file": "runtime__r0__ir__llama-run.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 24
+    },
+    {
+      "file": "runtime__r0__ir__prompt.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 22
+    },
+    {
+      "file": "runtime__r0__ir__trace.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 41
+    },
+    {
+      "file": "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 22
+    },
+    {
+      "file": "runtime__r1__ir__core.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 69
+    },
+    {
+      "file": "specs__00-expression-grammar.spec",
+      "status": "EMPTY",
+      "extension": ".spec",
+      "line_count": 0
+    },
+    {
+      "file": "specs__00-meta-model.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 206
+    },
+    {
+      "file": "specs__00-type-system.spec",
+      "status": "EMPTY",
+      "extension": ".spec",
+      "line_count": 0
+    },
+    {
+      "file": "specs__01-semantic-model.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 173
+    },
+    {
+      "file": "specs__02-constitution.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 229
+    },
+    {
+      "file": "specs__03-chron-semantic-extension.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 352
+    },
+    {
+      "file": "specs__04-runtime-model.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 291
+    },
+    {
+      "file": "tests__md__ir__phase0-big-bang-test.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 40
+    },
+    {
+      "file": "tests__md__ir__r2-0-a-tests.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 43
+    },
+    {
+      "file": "tests__md__ir__r2-0-b-tests.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 83
+    },
+    {
+      "file": "tests__md__ir__r2-0-c-tests.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 65
+    },
+    {
+      "file": "tests__md__ir__r2-1-b-tests.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 42
+    },
+    {
+      "file": "tests__md__ir__r2-2-e-tests.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 41
+    },
+    {
+      "file": "tests__md__ir__r2-3-s-tests.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 43
+    },
+    {
+      "file": "tests__pipeline_test.spec",
+      "status": "EXTRACTED",
+      "extension": ".spec",
+      "line_count": 175
+    }
+  ]
+}

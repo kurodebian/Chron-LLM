@@ -1,0 +1,6 @@
+{
+  "selected_specs": [
+    "cae-schema.yaml"
+  ],
+  "rationale": "Selected 1 specifications covering domains (cae) based on cross-domain causal dependency topology."
+}

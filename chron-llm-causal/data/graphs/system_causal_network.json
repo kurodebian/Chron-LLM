@@ -1,0 +1,5883 @@
+{
+  "system_name": "Chron-LLM Unified Causal Network",
+  "summary_stats": {
+    "total_components": 13,
+    "total_nodes": 340,
+    "total_edges": 312,
+    "delta_1_internal_edges": 312,
+    "delta_0_boundary_edges": 0,
+    "cross_component_coupling_matrix": {}
+  },
+  "nodes": [
+    {
+      "global_id": "component_001__ST_Canonical",
+      "local_id": "ST_Canonical",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_Canonical",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__ST_KernelState",
+      "local_id": "ST_KernelState",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_KernelState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__ST_Candidate",
+      "local_id": "ST_Candidate",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_Candidate",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__ST_Event",
+      "local_id": "ST_Event",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_Event",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__ST_ValidationReport",
+      "local_id": "ST_ValidationReport",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_ValidationReport",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__ST_RuntimeRequest",
+      "local_id": "ST_RuntimeRequest",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_RuntimeRequest",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__ST_RuntimeCommand",
+      "local_id": "ST_RuntimeCommand",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_RuntimeCommand",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__ST_Derived",
+      "local_id": "ST_Derived",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_Derived",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__ST_Prompt",
+      "local_id": "ST_Prompt",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_Prompt",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__ST_Fault",
+      "local_id": "ST_Fault",
+      "component_id": "component_001",
+      "type": "State",
+      "name": "ST_Fault",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__OP_Commit",
+      "local_id": "OP_Commit",
+      "component_id": "component_001",
+      "type": "Operation",
+      "name": "OP_Commit",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__OP_Replay",
+      "local_id": "OP_Replay",
+      "component_id": "component_001",
+      "type": "Operation",
+      "name": "OP_Replay",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__OP_Derive",
+      "local_id": "OP_Derive",
+      "component_id": "component_001",
+      "type": "Operation",
+      "name": "OP_Derive",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__OP_Validate",
+      "local_id": "OP_Validate",
+      "component_id": "component_001",
+      "type": "Operation",
+      "name": "OP_Validate",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__OP_PolicyRouter",
+      "local_id": "OP_PolicyRouter",
+      "component_id": "component_001",
+      "type": "Operation",
+      "name": "OP_PolicyRouter",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__OP_KernelTransition",
+      "local_id": "OP_KernelTransition",
+      "component_id": "component_001",
+      "type": "Operation",
+      "name": "OP_KernelTransition",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__OP_WakeDeferred",
+      "local_id": "OP_WakeDeferred",
+      "component_id": "component_001",
+      "type": "Operation",
+      "name": "OP_WakeDeferred",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__OP_BuildPrompt",
+      "local_id": "OP_BuildPrompt",
+      "component_id": "component_001",
+      "type": "Operation",
+      "name": "OP_BuildPrompt",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__OP_Backend",
+      "local_id": "OP_Backend",
+      "component_id": "component_001",
+      "type": "Operation",
+      "name": "OP_Backend",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__INV_CanonicalImmutable",
+      "local_id": "INV_CanonicalImmutable",
+      "component_id": "component_001",
+      "type": "Invariant",
+      "name": "INV_CanonicalImmutable",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__INV_PureOps",
+      "local_id": "INV_PureOps",
+      "component_id": "component_001",
+      "type": "Invariant",
+      "name": "INV_PureOps",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__INV_KernelStateMutator",
+      "local_id": "INV_KernelStateMutator",
+      "component_id": "component_001",
+      "type": "Invariant",
+      "name": "INV_KernelStateMutator",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__INV_CommitSoleUpdater",
+      "local_id": "INV_CommitSoleUpdater",
+      "component_id": "component_001",
+      "type": "Invariant",
+      "name": "INV_CommitSoleUpdater",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__INV_WakeDeferredTrigger",
+      "local_id": "INV_WakeDeferredTrigger",
+      "component_id": "component_001",
+      "type": "Invariant",
+      "name": "INV_WakeDeferredTrigger",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_001__INV_BackendNonAuthoritative",
+      "local_id": "INV_BackendNonAuthoritative",
+      "component_id": "component_001",
+      "type": "Invariant",
+      "name": "INV_BackendNonAuthoritative",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_Kernel",
+      "local_id": "ST_Kernel",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_Kernel",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_WAL",
+      "local_id": "ST_WAL",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_WAL",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_Graph",
+      "local_id": "ST_Graph",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_Graph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_KernelState",
+      "local_id": "ST_KernelState",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_KernelState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_RuntimeEnv",
+      "local_id": "ST_RuntimeEnv",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_RuntimeEnv",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_Context",
+      "local_id": "ST_Context",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_Context",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_Session",
+      "local_id": "ST_Session",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_Session",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_History",
+      "local_id": "ST_History",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_History",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_Sampler",
+      "local_id": "ST_Sampler",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_Sampler",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__ST_ImmuneStatus",
+      "local_id": "ST_ImmuneStatus",
+      "component_id": "component_002",
+      "type": "State",
+      "name": "ST_ImmuneStatus",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_InitKernel",
+      "local_id": "OP_InitKernel",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_InitKernel",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_SubmitUserInput",
+      "local_id": "OP_SubmitUserInput",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_SubmitUserInput",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_CommitEvent",
+      "local_id": "OP_CommitEvent",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_CommitEvent",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_RefreshProjections",
+      "local_id": "OP_RefreshProjections",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_RefreshProjections",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_GetCurrentState",
+      "local_id": "OP_GetCurrentState",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_GetCurrentState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_InitRuntime",
+      "local_id": "OP_InitRuntime",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_InitRuntime",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_MainLoop",
+      "local_id": "OP_MainLoop",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_MainLoop",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_InitLLM",
+      "local_id": "OP_InitLLM",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_InitLLM",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_Tokenize",
+      "local_id": "OP_Tokenize",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_Tokenize",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_PrefillPrompt",
+      "local_id": "OP_PrefillPrompt",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_PrefillPrompt",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_Generate",
+      "local_id": "OP_Generate",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_Generate",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_MySamplerSample",
+      "local_id": "OP_MySamplerSample",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_MySamplerSample",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_MyLlamaEval",
+      "local_id": "OP_MyLlamaEval",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_MyLlamaEval",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_RunGenerationWithSensors",
+      "local_id": "OP_RunGenerationWithSensors",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_RunGenerationWithSensors",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_FaultRecovery",
+      "local_id": "OP_FaultRecovery",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_FaultRecovery",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_Chat",
+      "local_id": "OP_Chat",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_Chat",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_StartChat",
+      "local_id": "OP_StartChat",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_StartChat",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__OP_Decide",
+      "local_id": "OP_Decide",
+      "component_id": "component_002",
+      "type": "Operation",
+      "name": "OP_Decide",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_KernelSoleMutator",
+      "local_id": "INV_KernelSoleMutator",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_KernelSoleMutator",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_GraphFromWAL",
+      "local_id": "INV_GraphFromWAL",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_GraphFromWAL",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_PostCommitPersisted",
+      "local_id": "INV_PostCommitPersisted",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_PostCommitPersisted",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_RuntimeNoDirectAccess",
+      "local_id": "INV_RuntimeNoDirectAccess",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_RuntimeNoDirectAccess",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_SamplerLifecycle",
+      "local_id": "INV_SamplerLifecycle",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_SamplerLifecycle",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_NPastInvariant",
+      "local_id": "INV_NPastInvariant",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_NPastInvariant",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_HistoryOrderedAppendOnly",
+      "local_id": "INV_HistoryOrderedAppendOnly",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_HistoryOrderedAppendOnly",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_FaultNoCommit",
+      "local_id": "INV_FaultNoCommit",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_FaultNoCommit",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_StatelessFFI",
+      "local_id": "INV_StatelessFFI",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_StatelessFFI",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_002__INV_Abi1to1",
+      "local_id": "INV_Abi1to1",
+      "component_id": "component_002",
+      "type": "Invariant",
+      "name": "INV_Abi1to1",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__ST_MemoryStore",
+      "local_id": "ST_MemoryStore",
+      "component_id": "component_003",
+      "type": "State",
+      "name": "ST_MemoryStore",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__ST_GraphStore",
+      "local_id": "ST_GraphStore",
+      "component_id": "component_003",
+      "type": "State",
+      "name": "ST_GraphStore",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__ST_World",
+      "local_id": "ST_World",
+      "component_id": "component_003",
+      "type": "State",
+      "name": "ST_World",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__ST_Registry",
+      "local_id": "ST_Registry",
+      "component_id": "component_003",
+      "type": "State",
+      "name": "ST_Registry",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__ST_PrefillState",
+      "local_id": "ST_PrefillState",
+      "component_id": "component_003",
+      "type": "State",
+      "name": "ST_PrefillState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__ST_LifecycleState",
+      "local_id": "ST_LifecycleState",
+      "component_id": "component_003",
+      "type": "State",
+      "name": "ST_LifecycleState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_StorePayload",
+      "local_id": "OP_StorePayload",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_StorePayload",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_LoadPayload",
+      "local_id": "OP_LoadPayload",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_LoadPayload",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_AddNode",
+      "local_id": "OP_AddNode",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_AddNode",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_AddEdge",
+      "local_id": "OP_AddEdge",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_AddEdge",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_CausalSubgraph",
+      "local_id": "OP_CausalSubgraph",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_CausalSubgraph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_ProjectContext",
+      "local_id": "OP_ProjectContext",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_ProjectContext",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_BuildPrefillState",
+      "local_id": "OP_BuildPrefillState",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_BuildPrefillState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_MakeWorld",
+      "local_id": "OP_MakeWorld",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_MakeWorld",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_ForkWorld",
+      "local_id": "OP_ForkWorld",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_ForkWorld",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_KernelCommitWorld",
+      "local_id": "OP_KernelCommitWorld",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_KernelCommitWorld",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_RegisterWorld",
+      "local_id": "OP_RegisterWorld",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_RegisterWorld",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_SetActiveWorld",
+      "local_id": "OP_SetActiveWorld",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_SetActiveWorld",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__OP_ArchiveWorld",
+      "local_id": "OP_ArchiveWorld",
+      "component_id": "component_003",
+      "type": "Operation",
+      "name": "OP_ArchiveWorld",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__INV_MemoryImmutable",
+      "local_id": "INV_MemoryImmutable",
+      "component_id": "component_003",
+      "type": "Invariant",
+      "name": "INV_MemoryImmutable",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__INV_GraphAppend",
+      "local_id": "INV_GraphAppend",
+      "component_id": "component_003",
+      "type": "Invariant",
+      "name": "INV_GraphAppend",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__INV_WorldIsolation",
+      "local_id": "INV_WorldIsolation",
+      "component_id": "component_003",
+      "type": "Invariant",
+      "name": "INV_WorldIsolation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__INV_CausalSeparation",
+      "local_id": "INV_CausalSeparation",
+      "component_id": "component_003",
+      "type": "Invariant",
+      "name": "INV_CausalSeparation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__INV_Determinism",
+      "local_id": "INV_Determinism",
+      "component_id": "component_003",
+      "type": "Invariant",
+      "name": "INV_Determinism",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_003__INV_CommitAtomic",
+      "local_id": "INV_CommitAtomic",
+      "component_id": "component_003",
+      "type": "Invariant",
+      "name": "INV_CommitAtomic",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__ST_WAL",
+      "local_id": "ST_WAL",
+      "component_id": "component_004",
+      "type": "State",
+      "name": "ST_WAL",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__ST_Graph",
+      "local_id": "ST_Graph",
+      "component_id": "component_004",
+      "type": "State",
+      "name": "ST_Graph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__ST_HealthyTable",
+      "local_id": "ST_HealthyTable",
+      "component_id": "component_004",
+      "type": "State",
+      "name": "ST_HealthyTable",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__ST_SystemState",
+      "local_id": "ST_SystemState",
+      "component_id": "component_004",
+      "type": "State",
+      "name": "ST_SystemState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__ST_KVCache",
+      "local_id": "ST_KVCache",
+      "component_id": "component_004",
+      "type": "State",
+      "name": "ST_KVCache",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__OP_AppendWAL",
+      "local_id": "OP_AppendWAL",
+      "component_id": "component_004",
+      "type": "Operation",
+      "name": "OP_AppendWAL",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__OP_CommitEvent",
+      "local_id": "OP_CommitEvent",
+      "component_id": "component_004",
+      "type": "Operation",
+      "name": "OP_CommitEvent",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__OP_LiftGraph",
+      "local_id": "OP_LiftGraph",
+      "component_id": "component_004",
+      "type": "Operation",
+      "name": "OP_LiftGraph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__OP_HandleFault",
+      "local_id": "OP_HandleFault",
+      "component_id": "component_004",
+      "type": "Operation",
+      "name": "OP_HandleFault",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__OP_BranchWorld",
+      "local_id": "OP_BranchWorld",
+      "component_id": "component_004",
+      "type": "Operation",
+      "name": "OP_BranchWorld",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__OP_Prefill",
+      "local_id": "OP_Prefill",
+      "component_id": "component_004",
+      "type": "Operation",
+      "name": "OP_Prefill",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__INV_MonotonicClock",
+      "local_id": "INV_MonotonicClock",
+      "component_id": "component_004",
+      "type": "Invariant",
+      "name": "INV_MonotonicClock",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__INV_AppendOnly",
+      "local_id": "INV_AppendOnly",
+      "component_id": "component_004",
+      "type": "Invariant",
+      "name": "INV_AppendOnly",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__INV_FaultIsolation",
+      "local_id": "INV_FaultIsolation",
+      "component_id": "component_004",
+      "type": "Invariant",
+      "name": "INV_FaultIsolation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_004__INV_CausalScope",
+      "local_id": "INV_CausalScope",
+      "component_id": "component_004",
+      "type": "Invariant",
+      "name": "INV_CausalScope",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__ST_WalWorldCounter",
+      "local_id": "ST_WalWorldCounter",
+      "component_id": "component_005",
+      "type": "State",
+      "name": "ST_WalWorldCounter",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__ST_Graph",
+      "local_id": "ST_Graph",
+      "component_id": "component_005",
+      "type": "State",
+      "name": "ST_Graph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__ST_Wal",
+      "local_id": "ST_Wal",
+      "component_id": "component_005",
+      "type": "State",
+      "name": "ST_Wal",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__OP_StageBranchWorld",
+      "local_id": "OP_StageBranchWorld",
+      "component_id": "component_005",
+      "type": "Operation",
+      "name": "OP_StageBranchWorld",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__OP_GetLatestNodeInWorld",
+      "local_id": "OP_GetLatestNodeInWorld",
+      "component_id": "component_005",
+      "type": "Operation",
+      "name": "OP_GetLatestNodeInWorld",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__OP_CheckImmuneStatus",
+      "local_id": "OP_CheckImmuneStatus",
+      "component_id": "component_005",
+      "type": "Operation",
+      "name": "OP_CheckImmuneStatus",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__OP_CleanHistory",
+      "local_id": "OP_CleanHistory",
+      "component_id": "component_005",
+      "type": "Operation",
+      "name": "OP_CleanHistory",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__OP_StageEvent",
+      "local_id": "OP_StageEvent",
+      "component_id": "component_005",
+      "type": "Operation",
+      "name": "OP_StageEvent",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_WorldIdUnique",
+      "local_id": "INV_WorldIdUnique",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_WorldIdUnique",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_WalWorldCounterMonotonic",
+      "local_id": "INV_WalWorldCounterMonotonic",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_WalWorldCounterMonotonic",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_BranchEventKindBranch",
+      "local_id": "INV_BranchEventKindBranch",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_BranchEventKindBranch",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_RootParentZero",
+      "local_id": "INV_RootParentZero",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_RootParentZero",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_QueryExcludesFaultNodes",
+      "local_id": "INV_QueryExcludesFaultNodes",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_QueryExcludesFaultNodes",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_QueryReturnsSingleLatest",
+      "local_id": "INV_QueryReturnsSingleLatest",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_QueryReturnsSingleLatest",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_BranchEventParentWorldImmutable",
+      "local_id": "INV_BranchEventParentWorldImmutable",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_BranchEventParentWorldImmutable",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_BranchEventParentNodeCommitted",
+      "local_id": "INV_BranchEventParentNodeCommitted",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_BranchEventParentNodeCommitted",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_BranchEventStatusStaged",
+      "local_id": "INV_BranchEventStatusStaged",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_BranchEventStatusStaged",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_005__INV_ImmuneHistoryExists",
+      "local_id": "INV_ImmuneHistoryExists",
+      "component_id": "component_005",
+      "type": "Invariant",
+      "name": "INV_ImmuneHistoryExists",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__ST_History",
+      "local_id": "ST_History",
+      "component_id": "component_006",
+      "type": "State",
+      "name": "ST_History",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__ST_ProjectionModel",
+      "local_id": "ST_ProjectionModel",
+      "component_id": "component_006",
+      "type": "State",
+      "name": "ST_ProjectionModel",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__ST_JustificationStructure",
+      "local_id": "ST_JustificationStructure",
+      "component_id": "component_006",
+      "type": "State",
+      "name": "ST_JustificationStructure",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__ST_EventABI",
+      "local_id": "ST_EventABI",
+      "component_id": "component_006",
+      "type": "State",
+      "name": "ST_EventABI",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__ST_SemanticModel",
+      "local_id": "ST_SemanticModel",
+      "component_id": "component_006",
+      "type": "State",
+      "name": "ST_SemanticModel",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__ST_RelationalGraph",
+      "local_id": "ST_RelationalGraph",
+      "component_id": "component_006",
+      "type": "State",
+      "name": "ST_RelationalGraph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__OP_d",
+      "local_id": "OP_d",
+      "component_id": "component_006",
+      "type": "Operation",
+      "name": "OP_d",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__OP_j",
+      "local_id": "OP_j",
+      "component_id": "component_006",
+      "type": "Operation",
+      "name": "OP_j",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__OP_interpret",
+      "local_id": "OP_interpret",
+      "component_id": "component_006",
+      "type": "Operation",
+      "name": "OP_interpret",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__OP_justify",
+      "local_id": "OP_justify",
+      "component_id": "component_006",
+      "type": "Operation",
+      "name": "OP_justify",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__OP_graph",
+      "local_id": "OP_graph",
+      "component_id": "component_006",
+      "type": "Operation",
+      "name": "OP_graph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_H_authoritative_causal_record",
+      "local_id": "INV_H_authoritative_causal_record",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_H_authoritative_causal_record",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_H_reproducible",
+      "local_id": "INV_H_reproducible",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_H_reproducible",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_H_inspectable",
+      "local_id": "INV_H_inspectable",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_H_inspectable",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_H_derivable",
+      "local_id": "INV_H_derivable",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_H_derivable",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_EventABI_not_in_H",
+      "local_id": "INV_EventABI_not_in_H",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_EventABI_not_in_H",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_ResolutionSemantics_not_in_H",
+      "local_id": "INV_ResolutionSemantics_not_in_H",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_ResolutionSemantics_not_in_H",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_d_deterministic",
+      "local_id": "INV_d_deterministic",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_d_deterministic",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_j_derived_exclusively_from_d",
+      "local_id": "INV_j_derived_exclusively_from_d",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_j_derived_exclusively_from_d",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_d_semantically_neutral",
+      "local_id": "INV_d_semantically_neutral",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_d_semantically_neutral",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_interpret_deterministic_under_ABI",
+      "local_id": "INV_interpret_deterministic_under_ABI",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_interpret_deterministic_under_ABI",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_ABI_explicit_and_versioned",
+      "local_id": "INV_ABI_explicit_and_versioned",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_ABI_explicit_and_versioned",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_S_derived_exclusively_from_M",
+      "local_id": "INV_S_derived_exclusively_from_M",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_S_derived_exclusively_from_M",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_interpret_preserves_order_M",
+      "local_id": "INV_interpret_preserves_order_M",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_interpret_preserves_order_M",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_J_derived_exclusively_from_S",
+      "local_id": "INV_J_derived_exclusively_from_S",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_J_derived_exclusively_from_S",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_external_semantic_injection_not_in_interpret",
+      "local_id": "INV_external_semantic_injection_not_in_interpret",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_external_semantic_injection_not_in_interpret",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_S_non_authoritative",
+      "local_id": "INV_S_non_authoritative",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_S_non_authoritative",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_graph_deterministic_from_S",
+      "local_id": "INV_graph_deterministic_from_S",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_graph_deterministic_from_S",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_nodes_preserve_identity_consistency",
+      "local_id": "INV_nodes_preserve_identity_consistency",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_nodes_preserve_identity_consistency",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_edges_structural_relations_only",
+      "local_id": "INV_edges_structural_relations_only",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_edges_structural_relations_only",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_traversal_deterministic",
+      "local_id": "INV_traversal_deterministic",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_traversal_deterministic",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_interpretation_not_in_G",
+      "local_id": "INV_interpretation_not_in_G",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_interpretation_not_in_G",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_006__INV_G_non_authoritative",
+      "local_id": "INV_G_non_authoritative",
+      "component_id": "component_006",
+      "type": "Invariant",
+      "name": "INV_G_non_authoritative",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__ST_Graph",
+      "local_id": "ST_Graph",
+      "component_id": "component_007",
+      "type": "State",
+      "name": "ST_Graph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__ST_Basin",
+      "local_id": "ST_Basin",
+      "component_id": "component_007",
+      "type": "State",
+      "name": "ST_Basin",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__ST_Attractor",
+      "local_id": "ST_Attractor",
+      "component_id": "component_007",
+      "type": "State",
+      "name": "ST_Attractor",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__ST_Trajectory",
+      "local_id": "ST_Trajectory",
+      "component_id": "component_007",
+      "type": "State",
+      "name": "ST_Trajectory",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__ST_Cycle",
+      "local_id": "ST_Cycle",
+      "component_id": "component_007",
+      "type": "State",
+      "name": "ST_Cycle",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__ST_SCC",
+      "local_id": "ST_SCC",
+      "component_id": "component_007",
+      "type": "State",
+      "name": "ST_SCC",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__ST_Cluster",
+      "local_id": "ST_Cluster",
+      "component_id": "component_007",
+      "type": "State",
+      "name": "ST_Cluster",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__ST_EventSelection",
+      "local_id": "ST_EventSelection",
+      "component_id": "component_007",
+      "type": "State",
+      "name": "ST_EventSelection",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__ST_BasinResult",
+      "local_id": "ST_BasinResult",
+      "component_id": "component_007",
+      "type": "State",
+      "name": "ST_BasinResult",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__OP_next_event",
+      "local_id": "OP_next_event",
+      "component_id": "component_007",
+      "type": "Operation",
+      "name": "OP_next_event",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__OP_rollout",
+      "local_id": "OP_rollout",
+      "component_id": "component_007",
+      "type": "Operation",
+      "name": "OP_rollout",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__OP_find_attractor",
+      "local_id": "OP_find_attractor",
+      "component_id": "component_007",
+      "type": "Operation",
+      "name": "OP_find_attractor",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__OP_find_cycle",
+      "local_id": "OP_find_cycle",
+      "component_id": "component_007",
+      "type": "Operation",
+      "name": "OP_find_cycle",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__OP_find_recurrent_cycle",
+      "local_id": "OP_find_recurrent_cycle",
+      "component_id": "component_007",
+      "type": "Operation",
+      "name": "OP_find_recurrent_cycle",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__OP_compute_sccs",
+      "local_id": "OP_compute_sccs",
+      "component_id": "component_007",
+      "type": "Operation",
+      "name": "OP_compute_sccs",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__OP_analyze_scc",
+      "local_id": "OP_analyze_scc",
+      "component_id": "component_007",
+      "type": "Operation",
+      "name": "OP_analyze_scc",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__OP_build_basin_map",
+      "local_id": "OP_build_basin_map",
+      "component_id": "component_007",
+      "type": "Operation",
+      "name": "OP_build_basin_map",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__OP_build_basin_structure",
+      "local_id": "OP_build_basin_structure",
+      "component_id": "component_007",
+      "type": "Operation",
+      "name": "OP_build_basin_structure",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__INV_Graph_Edge_Nodes",
+      "local_id": "INV_Graph_Edge_Nodes",
+      "component_id": "component_007",
+      "type": "Invariant",
+      "name": "INV_Graph_Edge_Nodes",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__INV_Basin_Mass",
+      "local_id": "INV_Basin_Mass",
+      "component_id": "component_007",
+      "type": "Invariant",
+      "name": "INV_Basin_Mass",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__INV_Basin_Ratio",
+      "local_id": "INV_Basin_Ratio",
+      "component_id": "component_007",
+      "type": "Invariant",
+      "name": "INV_Basin_Ratio",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__INV_Partition",
+      "local_id": "INV_Partition",
+      "component_id": "component_007",
+      "type": "Invariant",
+      "name": "INV_Partition",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__INV_SCC_Attractor",
+      "local_id": "INV_SCC_Attractor",
+      "component_id": "component_007",
+      "type": "Invariant",
+      "name": "INV_SCC_Attractor",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__INV_Cluster_Type",
+      "local_id": "INV_Cluster_Type",
+      "component_id": "component_007",
+      "type": "Invariant",
+      "name": "INV_Cluster_Type",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__INV_Stability",
+      "local_id": "INV_Stability",
+      "component_id": "component_007",
+      "type": "Invariant",
+      "name": "INV_Stability",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_007__INV_Rollout_Path",
+      "local_id": "INV_Rollout_Path",
+      "component_id": "component_007",
+      "type": "Invariant",
+      "name": "INV_Rollout_Path",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__ST_World",
+      "local_id": "ST_World",
+      "component_id": "component_008",
+      "type": "State",
+      "name": "ST_World",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__ST_Registry",
+      "local_id": "ST_Registry",
+      "component_id": "component_008",
+      "type": "State",
+      "name": "ST_Registry",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__ST_Kernel",
+      "local_id": "ST_Kernel",
+      "component_id": "component_008",
+      "type": "State",
+      "name": "ST_Kernel",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__ST_Graph",
+      "local_id": "ST_Graph",
+      "component_id": "component_008",
+      "type": "State",
+      "name": "ST_Graph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__ST_Memory",
+      "local_id": "ST_Memory",
+      "component_id": "component_008",
+      "type": "State",
+      "name": "ST_Memory",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__ST_Observation",
+      "local_id": "ST_Observation",
+      "component_id": "component_008",
+      "type": "State",
+      "name": "ST_Observation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__ST_Snapshot",
+      "local_id": "ST_Snapshot",
+      "component_id": "component_008",
+      "type": "State",
+      "name": "ST_Snapshot",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__ST_DiffResult",
+      "local_id": "ST_DiffResult",
+      "component_id": "component_008",
+      "type": "State",
+      "name": "ST_DiffResult",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__ST_Lifecycle",
+      "local_id": "ST_Lifecycle",
+      "component_id": "component_008",
+      "type": "State",
+      "name": "ST_Lifecycle",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_Observe",
+      "local_id": "OP_Observe",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_Observe",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_BuildWorldObservation",
+      "local_id": "OP_BuildWorldObservation",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_BuildWorldObservation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_BuildRegistryObservation",
+      "local_id": "OP_BuildRegistryObservation",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_BuildRegistryObservation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_BuildAncestryObservation",
+      "local_id": "OP_BuildAncestryObservation",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_BuildAncestryObservation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_BuildDiffObservation",
+      "local_id": "OP_BuildDiffObservation",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_BuildDiffObservation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_Diff",
+      "local_id": "OP_Diff",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_Diff",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_GetWorldObs",
+      "local_id": "OP_GetWorldObs",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_GetWorldObs",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_GetRegistryObs",
+      "local_id": "OP_GetRegistryObs",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_GetRegistryObs",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_WorldObservationEqual",
+      "local_id": "OP_WorldObservationEqual",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_WorldObservationEqual",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_RegistryObservationEqual",
+      "local_id": "OP_RegistryObservationEqual",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_RegistryObservationEqual",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_AncestryObservationEqual",
+      "local_id": "OP_AncestryObservationEqual",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_AncestryObservationEqual",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_DiffObservationEqual",
+      "local_id": "OP_DiffObservationEqual",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_DiffObservationEqual",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__OP_RunTests",
+      "local_id": "OP_RunTests",
+      "component_id": "component_008",
+      "type": "Operation",
+      "name": "OP_RunTests",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_ReadOnly",
+      "local_id": "INV_ReadOnly",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_ReadOnly",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_Deterministic",
+      "local_id": "INV_Deterministic",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_Deterministic",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_Accurate",
+      "local_id": "INV_Accurate",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_Accurate",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_NoSideEffects",
+      "local_id": "INV_NoSideEffects",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_NoSideEffects",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_ValueObjectEquality",
+      "local_id": "INV_ValueObjectEquality",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_ValueObjectEquality",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_CompleteObservation",
+      "local_id": "INV_CompleteObservation",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_CompleteObservation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_NoInference",
+      "local_id": "INV_NoInference",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_NoInference",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_PresentationIndependent",
+      "local_id": "INV_PresentationIndependent",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_PresentationIndependent",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_SchemaCompliance",
+      "local_id": "INV_SchemaCompliance",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_SchemaCompliance",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_DiffSemantics",
+      "local_id": "INV_DiffSemantics",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_DiffSemantics",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_NonAuth",
+      "local_id": "INV_NonAuth",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_NonAuth",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_008__INV_Layer",
+      "local_id": "INV_Layer",
+      "component_id": "component_008",
+      "type": "Invariant",
+      "name": "INV_Layer",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__ST_system_dir",
+      "local_id": "ST_system_dir",
+      "component_id": "component_009",
+      "type": "State",
+      "name": "ST_system_dir",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__ST_use_mock_physical_p",
+      "local_id": "ST_use_mock_physical_p",
+      "component_id": "component_009",
+      "type": "State",
+      "name": "ST_use_mock_physical_p",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__ST_boot_sequence",
+      "local_id": "ST_boot_sequence",
+      "component_id": "component_009",
+      "type": "State",
+      "name": "ST_boot_sequence",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_init_quicklisp",
+      "local_id": "OP_init_quicklisp",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_init_quicklisp",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_libs",
+      "local_id": "OP_load_libs",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_libs",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_system_file",
+      "local_id": "OP_load_system_file",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_system_file",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_init_layers",
+      "local_id": "OP_init_layers",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_init_layers",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_physical",
+      "local_id": "OP_load_physical",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_physical",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_llm",
+      "local_id": "OP_load_llm",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_llm",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_core",
+      "local_id": "OP_load_core",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_core",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_graph",
+      "local_id": "OP_load_graph",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_graph",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_world",
+      "local_id": "OP_load_world",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_world",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_immune",
+      "local_id": "OP_load_immune",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_immune",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_runtime",
+      "local_id": "OP_load_runtime",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_runtime",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_generation",
+      "local_id": "OP_load_generation",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_generation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_load_test",
+      "local_id": "OP_load_test",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_load_test",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_start_delta3",
+      "local_id": "OP_start_delta3",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_start_delta3",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_start_delta3_stub",
+      "local_id": "OP_start_delta3_stub",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_start_delta3_stub",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__OP_agent_main_loop",
+      "local_id": "OP_agent_main_loop",
+      "component_id": "component_009",
+      "type": "Operation",
+      "name": "OP_agent_main_loop",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__INV_boot_seq",
+      "local_id": "INV_boot_seq",
+      "component_id": "component_009",
+      "type": "Invariant",
+      "name": "INV_boot_seq",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__INV_abi",
+      "local_id": "INV_abi",
+      "component_id": "component_009",
+      "type": "Invariant",
+      "name": "INV_abi",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__INV_purity",
+      "local_id": "INV_purity",
+      "component_id": "component_009",
+      "type": "Invariant",
+      "name": "INV_purity",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__INV_deps",
+      "local_id": "INV_deps",
+      "component_id": "component_009",
+      "type": "Invariant",
+      "name": "INV_deps",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__INV_load_order",
+      "local_id": "INV_load_order",
+      "component_id": "component_009",
+      "type": "Invariant",
+      "name": "INV_load_order",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__INV_no_reverse_dep",
+      "local_id": "INV_no_reverse_dep",
+      "component_id": "component_009",
+      "type": "Invariant",
+      "name": "INV_no_reverse_dep",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__INV_physical_swap",
+      "local_id": "INV_physical_swap",
+      "component_id": "component_009",
+      "type": "Invariant",
+      "name": "INV_physical_swap",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_009__INV_fail_fast",
+      "local_id": "INV_fail_fast",
+      "component_id": "component_009",
+      "type": "Invariant",
+      "name": "INV_fail_fast",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__ST_CanonicalMemory",
+      "local_id": "ST_CanonicalMemory",
+      "component_id": "component_010",
+      "type": "State",
+      "name": "ST_CanonicalMemory",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__ST_ShortTermMemory",
+      "local_id": "ST_ShortTermMemory",
+      "component_id": "component_010",
+      "type": "State",
+      "name": "ST_ShortTermMemory",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__ST_LongTermMemory",
+      "local_id": "ST_LongTermMemory",
+      "component_id": "component_010",
+      "type": "State",
+      "name": "ST_LongTermMemory",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__ST_MemoryRef",
+      "local_id": "ST_MemoryRef",
+      "component_id": "component_010",
+      "type": "State",
+      "name": "ST_MemoryRef",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__ST_Runtime",
+      "local_id": "ST_Runtime",
+      "component_id": "component_010",
+      "type": "State",
+      "name": "ST_Runtime",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__ST_Cache",
+      "local_id": "ST_Cache",
+      "component_id": "component_010",
+      "type": "State",
+      "name": "ST_Cache",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__ST_KVCache",
+      "local_id": "ST_KVCache",
+      "component_id": "component_010",
+      "type": "State",
+      "name": "ST_KVCache",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__ST_Context",
+      "local_id": "ST_Context",
+      "component_id": "component_010",
+      "type": "State",
+      "name": "ST_Context",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__ST_PrefillState",
+      "local_id": "ST_PrefillState",
+      "component_id": "component_010",
+      "type": "State",
+      "name": "ST_PrefillState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_MemoryRead",
+      "local_id": "OP_MemoryRead",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_MemoryRead",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_Commit",
+      "local_id": "OP_Commit",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_Commit",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_Recover",
+      "local_id": "OP_Recover",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_Recover",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_Replay",
+      "local_id": "OP_Replay",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_Replay",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_ReconstructDerived",
+      "local_id": "OP_ReconstructDerived",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_ReconstructDerived",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_ReconstructMemoryRef",
+      "local_id": "OP_ReconstructMemoryRef",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_ReconstructMemoryRef",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_ReconstructWorking",
+      "local_id": "OP_ReconstructWorking",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_ReconstructWorking",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_ResumeRuntime",
+      "local_id": "OP_ResumeRuntime",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_ResumeRuntime",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_DestroyCache",
+      "local_id": "OP_DestroyCache",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_DestroyCache",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_DestroyKVCache",
+      "local_id": "OP_DestroyKVCache",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_DestroyKVCache",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_ReconstructPrefill",
+      "local_id": "OP_ReconstructPrefill",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_ReconstructPrefill",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__OP_Resume",
+      "local_id": "OP_Resume",
+      "component_id": "component_010",
+      "type": "Operation",
+      "name": "OP_Resume",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_CanonicalMemoryWriter",
+      "local_id": "INV_CanonicalMemoryWriter",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_CanonicalMemoryWriter",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_MemoryRefAuthoritativeWriter",
+      "local_id": "INV_MemoryRefAuthoritativeWriter",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_MemoryRefAuthoritativeWriter",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_MemoryRefDeterministic",
+      "local_id": "INV_MemoryRefDeterministic",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_MemoryRefDeterministic",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_ReplayRequiresMemoryRef",
+      "local_id": "INV_ReplayRequiresMemoryRef",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_ReplayRequiresMemoryRef",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_CanonicalImmutable",
+      "local_id": "INV_CanonicalImmutable",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_CanonicalImmutable",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_CanonicalMutateRequiresCommit",
+      "local_id": "INV_CanonicalMutateRequiresCommit",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_CanonicalMutateRequiresCommit",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_RecoverDeterministic",
+      "local_id": "INV_RecoverDeterministic",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_RecoverDeterministic",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_RecoverReplayCompatible",
+      "local_id": "INV_RecoverReplayCompatible",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_RecoverReplayCompatible",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_CanonicalHistoryRecoverable",
+      "local_id": "INV_CanonicalHistoryRecoverable",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_CanonicalHistoryRecoverable",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_010__INV_RecoverNoAuthoritativeInfo",
+      "local_id": "INV_RecoverNoAuthoritativeInfo",
+      "component_id": "component_010",
+      "type": "Invariant",
+      "name": "INV_RecoverNoAuthoritativeInfo",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__ST_ir_stream",
+      "local_id": "ST_ir_stream",
+      "component_id": "component_011",
+      "type": "State",
+      "name": "ST_ir_stream",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__ST_model_context",
+      "local_id": "ST_model_context",
+      "component_id": "component_011",
+      "type": "State",
+      "name": "ST_model_context",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__ST_runtime_state",
+      "local_id": "ST_runtime_state",
+      "component_id": "component_011",
+      "type": "State",
+      "name": "ST_runtime_state",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__OP_init_bridge",
+      "local_id": "OP_init_bridge",
+      "component_id": "component_011",
+      "type": "Operation",
+      "name": "OP_init_bridge",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__OP_make_ir",
+      "local_id": "OP_make_ir",
+      "component_id": "component_011",
+      "type": "Operation",
+      "name": "OP_make_ir",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__OP_ir_callback",
+      "local_id": "OP_ir_callback",
+      "component_id": "component_011",
+      "type": "Operation",
+      "name": "OP_ir_callback",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__OP_push_ir",
+      "local_id": "OP_push_ir",
+      "component_id": "component_011",
+      "type": "Operation",
+      "name": "OP_push_ir",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__OP_clear_stream",
+      "local_id": "OP_clear_stream",
+      "component_id": "component_011",
+      "type": "Operation",
+      "name": "OP_clear_stream",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__OP_validate_ir",
+      "local_id": "OP_validate_ir",
+      "component_id": "component_011",
+      "type": "Operation",
+      "name": "OP_validate_ir",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__OP_extract_actions",
+      "local_id": "OP_extract_actions",
+      "component_id": "component_011",
+      "type": "Operation",
+      "name": "OP_extract_actions",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__OP_run_trial",
+      "local_id": "OP_run_trial",
+      "component_id": "component_011",
+      "type": "Operation",
+      "name": "OP_run_trial",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__OP_divergence_profile",
+      "local_id": "OP_divergence_profile",
+      "component_id": "component_011",
+      "type": "Operation",
+      "name": "OP_divergence_profile",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__INV_ir_immutable",
+      "local_id": "INV_ir_immutable",
+      "component_id": "component_011",
+      "type": "Invariant",
+      "name": "INV_ir_immutable",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__INV_stream_append_only",
+      "local_id": "INV_stream_append_only",
+      "component_id": "component_011",
+      "type": "Invariant",
+      "name": "INV_stream_append_only",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__INV_stream_ordering",
+      "local_id": "INV_stream_ordering",
+      "component_id": "component_011",
+      "type": "Invariant",
+      "name": "INV_stream_ordering",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__INV_callback_determinism",
+      "local_id": "INV_callback_determinism",
+      "component_id": "component_011",
+      "type": "Invariant",
+      "name": "INV_callback_determinism",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__INV_analysis_isolation",
+      "local_id": "INV_analysis_isolation",
+      "component_id": "component_011",
+      "type": "Invariant",
+      "name": "INV_analysis_isolation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_011__INV_observation_neutrality",
+      "local_id": "INV_observation_neutrality",
+      "component_id": "component_011",
+      "type": "Invariant",
+      "name": "INV_observation_neutrality",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_IngressQueue",
+      "local_id": "ST_IngressQueue",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_IngressQueue",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_ReadyQueue",
+      "local_id": "ST_ReadyQueue",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_ReadyQueue",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_IsolatedQueue",
+      "local_id": "ST_IsolatedQueue",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_IsolatedQueue",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_ExecutionState",
+      "local_id": "ST_ExecutionState",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_ExecutionState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_CausalOrder",
+      "local_id": "ST_CausalOrder",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_CausalOrder",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_RetryCount",
+      "local_id": "ST_RetryCount",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_RetryCount",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_MaxRetry",
+      "local_id": "ST_MaxRetry",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_MaxRetry",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_MaxPenaltyRetry",
+      "local_id": "ST_MaxPenaltyRetry",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_MaxPenaltyRetry",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_CanonicalState",
+      "local_id": "ST_CanonicalState",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_CanonicalState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_DialogueState",
+      "local_id": "ST_DialogueState",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_DialogueState",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_CausalId",
+      "local_id": "ST_CausalId",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_CausalId",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__ST_ToolEvent",
+      "local_id": "ST_ToolEvent",
+      "component_id": "component_012",
+      "type": "State",
+      "name": "ST_ToolEvent",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__OP_Schedule",
+      "local_id": "OP_Schedule",
+      "component_id": "component_012",
+      "type": "Operation",
+      "name": "OP_Schedule",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__OP_Retry",
+      "local_id": "OP_Retry",
+      "component_id": "component_012",
+      "type": "Operation",
+      "name": "OP_Retry",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__OP_RetryWithPenalty",
+      "local_id": "OP_RetryWithPenalty",
+      "component_id": "component_012",
+      "type": "Operation",
+      "name": "OP_RetryWithPenalty",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__OP_Abort",
+      "local_id": "OP_Abort",
+      "component_id": "component_012",
+      "type": "Operation",
+      "name": "OP_Abort",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__OP_Apply",
+      "local_id": "OP_Apply",
+      "component_id": "component_012",
+      "type": "Operation",
+      "name": "OP_Apply",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__OP_ToolRetry",
+      "local_id": "OP_ToolRetry",
+      "component_id": "component_012",
+      "type": "Operation",
+      "name": "OP_ToolRetry",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_ScheduleDeterministic",
+      "local_id": "INV_ScheduleDeterministic",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_ScheduleDeterministic",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_RetryNoMutation",
+      "local_id": "INV_RetryNoMutation",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_RetryNoMutation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_NormalDialogueIsolation",
+      "local_id": "INV_NormalDialogueIsolation",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_NormalDialogueIsolation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_FaultIsolation",
+      "local_id": "INV_FaultIsolation",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_FaultIsolation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_AuthorityCommit",
+      "local_id": "INV_AuthorityCommit",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_AuthorityCommit",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_IsolationFail",
+      "local_id": "INV_IsolationFail",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_IsolationFail",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_CausalIdConsistency",
+      "local_id": "INV_CausalIdConsistency",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_CausalIdConsistency",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_RetryScope",
+      "local_id": "INV_RetryScope",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_RetryScope",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_NoBypass",
+      "local_id": "INV_NoBypass",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_NoBypass",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_012__INV_Determinism",
+      "local_id": "INV_Determinism",
+      "component_id": "component_012",
+      "type": "Invariant",
+      "name": "INV_Determinism",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__ST_Baseline",
+      "local_id": "ST_Baseline",
+      "component_id": "component_013",
+      "type": "State",
+      "name": "ST_Baseline",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__OP_Understand",
+      "local_id": "OP_Understand",
+      "component_id": "component_013",
+      "type": "Operation",
+      "name": "OP_Understand",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__OP_Analyze",
+      "local_id": "OP_Analyze",
+      "component_id": "component_013",
+      "type": "Operation",
+      "name": "OP_Analyze",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__OP_Design",
+      "local_id": "OP_Design",
+      "component_id": "component_013",
+      "type": "Operation",
+      "name": "OP_Design",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__OP_Implement",
+      "local_id": "OP_Implement",
+      "component_id": "component_013",
+      "type": "Operation",
+      "name": "OP_Implement",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__OP_Verify",
+      "local_id": "OP_Verify",
+      "component_id": "component_013",
+      "type": "Operation",
+      "name": "OP_Verify",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__OP_Record",
+      "local_id": "OP_Record",
+      "component_id": "component_013",
+      "type": "Operation",
+      "name": "OP_Record",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_Independence",
+      "local_id": "INV_Independence",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_Independence",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_GovernanceScope",
+      "local_id": "INV_GovernanceScope",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_GovernanceScope",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_RuntimeSatisfaction",
+      "local_id": "INV_RuntimeSatisfaction",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_RuntimeSatisfaction",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_EvolutionRule",
+      "local_id": "INV_EvolutionRule",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_EvolutionRule",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_ExtensionPriority",
+      "local_id": "INV_ExtensionPriority",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_ExtensionPriority",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_Minimalism",
+      "local_id": "INV_Minimalism",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_Minimalism",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_Neutrality",
+      "local_id": "INV_Neutrality",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_Neutrality",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_MetaDesignSeparation",
+      "local_id": "INV_MetaDesignSeparation",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_MetaDesignSeparation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_RuntimeDesignSeparation",
+      "local_id": "INV_RuntimeDesignSeparation",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_RuntimeDesignSeparation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_ConceptResponsibilityDependency",
+      "local_id": "INV_ConceptResponsibilityDependency",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_ConceptResponsibilityDependency",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_ConceptImplementationIndependence",
+      "local_id": "INV_ConceptImplementationIndependence",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_ConceptImplementationIndependence",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_NewConceptResponsibilityRequirement",
+      "local_id": "INV_NewConceptResponsibilityRequirement",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_NewConceptResponsibilityRequirement",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_ContentImplementationPrecedence",
+      "local_id": "INV_ContentImplementationPrecedence",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_ContentImplementationPrecedence",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_ImplementationConstitutionPreservation",
+      "local_id": "INV_ImplementationConstitutionPreservation",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_ImplementationConstitutionPreservation",
+      "description": "",
+      "is_boundary": false
+    },
+    {
+      "global_id": "component_013__INV_AuthorityRepresentationSeparation",
+      "local_id": "INV_AuthorityRepresentationSeparation",
+      "component_id": "component_013",
+      "type": "Invariant",
+      "name": "INV_AuthorityRepresentationSeparation",
+      "description": "",
+      "is_boundary": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "component_001__OP_Commit",
+      "to": "component_001__ST_Canonical",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_Commit",
+      "to": "component_001__OP_WakeDeferred",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_WakeDeferred",
+      "to": "component_001__ST_KernelState",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_Replay",
+      "to": "component_001__ST_Derived",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_Derive",
+      "to": "component_001__ST_Derived",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_BuildPrompt",
+      "to": "component_001__ST_Derived",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_BuildPrompt",
+      "to": "component_001__ST_Prompt",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_Backend",
+      "to": "component_001__ST_Prompt",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_Backend",
+      "to": "component_001__ST_Candidate",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_Validate",
+      "to": "component_001__ST_Candidate",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_Validate",
+      "to": "component_001__ST_Canonical",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_Validate",
+      "to": "component_001__ST_ValidationReport",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_PolicyRouter",
+      "to": "component_001__ST_ValidationReport",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_PolicyRouter",
+      "to": "component_001__ST_RuntimeRequest",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_KernelTransition",
+      "to": "component_001__ST_KernelState",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_KernelTransition",
+      "to": "component_001__ST_RuntimeRequest",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_KernelTransition",
+      "to": "component_001__ST_KernelState",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__OP_KernelTransition",
+      "to": "component_001__ST_RuntimeCommand",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__INV_CanonicalImmutable",
+      "to": "component_001__OP_Commit",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__INV_PureOps",
+      "to": "component_001__OP_Validate",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__INV_PureOps",
+      "to": "component_001__OP_PolicyRouter",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__INV_KernelStateMutator",
+      "to": "component_001__OP_KernelTransition",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__INV_CommitSoleUpdater",
+      "to": "component_001__OP_Commit",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__INV_WakeDeferredTrigger",
+      "to": "component_001__OP_WakeDeferred",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_001__INV_BackendNonAuthoritative",
+      "to": "component_001__OP_Backend",
+      "from_component": "component_001",
+      "to_component": "component_001",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_InitKernel",
+      "to": "component_002__ST_Kernel",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_InitKernel",
+      "to": "component_002__ST_WAL",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_SubmitUserInput",
+      "to": "component_002__OP_CommitEvent",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_CommitEvent",
+      "to": "component_002__ST_WAL",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_CommitEvent",
+      "to": "component_002__OP_RefreshProjections",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_RefreshProjections",
+      "to": "component_002__ST_Graph",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_GetCurrentState",
+      "to": "component_002__ST_Kernel",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_GetCurrentState",
+      "to": "component_002__ST_KernelState",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_InitRuntime",
+      "to": "component_002__ST_RuntimeEnv",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_MainLoop",
+      "to": "component_002__OP_SubmitUserInput",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_InitLLM",
+      "to": "component_002__ST_Context",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_Tokenize",
+      "to": "component_002__ST_Context",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_PrefillPrompt",
+      "to": "component_002__ST_Context",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_Generate",
+      "to": "component_002__ST_Context",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_Generate",
+      "to": "component_002__OP_MySamplerSample",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_Generate",
+      "to": "component_002__OP_MyLlamaEval",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_RunGenerationWithSensors",
+      "to": "component_002__OP_Generate",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_RunGenerationWithSensors",
+      "to": "component_002__OP_FaultRecovery",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_FaultRecovery",
+      "to": "component_002__ST_Context",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_Chat",
+      "to": "component_002__ST_Session",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_Chat",
+      "to": "component_002__OP_Tokenize",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_Chat",
+      "to": "component_002__OP_PrefillPrompt",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_Chat",
+      "to": "component_002__OP_Generate",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_StartChat",
+      "to": "component_002__OP_Chat",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__OP_Decide",
+      "to": "component_002__ST_Session",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_KernelSoleMutator",
+      "to": "component_002__OP_CommitEvent",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_GraphFromWAL",
+      "to": "component_002__OP_RefreshProjections",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_PostCommitPersisted",
+      "to": "component_002__OP_CommitEvent",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_RuntimeNoDirectAccess",
+      "to": "component_002__OP_MainLoop",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_SamplerLifecycle",
+      "to": "component_002__OP_Generate",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_NPastInvariant",
+      "to": "component_002__OP_PrefillPrompt",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_HistoryOrderedAppendOnly",
+      "to": "component_002__OP_Chat",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_FaultNoCommit",
+      "to": "component_002__OP_FaultRecovery",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_StatelessFFI",
+      "to": "component_002__OP_MyLlamaEval",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_002__INV_Abi1to1",
+      "to": "component_002__OP_MyLlamaEval",
+      "from_component": "component_002",
+      "to_component": "component_002",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_StorePayload",
+      "to": "component_003__ST_MemoryStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_LoadPayload",
+      "to": "component_003__ST_MemoryStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_AddNode",
+      "to": "component_003__ST_GraphStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_AddEdge",
+      "to": "component_003__ST_GraphStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_CausalSubgraph",
+      "to": "component_003__ST_GraphStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_ProjectContext",
+      "to": "component_003__ST_GraphStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_ProjectContext",
+      "to": "component_003__ST_MemoryStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_BuildPrefillState",
+      "to": "component_003__ST_PrefillState",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_BuildPrefillState",
+      "to": "component_003__OP_ProjectContext",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_MakeWorld",
+      "to": "component_003__ST_World",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_MakeWorld",
+      "to": "component_003__ST_GraphStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_MakeWorld",
+      "to": "component_003__ST_MemoryStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_ForkWorld",
+      "to": "component_003__ST_World",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_ForkWorld",
+      "to": "component_003__ST_World",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_KernelCommitWorld",
+      "to": "component_003__ST_World",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_KernelCommitWorld",
+      "to": "component_003__ST_GraphStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_KernelCommitWorld",
+      "to": "component_003__INV_CommitAtomic",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_RegisterWorld",
+      "to": "component_003__ST_Registry",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_SetActiveWorld",
+      "to": "component_003__ST_Registry",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__OP_ArchiveWorld",
+      "to": "component_003__ST_Registry",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__INV_MemoryImmutable",
+      "to": "component_003__ST_MemoryStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__INV_GraphAppend",
+      "to": "component_003__ST_GraphStore",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__INV_WorldIsolation",
+      "to": "component_003__ST_World",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__INV_CausalSeparation",
+      "to": "component_003__OP_CausalSubgraph",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_003__INV_Determinism",
+      "to": "component_003__OP_BuildPrefillState",
+      "from_component": "component_003",
+      "to_component": "component_003",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_AppendWAL",
+      "to": "component_004__ST_WAL",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_CommitEvent",
+      "to": "component_004__ST_WAL",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_LiftGraph",
+      "to": "component_004__ST_WAL",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_LiftGraph",
+      "to": "component_004__ST_HealthyTable",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_LiftGraph",
+      "to": "component_004__ST_Graph",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_HandleFault",
+      "to": "component_004__ST_KVCache",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_HandleFault",
+      "to": "component_004__ST_WAL",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_BranchWorld",
+      "to": "component_004__ST_SystemState",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_Prefill",
+      "to": "component_004__ST_WAL",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__OP_Prefill",
+      "to": "component_004__ST_KVCache",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__INV_MonotonicClock",
+      "to": "component_004__OP_AppendWAL",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__INV_AppendOnly",
+      "to": "component_004__ST_Graph",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__INV_FaultIsolation",
+      "to": "component_004__OP_LiftGraph",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_004__INV_CausalScope",
+      "to": "component_004__OP_LiftGraph",
+      "from_component": "component_004",
+      "to_component": "component_004",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__OP_StageBranchWorld",
+      "to": "component_005__OP_GetLatestNodeInWorld",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__OP_StageBranchWorld",
+      "to": "component_005__OP_StageEvent",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__OP_StageBranchWorld",
+      "to": "component_005__ST_WalWorldCounter",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__OP_StageBranchWorld",
+      "to": "component_005__ST_Wal",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__OP_StageBranchWorld",
+      "to": "component_005__ST_Graph",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__OP_GetLatestNodeInWorld",
+      "to": "component_005__ST_Graph",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__OP_CheckImmuneStatus",
+      "to": "component_005__OP_CleanHistory",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__OP_CleanHistory",
+      "to": "component_005__ST_Graph",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__OP_StageEvent",
+      "to": "component_005__ST_Wal",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_WorldIdUnique",
+      "to": "component_005__OP_StageBranchWorld",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_WalWorldCounterMonotonic",
+      "to": "component_005__ST_WalWorldCounter",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_BranchEventKindBranch",
+      "to": "component_005__OP_StageBranchWorld",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_RootParentZero",
+      "to": "component_005__OP_StageBranchWorld",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_QueryExcludesFaultNodes",
+      "to": "component_005__OP_GetLatestNodeInWorld",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_QueryReturnsSingleLatest",
+      "to": "component_005__OP_GetLatestNodeInWorld",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_BranchEventParentWorldImmutable",
+      "to": "component_005__OP_StageBranchWorld",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_BranchEventParentNodeCommitted",
+      "to": "component_005__OP_StageBranchWorld",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_BranchEventStatusStaged",
+      "to": "component_005__OP_StageEvent",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_005__INV_ImmuneHistoryExists",
+      "to": "component_005__OP_CheckImmuneStatus",
+      "from_component": "component_005",
+      "to_component": "component_005",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__ST_History",
+      "to": "component_006__OP_d",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__OP_d",
+      "to": "component_006__ST_ProjectionModel",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__ST_ProjectionModel",
+      "to": "component_006__OP_j",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__OP_j",
+      "to": "component_006__ST_JustificationStructure",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__ST_ProjectionModel",
+      "to": "component_006__OP_interpret",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__ST_EventABI",
+      "to": "component_006__OP_interpret",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__OP_interpret",
+      "to": "component_006__ST_SemanticModel",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__ST_SemanticModel",
+      "to": "component_006__OP_justify",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__OP_justify",
+      "to": "component_006__ST_JustificationStructure",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__ST_SemanticModel",
+      "to": "component_006__OP_graph",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__OP_graph",
+      "to": "component_006__ST_RelationalGraph",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_H_authoritative_causal_record",
+      "to": "component_006__ST_History",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_H_reproducible",
+      "to": "component_006__ST_History",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_H_inspectable",
+      "to": "component_006__ST_History",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_H_derivable",
+      "to": "component_006__ST_History",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_EventABI_not_in_H",
+      "to": "component_006__ST_History",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_ResolutionSemantics_not_in_H",
+      "to": "component_006__ST_History",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_d_deterministic",
+      "to": "component_006__OP_d",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_j_derived_exclusively_from_d",
+      "to": "component_006__OP_j",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_d_semantically_neutral",
+      "to": "component_006__OP_d",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_interpret_deterministic_under_ABI",
+      "to": "component_006__OP_interpret",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_ABI_explicit_and_versioned",
+      "to": "component_006__ST_EventABI",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_S_derived_exclusively_from_M",
+      "to": "component_006__ST_SemanticModel",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_interpret_preserves_order_M",
+      "to": "component_006__OP_interpret",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_J_derived_exclusively_from_S",
+      "to": "component_006__ST_JustificationStructure",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_external_semantic_injection_not_in_interpret",
+      "to": "component_006__OP_interpret",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_S_non_authoritative",
+      "to": "component_006__ST_SemanticModel",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_graph_deterministic_from_S",
+      "to": "component_006__OP_graph",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_nodes_preserve_identity_consistency",
+      "to": "component_006__ST_RelationalGraph",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_edges_structural_relations_only",
+      "to": "component_006__ST_RelationalGraph",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_traversal_deterministic",
+      "to": "component_006__ST_RelationalGraph",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_interpretation_not_in_G",
+      "to": "component_006__ST_RelationalGraph",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_006__INV_G_non_authoritative",
+      "to": "component_006__ST_RelationalGraph",
+      "from_component": "component_006",
+      "to_component": "component_006",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_next_event",
+      "to": "component_007__ST_EventSelection",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_rollout",
+      "to": "component_007__OP_next_event",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_rollout",
+      "to": "component_007__ST_Trajectory",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_find_attractor",
+      "to": "component_007__OP_rollout",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_find_attractor",
+      "to": "component_007__ST_Attractor",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_find_cycle",
+      "to": "component_007__ST_Trajectory",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_find_cycle",
+      "to": "component_007__ST_Cycle",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_find_recurrent_cycle",
+      "to": "component_007__OP_rollout",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_find_recurrent_cycle",
+      "to": "component_007__OP_find_cycle",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_compute_sccs",
+      "to": "component_007__ST_Graph",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_compute_sccs",
+      "to": "component_007__ST_SCC",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_analyze_scc",
+      "to": "component_007__ST_SCC",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_build_basin_map",
+      "to": "component_007__OP_find_attractor",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_build_basin_map",
+      "to": "component_007__ST_Basin",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_build_basin_structure",
+      "to": "component_007__ST_Basin",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__OP_build_basin_structure",
+      "to": "component_007__ST_BasinResult",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__INV_Graph_Edge_Nodes",
+      "to": "component_007__ST_Graph",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__INV_Basin_Mass",
+      "to": "component_007__ST_Basin",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__INV_Basin_Ratio",
+      "to": "component_007__ST_Basin",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__INV_Partition",
+      "to": "component_007__ST_Basin",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__INV_SCC_Attractor",
+      "to": "component_007__ST_SCC",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__INV_Cluster_Type",
+      "to": "component_007__ST_Cluster",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__INV_Stability",
+      "to": "component_007__ST_Cycle",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__INV_Rollout_Path",
+      "to": "component_007__ST_Trajectory",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__ST_Attractor",
+      "to": "component_007__ST_SCC",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_007__ST_Cluster",
+      "to": "component_007__ST_Graph",
+      "from_component": "component_007",
+      "to_component": "component_007",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_Observe",
+      "to": "component_008__ST_World",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_Observe",
+      "to": "component_008__ST_Registry",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_Observe",
+      "to": "component_008__ST_Kernel",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_Observe",
+      "to": "component_008__ST_Observation",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_Observe",
+      "to": "component_008__ST_Snapshot",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_Observe",
+      "to": "component_008__INV_ReadOnly",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_Observe",
+      "to": "component_008__INV_Deterministic",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_Observe",
+      "to": "component_008__INV_Accurate",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_Observe",
+      "to": "component_008__INV_NoSideEffects",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_BuildWorldObservation",
+      "to": "component_008__ST_World",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_BuildWorldObservation",
+      "to": "component_008__ST_Observation",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_BuildWorldObservation",
+      "to": "component_008__INV_ReadOnly",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_BuildRegistryObservation",
+      "to": "component_008__ST_Registry",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_BuildRegistryObservation",
+      "to": "component_008__ST_Observation",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_BuildRegistryObservation",
+      "to": "component_008__INV_ReadOnly",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_008__OP_BuildAncestryObservation",
+      "to": "component_008__ST_Registry",
+      "from_component": "component_008",
+      "to_component": "component_008",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_init_quicklisp",
+      "to": "component_009__OP_load_libs",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_libs",
+      "to": "component_009__OP_init_layers",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_init_layers",
+      "to": "component_009__OP_load_physical",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_physical",
+      "to": "component_009__OP_load_llm",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_llm",
+      "to": "component_009__OP_load_core",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_core",
+      "to": "component_009__OP_load_graph",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_graph",
+      "to": "component_009__OP_load_world",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_world",
+      "to": "component_009__OP_load_immune",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_immune",
+      "to": "component_009__OP_load_runtime",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_runtime",
+      "to": "component_009__OP_load_generation",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_generation",
+      "to": "component_009__OP_load_test",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_test",
+      "to": "component_009__OP_start_delta3",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_load_test",
+      "to": "component_009__OP_start_delta3_stub",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_start_delta3",
+      "to": "component_009__OP_agent_main_loop",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__OP_start_delta3_stub",
+      "to": "component_009__OP_agent_main_loop",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__ST_use_mock_physical_p",
+      "to": "component_009__OP_load_physical",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__ST_system_dir",
+      "to": "component_009__OP_load_system_file",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__INV_boot_seq",
+      "to": "component_009__OP_init_layers",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__INV_load_order",
+      "to": "component_009__OP_init_layers",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__INV_deps",
+      "to": "component_009__OP_load_core",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__INV_no_reverse_dep",
+      "to": "component_009__OP_load_graph",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__INV_physical_swap",
+      "to": "component_009__OP_load_physical",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__INV_abi",
+      "to": "component_009__OP_load_physical",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__INV_fail_fast",
+      "to": "component_009__OP_load_system_file",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_009__INV_purity",
+      "to": "component_009__OP_init_quicklisp",
+      "from_component": "component_009",
+      "to_component": "component_009",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_MemoryRead",
+      "to": "component_010__ST_MemoryRef",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Commit",
+      "to": "component_010__ST_CanonicalMemory",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Commit",
+      "to": "component_010__ST_MemoryRef",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Commit",
+      "to": "component_010__INV_CanonicalMemoryWriter",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Commit",
+      "to": "component_010__INV_MemoryRefAuthoritativeWriter",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Recover",
+      "to": "component_010__OP_Replay",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Recover",
+      "to": "component_010__OP_ReconstructPrefill",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Recover",
+      "to": "component_010__INV_RecoverDeterministic",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Recover",
+      "to": "component_010__INV_RecoverReplayCompatible",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Recover",
+      "to": "component_010__INV_RecoverNoAuthoritativeInfo",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Replay",
+      "to": "component_010__ST_CanonicalMemory",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Replay",
+      "to": "component_010__OP_ReconstructDerived",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_ReconstructDerived",
+      "to": "component_010__ST_Context",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_ReconstructDerived",
+      "to": "component_010__OP_ReconstructMemoryRef",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_ReconstructMemoryRef",
+      "to": "component_010__ST_MemoryRef",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_ReconstructMemoryRef",
+      "to": "component_010__OP_ReconstructWorking",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_ReconstructWorking",
+      "to": "component_010__ST_Context",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_ReconstructWorking",
+      "to": "component_010__OP_ResumeRuntime",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_ResumeRuntime",
+      "to": "component_010__ST_Runtime",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_ResumeRuntime",
+      "to": "component_010__OP_Resume",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_Resume",
+      "to": "component_010__ST_Runtime",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_DestroyCache",
+      "to": "component_010__ST_Cache",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__OP_DestroyKVCache",
+      "to": "component_010__ST_KVCache",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__INV_CanonicalImmutable",
+      "to": "component_010__ST_CanonicalMemory",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__INV_CanonicalImmutable",
+      "to": "component_010__OP_Commit",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__INV_CanonicalMutateRequiresCommit",
+      "to": "component_010__OP_Commit",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__INV_MemoryRefDeterministic",
+      "to": "component_010__ST_MemoryRef",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__INV_ReplayRequiresMemoryRef",
+      "to": "component_010__OP_Replay",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_010__INV_CanonicalHistoryRecoverable",
+      "to": "component_010__ST_CanonicalMemory",
+      "from_component": "component_010",
+      "to_component": "component_010",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_init_bridge",
+      "to": "component_011__ST_runtime_state",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_ir_callback",
+      "to": "component_011__OP_make_ir",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_ir_callback",
+      "to": "component_011__OP_push_ir",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_make_ir",
+      "to": "component_011__OP_validate_ir",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_push_ir",
+      "to": "component_011__ST_ir_stream",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_clear_stream",
+      "to": "component_011__ST_ir_stream",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_extract_actions",
+      "to": "component_011__ST_ir_stream",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_run_trial",
+      "to": "component_011__OP_clear_stream",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_run_trial",
+      "to": "component_011__OP_extract_actions",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_run_trial",
+      "to": "component_011__ST_model_context",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__OP_divergence_profile",
+      "to": "component_011__OP_run_trial",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__INV_ir_immutable",
+      "to": "component_011__OP_make_ir",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__INV_ir_immutable",
+      "to": "component_011__OP_push_ir",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__INV_stream_append_only",
+      "to": "component_011__ST_ir_stream",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__INV_stream_ordering",
+      "to": "component_011__OP_push_ir",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__INV_callback_determinism",
+      "to": "component_011__OP_ir_callback",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__INV_analysis_isolation",
+      "to": "component_011__OP_divergence_profile",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_011__INV_observation_neutrality",
+      "to": "component_011__OP_extract_actions",
+      "from_component": "component_011",
+      "to_component": "component_011",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Schedule",
+      "to": "component_012__ST_ReadyQueue",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Schedule",
+      "to": "component_012__ST_CausalOrder",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Schedule",
+      "to": "component_012__ST_ExecutionState",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_ScheduleDeterministic",
+      "to": "component_012__OP_Schedule",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Retry",
+      "to": "component_012__ST_RetryCount",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Retry",
+      "to": "component_012__ST_MaxRetry",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Retry",
+      "to": "component_012__ST_ReadyQueue",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Retry",
+      "to": "component_012__OP_Abort",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_RetryNoMutation",
+      "to": "component_012__OP_Retry",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_RetryWithPenalty",
+      "to": "component_012__ST_RetryCount",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_RetryWithPenalty",
+      "to": "component_012__ST_MaxPenaltyRetry",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_RetryWithPenalty",
+      "to": "component_012__ST_CanonicalState",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_RetryWithPenalty",
+      "to": "component_012__INV_RetryNoMutation",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Abort",
+      "to": "component_012__ST_ExecutionState",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_NormalDialogueIsolation",
+      "to": "component_012__ST_ReadyQueue",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_FaultIsolation",
+      "to": "component_012__OP_Abort",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Apply",
+      "to": "component_012__ST_ToolEvent",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Apply",
+      "to": "component_012__ST_CanonicalState",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_Apply",
+      "to": "component_012__ST_DialogueState",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_AuthorityCommit",
+      "to": "component_012__OP_Apply",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_IsolationFail",
+      "to": "component_012__OP_Apply",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_CausalIdConsistency",
+      "to": "component_012__OP_Apply",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_NoBypass",
+      "to": "component_012__OP_Apply",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__OP_ToolRetry",
+      "to": "component_012__ST_ToolEvent",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_RetryScope",
+      "to": "component_012__OP_ToolRetry",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_012__INV_Determinism",
+      "to": "component_012__OP_Apply",
+      "from_component": "component_012",
+      "to_component": "component_012",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__OP_Understand",
+      "to": "component_013__OP_Analyze",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__OP_Analyze",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__OP_Design",
+      "to": "component_013__OP_Implement",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__OP_Implement",
+      "to": "component_013__OP_Verify",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__OP_Verify",
+      "to": "component_013__OP_Record",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__OP_Record",
+      "to": "component_013__ST_Baseline",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_EvolutionRule",
+      "to": "component_013__OP_Implement",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_NewConceptResponsibilityRequirement",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_ContentImplementationPrecedence",
+      "to": "component_013__OP_Implement",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_ImplementationConstitutionPreservation",
+      "to": "component_013__OP_Implement",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_ConceptResponsibilityDependency",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_ConceptImplementationIndependence",
+      "to": "component_013__OP_Implement",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_RuntimeSatisfaction",
+      "to": "component_013__OP_Implement",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_GovernanceScope",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_Independence",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_ExtensionPriority",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_Minimalism",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_Neutrality",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_MetaDesignSeparation",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_RuntimeDesignSeparation",
+      "to": "component_013__OP_Implement",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    },
+    {
+      "from": "component_013__INV_AuthorityRepresentationSeparation",
+      "to": "component_013__OP_Design",
+      "from_component": "component_013",
+      "to_component": "component_013",
+      "type": "depends_on",
+      "delta_level": "DELTA_1",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "phase": "PHASE_6_REPAIR",
+  "audit_version": "2.0.0",
+  "source_files": 104,
+  "phase6_reported_file_count": 104,
+  "file_count_discrepancy": 0,
+  "extracted_units_count": 104,
+  "extracted_relations_count": 0,
+  "silent_loss": 0,
+  "silent_merge": false,
+  "missing_provenance_count": 0,
+  "unclassified_files_count": 0,
+  "unclassified_records_count": 0,
+  "false_yaml_enum_dependency_count": 0,
+  "verdict": "PASS"
+}

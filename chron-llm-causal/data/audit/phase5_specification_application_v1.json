@@ -1,0 +1,120 @@
+{
+  "audit_version": "PHASE5_FINAL_SPEC",
+  "timestamp": "2026-08-22T15:21:03.183622+00:00",
+  "selection_rationale": "Selected 1 specifications covering domains (cae) based on cross-domain causal dependency topology.",
+  "covered_domains": [
+    "cae"
+  ],
+  "source_coverage": {
+    "total_source_lines": 285,
+    "total_extracted_lines": 285,
+    "coverage_match": true
+  },
+  "specification_units": [
+    {
+      "unit_id": "SPEC_UNIT_0001",
+      "source_file": "cae-schema.yaml",
+      "domain": "cae",
+      "line_count": 285,
+      "text_fragment": "openapi: 3.1.0\ninfo:\n  title: Chron-LLM CAE (Causal Action Effect) Schema"
+    }
+  ],
+  "causal_relations": [
+    {
+      "relation_id": "REL_0001",
+      "source_unit": "SPEC_UNIT_0001",
+      "target_unit": "INV_AUTH_001",
+      "type": "CONSTRAINS",
+      "classification": "EVIDENCE"
+    }
+  ],
+  "authority_boundaries": [
+    {
+      "boundary_id": "AUTH_BND_001",
+      "source_unit": "SPEC_UNIT_0001",
+      "enforcement": "STRICT"
+    }
+  ],
+  "invariant_dependencies": [
+    {
+      "invariant_id": "INV_DEP_001",
+      "unit": "SPEC_UNIT_0001"
+    }
+  ],
+  "delta1_mappings": [
+    {
+      "unit_id": "SPEC_UNIT_0001",
+      "mapped_node": "INV_AUTH_001"
+    }
+  ],
+  "delta2_mappings": [
+    {
+      "relation_id": "REL_0001",
+      "mapped_edge": "E001"
+    }
+  ],
+  "unresolved": [],
+  "provenance": [
+    {
+      "unit_id": "SPEC_UNIT_0001",
+      "source_file": "cae-schema.yaml",
+      "line_number_start": 1,
+      "line_number_end": 285,
+      "provenance_complete": true
+    }
+  ],
+  "information_loss": [],
+  "accounting": {
+    "total_units": 1,
+    "mapped_units": 1,
+    "unresolved_units": 0,
+    "silent_loss": 0
+  },
+  "tests": {
+    "negative": [
+      {
+        "test": "reverse_causal_relation",
+        "status": "DETECTED"
+      },
+      {
+        "test": "remove_authority_boundary",
+        "status": "DETECTED"
+      },
+      {
+        "test": "remove_required_invariant",
+        "status": "DETECTED"
+      },
+      {
+        "test": "mutate_canonical_without_commit",
+        "status": "REJECTED"
+      },
+      {
+        "test": "derive_from_noncanonical",
+        "status": "REJECTED"
+      },
+      {
+        "test": "delete_unresolved_mapping",
+        "status": "DETECTED"
+      }
+    ],
+    "positive": [
+      {
+        "test": "valid_commit",
+        "status": "ACCEPTED"
+      },
+      {
+        "test": "valid_derive",
+        "status": "ACCEPTED"
+      },
+      {
+        "test": "valid_invariant_dependency",
+        "status": "ACCEPTED"
+      },
+      {
+        "test": "valid_cross_domain_dependency",
+        "status": "ACCEPTED"
+      }
+    ]
+  },
+  "verdict": "PASS"
+}

@@ -1,0 +1,370 @@
+[
+  {
+    "unit_id": "PHASE6_UNIT_0001",
+    "source_file": "cae-schema.yaml",
+    "domain": "cae",
+    "authority_class": "Canonical",
+    "ast": {
+      "definitions": [],
+      "types": [
+        {
+          "line": 71,
+          "text": "type: string"
+        },
+        {
+          "line": 76,
+          "text": "type: string"
+        },
+        {
+          "line": 77,
+          "text": "enum: [EQ, NEQ, GT, LT, GTE, LTE, CONTAINS, IS_TRUE, IS_FALSE]"
+        },
+        {
+          "line": 80,
+          "text": "type: object"
+        },
+        {
+          "line": 85,
+          "text": "type: string"
+        },
+        {
+          "line": 90,
+          "text": "type: string"
+        },
+        {
+          "line": 93,
+          "text": "type: object"
+        },
+        {
+          "line": 108,
+          "text": "type: string"
+        },
+        {
+          "line": 111,
+          "text": "type: array"
+        },
+        {
+          "line": 115,
+          "text": "type: string"
+        },
+        {
+          "line": 118,
+          "text": "type: array"
+        },
+        {
+          "line": 122,
+          "text": "type: string"
+        },
+        {
+          "line": 125,
+          "text": "type: object"
+        },
+        {
+          "line": 130,
+          "text": "type: integer"
+        },
+        {
+          "line": 133,
+          "text": "type: integer"
+        },
+        {
+          "line": 136,
+          "text": "type: number"
+        },
+        {
+          "line": 140,
+          "text": "type: object"
+        },
+        {
+          "line": 145,
+          "text": "type: string"
+        },
+        {
+          "line": 147,
+          "text": "type: integer"
+        },
+        {
+          "line": 150,
+          "text": "type: object"
+        },
+        {
+          "line": 155,
+          "text": "type: string"
+        },
+        {
+          "line": 156,
+          "text": "enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]"
+        },
+        {
+          "line": 159,
+          "text": "type: object"
+        },
+        {
+          "line": 160,
+          "text": "required: [from_id, to_id, type]"
+        },
+        {
+          "line": 167,
+          "text": "type:"
+        },
+        {
+          "line": 171,
+          "text": "type: string"
+        },
+        {
+          "line": 172,
+          "text": "enum: [commit, reject, defer, retry, retry-penalty, abort]"
+        },
+        {
+          "line": 175,
+          "text": "type: object"
+        },
+        {
+          "line": 186,
+          "text": "type: array"
+        },
+        {
+          "line": 190,
+          "text": "type: string"
+        },
+        {
+          "line": 194,
+          "text": "type: integer"
+        },
+        {
+          "line": 199,
+          "text": "type: object"
+        },
+        {
+          "line": 204,
+          "text": "type: integer"
+        },
+        {
+          "line": 207,
+          "text": "type: object"
+        },
+        {
+          "line": 210,
+          "text": "type: string"
+        },
+        {
+          "line": 211,
+          "text": "enum: [OK, CORRUPT, TRUNCATED]"
+        },
+        {
+          "line": 214,
+          "text": "type: object"
+        },
+        {
+          "line": 219,
+          "text": "type: integer"
+        },
+        {
+          "line": 222,
+          "text": "type: integer"
+        },
+        {
+          "line": 228,
+          "text": "type: string"
+        },
+        {
+          "line": 232,
+          "text": "type: string"
+        },
+        {
+          "line": 233,
+          "text": "enum: [proceed, discard, sleep, regenerate, terminate]"
+        },
+        {
+          "line": 236,
+          "text": "type: object"
+        },
+        {
+          "line": 243,
+          "text": "type: integer"
+        },
+        {
+          "line": 246,
+          "text": "type: string"
+        },
+        {
+          "line": 250,
+          "text": "type: integer"
+        },
+        {
+          "line": 254,
+          "text": "type: object"
+        },
+        {
+          "line": 258,
+          "text": "type: string"
+        },
+        {
+          "line": 260,
+          "text": "type: string"
+        },
+        {
+          "line": 262,
+          "text": "type: object"
+        }
+      ],
+      "operations": [
+        {
+          "line": 3,
+          "text": "title: Chron-LLM CAE (Causal Action Effect) Schema"
+        },
+        {
+          "line": 81,
+          "text": "required: [variable, op, value]"
+        },
+        {
+          "line": 87,
+          "text": "op:"
+        },
+        {
+          "line": 98,
+          "text": "- action"
+        },
+        {
+          "line": 114,
+          "text": "action:"
+        },
+        {
+          "line": 116,
+          "text": "description: \"Canonicalized kernel action name\""
+        }
+      ],
+      "preconditions": [],
+      "postconditions": [
+        {
+          "line": 10,
+          "text": "post:"
+        },
+        {
+          "line": 37,
+          "text": "post:"
+        }
+      ],
+      "invariants": [],
+      "authority_constraints": [],
+      "dependencies": [
+        {
+          "line": 156,
+          "target": "enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]",
+          "raw": "enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]"
+        }
+      ],
+      "causal_declarations": [
+        {
+          "line": 156,
+          "type": "refines",
+          "text": "enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]"
+        },
+        {
+          "line": 156,
+          "type": "depends_on",
+          "text": "enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]"
+        }
+      ],
+      "references": [
+        {
+          "line": 21,
+          "text": "$ref: '#/components/schemas/PreparePayload'"
+        },
+        {
+          "line": 28,
+          "text": "$ref: '#/components/schemas/PrepareResult'"
+        },
+        {
+          "line": 34,
+          "text": "$ref: '#/components/schemas/ErrorResponse'"
+        },
+        {
+          "line": 47,
+          "text": "$ref: '#/components/schemas/CommitRequest'"
+        },
+        {
+          "line": 54,
+          "text": "$ref: '#/components/schemas/CommitSealResult'"
+        },
+        {
+          "line": 60,
+          "text": "$ref: '#/components/schemas/ErrorResponse'"
+        },
+        {
+          "line": 66,
+          "text": "$ref: '#/components/schemas/ErrorResponse'"
+        },
+        {
+          "line": 88,
+          "text": "$ref: '#/components/schemas/ConditionOperator'"
+        },
+        {
+          "line": 106,
+          "text": "$ref: '#/components/schemas/NodeID'"
+        },
+        {
+          "line": 113,
+          "text": "$ref: '#/components/schemas/Condition'"
+        },
+        {
+          "line": 120,
+          "text": "$ref: '#/components/schemas/Condition'"
+        },
+        {
+          "line": 164,
+          "text": "$ref: '#/components/schemas/NodeID'"
+        },
+        {
+          "line": 166,
+          "text": "$ref: '#/components/schemas/NodeID'"
+        },
+        {
+          "line": 168,
+          "text": "$ref: '#/components/schemas/EdgeType'"
+        },
+        {
+          "line": 184,
+          "text": "$ref: '#/components/schemas/CAENode'"
+        },
+        {
+          "line": 188,
+          "text": "$ref: '#/components/schemas/CAEEdge'"
+        },
+        {
+          "line": 226,
+          "text": "$ref: '#/components/schemas/ActionType'"
+        },
+        {
+          "line": 241,
+          "text": "$ref: '#/components/schemas/CommitStatus'"
+        }
+      ],
+      "version_freeze": [
+        {
+          "line": 4,
+          "text": "version: 2.1.0-D"
+        },
+        {
+          "line": 7,
+          "text": "Finalized version: includes txid and payload_len to align with R2.1-D WAL header."
+        },
+        {
+          "line": 9,
+          "text": "/v1/causal/prepare:"
+        },
+        {
+          "line": 36,
+          "text": "/v1/causal/commit:"
+        }
+      ],
+      "total_lines": 285
+    },
+    "provenance": {
+      "source_file": "cae-schema.yaml",
+      "line_number_start": 1,
+      "line_number_end": 285,
+      "provenance_complete": true
+    }
+  }
+]

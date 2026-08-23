@@ -1,0 +1,12 @@
+{
+  "causal_relations": [],
+  "cycles": [],
+  "topological_order": [
+    "PHASE6_UNIT_0001"
+  ],
+  "connected_components": [
+    [
+      "PHASE6_UNIT_0001"
+    ]
+  ]
+}

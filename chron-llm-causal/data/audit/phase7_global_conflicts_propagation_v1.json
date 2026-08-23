@@ -1,0 +1,10 @@
+[
+  {
+    "origin_type": "UNRESOLVED_DEPENDENCY",
+    "origin_id": "UNRESOLVED_0001",
+    "source_unit": "PHASE6_UNIT_0001",
+    "impacted_units_count": 0,
+    "impacted_units": [],
+    "reason": "Import target 'enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]' declared at line 156 not found in spec corpus"
+  }
+]

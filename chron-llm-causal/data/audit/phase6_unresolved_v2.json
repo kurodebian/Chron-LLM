@@ -1,0 +1,13 @@
+{
+  "unresolved_count": 1,
+  "false_unresolved_count": 0,
+  "unresolved_items": [
+    {
+      "source_file": "experiments__ir__3cluster.spec",
+      "line": 1,
+      "raw_text": "import \"chron-llm-spec-v0.2.spec\" as SOT;",
+      "target": "SOT;"
+    }
+  ],
+  "false_unresolved_items": []
+}

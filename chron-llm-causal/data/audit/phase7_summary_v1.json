@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-08-23T03:02:14.886647+00:00",
+  "files": 1,
+  "specification_units": 1,
+  "graph_nodes": 1,
+  "graph_edges": 0,
+  "explicit_relations": 0,
+  "inferred_relations": 0,
+  "roots": [
+    "PHASE6_UNIT_0001"
+  ],
+  "sinks": [
+    "PHASE6_UNIT_0001"
+  ],
+  "cycles": [],
+  "orphan_units": [
+    "PHASE6_UNIT_0001"
+  ],
+  "duplicate_definitions": [],
+  "conflicting_definitions": [],
+  "conflicting_invariants": [],
+  "authority_violations": [],
+  "canonical_mutation_paths": [],
+  "non_authoritative_to_canonical_paths": [],
+  "unresolved_relations": 1,
+  "supersession_candidates": [],
+  "equivalence_candidates": [],
+  "cross_domain_dependencies": [],
+  "provenance_complete": true
+}

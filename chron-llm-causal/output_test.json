@@ -1,0 +1,55 @@
+{
+  "component_id": "component-001",
+  "nodes": [
+    {
+      "id": "ST_BufferReady",
+      "label": "Buffer Ready Status",
+      "raw_label": "Buffer Ready Status",
+      "type": "State",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_InitializeBuffer",
+      "label": "Initialize Buffer",
+      "raw_label": "Initialize Buffer",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "OP_WriteBuffer",
+      "label": "Write Buffer",
+      "raw_label": "Write Buffer",
+      "type": "Operation",
+      "component_id": "component-001"
+    },
+    {
+      "id": "INV_BufferSizeLimit",
+      "label": "Buffer Size Limit",
+      "raw_label": "Buffer Size Limit",
+      "type": "Invariant",
+      "component_id": "component-001"
+    }
+  ],
+  "edges": [
+    {
+      "from": "OP_InitializeBuffer",
+      "to": "ST_BufferReady",
+      "relation": "produces"
+    },
+    {
+      "from": "OP_WriteBuffer",
+      "to": "ST_BufferReady",
+      "relation": "mutates"
+    },
+    {
+      "from": "ST_BufferReady",
+      "to": "OP_WriteBuffer",
+      "relation": "depends_on"
+    },
+    {
+      "from": "OP_WriteBuffer",
+      "to": "INV_BufferSizeLimit",
+      "relation": "enforces"
+    }
+  ]
+}
