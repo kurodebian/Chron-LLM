@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "delta2-mastergraph.schema.json",
+  "title": "Delta2 MasterGraph",
+  "description": "Integrated and normalized master graph.",
+  "type": "object",
+  "required": [
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "global_id": {
+            "type": "string"
+          },
+          "local_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "invariant",
+              "operation",
+              "state",
+              "authority",
+              "function",
+              "type_def",
+              "component"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object"
+          },
+          "provenance": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "from",
+          "to"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "pipeline": {
+            "type": "string"
+          },
+          "morphism_type": {
+            "type": "string",
+            "enum": [
+              "authority_boundary",
+              "causal_flow",
+              "data_dependency",
+              "invariant",
+              "dependency",
+              "constraint",
+              "defines"
+            ]
+          },
+          "guard_invariant": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "delta_level": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

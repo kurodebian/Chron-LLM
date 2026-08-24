@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "traceability.schema.json",
+  "title": "Delta1 to Delta2 Traceability",
+  "description": "Verification of mapping from Delta1 artifacts to Delta2 MasterGraph.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "audit_version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "canonical_freeze": {
+      "type": "string"
+    },
+    "target_mastergraph": {
+      "type": "string"
+    },
+    "machine_checks": {
+      "type": "object"
+    },
+    "delta2_nodes_provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "delta2_node_id": {
+            "type": "string"
+          },
+          "source_delta1_node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "provenance_complete": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "delta2_edges_provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "delta2_edge_id": {
+            "type": "string"
+          },
+          "source_delta1_edge_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "provenance_complete": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

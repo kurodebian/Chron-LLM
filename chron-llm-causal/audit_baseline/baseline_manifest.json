@@ -1,0 +1,25 @@
+{
+  "baseline_id": "AUDIT-BASELINE-P7-2026-08-24",
+  "artifacts": [
+    {
+      "path": "../data/delta1_normalized/causal_extract_core_v1.json",
+      "sha256": "...",
+      "role": "delta1_extraction_v1"
+    },
+    {
+      "path": "../data/delta1_normalized/causal_extract_core_v2.json",
+      "sha256": "...",
+      "role": "delta1_extraction_v2"
+    },
+    {
+      "path": "../data/graphs/causal_master_graph_v2.json",
+      "sha256": "...",
+      "role": "delta2_mastergraph_v2"
+    },
+    {
+      "path": "../delta1_delta2_traceability.json",
+      "sha256": "...",
+      "role": "delta1_delta2_traceability"
+    }
+  ]
+}

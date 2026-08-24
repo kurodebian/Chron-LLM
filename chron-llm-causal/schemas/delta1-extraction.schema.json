@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "delta1-extraction.schema.json",
+  "title": "Delta1 Extraction Record",
+  "description": "Raw extraction results from Phase B/Step 1. Contains proposals, not validated graph structures.",
+  "type": "object",
+  "required": [
+    "document_ids",
+    "extraction_type",
+    "proposals"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "document_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "extraction_type": {
+      "type": "string",
+      "enum": [
+        "causal_dependency"
+      ]
+    },
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "target",
+          "evidence"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "claim_type": {
+            "description": "Normalized type from step0_ssot.ClaimType. Optional for legacy data.",
+            "type": "string",
+            "enum": [
+              "UNIT",
+              "REQUIRES",
+              "DEPENDS_ON"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+          },
+          "related_invariants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "string"
+          },
+          "parse_status": {
+            "type": "string",
+            "enum": [
+              "VALID_CLAIM",
+              "BLANK_LINE",
+              "COMMENT_LINE",
+              "NOT_A_CANDIDATE",
+              "INVALID_CONTEXT",
+              "INVALID_GRAMMAR"
+            ]
+          }
+        }
+      }
+    },
+    "key_invariants_detected": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "authority_boundaries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
