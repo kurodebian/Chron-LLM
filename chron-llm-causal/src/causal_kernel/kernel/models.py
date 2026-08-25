@@ -1,95 +1,63 @@
 """
 src/causal_kernel/kernel/models.py
 ----------------------------------
-正規化マスターグラフ v2.0 データ構造モデル定義（柔軟対応版）
+因果カーネル Python内部表現モデル定義 (Pydantic V2 対応)
 """
 
-from enum import Enum
-from typing import Any, Dict, List
-from pydantic import BaseModel, Field, model_validator
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field
 
 
-class NodeCategory(str, Enum):
-    INVARIANT = "Invariant"
-    OPERATION = "Operation"
-    STORAGE = "Storage"
-    STATE = "State"
-    EVENT = "Event"
+class Delta1GraphNode(BaseModel):
+    id: str
+    label: str
+    category: Optional[str] = None
+    description: Optional[str] = None
+    provenance: Optional[Dict[str, Any]] = None
 
 
-class CausalRelationType(str, Enum):
-    CONSTRAINS = "constrains"
-    TRANSFORMS = "transforms"
-    DEPENDS_ON = "depends_on"
-    PRODUCES = "produces"
-    CONFLICTS_WITH = "conflicts_with"
+class Delta1GraphEdge(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    id: str
+    from_: str = Field(..., alias="from")
+    to: str
+    relation: Optional[str] = None
+    evidence: Optional[str] = None
+    confidence: Optional[float] = None
 
 
-class CausalNode(BaseModel):
-    id: str = Field(..., description="Node Unique ID")
-    label: str = Field(..., description="人間が読めるラベル")
-    category: str = Field(default="State", description="ノードカテゴリ")
-    description: str = Field("", description="詳細仕様")
-    metadata: Dict[str, Any] = Field(default_factory=dict)
-
-    @model_validator(mode="before")
-    @classmethod
-    def flex_parse_node(cls, data: Any) -> Any:
-        if isinstance(data, dict):
-            # label 補完: label -> name -> id
-            if "label" not in data or not data["label"]:
-                data["label"] = data.get("name") or data.get("id") or "unnamed_node"
-            # category 補完: category -> type -> "State"
-            if "category" not in data or not data["category"]:
-                data["category"] = data.get("type") or "State"
-        return data
+class Delta1Graph(BaseModel):
+    schema_version: Optional[str] = None
+    source_extraction_id: Optional[str] = None
+    nodes: List[Delta1GraphNode]
+    edges: List[Delta1GraphEdge]
 
 
-class CausalEdge(BaseModel):
-    id: str = Field(..., description="Edge ID")
-    from_node: str = Field(..., alias="from")
-    to_node: str = Field(..., alias="to")
-    relation: str = Field(default="depends_on", description="因果関係種別")
-    evidence: str = Field("", description="根拠テキスト")
-    source_proposals: List[str] = Field(default_factory=list)
-    confidence: float = Field(default=1.0, ge=0.0, le=1.0)
-
-    class Config:
-        populate_by_name = True
-
-    @model_validator(mode="before")
-    @classmethod
-    def flex_parse_edge(cls, data: Any) -> Any:
-        if isinstance(data, dict):
-            # id 自動生成 (存在しない場合)
-            if "id" not in data or not data["id"]:
-                src = data.get("from", "src")
-                dst = data.get("to", "dst")
-                data["id"] = f"E_{src}_{dst}"
-            # relation 補完: relation -> type -> "depends_on"
-            if "relation" not in data or not data["relation"]:
-                data["relation"] = data.get("type") or data.get("relation_type") or "depends_on"
-        return data
+class Delta2MasterGraphNode(BaseModel):
+    id: str
+    global_id: str
+    local_id: str
+    type: str
+    name: str
+    description: str
+    properties: Dict[str, Any] = Field(default_factory=dict)
 
 
-class MasterGraphContainer(BaseModel):
-    nodes: Dict[str, CausalNode]
-    edges: List[CausalEdge]
-    version: str = "2.0"
+class Delta2MasterGraphEdge(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
 
-    @model_validator(mode="before")
-    @classmethod
-    def normalize_nodes(cls, data: Any) -> Any:
-        if isinstance(data, dict):
-            raw_nodes = data.get("nodes")
-            # JSON側がリスト形式 (List) の場合、ノードの "id" をキーにした辞書 (Dict) に変換する
-            if isinstance(raw_nodes, list):
-                nodes_dict = {}
-                for idx, n in enumerate(raw_nodes):
-                    if isinstance(n, dict):
-                        node_id = n.get("id") or f"N{idx+1:03d}"
-                        nodes_dict[node_id] = n
-                    else:
-                        nodes_dict[f"N{idx+1:03d}"] = n
-                data["nodes"] = nodes_dict
-        return data
+    id: str
+    from_: str = Field(..., alias="from")
+    to: str
+    pipeline: str
+    morphism_type: str
+    guard_invariant: List[str] = Field(default_factory=list)
+    delta_level: str
+
+
+class Delta2MasterGraph(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    nodes: List[Delta2MasterGraphNode]
+    edges: List[Delta2MasterGraphEdge]
