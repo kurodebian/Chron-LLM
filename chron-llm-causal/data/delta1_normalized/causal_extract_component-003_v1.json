@@ -6,175 +6,200 @@
       "label": "Memory Store [State]",
       "raw_label": "Memory Store",
       "type": "State",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_GraphStore",
       "label": "Graph Store [State]",
       "raw_label": "Graph Store",
       "type": "State",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_World",
       "label": "World Instance [State]",
       "raw_label": "World Instance",
       "type": "State",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_Registry",
       "label": "World Registry [State]",
       "raw_label": "World Registry",
       "type": "State",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_PrefillState",
       "label": "Prefill State [State]",
       "raw_label": "Prefill State",
       "type": "State",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_LifecycleState",
       "label": "Lifecycle State [State]",
       "raw_label": "Lifecycle State",
       "type": "State",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_StorePayload",
       "label": "Store Payload [Operation]",
       "raw_label": "Store Payload",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_LoadPayload",
       "label": "Load Payload [Operation]",
       "raw_label": "Load Payload",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_AddNode",
       "label": "Add Node [Operation]",
       "raw_label": "Add Node",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_AddEdge",
       "label": "Add Edge [Operation]",
       "raw_label": "Add Edge",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_CausalSubgraph",
       "label": "Causal Subgraph [Operation]",
       "raw_label": "Causal Subgraph",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_ProjectContext",
       "label": "Project Context [Operation]",
       "raw_label": "Project Context",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_BuildPrefillState",
       "label": "Build Prefill State [Operation]",
       "raw_label": "Build Prefill State",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_MakeWorld",
       "label": "Make World [Operation]",
       "raw_label": "Make World",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_ForkWorld",
       "label": "Fork World [Operation]",
       "raw_label": "Fork World",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_KernelCommitWorld",
       "label": "Kernel Commit World [Operation]",
       "raw_label": "Kernel Commit World",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_RegisterWorld",
       "label": "Register World [Operation]",
       "raw_label": "Register World",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_SetActiveWorld",
       "label": "Set Active World [Operation]",
       "raw_label": "Set Active World",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_ArchiveWorld",
       "label": "Archive World [Operation]",
       "raw_label": "Archive World",
       "type": "Operation",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_MemoryImmutable",
       "label": "Memory Immutability [Invariant]",
       "raw_label": "Memory Immutability",
       "type": "Invariant",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_GraphAppend",
       "label": "Graph Append Integrity [Invariant]",
       "raw_label": "Graph Append Integrity",
       "type": "Invariant",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_WorldIsolation",
       "label": "World Isolation [Invariant]",
       "raw_label": "World Isolation",
       "type": "Invariant",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_CausalSeparation",
       "label": "Causal Separation [Invariant]",
       "raw_label": "Causal Separation",
       "type": "Invariant",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_Determinism",
       "label": "Deterministic Prefill [Invariant]",
       "raw_label": "Deterministic Prefill",
       "type": "Invariant",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_CommitAtomic",
       "label": "Atomic Commit [Invariant]",
       "raw_label": "Atomic Commit",
       "type": "Invariant",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "origin": "EXPLICIT_NODE"
     }
   ],
   "edges": [
@@ -182,151 +207,177 @@
       "from": "OP_StorePayload",
       "to": "ST_MemoryStore",
       "relation": "mutates",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_StorePayload_ST_MemoryStore_0"
     },
     {
       "from": "OP_LoadPayload",
       "to": "ST_MemoryStore",
       "relation": "depends_on",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_LoadPayload_ST_MemoryStore_1"
     },
     {
       "from": "OP_AddNode",
       "to": "ST_GraphStore",
       "relation": "mutates",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_AddNode_ST_GraphStore_2"
     },
     {
       "from": "OP_AddEdge",
       "to": "ST_GraphStore",
       "relation": "mutates",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_AddEdge_ST_GraphStore_3"
     },
     {
       "from": "OP_CausalSubgraph",
       "to": "ST_GraphStore",
       "relation": "depends_on",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_CausalSubgraph_ST_GraphStore_4"
     },
     {
       "from": "OP_ProjectContext",
       "to": "ST_GraphStore",
       "relation": "depends_on",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_ProjectContext_ST_GraphStore_5"
     },
     {
       "from": "OP_ProjectContext",
       "to": "ST_MemoryStore",
       "relation": "depends_on",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_ProjectContext_ST_MemoryStore_6"
     },
     {
       "from": "OP_BuildPrefillState",
       "to": "ST_PrefillState",
       "relation": "produces",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_BuildPrefillState_ST_PrefillState_7"
     },
     {
       "from": "OP_BuildPrefillState",
       "to": "OP_ProjectContext",
       "relation": "depends_on",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_BuildPrefillState_OP_ProjectContext_8"
     },
     {
       "from": "OP_MakeWorld",
       "to": "ST_World",
       "relation": "produces",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_MakeWorld_ST_World_9"
     },
     {
       "from": "OP_MakeWorld",
       "to": "ST_GraphStore",
       "relation": "depends_on",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_MakeWorld_ST_GraphStore_10"
     },
     {
       "from": "OP_MakeWorld",
       "to": "ST_MemoryStore",
       "relation": "depends_on",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_MakeWorld_ST_MemoryStore_11"
     },
     {
       "from": "OP_ForkWorld",
       "to": "ST_World",
       "relation": "produces",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_ForkWorld_ST_World_12"
     },
     {
       "from": "OP_ForkWorld",
       "to": "ST_World",
       "relation": "depends_on",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_ForkWorld_ST_World_13"
     },
     {
       "from": "OP_KernelCommitWorld",
       "to": "ST_World",
       "relation": "mutates",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_KernelCommitWorld_ST_World_14"
     },
     {
       "from": "OP_KernelCommitWorld",
       "to": "ST_GraphStore",
       "relation": "mutates",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_KernelCommitWorld_ST_GraphStore_15"
     },
     {
       "from": "OP_KernelCommitWorld",
       "to": "INV_CommitAtomic",
       "relation": "enforces",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_KernelCommitWorld_INV_CommitAtomic_16"
     },
     {
       "from": "OP_RegisterWorld",
       "to": "ST_Registry",
       "relation": "mutates",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_RegisterWorld_ST_Registry_17"
     },
     {
       "from": "OP_SetActiveWorld",
       "to": "ST_Registry",
       "relation": "mutates",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_SetActiveWorld_ST_Registry_18"
     },
     {
       "from": "OP_ArchiveWorld",
       "to": "ST_Registry",
       "relation": "mutates",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_OP_ArchiveWorld_ST_Registry_19"
     },
     {
       "from": "INV_MemoryImmutable",
       "to": "ST_MemoryStore",
       "relation": "enforces",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_INV_MemoryImmutable_ST_MemoryStore_20"
     },
     {
       "from": "INV_GraphAppend",
       "to": "ST_GraphStore",
       "relation": "enforces",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_INV_GraphAppend_ST_GraphStore_21"
     },
     {
       "from": "INV_WorldIsolation",
       "to": "ST_World",
       "relation": "enforces",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_INV_WorldIsolation_ST_World_22"
     },
     {
       "from": "INV_CausalSeparation",
       "to": "OP_CausalSubgraph",
       "relation": "enforces",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_INV_CausalSeparation_OP_CausalSubgraph_23"
     },
     {
       "from": "INV_Determinism",
       "to": "OP_BuildPrefillState",
       "relation": "enforces",
-      "component_id": "component-003"
+      "component_id": "component-003",
+      "id": "edge_INV_Determinism_OP_BuildPrefillState_24"
     }
-  ]
+  ],
+  "proposals": []
 }

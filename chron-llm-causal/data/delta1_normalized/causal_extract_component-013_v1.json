@@ -6,154 +6,176 @@
       "label": "Baseline Status [State]",
       "raw_label": "Baseline Status",
       "type": "State",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Understand",
       "label": "Understand [Operation]",
       "raw_label": "Understand",
       "type": "Operation",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Analyze",
       "label": "Analyze [Operation]",
       "raw_label": "Analyze",
       "type": "Operation",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Design",
       "label": "Design [Operation]",
       "raw_label": "Design",
       "type": "Operation",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Implement",
       "label": "Implement [Operation]",
       "raw_label": "Implement",
       "type": "Operation",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Verify",
       "label": "Verify [Operation]",
       "raw_label": "Verify",
       "type": "Operation",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Record",
       "label": "Record [Operation]",
       "raw_label": "Record",
       "type": "Operation",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_Independence",
       "label": "Architecture Independence [Invariant]",
       "raw_label": "Architecture Independence",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_GovernanceScope",
       "label": "Governance Scope [Invariant]",
       "raw_label": "Governance Scope",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_RuntimeSatisfaction",
       "label": "Runtime Satisfaction [Invariant]",
       "raw_label": "Runtime Satisfaction",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_EvolutionRule",
       "label": "Evolution Rule [Invariant]",
       "raw_label": "Evolution Rule",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_ExtensionPriority",
       "label": "Extension Priority [Invariant]",
       "raw_label": "Extension Priority",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_Minimalism",
       "label": "Minimalism [Invariant]",
       "raw_label": "Minimalism",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_Neutrality",
       "label": "Neutrality [Invariant]",
       "raw_label": "Neutrality",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_MetaDesignSeparation",
       "label": "Meta-Design Separation [Invariant]",
       "raw_label": "Meta-Design Separation",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_RuntimeDesignSeparation",
       "label": "Runtime-Design Separation [Invariant]",
       "raw_label": "Runtime-Design Separation",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_ConceptResponsibilityDependency",
       "label": "Concept-Responsibility Dependency [Invariant]",
       "raw_label": "Concept-Responsibility Dependency",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_ConceptImplementationIndependence",
       "label": "Concept-Implementation Independence [Invariant]",
       "raw_label": "Concept-Implementation Independence",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_NewConceptResponsibilityRequirement",
       "label": "New Concept Responsibility Requirement [Invariant]",
       "raw_label": "New Concept Responsibility Requirement",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_ContentImplementationPrecedence",
       "label": "Content-Implementation Precedence [Invariant]",
       "raw_label": "Content-Implementation Precedence",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_ImplementationConstitutionPreservation",
       "label": "Implementation Constitution Preservation [Invariant]",
       "raw_label": "Implementation Constitution Preservation",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_AuthorityRepresentationSeparation",
       "label": "Authority-Representation Separation [Invariant]",
       "raw_label": "Authority-Representation Separation",
       "type": "Invariant",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "origin": "EXPLICIT_NODE"
     }
   ],
   "edges": [
@@ -161,127 +183,149 @@
       "from": "OP_Understand",
       "to": "OP_Analyze",
       "relation": "triggers",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_OP_Understand_OP_Analyze_0"
     },
     {
       "from": "OP_Analyze",
       "to": "OP_Design",
       "relation": "triggers",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_OP_Analyze_OP_Design_1"
     },
     {
       "from": "OP_Design",
       "to": "OP_Implement",
       "relation": "triggers",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_OP_Design_OP_Implement_2"
     },
     {
       "from": "OP_Implement",
       "to": "OP_Verify",
       "relation": "triggers",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_OP_Implement_OP_Verify_3"
     },
     {
       "from": "OP_Verify",
       "to": "OP_Record",
       "relation": "triggers",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_OP_Verify_OP_Record_4"
     },
     {
       "from": "OP_Record",
       "to": "ST_Baseline",
       "relation": "mutates",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_OP_Record_ST_Baseline_5"
     },
     {
       "from": "INV_EvolutionRule",
       "to": "OP_Implement",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_EvolutionRule_OP_Implement_6"
     },
     {
       "from": "INV_NewConceptResponsibilityRequirement",
       "to": "OP_Design",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_NewConceptResponsibilityRequirement_OP_Design_7"
     },
     {
       "from": "INV_ContentImplementationPrecedence",
       "to": "OP_Implement",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_ContentImplementationPrecedence_OP_Implement_8"
     },
     {
       "from": "INV_ImplementationConstitutionPreservation",
       "to": "OP_Implement",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_ImplementationConstitutionPreservation_OP_Implement_9"
     },
     {
       "from": "INV_ConceptResponsibilityDependency",
       "to": "OP_Design",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_ConceptResponsibilityDependency_OP_Design_10"
     },
     {
       "from": "INV_ConceptImplementationIndependence",
       "to": "OP_Implement",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_ConceptImplementationIndependence_OP_Implement_11"
     },
     {
       "from": "INV_RuntimeSatisfaction",
       "to": "OP_Implement",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_RuntimeSatisfaction_OP_Implement_12"
     },
     {
       "from": "INV_GovernanceScope",
       "to": "OP_Design",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_GovernanceScope_OP_Design_13"
     },
     {
       "from": "INV_Independence",
       "to": "OP_Design",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_Independence_OP_Design_14"
     },
     {
       "from": "INV_ExtensionPriority",
       "to": "OP_Design",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_ExtensionPriority_OP_Design_15"
     },
     {
       "from": "INV_Minimalism",
       "to": "OP_Design",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_Minimalism_OP_Design_16"
     },
     {
       "from": "INV_Neutrality",
       "to": "OP_Design",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_Neutrality_OP_Design_17"
     },
     {
       "from": "INV_MetaDesignSeparation",
       "to": "OP_Design",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_MetaDesignSeparation_OP_Design_18"
     },
     {
       "from": "INV_RuntimeDesignSeparation",
       "to": "OP_Implement",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_RuntimeDesignSeparation_OP_Implement_19"
     },
     {
       "from": "INV_AuthorityRepresentationSeparation",
       "to": "OP_Design",
       "relation": "enforces",
-      "component_id": "component-013"
+      "component_id": "component-013",
+      "id": "edge_INV_AuthorityRepresentationSeparation_OP_Design_20"
     }
-  ]
+  ],
+  "proposals": []
 }

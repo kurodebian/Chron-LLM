@@ -6,196 +6,224 @@
       "label": "Ingress Queue [State]",
       "raw_label": "Ingress Queue",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_ReadyQueue",
       "label": "Ready Queue [State]",
       "raw_label": "Ready Queue",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_IsolatedQueue",
       "label": "Isolated Queue [State]",
       "raw_label": "Isolated Queue",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_ExecutionState",
       "label": "Execution State [State]",
       "raw_label": "Execution State",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_CausalOrder",
       "label": "Causal Order [State]",
       "raw_label": "Causal Order",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_RetryCount",
       "label": "Retry Count [State]",
       "raw_label": "Retry Count",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_MaxRetry",
       "label": "Max Retry Limit [State]",
       "raw_label": "Max Retry Limit",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_MaxPenaltyRetry",
       "label": "Max Penalty Retry Limit [State]",
       "raw_label": "Max Penalty Retry Limit",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_CanonicalState",
       "label": "Canonical State [State]",
       "raw_label": "Canonical State",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_DialogueState",
       "label": "Dialogue State [State]",
       "raw_label": "Dialogue State",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_CausalId",
       "label": "Causal ID [State]",
       "raw_label": "Causal ID",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "ST_ToolEvent",
       "label": "Tool Event [State]",
       "raw_label": "Tool Event",
       "type": "State",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Schedule",
       "label": "Schedule [Operation]",
       "raw_label": "Schedule",
       "type": "Operation",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Retry",
       "label": "Retry [Operation]",
       "raw_label": "Retry",
       "type": "Operation",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_RetryWithPenalty",
       "label": "Retry With Penalty [Operation]",
       "raw_label": "Retry With Penalty",
       "type": "Operation",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Abort",
       "label": "Abort [Operation]",
       "raw_label": "Abort",
       "type": "Operation",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_Apply",
       "label": "Apply Tool Event [Operation]",
       "raw_label": "Apply Tool Event",
       "type": "Operation",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "OP_ToolRetry",
       "label": "Tool Retry [Operation]",
       "raw_label": "Tool Retry",
       "type": "Operation",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_ScheduleDeterministic",
       "label": "Schedule Determinism [Invariant]",
       "raw_label": "Schedule Determinism",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_RetryNoMutation",
       "label": "Retry No Mutation [Invariant]",
       "raw_label": "Retry No Mutation",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_NormalDialogueIsolation",
       "label": "Normal Dialogue Isolation [Invariant]",
       "raw_label": "Normal Dialogue Isolation",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_FaultIsolation",
       "label": "Fault Isolation [Invariant]",
       "raw_label": "Fault Isolation",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_AuthorityCommit",
       "label": "Authority Commit [Invariant]",
       "raw_label": "Authority Commit",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_IsolationFail",
       "label": "Isolation Fail [Invariant]",
       "raw_label": "Isolation Fail",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_CausalIdConsistency",
       "label": "Causal ID Consistency [Invariant]",
       "raw_label": "Causal ID Consistency",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_RetryScope",
       "label": "Retry Scope [Invariant]",
       "raw_label": "Retry Scope",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_NoBypass",
       "label": "No Bypass [Invariant]",
       "raw_label": "No Bypass",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     },
     {
       "id": "INV_Determinism",
       "label": "Replay Determinism [Invariant]",
       "raw_label": "Replay Determinism",
       "type": "Invariant",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "origin": "EXPLICIT_NODE"
     }
   ],
   "edges": [
@@ -203,157 +231,184 @@
       "from": "OP_Schedule",
       "to": "ST_ReadyQueue",
       "relation": "depends_on",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Schedule_ST_ReadyQueue_0"
     },
     {
       "from": "OP_Schedule",
       "to": "ST_CausalOrder",
       "relation": "depends_on",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Schedule_ST_CausalOrder_1"
     },
     {
       "from": "OP_Schedule",
       "to": "ST_ExecutionState",
       "relation": "produces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Schedule_ST_ExecutionState_2"
     },
     {
       "from": "INV_ScheduleDeterministic",
       "to": "OP_Schedule",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_ScheduleDeterministic_OP_Schedule_3"
     },
     {
       "from": "OP_Retry",
       "to": "ST_RetryCount",
       "relation": "depends_on",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Retry_ST_RetryCount_4"
     },
     {
       "from": "OP_Retry",
       "to": "ST_MaxRetry",
       "relation": "depends_on",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Retry_ST_MaxRetry_5"
     },
     {
       "from": "OP_Retry",
       "to": "ST_ReadyQueue",
       "relation": "mutates",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Retry_ST_ReadyQueue_6"
     },
     {
       "from": "OP_Retry",
       "to": "OP_Abort",
       "relation": "triggers",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Retry_OP_Abort_7"
     },
     {
       "from": "INV_RetryNoMutation",
       "to": "OP_Retry",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_RetryNoMutation_OP_Retry_8"
     },
     {
       "from": "OP_RetryWithPenalty",
       "to": "ST_RetryCount",
       "relation": "depends_on",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_RetryWithPenalty_ST_RetryCount_9"
     },
     {
       "from": "OP_RetryWithPenalty",
       "to": "ST_MaxPenaltyRetry",
       "relation": "depends_on",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_RetryWithPenalty_ST_MaxPenaltyRetry_10"
     },
     {
       "from": "OP_RetryWithPenalty",
       "to": "ST_CanonicalState",
       "relation": "depends_on",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_RetryWithPenalty_ST_CanonicalState_11"
     },
     {
       "from": "OP_RetryWithPenalty",
       "to": "INV_RetryNoMutation",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_RetryWithPenalty_INV_RetryNoMutation_12"
     },
     {
       "from": "OP_Abort",
       "to": "ST_ExecutionState",
       "relation": "mutates",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Abort_ST_ExecutionState_13"
     },
     {
       "from": "INV_NormalDialogueIsolation",
       "to": "ST_ReadyQueue",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_NormalDialogueIsolation_ST_ReadyQueue_14"
     },
     {
       "from": "INV_FaultIsolation",
       "to": "OP_Abort",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_FaultIsolation_OP_Abort_15"
     },
     {
       "from": "OP_Apply",
       "to": "ST_ToolEvent",
       "relation": "depends_on",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Apply_ST_ToolEvent_16"
     },
     {
       "from": "OP_Apply",
       "to": "ST_CanonicalState",
       "relation": "mutates",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Apply_ST_CanonicalState_17"
     },
     {
       "from": "OP_Apply",
       "to": "ST_DialogueState",
       "relation": "mutates",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_Apply_ST_DialogueState_18"
     },
     {
       "from": "INV_AuthorityCommit",
       "to": "OP_Apply",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_AuthorityCommit_OP_Apply_19"
     },
     {
       "from": "INV_IsolationFail",
       "to": "OP_Apply",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_IsolationFail_OP_Apply_20"
     },
     {
       "from": "INV_CausalIdConsistency",
       "to": "OP_Apply",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_CausalIdConsistency_OP_Apply_21"
     },
     {
       "from": "INV_NoBypass",
       "to": "OP_Apply",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_NoBypass_OP_Apply_22"
     },
     {
       "from": "OP_ToolRetry",
       "to": "ST_ToolEvent",
       "relation": "produces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_OP_ToolRetry_ST_ToolEvent_23"
     },
     {
       "from": "INV_RetryScope",
       "to": "OP_ToolRetry",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_RetryScope_OP_ToolRetry_24"
     },
     {
       "from": "INV_Determinism",
       "to": "OP_Apply",
       "relation": "enforces",
-      "component_id": "component-012"
+      "component_id": "component-012",
+      "id": "edge_INV_Determinism_OP_Apply_25"
     }
-  ]
+  ],
+  "proposals": []
 }
