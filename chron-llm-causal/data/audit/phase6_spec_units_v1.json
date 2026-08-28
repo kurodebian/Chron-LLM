@@ -257,12 +257,12 @@
       "causal_declarations": [
         {
           "line": 156,
-          "type": "depends_on",
+          "type": "refines",
           "text": "enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]"
         },
         {
           "line": 156,
-          "type": "refines",
+          "type": "depends_on",
           "text": "enum: [CAUSAL, DEPENDS_ON, REFINES, IMPLEMENTS]"
         }
       ],

@@ -262,10 +262,10 @@ def test_T10b_untracked_population_detection():
         trace = json.load(f)
 
     tracked_node_claims = [
-        m.get("source_original_id") for m in trace.get("node_mappings", [])
+        m.get("source_delta1_id") for m in trace.get("node_mappings", [])
     ]
     tracked_edge_claims = [
-        m.get("source_original_id") for m in trace.get("edge_mappings", [])
+        m.get("source_delta1_id") for m in trace.get("edge_mappings", [])
     ]
 
     # Claim 重複の検知

@@ -256,203 +256,203 @@
       "to": "ST_MemoryRef",
       "relation": "depends_on",
       "component_id": "component-010",
-      "id": "edge_OP_MemoryRead_ST_MemoryRef_0"
+      "id": "E_component-010_9b1d2e32"
     },
     {
       "from": "OP_Commit",
       "to": "ST_CanonicalMemory",
       "relation": "mutates",
       "component_id": "component-010",
-      "id": "edge_OP_Commit_ST_CanonicalMemory_1"
+      "id": "E_component-010_37538180"
     },
     {
       "from": "OP_Commit",
       "to": "ST_MemoryRef",
       "relation": "mutates",
       "component_id": "component-010",
-      "id": "edge_OP_Commit_ST_MemoryRef_2"
+      "id": "E_component-010_72934da0"
     },
     {
       "from": "OP_Commit",
       "to": "INV_CanonicalMemoryWriter",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_OP_Commit_INV_CanonicalMemoryWriter_3"
+      "id": "E_component-010_cf821e34"
     },
     {
       "from": "OP_Commit",
       "to": "INV_MemoryRefAuthoritativeWriter",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_OP_Commit_INV_MemoryRefAuthoritativeWriter_4"
+      "id": "E_component-010_d8926be3"
     },
     {
       "from": "OP_Recover",
       "to": "OP_Replay",
       "relation": "triggers",
       "component_id": "component-010",
-      "id": "edge_OP_Recover_OP_Replay_5"
+      "id": "E_component-010_5f1b6f39"
     },
     {
       "from": "OP_Recover",
       "to": "OP_ReconstructPrefill",
       "relation": "triggers",
       "component_id": "component-010",
-      "id": "edge_OP_Recover_OP_ReconstructPrefill_6"
+      "id": "E_component-010_1b15eccd"
     },
     {
       "from": "OP_Recover",
       "to": "INV_RecoverDeterministic",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_OP_Recover_INV_RecoverDeterministic_7"
+      "id": "E_component-010_baf9c85a"
     },
     {
       "from": "OP_Recover",
       "to": "INV_RecoverReplayCompatible",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_OP_Recover_INV_RecoverReplayCompatible_8"
+      "id": "E_component-010_a0489828"
     },
     {
       "from": "OP_Recover",
       "to": "INV_RecoverNoAuthoritativeInfo",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_OP_Recover_INV_RecoverNoAuthoritativeInfo_9"
+      "id": "E_component-010_4c8f9ea0"
     },
     {
       "from": "OP_Replay",
       "to": "ST_CanonicalMemory",
       "relation": "depends_on",
       "component_id": "component-010",
-      "id": "edge_OP_Replay_ST_CanonicalMemory_10"
+      "id": "E_component-010_927a3cd2"
     },
     {
       "from": "OP_Replay",
       "to": "OP_ReconstructDerived",
       "relation": "triggers",
       "component_id": "component-010",
-      "id": "edge_OP_Replay_OP_ReconstructDerived_11"
+      "id": "E_component-010_c3436e9b"
     },
     {
       "from": "OP_ReconstructDerived",
       "to": "ST_Context",
       "relation": "produces",
       "component_id": "component-010",
-      "id": "edge_OP_ReconstructDerived_ST_Context_12"
+      "id": "E_component-010_128eae19"
     },
     {
       "from": "OP_ReconstructDerived",
       "to": "OP_ReconstructMemoryRef",
       "relation": "triggers",
       "component_id": "component-010",
-      "id": "edge_OP_ReconstructDerived_OP_ReconstructMemoryRef_13"
+      "id": "E_component-010_9e73d33c"
     },
     {
       "from": "OP_ReconstructMemoryRef",
       "to": "ST_MemoryRef",
       "relation": "mutates",
       "component_id": "component-010",
-      "id": "edge_OP_ReconstructMemoryRef_ST_MemoryRef_14"
+      "id": "E_component-010_87dd18a2"
     },
     {
       "from": "OP_ReconstructMemoryRef",
       "to": "OP_ReconstructWorking",
       "relation": "triggers",
       "component_id": "component-010",
-      "id": "edge_OP_ReconstructMemoryRef_OP_ReconstructWorking_15"
+      "id": "E_component-010_207d6faf"
     },
     {
       "from": "OP_ReconstructWorking",
       "to": "ST_Context",
       "relation": "mutates",
       "component_id": "component-010",
-      "id": "edge_OP_ReconstructWorking_ST_Context_16"
+      "id": "E_component-010_39d8e977"
     },
     {
       "from": "OP_ReconstructWorking",
       "to": "OP_ResumeRuntime",
       "relation": "triggers",
       "component_id": "component-010",
-      "id": "edge_OP_ReconstructWorking_OP_ResumeRuntime_17"
+      "id": "E_component-010_384c4d3d"
     },
     {
       "from": "OP_ResumeRuntime",
       "to": "ST_Runtime",
       "relation": "mutates",
       "component_id": "component-010",
-      "id": "edge_OP_ResumeRuntime_ST_Runtime_18"
+      "id": "E_component-010_c1ffa37f"
     },
     {
       "from": "OP_ResumeRuntime",
       "to": "OP_Resume",
       "relation": "triggers",
       "component_id": "component-010",
-      "id": "edge_OP_ResumeRuntime_OP_Resume_19"
+      "id": "E_component-010_3a8b0d17"
     },
     {
       "from": "OP_Resume",
       "to": "ST_Runtime",
       "relation": "mutates",
       "component_id": "component-010",
-      "id": "edge_OP_Resume_ST_Runtime_20"
+      "id": "E_component-010_0a7f4ce8"
     },
     {
       "from": "OP_DestroyCache",
       "to": "ST_Cache",
       "relation": "mutates",
       "component_id": "component-010",
-      "id": "edge_OP_DestroyCache_ST_Cache_21"
+      "id": "E_component-010_46de1c0c"
     },
     {
       "from": "OP_DestroyKVCache",
       "to": "ST_KVCache",
       "relation": "mutates",
       "component_id": "component-010",
-      "id": "edge_OP_DestroyKVCache_ST_KVCache_22"
+      "id": "E_component-010_b55d38ad"
     },
     {
       "from": "INV_CanonicalImmutable",
       "to": "ST_CanonicalMemory",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_INV_CanonicalImmutable_ST_CanonicalMemory_23"
+      "id": "E_component-010_49241a4e"
     },
     {
       "from": "INV_CanonicalImmutable",
       "to": "OP_Commit",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_INV_CanonicalImmutable_OP_Commit_24"
+      "id": "E_component-010_85975108"
     },
     {
       "from": "INV_CanonicalMutateRequiresCommit",
       "to": "OP_Commit",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_INV_CanonicalMutateRequiresCommit_OP_Commit_25"
+      "id": "E_component-010_b325b0a9"
     },
     {
       "from": "INV_MemoryRefDeterministic",
       "to": "ST_MemoryRef",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_INV_MemoryRefDeterministic_ST_MemoryRef_26"
+      "id": "E_component-010_4c9d4ebd"
     },
     {
       "from": "INV_ReplayRequiresMemoryRef",
       "to": "OP_Replay",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_INV_ReplayRequiresMemoryRef_OP_Replay_27"
+      "id": "E_component-010_dea20da9"
     },
     {
       "from": "INV_CanonicalHistoryRecoverable",
       "to": "ST_CanonicalMemory",
       "relation": "enforces",
       "component_id": "component-010",
-      "id": "edge_INV_CanonicalHistoryRecoverable_ST_CanonicalMemory_28"
+      "id": "E_component-010_80bf8301"
     }
   ],
   "proposals": []

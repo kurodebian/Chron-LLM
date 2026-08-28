@@ -232,182 +232,182 @@
       "to": "ST_ReadyQueue",
       "relation": "depends_on",
       "component_id": "component-012",
-      "id": "edge_OP_Schedule_ST_ReadyQueue_0"
+      "id": "E_component-012_9cad7c5d"
     },
     {
       "from": "OP_Schedule",
       "to": "ST_CausalOrder",
       "relation": "depends_on",
       "component_id": "component-012",
-      "id": "edge_OP_Schedule_ST_CausalOrder_1"
+      "id": "E_component-012_4cc6ca6a"
     },
     {
       "from": "OP_Schedule",
       "to": "ST_ExecutionState",
       "relation": "produces",
       "component_id": "component-012",
-      "id": "edge_OP_Schedule_ST_ExecutionState_2"
+      "id": "E_component-012_e67f451c"
     },
     {
       "from": "INV_ScheduleDeterministic",
       "to": "OP_Schedule",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_ScheduleDeterministic_OP_Schedule_3"
+      "id": "E_component-012_4691f174"
     },
     {
       "from": "OP_Retry",
       "to": "ST_RetryCount",
       "relation": "depends_on",
       "component_id": "component-012",
-      "id": "edge_OP_Retry_ST_RetryCount_4"
+      "id": "E_component-012_baa9c93f"
     },
     {
       "from": "OP_Retry",
       "to": "ST_MaxRetry",
       "relation": "depends_on",
       "component_id": "component-012",
-      "id": "edge_OP_Retry_ST_MaxRetry_5"
+      "id": "E_component-012_eae34d59"
     },
     {
       "from": "OP_Retry",
       "to": "ST_ReadyQueue",
       "relation": "mutates",
       "component_id": "component-012",
-      "id": "edge_OP_Retry_ST_ReadyQueue_6"
+      "id": "E_component-012_aff824e3"
     },
     {
       "from": "OP_Retry",
       "to": "OP_Abort",
       "relation": "triggers",
       "component_id": "component-012",
-      "id": "edge_OP_Retry_OP_Abort_7"
+      "id": "E_component-012_f1fba26e"
     },
     {
       "from": "INV_RetryNoMutation",
       "to": "OP_Retry",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_RetryNoMutation_OP_Retry_8"
+      "id": "E_component-012_0a55aa20"
     },
     {
       "from": "OP_RetryWithPenalty",
       "to": "ST_RetryCount",
       "relation": "depends_on",
       "component_id": "component-012",
-      "id": "edge_OP_RetryWithPenalty_ST_RetryCount_9"
+      "id": "E_component-012_3bb4d241"
     },
     {
       "from": "OP_RetryWithPenalty",
       "to": "ST_MaxPenaltyRetry",
       "relation": "depends_on",
       "component_id": "component-012",
-      "id": "edge_OP_RetryWithPenalty_ST_MaxPenaltyRetry_10"
+      "id": "E_component-012_f69325e1"
     },
     {
       "from": "OP_RetryWithPenalty",
       "to": "ST_CanonicalState",
       "relation": "depends_on",
       "component_id": "component-012",
-      "id": "edge_OP_RetryWithPenalty_ST_CanonicalState_11"
+      "id": "E_component-012_2370a0ce"
     },
     {
       "from": "OP_RetryWithPenalty",
       "to": "INV_RetryNoMutation",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_OP_RetryWithPenalty_INV_RetryNoMutation_12"
+      "id": "E_component-012_3e4f6873"
     },
     {
       "from": "OP_Abort",
       "to": "ST_ExecutionState",
       "relation": "mutates",
       "component_id": "component-012",
-      "id": "edge_OP_Abort_ST_ExecutionState_13"
+      "id": "E_component-012_f0aa69be"
     },
     {
       "from": "INV_NormalDialogueIsolation",
       "to": "ST_ReadyQueue",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_NormalDialogueIsolation_ST_ReadyQueue_14"
+      "id": "E_component-012_02fe2904"
     },
     {
       "from": "INV_FaultIsolation",
       "to": "OP_Abort",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_FaultIsolation_OP_Abort_15"
+      "id": "E_component-012_d17f2ee8"
     },
     {
       "from": "OP_Apply",
       "to": "ST_ToolEvent",
       "relation": "depends_on",
       "component_id": "component-012",
-      "id": "edge_OP_Apply_ST_ToolEvent_16"
+      "id": "E_component-012_d3e9cf31"
     },
     {
       "from": "OP_Apply",
       "to": "ST_CanonicalState",
       "relation": "mutates",
       "component_id": "component-012",
-      "id": "edge_OP_Apply_ST_CanonicalState_17"
+      "id": "E_component-012_32286cc2"
     },
     {
       "from": "OP_Apply",
       "to": "ST_DialogueState",
       "relation": "mutates",
       "component_id": "component-012",
-      "id": "edge_OP_Apply_ST_DialogueState_18"
+      "id": "E_component-012_15ea965e"
     },
     {
       "from": "INV_AuthorityCommit",
       "to": "OP_Apply",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_AuthorityCommit_OP_Apply_19"
+      "id": "E_component-012_04c6be99"
     },
     {
       "from": "INV_IsolationFail",
       "to": "OP_Apply",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_IsolationFail_OP_Apply_20"
+      "id": "E_component-012_8d1860d0"
     },
     {
       "from": "INV_CausalIdConsistency",
       "to": "OP_Apply",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_CausalIdConsistency_OP_Apply_21"
+      "id": "E_component-012_15e612a9"
     },
     {
       "from": "INV_NoBypass",
       "to": "OP_Apply",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_NoBypass_OP_Apply_22"
+      "id": "E_component-012_18c745c6"
     },
     {
       "from": "OP_ToolRetry",
       "to": "ST_ToolEvent",
       "relation": "produces",
       "component_id": "component-012",
-      "id": "edge_OP_ToolRetry_ST_ToolEvent_23"
+      "id": "E_component-012_15a2c55a"
     },
     {
       "from": "INV_RetryScope",
       "to": "OP_ToolRetry",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_RetryScope_OP_ToolRetry_24"
+      "id": "E_component-012_34783357"
     },
     {
       "from": "INV_Determinism",
       "to": "OP_Apply",
       "relation": "enforces",
       "component_id": "component-012",
-      "id": "edge_INV_Determinism_OP_Apply_25"
+      "id": "E_component-012_6305897f"
     }
   ],
   "proposals": []

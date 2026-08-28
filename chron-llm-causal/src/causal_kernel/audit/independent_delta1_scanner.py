@@ -327,9 +327,12 @@ class IndependentDelta1Scanner:
 
                     if not is_struct_valid:
                         errors.append({
-                            "type": "IDENTITY_VIOLATION",
+                            "type": "TYPE_VIOLATION",
                             "file": file_name,
-                            "message": f"Edge at index {idx} missing valid structural string fields (from/to/relation)"
+                            "message": (
+                                f"Edge at index {idx} has invalid structural field type/value "
+                                "(from/to/relation must be non-empty strings)"
+                            )
                         })
 
                     if not is_id_valid or not is_struct_valid:

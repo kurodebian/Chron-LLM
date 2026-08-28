@@ -224,175 +224,175 @@
       "to": "OP_load_libs",
       "relation": "triggers",
       "component_id": "component-009",
-      "id": "edge_OP_init_quicklisp_OP_load_libs_0"
+      "id": "E_component-009_3a14ba6c"
     },
     {
       "from": "OP_load_libs",
       "to": "OP_init_layers",
       "relation": "triggers",
       "component_id": "component-009",
-      "id": "edge_OP_load_libs_OP_init_layers_1"
+      "id": "E_component-009_827d7866"
     },
     {
       "from": "OP_init_layers",
       "to": "OP_load_physical",
       "relation": "triggers",
       "component_id": "component-009",
-      "id": "edge_OP_init_layers_OP_load_physical_2"
+      "id": "E_component-009_6f273a24"
     },
     {
       "from": "OP_load_physical",
       "to": "OP_load_llm",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_OP_load_physical_OP_load_llm_3"
+      "id": "E_component-009_632d94aa"
     },
     {
       "from": "OP_load_llm",
       "to": "OP_load_core",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_OP_load_llm_OP_load_core_4"
+      "id": "E_component-009_67648914"
     },
     {
       "from": "OP_load_core",
       "to": "OP_load_graph",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_OP_load_core_OP_load_graph_5"
+      "id": "E_component-009_63d53fbc"
     },
     {
       "from": "OP_load_graph",
       "to": "OP_load_world",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_OP_load_graph_OP_load_world_6"
+      "id": "E_component-009_7629edc1"
     },
     {
       "from": "OP_load_world",
       "to": "OP_load_immune",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_OP_load_world_OP_load_immune_7"
+      "id": "E_component-009_c6ba45f6"
     },
     {
       "from": "OP_load_immune",
       "to": "OP_load_runtime",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_OP_load_immune_OP_load_runtime_8"
+      "id": "E_component-009_b03666d5"
     },
     {
       "from": "OP_load_runtime",
       "to": "OP_load_generation",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_OP_load_runtime_OP_load_generation_9"
+      "id": "E_component-009_5b0cc6b9"
     },
     {
       "from": "OP_load_generation",
       "to": "OP_load_test",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_OP_load_generation_OP_load_test_10"
+      "id": "E_component-009_93dc531f"
     },
     {
       "from": "OP_load_test",
       "to": "OP_start_delta3",
       "relation": "triggers",
       "component_id": "component-009",
-      "id": "edge_OP_load_test_OP_start_delta3_11"
+      "id": "E_component-009_1269dba6"
     },
     {
       "from": "OP_load_test",
       "to": "OP_start_delta3_stub",
       "relation": "triggers",
       "component_id": "component-009",
-      "id": "edge_OP_load_test_OP_start_delta3_stub_12"
+      "id": "E_component-009_552a2698"
     },
     {
       "from": "OP_start_delta3",
       "to": "OP_agent_main_loop",
       "relation": "triggers",
       "component_id": "component-009",
-      "id": "edge_OP_start_delta3_OP_agent_main_loop_13"
+      "id": "E_component-009_67a6996a"
     },
     {
       "from": "OP_start_delta3_stub",
       "to": "OP_agent_main_loop",
       "relation": "triggers",
       "component_id": "component-009",
-      "id": "edge_OP_start_delta3_stub_OP_agent_main_loop_14"
+      "id": "E_component-009_5e416c8c"
     },
     {
       "from": "ST_use_mock_physical_p",
       "to": "OP_load_physical",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_ST_use_mock_physical_p_OP_load_physical_15"
+      "id": "E_component-009_b6d84742"
     },
     {
       "from": "ST_system_dir",
       "to": "OP_load_system_file",
       "relation": "depends_on",
       "component_id": "component-009",
-      "id": "edge_ST_system_dir_OP_load_system_file_16"
+      "id": "E_component-009_d97fede4"
     },
     {
       "from": "INV_boot_seq",
       "to": "OP_init_layers",
       "relation": "enforces",
       "component_id": "component-009",
-      "id": "edge_INV_boot_seq_OP_init_layers_17"
+      "id": "E_component-009_ce3b7ecf"
     },
     {
       "from": "INV_load_order",
       "to": "OP_init_layers",
       "relation": "enforces",
       "component_id": "component-009",
-      "id": "edge_INV_load_order_OP_init_layers_18"
+      "id": "E_component-009_84c03c07"
     },
     {
       "from": "INV_deps",
       "to": "OP_load_core",
       "relation": "enforces",
       "component_id": "component-009",
-      "id": "edge_INV_deps_OP_load_core_19"
+      "id": "E_component-009_84cb4ca6"
     },
     {
       "from": "INV_no_reverse_dep",
       "to": "OP_load_graph",
       "relation": "enforces",
       "component_id": "component-009",
-      "id": "edge_INV_no_reverse_dep_OP_load_graph_20"
+      "id": "E_component-009_e82ea698"
     },
     {
       "from": "INV_physical_swap",
       "to": "OP_load_physical",
       "relation": "enforces",
       "component_id": "component-009",
-      "id": "edge_INV_physical_swap_OP_load_physical_21"
+      "id": "E_component-009_d566124c"
     },
     {
       "from": "INV_abi",
       "to": "OP_load_physical",
       "relation": "enforces",
       "component_id": "component-009",
-      "id": "edge_INV_abi_OP_load_physical_22"
+      "id": "E_component-009_675c6fd8"
     },
     {
       "from": "INV_fail_fast",
       "to": "OP_load_system_file",
       "relation": "enforces",
       "component_id": "component-009",
-      "id": "edge_INV_fail_fast_OP_load_system_file_23"
+      "id": "E_component-009_665cdcae"
     },
     {
       "from": "INV_purity",
       "to": "OP_init_quicklisp",
       "relation": "enforces",
       "component_id": "component-009",
-      "id": "edge_INV_purity_OP_init_quicklisp_24"
+      "id": "E_component-009_c9ffbe80"
     }
   ],
   "proposals": []

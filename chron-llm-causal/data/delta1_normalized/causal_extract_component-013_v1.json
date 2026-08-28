@@ -184,147 +184,147 @@
       "to": "OP_Analyze",
       "relation": "triggers",
       "component_id": "component-013",
-      "id": "edge_OP_Understand_OP_Analyze_0"
+      "id": "E_component-013_595ac2a2"
     },
     {
       "from": "OP_Analyze",
       "to": "OP_Design",
       "relation": "triggers",
       "component_id": "component-013",
-      "id": "edge_OP_Analyze_OP_Design_1"
+      "id": "E_component-013_4c7b0703"
     },
     {
       "from": "OP_Design",
       "to": "OP_Implement",
       "relation": "triggers",
       "component_id": "component-013",
-      "id": "edge_OP_Design_OP_Implement_2"
+      "id": "E_component-013_86ce4fcc"
     },
     {
       "from": "OP_Implement",
       "to": "OP_Verify",
       "relation": "triggers",
       "component_id": "component-013",
-      "id": "edge_OP_Implement_OP_Verify_3"
+      "id": "E_component-013_a1afa95e"
     },
     {
       "from": "OP_Verify",
       "to": "OP_Record",
       "relation": "triggers",
       "component_id": "component-013",
-      "id": "edge_OP_Verify_OP_Record_4"
+      "id": "E_component-013_07e25916"
     },
     {
       "from": "OP_Record",
       "to": "ST_Baseline",
       "relation": "mutates",
       "component_id": "component-013",
-      "id": "edge_OP_Record_ST_Baseline_5"
+      "id": "E_component-013_9cd4c8e0"
     },
     {
       "from": "INV_EvolutionRule",
       "to": "OP_Implement",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_EvolutionRule_OP_Implement_6"
+      "id": "E_component-013_d6579f29"
     },
     {
       "from": "INV_NewConceptResponsibilityRequirement",
       "to": "OP_Design",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_NewConceptResponsibilityRequirement_OP_Design_7"
+      "id": "E_component-013_4f0d12d1"
     },
     {
       "from": "INV_ContentImplementationPrecedence",
       "to": "OP_Implement",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_ContentImplementationPrecedence_OP_Implement_8"
+      "id": "E_component-013_ecaf5171"
     },
     {
       "from": "INV_ImplementationConstitutionPreservation",
       "to": "OP_Implement",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_ImplementationConstitutionPreservation_OP_Implement_9"
+      "id": "E_component-013_04eb9dcd"
     },
     {
       "from": "INV_ConceptResponsibilityDependency",
       "to": "OP_Design",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_ConceptResponsibilityDependency_OP_Design_10"
+      "id": "E_component-013_03e08167"
     },
     {
       "from": "INV_ConceptImplementationIndependence",
       "to": "OP_Implement",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_ConceptImplementationIndependence_OP_Implement_11"
+      "id": "E_component-013_64dbdc7d"
     },
     {
       "from": "INV_RuntimeSatisfaction",
       "to": "OP_Implement",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_RuntimeSatisfaction_OP_Implement_12"
+      "id": "E_component-013_8a425000"
     },
     {
       "from": "INV_GovernanceScope",
       "to": "OP_Design",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_GovernanceScope_OP_Design_13"
+      "id": "E_component-013_d18853c0"
     },
     {
       "from": "INV_Independence",
       "to": "OP_Design",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_Independence_OP_Design_14"
+      "id": "E_component-013_1078dc5c"
     },
     {
       "from": "INV_ExtensionPriority",
       "to": "OP_Design",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_ExtensionPriority_OP_Design_15"
+      "id": "E_component-013_f6d3c131"
     },
     {
       "from": "INV_Minimalism",
       "to": "OP_Design",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_Minimalism_OP_Design_16"
+      "id": "E_component-013_27cc30bf"
     },
     {
       "from": "INV_Neutrality",
       "to": "OP_Design",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_Neutrality_OP_Design_17"
+      "id": "E_component-013_068d0e3b"
     },
     {
       "from": "INV_MetaDesignSeparation",
       "to": "OP_Design",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_MetaDesignSeparation_OP_Design_18"
+      "id": "E_component-013_798fcbad"
     },
     {
       "from": "INV_RuntimeDesignSeparation",
       "to": "OP_Implement",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_RuntimeDesignSeparation_OP_Implement_19"
+      "id": "E_component-013_b00e0417"
     },
     {
       "from": "INV_AuthorityRepresentationSeparation",
       "to": "OP_Design",
       "relation": "enforces",
       "component_id": "component-013",
-      "id": "edge_INV_AuthorityRepresentationSeparation_OP_Design_20"
+      "id": "E_component-013_bf89cb28"
     }
   ],
   "proposals": []

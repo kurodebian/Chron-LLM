@@ -152,133 +152,133 @@
       "to": "OP_GetLatestNodeInWorld",
       "relation": "depends_on",
       "component_id": "component-005",
-      "id": "edge_OP_StageBranchWorld_OP_GetLatestNodeInWorld_0"
+      "id": "E_component-005_df1ec06f"
     },
     {
       "from": "OP_StageBranchWorld",
       "to": "OP_StageEvent",
       "relation": "depends_on",
       "component_id": "component-005",
-      "id": "edge_OP_StageBranchWorld_OP_StageEvent_1"
+      "id": "E_component-005_e116a34b"
     },
     {
       "from": "OP_StageBranchWorld",
       "to": "ST_WalWorldCounter",
       "relation": "mutates",
       "component_id": "component-005",
-      "id": "edge_OP_StageBranchWorld_ST_WalWorldCounter_2"
+      "id": "E_component-005_a2a1ab69"
     },
     {
       "from": "OP_StageBranchWorld",
       "to": "ST_Wal",
       "relation": "mutates",
       "component_id": "component-005",
-      "id": "edge_OP_StageBranchWorld_ST_Wal_3"
+      "id": "E_component-005_bb4b583b"
     },
     {
       "from": "OP_StageBranchWorld",
       "to": "ST_Graph",
       "relation": "depends_on",
       "component_id": "component-005",
-      "id": "edge_OP_StageBranchWorld_ST_Graph_4"
+      "id": "E_component-005_f2503ca8"
     },
     {
       "from": "OP_GetLatestNodeInWorld",
       "to": "ST_Graph",
       "relation": "depends_on",
       "component_id": "component-005",
-      "id": "edge_OP_GetLatestNodeInWorld_ST_Graph_5"
+      "id": "E_component-005_fe278382"
     },
     {
       "from": "OP_CheckImmuneStatus",
       "to": "OP_CleanHistory",
       "relation": "depends_on",
       "component_id": "component-005",
-      "id": "edge_OP_CheckImmuneStatus_OP_CleanHistory_6"
+      "id": "E_component-005_20e97b3b"
     },
     {
       "from": "OP_CleanHistory",
       "to": "ST_Graph",
       "relation": "depends_on",
       "component_id": "component-005",
-      "id": "edge_OP_CleanHistory_ST_Graph_7"
+      "id": "E_component-005_0f142eaa"
     },
     {
       "from": "OP_StageEvent",
       "to": "ST_Wal",
       "relation": "mutates",
       "component_id": "component-005",
-      "id": "edge_OP_StageEvent_ST_Wal_8"
+      "id": "E_component-005_d67a4c68"
     },
     {
       "from": "INV_WorldIdUnique",
       "to": "OP_StageBranchWorld",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_WorldIdUnique_OP_StageBranchWorld_9"
+      "id": "E_component-005_43a8244d"
     },
     {
       "from": "INV_WalWorldCounterMonotonic",
       "to": "ST_WalWorldCounter",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_WalWorldCounterMonotonic_ST_WalWorldCounter_10"
+      "id": "E_component-005_23cca916"
     },
     {
       "from": "INV_BranchEventKindBranch",
       "to": "OP_StageBranchWorld",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_BranchEventKindBranch_OP_StageBranchWorld_11"
+      "id": "E_component-005_ad78d85d"
     },
     {
       "from": "INV_RootParentZero",
       "to": "OP_StageBranchWorld",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_RootParentZero_OP_StageBranchWorld_12"
+      "id": "E_component-005_6c076bc9"
     },
     {
       "from": "INV_QueryExcludesFaultNodes",
       "to": "OP_GetLatestNodeInWorld",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_QueryExcludesFaultNodes_OP_GetLatestNodeInWorld_13"
+      "id": "E_component-005_12c9cb98"
     },
     {
       "from": "INV_QueryReturnsSingleLatest",
       "to": "OP_GetLatestNodeInWorld",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_QueryReturnsSingleLatest_OP_GetLatestNodeInWorld_14"
+      "id": "E_component-005_7a05b603"
     },
     {
       "from": "INV_BranchEventParentWorldImmutable",
       "to": "OP_StageBranchWorld",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_BranchEventParentWorldImmutable_OP_StageBranchWorld_15"
+      "id": "E_component-005_b2a45045"
     },
     {
       "from": "INV_BranchEventParentNodeCommitted",
       "to": "OP_StageBranchWorld",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_BranchEventParentNodeCommitted_OP_StageBranchWorld_16"
+      "id": "E_component-005_b8241d80"
     },
     {
       "from": "INV_BranchEventStatusStaged",
       "to": "OP_StageEvent",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_BranchEventStatusStaged_OP_StageEvent_17"
+      "id": "E_component-005_2bfa8e7d"
     },
     {
       "from": "INV_ImmuneHistoryExists",
       "to": "OP_CheckImmuneStatus",
       "relation": "enforces",
       "component_id": "component-005",
-      "id": "edge_INV_ImmuneHistoryExists_OP_CheckImmuneStatus_18"
+      "id": "E_component-005_9cdb10a2"
     }
   ],
   "proposals": []

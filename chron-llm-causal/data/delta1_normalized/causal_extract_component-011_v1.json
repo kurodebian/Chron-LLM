@@ -152,126 +152,126 @@
       "to": "ST_runtime_state",
       "relation": "mutates",
       "component_id": "component-011",
-      "id": "edge_OP_init_bridge_ST_runtime_state_0"
+      "id": "E_component-011_021fc3bf"
     },
     {
       "from": "OP_ir_callback",
       "to": "OP_make_ir",
       "relation": "triggers",
       "component_id": "component-011",
-      "id": "edge_OP_ir_callback_OP_make_ir_1"
+      "id": "E_component-011_d057d506"
     },
     {
       "from": "OP_ir_callback",
       "to": "OP_push_ir",
       "relation": "triggers",
       "component_id": "component-011",
-      "id": "edge_OP_ir_callback_OP_push_ir_2"
+      "id": "E_component-011_7b5c4710"
     },
     {
       "from": "OP_make_ir",
       "to": "OP_validate_ir",
       "relation": "depends_on",
       "component_id": "component-011",
-      "id": "edge_OP_make_ir_OP_validate_ir_3"
+      "id": "E_component-011_da78941f"
     },
     {
       "from": "OP_push_ir",
       "to": "ST_ir_stream",
       "relation": "mutates",
       "component_id": "component-011",
-      "id": "edge_OP_push_ir_ST_ir_stream_4"
+      "id": "E_component-011_c0b05a89"
     },
     {
       "from": "OP_clear_stream",
       "to": "ST_ir_stream",
       "relation": "mutates",
       "component_id": "component-011",
-      "id": "edge_OP_clear_stream_ST_ir_stream_5"
+      "id": "E_component-011_abceb9ac"
     },
     {
       "from": "OP_extract_actions",
       "to": "ST_ir_stream",
       "relation": "depends_on",
       "component_id": "component-011",
-      "id": "edge_OP_extract_actions_ST_ir_stream_6"
+      "id": "E_component-011_a6d71df3"
     },
     {
       "from": "OP_run_trial",
       "to": "OP_clear_stream",
       "relation": "triggers",
       "component_id": "component-011",
-      "id": "edge_OP_run_trial_OP_clear_stream_7"
+      "id": "E_component-011_e36f8bb5"
     },
     {
       "from": "OP_run_trial",
       "to": "OP_extract_actions",
       "relation": "depends_on",
       "component_id": "component-011",
-      "id": "edge_OP_run_trial_OP_extract_actions_8"
+      "id": "E_component-011_c4684aaf"
     },
     {
       "from": "OP_run_trial",
       "to": "ST_model_context",
       "relation": "depends_on",
       "component_id": "component-011",
-      "id": "edge_OP_run_trial_ST_model_context_9"
+      "id": "E_component-011_3afea86c"
     },
     {
       "from": "OP_divergence_profile",
       "to": "OP_run_trial",
       "relation": "depends_on",
       "component_id": "component-011",
-      "id": "edge_OP_divergence_profile_OP_run_trial_10"
+      "id": "E_component-011_6bcbc2d7"
     },
     {
       "from": "INV_ir_immutable",
       "to": "OP_make_ir",
       "relation": "enforces",
       "component_id": "component-011",
-      "id": "edge_INV_ir_immutable_OP_make_ir_11"
+      "id": "E_component-011_70d5c9c1"
     },
     {
       "from": "INV_ir_immutable",
       "to": "OP_push_ir",
       "relation": "enforces",
       "component_id": "component-011",
-      "id": "edge_INV_ir_immutable_OP_push_ir_12"
+      "id": "E_component-011_e67d6fb7"
     },
     {
       "from": "INV_stream_append_only",
       "to": "ST_ir_stream",
       "relation": "enforces",
       "component_id": "component-011",
-      "id": "edge_INV_stream_append_only_ST_ir_stream_13"
+      "id": "E_component-011_49fe4075"
     },
     {
       "from": "INV_stream_ordering",
       "to": "OP_push_ir",
       "relation": "enforces",
       "component_id": "component-011",
-      "id": "edge_INV_stream_ordering_OP_push_ir_14"
+      "id": "E_component-011_726caf01"
     },
     {
       "from": "INV_callback_determinism",
       "to": "OP_ir_callback",
       "relation": "enforces",
       "component_id": "component-011",
-      "id": "edge_INV_callback_determinism_OP_ir_callback_15"
+      "id": "E_component-011_3cdc2f15"
     },
     {
       "from": "INV_analysis_isolation",
       "to": "OP_divergence_profile",
       "relation": "enforces",
       "component_id": "component-011",
-      "id": "edge_INV_analysis_isolation_OP_divergence_profile_16"
+      "id": "E_component-011_c5af026e"
     },
     {
       "from": "INV_observation_neutrality",
       "to": "OP_extract_actions",
       "relation": "enforces",
       "component_id": "component-011",
-      "id": "edge_INV_observation_neutrality_OP_extract_actions_17"
+      "id": "E_component-011_4e51d0fc"
     }
   ],
   "proposals": []

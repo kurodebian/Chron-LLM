@@ -208,175 +208,175 @@
       "to": "ST_Canonical",
       "relation": "mutates",
       "component_id": "component-001",
-      "id": "edge_OP_Commit_ST_Canonical_0"
+      "id": "E_component-001_7cbf5ff5"
     },
     {
       "from": "OP_Commit",
       "to": "OP_WakeDeferred",
       "relation": "triggers",
       "component_id": "component-001",
-      "id": "edge_OP_Commit_OP_WakeDeferred_1"
+      "id": "E_component-001_d5b0d744"
     },
     {
       "from": "OP_WakeDeferred",
       "to": "ST_KernelState",
       "relation": "mutates",
       "component_id": "component-001",
-      "id": "edge_OP_WakeDeferred_ST_KernelState_2"
+      "id": "E_component-001_c72eedf4"
     },
     {
       "from": "OP_Replay",
       "to": "ST_Derived",
       "relation": "produces",
       "component_id": "component-001",
-      "id": "edge_OP_Replay_ST_Derived_3"
+      "id": "E_component-001_491ea9c1"
     },
     {
       "from": "OP_Derive",
       "to": "ST_Derived",
       "relation": "produces",
       "component_id": "component-001",
-      "id": "edge_OP_Derive_ST_Derived_4"
+      "id": "E_component-001_d2534d74"
     },
     {
       "from": "OP_BuildPrompt",
       "to": "ST_Derived",
       "relation": "depends_on",
       "component_id": "component-001",
-      "id": "edge_OP_BuildPrompt_ST_Derived_5"
+      "id": "E_component-001_54aa05f7"
     },
     {
       "from": "OP_BuildPrompt",
       "to": "ST_Prompt",
       "relation": "produces",
       "component_id": "component-001",
-      "id": "edge_OP_BuildPrompt_ST_Prompt_6"
+      "id": "E_component-001_68383237"
     },
     {
       "from": "OP_Backend",
       "to": "ST_Prompt",
       "relation": "depends_on",
       "component_id": "component-001",
-      "id": "edge_OP_Backend_ST_Prompt_7"
+      "id": "E_component-001_3a12fabb"
     },
     {
       "from": "OP_Backend",
       "to": "ST_Candidate",
       "relation": "produces",
       "component_id": "component-001",
-      "id": "edge_OP_Backend_ST_Candidate_8"
+      "id": "E_component-001_bc25bffe"
     },
     {
       "from": "OP_Validate",
       "to": "ST_Candidate",
       "relation": "depends_on",
       "component_id": "component-001",
-      "id": "edge_OP_Validate_ST_Candidate_9"
+      "id": "E_component-001_f7f1cc1f"
     },
     {
       "from": "OP_Validate",
       "to": "ST_Canonical",
       "relation": "depends_on",
       "component_id": "component-001",
-      "id": "edge_OP_Validate_ST_Canonical_10"
+      "id": "E_component-001_ecbc2461"
     },
     {
       "from": "OP_Validate",
       "to": "ST_ValidationReport",
       "relation": "produces",
       "component_id": "component-001",
-      "id": "edge_OP_Validate_ST_ValidationReport_11"
+      "id": "E_component-001_f675a7b4"
     },
     {
       "from": "OP_PolicyRouter",
       "to": "ST_ValidationReport",
       "relation": "depends_on",
       "component_id": "component-001",
-      "id": "edge_OP_PolicyRouter_ST_ValidationReport_12"
+      "id": "E_component-001_6eb74344"
     },
     {
       "from": "OP_PolicyRouter",
       "to": "ST_RuntimeRequest",
       "relation": "produces",
       "component_id": "component-001",
-      "id": "edge_OP_PolicyRouter_ST_RuntimeRequest_13"
+      "id": "E_component-001_2962597a"
     },
     {
       "from": "OP_KernelTransition",
       "to": "ST_KernelState",
       "relation": "depends_on",
       "component_id": "component-001",
-      "id": "edge_OP_KernelTransition_ST_KernelState_14"
+      "id": "E_component-001_7f73f252"
     },
     {
       "from": "OP_KernelTransition",
       "to": "ST_RuntimeRequest",
       "relation": "depends_on",
       "component_id": "component-001",
-      "id": "edge_OP_KernelTransition_ST_RuntimeRequest_15"
+      "id": "E_component-001_c0323ade"
     },
     {
       "from": "OP_KernelTransition",
       "to": "ST_KernelState",
       "relation": "mutates",
       "component_id": "component-001",
-      "id": "edge_OP_KernelTransition_ST_KernelState_16"
+      "id": "E_component-001_735fb28a"
     },
     {
       "from": "OP_KernelTransition",
       "to": "ST_RuntimeCommand",
       "relation": "produces",
       "component_id": "component-001",
-      "id": "edge_OP_KernelTransition_ST_RuntimeCommand_17"
+      "id": "E_component-001_1e714856"
     },
     {
       "from": "INV_CanonicalImmutable",
       "to": "OP_Commit",
       "relation": "enforces",
       "component_id": "component-001",
-      "id": "edge_INV_CanonicalImmutable_OP_Commit_18"
+      "id": "E_component-001_bc2838f3"
     },
     {
       "from": "INV_PureOps",
       "to": "OP_Validate",
       "relation": "enforces",
       "component_id": "component-001",
-      "id": "edge_INV_PureOps_OP_Validate_19"
+      "id": "E_component-001_dbf60bff"
     },
     {
       "from": "INV_PureOps",
       "to": "OP_PolicyRouter",
       "relation": "enforces",
       "component_id": "component-001",
-      "id": "edge_INV_PureOps_OP_PolicyRouter_20"
+      "id": "E_component-001_d7ec4fcd"
     },
     {
       "from": "INV_KernelStateMutator",
       "to": "OP_KernelTransition",
       "relation": "enforces",
       "component_id": "component-001",
-      "id": "edge_INV_KernelStateMutator_OP_KernelTransition_21"
+      "id": "E_component-001_d61d6667"
     },
     {
       "from": "INV_CommitSoleUpdater",
       "to": "OP_Commit",
       "relation": "enforces",
       "component_id": "component-001",
-      "id": "edge_INV_CommitSoleUpdater_OP_Commit_22"
+      "id": "E_component-001_69457e23"
     },
     {
       "from": "INV_WakeDeferredTrigger",
       "to": "OP_WakeDeferred",
       "relation": "enforces",
       "component_id": "component-001",
-      "id": "edge_INV_WakeDeferredTrigger_OP_WakeDeferred_23"
+      "id": "E_component-001_3698a8d7"
     },
     {
       "from": "INV_BackendNonAuthoritative",
       "to": "OP_Backend",
       "relation": "enforces",
       "component_id": "component-001",
-      "id": "edge_INV_BackendNonAuthoritative_OP_Backend_24"
+      "id": "E_component-001_57984b31"
     }
   ],
   "proposals": []

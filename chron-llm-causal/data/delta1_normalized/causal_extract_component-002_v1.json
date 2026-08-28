@@ -312,245 +312,245 @@
       "to": "ST_Kernel",
       "relation": "mutates",
       "component_id": "component-002",
-      "id": "edge_OP_InitKernel_ST_Kernel_0"
+      "id": "E_component-002_a2092e40"
     },
     {
       "from": "OP_InitKernel",
       "to": "ST_WAL",
       "relation": "produces",
       "component_id": "component-002",
-      "id": "edge_OP_InitKernel_ST_WAL_1"
+      "id": "E_component-002_f101141b"
     },
     {
       "from": "OP_SubmitUserInput",
       "to": "OP_CommitEvent",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_SubmitUserInput_OP_CommitEvent_2"
+      "id": "E_component-002_1193d7ea"
     },
     {
       "from": "OP_CommitEvent",
       "to": "ST_WAL",
       "relation": "mutates",
       "component_id": "component-002",
-      "id": "edge_OP_CommitEvent_ST_WAL_3"
+      "id": "E_component-002_dc21bb70"
     },
     {
       "from": "OP_CommitEvent",
       "to": "OP_RefreshProjections",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_CommitEvent_OP_RefreshProjections_4"
+      "id": "E_component-002_264b3af8"
     },
     {
       "from": "OP_RefreshProjections",
       "to": "ST_Graph",
       "relation": "mutates",
       "component_id": "component-002",
-      "id": "edge_OP_RefreshProjections_ST_Graph_5"
+      "id": "E_component-002_7298d79b"
     },
     {
       "from": "OP_GetCurrentState",
       "to": "ST_Kernel",
       "relation": "depends_on",
       "component_id": "component-002",
-      "id": "edge_OP_GetCurrentState_ST_Kernel_6"
+      "id": "E_component-002_1729bb9a"
     },
     {
       "from": "OP_GetCurrentState",
       "to": "ST_KernelState",
       "relation": "produces",
       "component_id": "component-002",
-      "id": "edge_OP_GetCurrentState_ST_KernelState_7"
+      "id": "E_component-002_56c11a15"
     },
     {
       "from": "OP_InitRuntime",
       "to": "ST_RuntimeEnv",
       "relation": "mutates",
       "component_id": "component-002",
-      "id": "edge_OP_InitRuntime_ST_RuntimeEnv_8"
+      "id": "E_component-002_a668e0cf"
     },
     {
       "from": "OP_MainLoop",
       "to": "OP_SubmitUserInput",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_MainLoop_OP_SubmitUserInput_9"
+      "id": "E_component-002_2b89dc97"
     },
     {
       "from": "OP_InitLLM",
       "to": "ST_Context",
       "relation": "mutates",
       "component_id": "component-002",
-      "id": "edge_OP_InitLLM_ST_Context_10"
+      "id": "E_component-002_afce9d62"
     },
     {
       "from": "OP_Tokenize",
       "to": "ST_Context",
       "relation": "depends_on",
       "component_id": "component-002",
-      "id": "edge_OP_Tokenize_ST_Context_11"
+      "id": "E_component-002_c3d97217"
     },
     {
       "from": "OP_PrefillPrompt",
       "to": "ST_Context",
       "relation": "mutates",
       "component_id": "component-002",
-      "id": "edge_OP_PrefillPrompt_ST_Context_12"
+      "id": "E_component-002_e5993bfd"
     },
     {
       "from": "OP_Generate",
       "to": "ST_Context",
       "relation": "depends_on",
       "component_id": "component-002",
-      "id": "edge_OP_Generate_ST_Context_13"
+      "id": "E_component-002_4c7fb2ca"
     },
     {
       "from": "OP_Generate",
       "to": "OP_MySamplerSample",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_Generate_OP_MySamplerSample_14"
+      "id": "E_component-002_0e6c766d"
     },
     {
       "from": "OP_Generate",
       "to": "OP_MyLlamaEval",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_Generate_OP_MyLlamaEval_15"
+      "id": "E_component-002_b32b91d1"
     },
     {
       "from": "OP_RunGenerationWithSensors",
       "to": "OP_Generate",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_RunGenerationWithSensors_OP_Generate_16"
+      "id": "E_component-002_c1c3aa6e"
     },
     {
       "from": "OP_RunGenerationWithSensors",
       "to": "OP_FaultRecovery",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_RunGenerationWithSensors_OP_FaultRecovery_17"
+      "id": "E_component-002_d557f76e"
     },
     {
       "from": "OP_FaultRecovery",
       "to": "ST_Context",
       "relation": "mutates",
       "component_id": "component-002",
-      "id": "edge_OP_FaultRecovery_ST_Context_18"
+      "id": "E_component-002_b3ec2306"
     },
     {
       "from": "OP_Chat",
       "to": "ST_Session",
       "relation": "mutates",
       "component_id": "component-002",
-      "id": "edge_OP_Chat_ST_Session_19"
+      "id": "E_component-002_27298ea5"
     },
     {
       "from": "OP_Chat",
       "to": "OP_Tokenize",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_Chat_OP_Tokenize_20"
+      "id": "E_component-002_b06a14c7"
     },
     {
       "from": "OP_Chat",
       "to": "OP_PrefillPrompt",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_Chat_OP_PrefillPrompt_21"
+      "id": "E_component-002_1efe5390"
     },
     {
       "from": "OP_Chat",
       "to": "OP_Generate",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_Chat_OP_Generate_22"
+      "id": "E_component-002_7df4e8cc"
     },
     {
       "from": "OP_StartChat",
       "to": "OP_Chat",
       "relation": "triggers",
       "component_id": "component-002",
-      "id": "edge_OP_StartChat_OP_Chat_23"
+      "id": "E_component-002_14f7831c"
     },
     {
       "from": "OP_Decide",
       "to": "ST_Session",
       "relation": "depends_on",
       "component_id": "component-002",
-      "id": "edge_OP_Decide_ST_Session_24"
+      "id": "E_component-002_69cf8c98"
     },
     {
       "from": "INV_KernelSoleMutator",
       "to": "OP_CommitEvent",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_KernelSoleMutator_OP_CommitEvent_25"
+      "id": "E_component-002_1152e10a"
     },
     {
       "from": "INV_GraphFromWAL",
       "to": "OP_RefreshProjections",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_GraphFromWAL_OP_RefreshProjections_26"
+      "id": "E_component-002_8c7b491e"
     },
     {
       "from": "INV_PostCommitPersisted",
       "to": "OP_CommitEvent",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_PostCommitPersisted_OP_CommitEvent_27"
+      "id": "E_component-002_884381c8"
     },
     {
       "from": "INV_RuntimeNoDirectAccess",
       "to": "OP_MainLoop",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_RuntimeNoDirectAccess_OP_MainLoop_28"
+      "id": "E_component-002_f9b473e3"
     },
     {
       "from": "INV_SamplerLifecycle",
       "to": "OP_Generate",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_SamplerLifecycle_OP_Generate_29"
+      "id": "E_component-002_6517815c"
     },
     {
       "from": "INV_NPastInvariant",
       "to": "OP_PrefillPrompt",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_NPastInvariant_OP_PrefillPrompt_30"
+      "id": "E_component-002_6e711383"
     },
     {
       "from": "INV_HistoryOrderedAppendOnly",
       "to": "OP_Chat",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_HistoryOrderedAppendOnly_OP_Chat_31"
+      "id": "E_component-002_c4b45e64"
     },
     {
       "from": "INV_FaultNoCommit",
       "to": "OP_FaultRecovery",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_FaultNoCommit_OP_FaultRecovery_32"
+      "id": "E_component-002_a362022f"
     },
     {
       "from": "INV_StatelessFFI",
       "to": "OP_MyLlamaEval",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_StatelessFFI_OP_MyLlamaEval_33"
+      "id": "E_component-002_ca333668"
     },
     {
       "from": "INV_Abi1to1",
       "to": "OP_MyLlamaEval",
       "relation": "enforces",
       "component_id": "component-002",
-      "id": "edge_INV_Abi1to1_OP_MyLlamaEval_34"
+      "id": "E_component-002_40905b3f"
     }
   ],
   "proposals": []

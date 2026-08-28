@@ -280,112 +280,112 @@
       "to": "ST_World",
       "relation": "depends_on",
       "component_id": "component-008",
-      "id": "edge_OP_Observe_ST_World_0"
+      "id": "E_component-008_7eb01580"
     },
     {
       "from": "OP_Observe",
       "to": "ST_Registry",
       "relation": "depends_on",
       "component_id": "component-008",
-      "id": "edge_OP_Observe_ST_Registry_1"
+      "id": "E_component-008_61e77783"
     },
     {
       "from": "OP_Observe",
       "to": "ST_Kernel",
       "relation": "depends_on",
       "component_id": "component-008",
-      "id": "edge_OP_Observe_ST_Kernel_2"
+      "id": "E_component-008_550e7a70"
     },
     {
       "from": "OP_Observe",
       "to": "ST_Observation",
       "relation": "produces",
       "component_id": "component-008",
-      "id": "edge_OP_Observe_ST_Observation_3"
+      "id": "E_component-008_a989d480"
     },
     {
       "from": "OP_Observe",
       "to": "ST_Snapshot",
       "relation": "produces",
       "component_id": "component-008",
-      "id": "edge_OP_Observe_ST_Snapshot_4"
+      "id": "E_component-008_fbe270f3"
     },
     {
       "from": "OP_Observe",
       "to": "INV_ReadOnly",
       "relation": "enforces",
       "component_id": "component-008",
-      "id": "edge_OP_Observe_INV_ReadOnly_5"
+      "id": "E_component-008_37035deb"
     },
     {
       "from": "OP_Observe",
       "to": "INV_Deterministic",
       "relation": "enforces",
       "component_id": "component-008",
-      "id": "edge_OP_Observe_INV_Deterministic_6"
+      "id": "E_component-008_23c718ba"
     },
     {
       "from": "OP_Observe",
       "to": "INV_Accurate",
       "relation": "enforces",
       "component_id": "component-008",
-      "id": "edge_OP_Observe_INV_Accurate_7"
+      "id": "E_component-008_de20aa56"
     },
     {
       "from": "OP_Observe",
       "to": "INV_NoSideEffects",
       "relation": "enforces",
       "component_id": "component-008",
-      "id": "edge_OP_Observe_INV_NoSideEffects_8"
+      "id": "E_component-008_7586d8b0"
     },
     {
       "from": "OP_BuildWorldObservation",
       "to": "ST_World",
       "relation": "depends_on",
       "component_id": "component-008",
-      "id": "edge_OP_BuildWorldObservation_ST_World_9"
+      "id": "E_component-008_06640554"
     },
     {
       "from": "OP_BuildWorldObservation",
       "to": "ST_Observation",
       "relation": "produces",
       "component_id": "component-008",
-      "id": "edge_OP_BuildWorldObservation_ST_Observation_10"
+      "id": "E_component-008_81e8163a"
     },
     {
       "from": "OP_BuildWorldObservation",
       "to": "INV_ReadOnly",
       "relation": "enforces",
       "component_id": "component-008",
-      "id": "edge_OP_BuildWorldObservation_INV_ReadOnly_11"
+      "id": "E_component-008_d8d9a2a2"
     },
     {
       "from": "OP_BuildRegistryObservation",
       "to": "ST_Registry",
       "relation": "depends_on",
       "component_id": "component-008",
-      "id": "edge_OP_BuildRegistryObservation_ST_Registry_12"
+      "id": "E_component-008_2e4af45b"
     },
     {
       "from": "OP_BuildRegistryObservation",
       "to": "ST_Observation",
       "relation": "produces",
       "component_id": "component-008",
-      "id": "edge_OP_BuildRegistryObservation_ST_Observation_13"
+      "id": "E_component-008_1fd70f28"
     },
     {
       "from": "OP_BuildRegistryObservation",
       "to": "INV_ReadOnly",
       "relation": "enforces",
       "component_id": "component-008",
-      "id": "edge_OP_BuildRegistryObservation_INV_ReadOnly_14"
+      "id": "E_component-008_22333895"
     },
     {
       "from": "OP_BuildAncestryObservation",
       "to": "ST_Registry",
       "relation": "depends_on",
       "component_id": "component-008",
-      "id": "edge_OP_BuildAncestryObservation_ST_Registry_15"
+      "id": "E_component-008_8ebeb27a"
     }
   ],
   "proposals": []

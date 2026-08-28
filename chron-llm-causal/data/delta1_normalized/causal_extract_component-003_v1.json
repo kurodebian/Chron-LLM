@@ -208,175 +208,175 @@
       "to": "ST_MemoryStore",
       "relation": "mutates",
       "component_id": "component-003",
-      "id": "edge_OP_StorePayload_ST_MemoryStore_0"
+      "id": "E_component-003_c603348f"
     },
     {
       "from": "OP_LoadPayload",
       "to": "ST_MemoryStore",
       "relation": "depends_on",
       "component_id": "component-003",
-      "id": "edge_OP_LoadPayload_ST_MemoryStore_1"
+      "id": "E_component-003_e560b832"
     },
     {
       "from": "OP_AddNode",
       "to": "ST_GraphStore",
       "relation": "mutates",
       "component_id": "component-003",
-      "id": "edge_OP_AddNode_ST_GraphStore_2"
+      "id": "E_component-003_b0b49465"
     },
     {
       "from": "OP_AddEdge",
       "to": "ST_GraphStore",
       "relation": "mutates",
       "component_id": "component-003",
-      "id": "edge_OP_AddEdge_ST_GraphStore_3"
+      "id": "E_component-003_6f547f49"
     },
     {
       "from": "OP_CausalSubgraph",
       "to": "ST_GraphStore",
       "relation": "depends_on",
       "component_id": "component-003",
-      "id": "edge_OP_CausalSubgraph_ST_GraphStore_4"
+      "id": "E_component-003_6057c16c"
     },
     {
       "from": "OP_ProjectContext",
       "to": "ST_GraphStore",
       "relation": "depends_on",
       "component_id": "component-003",
-      "id": "edge_OP_ProjectContext_ST_GraphStore_5"
+      "id": "E_component-003_0493621a"
     },
     {
       "from": "OP_ProjectContext",
       "to": "ST_MemoryStore",
       "relation": "depends_on",
       "component_id": "component-003",
-      "id": "edge_OP_ProjectContext_ST_MemoryStore_6"
+      "id": "E_component-003_af3d9832"
     },
     {
       "from": "OP_BuildPrefillState",
       "to": "ST_PrefillState",
       "relation": "produces",
       "component_id": "component-003",
-      "id": "edge_OP_BuildPrefillState_ST_PrefillState_7"
+      "id": "E_component-003_225522de"
     },
     {
       "from": "OP_BuildPrefillState",
       "to": "OP_ProjectContext",
       "relation": "depends_on",
       "component_id": "component-003",
-      "id": "edge_OP_BuildPrefillState_OP_ProjectContext_8"
+      "id": "E_component-003_44fbbc1a"
     },
     {
       "from": "OP_MakeWorld",
       "to": "ST_World",
       "relation": "produces",
       "component_id": "component-003",
-      "id": "edge_OP_MakeWorld_ST_World_9"
+      "id": "E_component-003_8674360d"
     },
     {
       "from": "OP_MakeWorld",
       "to": "ST_GraphStore",
       "relation": "depends_on",
       "component_id": "component-003",
-      "id": "edge_OP_MakeWorld_ST_GraphStore_10"
+      "id": "E_component-003_d41d8391"
     },
     {
       "from": "OP_MakeWorld",
       "to": "ST_MemoryStore",
       "relation": "depends_on",
       "component_id": "component-003",
-      "id": "edge_OP_MakeWorld_ST_MemoryStore_11"
+      "id": "E_component-003_ce9ec060"
     },
     {
       "from": "OP_ForkWorld",
       "to": "ST_World",
       "relation": "produces",
       "component_id": "component-003",
-      "id": "edge_OP_ForkWorld_ST_World_12"
+      "id": "E_component-003_e8dc47da"
     },
     {
       "from": "OP_ForkWorld",
       "to": "ST_World",
       "relation": "depends_on",
       "component_id": "component-003",
-      "id": "edge_OP_ForkWorld_ST_World_13"
+      "id": "E_component-003_b5870765"
     },
     {
       "from": "OP_KernelCommitWorld",
       "to": "ST_World",
       "relation": "mutates",
       "component_id": "component-003",
-      "id": "edge_OP_KernelCommitWorld_ST_World_14"
+      "id": "E_component-003_68ebaf8e"
     },
     {
       "from": "OP_KernelCommitWorld",
       "to": "ST_GraphStore",
       "relation": "mutates",
       "component_id": "component-003",
-      "id": "edge_OP_KernelCommitWorld_ST_GraphStore_15"
+      "id": "E_component-003_c53329b6"
     },
     {
       "from": "OP_KernelCommitWorld",
       "to": "INV_CommitAtomic",
       "relation": "enforces",
       "component_id": "component-003",
-      "id": "edge_OP_KernelCommitWorld_INV_CommitAtomic_16"
+      "id": "E_component-003_19b590ad"
     },
     {
       "from": "OP_RegisterWorld",
       "to": "ST_Registry",
       "relation": "mutates",
       "component_id": "component-003",
-      "id": "edge_OP_RegisterWorld_ST_Registry_17"
+      "id": "E_component-003_824f4f59"
     },
     {
       "from": "OP_SetActiveWorld",
       "to": "ST_Registry",
       "relation": "mutates",
       "component_id": "component-003",
-      "id": "edge_OP_SetActiveWorld_ST_Registry_18"
+      "id": "E_component-003_6780b960"
     },
     {
       "from": "OP_ArchiveWorld",
       "to": "ST_Registry",
       "relation": "mutates",
       "component_id": "component-003",
-      "id": "edge_OP_ArchiveWorld_ST_Registry_19"
+      "id": "E_component-003_da476041"
     },
     {
       "from": "INV_MemoryImmutable",
       "to": "ST_MemoryStore",
       "relation": "enforces",
       "component_id": "component-003",
-      "id": "edge_INV_MemoryImmutable_ST_MemoryStore_20"
+      "id": "E_component-003_0a752326"
     },
     {
       "from": "INV_GraphAppend",
       "to": "ST_GraphStore",
       "relation": "enforces",
       "component_id": "component-003",
-      "id": "edge_INV_GraphAppend_ST_GraphStore_21"
+      "id": "E_component-003_8347b5d3"
     },
     {
       "from": "INV_WorldIsolation",
       "to": "ST_World",
       "relation": "enforces",
       "component_id": "component-003",
-      "id": "edge_INV_WorldIsolation_ST_World_22"
+      "id": "E_component-003_8d48fcae"
     },
     {
       "from": "INV_CausalSeparation",
       "to": "OP_CausalSubgraph",
       "relation": "enforces",
       "component_id": "component-003",
-      "id": "edge_INV_CausalSeparation_OP_CausalSubgraph_23"
+      "id": "E_component-003_5092e80d"
     },
     {
       "from": "INV_Determinism",
       "to": "OP_BuildPrefillState",
       "relation": "enforces",
       "component_id": "component-003",
-      "id": "edge_INV_Determinism_OP_BuildPrefillState_24"
+      "id": "E_component-003_7b3411cf"
     }
   ],
   "proposals": []

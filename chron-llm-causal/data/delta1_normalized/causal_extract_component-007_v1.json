@@ -216,182 +216,182 @@
       "to": "ST_EventSelection",
       "relation": "produces",
       "component_id": "component-007",
-      "id": "edge_OP_next_event_ST_EventSelection_0"
+      "id": "E_component-007_993bf6d0"
     },
     {
       "from": "OP_rollout",
       "to": "OP_next_event",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_OP_rollout_OP_next_event_1"
+      "id": "E_component-007_4d6f0f17"
     },
     {
       "from": "OP_rollout",
       "to": "ST_Trajectory",
       "relation": "mutates",
       "component_id": "component-007",
-      "id": "edge_OP_rollout_ST_Trajectory_2"
+      "id": "E_component-007_04d33a86"
     },
     {
       "from": "OP_find_attractor",
       "to": "OP_rollout",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_OP_find_attractor_OP_rollout_3"
+      "id": "E_component-007_9f505f26"
     },
     {
       "from": "OP_find_attractor",
       "to": "ST_Attractor",
       "relation": "produces",
       "component_id": "component-007",
-      "id": "edge_OP_find_attractor_ST_Attractor_4"
+      "id": "E_component-007_ba0d2c11"
     },
     {
       "from": "OP_find_cycle",
       "to": "ST_Trajectory",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_OP_find_cycle_ST_Trajectory_5"
+      "id": "E_component-007_1e0a6d85"
     },
     {
       "from": "OP_find_cycle",
       "to": "ST_Cycle",
       "relation": "produces",
       "component_id": "component-007",
-      "id": "edge_OP_find_cycle_ST_Cycle_6"
+      "id": "E_component-007_99c16f24"
     },
     {
       "from": "OP_find_recurrent_cycle",
       "to": "OP_rollout",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_OP_find_recurrent_cycle_OP_rollout_7"
+      "id": "E_component-007_1a292a1a"
     },
     {
       "from": "OP_find_recurrent_cycle",
       "to": "OP_find_cycle",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_OP_find_recurrent_cycle_OP_find_cycle_8"
+      "id": "E_component-007_76d2d41b"
     },
     {
       "from": "OP_compute_sccs",
       "to": "ST_Graph",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_OP_compute_sccs_ST_Graph_9"
+      "id": "E_component-007_3bd6bc3b"
     },
     {
       "from": "OP_compute_sccs",
       "to": "ST_SCC",
       "relation": "produces",
       "component_id": "component-007",
-      "id": "edge_OP_compute_sccs_ST_SCC_10"
+      "id": "E_component-007_92fa514e"
     },
     {
       "from": "OP_analyze_scc",
       "to": "ST_SCC",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_OP_analyze_scc_ST_SCC_11"
+      "id": "E_component-007_cb579a4c"
     },
     {
       "from": "OP_build_basin_map",
       "to": "OP_find_attractor",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_OP_build_basin_map_OP_find_attractor_12"
+      "id": "E_component-007_71f6796e"
     },
     {
       "from": "OP_build_basin_map",
       "to": "ST_Basin",
       "relation": "mutates",
       "component_id": "component-007",
-      "id": "edge_OP_build_basin_map_ST_Basin_13"
+      "id": "E_component-007_94254708"
     },
     {
       "from": "OP_build_basin_structure",
       "to": "ST_Basin",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_OP_build_basin_structure_ST_Basin_14"
+      "id": "E_component-007_c292b62c"
     },
     {
       "from": "OP_build_basin_structure",
       "to": "ST_BasinResult",
       "relation": "produces",
       "component_id": "component-007",
-      "id": "edge_OP_build_basin_structure_ST_BasinResult_15"
+      "id": "E_component-007_b0325f4c"
     },
     {
       "from": "INV_Graph_Edge_Nodes",
       "to": "ST_Graph",
       "relation": "enforces",
       "component_id": "component-007",
-      "id": "edge_INV_Graph_Edge_Nodes_ST_Graph_16"
+      "id": "E_component-007_d9106f26"
     },
     {
       "from": "INV_Basin_Mass",
       "to": "ST_Basin",
       "relation": "enforces",
       "component_id": "component-007",
-      "id": "edge_INV_Basin_Mass_ST_Basin_17"
+      "id": "E_component-007_81912b9b"
     },
     {
       "from": "INV_Basin_Ratio",
       "to": "ST_Basin",
       "relation": "enforces",
       "component_id": "component-007",
-      "id": "edge_INV_Basin_Ratio_ST_Basin_18"
+      "id": "E_component-007_d1d353ad"
     },
     {
       "from": "INV_Partition",
       "to": "ST_Basin",
       "relation": "enforces",
       "component_id": "component-007",
-      "id": "edge_INV_Partition_ST_Basin_19"
+      "id": "E_component-007_52289e65"
     },
     {
       "from": "INV_SCC_Attractor",
       "to": "ST_SCC",
       "relation": "enforces",
       "component_id": "component-007",
-      "id": "edge_INV_SCC_Attractor_ST_SCC_20"
+      "id": "E_component-007_bcdce69e"
     },
     {
       "from": "INV_Cluster_Type",
       "to": "ST_Cluster",
       "relation": "enforces",
       "component_id": "component-007",
-      "id": "edge_INV_Cluster_Type_ST_Cluster_21"
+      "id": "E_component-007_128b95ea"
     },
     {
       "from": "INV_Stability",
       "to": "ST_Cycle",
       "relation": "enforces",
       "component_id": "component-007",
-      "id": "edge_INV_Stability_ST_Cycle_22"
+      "id": "E_component-007_998f15b6"
     },
     {
       "from": "INV_Rollout_Path",
       "to": "ST_Trajectory",
       "relation": "enforces",
       "component_id": "component-007",
-      "id": "edge_INV_Rollout_Path_ST_Trajectory_23"
+      "id": "E_component-007_59035820"
     },
     {
       "from": "ST_Attractor",
       "to": "ST_SCC",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_ST_Attractor_ST_SCC_24"
+      "id": "E_component-007_dee085a9"
     },
     {
       "from": "ST_Cluster",
       "to": "ST_Graph",
       "relation": "depends_on",
       "component_id": "component-007",
-      "id": "edge_ST_Cluster_ST_Graph_25"
+      "id": "E_component-007_48c05e7c"
     }
   ],
   "proposals": []

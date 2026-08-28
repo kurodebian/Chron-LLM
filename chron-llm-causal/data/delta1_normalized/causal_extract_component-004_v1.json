@@ -128,98 +128,98 @@
       "to": "ST_WAL",
       "relation": "mutates",
       "component_id": "component-004",
-      "id": "edge_OP_AppendWAL_ST_WAL_0"
+      "id": "E_component-004_70bfaf46"
     },
     {
       "from": "OP_CommitEvent",
       "to": "ST_WAL",
       "relation": "mutates",
       "component_id": "component-004",
-      "id": "edge_OP_CommitEvent_ST_WAL_1"
+      "id": "E_component-004_516454fb"
     },
     {
       "from": "OP_LiftGraph",
       "to": "ST_WAL",
       "relation": "depends_on",
       "component_id": "component-004",
-      "id": "edge_OP_LiftGraph_ST_WAL_2"
+      "id": "E_component-004_57614be0"
     },
     {
       "from": "OP_LiftGraph",
       "to": "ST_HealthyTable",
       "relation": "depends_on",
       "component_id": "component-004",
-      "id": "edge_OP_LiftGraph_ST_HealthyTable_3"
+      "id": "E_component-004_e804f9c4"
     },
     {
       "from": "OP_LiftGraph",
       "to": "ST_Graph",
       "relation": "produces",
       "component_id": "component-004",
-      "id": "edge_OP_LiftGraph_ST_Graph_4"
+      "id": "E_component-004_c7ca7b97"
     },
     {
       "from": "OP_HandleFault",
       "to": "ST_KVCache",
       "relation": "mutates",
       "component_id": "component-004",
-      "id": "edge_OP_HandleFault_ST_KVCache_5"
+      "id": "E_component-004_36f247d7"
     },
     {
       "from": "OP_HandleFault",
       "to": "ST_WAL",
       "relation": "mutates",
       "component_id": "component-004",
-      "id": "edge_OP_HandleFault_ST_WAL_6"
+      "id": "E_component-004_3fd31a79"
     },
     {
       "from": "OP_BranchWorld",
       "to": "ST_SystemState",
       "relation": "mutates",
       "component_id": "component-004",
-      "id": "edge_OP_BranchWorld_ST_SystemState_7"
+      "id": "E_component-004_ebcda12c"
     },
     {
       "from": "OP_Prefill",
       "to": "ST_WAL",
       "relation": "depends_on",
       "component_id": "component-004",
-      "id": "edge_OP_Prefill_ST_WAL_8"
+      "id": "E_component-004_fefc9e08"
     },
     {
       "from": "OP_Prefill",
       "to": "ST_KVCache",
       "relation": "mutates",
       "component_id": "component-004",
-      "id": "edge_OP_Prefill_ST_KVCache_9"
+      "id": "E_component-004_15448b45"
     },
     {
       "from": "INV_MonotonicClock",
       "to": "OP_AppendWAL",
       "relation": "enforces",
       "component_id": "component-004",
-      "id": "edge_INV_MonotonicClock_OP_AppendWAL_10"
+      "id": "E_component-004_150b3f50"
     },
     {
       "from": "INV_AppendOnly",
       "to": "ST_Graph",
       "relation": "enforces",
       "component_id": "component-004",
-      "id": "edge_INV_AppendOnly_ST_Graph_11"
+      "id": "E_component-004_545db0ea"
     },
     {
       "from": "INV_FaultIsolation",
       "to": "OP_LiftGraph",
       "relation": "enforces",
       "component_id": "component-004",
-      "id": "edge_INV_FaultIsolation_OP_LiftGraph_12"
+      "id": "E_component-004_4ea853ac"
     },
     {
       "from": "INV_CausalScope",
       "to": "OP_LiftGraph",
       "relation": "enforces",
       "component_id": "component-004",
-      "id": "edge_INV_CausalScope_OP_LiftGraph_13"
+      "id": "E_component-004_c1288971"
     }
   ],
   "proposals": []
