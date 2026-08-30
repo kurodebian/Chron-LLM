@@ -29,6 +29,7 @@ class ObservedNodeRecord:
     raw_data: Dict[str, Any]
     source_file: str
     record_index: int
+    component_id: Optional[str]
 
 
 @dataclass(frozen=True)
@@ -36,6 +37,7 @@ class ObservedEdgeRecord:
     raw_data: Dict[str, Any]
     source_file: str
     record_index: int
+    component_id: Optional[str]
 
 
 @dataclass(frozen=True)
@@ -43,6 +45,7 @@ class ObservedProposalRecord:
     raw_data: Dict[str, Any]
     source_file: str
     record_index: int
+    component_id: Optional[str]
 
 
 # --- Layer B: Canonical GT Records ---
@@ -170,7 +173,8 @@ class IndependentDelta1Scanner:
                     observed_proposals_list.append(ObservedProposalRecord(
                         raw_data=raw_dict,
                         source_file=file_name,
-                        record_index=idx
+                        record_index=idx,
+                        component_id=data.get("component_id"),
                     ))
 
             # 2. Physical Nodes Observation
@@ -193,7 +197,8 @@ class IndependentDelta1Scanner:
                     observed_nodes_list.append(ObservedNodeRecord(
                         raw_data=raw_dict,
                         source_file=file_name,
-                        record_index=idx
+                        record_index=idx,
+                        component_id=data.get("component_id"),
                     ))
 
             # 3. Physical Edges Observation
@@ -216,7 +221,8 @@ class IndependentDelta1Scanner:
                     observed_edges_list.append(ObservedEdgeRecord(
                         raw_data=raw_dict,
                         source_file=file_name,
-                        record_index=idx
+                        record_index=idx,
+                        component_id=data.get("component_id"),
                     ))
 
             # =========================================================

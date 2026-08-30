@@ -7,7 +7,7 @@ root_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(root_dir))
 sys.path.append(str(root_dir / "src"))
 
-from causal_kernel.kernel.scanner.delta1_scanner import IndependentDelta1Scanner
+from causal_kernel.audit.independent_delta1_scanner import IndependentDelta1Scanner
 from causal_kernel.kernel.reconciler.claim_extractor import TraceabilityClaimExtractor
 from causal_kernel.kernel.reconciler.traceability_reconciler import TraceabilityReconciler
 
@@ -35,13 +35,18 @@ def main():
     print("    RUNNING INDEPENDENT TRACEABILITY AUDIT")
     print("==================================================")
 
-    # 1. Ground Truth Scan
-    print(f"[*] Scanning Ground Truth from: {args.delta1_dir}")
-    scanner = IndependentDelta1Scanner(args.delta1_dir)
-    gt = scanner.scan()
-    print(f"    - Files Scanned      : {len(gt.files_scanned)}")
-    print(f"    - Unique Node Count  : {gt.unique_node_count}")
-    print(f"    - Unique Edge Count  : {gt.unique_edge_count}")
+    # 1. Ground Truth Scan 
+    print(f"[*] Scanning Ground Truth from: {args.delta1_dir}") 
+
+    scanner = IndependentDelta1Scanner(args.delta1_dir) 
+    gt, summary = scanner.scan() 
+
+    print(f" - Physical Nodes : {gt.physical_node_count}") 
+    print(f" - Canonical Nodes : {len(gt.canonical_nodes)}") 
+    print(f" - Physical Edges : {gt.physical_edge_count}") 
+    print(f" - Canonical Edges : {len(gt.canonical_edges)}") 
+    print( f" - Rejected Nodes : " f"{gt.physical_node_count - len(gt.canonical_nodes)}" ) 
+    print( f" - Rejected Edges : " f"{gt.physical_edge_count - len(gt.canonical_edges)}" )
 
     # 2. Extract Claims with Filtering
     all_trace_files = []
