@@ -1,0 +1,449 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "delta1_delta2_mapping.schema.json",
+  "title": "Delta1 to Delta2 Structural Mapping and Accounting",
+  "description": "Phase 2 structural mapping and accounting artifact. Semantic provenance is explicitly deferred to Phase 3.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "audit_version",
+    "phase",
+    "source",
+    "delta1_totals",
+    "delta2_totals",
+    "identity_model",
+    "node_mappings",
+    "edge_mappings",
+    "accounting",
+    "ambiguities",
+    "unresolved",
+    "validation"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+
+    "audit_version": {
+      "type": "string"
+    },
+
+    "phase": {
+      "const": "PHASE_2"
+    },
+
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "delta1",
+        "delta2"
+      ],
+      "properties": {
+        "delta1": {
+          "type": "string"
+        },
+        "delta2": {
+          "type": "string"
+        }
+      }
+    },
+
+    "delta1_totals": {
+      "$ref": "#/$defs/totals"
+    },
+
+    "delta2_totals": {
+      "$ref": "#/$defs/totals"
+    },
+
+    "identity_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node",
+        "edge",
+        "synthetic_graph_ids_generated"
+      ],
+      "properties": {
+        "node": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_delta1_id",
+            "source_original_id",
+            "raw_id_global_uniqueness"
+          ],
+          "properties": {
+            "source_delta1_id": {
+              "const": "(component_id, raw_id, record_index)"
+            },
+            "source_original_id": {
+              "const": "raw Delta-1 node id"
+            },
+            "raw_id_global_uniqueness": {
+              "type": "boolean"
+            }
+          }
+        },
+
+        "edge": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_delta1_id",
+            "source_original_id",
+            "canonical_id_global_uniqueness"
+          ],
+          "properties": {
+            "source_delta1_id": {
+              "const": "(component_id, canonical_id, record_index)"
+            },
+            "source_original_id": {
+              "const": "canonical Delta-1 edge id"
+            },
+            "canonical_id_global_uniqueness": {
+              "type": "boolean"
+            }
+          }
+        },
+
+        "synthetic_graph_ids_generated": {
+          "type": "boolean"
+        },
+
+        "node_record_identity": {
+          "type": "string"
+        },
+
+        "edge_record_identity": {
+          "type": "string"
+        },
+
+        "raw_node_id_global_uniqueness": {
+          "type": "boolean"
+        },
+
+        "canonical_edge_id_global_uniqueness": {
+          "type": "boolean"
+        }
+      }
+    },
+
+    "node_mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nodeMapping"
+      }
+    },
+
+    "edge_mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/edgeMapping"
+      }
+    },
+
+    "accounting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodes",
+        "edges"
+      ],
+      "properties": {
+        "nodes": {
+          "$ref": "#/$defs/accountingCounts"
+        },
+        "edges": {
+          "$ref": "#/$defs/accountingCounts"
+        }
+      }
+    },
+
+    "ambiguities": {
+      "type": "array",
+      "items": {}
+    },
+
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "structural_traceability",
+        "identity_accounting",
+        "delta1_population",
+        "node_raw_id_global_uniqueness",
+        "node_record_identity_uniqueness",
+        "edge_canonical_id_validity",
+        "edge_canonical_id_uniqueness",
+        "self_reported_oracle_bypassed",
+        "no_silent_loss",
+        "no_silent_node_normalization",
+        "raw_node_id_preserved",
+        "raw_edge_id_preserved",
+        "semantic_provenance"
+      ],
+      "properties": {
+        "structural_traceability": {
+          "type": "string"
+        },
+        "identity_accounting": {
+          "type": "string"
+        },
+        "delta1_population": {
+          "type": "string"
+        },
+        "node_raw_id_global_uniqueness": {
+          "type": "string"
+        },
+        "node_record_identity_uniqueness": {
+          "type": "string"
+        },
+        "edge_canonical_id_validity": {
+          "type": "string"
+        },
+        "edge_canonical_id_uniqueness": {
+          "type": "string"
+        },
+        "self_reported_oracle_bypassed": {
+          "type": "boolean"
+        },
+        "no_silent_loss": {
+          "type": "boolean"
+        },
+        "no_silent_node_normalization": {
+          "type": "boolean"
+        },
+        "raw_node_id_preserved": {
+          "type": "boolean"
+        },
+        "raw_edge_id_preserved": {
+          "type": "boolean"
+        },
+        "semantic_provenance": {
+          "const": "DEFERRED_TO_PHASE_3"
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodes",
+        "edges"
+      ],
+      "properties": {
+        "nodes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "edges": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+
+    "accountingCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "PRESERVED",
+        "AGGREGATED",
+        "COLLAPSED",
+        "ABSORBED",
+        "UNRESOLVED"
+      ],
+      "properties": {
+        "PRESERVED": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "AGGREGATED": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "COLLAPSED": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ABSORBED": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "UNRESOLVED": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+
+    "nodeMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_delta1_id",
+        "source_original_id",
+        "source_file",
+        "source_record_index",
+        "source_component_id",
+        "source_name_type",
+        "target_delta2_id",
+        "classification",
+        "evidence",
+        "evidence_strength",
+        "mapping_reason",
+        "confidence"
+      ],
+      "properties": {
+        "source_delta1_id": {
+          "$ref": "#/$defs/recordIdentity"
+        },
+        "source_original_id": {
+          "type": "string"
+        },
+        "source_file": {
+          "type": "string"
+        },
+        "source_record_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_component_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_name_type": {
+          "type": "string"
+        },
+        "target_delta2_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "PRESERVED",
+            "AGGREGATED",
+            "ABSORBED",
+            "UNRESOLVED"
+          ]
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_strength": {
+          "enum": [
+            "E0",
+            "E1",
+            "E2",
+            "E3"
+          ]
+        },
+        "mapping_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+
+    "edgeMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_delta1_id",
+        "source_original_id",
+        "source_file",
+        "source_record_index",
+        "source_component_id",
+        "source_name_type",
+        "target_delta2_id",
+        "classification",
+        "evidence",
+        "evidence_strength",
+        "mapping_reason",
+        "confidence"
+      ],
+      "properties": {
+        "source_delta1_id": {
+          "$ref": "#/$defs/recordIdentity"
+        },
+        "source_original_id": {
+          "type": "string"
+        },
+        "source_file": {
+          "type": "string"
+        },
+        "source_record_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_component_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_name_type": {
+          "type": "string"
+        },
+        "target_delta2_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "PRESERVED",
+            "COLLAPSED",
+            "ABSORBED",
+            "UNRESOLVED"
+          ]
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_strength": {
+          "enum": [
+            "E0",
+            "E1",
+            "E2",
+            "E3"
+          ]
+        },
+        "mapping_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+
+    "recordIdentity": {
+      "type": "string",
+      "pattern": "^[^:]+:[^:]+:[0-9]+$"
+    }
+  }
+}

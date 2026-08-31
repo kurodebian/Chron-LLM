@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chron-llm.org/schemas/causal_master_graph_v2.schema.json",
+  "title": "Causal Master Graph Schema Version 2",
+  "type": "object",
+  "required": [
+    "version",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Node"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Edge"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Node": {
+      "type": "object",
+      "required": [
+        "id",
+        "global_id",
+        "local_id",
+        "type",
+        "name",
+        "description",
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "global_id": {
+          "type": "string"
+        },
+        "local_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Edge": {
+      "type": "object",
+      "required": [
+        "id",
+        "from",
+        "to",
+        "pipeline",
+        "morphism_type",
+        "delta_level"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^E\\d{3,}$"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "pipeline": {
+          "type": "string"
+        },
+        "morphism_type": {
+          "type": "string"
+        },
+        "guard_invariant": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "delta_level": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

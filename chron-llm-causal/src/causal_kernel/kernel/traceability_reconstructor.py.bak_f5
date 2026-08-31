@@ -24,7 +24,7 @@ Identity model:
         = raw Delta-1 ID
 
     source_delta1_id
-        = <component_id>:<raw_id>:<record_index>
+        = <component_id>::<raw_id>::<record_index>
 
 source_delta1_id は synthetic graph ID ではなく、
 既存 Delta-1 record を一意に参照するための Traceability identity
@@ -79,8 +79,8 @@ def make_node_record_identity(
     record 単位で一意化する。
     """
     return (
-        f"{component_id}:"
-        f"{node_id}:"
+        f"{component_id}::"
+        f"{node_id}::"
         f"{record_index}"
     )
 
@@ -94,10 +94,11 @@ def make_edge_record_identity(
     Delta-1 Edge record の deterministic identity。
     """
     return (
-        f"{component_id}:"
-        f"{edge_id}:"
+        f"{component_id}::"
+        f"{edge_id}::"
         f"{record_index}"
     )
+
 
 # ============================================================
 # Canonical Edge ID
@@ -1190,6 +1191,28 @@ def reconstruct() -> Dict[str, Any]:
         "edge_mappings":
             edge_mappings,
 
+        "delta2_node_provenance": [
+            {
+                "delta2_id":
+                    f"N_{i + 1:03d}",
+
+                "contributing_delta1_nodes":
+                    [],
+            }
+            for i in range(len(d2_nodes))
+        ],
+
+        "delta2_edge_provenance": [
+            {
+                "delta2_id":
+                    f"E_{i + 1:03d}",
+
+                "contributing_delta1_edges":
+                    [],
+            }
+            for i in range(len(d2_edges))
+        ],
+
         "accounting": {
             "nodes":
                 expected_node_counts,
@@ -1201,10 +1224,8 @@ def reconstruct() -> Dict[str, Any]:
         "ambiguities":
             [],
 
-        "unresolved": {
-            "nodes": unresolved_nodes,
-            "edges": unresolved_edges,
-        },
+        "unresolved":
+            unresolved,
 
         "validation": {
 

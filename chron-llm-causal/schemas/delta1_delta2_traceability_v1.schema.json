@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chron-llm.org/schemas/delta1_delta2_traceability_v1.schema.json",
+  "title": "Delta1 to Delta2 Traceability Schema Version 1",
+  "type": "object",
+  "required": [
+    "node_mappings",
+    "edge_mappings",
+    "delta2_node_provenance",
+    "delta2_edge_provenance"
+  ],
+  "properties": {
+    "node_mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/NodeMapping"
+      }
+    },
+    "edge_mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EdgeMapping"
+      }
+    },
+    "delta2_node_provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/NodeProvenance"
+      }
+    },
+    "delta2_edge_provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EdgeProvenance"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "NodeMapping": {
+      "type": "object",
+      "required": [
+        "source_delta1_id",
+        "source_original_id",
+        "source_component_id",
+        "target_delta2_id",
+        "classification"
+      ],
+      "properties": {
+        "source_delta1_id": {
+          "type": "string"
+        },
+        "source_original_id": {
+          "type": "string"
+        },
+        "source_file": {
+          "type": "string"
+        },
+        "source_record_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_component_id": {
+          "type": "string"
+        },
+        "source_name_type": {
+          "type": "string"
+        },
+        "target_delta2_id": {
+          "type": "string",
+          "pattern": "^N_\\d{3,}$"
+        },
+        "classification": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "evidence_strength": {
+          "type": "string"
+        },
+        "mapping_reason": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      },
+      "additionalProperties": false
+    },
+    "EdgeMapping": {
+      "type": "object",
+      "required": [
+        "source_delta1_id",
+        "source_original_id",
+        "source_component_id",
+        "target_delta2_id",
+        "classification"
+      ],
+      "properties": {
+        "source_delta1_id": {
+          "type": "string"
+        },
+        "source_original_id": {
+          "type": "string"
+        },
+        "source_file": {
+          "type": "string"
+        },
+        "source_record_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_component_id": {
+          "type": "string"
+        },
+        "source_name_type": {
+          "type": "string"
+        },
+        "target_delta2_id": {
+          "type": "string",
+          "pattern": "^E_\\d{3,}$"
+        },
+        "classification": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "evidence_strength": {
+          "type": "string"
+        },
+        "mapping_reason": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      },
+      "additionalProperties": false
+    },
+    "NodeProvenance": {
+      "type": "object",
+      "required": [
+        "delta2_id",
+        "contributing_delta1_nodes"
+      ],
+      "properties": {
+        "delta2_id": {
+          "type": "string",
+          "pattern": "^N_\\d{3,}$"
+        },
+        "contributing_delta1_nodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "EdgeProvenance": {
+      "type": "object",
+      "required": [
+        "delta2_id",
+        "contributing_delta1_edges"
+      ],
+      "properties": {
+        "delta2_id": {
+          "type": "string",
+          "pattern": "^E_\\d{3,}$"
+        },
+        "contributing_delta1_edges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
