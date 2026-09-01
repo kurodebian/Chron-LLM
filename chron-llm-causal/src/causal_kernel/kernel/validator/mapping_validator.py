@@ -28,12 +28,16 @@ class MappingValidator:
         "ABSTRACTION",
     }
 
-    # Delta2 の Target ID 存在が必須となるステータス
-    # (ABSORBED, UNRESOLVED, AMBIGUOUS は Target ID なしを正当として許容)
+    # Delta2 の Target ID 存在が必須となるステータス。
+    #
+    # AGGREGATED / COLLAPSED は accounting 上の分類であり、
+    # Canonical な Delta-2 Target を持たないため、Target ID は None
+    # であることを正当な状態として許容する。
+    #
+    # ABSORBED / UNRESOLVED / AMBIGUOUS についても
+    # Target ID なしを正当として許容する。
     TARGET_REQUIRED_STATUSES: Set[str] = {
         "PRESERVED",
-        "AGGREGATED",
-        "COLLAPSED",
         "RESOLVED",
         "1:1",
         "N:1",
@@ -59,7 +63,8 @@ class MappingValidator:
 
         if not isinstance(mapping_data, dict):
             return ValidationResult(
-                is_valid=False, errors=["Mapping data must be a dictionary"]
+                is_valid=False,
+                errors=["Mapping data must be a dictionary"],
             )
 
         # 1. Node Mappings の検証
@@ -89,7 +94,9 @@ class MappingValidator:
             )
 
         return ValidationResult(
-            is_valid=len(errors) == 0, errors=errors, warnings=warnings
+            is_valid=len(errors) == 0,
+            errors=errors,
+            warnings=warnings,
         )
 
     def _validate_mapping_list(
@@ -111,17 +118,31 @@ class MappingValidator:
 
         for idx, item in enumerate(mappings):
             prefix = f"{mapping_type}[{idx}]"
+
             if not isinstance(item, dict):
                 errors.append(f"{prefix} must be an object")
                 continue
 
             # A. Source ID 抽出と存在検証
-            source_id = item.get(source_id_key) or item.get("source_id") or item.get("delta1_id")
+            source_id = (
+                item.get(source_id_key)
+                or item.get("source_id")
+                or item.get("delta1_id")
+            )
+
             if not source_id or not isinstance(source_id, str):
-                errors.append(f"{prefix}: missing or non-string source Delta1 ID")
+                errors.append(
+                    f"{prefix}: missing or non-string source Delta1 ID"
+                )
             else:
-                if known_sources is not None and source_id not in known_sources:
-                    errors.append(f"{prefix}: source ID '{source_id}' not found in Delta1 specification")
+                if (
+                    known_sources is not None
+                    and source_id not in known_sources
+                ):
+                    errors.append(
+                        f"{prefix}: source ID '{source_id}' "
+                        f"not found in Delta1 specification"
+                    )
 
             # B. 分類・ステータスの取得
             status = str(
@@ -132,36 +153,84 @@ class MappingValidator:
             ).upper()
 
             if not status:
-                errors.append(f"{prefix}: missing mapping classification/status")
+                errors.append(
+                    f"{prefix}: missing mapping classification/status"
+                )
             elif status not in self.ALLOWED_MAPPING_STATUSES:
-                errors.append(f"{prefix}: invalid mapping classification/status '{status}'")
+                errors.append(
+                    f"{prefix}: invalid mapping classification/status "
+                    f"'{status}'"
+                )
 
             # C. Target ID 必須性と参照整合性チェック
-            target_id = item.get(target_id_key) or item.get("target_id") or item.get("delta2_id")
+            target_id = (
+                item.get(target_id_key)
+                or item.get("target_id")
+                or item.get("delta2_id")
+            )
+
             if status in self.TARGET_REQUIRED_STATUSES:
                 if not target_id or not isinstance(target_id, str):
-                    errors.append(f"{prefix}: classification '{status}' requires a valid target Delta2 ID")
-                elif known_targets is not None and target_id not in known_targets:
-                    errors.append(f"{prefix}: target ID '{target_id}' not found in Delta2 graph")
-            elif target_id and isinstance(target_id, str):
-                # ABSORBED や UNRESOLVED 等で明示的に Target ID が指定されている場合の参照チェック
-                if known_targets is not None and target_id not in known_targets:
-                    errors.append(f"{prefix}: target ID '{target_id}' not found in Delta2 graph")
+                    errors.append(
+                        f"{prefix}: classification '{status}' "
+                        f"requires a valid target Delta2 ID"
+                    )
+                elif (
+                    known_targets is not None
+                    and target_id not in known_targets
+                ):
+                    errors.append(
+                        f"{prefix}: target ID '{target_id}' "
+                        f"not found in Delta2 graph"
+                    )
 
-            # D. 重複マッピング検出: (source_id, target_id) ペアの完全一致のみ拒否
-            if source_id and target_id and status in self.TARGET_REQUIRED_STATUSES:
+            elif target_id and isinstance(target_id, str):
+                # AGGREGATED / COLLAPSED / ABSORBED / UNRESOLVED /
+                # AMBIGUOUS 等で Target ID が明示されている場合でも、
+                # 指定された ID 自体が存在するなら参照整合性を検証する。
+                if (
+                    known_targets is not None
+                    and target_id not in known_targets
+                ):
+                    errors.append(
+                        f"{prefix}: target ID '{target_id}' "
+                        f"not found in Delta2 graph"
+                    )
+
+            # D. 重複マッピング検出:
+            # (source_id, target_id) の完全一致のみ拒否。
+            #
+            # AGGREGATED / COLLAPSED 等は target_id=None が正当なので、
+            # ここでは Target ID を持つ関係のみ対象とする。
+            if (
+                source_id
+                and target_id
+                and status in self.TARGET_REQUIRED_STATUSES
+            ):
                 pair = (source_id, target_id)
+
                 if pair in seen_pairs:
                     errors.append(
                         f"{prefix}: duplicate mapping relationship for "
                         f"source '{source_id}' -> target '{target_id}'"
                     )
+
                 seen_pairs.add(pair)
 
             # E. Mapping Evidence 存在判定
-            evidence = item.get("evidence") or item.get("mapping_evidence") or item.get("proof")
-            if evidence is None or (isinstance(evidence, (str, list, dict)) and len(evidence) == 0):
-                errors.append(f"{prefix}: missing or empty mapping evidence")
+            evidence = (
+                item.get("evidence")
+                or item.get("mapping_evidence")
+                or item.get("proof")
+            )
+
+            if evidence is None or (
+                isinstance(evidence, (str, list, dict))
+                and len(evidence) == 0
+            ):
+                errors.append(
+                    f"{prefix}: missing or empty mapping evidence"
+                )
 
             # F. E0 × VERIFIED の論理矛盾判定
             evidence_level = str(
@@ -169,13 +238,19 @@ class MappingValidator:
                 or item.get("evidence_level")
                 or ""
             ).upper()
+
             verification_status = str(
                 item.get("verification_status")
                 or item.get("status_verification")
                 or ""
             ).upper()
 
-            if evidence_level == "E0" and verification_status in {"VERIFIED", "APPROVED", "CONFIRMED"}:
+            if (
+                evidence_level == "E0"
+                and verification_status
+                in {"VERIFIED", "APPROVED", "CONFIRMED"}
+            ):
                 errors.append(
-                    f"{prefix}: logical contradiction - cannot be VERIFIED with E0 evidence strength"
+                    f"{prefix}: logical contradiction - "
+                    f"cannot be VERIFIED with E0 evidence strength"
                 )

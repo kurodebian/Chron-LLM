@@ -120,26 +120,108 @@ def test_t3_every_mapping_references_existing_delta1(traceability_data: Dict[str
 # T4
 # ==========================================================
 
-def test_t4_resolved_node_mapping_references_delta2(traceability_data: Dict[str, Any]) -> None:
+def test_t4_only_preserved_node_mapping_references_delta2(
+    traceability_data: Dict[str, Any],
+) -> None:
     """
-    T4: resolved Node mappings have a Delta-2 target.
+    T4: only PRESERVED Node mappings reference an actual
+    Delta-2 MasterGraph Node identity.
+
+    Phase 2 contract:
+
+        PRESERVED
+            -> target_delta2_id MUST be an actual Delta-2 Node ID.
+
+        AGGREGATED / ABSORBED / UNRESOLVED
+            -> target_delta2_id MUST be None.
+
+    IMPORTANT:
+        Delta-2 Node IDs are canonical identities defined by
+        the MasterGraph. Their textual prefix is NOT part of
+        the identity contract.
+
+        Semantic provenance is deferred to Phase 3.
     """
+
+    with open(
+        MASTERGRAPH_PATH,
+        "r",
+        encoding="utf-8",
+    ) as f:
+        mastergraph = json.load(f)
+
+    delta2_node_ids = {
+        node["id"]
+        for node in mastergraph["nodes"]
+    }
+
     for mapping in traceability_data["node_mappings"]:
-        if mapping["classification"] in {"PRESERVED", "AGGREGATED"}:
-            assert mapping["target_delta2_id"] is not None
+
+        classification = mapping["classification"]
+        target = mapping["target_delta2_id"]
+
+        if classification == "PRESERVED":
+
+            assert target is not None
+            assert target in delta2_node_ids
+
+        else:
+
+            assert target is None
 
 
 # ==========================================================
 # T5
 # ==========================================================
 
-def test_t5_resolved_edge_mapping_references_delta2(traceability_data: Dict[str, Any]) -> None:
+def test_t5_only_preserved_edge_mapping_references_delta2(
+    traceability_data: Dict[str, Any],
+) -> None:
     """
-    T5: resolved Edge mappings have a Delta-2 target.
+    T5: only PRESERVED Edge mappings reference an actual
+    Delta-2 MasterGraph Edge identity.
+
+    Phase 2 contract:
+
+        PRESERVED
+            -> target_delta2_id MUST be an actual Delta-2 Edge ID.
+
+        COLLAPSED / ABSORBED / UNRESOLVED
+            -> target_delta2_id MUST be None.
+
+    IMPORTANT:
+        Delta-2 Edge IDs are canonical identities defined by
+        the MasterGraph. Their textual prefix is NOT part of
+        the identity contract.
+
+        Semantic provenance is deferred to Phase 3.
     """
+
+    with open(
+        MASTERGRAPH_PATH,
+        "r",
+        encoding="utf-8",
+    ) as f:
+        mastergraph = json.load(f)
+
+    delta2_edge_ids = {
+        edge["id"]
+        for edge in mastergraph["edges"]
+    }
+
     for mapping in traceability_data["edge_mappings"]:
-        if mapping["classification"] in {"PRESERVED", "COLLAPSED"}:
-            assert mapping["target_delta2_id"] is not None
+
+        classification = mapping["classification"]
+        target = mapping["target_delta2_id"]
+
+        if classification == "PRESERVED":
+
+            assert target is not None
+            assert target in delta2_edge_ids
+
+        else:
+
+            assert target is None
 
 
 # ==========================================================
@@ -167,8 +249,14 @@ def test_t7_no_duplicate_source_accounting(traceability_data: Dict[str, Any]) ->
     Raw Node IDs may legitimately duplicate across components.
     The uniqueness contract applies to source_delta1_id.
     """
-    node_ids = [mapping["source_delta1_id"] for mapping in traceability_data["node_mappings"]]
-    edge_ids = [mapping["source_delta1_id"] for mapping in traceability_data["edge_mappings"]]
+    node_ids = [
+        mapping["source_delta1_id"]
+        for mapping in traceability_data["node_mappings"]
+    ]
+    edge_ids = [
+        mapping["source_delta1_id"]
+        for mapping in traceability_data["edge_mappings"]
+    ]
 
     assert len(node_ids) == EXPECTED_D1_NODES
     assert len(node_ids) == len(set(node_ids))
@@ -181,30 +269,74 @@ def test_t7_no_duplicate_source_accounting(traceability_data: Dict[str, Any]) ->
 # T8
 # ==========================================================
 
-def test_t8_no_dangling_provenance_target(traceability_data: Dict[str, Any]) -> None:
+def test_t8_preserved_mappings_reference_existing_delta2(
+    traceability_data: Dict[str, Any],
+) -> None:
     """
-    T8: every Delta-2 provenance record has a Delta-2 identity.
+    T8: PRESERVED mappings reference existing Delta-2
+    identities.
+
+    Phase 2 contract:
+
+        PRESERVED
+            -> target_delta2_id MUST exist
+
+        AGGREGATED / ABSORBED / UNRESOLVED
+            -> target_delta2_id MUST be None
+
+    Semantic provenance is deferred to Phase 3.
     """
-    node_provenance = traceability_data["delta2_node_provenance"]
-    edge_provenance = traceability_data["delta2_edge_provenance"]
 
-    assert len(node_provenance) == EXPECTED_D2_NODES
-    assert len(edge_provenance) == EXPECTED_D2_EDGES
+    with open(
+        MASTERGRAPH_PATH,
+        "r",
+        encoding="utf-8",
+    ) as f:
+        mastergraph = json.load(f)
 
-    for provenance in node_provenance:
-        assert "delta2_id" in provenance and provenance["delta2_id"]
+    delta2_node_ids = {
+        node["id"]
+        for node in mastergraph["nodes"]
+    }
 
-    for provenance in edge_provenance:
-        assert "delta2_id" in provenance and provenance["delta2_id"]
+    delta2_edge_ids = {
+        edge["id"]
+        for edge in mastergraph["edges"]
+    }
+
+    for mapping in traceability_data["node_mappings"]:
+
+        classification = mapping["classification"]
+        target = mapping["target_delta2_id"]
+
+        if classification == "PRESERVED":
+            assert target is not None
+            assert target in delta2_node_ids
+        else:
+            assert target is None
+
+    for mapping in traceability_data["edge_mappings"]:
+
+        classification = mapping["classification"]
+        target = mapping["target_delta2_id"]
+
+        if classification == "PRESERVED":
+            assert target is not None
+            assert target in delta2_edge_ids
+        else:
+            assert target is None
 
 
 # ==========================================================
 # T9
 # ==========================================================
 
-def test_t9_all_mappings_contain_evidence(traceability_data: Dict[str, Any]) -> None:
+def test_t9_all_mappings_contain_evidence(
+    traceability_data: Dict[str, Any],
+) -> None:
     """
-    T9: every mapping contains explicit evidence metadata.
+    T9: every Phase 2 accounting mapping contains
+    explicit evidence metadata.
     """
     for mapping in traceability_data["node_mappings"]:
         assert "evidence" in mapping and mapping["evidence"]
@@ -219,7 +351,9 @@ def test_t9_all_mappings_contain_evidence(traceability_data: Dict[str, Any]) -> 
 # T10
 # ==========================================================
 
-def test_t10_e0_cannot_be_verified(traceability_data: Dict[str, Any]) -> None:
+def test_t10_e0_cannot_be_verified(
+    traceability_data: Dict[str, Any],
+) -> None:
     """
     T10: E0 mappings cannot be treated as verified.
 
@@ -240,11 +374,14 @@ def test_t10_e0_cannot_be_verified(traceability_data: Dict[str, Any]) -> None:
 # T11
 # ==========================================================
 
-def test_t11_unresolved_elements_explicitly_preserved(traceability_data: Dict[str, Any]) -> None:
+def test_t11_unresolved_elements_explicitly_preserved(
+    traceability_data: Dict[str, Any],
+) -> None:
     """
-    T11: unresolved Node and Edge records are explicitly preserved.
+    T11: unresolved Node and Edge records are explicitly
+    preserved.
 
-    Current contract:
+    Canonical contract:
         unresolved = {
             "nodes": [...],
             "edges": [...]
@@ -260,8 +397,6 @@ def test_t11_unresolved_elements_explicitly_preserved(traceability_data: Dict[st
     assert isinstance(unresolved["nodes"], list)
     assert isinstance(unresolved["edges"], list)
 
-    # Every unresolved identity must correspond to an actual
-    # source_delta1_id in its respective mapping space.
     node_ids = {
         mapping["source_delta1_id"]
         for mapping in traceability_data["node_mappings"]
@@ -282,13 +417,186 @@ def test_t11_unresolved_elements_explicitly_preserved(traceability_data: Dict[st
 # T12
 # ==========================================================
 
-def test_t12_delta2_provenance_reconstructible(traceability_data: Dict[str, Any]) -> None:
+def test_t12_phase2_structural_mapping_contract(
+    traceability_data: Dict[str, Any],
+) -> None:
     """
-    T12: Delta-2 provenance containers exist and are
-    structurally reconstructible from mapping records.
+    T12: Phase 2 structural mapping artifact conforms to the
+    canonical Phase 2 accounting contract.
+
+    Phase 2 owns only structural/accounting mapping.
+
+    It MUST contain:
+        - node_mappings
+        - edge_mappings
+        - accounting
+        - unresolved
+
+    It MUST NOT contain:
+        - delta2_nodes_provenance
+        - delta2_edges_provenance
+
+    Semantic D1 -> D2 provenance is exclusively deferred to
+    Phase 3.
     """
-    assert len(traceability_data["delta2_node_provenance"]) == EXPECTED_D2_NODES
-    assert len(traceability_data["delta2_edge_provenance"]) == EXPECTED_D2_EDGES
+
+    # ----------------------------------------------------------
+    # Phase
+    # ----------------------------------------------------------
+
+    assert traceability_data.get("phase") == "PHASE_2"
+
+    # ----------------------------------------------------------
+    # Phase 3 provenance containers MUST NOT leak into Phase 2
+    # ----------------------------------------------------------
+
+    assert (
+        "delta2_nodes_provenance"
+        not in traceability_data
+    )
+
+    assert (
+        "delta2_edges_provenance"
+        not in traceability_data
+    )
+
+    # ----------------------------------------------------------
+    # Required Phase 2 structural mapping containers
+    # ----------------------------------------------------------
+
+    assert "node_mappings" in traceability_data
+    assert "edge_mappings" in traceability_data
+    assert "accounting" in traceability_data
+    assert "unresolved" in traceability_data
+
+    node_mappings = traceability_data[
+        "node_mappings"
+    ]
+
+    edge_mappings = traceability_data[
+        "edge_mappings"
+    ]
+
+    accounting = traceability_data[
+        "accounting"
+    ]
+
+    unresolved = traceability_data[
+        "unresolved"
+    ]
+
+    # ----------------------------------------------------------
+    # Container types
+    # ----------------------------------------------------------
+
+    assert isinstance(node_mappings, list)
+    assert isinstance(edge_mappings, list)
+    assert isinstance(accounting, dict)
+    assert isinstance(unresolved, dict)
+
+    assert isinstance(
+        unresolved.get("nodes"),
+        list,
+    )
+
+    assert isinstance(
+        unresolved.get("edges"),
+        list,
+    )
+
+    # ----------------------------------------------------------
+    # Physical population coverage
+    #
+    # Phase 2 must account for every Delta-1 physical record.
+    # ----------------------------------------------------------
+
+    assert len(node_mappings) == 340
+    assert len(edge_mappings) == 312
+
+    # ----------------------------------------------------------
+    # Canonical accounting
+    # ----------------------------------------------------------
+
+    expected_node_accounting = {
+        "PRESERVED": 14,
+        "AGGREGATED": 306,
+        "ABSORBED": 18,
+        "UNRESOLVED": 2,
+    }
+
+    expected_edge_accounting = {
+        "PRESERVED": 11,
+        "COLLAPSED": 280,
+        "ABSORBED": 15,
+        "UNRESOLVED": 6,
+    }
+
+    assert (
+        accounting.get("nodes")
+        == expected_node_accounting
+    )
+
+    assert (
+        accounting.get("edges")
+        == expected_edge_accounting
+    )
+
+    # ----------------------------------------------------------
+    # Recompute classifications independently from mappings.
+    #
+    # This prevents the accounting object from becoming its
+    # own oracle.
+    # ----------------------------------------------------------
+
+    from collections import Counter
+
+    actual_node_accounting = Counter(
+        mapping.get("classification")
+        for mapping in node_mappings
+    )
+
+    actual_edge_accounting = Counter(
+        mapping.get("classification")
+        for mapping in edge_mappings
+    )
+
+    assert dict(actual_node_accounting) == (
+        expected_node_accounting
+    )
+
+    assert dict(actual_edge_accounting) == (
+        expected_edge_accounting
+    )
+
+    # ----------------------------------------------------------
+    # Unresolved must exactly correspond to mappings classified
+    # as UNRESOLVED.
+    # ----------------------------------------------------------
+
+    unresolved_node_ids = {
+        mapping["source_delta1_id"]
+        for mapping in node_mappings
+        if mapping["classification"]
+        == "UNRESOLVED"
+    }
+
+    unresolved_edge_ids = {
+        mapping["source_delta1_id"]
+        for mapping in edge_mappings
+        if mapping["classification"]
+        == "UNRESOLVED"
+    }
+
+    assert set(unresolved["nodes"]) == (
+        unresolved_node_ids
+    )
+
+    assert set(unresolved["edges"]) == (
+        unresolved_edge_ids
+    )
+
+    assert len(unresolved["nodes"]) == 2
+    assert len(unresolved["edges"]) == 6
 
 
 # ==========================================================

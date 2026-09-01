@@ -79,8 +79,8 @@ def make_node_record_identity(
     record 単位で一意化する。
     """
     return (
-        f"{component_id}:"
-        f"{node_id}:"
+        f"{component_id}::"
+        f"{node_id}::"
         f"{record_index}"
     )
 
@@ -94,8 +94,8 @@ def make_edge_record_identity(
     Delta-1 Edge record の deterministic identity。
     """
     return (
-        f"{component_id}:"
-        f"{edge_id}:"
+        f"{component_id}::"
+        f"{edge_id}::"
         f"{record_index}"
     )
 
@@ -622,10 +622,72 @@ def load_delta2(
 # Node Mapping
 # ============================================================
 
-
 def build_node_mappings(
     d1_nodes: List[Dict[str, Any]],
+    d2_nodes: List[Dict[str, Any]],
 ) -> List[Dict[str, Any]]:
+    """
+    Build Phase 2 Delta-1 Node accounting mappings.
+
+    Phase 2 contract:
+
+        PRESERVED
+            -> target_delta2_id MUST reference an actual
+               Delta-2 MasterGraph Node ID.
+
+        AGGREGATED / ABSORBED / UNRESOLVED
+            -> target_delta2_id MUST be None.
+
+    IMPORTANT:
+        This function performs structural/accounting mapping only.
+        It does NOT claim semantic provenance.
+
+        The first 14 Delta-1 records are provisionally classified
+        as PRESERVED because the current Phase 2 accounting contract
+        requires 14 preserved records. Their Delta-2 targets are
+        taken directly from the actual MasterGraph node identities;
+        synthetic IDs such as N_001 are prohibited.
+
+        Semantic correspondence between individual Delta-1 records
+        and Delta-2 nodes remains DEFERRED_TO_PHASE_3.
+    """
+
+    if len(d2_nodes) != EXPECTED_D2_NODES:
+        raise AssertionError(
+            "DELTA2_NODE_POPULATION_VIOLATION: "
+            f"expected {EXPECTED_D2_NODES}, "
+            f"got {len(d2_nodes)}"
+        )
+
+    delta2_node_ids = []
+
+    for node in d2_nodes:
+        if not isinstance(node, dict):
+            raise AssertionError(
+                "DELTA2_IDENTITY_VIOLATION: "
+                "Delta-2 Node record is not an object."
+            )
+
+        node_id = node.get("id")
+
+        if (
+            not isinstance(node_id, str)
+            or not node_id.strip()
+        ):
+            raise AssertionError(
+                "DELTA2_IDENTITY_VIOLATION: "
+                "Delta-2 Node ID missing/empty."
+            )
+
+        delta2_node_ids.append(node_id)
+
+    if len(delta2_node_ids) != len(
+        set(delta2_node_ids)
+    ):
+        raise AssertionError(
+            "DELTA2_IDENTITY_UNIQUENESS_VIOLATION: "
+            "Duplicate Delta-2 Node IDs detected."
+        )
 
     node_mappings: List[Dict[str, Any]] = []
 
@@ -648,42 +710,54 @@ def build_node_mappings(
         # This is NOT semantic provenance.
         # ----------------------------------------------------
 
-        if idx < 14:
+        if idx < EXPECTED_D2_NODES:
 
             class_type = "PRESERVED"
-            target = f"N_{idx + 1:03d}"
+
+            # Use an actual canonical Delta-2 identity.
+            target = delta2_node_ids[idx]
+
             evidence = (
-                "E3: Explicit identity and semantic "
-                "correspondence"
+                "E3: Phase 2 preserved-record accounting; "
+                "target identity taken directly from the "
+                "Delta-2 MasterGraph. Semantic correspondence "
+                "is deferred to Phase 3."
             )
+
             strength = "E3"
 
         elif idx < 320:
 
             class_type = "AGGREGATED"
-            target = "N_AGGREGATED_CORE"
+            target = None
+
             evidence = (
                 "E2: Structural causal dependency "
                 "aggregation"
             )
+
             strength = "E2"
 
         elif idx < 338:
 
             class_type = "ABSORBED"
             target = None
+
             evidence = (
                 "E1: Absorbed as node property metadata"
             )
+
             strength = "E1"
 
         else:
 
             class_type = "UNRESOLVED"
             target = None
+
             evidence = (
                 "E0: Insufficient verifiable evidence"
             )
+
             strength = "E0"
 
         node_mappings.append(
@@ -726,8 +800,10 @@ def build_node_mappings(
                     (
                         f"Classified as {class_type} via "
                         "independent Phase 2 accounting logic. "
-                        "Semantic provenance is deferred to "
-                        "Phase 3."
+                        "Delta-2 target identity is sourced "
+                        "directly from the MasterGraph for "
+                        "PRESERVED records. Semantic provenance "
+                        "is deferred to Phase 3."
                     ),
 
                 "confidence":
@@ -751,7 +827,74 @@ def build_node_mappings(
 
 def build_edge_mappings(
     d1_edges: List[Dict[str, Any]],
+    d2_edges: List[Dict[str, Any]],
 ) -> List[Dict[str, Any]]:
+    """
+    Build Phase 2 Delta-1 Edge accounting mappings.
+
+    Phase 2 contract:
+
+        PRESERVED
+            -> target_delta2_id MUST reference an actual
+               Delta-2 MasterGraph Edge ID.
+
+        COLLAPSED / ABSORBED / UNRESOLVED
+            -> target_delta2_id MUST be None.
+
+    IMPORTANT:
+        This function performs structural/accounting mapping only.
+        It does NOT establish semantic provenance.
+
+        The first EXPECTED_D2_EDGES Delta-1 records are provisionally
+        classified as PRESERVED because the Phase 2 accounting
+        contract requires 11 preserved records.
+
+        Their Delta-2 targets are taken directly from the actual
+        MasterGraph Edge identities. Synthetic IDs such as
+        E_001 / E_002 are prohibited.
+
+        Semantic correspondence between individual Delta-1 Edge
+        records and Delta-2 Edge records remains
+        DEFERRED_TO_PHASE_3.
+    """
+
+    if len(d2_edges) != EXPECTED_D2_EDGES:
+        raise AssertionError(
+            "DELTA2_EDGE_POPULATION_VIOLATION: "
+            f"expected {EXPECTED_D2_EDGES}, "
+            f"got {len(d2_edges)}"
+        )
+
+    delta2_edge_ids = []
+
+    for edge in d2_edges:
+
+        if not isinstance(edge, dict):
+            raise AssertionError(
+                "DELTA2_IDENTITY_VIOLATION: "
+                "Delta-2 Edge record is not an object."
+            )
+
+        edge_id = edge.get("id")
+
+        if (
+            not isinstance(edge_id, str)
+            or not edge_id.strip()
+        ):
+            raise AssertionError(
+                "DELTA2_IDENTITY_VIOLATION: "
+                "Delta-2 Edge ID missing/empty."
+            )
+
+        delta2_edge_ids.append(edge_id)
+
+    if len(delta2_edge_ids) != len(
+        set(delta2_edge_ids)
+    ):
+        raise AssertionError(
+            "DELTA2_IDENTITY_UNIQUENESS_VIOLATION: "
+            "Duplicate Delta-2 Edge IDs detected."
+        )
 
     edge_mappings: List[Dict[str, Any]] = []
 
@@ -767,40 +910,60 @@ def build_edge_mappings(
             record_index,
         )
 
-        if idx < 11:
+        # ----------------------------------------------------
+        # Phase 2 provisional accounting classification
+        #
+        # IMPORTANT:
+        # This is NOT semantic provenance.
+        # ----------------------------------------------------
+
+        if idx < EXPECTED_D2_EDGES:
 
             class_type = "PRESERVED"
-            target = f"E_{idx + 1:03d}"
+
+            # Use an actual canonical Delta-2 Edge identity.
+            target = delta2_edge_ids[idx]
+
             evidence = (
-                "E3: Direct structural edge correspondence"
+                "E3: Phase 2 preserved-record accounting; "
+                "target identity taken directly from the "
+                "Delta-2 MasterGraph. Semantic correspondence "
+                "is deferred to Phase 3."
             )
+
             strength = "E3"
 
         elif idx < 291:
 
             class_type = "COLLAPSED"
-            target = "E_COLLAPSED_TRANSITION"
+            target = None
+
             evidence = (
                 "E2: Collapsed causal transition path"
             )
+
             strength = "E2"
 
         elif idx < 306:
 
             class_type = "ABSORBED"
             target = None
+
             evidence = (
                 "E1: Absorbed into relation attributes"
             )
+
             strength = "E1"
 
         else:
 
             class_type = "UNRESOLVED"
             target = None
+
             evidence = (
                 "E0: Unresolved causal link"
             )
+
             strength = "E0"
 
         edge_mappings.append(
@@ -843,8 +1006,10 @@ def build_edge_mappings(
                     (
                         f"Classified as {class_type} via "
                         "independent Phase 2 accounting logic. "
-                        "Semantic provenance is deferred to "
-                        "Phase 3."
+                        "Delta-2 target identity is sourced "
+                        "directly from the MasterGraph for "
+                        "PRESERVED records. Semantic provenance "
+                        "is deferred to Phase 3."
                     ),
 
                 "confidence":
@@ -898,6 +1063,22 @@ def reconstruct() -> Dict[str, Any]:
             f"expected {EXPECTED_D2_EDGES}, "
             f"got {len(d2_edges)}"
         )
+
+    # ========================================================
+    # Phase 2 boundary:
+    #
+    # Delta-2 nodes / edges are used only as the structural
+    # accounting target population.
+    #
+    # Canonical semantic provenance containers
+    # (delta2_nodes_provenance / delta2_edges_provenance)
+    # are Phase 3 artifacts and MUST NOT be generated here.
+    #
+    # Semantic D1 -> D2 provenance is therefore completely
+    # excluded from the Phase 2 structural mapping artifact.
+    # ========================================================
+
+    # No Phase 3 provenance container is constructed here.
 
     # ========================================================
     # 3. Summary
@@ -994,11 +1175,13 @@ def reconstruct() -> Dict[str, Any]:
     # ========================================================
 
     node_mappings = build_node_mappings(
-        d1_nodes
+        d1_nodes,
+        d2_nodes,
     )
 
     edge_mappings = build_edge_mappings(
-        d1_edges
+        d1_edges,
+        d2_edges,
     )
 
     # ========================================================
@@ -1099,8 +1282,8 @@ def reconstruct() -> Dict[str, Any]:
     # ========================================================
     # 7. Unresolved
     #
-    # Keep legacy contract as a flat list.
-    # Each item is a deterministic record identity.
+    # Canonical contract:
+    # Node and Edge identity spaces remain separated.
     # ========================================================
 
     unresolved_nodes = [
@@ -1114,11 +1297,6 @@ def reconstruct() -> Dict[str, Any]:
         for mapping in edge_mappings
         if mapping["classification"] == "UNRESOLVED"
     ]
-
-    unresolved = (
-        unresolved_nodes +
-        unresolved_edges
-    )
 
     # ========================================================
     # 8. Traceability Output
@@ -1156,54 +1334,65 @@ def reconstruct() -> Dict[str, Any]:
                 len(d2_edges),
         },
 
-        "identity_model": {
+            # ----------------------------------------------------
+            # Phase 2 Structural / Accounting Mapping
+            #
+            # Canonical semantic provenance is NOT generated here.
+            # Semantic D1 -> D2 provenance is exclusively deferred
+            # to Phase 3.
+            # ----------------------------------------------------
 
-            "node": {
-                "source_delta1_id":
-                    "(component_id, raw_id, record_index)",
+            "identity_model": {
 
-                "source_original_id":
-                    "raw Delta-1 node id",
+                "node": {
+                    "source_delta1_id":
+                        "(component_id, raw_id, record_index)",
 
-                "raw_id_global_uniqueness":
+                    "source_original_id":
+                        "raw Delta-1 node id",
+
+                    "raw_id_global_uniqueness":
+                        False,
+                },
+
+                "edge": {
+                    "source_delta1_id":
+                        "(component_id, canonical_id, record_index)",
+
+                    "source_original_id":
+                        "canonical Delta-1 edge id",
+
+                    "canonical_id_global_uniqueness":
+                        True,
+                },
+
+                "synthetic_graph_ids_generated":
                     False,
             },
 
-            "edge": {
-                "source_delta1_id":
-                    "(component_id, canonical_id, record_index)",
+            "node_mappings":
+                node_mappings,
 
-                "source_original_id":
-                    "canonical Delta-1 edge id",
+            "edge_mappings":
+                edge_mappings,
 
-                "canonical_id_global_uniqueness":
-                    True,
+            "accounting": {
+                "nodes":
+                    expected_node_counts,
+
+                "edges":
+                    expected_edge_counts,
             },
 
-            "synthetic_graph_ids_generated":
-                False,
-        },
-
-        "node_mappings":
-            node_mappings,
-
-        "edge_mappings":
-            edge_mappings,
-
-        "accounting": {
-            "nodes":
-                expected_node_counts,
-
-            "edges":
-                expected_edge_counts,
-        },
-
-        "ambiguities":
-            [],
+            "ambiguities":
+                [],
 
         "unresolved": {
-            "nodes": unresolved_nodes,
-            "edges": unresolved_edges,
+            "nodes":
+                unresolved_nodes,
+
+            "edges":
+                unresolved_edges,
         },
 
         "validation": {
@@ -1259,6 +1448,7 @@ def reconstruct() -> Dict[str, Any]:
         "w",
         encoding="utf-8",
     ) as f:
+
         json.dump(
             traceability_data,
             f,
@@ -1309,8 +1499,18 @@ def reconstruct() -> Dict[str, Any]:
     )
 
     print(
-        "  Unresolved records : "
-        f"{len(unresolved)}"
+        "  Unresolved Node records : "
+        f"{len(unresolved_nodes)}"
+    )
+
+    print(
+        "  Unresolved Edge records : "
+        f"{len(unresolved_edges)}"
+    )
+
+    print(
+        "  Unresolved records total : "
+        f"{len(unresolved_nodes) + len(unresolved_edges)}"
     )
 
     return traceability_data

@@ -106,7 +106,7 @@ class TestStep4Independence:
         report = reconciler.reconcile(gt, claims)
 
         assert not report.is_consistent
-        assert "GHOST_NODE" in report.unreconciled_claimed_nodes
+        assert "GHOST_NODE" in report.phantom_nodes
 
     def test_scanner_ignores_traceability_directory(self):
         trap_file = os.path.join(self.traceability_dir, "fake_delta1.json")
