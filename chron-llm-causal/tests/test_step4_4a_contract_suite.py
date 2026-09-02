@@ -252,26 +252,39 @@ def test_T10a_gt_identity_cardinality_completeness():
 
 
 def test_T10b_untracked_population_detection():
-    """T10b: GT - Claim => UNTRACKED Population 検証"""
+    """T10b: GT - Claim => UNTRACKED Population 検証 (Record Identity 空間)"""
+
     nodes, edges, _ = load_delta1_population()
 
-    gt_node_ids = set(n["data"].get("id") for n in nodes if n["data"].get("id"))
-    gt_edge_ids = set(e["data"].get("id") for e in edges if e["data"].get("id"))
+    gt_node_record_ids = {
+        f"{node['component_id']}:{node['data']['id']}:{node['data']['record_index']}"
+        for node in nodes
+        if node["data"].get("id") and node["data"].get("record_index") is not None
+    }
+
+    gt_edge_record_ids = {
+        f"{edge['component_id']}:{edge['data']['id']}:{edge['data']['record_index']}"
+        for edge in edges
+        if edge["data"].get("id") and edge["data"].get("record_index") is not None
+    }
 
     with open(TRACEABILITY_FILE, "r", encoding="utf-8") as f:
         trace = json.load(f)
 
     tracked_node_claims = [
-        m.get("source_delta1_id") for m in trace.get("node_mappings", [])
+        m.get("source_delta1_id")
+        for m in trace.get("node_mappings", [])
     ]
     tracked_edge_claims = [
-        m.get("source_delta1_id") for m in trace.get("edge_mappings", [])
+        m.get("source_delta1_id")
+        for m in trace.get("edge_mappings", [])
     ]
 
     # Claim 重複の検知
     assert len(tracked_node_claims) == len(
         set(tracked_node_claims)
     ), "Contract Violation (T10b: DUPLICATE_CLAIM): Node claims contain duplicates."
+
     assert len(tracked_edge_claims) == len(
         set(tracked_edge_claims)
     ), "Contract Violation (T10b: DUPLICATE_CLAIM): Edge claims contain duplicates."
@@ -279,8 +292,8 @@ def test_T10b_untracked_population_detection():
     set_node_claims = set(tracked_node_claims)
     set_edge_claims = set(tracked_edge_claims)
 
-    untracked_nodes = gt_node_ids - set_node_claims
-    untracked_edges = gt_edge_ids - set_edge_claims
+    untracked_nodes = gt_node_record_ids - set_node_claims
+    untracked_edges = gt_edge_record_ids - set_edge_claims
 
     assert len(untracked_nodes) == 0 and len(untracked_edges) == 0, (
         f"Contract Violation (T10b: UNTRACKED): Untracked population detected. "

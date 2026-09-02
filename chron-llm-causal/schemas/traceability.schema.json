@@ -18,35 +18,28 @@
     "$schema": {
       "type": "string"
     },
-
     "audit_version": {
       "type": "string"
     },
-
     "status": {
       "type": "string"
     },
-
     "canonical_freeze": {
       "type": "string"
     },
-
     "target_mastergraph": {
       "type": "string"
     },
-
     "machine_checks": {
       "type": "object",
       "additionalProperties": true
     },
-
     "delta2_nodes_provenance": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/nodeProvenance"
       }
     },
-
     "delta2_edges_provenance": {
       "type": "array",
       "items": {
@@ -54,7 +47,6 @@
       }
     }
   },
-
   "$defs": {
     "nodeProvenance": {
       "type": "object",
@@ -69,20 +61,17 @@
           "type": "string",
           "minLength": 1
         },
-
         "source_delta1_node_ids": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/recordIdentity"
           }
         },
-
         "provenance_complete": {
           "type": "boolean"
         }
       }
     },
-
     "edgeProvenance": {
       "type": "object",
       "additionalProperties": false,
@@ -96,20 +85,17 @@
           "type": "string",
           "minLength": 1
         },
-
         "source_delta1_edge_ids": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/recordIdentity"
           }
         },
-
         "provenance_complete": {
           "type": "boolean"
         }
       }
     },
-
     "recordIdentity": {
       "type": "string",
       "pattern": "^[^:]+:[^:]+:[0-9]+$"
