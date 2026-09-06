@@ -78,3 +78,8 @@ class CausalGraphValidator:
                 unconstrained.append(node)
 
         return unconstrained
+
+# Backward-compatible public API alias.
+GraphValidator = CausalGraphValidator
+# Backward-compatible public API alias.
+GraphValidator = CausalGraphValidator
