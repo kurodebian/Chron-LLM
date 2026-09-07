@@ -4,8 +4,6 @@
 **Module** : Reference Causal Kernel Prototype  
 **Purpose** : Chron-LLM 因果カーネルの概念実証 (Proof of Concept)
 
----
-
 # 1. 概要
 
 本モジュールは Chron-LLM Δ3 の最初期リファレンス実装であり、
@@ -27,8 +25,6 @@
 - World Service
 
 へ分離された設計の原型となる。
-
----
 
 # 2. 設計目的
 
@@ -56,8 +52,6 @@ History抽出
 
 が成立することを検証するためのPoCである。
 
----
-
 # 3. モジュール構成
 
 ```
@@ -75,8 +69,6 @@ Phase D
 
 Simulation
 ```
-
----
 
 # 4. アーキテクチャ
 
@@ -106,8 +98,6 @@ Simulation
 
 Graphは永続化されない。
 
----
-
 # 5. Event ABI
 
 ## event
@@ -124,37 +114,25 @@ Kind
 Payload
 ```
 
----
-
 ### index
 
 WAL内位置
-
----
 
 ### clock
 
 Commit順序
 
----
-
 ### causal-id
 
 世界線ID
-
----
 
 ### kind
 
 イベント種類
 
----
-
 ### payload
 
 Property List
-
----
 
 # 6. Event設計
 
@@ -180,8 +158,6 @@ Metadata
 
 HeaderはKernel管理を想定している。
 
----
-
 # 7. WAL
 
 ## write-ahead-log
@@ -196,8 +172,6 @@ Clock
 Stage Queue
 ```
 
----
-
 ### storage
 
 永続Event
@@ -206,19 +180,13 @@ Stage Queue
 Vector<Event>
 ```
 
----
-
 ### clock
 
 単調増加論理時計
 
----
-
 ### staged-events
 
 Commit待機Event
-
----
 
 # 8. WAL API
 
@@ -233,8 +201,6 @@ discard-staged
 
 commit-staged
 ```
-
----
 
 # 9. append-event()
 
@@ -255,8 +221,6 @@ Storage追加
 ```
 
 Stageを経由しない。
-
----
 
 # 10. stage-event()
 
@@ -284,8 +248,6 @@ wal-clock+1
 
 Commit時に再設定される。
 
----
-
 # 11. discard-staged()
 
 Stage Queue破棄。
@@ -295,8 +257,6 @@ Rollback
 ```
 
 相当。
-
----
 
 # 12. commit-staged()
 
@@ -318,8 +278,6 @@ Storage追加
 
 Stage削除
 
----
-
 Commit順
 
 ```
@@ -335,8 +293,6 @@ push
 ```
 
 で逆順に格納されるためである。
-
----
 
 # 13. Graph
 
@@ -358,8 +314,6 @@ Clock
 World
 ```
 
----
-
 # 14. Node Class
 
 determine-node-class()
@@ -374,8 +328,6 @@ Dialogue
 :assistant-reply
 ```
 
----
-
 Tool
 
 ```
@@ -388,8 +340,6 @@ tool-call-abort
 tool-call-commit
 ```
 
----
-
 Fault
 
 ```
@@ -398,13 +348,9 @@ structural-fault
 tool-fault
 ```
 
----
-
 Meta
 
 その他
-
----
 
 # 15. Graph構造
 
@@ -436,8 +382,6 @@ Parents
 Hash
 ```
 
----
-
 # 16. Projection
 
 lift-to-graph()
@@ -453,8 +397,6 @@ DAG
 ```
 
 生成
-
----
 
 # 17. Projectionアルゴリズム
 
@@ -476,8 +418,6 @@ Causal Edge
 
 Healthy更新
 
----
-
 # 18. Temporal Edge
 
 ```
@@ -489,8 +429,6 @@ Current Node
 ```
 
 全Eventを時間順接続。
-
----
 
 # 19. Causal Edge
 
@@ -508,8 +446,6 @@ Current
 
 Faultは継承しない。
 
----
-
 # 20. Healthy Table
 
 Hash
@@ -523,8 +459,6 @@ Latest Healthy Node
 ```
 
 Projection中のみ保持。
-
----
 
 # 21. Clean History
 
@@ -541,8 +475,6 @@ clean-history()
 ```
 
 抽出。
-
----
 
 # 22. History抽出
 
@@ -566,8 +498,6 @@ Root
 
 Dialogueのみ返す。
 
----
-
 # 23. Fault処理
 
 Fault Node
@@ -588,8 +518,6 @@ Clean History
 
 が生成される。
 
----
-
 # 24. Simulation
 
 run-causal-kernel-simulation()
@@ -597,8 +525,6 @@ run-causal-kernel-simulation()
 目的
 
 Chron Kernel動作検証。
-
----
 
 # 25. シミュレーションシナリオ
 
@@ -608,15 +534,11 @@ Chron Kernel動作検証。
 World100
 ```
 
----
-
 User
 
 ```
 こんにちは
 ```
-
----
 
 Assistant
 
@@ -624,19 +546,13 @@ Assistant
 好調
 ```
 
----
-
 Tool Start
 
 ```
 Blender
 ```
 
----
-
 Tool Timeout
-
----
 
 Assistant生成開始
 
@@ -672,8 +588,6 @@ Retry Reply
 
 Commit
 
----
-
 # 26. Branch
 
 ```
@@ -694,21 +608,15 @@ World101
 
 へ保存。
 
----
-
 # 27. Debug API
 
 dump-wal()
 
 WAL表示。
 
----
-
 dump-clean-history()
 
 History表示。
-
----
 
 # 28. 出力
 
@@ -731,8 +639,6 @@ History101
 ```
 
 表示。
-
----
 
 # 29. データフロー
 
@@ -759,8 +665,6 @@ History
 
 Console
 ```
-
----
 
 # 30. 状態遷移
 
@@ -800,8 +704,6 @@ Retry
 Commit
 ```
 
----
-
 # 31. 不変条件
 
 Commit後
@@ -820,8 +722,6 @@ Fault
 History継承停止
 ```
 
----
-
 # 32. 計算量
 
 Append
@@ -830,15 +730,11 @@ Append
 O(1)
 ```
 
----
-
 Stage
 
 ```
 O(1)
 ```
-
----
 
 Commit
 
@@ -846,23 +742,17 @@ Commit
 O(n)
 ```
 
----
-
 Projection
 
 ```
 O(n)
 ```
 
----
-
 History
 
 ```
 O(depth)
 ```
-
----
 
 # 33. この実装の特徴
 
@@ -900,8 +790,6 @@ Discard
 
 そのため永続履歴は常に健全状態のみ保持する。
 
----
-
 # 34. Phase A–Dで確立された設計
 
 このPoCから後のΔ3実装へ継承された主要概念は以下である。
@@ -918,8 +806,6 @@ Discard
 
 現在のChron-LLMではこれらが個別サービスへ分割されている。
 
----
-
 # 35. コードレビュー・設計評価
 
 ## 35.1 優れている点
@@ -934,8 +820,6 @@ Discard
 というChron-LLMの根幹概念を検証しています。
 
 「LLMの途中生成は永続化せず、Commit済みイベントのみが真実である」という思想は、この時点ですでに明確です。
-
----
 
 ## 35.2 後の実装との相違点
 
@@ -959,8 +843,6 @@ chron-llm-runtime.lisp
 
 へ責務分離されています。
 
----
-
 ## 35.3 `index` を Node ID として利用
 
 `lift-to-graph()` では
@@ -979,8 +861,6 @@ node-id
 
 が独立採番されるよう改善され、WAL配置と論理ノード識別子が分離されました。
 
----
-
 ## 35.4 `clean-history()` の探索
 
 最新ノード探索は
@@ -998,8 +878,6 @@ Latest Healthy Table
 ```
 
 をGraphへ保持することで、世界線ごとの最新ノード取得を高速化する設計へ発展しています。
-
----
 
 # 36. 歴史的意義
 
