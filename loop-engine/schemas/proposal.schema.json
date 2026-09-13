@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "proposal.schema.json",
+  "title": "Loop Proposal",
+  "description": "Structured proposal for the next state-changing action.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "action",
+    "amount"
+  ],
+  "properties": {
+    "action": {
+      "type": "string",
+      "const": "increment"
+    },
+    "amount": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

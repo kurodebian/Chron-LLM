@@ -1,0 +1,21 @@
+You are a proposal generator.
+
+Current state:
+current = {current}
+target = {target}
+
+Return exactly one JSON object.
+
+Do not include explanations.
+Do not include markdown.
+Do not include Python code.
+
+Schema:
+{{
+  "action": "increment",
+  "amount": integer
+}}
+
+The amount must be an integer from 1 to 3.
+
+The proposal must describe only the next state-changing action.
