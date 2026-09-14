@@ -19,7 +19,11 @@ TOOLS = [
         "type": "function",
         "function": {
             "name": "read_file",
-            "description": "Read a file from the target repository.",
+            "description": (
+                "Read a file from the target repository. "
+                "Repository files are readable, but repository state must be "
+                "treated as authoritative evidence."
+            ),
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -34,7 +38,10 @@ TOOLS = [
         "type": "function",
         "function": {
             "name": "write_file",
-            "description": "Write a file to the target repository.",
+            "description": (
+                "Write a file inside the sandbox directory only. "
+                "Files outside sandbox/ cannot be modified."
+            ),
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -51,8 +58,9 @@ TOOLS = [
         "function": {
             "name": "run_command",
             "description": (
-                "Run an allowed repository test command. "
-                "The command executes inside the sandbox."
+                "Run an allowed repository command. "
+                "The command executes from the repository root. "
+                "Use repository-relative paths such as sandbox/task.py."
             ),
             "parameters": {
                 "type": "object",
@@ -100,6 +108,59 @@ class EngineeringAgent:
 
         return executor(data)
 
+    def _quality_gate(self) -> tuple[bool, str]:
+        """
+        External quality gate for the current Loop Engineering PoC.
+
+        The LLM's final message is never treated as authoritative.
+        Completion requires an actual passing pytest execution.
+
+        Gate conditions:
+        - pytest exits with code 0
+        - at least one test is collected
+        """
+
+        try:
+            result = run_command(
+                "python -m pytest sandbox/ -v"
+            )
+        except Exception as exc:
+            return (
+                False,
+                (
+                    "QUALITY_GATE_ERROR\n"
+                    f"error_type={type(exc).__name__}\n"
+                    f"error={exc}"
+                ),
+            )
+
+        if "exit_code=0" not in result:
+            return False, (
+                "QUALITY_GATE_FAIL\n"
+                "pytest did not exit successfully.\n"
+                f"{result}"
+            )
+
+        if "collected 0 items" in result:
+            return False, (
+                "QUALITY_GATE_FAIL\n"
+                "pytest collected zero tests.\n"
+                f"{result}"
+            )
+
+        if "passed" not in result:
+            return False, (
+                "QUALITY_GATE_FAIL\n"
+                "pytest did not report a passing test result.\n"
+                f"{result}"
+            )
+
+        return True, (
+            "QUALITY_GATE_PASS\n"
+            "pytest completed successfully with passing tests.\n"
+            f"{result}"
+        )
+
     def run(self, objective: str) -> AgentResult:
         messages: list[dict[str, Any]] = [
             {
@@ -123,6 +184,9 @@ class EngineeringAgent:
                     "The repository state is authoritative. LLM output itself "
                     "is not repository truth.\n"
                     "\n"
+                    "You may inspect repository files, but write operations "
+                    "are restricted to the sandbox directory.\n"
+                    "\n"
                     "When the objective and quality requirements are actually "
                     "satisfied, stop and report completion."
                 ),
@@ -132,7 +196,6 @@ class EngineeringAgent:
                 "content": objective,
             },
         ]
-
 
         for turn in range(1, self.max_turns + 1):
             available_tools = TOOLS
@@ -184,10 +247,20 @@ class EngineeringAgent:
                         call.function.arguments,
                     )
 
-                    result = self._execute_tool(
-                        call.function.name,
-                        call.function.arguments,
-                    )
+                    try:
+                        result = self._execute_tool(
+                            call.function.name,
+                            call.function.arguments,
+                        )
+                    except Exception as exc:
+                        result = (
+                            "TOOL_EXECUTION_ERROR\n"
+                            f"error_type={type(exc).__name__}\n"
+                            f"error={exc}\n"
+                            "The tool call failed. Diagnose the error and retry "
+                            "with a corrected tool call if the objective still "
+                            "requires it."
+                        )
 
                     print("RESULT:", repr(result))
 
@@ -199,17 +272,38 @@ class EngineeringAgent:
                         }
                     )
 
-
                 continue
 
             content = message.content or ""
 
             if content.strip():
-                return AgentResult(
-                    completed=True,
-                    turns=turn,
-                    final_message=content,
+                quality_passed, quality_result = self._quality_gate()
+
+                print("=== EXTERNAL QUALITY GATE ===")
+                print("passed =", quality_passed)
+                print("result =", repr(quality_result))
+
+                if quality_passed:
+                    return AgentResult(
+                        completed=True,
+                        turns=turn,
+                        final_message=content,
+                    )
+
+                messages.append(
+                    {
+                        "role": "user",
+                        "content": (
+                            "The external quality gate has not passed.\n"
+                            f"{quality_result}\n"
+                            "Do not claim completion. Continue the engineering "
+                            "task, diagnose the remaining issue, make any "
+                            "necessary changes, and re-test."
+                        ),
+                    }
                 )
+
+                continue
 
             print("=== EMPTY ASSISTANT RESPONSE ===")
 
@@ -223,8 +317,6 @@ class EngineeringAgent:
                     ),
                 }
             )
-
-            last_tool_name = None
 
         return AgentResult(
             completed=False,
