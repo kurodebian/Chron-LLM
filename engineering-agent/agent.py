@@ -1,3 +1,4 @@
+import hashlib
 import json
 from dataclasses import dataclass
 from typing import Any
@@ -99,8 +100,22 @@ class EngineeringAgent:
         self.model = model
         self.max_turns = max_turns
 
-    def _execute_tool(self, name: str, arguments: str) -> str:
+    def _execute_tool(
+        self,
+        name: str,
+        arguments: str,
+        protected_test_baseline: dict[str, str] | None = None,
+    ) -> str:
         data = json.loads(arguments)
+
+        if name == "write_file":
+            return write_file(
+                data["path"],
+                data["content"],
+                protected_paths=set(
+                    protected_test_baseline or {}
+                ),
+            )
 
         executor = TOOL_EXECUTORS.get(name)
         if executor is None:
@@ -108,17 +123,142 @@ class EngineeringAgent:
 
         return executor(data)
 
-    def _quality_gate(self) -> tuple[bool, str]:
+    def _capture_protected_test_baseline(self) -> dict[str, str]:
         """
-        External quality gate for the current Loop Engineering PoC.
+        Capture the trusted baseline of existing sandbox tests.
 
-        The LLM's final message is never treated as authoritative.
-        Completion requires an actual passing pytest execution.
-
-        Gate conditions:
-        - pytest exits with code 0
-        - at least one test is collected
+        The baseline is captured once before the agent is allowed
+        to modify the sandbox and is retained in controller memory.
         """
+        result = run_command(
+            'find sandbox -type f \\( -name "test_*.py" -o -name "*_test.py" \\)'
+        )
+
+        if "exit_code=0" not in result:
+            raise RuntimeError(
+                "failed to discover protected test files"
+            )
+
+        paths = []
+
+        stdout_marker = "stdout:\n"
+        stderr_marker = "\nstderr:\n"
+
+        if stdout_marker in result:
+            stdout = result.split(stdout_marker, 1)[1]
+            if stderr_marker in stdout:
+                stdout = stdout.split(stderr_marker, 1)[0]
+
+            paths = [
+                line.strip()
+                for line in stdout.splitlines()
+                if line.strip()
+            ]
+
+        baseline = {}
+
+        for path in paths:
+            content = read_file(path)
+            digest = hashlib.sha256(
+                content.encode("utf-8")
+            ).hexdigest()
+            baseline[path] = digest
+
+        return baseline
+
+    def _check_protected_test_integrity(
+        self,
+        baseline: dict[str, str],
+    ) -> tuple[bool, str]:
+        """
+        Verify that protected baseline tests were not modified,
+        deleted, or replaced.
+        """
+        result = run_command(
+            'find sandbox -type f \\( -name "test_*.py" -o -name "*_test.py" \\)'
+        )
+
+        if "exit_code=0" not in result:
+            return False, (
+                "REGRESSION_SAFETY_FAIL\n"
+                "Unable to enumerate protected tests.\n"
+                f"{result}"
+            )
+
+        stdout_marker = "stdout:\n"
+        stderr_marker = "\nstderr:\n"
+
+        stdout = ""
+        if stdout_marker in result:
+            stdout = result.split(stdout_marker, 1)[1]
+            if stderr_marker in stdout:
+                stdout = stdout.split(stderr_marker, 1)[0]
+
+        current_paths = {
+            line.strip()
+            for line in stdout.splitlines()
+            if line.strip()
+        }
+
+        baseline_paths = set(baseline)
+
+        deleted = sorted(
+            baseline_paths - current_paths
+        )
+
+        unexpected_replacements = sorted(
+            current_paths - baseline_paths
+        )
+
+        modified = []
+
+        for path in sorted(
+            baseline_paths & current_paths
+        ):
+            content = read_file(path)
+            digest = hashlib.sha256(
+                content.encode("utf-8")
+            ).hexdigest()
+
+            if digest != baseline[path]:
+                modified.append(path)
+
+        if deleted or modified or unexpected_replacements:
+            return False, (
+                "REGRESSION_SAFETY_FAIL\n"
+                "Protected test baseline integrity violation.\n"
+                f"deleted={deleted}\n"
+                f"modified={modified}\n"
+                f"unexpected_test_files={unexpected_replacements}\n"
+            )
+
+        return True, (
+            "REGRESSION_SAFETY_PASS\n"
+            "Protected test baseline is unchanged.\n"
+        )
+
+    def _quality_gate(
+        self,
+        protected_test_baseline: dict[str, str],
+    ) -> tuple[bool, str]:
+        """
+        External quality gate.
+
+        Completion requires both:
+        - protected baseline integrity
+        - actual passing pytest execution
+
+        The LLM's final message is never authoritative.
+        """
+
+        integrity_passed, integrity_result = (
+            self._check_protected_test_integrity(
+                protected_test_baseline
+            )
+        )
+
+        if not integrity_passed:
+            return False, integrity_result
 
         try:
             result = run_command(
@@ -157,6 +297,7 @@ class EngineeringAgent:
 
         return True, (
             "QUALITY_GATE_PASS\n"
+            "Protected baseline integrity verified.\n"
             "pytest completed successfully with passing tests.\n"
             f"{result}"
         )
@@ -196,6 +337,10 @@ class EngineeringAgent:
                 "content": objective,
             },
         ]
+
+        protected_test_baseline = (
+            self._capture_protected_test_baseline()
+        )
 
         for turn in range(1, self.max_turns + 1):
             available_tools = TOOLS
@@ -251,6 +396,7 @@ class EngineeringAgent:
                         result = self._execute_tool(
                             call.function.name,
                             call.function.arguments,
+                            protected_test_baseline,
                         )
                     except Exception as exc:
                         result = (
@@ -276,47 +422,37 @@ class EngineeringAgent:
 
             content = message.content or ""
 
-            if content.strip():
-                quality_passed, quality_result = self._quality_gate()
-
-                print("=== EXTERNAL QUALITY GATE ===")
-                print("passed =", quality_passed)
-                print("result =", repr(quality_result))
-
-                if quality_passed:
-                    return AgentResult(
-                        completed=True,
-                        turns=turn,
-                        final_message=content,
-                    )
-
-                messages.append(
-                    {
-                        "role": "user",
-                        "content": (
-                            "The external quality gate has not passed.\n"
-                            f"{quality_result}\n"
-                            "Do not claim completion. Continue the engineering "
-                            "task, diagnose the remaining issue, make any "
-                            "necessary changes, and re-test."
-                        ),
-                    }
+            quality_passed, quality_result = (
+                self._quality_gate(
+                    protected_test_baseline
                 )
+            )
 
-                continue
+            print("=== EXTERNAL QUALITY GATE ===")
+            print("passed =", quality_passed)
+            print("result =", repr(quality_result))
 
-            print("=== EMPTY ASSISTANT RESPONSE ===")
+            if quality_passed:
+                return AgentResult(
+                    completed=True,
+                    turns=turn,
+                    final_message=content,
+                )
 
             messages.append(
                 {
                     "role": "user",
                     "content": (
-                        "Continue the engineering task. "
-                        "Do not stop with an empty response. "
-                        "Use repository tools when further work is required."
+                        "The external quality gate has not passed.\n"
+                        f"{quality_result}\n"
+                        "Do not claim completion. Continue the engineering "
+                        "task, diagnose the remaining issue, make any "
+                        "necessary changes, and re-test."
                     ),
                 }
             )
+
+            continue
 
         return AgentResult(
             completed=False,

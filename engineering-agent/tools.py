@@ -48,11 +48,25 @@ def read_file(path: str) -> str:
     return resolved.read_text(encoding="utf-8")
 
 
-def write_file(path: str, content: str) -> str:
+def write_file(
+    path: str,
+    content: str,
+    protected_paths: set[str] | None = None,
+) -> str:
+    protected_paths = protected_paths or set()
+
+    if path in protected_paths:
+        raise PermissionError(
+            f"protected test file is not writable: {path}"
+        )
+
     resolved = _resolve_sandbox_path(path)
 
     resolved.parent.mkdir(parents=True, exist_ok=True)
-    resolved.write_text(encoding="utf-8", data=content)
+    resolved.write_text(
+        encoding="utf-8",
+        data=content,
+    )
 
     return f"wrote {path}"
 
