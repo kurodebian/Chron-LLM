@@ -1,0 +1,37 @@
+{
+  "execution_summary": {
+    "total_spec_files": 103,
+    "total_lines_processed": 6463,
+    "formats_found": {
+      "type_theoretic": 38,
+      "common_lisp": 8,
+      "generic": 39,
+      "test_format": 18
+    },
+    "total_relationships": 558,
+    "total_findings": 38,
+    "total_types_extracted": 550,
+    "total_enums_extracted": 4,
+    "total_ops_extracted": 97,
+    "total_invariants_extracted": 3
+  },
+  "quality_gates": {
+    "corpus_preservation": "PASS",
+    "functional_correctness": "PASS",
+    "organization": "PASS",
+    "integration": "PASS",
+    "consistency_analysis": "PASS",
+    "traceability": "PASS",
+    "autonomous_development": "PASS",
+    "failure_recovery": "PENDING",
+    "external_acceptance": "PENDING"
+  },
+  "output_files": [
+    "organization.json",
+    "integration.json",
+    "consistency_report.json",
+    "traceability.json",
+    "validation_report.json",
+    "summary.json"
+  ]
+}

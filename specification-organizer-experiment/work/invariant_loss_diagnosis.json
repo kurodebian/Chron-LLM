@@ -1,0 +1,1417 @@
+{
+  "meta": {
+    "full_records_file": "/home/junu/Chron-LLM/specification-organizer-experiment/work/invariant_loss_diagnosis.json",
+    "a_count": 77,
+    "b_parser_count": 4,
+    "b_registry_count": 4,
+    "a_minus_b_parser_count": 73,
+    "a_minus_b_registry_count": 73,
+    "b_parser_minus_b_registry_count": 0,
+    "b_parser_intersect_a_count": 4,
+    "authoritative_patterns": [
+      "^\\s*INV(?:_DEF)?\\b",
+      "^\\s*INVARIANT\\b"
+    ]
+  },
+  "sets": {
+    "A": [
+      "contracts__base-invariants.spec",
+      "contracts__pipeline-orchestration.spec",
+      "docs__ir__00-constitution.spec",
+      "docs__ir__01-domain-model.spec",
+      "docs__ir__02-operational-semantics.spec",
+      "docs__ir__03-reference-runtime.spec",
+      "docs__ir__05-validation-pipeline.spec",
+      "docs__ir__07-chron-mapping.spec",
+      "docs__ir__08-memory-model.spec",
+      "docs__ir__09-runtime-scheduling.spec",
+      "docs__ir__10-tool-execution.spec",
+      "docs__ir__11-prompt-builder.spec",
+      "docs__ir__12-recovery.spec",
+      "docs__ir__13-worldline-branching.spec",
+      "docs__ir__99-open-questions.spec",
+      "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "docs__ir__knowledge-system.spec",
+      "docs__ir__phase-a-charter.spec",
+      "docs__ir__phase-b-charter.spec",
+      "docs__ir__phase-c-charter.spec",
+      "docs__ir__phase-d-charter.spec",
+      "docs__ir__phase-e-charter.spec",
+      "docs__ir__phase-f-charter.spec",
+      "docs__ir__pull_request_template.spec",
+      "docs__ir__r2-0-c-freeze-report.spec",
+      "docs__reference__ir__knowledge-rationale.spec",
+      "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "experiments__ir__3cluster.spec",
+      "experiments__ir__chron-llm-spec-v0.2.spec",
+      "experiments__ir__cycle.spec",
+      "experiments__ir__dynamics.spec",
+      "experiments__ir__scc.spec",
+      "graph-runtime__ir__causal.spec",
+      "graph-runtime__ir__graph.spec",
+      "llama-agent__ir__causal-kernel.spec",
+      "llama-agent__ir__chron-llm-graph.spec",
+      "llama-agent__ir__chron-llm-immune.spec",
+      "llama-agent__ir__chron-llm-kernel.spec",
+      "llama-agent__ir__chron-llm-runtime.spec",
+      "llama-agent__ir__chron-llm-world.spec",
+      "llama-agent__ir__chron-llm.spec",
+      "llama-agent__ir__ffi-bindings-mock.spec",
+      "llama-agent__ir__ffi-bindings.spec",
+      "llama-agent__ir__generate.spec",
+      "llama-agent__ir__immune-system.spec",
+      "memory__ir__store.spec",
+      "observability__ir__world-snapshot.spec",
+      "runtime__ir__callback.spec",
+      "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "runtime__ir__ffi.spec",
+      "runtime__ir__ir.spec",
+      "runtime__ir__stream.spec",
+      "runtime__r0__ir__api.spec",
+      "runtime__r0__ir__chat-loop.spec",
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "runtime__r0__ir__history.spec",
+      "runtime__r0__ir__llama-run.spec",
+      "runtime__r0__ir__prompt.spec",
+      "runtime__r0__ir__trace.spec",
+      "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "specs__00-meta-model.spec",
+      "specs__01-semantic-model.spec",
+      "specs__02-constitution.spec",
+      "specs__03-chron-semantic-extension.spec",
+      "specs__04-runtime-model.spec",
+      "tests__md__ir__phase0-big-bang-test.spec",
+      "tests__md__ir__r2-0-a-tests.spec",
+      "tests__md__ir__r2-0-b-tests.spec",
+      "tests__md__ir__r2-0-c-tests.spec",
+      "tests__md__ir__r2-1-b-tests.spec",
+      "tests__md__ir__r2-2-e-tests.spec",
+      "tests__md__ir__r2-3-s-tests.spec"
+    ],
+    "B_PARSER": [
+      "contracts__base-invariants.spec",
+      "docs__ir__00-constitution.spec",
+      "docs__ir__01-domain-model.spec",
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec"
+    ],
+    "B_REGISTRY": [
+      "contracts__base-invariants.spec",
+      "docs__ir__00-constitution.spec",
+      "docs__ir__01-domain-model.spec",
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec"
+    ],
+    "A_MINUS_B_PARSER": [
+      "contracts__pipeline-orchestration.spec",
+      "docs__ir__02-operational-semantics.spec",
+      "docs__ir__03-reference-runtime.spec",
+      "docs__ir__05-validation-pipeline.spec",
+      "docs__ir__07-chron-mapping.spec",
+      "docs__ir__08-memory-model.spec",
+      "docs__ir__09-runtime-scheduling.spec",
+      "docs__ir__10-tool-execution.spec",
+      "docs__ir__11-prompt-builder.spec",
+      "docs__ir__12-recovery.spec",
+      "docs__ir__13-worldline-branching.spec",
+      "docs__ir__99-open-questions.spec",
+      "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "docs__ir__knowledge-system.spec",
+      "docs__ir__phase-a-charter.spec",
+      "docs__ir__phase-b-charter.spec",
+      "docs__ir__phase-c-charter.spec",
+      "docs__ir__phase-d-charter.spec",
+      "docs__ir__phase-e-charter.spec",
+      "docs__ir__phase-f-charter.spec",
+      "docs__ir__pull_request_template.spec",
+      "docs__ir__r2-0-c-freeze-report.spec",
+      "docs__reference__ir__knowledge-rationale.spec",
+      "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "experiments__ir__3cluster.spec",
+      "experiments__ir__chron-llm-spec-v0.2.spec",
+      "experiments__ir__cycle.spec",
+      "experiments__ir__dynamics.spec",
+      "experiments__ir__scc.spec",
+      "graph-runtime__ir__causal.spec",
+      "graph-runtime__ir__graph.spec",
+      "llama-agent__ir__causal-kernel.spec",
+      "llama-agent__ir__chron-llm-graph.spec",
+      "llama-agent__ir__chron-llm-immune.spec",
+      "llama-agent__ir__chron-llm-kernel.spec",
+      "llama-agent__ir__chron-llm-runtime.spec",
+      "llama-agent__ir__chron-llm-world.spec",
+      "llama-agent__ir__chron-llm.spec",
+      "llama-agent__ir__ffi-bindings-mock.spec",
+      "llama-agent__ir__ffi-bindings.spec",
+      "llama-agent__ir__generate.spec",
+      "llama-agent__ir__immune-system.spec",
+      "memory__ir__store.spec",
+      "observability__ir__world-snapshot.spec",
+      "runtime__ir__callback.spec",
+      "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "runtime__ir__ffi.spec",
+      "runtime__ir__ir.spec",
+      "runtime__ir__stream.spec",
+      "runtime__r0__ir__api.spec",
+      "runtime__r0__ir__chat-loop.spec",
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "runtime__r0__ir__history.spec",
+      "runtime__r0__ir__llama-run.spec",
+      "runtime__r0__ir__prompt.spec",
+      "runtime__r0__ir__trace.spec",
+      "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "specs__00-meta-model.spec",
+      "specs__01-semantic-model.spec",
+      "specs__02-constitution.spec",
+      "specs__03-chron-semantic-extension.spec",
+      "specs__04-runtime-model.spec",
+      "tests__md__ir__phase0-big-bang-test.spec",
+      "tests__md__ir__r2-0-a-tests.spec",
+      "tests__md__ir__r2-0-b-tests.spec",
+      "tests__md__ir__r2-0-c-tests.spec",
+      "tests__md__ir__r2-1-b-tests.spec",
+      "tests__md__ir__r2-2-e-tests.spec",
+      "tests__md__ir__r2-3-s-tests.spec"
+    ],
+    "A_MINUS_B_REGISTRY": [
+      "contracts__pipeline-orchestration.spec",
+      "docs__ir__02-operational-semantics.spec",
+      "docs__ir__03-reference-runtime.spec",
+      "docs__ir__05-validation-pipeline.spec",
+      "docs__ir__07-chron-mapping.spec",
+      "docs__ir__08-memory-model.spec",
+      "docs__ir__09-runtime-scheduling.spec",
+      "docs__ir__10-tool-execution.spec",
+      "docs__ir__11-prompt-builder.spec",
+      "docs__ir__12-recovery.spec",
+      "docs__ir__13-worldline-branching.spec",
+      "docs__ir__99-open-questions.spec",
+      "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "docs__ir__knowledge-system.spec",
+      "docs__ir__phase-a-charter.spec",
+      "docs__ir__phase-b-charter.spec",
+      "docs__ir__phase-c-charter.spec",
+      "docs__ir__phase-d-charter.spec",
+      "docs__ir__phase-e-charter.spec",
+      "docs__ir__phase-f-charter.spec",
+      "docs__ir__pull_request_template.spec",
+      "docs__ir__r2-0-c-freeze-report.spec",
+      "docs__reference__ir__knowledge-rationale.spec",
+      "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "experiments__ir__3cluster.spec",
+      "experiments__ir__chron-llm-spec-v0.2.spec",
+      "experiments__ir__cycle.spec",
+      "experiments__ir__dynamics.spec",
+      "experiments__ir__scc.spec",
+      "graph-runtime__ir__causal.spec",
+      "graph-runtime__ir__graph.spec",
+      "llama-agent__ir__causal-kernel.spec",
+      "llama-agent__ir__chron-llm-graph.spec",
+      "llama-agent__ir__chron-llm-immune.spec",
+      "llama-agent__ir__chron-llm-kernel.spec",
+      "llama-agent__ir__chron-llm-runtime.spec",
+      "llama-agent__ir__chron-llm-world.spec",
+      "llama-agent__ir__chron-llm.spec",
+      "llama-agent__ir__ffi-bindings-mock.spec",
+      "llama-agent__ir__ffi-bindings.spec",
+      "llama-agent__ir__generate.spec",
+      "llama-agent__ir__immune-system.spec",
+      "memory__ir__store.spec",
+      "observability__ir__world-snapshot.spec",
+      "runtime__ir__callback.spec",
+      "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "runtime__ir__ffi.spec",
+      "runtime__ir__ir.spec",
+      "runtime__ir__stream.spec",
+      "runtime__r0__ir__api.spec",
+      "runtime__r0__ir__chat-loop.spec",
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "runtime__r0__ir__history.spec",
+      "runtime__r0__ir__llama-run.spec",
+      "runtime__r0__ir__prompt.spec",
+      "runtime__r0__ir__trace.spec",
+      "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "specs__00-meta-model.spec",
+      "specs__01-semantic-model.spec",
+      "specs__02-constitution.spec",
+      "specs__03-chron-semantic-extension.spec",
+      "specs__04-runtime-model.spec",
+      "tests__md__ir__phase0-big-bang-test.spec",
+      "tests__md__ir__r2-0-a-tests.spec",
+      "tests__md__ir__r2-0-b-tests.spec",
+      "tests__md__ir__r2-0-c-tests.spec",
+      "tests__md__ir__r2-1-b-tests.spec",
+      "tests__md__ir__r2-2-e-tests.spec",
+      "tests__md__ir__r2-3-s-tests.spec"
+    ],
+    "B_PARSER_MINUS_B_REGISTRY": [],
+    "B_PARSER_INTERSECT_A": [
+      "contracts__base-invariants.spec",
+      "docs__ir__00-constitution.spec",
+      "docs__ir__01-domain-model.spec",
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec"
+    ]
+  },
+  "records": [
+    {
+      "filename": "contracts__pipeline-orchestration.spec",
+      "authoritative_matching_lines": [
+        "  INV_DEF PIPE.CORE.001: pure_stage_transformations(",
+        "  INV_DEF PIPE.CORE.002: replay_context_deterministic("
+      ],
+      "marker_style": "INV_DEF",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__02-operational-semantics.spec",
+      "authoritative_matching_lines": [
+        "  INV: Atomic | !Partial | Sole Canonical Mutator",
+        "  INV: Authoritative(Backend.output) == false",
+        "  INV: Deterministic | Sole Runtime State Mutator",
+        "  INV: Canonical immutable",
+        "  INV: Canonical immutable | Authoritative post-Commit | Standard Candidate->Validation->Commit path"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__03-reference-runtime.spec",
+      "authoritative_matching_lines": [
+        "    INV: no_new_runtime_semantics"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__05-validation-pipeline.spec",
+      "authoritative_matching_lines": [
+        "INV:"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__07-chron-mapping.spec",
+      "authoritative_matching_lines": [
+        "INV: write(CanonicalState) == op:mutate(CanonicalState) // Commit is sole updater",
+        "INV: Replay(WAL[]) -> deterministic(ReplayInput)",
+        "INV: Projection(CanonicalState) ⊆ CanonicalState"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__08-memory-model.spec",
+      "authoritative_matching_lines": [
+        "INV CanonicalMemory.writer == Commit",
+        "INV MemoryRef.authoritative.writer == Commit",
+        "INV MemoryRef.is_deterministic == true",
+        "INV Replay.requires(MemoryRef) == true"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__09-runtime-scheduling.spec",
+      "authoritative_matching_lines": [
+        "INV Schedule == Deterministic(CanonicalState)",
+        "INV Retry -> !Mutate(CanonicalState)",
+        "INV NormalDialogueExecution !Depends(IsolatedQueue)",
+        "INV FaultIsolation -> !Affect(NormalDialogueReplay)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__10-tool-execution.spec",
+      "authoritative_matching_lines": [
+        "INV(authority): State'.canonical != State.canonical <-> evt.type == COMMIT",
+        "INV(isolation_fail): evt.type in {TIMEOUT, ABORT} -> State'.dialogue == State.dialogue",
+        "INV(causal_id): forall e: ToolEvent, e.causal_id == Context.causal_id",
+        "INV(retry_scope): retry() subset_of tool_stream",
+        "INV(retry_no_mutation): on(RETRY) -> State.canonical == prev(State.canonical)",
+        "INV(no_bypass): evt.type != COMMIT -> State'.canonical == State.canonical",
+        "INV(determinism): replay(Events) -> deterministic_outcome"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__11-prompt-builder.spec",
+      "authoritative_matching_lines": [
+        "INV: Deterministic(Construct)",
+        "INV: Immutable(Canonical)",
+        "INV: Prompt !contains Excluded",
+        "INV: Construct depends_on {Replay, Config}"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__12-recovery.spec",
+      "authoritative_matching_lines": [
+        "INV: Canonical.mutate == False",
+        "INV: Canonical.mutate -> Commit",
+        "INV: Recover == Deterministic",
+        "INV: Recover == ReplayCompatible",
+        "INV: Canonical.History == Recoverable",
+        "INV: Recover.Introduce(AuthoritativeInfo) == False"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__13-worldline-branching.spec",
+      "authoritative_matching_lines": [
+        "INV: Branch deterministic (derivation_hash depends only on parent_id, world_id, kind)",
+        "INV: history replayable from WAL",
+        "INV: forall w in state.world_heads: w.key != state.active_stream_id => w.value is immutable"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__99-open-questions.spec",
+      "authoritative_matching_lines": [
+        "INV Commit.idempotency = ?",
+        "INV Commit.atomicity = ?"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "authoritative_matching_lines": [
+        "INV-MEM-IMMUTABLE: MemoryStore[h] == constant after write",
+        "INV-MEM-HASH: hash(content) == h",
+        "INV-GRAPH-APPEND: GraphStore.size >= previous_size; no node/edge mutation",
+        "INV-GRAPH-ROOT: GraphStore.root-id == constant",
+        "INV-GRAPH-REACH: forall n in GraphStore.nodes where n.type in {system, prompt, assistant}: reachable(GraphStore.edges, root-id, n.id)",
+        "INV-CAUSAL-SEPARATION: causal-subgraph traverses only EdgeType=causal; excludes NodeType={eval, feedback}",
+        "INV-PROMPT-PURE: build-prompt is deterministic; no side-effects; no external IO/random/timestamps",
+        "INV-PREFILL-DET: PrefillState(Graph, Memory, Policy, Builder) -> unique hash",
+        "INV-AUTHORITY: GraphStore mutation allowed ONLY via CommitKernel",
+        "INV-EVAL-INDEP: Existence of NodeType={eval, feedback} does not alter causal-subgraph or causal PrefillState"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "authoritative_matching_lines": [
+        "INV World.id UNIQUE & STABLE",
+        "INV World.graph-ref == GlobalState.canonical-graph",
+        "INV World.memory-ref == GlobalState.memory-store",
+        "INV World.root-node IMMUTABLE after creation",
+        "INV World.head-node REACHABLE(World.root-node, World.head-node, :causal)",
+        "INV World.head-node COMMITTED",
+        "INV World.projection-policy IMMUTABLE",
+        "INV World.metadata COPY_ON_WRITE",
+        "INV World ISOLATED (no direct mutation)",
+        "INV Replay DETERMINISTIC(Graph, Memory, WorldState)",
+        "INV Registry NON_AUTHORITATIVE"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "authoritative_matching_lines": [
+        "INV IRStream == SourceOfTruth(KernelState)",
+        "INV RuntimeCommand == ControlBoundary(Kernel, Backend)",
+        "INV Metadata == Opaque",
+        "INV Omega.total == w_e*E^2 + w_s*S^2 + w_t*T^2",
+        "INV BackendControl == { KV_Truncate, Delta_Prefill, Steering }",
+        "INV ABI == Frozen(RuntimeCommand, IRStream, PhaseBoundary)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__knowledge-system.spec",
+      "authoritative_matching_lines": [
+        "INV Independence: Architecture !-> RepoLayout | DirStructure | DocNames | Lang | Impl",
+        "INV GovernanceScope: Governance -> Artifact && Governance !-> RuntimeBehavior",
+        "INV RuntimeSatisfaction: Runtime -> Specification",
+        "INV RuntimeVolatility: Runtime.evolution > Design.evolution",
+        "INV Minimalism: Concepts = Min(Necessary)",
+        "INV Neutrality: KnowledgeSystem !-> Product | Repo | Impl",
+        "INV EvolutionRule: Introduce(NewCategory) -> !Exists(ExistingCategory -> Responsibility)",
+        "INV ExtensionPriority: Extend(Existing) > Introduce(New)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__phase-a-charter.spec",
+      "authoritative_matching_lines": [
+        "INV: H.authoritative_causal_record",
+        "INV: H.reproducible",
+        "INV: H.inspectable",
+        "INV: H.derivable",
+        "INV: EventABI !in H",
+        "INV: ResolutionSemantics !in H"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__phase-b-charter.spec",
+      "authoritative_matching_lines": [
+        "INV: d.deterministic",
+        "INV: j.derived_exclusively_from(d)",
+        "INV: d.semantically_neutral",
+        "INV: d.reproducible"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__phase-c-charter.spec",
+      "authoritative_matching_lines": [
+        "INV: interpret.deterministic_under(ABI)",
+        "INV: ABI.explicit_and_versioned",
+        "INV: S.derived_exclusively_from(M)",
+        "INV: interpret.preserves_order(M)",
+        "INV: J.derived_exclusively_from(S)",
+        "INV: external_semantic_injection !in interpret",
+        "INV: S.non_authoritative"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__phase-d-charter.spec",
+      "authoritative_matching_lines": [
+        "INV: graph.deterministic_from(S)",
+        "INV: nodes.preserve_identity_consistency",
+        "INV: edges.structural_relations_only",
+        "INV: traversal.deterministic",
+        "INV: interpretation !in G",
+        "INV: G.non_authoritative"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__phase-e-charter.spec",
+      "authoritative_matching_lines": [
+        "INV-E1 : !semantic_selection(O)",
+        "INV-E2 : !semantic_normalization(O)",
+        "INV-E3 : O.subset(structural_properties(G))",
+        "INV-E4 : coexist(SemanticInterpretation[])",
+        "INV-E5 : invariant(Observe(G), SemanticInterpretation)",
+        "INV-E6 : G == G_post",
+        "INV-E7 : deterministic(Observe)",
+        "INV-E8 : !mutate(runtime_state)",
+        "  INV : preserve(INV-E1..E8)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__phase-f-charter.spec",
+      "authoritative_matching_lines": [
+        "INV:",
+        "INV-1: count(active_inlet) == 1",
+        "INV-2: normalize_input(x) == normalize_input(x)",
+        "INV-3: normalize_output(x) == normalize_output(x)",
+        "INV-4: boundary_inlet(v, x) == boundary_inlet(v, x)",
+        "INV-5: map_decision(x) == map_decision(x)",
+        "INV-6: delta(authoritative_state) == 0",
+        "INV-7: active_inlet != null",
+        "INV-8: interpretation_scope == boundary_inlet",
+        "INV-9: modify(boundary_inlet) -> new_phase_f_version"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__pull_request_template.spec",
+      "authoritative_matching_lines": [
+        "INV: use(t) -> exists(x in r.templates | x == t)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__ir__r2-0-c-freeze-report.spec",
+      "authoritative_matching_lines": [
+        "INV: D1=!mutate(world), D2=!mutate(registry), D3=deterministic(obs), D4=accurate(ancestry), D5=deterministic(diff), D6=repr_independent(obs), ABI=additive_only(extensions), DESC=read_only(return)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__reference__ir__knowledge-rationale.spec",
+      "authoritative_matching_lines": [
+        "INV: Meta != Design",
+        "INV: Runtime != Design",
+        "INV: Runtime.evolution independent_of Design.evolution",
+        "INV: Governance != Design",
+        "INV: Foundation != Constitution",
+        "INV: Repository.Layout independent_of Architecture",
+        "INV: Architecture != Process",
+        "INV: Concept.definition depends_on(Responsibility)",
+        "INV: Concept.definition NOT depends_on(Implementation)",
+        "INV: NewConcept.introduction requires !Exists(r in Responsibility : r.canExpress(Meaning))",
+        "INV: Content.definition precedes Implementation.expansion",
+        "INV: Constitution != Implementation",
+        "INV: Implementation.evolution preserves(Constitution)",
+        "INV: Authority != Representation",
+        "INV: Representation.derived != Authority"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "authoritative_matching_lines": [
+        "INV:"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "authoritative_matching_lines": [
+        "INV: forall(w in Registry.worlds): w.graph == Registry.graph",
+        "INV: forall(w in Registry.worlds): w.memory == Registry.memory",
+        "INV: count(w in Registry.worlds where w.lifecycle == :active) <= 1",
+        "INV: Observation types subset {Str, Num, Kw, Char, List}"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "authoritative_matching_lines": [
+        "  INV-1 (Graph-Unique-Node)   : Unique(keys(Graph.nodes))",
+        "  INV-2 (Mem-Content-Addr)    : ContentAddr(PayloadRef.hash == SHA256(content))",
+        "  INV-3 (World-Head-Valid)    : World.head in keys(World.graph.nodes)",
+        "  INV-4 (Commit-Atomic)       : Atomic(GraphAppend, HeadAdvance)",
+        "  INV-5 (Obs-Primitive)       : Type(x) in {null, bool, str, num, char, kw, list}",
+        "  INV-6 (Head-Commit-Truth)   : kernel-commit-world! == ONLY(head_advance)",
+        "  INV-7 (Replay-Determinism)  : Hash(Graph + MemStore + Policy) == PrefillHash",
+        "  INV-8 (Causal-Eval-Isolated): Evaluation edges (:eval) MUST NOT enter PrefillState or prompt context sequence",
+        "  INV-9 (Obs-Read-Only)       : Snapshot & Observation operations MUST NOT mutate World, Registry, or Graph state"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "experiments__ir__3cluster.spec",
+      "authoritative_matching_lines": [
+        "INV |G.nodes| = 8",
+        "INV |G.edges| = 10",
+        "INV SCCs(G) = [{a1, a2, a3}, {b1, b2, b3}, {c1}, {c2}]",
+        "INV Attractors(G) = [{a1, a2, a3}, {b1, b2, b3}]",
+        "INV Deterministic(G) = True"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "authoritative_matching_lines": [
+        "INV SCC.is_att == False",
+        "INV SCC -> Attractor IF SCC.stable > STAB_THRESH",
+        "INV Basin.mass == len(Basin.nodes)",
+        "INV Basin.ratio == Basin.mass / len(Graph.nodes)",
+        "INV Cluster.type == reply IF recurrence > HIGH",
+        "INV Cluster.type == temporal IF stability < LOW",
+        "INV Cluster.type == bridge IF conns > 1_cluster",
+        "INV Stability == cycle_reappearance / total_obs",
+        "INV-PARTITION: forall n in Graph.nodes, exists unique b in Basin, n in b.nodes",
+        "INV-MASS: forall b in Basin, b.mass == len(b.nodes)",
+        "INV-RATIO: forall b in Basin, b.ratio == b.mass / len(Graph.nodes)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "experiments__ir__cycle.spec",
+      "authoritative_matching_lines": [
+        "INV:",
+        "  INV-1: ret ∈ [State]",
+        "  INV-2: pure_analysis",
+        "  INV-3: deterministic",
+        "  INV-4: no_graph_mutation"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "experiments__ir__dynamics.spec",
+      "authoritative_matching_lines": [
+        "INV Determinism: Pure functions",
+        "INV NonMutating: G is read-only",
+        "INV Greedy: next-event selects max strength",
+        "INV Finite: len(rollout*) <= steps + 1"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "experiments__ir__scc.spec",
+      "authoritative_matching_lines": [
+        "INV-PARTITION: union(compute-sccs(G, nodes)) == nodes",
+        "INV-DISJOINT: forall i!=j: sccs[i] intersect sccs[j] == {}",
+        "INV-MUTUAL: forall c in sccs, forall u,v in c: reachable(G, u, v) AND reachable(G, v, u)",
+        "INV-PURE: G_before == G_after",
+        "INV-DET: same(G, nodes) -> same(sccs)",
+        "INV-COMP: O(V+E)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "graph-runtime__ir__causal.spec",
+      "authoritative_matching_lines": [
+        "INV:"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "graph-runtime__ir__graph.spec",
+      "authoritative_matching_lines": [
+        "INV NODE-UNIQUE: forall x,y in CausalGraph.nodes, x != y -> x.id != y.id",
+        "INV EDGE-CLOSURE: forall e in CausalGraph.edges, exists n1,n2 in CausalGraph.nodes where (n1.id == e.from AND n2.id == e.to)",
+        "INV FIELD-IMMUTABLE: all fields of CausalNode/CausalEdge are read-only post-construction"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__causal-kernel.spec",
+      "authoritative_matching_lines": [
+        "INV:"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__chron-llm-graph.spec",
+      "authoritative_matching_lines": [
+        "INV: forall e in WAL, exists n in Graph.nodes where n.event == e",
+        "INV: Temporal edges form linear chain matching WAL order",
+        "INV: forall n in Graph.nodes where n.class == :fault, n.id not in HealthyTable.values",
+        "INV: Graph = f(WAL)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__chron-llm-immune.spec",
+      "authoritative_matching_lines": [
+        "INV(WorldID): Unique",
+        "INV(BranchEvent): ParentWorldID = Immutable",
+        "INV(BranchEvent): ParentCausalID -> CommittedNode",
+        "INV(BranchEvent): Status = Staged",
+        "INV(Immune): HistoryExists -> Status = :ok"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__chron-llm-kernel.spec",
+      "authoritative_matching_lines": [
+        "INV: Runtime -> Kernel API only",
+        "INV: Kernel -> Sole State Mutator",
+        "INV: Graph = f(WAL)",
+        "INV: Post-Commit: WAL.persisted AND Graph.updated"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__chron-llm-runtime.spec",
+      "authoritative_matching_lines": [
+        "INV:"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__chron-llm-world.spec",
+      "authoritative_matching_lines": [
+        "  INV: WorldID unique",
+        "  INV: NodeID unique",
+        "  INV: Root World ⇔ parent_world_id == 0 AND parent_node_id == 0",
+        "  INV: parent_node_id == 0 OR parent node exists",
+        "  INV: Graph is acyclic",
+        "  INV: Project(Canonical EventLog) produces identical graph"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__chron-llm.spec",
+      "authoritative_matching_lines": [
+        "INV:",
+        "INV(Event.Header): Writer == Kernel",
+        "INV(Event.Payload): Writer == User",
+        "INV(LLM.Runtime): Input == Prompt, Output == Text, Knowledge == {}",
+        "INV(Sampler): Lifecycle == {Create -> Use -> Free}",
+        "INV(n-past): Start == PromptLen, End == PromptLen + GenLen"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__ffi-bindings-mock.spec",
+      "authoritative_matching_lines": [
+        "INV ABI_COMPATIBLE_WITH_LLAMA_CPP",
+        "INV ALL_OPS_COMPLEXITY == O(1)",
+        "INV NO_EXCEPTIONS_RAISED"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__ffi-bindings.spec",
+      "authoritative_matching_lines": [
+        "  INV stateless : Module holds only native pointers. No inference logic.",
+        "  INV abi_1to1 : FFI calls map 1:1 to C Wrapper -> llama.cpp.",
+        "  INV error_pass_through : Return values passed up; no local handling.",
+        "  INV mock_compat : ABI matches ffi-bindings-mock.lisp."
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__generate.spec",
+      "authoritative_matching_lines": [
+        "  INV-1 (Fault-No-Commit)    : ir.status == :fault IMPLIES NOT committed(kernel)",
+        "  INV-2 (Rollback-Stage-Empty): rolled_back(kernel) IMPLIES stage_is_empty()",
+        "  INV-3 (Fault-KV-Reset)     : ir.status == :fault IMPLIES kv_cache_reset(ctx)",
+        "  INV-4 (Step-Limit-Bound)   : s.step <= cfg.max_tokens + 1"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "llama-agent__ir__immune-system.spec",
+      "authoritative_matching_lines": [
+        "INV Pure_Functionality: calculate_entropy depends ONLY on Logits.",
+        "INV Monotonic_Thresholds: WARN_THRESH < FAULT_THRESH.",
+        "INV Complexity: Time=O(V), Space=O(1)."
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "memory__ir__store.spec",
+      "authoritative_matching_lines": [
+        "INV(payload-ref): immutable_fields",
+        "INV(store): explicit_reference; !global_singleton"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "observability__ir__world-snapshot.spec",
+      "authoritative_matching_lines": [
+        "INV: Obs fields subset PrimitiveTree. Accessors -> deep-copy(%copy-primitive-tree). Builders -> validate %require-primitive-tree."
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__ir__callback.spec",
+      "authoritative_matching_lines": [
+        "INV(Determinism): callback(e1)==callback(e2)<=>e1==e2; INV(Lossless): ir.fields=={ctx_id, pos, token, score, phase}",
+        "INV(Isolation): Delta(State)={IR_Stream}; Kernel=Const; Canonical=Const; Runtime=Const",
+        "INV(Perf): Time=O(1); Mem=O(1); THREAD: Safe iff push_ir is Thread-Safe; ERROR: None"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "authoritative_matching_lines": [
+        "    INV-NON-INVASIVE: !mod(RuntimeState)",
+        "    INV-ORDERED: forall i < len(result)-1: ir.ir-pos(result[i]) <= ir.ir-pos(result[i+1])",
+        "    INV-IMMUTABLE: forall ir in *observation-buffer*, !mod(ir.fields) post_creation",
+        "    INV-THREAD-SAFE: Concurrent ir-callback invocations are safe and lock-free",
+        "    INV-BOUNDED-NO-CRASH: Buffer overflows gracefully log without crashing LLM backend",
+        "    INV-APPEND-ONLY: len(*observation-buffer*') >= len(*observation-buffer*) unless clear-buffer() called",
+        "    INV-DETERMINISTIC: run-single-trial(prompt, seed) -> deterministic output",
+        "    INV-COUPLING: AnalysisOps != CollectionOps",
+        "    INV-OBS-ONLY: !write(Runtime|Kernel|Candidate|Canonical|Prompt)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__ir__ffi.spec",
+      "authoritative_matching_lines": [
+        "INV:"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__ir__ir.spec",
+      "authoritative_matching_lines": [
+        "INV-PURITY: IR.role=OBSERVATION; !IR.decision_authority; !IR.semantic_meaning",
+        "INV-IMMUTABLE: post(make-ir) -> immutable(IR.fields)",
+        "INV-ORDERING: (A.pos < B.pos) -> emitted_before(A,B)",
+        "INV-BOUNDED: buf.size <= buf.capacity OR atomic_read(buf.overflow_count) > 0",
+        "INV-THREAD-SAFE: Concurrent push-ir calls populate distinct slots without data races",
+        "INV-REPLAY: Stream(S1)==Stream(S2) -> analyze(S1)==analyze(S2)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__ir__stream.spec",
+      "authoritative_matching_lines": [
+        "    INV-S1 (Ordering): Enforced by ir.IR_Buffer atomic append",
+        "    INV-S2 (Ephemeral): *ir-stream* != Truth; Authority=History/WAL",
+        "    INV-S3 (Neutrality): !mutate(IR); !interpret(IR)",
+        "    INV-S4 (Isolation): RunStart -> clear-buffer()"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__r0__ir__api.spec",
+      "authoritative_matching_lines": [
+        "INV:"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__r0__ir__chat-loop.spec",
+      "authoritative_matching_lines": [
+        "INV Session.fields == { model, history }",
+        "INV chat.seq: append-user -> project-prompt -> llama-run -> append-assistant",
+        "INV trace.snapshots: h-before AND h-after present"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "authoritative_matching_lines": [
+        "INV(History) = ordered ^ append_only ^ snapshot_capable",
+        "INV(IR) = immutable ^ ordered ^ semantic_free ^ non_authoritative"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__r0__ir__history.spec",
+      "authoritative_matching_lines": [
+        "INV(history-append): APPEND_ONLY , PRESERVE_ORDER",
+        "INV(history-size): SIZE_CONSISTENT",
+        "INV(history-copy): VECTOR_CLONED , EVENTS_SHARED",
+        "INV(module): PURE_DATA_LAYER , NO_EXTERNAL_DEPS"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__r0__ir__llama-run.spec",
+      "authoritative_matching_lines": [
+        "INV STATELESS: Module holds no state between calls",
+        "INV SYNC: Execution is blocking until completion",
+        "INV NO_EXCEPTION_ON_FAIL: Process exit codes do not raise exceptions",
+        "INV ISOLATION: Interface strictly maps Prompt -> Response"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__r0__ir__prompt.spec",
+      "authoritative_matching_lines": [
+        "  INV h immutable; Output Only"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__r0__ir__trace.spec",
+      "authoritative_matching_lines": [
+        "  INV RuntimeState == RuntimeState'",
+        "  INV *trace-log* == *trace-log*'",
+        "INV ObservationOnly: TraceOps !-> Modify(RuntimeState | History | Session | Prompt)",
+        "INV ImmutableSnapshot: t.history-before == StateAt(t.capture_time)",
+        "INV SerializationFormat: Output =~ ReadableSExpression",
+        "INV SideEffectIsolation: save-trace-to-file uses snapshot to prevent race conditions"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "authoritative_matching_lines": [
+        "INV Determinism: translate(IR_A) == translate(IR_A)",
+        "INV NonAuth: PhaseE.output != Canonical_State",
+        "INV NoCommit: NOT EXISTS(op in PhaseE.output | op.type==\"commit\")",
+        "INV Lossless: IR_Event.fields subset DSL_Op.meta"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "specs__00-meta-model.spec",
+      "authoritative_matching_lines": [
+        "INVARIANT META_01: UniqueIDsPerFile {",
+        "INVARIANT META_02: ImportGraphIsAcyclic {",
+        "INVARIANT META_03: NoUndefinedReference {",
+        "INVARIANT META_04: MetaDoesNotDependOnSemantic {",
+        "INVARIANT META_05: GenerationBoundaryIsolation {"
+      ],
+      "marker_style": "INVARIANT",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "specs__01-semantic-model.spec",
+      "authoritative_matching_lines": [
+        "INVARIANT EVENT_01:",
+        "INVARIANT EVENT_02:",
+        "INVARIANT STATE_01:",
+        "INVARIANT STATE_02:",
+        "INVARIANT WORLDLINE_01:",
+        "INVARIANT WORLDLINE_02:",
+        "INVARIANT WORLDLINE_03:",
+        "INVARIANT REPLAY_01:",
+        "INVARIANT REPLAY_02:",
+        "INVARIANT REPLAY_03:",
+        "INVARIANT PROJECTION_01:",
+        "INVARIANT PROJECTION_02:",
+        "INVARIANT SEM_01:",
+        "INVARIANT SEM_02:",
+        "INVARIANT SEM_03:",
+        "INVARIANT SEM_04:",
+        "INVARIANT SEM_05:"
+      ],
+      "marker_style": "INVARIANT",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "specs__02-constitution.spec",
+      "authoritative_matching_lines": [
+        "INVARIANT CANON_01:",
+        "INVARIANT CANON_02:",
+        "INVARIANT CANON_03:",
+        "INVARIANT AUTH_01:",
+        "INVARIANT AUTH_02:",
+        "INVARIANT AUTH_03:",
+        "INVARIANT MUT_01:",
+        "INVARIANT MUT_02:",
+        "INVARIANT CAUSAL_01:",
+        "INVARIANT CAUSAL_02:",
+        "INVARIANT CAUSAL_03:",
+        "INVARIANT REPLAY_LAW_01:",
+        "INVARIANT REPLAY_LAW_02:",
+        "INVARIANT REPLAY_LAW_03:",
+        "INVARIANT PROJ_LAW_01:",
+        "INVARIANT PROJ_LAW_02:",
+        "INVARIANT CONST_01:",
+        "INVARIANT CONST_02:",
+        "INVARIANT CONST_03:",
+        "INVARIANT CONST_04:",
+        "INVARIANT CONST_05:"
+      ],
+      "marker_style": "INVARIANT",
+      "entry.format_type": "common_lisp",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "specs__03-chron-semantic-extension.spec",
+      "authoritative_matching_lines": [
+        "INVARIANT EVIDENCE_01:",
+        "INVARIANT EVIDENCE_02:",
+        "INVARIANT PROPOSAL_01:",
+        "INVARIANT PROPOSAL_02:",
+        "INVARIANT PROPOSAL_03:",
+        "INVARIANT COMMIT_01:",
+        "INVARIANT COMMIT_02:",
+        "INVARIANT COMMIT_03:",
+        "INVARIANT COMMIT_04:",
+        "INVARIANT COMMIT_RESULT_01:",
+        "INVARIANT COMMIT_RESULT_02:",
+        "INVARIANT COMMIT_RESULT_03:",
+        "INVARIANT COMMIT_RESULT_04:",
+        "INVARIANT BRANCH_01:",
+        "INVARIANT BRANCH_02:",
+        "INVARIANT BRANCH_03:",
+        "INVARIANT FORK_01:",
+        "INVARIANT FORK_02:",
+        "INVARIANT FORK_03:",
+        "INVARIANT MERGE_01:",
+        "INVARIANT MERGE_02:",
+        "INVARIANT MERGE_03:",
+        "INVARIANT MERGE_04:",
+        "INVARIANT BRANCH_CAUSAL_01:",
+        "INVARIANT BRANCH_CAUSAL_02:",
+        "INVARIANT MERGE_CAUSAL_01:",
+        "INVARIANT MERGE_CAUSAL_02:",
+        "INVARIANT CHRON_BOUNDARY_01:",
+        "INVARIANT CHRON_BOUNDARY_02:",
+        "INVARIANT CHRON_BOUNDARY_03:",
+        "INVARIANT CHRON_BOUNDARY_04:",
+        "INVARIANT CHRON_BOUNDARY_05:"
+      ],
+      "marker_style": "INVARIANT",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "specs__04-runtime-model.spec",
+      "authoritative_matching_lines": [
+        "INVARIANT OBS_01:",
+        "INVARIANT OBS_02:",
+        "INVARIANT VAL_01:",
+        "INVARIANT VAL_02:",
+        "INVARIANT ROUTE_01:",
+        "INVARIANT ROUTE_02:",
+        "INVARIANT SCHED_01:",
+        "INVARIANT SCHED_02:",
+        "INVARIANT CR_01:",
+        "INVARIANT CR_02:",
+        "INVARIANT CR_03:",
+        "INVARIANT PERSIST_01:",
+        "INVARIANT PERSIST_02:",
+        "INVARIANT RUNTIME_BOUNDARY_01:",
+        "INVARIANT RUNTIME_BOUNDARY_02:",
+        "INVARIANT RUNTIME_BOUNDARY_03:",
+        "INVARIANT RUNTIME_BOUNDARY_04:",
+        "INVARIANT RUNTIME_BOUNDARY_05:",
+        "INVARIANT RUNTIME_BOUNDARY_06:",
+        "INVARIANT RUNTIME_BOUNDARY_07:"
+      ],
+      "marker_style": "INVARIANT",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "tests__md__ir__phase0-big-bang-test.spec",
+      "authoritative_matching_lines": [
+        "INV:",
+        "  INV-Loop-1: new_world.parent_id == current_world.causal_id",
+        "  INV-Loop-2: action.physical_type == :invoke-api",
+        "  INV-Final-1: final_world.causal_id == \"node-2\"",
+        "  INV-Final-2: final_world.retry_count == 2",
+        "  INV-Final-3: count(PipelineStep) == 2"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "tests__md__ir__r2-0-a-tests.spec",
+      "authoritative_matching_lines": [
+        "  INV: !cond -> error(\"R2.0-A invariant failed: ~A\", msg)",
+        "  INV: store(s, x).ref == store(s, y).ref where x==y",
+        "  INV: load(s, ref) == original_payload",
+        "  INV: payload_immutable(ref)",
+        "  INV: causal_subgraph(g, \"p\") order == [\"s\", \"p\"]",
+        "  INV: causal_subgraph(g, n) deterministic",
+        "  INV: view(g, \"p\").nodes excludes :eval unless flag(:include-evals)",
+        "  INV: project(g).order == [SysFact, UserFact]",
+        "  INV: feedbacks linked to nodes",
+        "  INV: build_prefill(g, s).hash constant for identical inputs",
+        "  INV: hash(build_prefill(g_eval)) == hash(build_prefill(g_no_eval))"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "tests__md__ir__r2-0-b-tests.spec",
+      "authoritative_matching_lines": [
+        "  INV-1 (Graph-Unique-Node)   : Unique(keys(Graph.nodes))",
+        "  INV-2 (Mem-Content-Addr)    : ContentAddr(PayloadRef.hash == SHA256(content))",
+        "  INV-3 (World-Head-Valid)    : World.head in keys(World.graph.nodes)",
+        "  INV-4 (Commit-Atomic)       : Atomic(GraphAppend, HeadAdvance)",
+        "  INV-6 (Head-Commit-Truth)   : kernel-commit-world! == ONLY(head_advance)",
+        "  INV-7 (Replay-Determinism)  : Hash(Graph + MemStore + Policy) == PrefillHash",
+        "  INV-8 (Causal-Eval-Isolated): Evaluation edges (:eval) MUST NOT enter PrefillState or prompt context sequence",
+        "  INV-9 (Obs-Read-Only)       : Snapshot & Observation operations MUST NOT mutate World or Registry state"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "tests__md__ir__r2-0-c-tests.spec",
+      "authoritative_matching_lines": [
+        "  INV-5 (Obs-Primitive)       : All observation attributes MUST resolve strictly to primitive data types (null, bool, str, num, kw, list, map).",
+        "  INV-9 (Obs-Read-Only)       : Snapshot & Observation operations MUST NOT mutate World, Registry, or Graph state."
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "test_format",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "tests__md__ir__r2-1-b-tests.spec",
+      "authoritative_matching_lines": [
+        "  INV(obs != nil && obs.finish-reason == :stop && obs.raw-text == \"mock-success-response\")",
+        "  INV(obs.finish-reason == :timeout && obs.error-info.msg == \"Provider request timeout.\")",
+        "  INV(obs.config.temp == 0.0)",
+        "  INV(meta-b.model == \"mock-model\" && obs.provider-metadata.model == \"mock-model\")",
+        "  INV(obs1.raw-text == obs2.raw-text && obs1.finish-reason == obs2.finish-reason)",
+        "  INV(obs1.raw-text == obs2.raw-text)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "generic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "tests__md__ir__r2-2-e-tests.spec",
+      "authoritative_matching_lines": [
+        "    INV EQ(d1.inference-decision-type, d2.inference-decision-type)",
+        "    INV EQUAL(ws, ws_pre)",
+        "    INV EQ(d.inference-decision-type, :retry)",
+        "    INV EQ(d.inference-decision-type, :abort)",
+        "    INV EQUAL(ops1, ops2)"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    },
+    {
+      "filename": "tests__md__ir__r2-3-s-tests.spec",
+      "authoritative_matching_lines": [
+        "  INV equalp(world, before) == T",
+        "  INV equal(ops, first(new-world.history)) == T",
+        "  INV eq(old-history, cdr(new-world.history)) == T",
+        "  INV string=(\"child-id\", new-world.causal-id) == T",
+        "  INV string=(\"genesis\", new-world.parent-id) == T",
+        "  INV w-retry.retry-count == 1",
+        "  INV a-retry.type == :invoke-api",
+        "  INV w-abort.status == :halted",
+        "  INV a-abort.type == :halt"
+      ],
+      "marker_style": "INV",
+      "entry.format_type": "type_theoretic",
+      "invariant_count": 0,
+      "entry.invariants": [],
+      "set": "A_MINUS_B_PARSER"
+    }
+  ]
+}

@@ -1,0 +1,510 @@
+{
+  "summary": {
+    "total_findings": 38,
+    "by_severity": {
+      "critical": 37,
+      "warning": 1,
+      "info": 0
+    },
+    "by_type": {
+      "contradiction": 37,
+      "inconsistency": 1
+    }
+  },
+  "findings": [
+    {
+      "finding_id": "TYPE_CONFLICT_Event_1",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Event' has conflicting definitions across specifications",
+      "source_spec": "contracts__base-history.spec",
+      "target_spec": "contracts__kernel-world.spec",
+      "evidence": [
+        "Definition in contracts__base-history.spec: Frozen<{",
+        "Definition in contracts__kernel-world.spec: "
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_History_2",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'History' has conflicting definitions across specifications",
+      "source_spec": "contracts__base-history.spec",
+      "target_spec": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "evidence": [
+        "Definition in contracts__base-history.spec: Frozen<List<Event>>",
+        "Definition in runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec: [HistoryEvent]"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_KernelAction_3",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'KernelAction' has conflicting definitions across specifications",
+      "source_spec": "contracts__kernel-world.spec",
+      "target_spec": "docs__ir__01-domain-model.spec",
+      "evidence": [
+        "Definition in contracts__kernel-world.spec: ",
+        "Definition in docs__ir__01-domain-model.spec: "
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Executable_4",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Executable' has conflicting definitions across specifications",
+      "source_spec": "contracts__kernel-world.spec",
+      "target_spec": "docs__ir__knowledge-system.spec",
+      "evidence": [
+        "Definition in contracts__kernel-world.spec: ",
+        "Definition in docs__ir__knowledge-system.spec: { runtime: Runtime }"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Observation_5",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Observation' has conflicting definitions across specifications",
+      "source_spec": "contracts__kernel-world.spec",
+      "target_spec": "docs__ir__05-validation-pipeline.spec",
+      "evidence": [
+        "Definition in contracts__kernel-world.spec: ",
+        "Definition in docs__ir__05-validation-pipeline.spec: {detector, score, threshold, facts[]}"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Canonical_6",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Canonical' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__00-constitution.spec",
+      "target_spec": "docs__ir__01-domain-model.spec",
+      "evidence": [
+        "Definition in docs__ir__00-constitution.spec: ",
+        "Definition in docs__ir__01-domain-model.spec: "
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Candidate_7",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Candidate' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__00-constitution.spec",
+      "target_spec": "docs__ir__01-domain-model.spec",
+      "evidence": [
+        "Definition in docs__ir__00-constitution.spec: ",
+        "Definition in docs__ir__01-domain-model.spec: "
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_ValidationReport_8",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'ValidationReport' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__01-domain-model.spec",
+      "target_spec": "docs__ir__05-validation-pipeline.spec",
+      "evidence": [
+        "Definition in docs__ir__01-domain-model.spec: ",
+        "Definition in docs__ir__05-validation-pipeline.spec: {cid: Candidate.id, syntax-violations: [Violation], semantic-violations: [Violation], invariant-violations: [Violation], observations: [Observation]}"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_RuntimeCommand_9",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'RuntimeCommand' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__01-domain-model.spec",
+      "target_spec": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "evidence": [
+        "Definition in docs__ir__01-domain-model.spec: ",
+        "Definition in docs__ir__chron-llm-r1-interface-spec-v1.2.spec: { op: Commit | Retry | Rollback, interventions: [Intervention], truncate-at: Int | Null, delta-prefill: Str | Null, payload: Any, metadata: Opaque }"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Session_10",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Session' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__01-domain-model.spec",
+      "target_spec": "runtime__r0__ir__chat-loop.spec",
+      "evidence": [
+        "Definition in docs__ir__01-domain-model.spec: ",
+        "Definition in runtime__r0__ir__chat-loop.spec: { model: ModelRef | Nil, history: History }"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Context_11",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Context' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__01-domain-model.spec",
+      "target_spec": "llama-agent__ir__chron-llm.spec",
+      "evidence": [
+        "Definition in docs__ir__01-domain-model.spec: ",
+        "Definition in llama-agent__ir__chron-llm.spec: model:ModelPtr, ctx:LLamaCtx, n-past:Int"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Config_12",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Config' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__05-validation-pipeline.spec",
+      "target_spec": "docs__ir__99-open-questions.spec",
+      "evidence": [
+        "Definition in docs__ir__05-validation-pipeline.spec: {retry-limit, penalty-strategy, thresholds[], policy}",
+        "Definition in docs__ir__99-open-questions.spec: { routing: P, retry: S, penalty: S, detectors: T, logging: L, metrics: M, telemetry: T }"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_EventID_13",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'EventID' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__99-open-questions.spec",
+      "target_spec": "specs__01-semantic-model.spec",
+      "evidence": [
+        "Definition in docs__ir__99-open-questions.spec: UUID | SeqID | LamportClock | CompositeID",
+        "Definition in specs__01-semantic-model.spec: IDType(NamespacedID(\"event\"))"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_ID_14",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'ID' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "target_spec": "graph-runtime__ir__graph.spec",
+      "evidence": [
+        "Definition in docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec: ",
+        "Definition in graph-runtime__ir__graph.spec: Symbol | String"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Ref_15",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Ref' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "target_spec": "graph-runtime__ir__graph.spec",
+      "evidence": [
+        "Definition in docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec: ",
+        "Definition in graph-runtime__ir__graph.spec: Any"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_PhysicalEvent_16",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'PhysicalEvent' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "target_spec": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "evidence": [
+        "Definition in docs__ir__chron-llm-r1-interface-spec-v1.2.spec: { causal-id: ID, token-id: Int, kv-pos: Int, entropy: Float, ts: Time }",
+        "Definition in runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec: { causal_id: ID, token_id: TokenID, kv_pos: Pos, entropy: Float, timestamp: Time }"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_PRE_17",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'PRE' has conflicting definitions across specifications",
+      "source_spec": "docs__ir__phase-f-charter.spec",
+      "target_spec": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "evidence": [
+        "Definition in docs__ir__phase-f-charter.spec: ",
+        "Definition in docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec: !exists_key(g.nodes, n.id)"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_WorldObs = { ver_18",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'WorldObs = { ver' has conflicting definitions across specifications",
+      "source_spec": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target_spec": "tests__md__ir__r2-0-c-tests.spec",
+      "evidence": [
+        "Definition in docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec: U16, world_id:ID, root_id:ID, head_id:ID, policy:Map, meta:Map, lifecycle:Enum, parent_id:ID|NIL }",
+        "Definition in tests__md__ir__r2-0-c-tests.spec: U16, world_id:ID, root_id:ID, head_id:ID, policy:Map, meta:Map, lifecycle:Enum{:created, :active, :inactive, :archived}, parent_id:ID|NIL }"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_POST_19",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'POST' has conflicting definitions across specifications",
+      "source_spec": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target_spec": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "evidence": [
+        "Definition in docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec: g'.nodes == put(g.nodes, n.id, n)",
+        "Definition in docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec: g'.edges == append(g.edges, e)"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_LOGIC_20",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'LOGIC' has conflicting definitions across specifications",
+      "source_spec": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target_spec": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "evidence": [
+        "Definition in docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec: Traverse causal ancestry -> Load content from MemStore -> Materialize ContextNode list",
+        "Definition in docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec: Traverse causal ancestors -> Query outgoing :eval edges for each ancestor -> Map NodeID to [Eval]"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_RULE_21",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'RULE' has conflicting definitions across specifications",
+      "source_spec": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target_spec": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "evidence": [
+        "Definition in docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec: Deterministic string serialization maintaining node order",
+        "Definition in docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec: Data-only snapshot, No mutation"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_SEQ_22",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'SEQ' has conflicting definitions across specifications",
+      "source_spec": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target_spec": "llama-agent__ir__generate.spec",
+      "evidence": [
+        "Definition in docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec: add-node!(w.graph, node); w.head = node.id",
+        "Definition in llama-agent__ir__generate.spec: my-llama-reset-kv(s.ctx); kernel-rollback!(kernel); cleanup!(s)"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Node_23",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Node' has conflicting definitions across specifications",
+      "source_spec": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target_spec": "experiments__ir__scc.spec",
+      "evidence": [
+        "Definition in experiments__ir__chron-llm-spec-v0.2.spec: {id: ID, role: Role, ts: Time}",
+        "Definition in experiments__ir__scc.spec: ID"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Edge_24",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Edge' has conflicting definitions across specifications",
+      "source_spec": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target_spec": "experiments__ir__scc.spec",
+      "evidence": [
+        "Definition in experiments__ir__chron-llm-spec-v0.2.spec: {from: ID, to: ID, rel: Role, str: Float[0,1], cnt: Int}",
+        "Definition in experiments__ir__scc.spec: {from: Node, to: Node}"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Graph_25",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Graph' has conflicting definitions across specifications",
+      "source_spec": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target_spec": "experiments__ir__scc.spec",
+      "evidence": [
+        "Definition in experiments__ir__chron-llm-spec-v0.2.spec: {nodes: Node[], edges: Edge[], clusters: Cluster[], meta: Map}",
+        "Definition in experiments__ir__scc.spec: {nodes: [Node], edges: [Edge]}"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_SCC_26",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'SCC' has conflicting definitions across specifications",
+      "source_spec": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target_spec": "experiments__ir__scc.spec",
+      "evidence": [
+        "Definition in experiments__ir__chron-llm-spec-v0.2.spec: {id: ID, nodes: ID[], reach: Bool, is_att: Bool, stable: Bool}",
+        "Definition in experiments__ir__scc.spec: [Node]"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Keyword_27",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Keyword' has conflicting definitions across specifications",
+      "source_spec": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target_spec": "graph-runtime__ir__graph.spec",
+      "evidence": [
+        "Definition in graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec: String",
+        "Definition in graph-runtime__ir__graph.spec: Symbol"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Kernel = {wal_28",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Kernel = {wal' has conflicting definitions across specifications",
+      "source_spec": "llama-agent__ir__causal-kernel.spec",
+      "target_spec": "llama-agent__ir__chron-llm-kernel.spec",
+      "evidence": [
+        "Definition in llama-agent__ir__causal-kernel.spec: WAL, cur-wld: Int}",
+        "Definition in llama-agent__ir__chron-llm-kernel.spec: WAL, graph: Graph?, current_world: Integer}"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_*n-past*_29",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type '*n-past*' has conflicting definitions across specifications",
+      "source_spec": "llama-agent__ir__chron-llm.spec",
+      "target_spec": "llama-agent__ir__ffi-bindings.spec",
+      "evidence": [
+        "Definition in llama-agent__ir__chron-llm.spec: Int = 0",
+        "Definition in llama-agent__ir__ffi-bindings.spec: int32"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_EXEC_30",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'EXEC' has conflicting definitions across specifications",
+      "source_spec": "llama-agent__ir__chron-llm.spec",
+      "target_spec": "llama-agent__ir__chron-llm.spec",
+      "evidence": [
+        "Definition in llama-agent__ir__chron-llm.spec: llama_eval(ctx.ctx, tokens)",
+        "Definition in llama-agent__ir__chron-llm.spec: "
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_RET_31",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'RET' has conflicting definitions across specifications",
+      "source_spec": "llama-agent__ir__chron-llm.spec",
+      "target_spec": "llama-agent__ir__chron-llm.spec",
+      "evidence": [
+        "Definition in llama-agent__ir__chron-llm.spec: UTF8(buf)",
+        "Definition in llama-agent__ir__chron-llm.spec: Bytes"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_if cmd_32",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'if cmd' has conflicting definitions across specifications",
+      "source_spec": "llama-agent__ir__delta3-agent.spec",
+      "target_spec": "llama-agent__ir__delta3-agent.spec",
+      "evidence": [
+        "Definition in llama-agent__ir__delta3-agent.spec: \":quit\": break",
+        "Definition in llama-agent__ir__delta3-agent.spec: \":reset\": perform_stateful_reset(); continue"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_ql_33",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'ql' has conflicting definitions across specifications",
+      "source_spec": "llama-agent__ir__llama-agent.spec",
+      "target_spec": "llama-agent__ir__llama-agent.spec",
+      "evidence": [
+        "Definition in llama-agent__ir__llama-agent.spec: quickload(\"cffi\")",
+        "Definition in llama-agent__ir__llama-agent.spec: quickload(\"babel\")"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_Prompt_34",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'Prompt' has conflicting definitions across specifications",
+      "source_spec": "runtime__ir__divergence.spec",
+      "target_spec": "runtime__r0__ir__llama-run.spec",
+      "evidence": [
+        "Definition in runtime__ir__divergence.spec: STRING",
+        "Definition in runtime__r0__ir__llama-run.spec: String"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_IR_35",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'IR' has conflicting definitions across specifications",
+      "source_spec": "runtime__ir__ir.spec",
+      "target_spec": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "evidence": [
+        "Definition in runtime__ir__ir.spec: STRUCT {",
+        "Definition in runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec: { ctx_id: ID, pos: Pos, phase: Phase, token: Token, score: Score }"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_HistoryEvent_36",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'HistoryEvent' has conflicting definitions across specifications",
+      "source_spec": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "target_spec": "runtime__r0__ir__history.spec",
+      "evidence": [
+        "Definition in runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec: { role: Role, content: Text }",
+        "Definition in runtime__r0__ir__history.spec: { role: Any , content: Any }"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "TYPE_CONFLICT_R0Trace_37",
+      "type": "contradiction",
+      "severity": "critical",
+      "description": "Type 'R0Trace' has conflicting definitions across specifications",
+      "source_spec": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "target_spec": "runtime__r0__ir__trace.spec",
+      "evidence": [
+        "Definition in runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec: { user_text: Text, prompt: Text, raw: RawData, parsed: ParsedData, history_before: History, history_after: History, prompt_len: Int, response_len: Int }",
+        "Definition in runtime__r0__ir__trace.spec: {"
+      ],
+      "line_numbers": []
+    },
+    {
+      "finding_id": "INV_CONFLICT_unknown_38",
+      "type": "inconsistency",
+      "severity": "warning",
+      "description": "Entity 'unknown' has multiple invariants",
+      "source_spec": "docs__ir__00-constitution.spec",
+      "target_spec": "docs__ir__00-constitution.spec",
+      "evidence": [
+        "Invariant in docs__ir__00-constitution.spec: Canonical.authoritative == true",
+        "Invariant in docs__ir__00-constitution.spec: Working.authoritative == false"
+      ],
+      "line_numbers": []
+    }
+  ]
+}

@@ -1,0 +1,4635 @@
+{
+  "nodes": [
+    {
+      "id": "bindings__llama_cffi.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 255,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "config__sbcl_policy.spec",
+      "format": "common_lisp",
+      "tags": [
+        "common_lisp_defstruct"
+      ],
+      "metrics": {
+        "lines": 139,
+        "types": 10,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__abi-registry.spec",
+      "format": "type_theoretic",
+      "tags": [
+        "has_theorems"
+      ],
+      "metrics": {
+        "lines": 93,
+        "types": 8,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__base-excludes.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 27,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__base-history.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 31,
+        "types": 4,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__base-invariants.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 63,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__base-types.spec",
+      "format": "common_lisp",
+      "tags": [
+        "has_theorems",
+        "section:\u5065\u5168\u6027\u5b9a\u7406"
+      ],
+      "metrics": {
+        "lines": 95,
+        "types": 10,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__integration-verification.spec",
+      "format": "type_theoretic",
+      "tags": [
+        "has_theorems"
+      ],
+      "metrics": {
+        "lines": 61,
+        "types": 3,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__kernel-world.spec",
+      "format": "common_lisp",
+      "tags": [
+        "has_theorems"
+      ],
+      "metrics": {
+        "lines": 120,
+        "types": 16,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__pipeline-orchestration.spec",
+      "format": "type_theoretic",
+      "tags": [
+        "has_theorems"
+      ],
+      "metrics": {
+        "lines": 72,
+        "types": 8,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__spec-metamodel.spec",
+      "format": "type_theoretic",
+      "tags": [
+        "section:Regex"
+      ],
+      "metrics": {
+        "lines": 31,
+        "types": 2,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__spec__v2.8.0-C-persistence.spec",
+      "format": "generic",
+      "tags": [
+        "has_theorems"
+      ],
+      "metrics": {
+        "lines": 26,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "contracts__spec__v2.8.0-D-replay.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 15,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "core__types.spec",
+      "format": "common_lisp",
+      "tags": [
+        "common_lisp_deftype",
+        "common_lisp_defstruct"
+      ],
+      "metrics": {
+        "lines": 202,
+        "types": 41,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__00-constitution.spec",
+      "format": "common_lisp",
+      "tags": [],
+      "metrics": {
+        "lines": 22,
+        "types": 7,
+        "enums": 0,
+        "ops": 2,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__01-domain-model.spec",
+      "format": "common_lisp",
+      "tags": [
+        "has_ownership",
+        "has_producer_consumer"
+      ],
+      "metrics": {
+        "lines": 59,
+        "types": 13,
+        "enums": 4,
+        "ops": 0,
+        "invariants": 3
+      }
+    },
+    {
+      "id": "docs__ir__02-operational-semantics.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 67,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__03-reference-runtime.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 17,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__05-validation-pipeline.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 30,
+        "types": 8,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__06-kernel-state-machine.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 25,
+        "types": 15,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__07-chron-mapping.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 40,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__08-memory-model.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 14,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__09-runtime-scheduling.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 22,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__10-tool-execution.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 16,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__11-prompt-builder.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 12,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__12-recovery.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 15,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__13-worldline-branching.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 71,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__99-open-questions.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 19,
+        "types": 16,
+        "enums": 0,
+        "ops": 1,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 61,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 83,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 55,
+        "types": 5,
+        "enums": 0,
+        "ops": 9,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "format": "common_lisp",
+      "tags": [],
+      "metrics": {
+        "lines": 63,
+        "types": 7,
+        "enums": 0,
+        "ops": 1,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__architecture-v1.1.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 101,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 30,
+        "types": 10,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__knowledge-system.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 24,
+        "types": 11,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__phase-a-charter.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 9,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__phase-b-charter.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 11,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__phase-c-charter.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 14,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__phase-d-charter.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 12,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__phase-e-charter.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 42,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__phase-f-charter.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 35,
+        "types": 10,
+        "enums": 0,
+        "ops": 5,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__pull_request_template.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 8,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__ir__r2-0-c-freeze-report.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 6,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__reference__ir__knowledge-rationale.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 42,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 92,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__spec__ir__Chron-LLM_R2.1-Kernel_Freeze_Spec.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 49,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 64,
+        "types": 12,
+        "enums": 0,
+        "ops": 12,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 126,
+        "types": 76,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "experiments__ir__3cluster.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 36,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 50,
+        "types": 15,
+        "enums": 0,
+        "ops": 1,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "experiments__ir__cycle.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 26,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "experiments__ir__dynamics.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 31,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "experiments__ir__scc.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 49,
+        "types": 5,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "graph-runtime__ir__causal.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 36,
+        "types": 3,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 159,
+        "types": 10,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "graph-runtime__ir__graph.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 28,
+        "types": 4,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__causal-kernel.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 72,
+        "types": 6,
+        "enums": 0,
+        "ops": 11,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__chron-llm-graph.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 66,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__chron-llm-immune.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 35,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__chron-llm-kernel.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 64,
+        "types": 6,
+        "enums": 0,
+        "ops": 8,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__chron-llm-runtime.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 37,
+        "types": 2,
+        "enums": 0,
+        "ops": 2,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__chron-llm-world.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 144,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__chron-llm.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 48,
+        "types": 25,
+        "enums": 0,
+        "ops": 5,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__delta3-agent.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 76,
+        "types": 8,
+        "enums": 0,
+        "ops": 10,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__ffi-bindings-mock.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 54,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__ffi-bindings.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 46,
+        "types": 24,
+        "enums": 0,
+        "ops": 10,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__generate.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 43,
+        "types": 22,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__immune-system.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 41,
+        "types": 4,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "llama-agent__ir__llama-agent.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 92,
+        "types": 27,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "macros__dsl.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 220,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "memory__ir__store.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 68,
+        "types": 1,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "observability__ir__world-snapshot.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 73,
+        "types": 2,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__ir__callback.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 6,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 71,
+        "types": 1,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__ir__divergence.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 9,
+        "types": 2,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__ir__ffi.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 19,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__ir__ir.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 84,
+        "types": 5,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__ir__stream.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 14,
+        "types": 1,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__md__ir__llama-engine.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 3,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__r0__ir__api.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 20,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__r0__ir__chat-loop.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 40,
+        "types": 3,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 33,
+        "types": 7,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__r0__ir__history.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 15,
+        "types": 2,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__r0__ir__llama-run.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 24,
+        "types": 3,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__r0__ir__prompt.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 22,
+        "types": 2,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__r0__ir__trace.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 41,
+        "types": 2,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 22,
+        "types": 3,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "runtime__r1__ir__core.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 69,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "specs__00-expression-grammar.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 1,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "specs__00-meta-model.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 207,
+        "types": 4,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "specs__00-type-system.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 1,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "specs__01-semantic-model.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 174,
+        "types": 3,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "specs__02-constitution.spec",
+      "format": "common_lisp",
+      "tags": [],
+      "metrics": {
+        "lines": 230,
+        "types": 2,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "specs__03-chron-semantic-extension.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 353,
+        "types": 7,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "specs__04-runtime-model.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 292,
+        "types": 6,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "tests__md__ir__phase0-big-bang-test.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 40,
+        "types": 9,
+        "enums": 0,
+        "ops": 4,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "tests__md__ir__r2-0-a-tests.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 43,
+        "types": 4,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "tests__md__ir__r2-0-b-tests.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 83,
+        "types": 10,
+        "enums": 0,
+        "ops": 12,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "tests__md__ir__r2-0-c-tests.spec",
+      "format": "test_format",
+      "tags": [],
+      "metrics": {
+        "lines": 65,
+        "types": 14,
+        "enums": 0,
+        "ops": 4,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "tests__md__ir__r2-1-b-tests.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 42,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "tests__md__ir__r2-2-e-tests.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 41,
+        "types": 4,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "tests__md__ir__r2-3-s-tests.spec",
+      "format": "type_theoretic",
+      "tags": [],
+      "metrics": {
+        "lines": 43,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    },
+    {
+      "id": "tests__pipeline_test.spec",
+      "format": "generic",
+      "tags": [],
+      "metrics": {
+        "lines": 176,
+        "types": 0,
+        "enums": 0,
+        "ops": 0,
+        "invariants": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "config__sbcl_policy.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "config__sbcl_policy.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "config__sbcl_policy.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "config__sbcl_policy.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "config__sbcl_policy.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "config__sbcl_policy.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:fixnum"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "config__sbcl_policy.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:single"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:single"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:single"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:single"
+    },
+    {
+      "source": "config__sbcl_policy.spec",
+      "target": "core__types.spec",
+      "type": "references",
+      "description": "Shared entity: type:single"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:single"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "contracts__kernel-world.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "docs__ir__00-constitution.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "docs__ir__01-domain-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "runtime__r0__ir__chat-loop.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "runtime__r0__ir__prompt.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__kernel-world.spec",
+      "target": "docs__ir__00-constitution.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__kernel-world.spec",
+      "target": "docs__ir__01-domain-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__kernel-world.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__kernel-world.spec",
+      "target": "runtime__r0__ir__chat-loop.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__kernel-world.spec",
+      "target": "runtime__r0__ir__prompt.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__01-domain-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "runtime__r0__ir__chat-loop.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "runtime__r0__ir__prompt.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "runtime__r0__ir__chat-loop.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "runtime__r0__ir__prompt.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "runtime__r0__ir__chat-loop.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "runtime__r0__ir__prompt.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "runtime__r0__ir__chat-loop.spec",
+      "target": "runtime__r0__ir__prompt.spec",
+      "type": "references",
+      "description": "Shared entity: type:Event"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "runtime__r0__ir__history.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "runtime__r0__ir__prompt.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "contracts__base-history.spec",
+      "target": "runtime__r0__ir__trace.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "target": "runtime__r0__ir__history.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "target": "runtime__r0__ir__prompt.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "target": "runtime__r0__ir__trace.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "runtime__r0__ir__history.spec",
+      "target": "runtime__r0__ir__prompt.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "runtime__r0__ir__history.spec",
+      "target": "runtime__r0__ir__trace.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "runtime__r0__ir__prompt.spec",
+      "target": "runtime__r0__ir__trace.spec",
+      "type": "references",
+      "description": "Shared entity: type:History"
+    },
+    {
+      "source": "contracts__base-types.spec",
+      "target": "contracts__kernel-world.spec",
+      "type": "references",
+      "description": "Shared entity: type:Nat"
+    },
+    {
+      "source": "contracts__base-types.spec",
+      "target": "contracts__kernel-world.spec",
+      "type": "references",
+      "description": "Shared entity: type:String"
+    },
+    {
+      "source": "contracts__base-types.spec",
+      "target": "contracts__kernel-world.spec",
+      "type": "references",
+      "description": "Shared entity: type:Authority"
+    },
+    {
+      "source": "contracts__base-types.spec",
+      "target": "contracts__kernel-world.spec",
+      "type": "references",
+      "description": "Shared entity: type:ExecutionAuthority"
+    },
+    {
+      "source": "contracts__base-types.spec",
+      "target": "contracts__kernel-world.spec",
+      "type": "references",
+      "description": "Shared entity: type:CausalAuthority"
+    },
+    {
+      "source": "contracts__base-types.spec",
+      "target": "contracts__kernel-world.spec",
+      "type": "references",
+      "description": "Shared entity: type:InterpretationAuthority"
+    },
+    {
+      "source": "contracts__base-types.spec",
+      "target": "contracts__kernel-world.spec",
+      "type": "references",
+      "description": "Shared entity: type:CanonicalAuthority"
+    },
+    {
+      "source": "contracts__base-types.spec",
+      "target": "contracts__kernel-world.spec",
+      "type": "references",
+      "description": "Shared entity: type:DelegationGraph"
+    },
+    {
+      "source": "contracts__kernel-world.spec",
+      "target": "docs__ir__01-domain-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:KernelAction"
+    },
+    {
+      "source": "contracts__kernel-world.spec",
+      "target": "docs__ir__05-validation-pipeline.spec",
+      "type": "references",
+      "description": "Shared entity: type:KernelAction"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "docs__ir__05-validation-pipeline.spec",
+      "type": "references",
+      "description": "Shared entity: type:KernelAction"
+    },
+    {
+      "source": "contracts__kernel-world.spec",
+      "target": "docs__ir__knowledge-system.spec",
+      "type": "references",
+      "description": "Shared entity: type:Executable"
+    },
+    {
+      "source": "contracts__kernel-world.spec",
+      "target": "docs__ir__05-validation-pipeline.spec",
+      "type": "references",
+      "description": "Shared entity: type:Observation"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:timestamp"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:timestamp"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:timestamp"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:uuid"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:list"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:symbol"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:symbol"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:symbol"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "core__types.spec",
+      "target": "core__types.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:string"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__01-domain-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:Canonical"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__05-validation-pipeline.spec",
+      "type": "references",
+      "description": "Shared entity: type:Canonical"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "docs__ir__05-validation-pipeline.spec",
+      "type": "references",
+      "description": "Shared entity: type:Canonical"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__01-domain-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:Working"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__01-domain-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:Derived"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__01-domain-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:External"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__01-domain-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:Candidate"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__05-validation-pipeline.spec",
+      "type": "references",
+      "description": "Shared entity: type:Candidate"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Candidate"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "docs__ir__05-validation-pipeline.spec",
+      "type": "references",
+      "description": "Shared entity: type:Candidate"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Candidate"
+    },
+    {
+      "source": "docs__ir__05-validation-pipeline.spec",
+      "target": "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Candidate"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__99-open-questions.spec",
+      "type": "references",
+      "description": "Shared entity: op:Commit"
+    },
+    {
+      "source": "docs__ir__00-constitution.spec",
+      "target": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "type": "references",
+      "description": "Shared entity: op:Commit"
+    },
+    {
+      "source": "docs__ir__99-open-questions.spec",
+      "target": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "type": "references",
+      "description": "Shared entity: op:Commit"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "docs__ir__05-validation-pipeline.spec",
+      "type": "references",
+      "description": "Shared entity: type:ValidationReport"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "type": "references",
+      "description": "Shared entity: type:RuntimeCommand"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:RuntimeCommand"
+    },
+    {
+      "source": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "target": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:RuntimeCommand"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "runtime__r0__ir__chat-loop.spec",
+      "type": "references",
+      "description": "Shared entity: type:Session"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Session"
+    },
+    {
+      "source": "runtime__r0__ir__chat-loop.spec",
+      "target": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Session"
+    },
+    {
+      "source": "docs__ir__01-domain-model.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:Context"
+    },
+    {
+      "source": "docs__ir__05-validation-pipeline.spec",
+      "target": "docs__ir__99-open-questions.spec",
+      "type": "references",
+      "description": "Shared entity: type:Config"
+    },
+    {
+      "source": "docs__ir__06-kernel-state-machine.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "docs__ir__06-kernel-state-machine.spec",
+      "target": "llama-agent__ir__ffi-bindings.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "docs__ir__06-kernel-state-machine.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "docs__ir__06-kernel-state-machine.spec",
+      "target": "llama-agent__ir__llama-agent.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__ffi-bindings.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__llama-agent.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "llama-agent__ir__ffi-bindings.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "llama-agent__ir__ffi-bindings.spec",
+      "target": "llama-agent__ir__llama-agent.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "llama-agent__ir__generate.spec",
+      "target": "llama-agent__ir__llama-agent.spec",
+      "type": "references",
+      "description": "Shared entity: type:INVARIANTS"
+    },
+    {
+      "source": "docs__ir__99-open-questions.spec",
+      "target": "specs__01-semantic-model.spec",
+      "type": "references",
+      "description": "Shared entity: type:EventID"
+    },
+    {
+      "source": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "target": "graph-runtime__ir__graph.spec",
+      "type": "references",
+      "description": "Shared entity: type:ID"
+    },
+    {
+      "source": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "target": "runtime__ir__ir.spec",
+      "type": "references",
+      "description": "Shared entity: type:ID"
+    },
+    {
+      "source": "graph-runtime__ir__graph.spec",
+      "target": "runtime__ir__ir.spec",
+      "type": "references",
+      "description": "Shared entity: type:ID"
+    },
+    {
+      "source": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "target": "graph-runtime__ir__graph.spec",
+      "type": "references",
+      "description": "Shared entity: type:Ref"
+    },
+    {
+      "source": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "target": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PhysicalEvent"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__ir__phase-f-charter.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "llama-agent__ir__generate.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:PRE"
+    },
+    {
+      "source": "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "target": "llama-agent__ir__chron-llm-kernel.spec",
+      "type": "references",
+      "description": "Shared entity: op:return map(n"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-b-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:PayloadRef = { hash"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:PayloadRef = { hash"
+    },
+    {
+      "source": "tests__md__ir__r2-0-b-tests.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:PayloadRef = { hash"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-b-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node = { id"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node = { id"
+    },
+    {
+      "source": "tests__md__ir__r2-0-b-tests.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node = { id"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-b-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge = { from"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge = { from"
+    },
+    {
+      "source": "tests__md__ir__r2-0-b-tests.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge = { from"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-b-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph = { nodes"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph = { nodes"
+    },
+    {
+      "source": "tests__md__ir__r2-0-b-tests.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph = { nodes"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-b-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:World = { id"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:World = { id"
+    },
+    {
+      "source": "tests__md__ir__r2-0-b-tests.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:World = { id"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-b-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Registry = { worlds"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Registry = { worlds"
+    },
+    {
+      "source": "tests__md__ir__r2-0-b-tests.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Registry = { worlds"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:WorldObs = { ver"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:RegistryObs = { ver"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:AncestryObs = { world_id"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:DiffObs = { changed"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:OPERATIONS"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "llama-agent__ir__generate.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:POST"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:LOGIC"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:LOGIC"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:LOGIC"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RULE"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:SEQ"
+    },
+    {
+      "source": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "references",
+      "description": "Shared entity: type:SEQ"
+    },
+    {
+      "source": "llama-agent__ir__generate.spec",
+      "target": "llama-agent__ir__generate.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:SEQ"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "experiments__ir__scc.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "graph-runtime__ir__causal.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "graph-runtime__ir__causal.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "graph-runtime__ir__causal.spec",
+      "target": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "graph-runtime__ir__causal.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "graph-runtime__ir__causal.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Node"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "experiments__ir__scc.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "graph-runtime__ir__causal.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "graph-runtime__ir__causal.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "graph-runtime__ir__causal.spec",
+      "target": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "graph-runtime__ir__causal.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Edge"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "experiments__ir__scc.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "graph-runtime__ir__causal.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "graph-runtime__ir__causal.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "experiments__ir__scc.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "graph-runtime__ir__causal.spec",
+      "target": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "graph-runtime__ir__causal.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "tests__md__ir__r2-0-a-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:Graph"
+    },
+    {
+      "source": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "target": "experiments__ir__scc.spec",
+      "type": "references",
+      "description": "Shared entity: type:SCC"
+    },
+    {
+      "source": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "target": "graph-runtime__ir__graph.spec",
+      "type": "references",
+      "description": "Shared entity: type:Keyword"
+    },
+    {
+      "source": "llama-agent__ir__causal-kernel.spec",
+      "target": "llama-agent__ir__chron-llm-kernel.spec",
+      "type": "references",
+      "description": "Shared entity: type:Kernel = {wal"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__ffi-bindings.spec",
+      "type": "references",
+      "description": "Shared entity: type:*n-past*"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__llama-agent.spec",
+      "type": "references",
+      "description": "Shared entity: type:OPS"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:EXEC"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:EXEC"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:EXEC"
+    },
+    {
+      "source": "llama-agent__ir__chron-llm.spec",
+      "target": "llama-agent__ir__chron-llm.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:RET"
+    },
+    {
+      "source": "llama-agent__ir__delta3-agent.spec",
+      "target": "llama-agent__ir__delta3-agent.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:if cmd"
+    },
+    {
+      "source": "llama-agent__ir__llama-agent.spec",
+      "target": "llama-agent__ir__llama-agent.spec",
+      "type": "overlaps",
+      "description": "Shared entity: type:ql"
+    },
+    {
+      "source": "runtime__ir__divergence.spec",
+      "target": "runtime__r0__ir__llama-run.spec",
+      "type": "references",
+      "description": "Shared entity: type:Prompt"
+    },
+    {
+      "source": "runtime__ir__ir.spec",
+      "target": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "type": "references",
+      "description": "Shared entity: type:IR"
+    },
+    {
+      "source": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "target": "runtime__r0__ir__history.spec",
+      "type": "references",
+      "description": "Shared entity: type:HistoryEvent"
+    },
+    {
+      "source": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "target": "runtime__r0__ir__trace.spec",
+      "type": "references",
+      "description": "Shared entity: type:R0Trace"
+    },
+    {
+      "source": "tests__md__ir__r2-0-b-tests.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:UTILS"
+    },
+    {
+      "source": "tests__md__ir__r2-0-b-tests.spec",
+      "target": "tests__md__ir__r2-0-c-tests.spec",
+      "type": "references",
+      "description": "Shared entity: type:INIT g.nodes = {\"root\""
+    }
+  ],
+  "clusters": [
+    {
+      "tag": "common_lisp_defstruct",
+      "files": [
+        "config__sbcl_policy.spec",
+        "core__types.spec"
+      ],
+      "size": 2
+    },
+    {
+      "tag": "has_theorems",
+      "files": [
+        "contracts__abi-registry.spec",
+        "contracts__base-types.spec",
+        "contracts__integration-verification.spec",
+        "contracts__kernel-world.spec",
+        "contracts__pipeline-orchestration.spec",
+        "contracts__spec__v2.8.0-C-persistence.spec"
+      ],
+      "size": 6
+    }
+  ]
+}

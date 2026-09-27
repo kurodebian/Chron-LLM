@@ -1,0 +1,364 @@
+GROUP=type_theoretic/INV_DEF
+RECORD=contracts__pipeline-orchestration.spec
+RAW_MATCHING_LINES=["  INV_DEF PIPE.CORE.001: pure_stage_transformations(", "  INV_DEF PIPE.CORE.002: replay_context_deterministic("]
+DISTINCT_RAW_SYNTAX_COUNT=2
+
+GROUP=generic/INV
+RECORD=docs__ir__02-operational-semantics.spec
+RAW_MATCHING_LINES=["  INV: Atomic | !Partial | Sole Canonical Mutator", "  INV: Authoritative(Backend.output) == false", "  INV: Deterministic | Sole Runtime State Mutator", "  INV: Canonical immutable", "  INV: Canonical immutable | Authoritative post-Commit | Standard Candidate->Validation->Commit path"]
+DISTINCT_RAW_SYNTAX_COUNT=5
+
+GROUP=generic/INV
+RECORD=docs__ir__07-chron-mapping.spec
+RAW_MATCHING_LINES=["INV: write(CanonicalState) == op:mutate(CanonicalState) // Commit is sole updater", "INV: Replay(WAL[]) -> deterministic(ReplayInput)", "INV: Projection(CanonicalState) ⊆ CanonicalState"]
+DISTINCT_RAW_SYNTAX_COUNT=3
+
+GROUP=generic/INV
+RECORD=docs__ir__08-memory-model.spec
+RAW_MATCHING_LINES=["INV CanonicalMemory.writer == Commit", "INV MemoryRef.authoritative.writer == Commit", "INV MemoryRef.is_deterministic == true", "INV Replay.requires(MemoryRef) == true"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=generic/INV
+RECORD=docs__ir__09-runtime-scheduling.spec
+RAW_MATCHING_LINES=["INV Schedule == Deterministic(CanonicalState)", "INV Retry -> !Mutate(CanonicalState)", "INV NormalDialogueExecution !Depends(IsolatedQueue)", "INV FaultIsolation -> !Affect(NormalDialogueReplay)"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=generic/INV
+RECORD=docs__ir__10-tool-execution.spec
+RAW_MATCHING_LINES=["INV(authority): State'.canonical != State.canonical <-> evt.type == COMMIT", "INV(isolation_fail): evt.type in {TIMEOUT, ABORT} -> State'.dialogue == State.dialogue", "INV(causal_id): forall e: ToolEvent, e.causal_id == Context.causal_id", "INV(retry_scope): retry() subset_of tool_stream", "INV(retry_no_mutation): on(RETRY) -> State.canonical == prev(State.canonical)", "INV(no_bypass): evt.type != COMMIT -> State'.canonical == State.canonical", "INV(determinism): replay(Events) -> deterministic_outcome"]
+DISTINCT_RAW_SYNTAX_COUNT=7
+
+GROUP=generic/INV
+RECORD=docs__ir__11-prompt-builder.spec
+RAW_MATCHING_LINES=["INV: Deterministic(Construct)", "INV: Immutable(Canonical)", "INV: Prompt !contains Excluded", "INV: Construct depends_on {Replay, Config}"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=generic/INV
+RECORD=docs__ir__12-recovery.spec
+RAW_MATCHING_LINES=["INV: Canonical.mutate == False", "INV: Canonical.mutate -> Commit", "INV: Recover == Deterministic", "INV: Recover == ReplayCompatible", "INV: Canonical.History == Recoverable", "INV: Recover.Introduce(AuthoritativeInfo) == False"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=generic/INV
+RECORD=docs__ir__13-worldline-branching.spec
+RAW_MATCHING_LINES=["INV: Branch deterministic (derivation_hash depends only on parent_id, world_id, kind)", "INV: history replayable from WAL", "INV: forall w in state.world_heads: w.key != state.active_stream_id => w.value is immutable"]
+DISTINCT_RAW_SYNTAX_COUNT=3
+
+GROUP=generic/INV
+RECORD=docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec
+RAW_MATCHING_LINES=["INV-MEM-IMMUTABLE: MemoryStore[h] == constant after write", "INV-MEM-HASH: hash(content) == h", "INV-GRAPH-APPEND: GraphStore.size >= previous_size; no node/edge mutation", "INV-GRAPH-ROOT: GraphStore.root-id == constant", "INV-GRAPH-REACH: forall n in GraphStore.nodes where n.type in {system, prompt, assistant}: reachable(GraphStore.edges, root-id, n.id)", "INV-CAUSAL-SEPARATION: causal-subgraph traverses only EdgeType=causal; excludes NodeType={eval, feedback}", "INV-PROMPT-PURE: build-prompt is deterministic; no side-effects; no external IO/random/timestamps", "INV-PREFILL-DET: PrefillState(Graph, Memory, Policy, Builder) -> unique hash", "INV-AUTHORITY: GraphStore mutation allowed ONLY via CommitKernel", "INV-EVAL-INDEP: Existence of NodeType={eval, feedback} does not alter causal-subgraph or causal PrefillState"]
+DISTINCT_RAW_SYNTAX_COUNT=10
+
+GROUP=generic/INV
+RECORD=docs__ir__phase-a-charter.spec
+RAW_MATCHING_LINES=["INV: H.authoritative_causal_record", "INV: H.reproducible", "INV: H.inspectable", "INV: H.derivable", "INV: EventABI !in H", "INV: ResolutionSemantics !in H"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=generic/INV
+RECORD=docs__ir__phase-b-charter.spec
+RAW_MATCHING_LINES=["INV: d.deterministic", "INV: j.derived_exclusively_from(d)", "INV: d.semantically_neutral", "INV: d.reproducible"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=generic/INV
+RECORD=docs__ir__phase-c-charter.spec
+RAW_MATCHING_LINES=["INV: interpret.deterministic_under(ABI)", "INV: ABI.explicit_and_versioned", "INV: S.derived_exclusively_from(M)", "INV: interpret.preserves_order(M)", "INV: J.derived_exclusively_from(S)", "INV: external_semantic_injection !in interpret", "INV: S.non_authoritative"]
+DISTINCT_RAW_SYNTAX_COUNT=7
+
+GROUP=generic/INV
+RECORD=docs__ir__phase-d-charter.spec
+RAW_MATCHING_LINES=["INV: graph.deterministic_from(S)", "INV: nodes.preserve_identity_consistency", "INV: edges.structural_relations_only", "INV: traversal.deterministic", "INV: interpretation !in G", "INV: G.non_authoritative"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=generic/INV
+RECORD=docs__ir__phase-e-charter.spec
+RAW_MATCHING_LINES=["INV-E1 : !semantic_selection(O)", "INV-E2 : !semantic_normalization(O)", "INV-E3 : O.subset(structural_properties(G))", "INV-E4 : coexist(SemanticInterpretation[])", "INV-E5 : invariant(Observe(G), SemanticInterpretation)", "INV-E6 : G == G_post", "INV-E7 : deterministic(Observe)", "INV-E8 : !mutate(runtime_state)", "  INV : preserve(INV-E1..E8)"]
+DISTINCT_RAW_SYNTAX_COUNT=9
+
+GROUP=generic/INV
+RECORD=docs__ir__pull_request_template.spec
+RAW_MATCHING_LINES=["INV: use(t) -> exists(x in r.templates | x == t)"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=generic/INV
+RECORD=docs__reference__ir__knowledge-rationale.spec
+RAW_MATCHING_LINES=["INV: Meta != Design", "INV: Runtime != Design", "INV: Runtime.evolution independent_of Design.evolution", "INV: Governance != Design", "INV: Foundation != Constitution", "INV: Repository.Layout independent_of Architecture", "INV: Architecture != Process", "INV: Concept.definition depends_on(Responsibility)", "INV: Concept.definition NOT depends_on(Implementation)", "INV: NewConcept.introduction requires !Exists(r in Responsibility : r.canExpress(Meaning))", "INV: Content.definition precedes Implementation.expansion", "INV: Constitution != Implementation", "INV: Implementation.evolution preserves(Constitution)", "INV: Authority != Representation", "INV: Representation.derived != Authority"]
+DISTINCT_RAW_SYNTAX_COUNT=15
+
+GROUP=generic/INV
+RECORD=docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec
+RAW_MATCHING_LINES=["INV:"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=generic/INV
+RECORD=experiments__ir__3cluster.spec
+RAW_MATCHING_LINES=["INV |G.nodes| = 8", "INV |G.edges| = 10", "INV SCCs(G) = [{a1, a2, a3}, {b1, b2, b3}, {c1}, {c2}]", "INV Attractors(G) = [{a1, a2, a3}, {b1, b2, b3}]", "INV Deterministic(G) = True"]
+DISTINCT_RAW_SYNTAX_COUNT=5
+
+GROUP=generic/INV
+RECORD=experiments__ir__cycle.spec
+RAW_MATCHING_LINES=["INV:", "  INV-1: ret ∈ [State]", "  INV-2: pure_analysis", "  INV-3: deterministic", "  INV-4: no_graph_mutation"]
+DISTINCT_RAW_SYNTAX_COUNT=5
+
+GROUP=generic/INV
+RECORD=experiments__ir__dynamics.spec
+RAW_MATCHING_LINES=["INV Determinism: Pure functions", "INV NonMutating: G is read-only", "INV Greedy: next-event selects max strength", "INV Finite: len(rollout*) <= steps + 1"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=generic/INV
+RECORD=llama-agent__ir__chron-llm-graph.spec
+RAW_MATCHING_LINES=["INV: forall e in WAL, exists n in Graph.nodes where n.event == e", "INV: Temporal edges form linear chain matching WAL order", "INV: forall n in Graph.nodes where n.class == :fault, n.id not in HealthyTable.values", "INV: Graph = f(WAL)"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=generic/INV
+RECORD=llama-agent__ir__chron-llm-immune.spec
+RAW_MATCHING_LINES=["INV(WorldID): Unique", "INV(BranchEvent): ParentWorldID = Immutable", "INV(BranchEvent): ParentCausalID -> CommittedNode", "INV(BranchEvent): Status = Staged", "INV(Immune): HistoryExists -> Status = :ok"]
+DISTINCT_RAW_SYNTAX_COUNT=5
+
+GROUP=generic/INV
+RECORD=llama-agent__ir__chron-llm-world.spec
+RAW_MATCHING_LINES=["  INV: WorldID unique", "  INV: NodeID unique", "  INV: Root World ⇔ parent_world_id == 0 AND parent_node_id == 0", "  INV: parent_node_id == 0 OR parent node exists", "  INV: Graph is acyclic", "  INV: Project(Canonical EventLog) produces identical graph"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=generic/INV
+RECORD=runtime__ir__callback.spec
+RAW_MATCHING_LINES=["INV(Determinism): callback(e1)==callback(e2)<=>e1==e2; INV(Lossless): ir.fields=={ctx_id, pos, token, score, phase}", "INV(Isolation): Delta(State)={IR_Stream}; Kernel=Const; Canonical=Const; Runtime=Const", "INV(Perf): Time=O(1); Mem=O(1); THREAD: Safe iff push_ir is Thread-Safe; ERROR: None"]
+DISTINCT_RAW_SYNTAX_COUNT=3
+
+GROUP=generic/INV
+RECORD=runtime__ir__ffi.spec
+RAW_MATCHING_LINES=["INV:"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=generic/INV
+RECORD=runtime__r0__ir__api.spec
+RAW_MATCHING_LINES=["INV:"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=generic/INV
+RECORD=tests__md__ir__r2-1-b-tests.spec
+RAW_MATCHING_LINES=["  INV(obs != nil && obs.finish-reason == :stop && obs.raw-text == \"mock-success-response\")", "  INV(obs.finish-reason == :timeout && obs.error-info.msg == \"Provider request timeout.\")", "  INV(obs.config.temp == 0.0)", "  INV(meta-b.model == \"mock-model\" && obs.provider-metadata.model == \"mock-model\")", "  INV(obs1.raw-text == obs2.raw-text && obs1.finish-reason == obs2.finish-reason)", "  INV(obs1.raw-text == obs2.raw-text)"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=type_theoretic/INV
+RECORD=docs__ir__03-reference-runtime.spec
+RAW_MATCHING_LINES=["    INV: no_new_runtime_semantics"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=type_theoretic/INV
+RECORD=docs__ir__99-open-questions.spec
+RAW_MATCHING_LINES=["INV Commit.idempotency = ?", "INV Commit.atomicity = ?"]
+DISTINCT_RAW_SYNTAX_COUNT=2
+
+GROUP=type_theoretic/INV
+RECORD=docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec
+RAW_MATCHING_LINES=["INV World.id UNIQUE & STABLE", "INV World.graph-ref == GlobalState.canonical-graph", "INV World.memory-ref == GlobalState.memory-store", "INV World.root-node IMMUTABLE after creation", "INV World.head-node REACHABLE(World.root-node, World.head-node, :causal)", "INV World.head-node COMMITTED", "INV World.projection-policy IMMUTABLE", "INV World.metadata COPY_ON_WRITE", "INV World ISOLATED (no direct mutation)", "INV Replay DETERMINISTIC(Graph, Memory, WorldState)", "INV Registry NON_AUTHORITATIVE"]
+DISTINCT_RAW_SYNTAX_COUNT=11
+
+GROUP=type_theoretic/INV
+RECORD=docs__ir__chron-llm-r1-interface-spec-v1.2.spec
+RAW_MATCHING_LINES=["INV IRStream == SourceOfTruth(KernelState)", "INV RuntimeCommand == ControlBoundary(Kernel, Backend)", "INV Metadata == Opaque", "INV Omega.total == w_e*E^2 + w_s*S^2 + w_t*T^2", "INV BackendControl == { KV_Truncate, Delta_Prefill, Steering }", "INV ABI == Frozen(RuntimeCommand, IRStream, PhaseBoundary)"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=type_theoretic/INV
+RECORD=docs__ir__knowledge-system.spec
+RAW_MATCHING_LINES=["INV Independence: Architecture !-> RepoLayout | DirStructure | DocNames | Lang | Impl", "INV GovernanceScope: Governance -> Artifact && Governance !-> RuntimeBehavior", "INV RuntimeSatisfaction: Runtime -> Specification", "INV RuntimeVolatility: Runtime.evolution > Design.evolution", "INV Minimalism: Concepts = Min(Necessary)", "INV Neutrality: KnowledgeSystem !-> Product | Repo | Impl", "INV EvolutionRule: Introduce(NewCategory) -> !Exists(ExistingCategory -> Responsibility)", "INV ExtensionPriority: Extend(Existing) > Introduce(New)"]
+DISTINCT_RAW_SYNTAX_COUNT=8
+
+GROUP=type_theoretic/INV
+RECORD=experiments__ir__chron-llm-spec-v0.2.spec
+RAW_MATCHING_LINES=["INV SCC.is_att == False", "INV SCC -> Attractor IF SCC.stable > STAB_THRESH", "INV Basin.mass == len(Basin.nodes)", "INV Basin.ratio == Basin.mass / len(Graph.nodes)", "INV Cluster.type == reply IF recurrence > HIGH", "INV Cluster.type == temporal IF stability < LOW", "INV Cluster.type == bridge IF conns > 1_cluster", "INV Stability == cycle_reappearance / total_obs", "INV-PARTITION: forall n in Graph.nodes, exists unique b in Basin, n in b.nodes", "INV-MASS: forall b in Basin, b.mass == len(b.nodes)", "INV-RATIO: forall b in Basin, b.ratio == b.mass / len(Graph.nodes)"]
+DISTINCT_RAW_SYNTAX_COUNT=11
+
+GROUP=type_theoretic/INV
+RECORD=experiments__ir__scc.spec
+RAW_MATCHING_LINES=["INV-PARTITION: union(compute-sccs(G, nodes)) == nodes", "INV-DISJOINT: forall i!=j: sccs[i] intersect sccs[j] == {}", "INV-MUTUAL: forall c in sccs, forall u,v in c: reachable(G, u, v) AND reachable(G, v, u)", "INV-PURE: G_before == G_after", "INV-DET: same(G, nodes) -> same(sccs)", "INV-COMP: O(V+E)"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=type_theoretic/INV
+RECORD=graph-runtime__ir__causal.spec
+RAW_MATCHING_LINES=["INV:"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=type_theoretic/INV
+RECORD=graph-runtime__ir__graph.spec
+RAW_MATCHING_LINES=["INV NODE-UNIQUE: forall x,y in CausalGraph.nodes, x != y -> x.id != y.id", "INV EDGE-CLOSURE: forall e in CausalGraph.edges, exists n1,n2 in CausalGraph.nodes where (n1.id == e.from AND n2.id == e.to)", "INV FIELD-IMMUTABLE: all fields of CausalNode/CausalEdge are read-only post-construction"]
+DISTINCT_RAW_SYNTAX_COUNT=3
+
+GROUP=type_theoretic/INV
+RECORD=llama-agent__ir__ffi-bindings-mock.spec
+RAW_MATCHING_LINES=["INV ABI_COMPATIBLE_WITH_LLAMA_CPP", "INV ALL_OPS_COMPLEXITY == O(1)", "INV NO_EXCEPTIONS_RAISED"]
+DISTINCT_RAW_SYNTAX_COUNT=3
+
+GROUP=type_theoretic/INV
+RECORD=llama-agent__ir__immune-system.spec
+RAW_MATCHING_LINES=["INV Pure_Functionality: calculate_entropy depends ONLY on Logits.", "INV Monotonic_Thresholds: WARN_THRESH < FAULT_THRESH.", "INV Complexity: Time=O(V), Space=O(1)."]
+DISTINCT_RAW_SYNTAX_COUNT=3
+
+GROUP=type_theoretic/INV
+RECORD=memory__ir__store.spec
+RAW_MATCHING_LINES=["INV(payload-ref): immutable_fields", "INV(store): explicit_reference; !global_singleton"]
+DISTINCT_RAW_SYNTAX_COUNT=2
+
+GROUP=type_theoretic/INV
+RECORD=observability__ir__world-snapshot.spec
+RAW_MATCHING_LINES=["INV: Obs fields subset PrimitiveTree. Accessors -> deep-copy(%copy-primitive-tree). Builders -> validate %require-primitive-tree."]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=type_theoretic/INV
+RECORD=runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec
+RAW_MATCHING_LINES=["    INV-NON-INVASIVE: !mod(RuntimeState)", "    INV-ORDERED: forall i < len(result)-1: ir.ir-pos(result[i]) <= ir.ir-pos(result[i+1])", "    INV-IMMUTABLE: forall ir in *observation-buffer*, !mod(ir.fields) post_creation", "    INV-THREAD-SAFE: Concurrent ir-callback invocations are safe and lock-free", "    INV-BOUNDED-NO-CRASH: Buffer overflows gracefully log without crashing LLM backend", "    INV-APPEND-ONLY: len(*observation-buffer*') >= len(*observation-buffer*) unless clear-buffer() called", "    INV-DETERMINISTIC: run-single-trial(prompt, seed) -> deterministic output", "    INV-COUPLING: AnalysisOps != CollectionOps", "    INV-OBS-ONLY: !write(Runtime|Kernel|Candidate|Canonical|Prompt)"]
+DISTINCT_RAW_SYNTAX_COUNT=9
+
+GROUP=type_theoretic/INV
+RECORD=runtime__ir__ir.spec
+RAW_MATCHING_LINES=["INV-PURITY: IR.role=OBSERVATION; !IR.decision_authority; !IR.semantic_meaning", "INV-IMMUTABLE: post(make-ir) -> immutable(IR.fields)", "INV-ORDERING: (A.pos < B.pos) -> emitted_before(A,B)", "INV-BOUNDED: buf.size <= buf.capacity OR atomic_read(buf.overflow_count) > 0", "INV-THREAD-SAFE: Concurrent push-ir calls populate distinct slots without data races", "INV-REPLAY: Stream(S1)==Stream(S2) -> analyze(S1)==analyze(S2)"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=type_theoretic/INV
+RECORD=runtime__ir__stream.spec
+RAW_MATCHING_LINES=["    INV-S1 (Ordering): Enforced by ir.IR_Buffer atomic append", "    INV-S2 (Ephemeral): *ir-stream* != Truth; Authority=History/WAL", "    INV-S3 (Neutrality): !mutate(IR); !interpret(IR)", "    INV-S4 (Isolation): RunStart -> clear-buffer()"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=type_theoretic/INV
+RECORD=runtime__r0__ir__chat-loop.spec
+RAW_MATCHING_LINES=["INV Session.fields == { model, history }", "INV chat.seq: append-user -> project-prompt -> llama-run -> append-assistant", "INV trace.snapshots: h-before AND h-after present"]
+DISTINCT_RAW_SYNTAX_COUNT=3
+
+GROUP=type_theoretic/INV
+RECORD=runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec
+RAW_MATCHING_LINES=["INV(History) = ordered ^ append_only ^ snapshot_capable", "INV(IR) = immutable ^ ordered ^ semantic_free ^ non_authoritative"]
+DISTINCT_RAW_SYNTAX_COUNT=2
+
+GROUP=type_theoretic/INV
+RECORD=runtime__r0__ir__history.spec
+RAW_MATCHING_LINES=["INV(history-append): APPEND_ONLY , PRESERVE_ORDER", "INV(history-size): SIZE_CONSISTENT", "INV(history-copy): VECTOR_CLONED , EVENTS_SHARED", "INV(module): PURE_DATA_LAYER , NO_EXTERNAL_DEPS"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=type_theoretic/INV
+RECORD=runtime__r0__ir__llama-run.spec
+RAW_MATCHING_LINES=["INV STATELESS: Module holds no state between calls", "INV SYNC: Execution is blocking until completion", "INV NO_EXCEPTION_ON_FAIL: Process exit codes do not raise exceptions", "INV ISOLATION: Interface strictly maps Prompt -> Response"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=type_theoretic/INV
+RECORD=runtime__r0__ir__prompt.spec
+RAW_MATCHING_LINES=["  INV h immutable; Output Only"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=type_theoretic/INV
+RECORD=runtime__r0__ir__trace.spec
+RAW_MATCHING_LINES=["  INV RuntimeState == RuntimeState'", "  INV *trace-log* == *trace-log*'", "INV ObservationOnly: TraceOps !-> Modify(RuntimeState | History | Session | Prompt)", "INV ImmutableSnapshot: t.history-before == StateAt(t.capture_time)", "INV SerializationFormat: Output =~ ReadableSExpression", "INV SideEffectIsolation: save-trace-to-file uses snapshot to prevent race conditions"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=type_theoretic/INV
+RECORD=runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec
+RAW_MATCHING_LINES=["INV Determinism: translate(IR_A) == translate(IR_A)", "INV NonAuth: PhaseE.output != Canonical_State", "INV NoCommit: NOT EXISTS(op in PhaseE.output | op.type==\"commit\")", "INV Lossless: IR_Event.fields subset DSL_Op.meta"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=type_theoretic/INV
+RECORD=tests__md__ir__r2-0-a-tests.spec
+RAW_MATCHING_LINES=["  INV: !cond -> error(\"R2.0-A invariant failed: ~A\", msg)", "  INV: store(s, x).ref == store(s, y).ref where x==y", "  INV: load(s, ref) == original_payload", "  INV: payload_immutable(ref)", "  INV: causal_subgraph(g, \"p\") order == [\"s\", \"p\"]", "  INV: causal_subgraph(g, n) deterministic", "  INV: view(g, \"p\").nodes excludes :eval unless flag(:include-evals)", "  INV: project(g).order == [SysFact, UserFact]", "  INV: feedbacks linked to nodes", "  INV: build_prefill(g, s).hash constant for identical inputs", "  INV: hash(build_prefill(g_eval)) == hash(build_prefill(g_no_eval))"]
+DISTINCT_RAW_SYNTAX_COUNT=11
+
+GROUP=type_theoretic/INV
+RECORD=tests__md__ir__r2-2-e-tests.spec
+RAW_MATCHING_LINES=["    INV EQ(d1.inference-decision-type, d2.inference-decision-type)", "    INV EQUAL(ws, ws_pre)", "    INV EQ(d.inference-decision-type, :retry)", "    INV EQ(d.inference-decision-type, :abort)", "    INV EQUAL(ops1, ops2)"]
+DISTINCT_RAW_SYNTAX_COUNT=5
+
+GROUP=type_theoretic/INV
+RECORD=tests__md__ir__r2-3-s-tests.spec
+RAW_MATCHING_LINES=["  INV equalp(world, before) == T", "  INV equal(ops, first(new-world.history)) == T", "  INV eq(old-history, cdr(new-world.history)) == T", "  INV string=(\"child-id\", new-world.causal-id) == T", "  INV string=(\"genesis\", new-world.parent-id) == T", "  INV w-retry.retry-count == 1", "  INV a-retry.type == :invoke-api", "  INV w-abort.status == :halted", "  INV a-abort.type == :halt"]
+DISTINCT_RAW_SYNTAX_COUNT=9
+
+GROUP=test_format/INV
+RECORD=docs__ir__05-validation-pipeline.spec
+RAW_MATCHING_LINES=["INV:"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=test_format/INV
+RECORD=docs__ir__phase-f-charter.spec
+RAW_MATCHING_LINES=["INV:", "INV-1: count(active_inlet) == 1", "INV-2: normalize_input(x) == normalize_input(x)", "INV-3: normalize_output(x) == normalize_output(x)", "INV-4: boundary_inlet(v, x) == boundary_inlet(v, x)", "INV-5: map_decision(x) == map_decision(x)", "INV-6: delta(authoritative_state) == 0", "INV-7: active_inlet != null", "INV-8: interpretation_scope == boundary_inlet", "INV-9: modify(boundary_inlet) -> new_phase_f_version"]
+DISTINCT_RAW_SYNTAX_COUNT=10
+
+GROUP=test_format/INV
+RECORD=docs__ir__r2-0-c-freeze-report.spec
+RAW_MATCHING_LINES=["INV: D1=!mutate(world), D2=!mutate(registry), D3=deterministic(obs), D4=accurate(ancestry), D5=deterministic(diff), D6=repr_independent(obs), ABI=additive_only(extensions), DESC=read_only(return)"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=test_format/INV
+RECORD=docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec
+RAW_MATCHING_LINES=["INV: forall(w in Registry.worlds): w.graph == Registry.graph", "INV: forall(w in Registry.worlds): w.memory == Registry.memory", "INV: count(w in Registry.worlds where w.lifecycle == :active) <= 1", "INV: Observation types subset {Str, Num, Kw, Char, List}"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=test_format/INV
+RECORD=docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec
+RAW_MATCHING_LINES=["  INV-1 (Graph-Unique-Node)   : Unique(keys(Graph.nodes))", "  INV-2 (Mem-Content-Addr)    : ContentAddr(PayloadRef.hash == SHA256(content))", "  INV-3 (World-Head-Valid)    : World.head in keys(World.graph.nodes)", "  INV-4 (Commit-Atomic)       : Atomic(GraphAppend, HeadAdvance)", "  INV-5 (Obs-Primitive)       : Type(x) in {null, bool, str, num, char, kw, list}", "  INV-6 (Head-Commit-Truth)   : kernel-commit-world! == ONLY(head_advance)", "  INV-7 (Replay-Determinism)  : Hash(Graph + MemStore + Policy) == PrefillHash", "  INV-8 (Causal-Eval-Isolated): Evaluation edges (:eval) MUST NOT enter PrefillState or prompt context sequence", "  INV-9 (Obs-Read-Only)       : Snapshot & Observation operations MUST NOT mutate World, Registry, or Graph state"]
+DISTINCT_RAW_SYNTAX_COUNT=9
+
+GROUP=test_format/INV
+RECORD=llama-agent__ir__causal-kernel.spec
+RAW_MATCHING_LINES=["INV:"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=test_format/INV
+RECORD=llama-agent__ir__chron-llm-kernel.spec
+RAW_MATCHING_LINES=["INV: Runtime -> Kernel API only", "INV: Kernel -> Sole State Mutator", "INV: Graph = f(WAL)", "INV: Post-Commit: WAL.persisted AND Graph.updated"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=test_format/INV
+RECORD=llama-agent__ir__chron-llm-runtime.spec
+RAW_MATCHING_LINES=["INV:"]
+DISTINCT_RAW_SYNTAX_COUNT=1
+
+GROUP=test_format/INV
+RECORD=llama-agent__ir__chron-llm.spec
+RAW_MATCHING_LINES=["INV:", "INV(Event.Header): Writer == Kernel", "INV(Event.Payload): Writer == User", "INV(LLM.Runtime): Input == Prompt, Output == Text, Knowledge == {}", "INV(Sampler): Lifecycle == {Create -> Use -> Free}", "INV(n-past): Start == PromptLen, End == PromptLen + GenLen"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=test_format/INV
+RECORD=llama-agent__ir__ffi-bindings.spec
+RAW_MATCHING_LINES=["  INV stateless : Module holds only native pointers. No inference logic.", "  INV abi_1to1 : FFI calls map 1:1 to C Wrapper -> llama.cpp.", "  INV error_pass_through : Return values passed up; no local handling.", "  INV mock_compat : ABI matches ffi-bindings-mock.lisp."]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=test_format/INV
+RECORD=llama-agent__ir__generate.spec
+RAW_MATCHING_LINES=["  INV-1 (Fault-No-Commit)    : ir.status == :fault IMPLIES NOT committed(kernel)", "  INV-2 (Rollback-Stage-Empty): rolled_back(kernel) IMPLIES stage_is_empty()", "  INV-3 (Fault-KV-Reset)     : ir.status == :fault IMPLIES kv_cache_reset(ctx)", "  INV-4 (Step-Limit-Bound)   : s.step <= cfg.max_tokens + 1"]
+DISTINCT_RAW_SYNTAX_COUNT=4
+
+GROUP=test_format/INV
+RECORD=tests__md__ir__phase0-big-bang-test.spec
+RAW_MATCHING_LINES=["INV:", "  INV-Loop-1: new_world.parent_id == current_world.causal_id", "  INV-Loop-2: action.physical_type == :invoke-api", "  INV-Final-1: final_world.causal_id == \"node-2\"", "  INV-Final-2: final_world.retry_count == 2", "  INV-Final-3: count(PipelineStep) == 2"]
+DISTINCT_RAW_SYNTAX_COUNT=6
+
+GROUP=test_format/INV
+RECORD=tests__md__ir__r2-0-b-tests.spec
+RAW_MATCHING_LINES=["  INV-1 (Graph-Unique-Node)   : Unique(keys(Graph.nodes))", "  INV-2 (Mem-Content-Addr)    : ContentAddr(PayloadRef.hash == SHA256(content))", "  INV-3 (World-Head-Valid)    : World.head in keys(World.graph.nodes)", "  INV-4 (Commit-Atomic)       : Atomic(GraphAppend, HeadAdvance)", "  INV-6 (Head-Commit-Truth)   : kernel-commit-world! == ONLY(head_advance)", "  INV-7 (Replay-Determinism)  : Hash(Graph + MemStore + Policy) == PrefillHash", "  INV-8 (Causal-Eval-Isolated): Evaluation edges (:eval) MUST NOT enter PrefillState or prompt context sequence", "  INV-9 (Obs-Read-Only)       : Snapshot & Observation operations MUST NOT mutate World or Registry state"]
+DISTINCT_RAW_SYNTAX_COUNT=8
+
+GROUP=test_format/INV
+RECORD=tests__md__ir__r2-0-c-tests.spec
+RAW_MATCHING_LINES=["  INV-5 (Obs-Primitive)       : All observation attributes MUST resolve strictly to primitive data types (null, bool, str, num, kw, list, map).", "  INV-9 (Obs-Read-Only)       : Snapshot & Observation operations MUST NOT mutate World, Registry, or Graph state."]
+DISTINCT_RAW_SYNTAX_COUNT=2
+
+GROUP=type_theoretic/INVARIANT
+RECORD=specs__00-meta-model.spec
+RAW_MATCHING_LINES=["INVARIANT META_01: UniqueIDsPerFile {", "INVARIANT META_02: ImportGraphIsAcyclic {", "INVARIANT META_03: NoUndefinedReference {", "INVARIANT META_04: MetaDoesNotDependOnSemantic {", "INVARIANT META_05: GenerationBoundaryIsolation {"]
+DISTINCT_RAW_SYNTAX_COUNT=5
+
+GROUP=type_theoretic/INVARIANT
+RECORD=specs__01-semantic-model.spec
+RAW_MATCHING_LINES=["INVARIANT EVENT_01:", "INVARIANT EVENT_02:", "INVARIANT STATE_01:", "INVARIANT STATE_02:", "INVARIANT WORLDLINE_01:", "INVARIANT WORLDLINE_02:", "INVARIANT WORLDLINE_03:", "INVARIANT REPLAY_01:", "INVARIANT REPLAY_02:", "INVARIANT REPLAY_03:", "INVARIANT PROJECTION_01:", "INVARIANT PROJECTION_02:", "INVARIANT SEM_01:", "INVARIANT SEM_02:", "INVARIANT SEM_03:", "INVARIANT SEM_04:", "INVARIANT SEM_05:"]
+DISTINCT_RAW_SYNTAX_COUNT=17
+
+GROUP=type_theoretic/INVARIANT
+RECORD=specs__03-chron-semantic-extension.spec
+RAW_MATCHING_LINES=["INVARIANT EVIDENCE_01:", "INVARIANT EVIDENCE_02:", "INVARIANT PROPOSAL_01:", "INVARIANT PROPOSAL_02:", "INVARIANT PROPOSAL_03:", "INVARIANT COMMIT_01:", "INVARIANT COMMIT_02:", "INVARIANT COMMIT_03:", "INVARIANT COMMIT_04:", "INVARIANT COMMIT_RESULT_01:", "INVARIANT COMMIT_RESULT_02:", "INVARIANT COMMIT_RESULT_03:", "INVARIANT COMMIT_RESULT_04:", "INVARIANT BRANCH_01:", "INVARIANT BRANCH_02:", "INVARIANT BRANCH_03:", "INVARIANT FORK_01:", "INVARIANT FORK_02:", "INVARIANT FORK_03:", "INVARIANT MERGE_01:", "INVARIANT MERGE_02:", "INVARIANT MERGE_03:", "INVARIANT MERGE_04:", "INVARIANT BRANCH_CAUSAL_01:", "INVARIANT BRANCH_CAUSAL_02:", "INVARIANT MERGE_CAUSAL_01:", "INVARIANT MERGE_CAUSAL_02:", "INVARIANT CHRON_BOUNDARY_01:", "INVARIANT CHRON_BOUNDARY_02:", "INVARIANT CHRON_BOUNDARY_03:", "INVARIANT CHRON_BOUNDARY_04:", "INVARIANT CHRON_BOUNDARY_05:"]
+DISTINCT_RAW_SYNTAX_COUNT=32
+
+GROUP=type_theoretic/INVARIANT
+RECORD=specs__04-runtime-model.spec
+RAW_MATCHING_LINES=["INVARIANT OBS_01:", "INVARIANT OBS_02:", "INVARIANT VAL_01:", "INVARIANT VAL_02:", "INVARIANT ROUTE_01:", "INVARIANT ROUTE_02:", "INVARIANT SCHED_01:", "INVARIANT SCHED_02:", "INVARIANT CR_01:", "INVARIANT CR_02:", "INVARIANT CR_03:", "INVARIANT PERSIST_01:", "INVARIANT PERSIST_02:", "INVARIANT RUNTIME_BOUNDARY_01:", "INVARIANT RUNTIME_BOUNDARY_02:", "INVARIANT RUNTIME_BOUNDARY_03:", "INVARIANT RUNTIME_BOUNDARY_04:", "INVARIANT RUNTIME_BOUNDARY_05:", "INVARIANT RUNTIME_BOUNDARY_06:", "INVARIANT RUNTIME_BOUNDARY_07:"]
+DISTINCT_RAW_SYNTAX_COUNT=20
+
+GROUP=common_lisp/INVARIANT
+RECORD=specs__02-constitution.spec
+RAW_MATCHING_LINES=["INVARIANT CANON_01:", "INVARIANT CANON_02:", "INVARIANT CANON_03:", "INVARIANT AUTH_01:", "INVARIANT AUTH_02:", "INVARIANT AUTH_03:", "INVARIANT MUT_01:", "INVARIANT MUT_02:", "INVARIANT CAUSAL_01:", "INVARIANT CAUSAL_02:", "INVARIANT CAUSAL_03:", "INVARIANT REPLAY_LAW_01:", "INVARIANT REPLAY_LAW_02:", "INVARIANT REPLAY_LAW_03:", "INVARIANT PROJ_LAW_01:", "INVARIANT PROJ_LAW_02:", "INVARIANT CONST_01:", "INVARIANT CONST_02:", "INVARIANT CONST_03:", "INVARIANT CONST_04:", "INVARIANT CONST_05:"]
+DISTINCT_RAW_SYNTAX_COUNT=21

@@ -1,0 +1,1310 @@
+{
+  "findings_by_source": {
+    "contracts__base-history.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Event_1",
+        "type": "contradiction",
+        "description": "Type 'Event' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_History_2",
+        "type": "contradiction",
+        "description": "Type 'History' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "contracts__kernel-world.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Event_1",
+        "type": "contradiction",
+        "description": "Type 'Event' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_KernelAction_3",
+        "type": "contradiction",
+        "description": "Type 'KernelAction' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Executable_4",
+        "type": "contradiction",
+        "description": "Type 'Executable' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Observation_5",
+        "type": "contradiction",
+        "description": "Type 'Observation' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_History_2",
+        "type": "contradiction",
+        "description": "Type 'History' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_PhysicalEvent_16",
+        "type": "contradiction",
+        "description": "Type 'PhysicalEvent' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_IR_35",
+        "type": "contradiction",
+        "description": "Type 'IR' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_HistoryEvent_36",
+        "type": "contradiction",
+        "description": "Type 'HistoryEvent' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_R0Trace_37",
+        "type": "contradiction",
+        "description": "Type 'R0Trace' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "docs__ir__01-domain-model.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_KernelAction_3",
+        "type": "contradiction",
+        "description": "Type 'KernelAction' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Canonical_6",
+        "type": "contradiction",
+        "description": "Type 'Canonical' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Candidate_7",
+        "type": "contradiction",
+        "description": "Type 'Candidate' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_ValidationReport_8",
+        "type": "contradiction",
+        "description": "Type 'ValidationReport' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_RuntimeCommand_9",
+        "type": "contradiction",
+        "description": "Type 'RuntimeCommand' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Session_10",
+        "type": "contradiction",
+        "description": "Type 'Session' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Context_11",
+        "type": "contradiction",
+        "description": "Type 'Context' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "INV_CONFLICT_unknown_38",
+        "type": "inconsistency",
+        "description": "Entity 'unknown' has multiple invariants",
+        "severity": "warning"
+      },
+      {
+        "finding_id": "INV_CONFLICT_unknown_38",
+        "type": "inconsistency",
+        "description": "Entity 'unknown' has multiple invariants",
+        "severity": "warning"
+      }
+    ],
+    "docs__ir__knowledge-system.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Executable_4",
+        "type": "contradiction",
+        "description": "Type 'Executable' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "docs__ir__05-validation-pipeline.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Observation_5",
+        "type": "contradiction",
+        "description": "Type 'Observation' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_ValidationReport_8",
+        "type": "contradiction",
+        "description": "Type 'ValidationReport' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Config_12",
+        "type": "contradiction",
+        "description": "Type 'Config' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "docs__ir__00-constitution.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Canonical_6",
+        "type": "contradiction",
+        "description": "Type 'Canonical' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Candidate_7",
+        "type": "contradiction",
+        "description": "Type 'Candidate' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "docs__ir__chron-llm-r1-interface-spec-v1.2.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_RuntimeCommand_9",
+        "type": "contradiction",
+        "description": "Type 'RuntimeCommand' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_PhysicalEvent_16",
+        "type": "contradiction",
+        "description": "Type 'PhysicalEvent' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "runtime__r0__ir__chat-loop.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Session_10",
+        "type": "contradiction",
+        "description": "Type 'Session' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "llama-agent__ir__chron-llm.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Context_11",
+        "type": "contradiction",
+        "description": "Type 'Context' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_*n-past*_29",
+        "type": "contradiction",
+        "description": "Type '*n-past*' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_EXEC_30",
+        "type": "contradiction",
+        "description": "Type 'EXEC' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_EXEC_30",
+        "type": "contradiction",
+        "description": "Type 'EXEC' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_RET_31",
+        "type": "contradiction",
+        "description": "Type 'RET' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_RET_31",
+        "type": "contradiction",
+        "description": "Type 'RET' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "docs__ir__99-open-questions.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Config_12",
+        "type": "contradiction",
+        "description": "Type 'Config' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_EventID_13",
+        "type": "contradiction",
+        "description": "Type 'EventID' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "specs__01-semantic-model.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_EventID_13",
+        "type": "contradiction",
+        "description": "Type 'EventID' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_ID_14",
+        "type": "contradiction",
+        "description": "Type 'ID' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Ref_15",
+        "type": "contradiction",
+        "description": "Type 'Ref' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "graph-runtime__ir__graph.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_ID_14",
+        "type": "contradiction",
+        "description": "Type 'ID' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Ref_15",
+        "type": "contradiction",
+        "description": "Type 'Ref' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Keyword_27",
+        "type": "contradiction",
+        "description": "Type 'Keyword' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "docs__ir__phase-f-charter.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_PRE_17",
+        "type": "contradiction",
+        "description": "Type 'PRE' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_PRE_17",
+        "type": "contradiction",
+        "description": "Type 'PRE' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_WorldObs = { ver_18",
+        "type": "contradiction",
+        "description": "Type 'WorldObs = { ver' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_POST_19",
+        "type": "contradiction",
+        "description": "Type 'POST' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_POST_19",
+        "type": "contradiction",
+        "description": "Type 'POST' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_LOGIC_20",
+        "type": "contradiction",
+        "description": "Type 'LOGIC' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_LOGIC_20",
+        "type": "contradiction",
+        "description": "Type 'LOGIC' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_RULE_21",
+        "type": "contradiction",
+        "description": "Type 'RULE' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_RULE_21",
+        "type": "contradiction",
+        "description": "Type 'RULE' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_SEQ_22",
+        "type": "contradiction",
+        "description": "Type 'SEQ' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "tests__md__ir__r2-0-c-tests.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_WorldObs = { ver_18",
+        "type": "contradiction",
+        "description": "Type 'WorldObs = { ver' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "llama-agent__ir__generate.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_SEQ_22",
+        "type": "contradiction",
+        "description": "Type 'SEQ' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "experiments__ir__chron-llm-spec-v0.2.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Node_23",
+        "type": "contradiction",
+        "description": "Type 'Node' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Edge_24",
+        "type": "contradiction",
+        "description": "Type 'Edge' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Graph_25",
+        "type": "contradiction",
+        "description": "Type 'Graph' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_SCC_26",
+        "type": "contradiction",
+        "description": "Type 'SCC' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "experiments__ir__scc.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Node_23",
+        "type": "contradiction",
+        "description": "Type 'Node' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Edge_24",
+        "type": "contradiction",
+        "description": "Type 'Edge' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_Graph_25",
+        "type": "contradiction",
+        "description": "Type 'Graph' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_SCC_26",
+        "type": "contradiction",
+        "description": "Type 'SCC' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Keyword_27",
+        "type": "contradiction",
+        "description": "Type 'Keyword' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "llama-agent__ir__causal-kernel.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Kernel = {wal_28",
+        "type": "contradiction",
+        "description": "Type 'Kernel = {wal' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "llama-agent__ir__chron-llm-kernel.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Kernel = {wal_28",
+        "type": "contradiction",
+        "description": "Type 'Kernel = {wal' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "llama-agent__ir__ffi-bindings.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_*n-past*_29",
+        "type": "contradiction",
+        "description": "Type '*n-past*' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "llama-agent__ir__delta3-agent.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_if cmd_32",
+        "type": "contradiction",
+        "description": "Type 'if cmd' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_if cmd_32",
+        "type": "contradiction",
+        "description": "Type 'if cmd' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "llama-agent__ir__llama-agent.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_ql_33",
+        "type": "contradiction",
+        "description": "Type 'ql' has conflicting definitions across specifications",
+        "severity": "critical"
+      },
+      {
+        "finding_id": "TYPE_CONFLICT_ql_33",
+        "type": "contradiction",
+        "description": "Type 'ql' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "runtime__ir__divergence.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Prompt_34",
+        "type": "contradiction",
+        "description": "Type 'Prompt' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "runtime__r0__ir__llama-run.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_Prompt_34",
+        "type": "contradiction",
+        "description": "Type 'Prompt' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "runtime__ir__ir.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_IR_35",
+        "type": "contradiction",
+        "description": "Type 'IR' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "runtime__r0__ir__history.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_HistoryEvent_36",
+        "type": "contradiction",
+        "description": "Type 'HistoryEvent' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ],
+    "runtime__r0__ir__trace.spec": [
+      {
+        "finding_id": "TYPE_CONFLICT_R0Trace_37",
+        "type": "contradiction",
+        "description": "Type 'R0Trace' has conflicting definitions across specifications",
+        "severity": "critical"
+      }
+    ]
+  },
+  "findings_by_entity": {},
+  "source_coverage": {
+    "bindings__llama_cffi.spec": {
+      "filename": "bindings__llama_cffi.spec",
+      "format": "type_theoretic",
+      "lines": 255,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "config__sbcl_policy.spec": {
+      "filename": "config__sbcl_policy.spec",
+      "format": "common_lisp",
+      "lines": 139,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "contracts__abi-registry.spec": {
+      "filename": "contracts__abi-registry.spec",
+      "format": "type_theoretic",
+      "lines": 93,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "contracts__base-excludes.spec": {
+      "filename": "contracts__base-excludes.spec",
+      "format": "generic",
+      "lines": 27,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "contracts__base-history.spec": {
+      "filename": "contracts__base-history.spec",
+      "format": "type_theoretic",
+      "lines": 31,
+      "findings": 2,
+      "findings_by_type": {
+        "contradiction": 2
+      }
+    },
+    "contracts__base-invariants.spec": {
+      "filename": "contracts__base-invariants.spec",
+      "format": "generic",
+      "lines": 63,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "contracts__base-types.spec": {
+      "filename": "contracts__base-types.spec",
+      "format": "common_lisp",
+      "lines": 95,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "contracts__integration-verification.spec": {
+      "filename": "contracts__integration-verification.spec",
+      "format": "type_theoretic",
+      "lines": 61,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "contracts__kernel-world.spec": {
+      "filename": "contracts__kernel-world.spec",
+      "format": "common_lisp",
+      "lines": 120,
+      "findings": 4,
+      "findings_by_type": {
+        "contradiction": 4
+      }
+    },
+    "contracts__pipeline-orchestration.spec": {
+      "filename": "contracts__pipeline-orchestration.spec",
+      "format": "type_theoretic",
+      "lines": 72,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "contracts__spec-metamodel.spec": {
+      "filename": "contracts__spec-metamodel.spec",
+      "format": "type_theoretic",
+      "lines": 31,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "contracts__spec__v2.8.0-C-persistence.spec": {
+      "filename": "contracts__spec__v2.8.0-C-persistence.spec",
+      "format": "generic",
+      "lines": 26,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "contracts__spec__v2.8.0-D-replay.spec": {
+      "filename": "contracts__spec__v2.8.0-D-replay.spec",
+      "format": "generic",
+      "lines": 15,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "core__types.spec": {
+      "filename": "core__types.spec",
+      "format": "common_lisp",
+      "lines": 202,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__00-constitution.spec": {
+      "filename": "docs__ir__00-constitution.spec",
+      "format": "common_lisp",
+      "lines": 22,
+      "findings": 2,
+      "findings_by_type": {
+        "contradiction": 2
+      }
+    },
+    "docs__ir__01-domain-model.spec": {
+      "filename": "docs__ir__01-domain-model.spec",
+      "format": "common_lisp",
+      "lines": 59,
+      "findings": 8,
+      "findings_by_type": {
+        "contradiction": 7,
+        "inconsistency": 1
+      }
+    },
+    "docs__ir__02-operational-semantics.spec": {
+      "filename": "docs__ir__02-operational-semantics.spec",
+      "format": "generic",
+      "lines": 67,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__03-reference-runtime.spec": {
+      "filename": "docs__ir__03-reference-runtime.spec",
+      "format": "type_theoretic",
+      "lines": 17,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__05-validation-pipeline.spec": {
+      "filename": "docs__ir__05-validation-pipeline.spec",
+      "format": "test_format",
+      "lines": 30,
+      "findings": 3,
+      "findings_by_type": {
+        "contradiction": 3
+      }
+    },
+    "docs__ir__06-kernel-state-machine.spec": {
+      "filename": "docs__ir__06-kernel-state-machine.spec",
+      "format": "test_format",
+      "lines": 25,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__07-chron-mapping.spec": {
+      "filename": "docs__ir__07-chron-mapping.spec",
+      "format": "generic",
+      "lines": 40,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__08-memory-model.spec": {
+      "filename": "docs__ir__08-memory-model.spec",
+      "format": "generic",
+      "lines": 14,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__09-runtime-scheduling.spec": {
+      "filename": "docs__ir__09-runtime-scheduling.spec",
+      "format": "generic",
+      "lines": 22,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__10-tool-execution.spec": {
+      "filename": "docs__ir__10-tool-execution.spec",
+      "format": "generic",
+      "lines": 16,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__11-prompt-builder.spec": {
+      "filename": "docs__ir__11-prompt-builder.spec",
+      "format": "generic",
+      "lines": 12,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__12-recovery.spec": {
+      "filename": "docs__ir__12-recovery.spec",
+      "format": "generic",
+      "lines": 15,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__13-worldline-branching.spec": {
+      "filename": "docs__ir__13-worldline-branching.spec",
+      "format": "generic",
+      "lines": 71,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__99-open-questions.spec": {
+      "filename": "docs__ir__99-open-questions.spec",
+      "format": "type_theoretic",
+      "lines": 19,
+      "findings": 2,
+      "findings_by_type": {
+        "contradiction": 2
+      }
+    },
+    "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec": {
+      "filename": "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+      "format": "generic",
+      "lines": 61,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec": {
+      "filename": "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+      "format": "type_theoretic",
+      "lines": 83,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec": {
+      "filename": "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+      "format": "test_format",
+      "lines": 55,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec": {
+      "filename": "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+      "format": "common_lisp",
+      "lines": 63,
+      "findings": 2,
+      "findings_by_type": {
+        "contradiction": 2
+      }
+    },
+    "docs__ir__architecture-v1.1.spec": {
+      "filename": "docs__ir__architecture-v1.1.spec",
+      "format": "generic",
+      "lines": 101,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__chron-llm-r1-interface-spec-v1.2.spec": {
+      "filename": "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+      "format": "type_theoretic",
+      "lines": 30,
+      "findings": 2,
+      "findings_by_type": {
+        "contradiction": 2
+      }
+    },
+    "docs__ir__knowledge-system.spec": {
+      "filename": "docs__ir__knowledge-system.spec",
+      "format": "type_theoretic",
+      "lines": 24,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "docs__ir__phase-a-charter.spec": {
+      "filename": "docs__ir__phase-a-charter.spec",
+      "format": "generic",
+      "lines": 9,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__phase-b-charter.spec": {
+      "filename": "docs__ir__phase-b-charter.spec",
+      "format": "generic",
+      "lines": 11,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__phase-c-charter.spec": {
+      "filename": "docs__ir__phase-c-charter.spec",
+      "format": "generic",
+      "lines": 14,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__phase-d-charter.spec": {
+      "filename": "docs__ir__phase-d-charter.spec",
+      "format": "generic",
+      "lines": 12,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__phase-e-charter.spec": {
+      "filename": "docs__ir__phase-e-charter.spec",
+      "format": "generic",
+      "lines": 42,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__phase-f-charter.spec": {
+      "filename": "docs__ir__phase-f-charter.spec",
+      "format": "test_format",
+      "lines": 35,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "docs__ir__pull_request_template.spec": {
+      "filename": "docs__ir__pull_request_template.spec",
+      "format": "generic",
+      "lines": 8,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__ir__r2-0-c-freeze-report.spec": {
+      "filename": "docs__ir__r2-0-c-freeze-report.spec",
+      "format": "test_format",
+      "lines": 6,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__reference__ir__knowledge-rationale.spec": {
+      "filename": "docs__reference__ir__knowledge-rationale.spec",
+      "format": "generic",
+      "lines": 42,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec": {
+      "filename": "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+      "format": "generic",
+      "lines": 92,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__spec__ir__Chron-LLM_R2.1-Kernel_Freeze_Spec.spec": {
+      "filename": "docs__spec__ir__Chron-LLM_R2.1-Kernel_Freeze_Spec.spec",
+      "format": "generic",
+      "lines": 49,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec": {
+      "filename": "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+      "format": "test_format",
+      "lines": 64,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec": {
+      "filename": "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+      "format": "test_format",
+      "lines": 126,
+      "findings": 6,
+      "findings_by_type": {
+        "contradiction": 6
+      }
+    },
+    "experiments__ir__3cluster.spec": {
+      "filename": "experiments__ir__3cluster.spec",
+      "format": "generic",
+      "lines": 36,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "experiments__ir__chron-llm-spec-v0.2.spec": {
+      "filename": "experiments__ir__chron-llm-spec-v0.2.spec",
+      "format": "type_theoretic",
+      "lines": 50,
+      "findings": 4,
+      "findings_by_type": {
+        "contradiction": 4
+      }
+    },
+    "experiments__ir__cycle.spec": {
+      "filename": "experiments__ir__cycle.spec",
+      "format": "generic",
+      "lines": 26,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "experiments__ir__dynamics.spec": {
+      "filename": "experiments__ir__dynamics.spec",
+      "format": "generic",
+      "lines": 31,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "experiments__ir__scc.spec": {
+      "filename": "experiments__ir__scc.spec",
+      "format": "type_theoretic",
+      "lines": 49,
+      "findings": 4,
+      "findings_by_type": {
+        "contradiction": 4
+      }
+    },
+    "graph-runtime__ir__causal.spec": {
+      "filename": "graph-runtime__ir__causal.spec",
+      "format": "type_theoretic",
+      "lines": 36,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec": {
+      "filename": "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+      "format": "type_theoretic",
+      "lines": 159,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "graph-runtime__ir__graph.spec": {
+      "filename": "graph-runtime__ir__graph.spec",
+      "format": "type_theoretic",
+      "lines": 28,
+      "findings": 3,
+      "findings_by_type": {
+        "contradiction": 3
+      }
+    },
+    "llama-agent__ir__causal-kernel.spec": {
+      "filename": "llama-agent__ir__causal-kernel.spec",
+      "format": "test_format",
+      "lines": 72,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "llama-agent__ir__chron-llm-graph.spec": {
+      "filename": "llama-agent__ir__chron-llm-graph.spec",
+      "format": "generic",
+      "lines": 66,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "llama-agent__ir__chron-llm-immune.spec": {
+      "filename": "llama-agent__ir__chron-llm-immune.spec",
+      "format": "generic",
+      "lines": 35,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "llama-agent__ir__chron-llm-kernel.spec": {
+      "filename": "llama-agent__ir__chron-llm-kernel.spec",
+      "format": "test_format",
+      "lines": 64,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "llama-agent__ir__chron-llm-runtime.spec": {
+      "filename": "llama-agent__ir__chron-llm-runtime.spec",
+      "format": "test_format",
+      "lines": 37,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "llama-agent__ir__chron-llm-world.spec": {
+      "filename": "llama-agent__ir__chron-llm-world.spec",
+      "format": "generic",
+      "lines": 144,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "llama-agent__ir__chron-llm.spec": {
+      "filename": "llama-agent__ir__chron-llm.spec",
+      "format": "test_format",
+      "lines": 48,
+      "findings": 4,
+      "findings_by_type": {
+        "contradiction": 4
+      }
+    },
+    "llama-agent__ir__delta3-agent.spec": {
+      "filename": "llama-agent__ir__delta3-agent.spec",
+      "format": "test_format",
+      "lines": 76,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "llama-agent__ir__ffi-bindings-mock.spec": {
+      "filename": "llama-agent__ir__ffi-bindings-mock.spec",
+      "format": "type_theoretic",
+      "lines": 54,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "llama-agent__ir__ffi-bindings.spec": {
+      "filename": "llama-agent__ir__ffi-bindings.spec",
+      "format": "test_format",
+      "lines": 46,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "llama-agent__ir__generate.spec": {
+      "filename": "llama-agent__ir__generate.spec",
+      "format": "test_format",
+      "lines": 43,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "llama-agent__ir__immune-system.spec": {
+      "filename": "llama-agent__ir__immune-system.spec",
+      "format": "type_theoretic",
+      "lines": 41,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "llama-agent__ir__llama-agent.spec": {
+      "filename": "llama-agent__ir__llama-agent.spec",
+      "format": "test_format",
+      "lines": 92,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "macros__dsl.spec": {
+      "filename": "macros__dsl.spec",
+      "format": "generic",
+      "lines": 220,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "memory__ir__store.spec": {
+      "filename": "memory__ir__store.spec",
+      "format": "type_theoretic",
+      "lines": 68,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "observability__ir__world-snapshot.spec": {
+      "filename": "observability__ir__world-snapshot.spec",
+      "format": "type_theoretic",
+      "lines": 73,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "runtime__ir__callback.spec": {
+      "filename": "runtime__ir__callback.spec",
+      "format": "generic",
+      "lines": 6,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec": {
+      "filename": "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+      "format": "type_theoretic",
+      "lines": 71,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "runtime__ir__divergence.spec": {
+      "filename": "runtime__ir__divergence.spec",
+      "format": "type_theoretic",
+      "lines": 9,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "runtime__ir__ffi.spec": {
+      "filename": "runtime__ir__ffi.spec",
+      "format": "generic",
+      "lines": 19,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "runtime__ir__ir.spec": {
+      "filename": "runtime__ir__ir.spec",
+      "format": "type_theoretic",
+      "lines": 84,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "runtime__ir__stream.spec": {
+      "filename": "runtime__ir__stream.spec",
+      "format": "type_theoretic",
+      "lines": 14,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "runtime__md__ir__llama-engine.spec": {
+      "filename": "runtime__md__ir__llama-engine.spec",
+      "format": "generic",
+      "lines": 3,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "runtime__r0__ir__api.spec": {
+      "filename": "runtime__r0__ir__api.spec",
+      "format": "generic",
+      "lines": 20,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "runtime__r0__ir__chat-loop.spec": {
+      "filename": "runtime__r0__ir__chat-loop.spec",
+      "format": "type_theoretic",
+      "lines": 40,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec": {
+      "filename": "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+      "format": "type_theoretic",
+      "lines": 33,
+      "findings": 5,
+      "findings_by_type": {
+        "contradiction": 5
+      }
+    },
+    "runtime__r0__ir__history.spec": {
+      "filename": "runtime__r0__ir__history.spec",
+      "format": "type_theoretic",
+      "lines": 15,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "runtime__r0__ir__llama-run.spec": {
+      "filename": "runtime__r0__ir__llama-run.spec",
+      "format": "type_theoretic",
+      "lines": 24,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "runtime__r0__ir__prompt.spec": {
+      "filename": "runtime__r0__ir__prompt.spec",
+      "format": "type_theoretic",
+      "lines": 22,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "runtime__r0__ir__trace.spec": {
+      "filename": "runtime__r0__ir__trace.spec",
+      "format": "type_theoretic",
+      "lines": 41,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec": {
+      "filename": "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+      "format": "type_theoretic",
+      "lines": 22,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "runtime__r1__ir__core.spec": {
+      "filename": "runtime__r1__ir__core.spec",
+      "format": "generic",
+      "lines": 69,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "specs__00-expression-grammar.spec": {
+      "filename": "specs__00-expression-grammar.spec",
+      "format": "generic",
+      "lines": 1,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "specs__00-meta-model.spec": {
+      "filename": "specs__00-meta-model.spec",
+      "format": "type_theoretic",
+      "lines": 207,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "specs__00-type-system.spec": {
+      "filename": "specs__00-type-system.spec",
+      "format": "generic",
+      "lines": 1,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "specs__01-semantic-model.spec": {
+      "filename": "specs__01-semantic-model.spec",
+      "format": "type_theoretic",
+      "lines": 174,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "specs__02-constitution.spec": {
+      "filename": "specs__02-constitution.spec",
+      "format": "common_lisp",
+      "lines": 230,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "specs__03-chron-semantic-extension.spec": {
+      "filename": "specs__03-chron-semantic-extension.spec",
+      "format": "type_theoretic",
+      "lines": 353,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "specs__04-runtime-model.spec": {
+      "filename": "specs__04-runtime-model.spec",
+      "format": "type_theoretic",
+      "lines": 292,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "tests__md__ir__phase0-big-bang-test.spec": {
+      "filename": "tests__md__ir__phase0-big-bang-test.spec",
+      "format": "test_format",
+      "lines": 40,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "tests__md__ir__r2-0-a-tests.spec": {
+      "filename": "tests__md__ir__r2-0-a-tests.spec",
+      "format": "type_theoretic",
+      "lines": 43,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "tests__md__ir__r2-0-b-tests.spec": {
+      "filename": "tests__md__ir__r2-0-b-tests.spec",
+      "format": "test_format",
+      "lines": 83,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "tests__md__ir__r2-0-c-tests.spec": {
+      "filename": "tests__md__ir__r2-0-c-tests.spec",
+      "format": "test_format",
+      "lines": 65,
+      "findings": 1,
+      "findings_by_type": {
+        "contradiction": 1
+      }
+    },
+    "tests__md__ir__r2-1-b-tests.spec": {
+      "filename": "tests__md__ir__r2-1-b-tests.spec",
+      "format": "generic",
+      "lines": 42,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "tests__md__ir__r2-2-e-tests.spec": {
+      "filename": "tests__md__ir__r2-2-e-tests.spec",
+      "format": "type_theoretic",
+      "lines": 41,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "tests__md__ir__r2-3-s-tests.spec": {
+      "filename": "tests__md__ir__r2-3-s-tests.spec",
+      "format": "type_theoretic",
+      "lines": 43,
+      "findings": 0,
+      "findings_by_type": {}
+    },
+    "tests__pipeline_test.spec": {
+      "filename": "tests__pipeline_test.spec",
+      "format": "generic",
+      "lines": 176,
+      "findings": 0,
+      "findings_by_type": {}
+    }
+  },
+  "entity_coverage": {}
+}

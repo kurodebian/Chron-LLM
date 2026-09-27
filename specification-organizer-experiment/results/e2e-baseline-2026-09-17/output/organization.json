@@ -1,0 +1,2520 @@
+{
+  "corpus_metadata": {
+    "total_files": 103,
+    "total_lines": 6463,
+    "total_types": 550,
+    "total_enums": 4,
+    "total_ops": 97,
+    "total_invariants": 3,
+    "total_theorems": 0,
+    "total_policies": 3
+  },
+  "format_distribution": {
+    "type_theoretic": {
+      "count": 38,
+      "files": [
+        "bindings__llama_cffi.spec",
+        "contracts__abi-registry.spec",
+        "contracts__base-history.spec",
+        "contracts__integration-verification.spec",
+        "contracts__pipeline-orchestration.spec",
+        "contracts__spec-metamodel.spec",
+        "docs__ir__03-reference-runtime.spec",
+        "docs__ir__99-open-questions.spec",
+        "docs__ir__Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.spec",
+        "docs__ir__chron-llm-r1-interface-spec-v1.2.spec",
+        "docs__ir__knowledge-system.spec",
+        "experiments__ir__chron-llm-spec-v0.2.spec",
+        "experiments__ir__scc.spec",
+        "graph-runtime__ir__causal.spec",
+        "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec",
+        "graph-runtime__ir__graph.spec",
+        "llama-agent__ir__ffi-bindings-mock.spec",
+        "llama-agent__ir__immune-system.spec",
+        "memory__ir__store.spec",
+        "observability__ir__world-snapshot.spec",
+        "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec",
+        "runtime__ir__divergence.spec",
+        "runtime__ir__ir.spec",
+        "runtime__ir__stream.spec",
+        "runtime__r0__ir__chat-loop.spec",
+        "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec",
+        "runtime__r0__ir__history.spec",
+        "runtime__r0__ir__llama-run.spec",
+        "runtime__r0__ir__prompt.spec",
+        "runtime__r0__ir__trace.spec",
+        "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec",
+        "specs__00-meta-model.spec",
+        "specs__01-semantic-model.spec",
+        "specs__03-chron-semantic-extension.spec",
+        "specs__04-runtime-model.spec",
+        "tests__md__ir__r2-0-a-tests.spec",
+        "tests__md__ir__r2-2-e-tests.spec",
+        "tests__md__ir__r2-3-s-tests.spec"
+      ]
+    },
+    "common_lisp": {
+      "count": 8,
+      "files": [
+        "config__sbcl_policy.spec",
+        "contracts__base-types.spec",
+        "contracts__kernel-world.spec",
+        "core__types.spec",
+        "docs__ir__00-constitution.spec",
+        "docs__ir__01-domain-model.spec",
+        "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec",
+        "specs__02-constitution.spec"
+      ]
+    },
+    "generic": {
+      "count": 39,
+      "files": [
+        "contracts__base-excludes.spec",
+        "contracts__base-invariants.spec",
+        "contracts__spec__v2.8.0-C-persistence.spec",
+        "contracts__spec__v2.8.0-D-replay.spec",
+        "docs__ir__02-operational-semantics.spec",
+        "docs__ir__07-chron-mapping.spec",
+        "docs__ir__08-memory-model.spec",
+        "docs__ir__09-runtime-scheduling.spec",
+        "docs__ir__10-tool-execution.spec",
+        "docs__ir__11-prompt-builder.spec",
+        "docs__ir__12-recovery.spec",
+        "docs__ir__13-worldline-branching.spec",
+        "docs__ir__Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.spec",
+        "docs__ir__architecture-v1.1.spec",
+        "docs__ir__phase-a-charter.spec",
+        "docs__ir__phase-b-charter.spec",
+        "docs__ir__phase-c-charter.spec",
+        "docs__ir__phase-d-charter.spec",
+        "docs__ir__phase-e-charter.spec",
+        "docs__ir__pull_request_template.spec",
+        "docs__reference__ir__knowledge-rationale.spec",
+        "docs__spec__ir__Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.spec",
+        "docs__spec__ir__Chron-LLM_R2.1-Kernel_Freeze_Spec.spec",
+        "experiments__ir__3cluster.spec",
+        "experiments__ir__cycle.spec",
+        "experiments__ir__dynamics.spec",
+        "llama-agent__ir__chron-llm-graph.spec",
+        "llama-agent__ir__chron-llm-immune.spec",
+        "llama-agent__ir__chron-llm-world.spec",
+        "macros__dsl.spec",
+        "runtime__ir__callback.spec",
+        "runtime__ir__ffi.spec",
+        "runtime__md__ir__llama-engine.spec",
+        "runtime__r0__ir__api.spec",
+        "runtime__r1__ir__core.spec",
+        "specs__00-expression-grammar.spec",
+        "specs__00-type-system.spec",
+        "tests__md__ir__r2-1-b-tests.spec",
+        "tests__pipeline_test.spec"
+      ]
+    },
+    "test_format": {
+      "count": 18,
+      "files": [
+        "docs__ir__05-validation-pipeline.spec",
+        "docs__ir__06-kernel-state-machine.spec",
+        "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec",
+        "docs__ir__phase-f-charter.spec",
+        "docs__ir__r2-0-c-freeze-report.spec",
+        "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec",
+        "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec",
+        "llama-agent__ir__causal-kernel.spec",
+        "llama-agent__ir__chron-llm-kernel.spec",
+        "llama-agent__ir__chron-llm-runtime.spec",
+        "llama-agent__ir__chron-llm.spec",
+        "llama-agent__ir__delta3-agent.spec",
+        "llama-agent__ir__ffi-bindings.spec",
+        "llama-agent__ir__generate.spec",
+        "llama-agent__ir__llama-agent.spec",
+        "tests__md__ir__phase0-big-bang-test.spec",
+        "tests__md__ir__r2-0-b-tests.spec",
+        "tests__md__ir__r2-0-c-tests.spec"
+      ]
+    }
+  },
+  "section_distribution": {
+    "\u5065\u5168\u6027\u5b9a\u7406": {
+      "count": 1,
+      "files": [
+        "contracts__base-types.spec"
+      ]
+    },
+    "Regex": {
+      "count": 1,
+      "files": [
+        "contracts__spec-metamodel.spec"
+      ]
+    }
+  },
+  "entity_registry": {
+    "types": {
+      "config__sbcl_policy.spec:Declarations": {
+        "definition": "",
+        "line": 4
+      },
+      "config__sbcl_policy.spec:fixnum": {
+        "definition": "",
+        "line": 113
+      },
+      "config__sbcl_policy.spec:DECLARATIONS": {
+        "definition": "",
+        "line": 65
+      },
+      "config__sbcl_policy.spec:Global": {
+        "definition": "",
+        "line": 67
+      },
+      "config__sbcl_policy.spec:single": {
+        "definition": "",
+        "line": 83
+      },
+      "config__sbcl_policy.spec:token": {
+        "definition": "",
+        "line": 118
+      },
+      "contracts__abi-registry.spec:EventType": {
+        "definition": "String",
+        "line": 13
+      },
+      "contracts__abi-registry.spec:EventSchema": {
+        "definition": "String",
+        "line": 14
+      },
+      "contracts__abi-registry.spec:ABIOpKind": {
+        "definition": "RegisterABI",
+        "line": 15
+      },
+      "contracts__abi-registry.spec:EventABI": {
+        "definition": "{",
+        "line": 17
+      },
+      "contracts__abi-registry.spec:ABIRegistryEvent": {
+        "definition": "{",
+        "line": 23
+      },
+      "contracts__abi-registry.spec:ABIRegistryHistory": {
+        "definition": "EmptyHistory",
+        "line": 28
+      },
+      "contracts__abi-registry.spec:ABIRegistrySnapshot": {
+        "definition": "List<EventABI>",
+        "line": 35
+      },
+      "contracts__abi-registry.spec:HistoryTransition": {
+        "definition": "{",
+        "line": 37
+      },
+      "contracts__base-history.spec:CausalID": {
+        "definition": "String",
+        "line": 15
+      },
+      "contracts__base-history.spec:EventPayload": {
+        "definition": "String",
+        "line": 16
+      },
+      "contracts__base-history.spec:Event": {
+        "definition": "Frozen<{",
+        "line": 18
+      },
+      "contracts__base-history.spec:History": {
+        "definition": "Frozen<List<Event>>",
+        "line": 24
+      },
+      "contracts__base-types.spec:Nat": {
+        "definition": "",
+        "line": 12
+      },
+      "contracts__base-types.spec:String": {
+        "definition": "",
+        "line": 13
+      },
+      "contracts__base-types.spec:Authority": {
+        "definition": "",
+        "line": 21
+      },
+      "contracts__base-types.spec:ExecutionAuthority": {
+        "definition": "",
+        "line": 25
+      },
+      "contracts__base-types.spec:CausalAuthority": {
+        "definition": "",
+        "line": 26
+      },
+      "contracts__base-types.spec:InterpretationAuthority": {
+        "definition": "",
+        "line": 27
+      },
+      "contracts__base-types.spec:CanonicalAuthority": {
+        "definition": "",
+        "line": 29
+      },
+      "contracts__base-types.spec:DelegationGraph": {
+        "definition": "",
+        "line": 35
+      },
+      "contracts__base-types.spec:ExecutionAuthorityGrant": {
+        "definition": "",
+        "line": 40
+      },
+      "contracts__base-types.spec:CommitCapability": {
+        "definition": "",
+        "line": 47
+      },
+      "contracts__integration-verification.spec:CheckEvidence": {
+        "definition": "{",
+        "line": 15
+      },
+      "contracts__integration-verification.spec:ProposedProposal": {
+        "definition": "{",
+        "line": 25
+      },
+      "contracts__integration-verification.spec:ValidatedProposal": {
+        "definition": "{",
+        "line": 31
+      },
+      "contracts__kernel-world.spec:Nat": {
+        "definition": "",
+        "line": 15
+      },
+      "contracts__kernel-world.spec:String": {
+        "definition": "",
+        "line": 16
+      },
+      "contracts__kernel-world.spec:Authority": {
+        "definition": "",
+        "line": 22
+      },
+      "contracts__kernel-world.spec:ExecutionAuthority": {
+        "definition": "",
+        "line": 23
+      },
+      "contracts__kernel-world.spec:CausalAuthority": {
+        "definition": "",
+        "line": 24
+      },
+      "contracts__kernel-world.spec:InterpretationAuthority": {
+        "definition": "",
+        "line": 25
+      },
+      "contracts__kernel-world.spec:CanonicalAuthority": {
+        "definition": "",
+        "line": 27
+      },
+      "contracts__kernel-world.spec:DelegationGraph": {
+        "definition": "",
+        "line": 32
+      },
+      "contracts__kernel-world.spec:KernelContext": {
+        "definition": "",
+        "line": 36
+      },
+      "contracts__kernel-world.spec:Projection": {
+        "definition": "",
+        "line": 44
+      },
+      "contracts__kernel-world.spec:KernelAction": {
+        "definition": "",
+        "line": 48
+      },
+      "contracts__kernel-world.spec:Executable": {
+        "definition": "",
+        "line": 53
+      },
+      "contracts__kernel-world.spec:Observation": {
+        "definition": "",
+        "line": 56
+      },
+      "contracts__kernel-world.spec:EventFact": {
+        "definition": "",
+        "line": 63
+      },
+      "contracts__kernel-world.spec:Event": {
+        "definition": "",
+        "line": 70
+      },
+      "contracts__kernel-world.spec:InternalCapability": {
+        "definition": "",
+        "line": 82
+      },
+      "contracts__pipeline-orchestration.spec:ProjectionOrigin": {
+        "definition": "HistoryProjection",
+        "line": 16
+      },
+      "contracts__pipeline-orchestration.spec:DerivedData": {
+        "definition": "Frozen<{",
+        "line": 22
+      },
+      "contracts__pipeline-orchestration.spec:ProjectionState": {
+        "definition": "Frozen<{ data : DerivedData, authority : NonAuthoritative }>",
+        "line": 27
+      },
+      "contracts__pipeline-orchestration.spec:SemanticState": {
+        "definition": "Frozen<{ data : DerivedData, authority : NonAuthoritative }>",
+        "line": 28
+      },
+      "contracts__pipeline-orchestration.spec:GraphState": {
+        "definition": "Frozen<{ data : DerivedData, authority : NonAuthoritative }>",
+        "line": 29
+      },
+      "contracts__pipeline-orchestration.spec:PipelineState": {
+        "definition": "Frozen<{",
+        "line": 31
+      },
+      "contracts__pipeline-orchestration.spec:ReplayContext": {
+        "definition": "Frozen<{",
+        "line": 37
+      },
+      "contracts__pipeline-orchestration.spec:PipelineExecutionError": {
+        "definition": "InvalidContext | StepExecutionFailed(String)",
+        "line": 43
+      },
+      "contracts__spec-metamodel.spec:SpecIdentifier": {
+        "definition": "String",
+        "line": 10
+      },
+      "contracts__spec-metamodel.spec:InvariantID": {
+        "definition": "NamespaceInvariantID  # Regex: ^[A-Z]+\\.[A-Z]+\\.[0-9]{3}$",
+        "line": 11
+      },
+      "core__types.spec:timestamp": {
+        "definition": "",
+        "line": 176
+      },
+      "core__types.spec:uuid": {
+        "definition": "",
+        "line": 182
+      },
+      "core__types.spec:phase": {
+        "definition": "",
+        "line": 20
+      },
+      "core__types.spec:list": {
+        "definition": "",
+        "line": 154
+      },
+      "core__types.spec:symbol": {
+        "definition": "",
+        "line": 175
+      },
+      "core__types.spec:string": {
+        "definition": "",
+        "line": 122
+      },
+      "core__types.spec:vector": {
+        "definition": "",
+        "line": 42
+      },
+      "core__types.spec:fixnum": {
+        "definition": "",
+        "line": 68
+      },
+      "core__types.spec:single": {
+        "definition": "",
+        "line": 155
+      },
+      "core__types.spec:t": {
+        "definition": "",
+        "line": 183
+      },
+      "core__types.spec:boolean": {
+        "definition": "",
+        "line": 184
+      },
+      "docs__ir__00-constitution.spec:Canonical": {
+        "definition": "",
+        "line": 1
+      },
+      "docs__ir__00-constitution.spec:Working": {
+        "definition": "",
+        "line": 2
+      },
+      "docs__ir__00-constitution.spec:Derived": {
+        "definition": "",
+        "line": 3
+      },
+      "docs__ir__00-constitution.spec:External": {
+        "definition": "",
+        "line": 4
+      },
+      "docs__ir__00-constitution.spec:Event": {
+        "definition": "",
+        "line": 5
+      },
+      "docs__ir__00-constitution.spec:Evidence": {
+        "definition": "",
+        "line": 6
+      },
+      "docs__ir__00-constitution.spec:Candidate": {
+        "definition": "",
+        "line": 7
+      },
+      "docs__ir__01-domain-model.spec:Event": {
+        "definition": "",
+        "line": 12
+      },
+      "docs__ir__01-domain-model.spec:Candidate": {
+        "definition": "",
+        "line": 13
+      },
+      "docs__ir__01-domain-model.spec:ValidationReport": {
+        "definition": "",
+        "line": 14
+      },
+      "docs__ir__01-domain-model.spec:RuntimeRequest": {
+        "definition": "",
+        "line": 17
+      },
+      "docs__ir__01-domain-model.spec:KernelAction": {
+        "definition": "",
+        "line": 18
+      },
+      "docs__ir__01-domain-model.spec:RuntimeCommand": {
+        "definition": "",
+        "line": 19
+      },
+      "docs__ir__01-domain-model.spec:FaultEvent": {
+        "definition": "",
+        "line": 20
+      },
+      "docs__ir__01-domain-model.spec:Canonical": {
+        "definition": "",
+        "line": 23
+      },
+      "docs__ir__01-domain-model.spec:Working": {
+        "definition": "",
+        "line": 24
+      },
+      "docs__ir__01-domain-model.spec:Derived": {
+        "definition": "",
+        "line": 25
+      },
+      "docs__ir__01-domain-model.spec:External": {
+        "definition": "",
+        "line": 26
+      },
+      "docs__ir__01-domain-model.spec:Session": {
+        "definition": "",
+        "line": 28
+      },
+      "docs__ir__01-domain-model.spec:Context": {
+        "definition": "",
+        "line": 29
+      },
+      "docs__ir__05-validation-pipeline.spec:Candidate": {
+        "definition": "{id}",
+        "line": 9
+      },
+      "docs__ir__05-validation-pipeline.spec:Canonical": {
+        "definition": "State",
+        "line": 9
+      },
+      "docs__ir__05-validation-pipeline.spec:Config": {
+        "definition": "{retry-limit, penalty-strategy, thresholds[], policy}",
+        "line": 9
+      },
+      "docs__ir__05-validation-pipeline.spec:Violation": {
+        "definition": "{type, severity:{recoverable|unrecoverable}}",
+        "line": 9
+      },
+      "docs__ir__05-validation-pipeline.spec:Observation": {
+        "definition": "{detector, score, threshold, facts[]}",
+        "line": 9
+      },
+      "docs__ir__05-validation-pipeline.spec:ValidationReport": {
+        "definition": "{cid: Candidate.id, syntax-violations: [Violation], semantic-violations: [Violation], invariant-violations: [Violation], observations: [Observation]}",
+        "line": 9
+      },
+      "docs__ir__05-validation-pipeline.spec:RuntimeRequestKind": {
+        "definition": "commit | reject | defer | retry | retry-penalty | abort",
+        "line": 9
+      },
+      "docs__ir__05-validation-pipeline.spec:KernelAction": {
+        "definition": "{kind: RuntimeRequestKind}",
+        "line": 9
+      },
+      "docs__ir__06-kernel-state-machine.spec:KernelState = {Canonical": {
+        "definition": "{History:[Event], MemoryRef, LamportClock:int}, DeferredQueue:[Candidate], Working}",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:Event = {intent": {
+        "definition": "{memory-write|recover}}",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:KERNEL_FUNC": {
+        "definition": "",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:Kernel(req": {
+        "definition": "KernelAction, s:KernelState, cfg:Config) -> (s':KernelState, cmd:RuntimeCommand)",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:TRANSITIONS": {
+        "definition": "",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:req.type=commit -> events": {
+        "definition": "=Map(Working.Candidate); Canonical.History+=events; if exists(e in events|e.intent in {memory-write,recover})->Canonical.MemoryRef++; Canonical.LamportClock++; Working:=Init(); cmd=proceed",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:req.type=reject -> Working": {
+        "definition": "=Init(); cmd=discard",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:req.type=retry-penalty -> Working.Policy": {
+        "definition": "=ApplyPenalty(Working.Policy, cfg.penalty_policy); cmd=regenerate-with-penalty",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:DEFERRED_QUEUE": {
+        "definition": "",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:INVARIANTS": {
+        "definition": "",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:INV1": {
+        "definition": "Mutate(Canonical) => op==Commit",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:INV2": {
+        "definition": "RuntimeCommand !-> Mutate(Canonical)",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:INV3": {
+        "definition": "Owner(DeferredQueue)==Kernel",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:INV4": {
+        "definition": "Kernel !-> Invoke(Backend)",
+        "line": 24
+      },
+      "docs__ir__06-kernel-state-machine.spec:INV5": {
+        "definition": "Deterministic(Kernel(req,s,cfg))",
+        "line": 24
+      },
+      "docs__ir__99-open-questions.spec:EventID": {
+        "definition": "UUID | SeqID | LamportClock | CompositeID",
+        "line": 1
+      },
+      "docs__ir__99-open-questions.spec:EventMeta": {
+        "definition": "{ ts: T, seq: N, lamport: N, parent: EventID?, impl: Map }",
+        "line": 2
+      },
+      "docs__ir__99-open-questions.spec:CandidateRep": {
+        "definition": "{ op_ir_ver: V, ser: Fmt, compat: Strat }",
+        "line": 3
+      },
+      "docs__ir__99-open-questions.spec:EvidenceRep": {
+        "definition": "{ enc: E, store: Fmt, replay_compat: Bool }",
+        "line": 4
+      },
+      "docs__ir__99-open-questions.spec:Versioning": {
+        "definition": "{ event_abi: V, op_ir: V, val_report_abi: V, fault_event_abi: V }",
+        "line": 5
+      },
+      "docs__ir__99-open-questions.spec:ReplayScope": {
+        "definition": "History | HistoryConfig | HistoryConfigMemRef",
+        "line": 9
+      },
+      "docs__ir__99-open-questions.spec:Config": {
+        "definition": "{ routing: P, retry: S, penalty: S, detectors: T, logging: L, metrics: M, telemetry: T }",
+        "line": 10
+      },
+      "docs__ir__99-open-questions.spec:ExtConsistency": {
+        "definition": "{ ltm_sync: M, storage_update: S }",
+        "line": 11
+      },
+      "docs__ir__99-open-questions.spec:MemoryRef": {
+        "definition": "{ lifecycle: L, cache: S, persistence: M }",
+        "line": 12
+      },
+      "docs__ir__99-open-questions.spec:Scheduling": {
+        "definition": "{ candidate: S, deferred_order: O, fairness: F, starvation: P }",
+        "line": 13
+      },
+      "docs__ir__99-open-questions.spec:ToolExec": {
+        "definition": "{ mode: Sync|Async, retry: S, fail_prop: P, timeout: T }",
+        "line": 14
+      },
+      "docs__ir__99-open-questions.spec:Recovery": {
+        "definition": "{ restart: B, crash: C, replay_guarantee: G }",
+        "line": 15
+      },
+      "docs__ir__99-open-questions.spec:DistRuntime": {
+        "definition": "{ multi_agent_causality: ?, dist_sessions: ?, remote_commit: ?, shared_canonical: ?, fed_memory: ?, cross_agent_replay: ? }",
+        "line": 16
+      },
+      "docs__ir__99-open-questions.spec:CausalModel": {
+        "definition": "CausalDAG | VectorClocks | HybridLogicalClocks | ToolEventOrder | CrossSessionLink",
+        "line": 17
+      },
+      "docs__ir__99-open-questions.spec:ValExt": {
+        "definition": "{ detectors: Set, inv_cats: Set, policy_router: Impl, routing_strat: S }",
+        "line": 18
+      },
+      "docs__ir__99-open-questions.spec:RtExt": {
+        "definition": "{ backends: Set, dist_deferred_queue: ?, parallel_replay: ?, streaming_candidates: ? }",
+        "line": 19
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:Observation={id": {
+        "definition": "UUID, logical_time:T, snapshot:StateSnapshot}",
+        "line": 13
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:StateSnapshot={world": {
+        "definition": "WorldObs, registry:RegistryObs, kernel:KernelObs}",
+        "line": 13
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:WorldObs={id": {
+        "definition": "ID, head:NodeID, root:NodeID, policy:Policy, meta:Map, lifecycle:State, parent:ID?}",
+        "line": 13
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:RegistryObs={worlds": {
+        "definition": "[ID], active:ID, ancestry:Graph, archived:[ID]}",
+        "line": 13
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:DiffResult={added": {
+        "definition": "Set, removed:Set, modified:Set}",
+        "line": 13
+      },
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec:ID": {
+        "definition": "",
+        "line": 6
+      },
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec:Ref": {
+        "definition": "",
+        "line": 7
+      },
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec:Enum": {
+        "definition": "",
+        "line": 8
+      },
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec:CandidateEvent": {
+        "definition": "",
+        "line": 10
+      },
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec:CanonicalEvent": {
+        "definition": "",
+        "line": 11
+      },
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec:WALRecord": {
+        "definition": "",
+        "line": 12
+      },
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec:CommitResult": {
+        "definition": "",
+        "line": 13
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:PhysicalEvent": {
+        "definition": "{ causal-id: ID, token-id: Int, kv-pos: Int, entropy: Float, ts: Time }",
+        "line": 1
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:IRStream": {
+        "definition": "[PhysicalEvent]",
+        "line": 2
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:EventNode": {
+        "definition": "{ causal-id: ID, tokens: [Int], kv-range: [Int], parent: EventNode | Null }",
+        "line": 3
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:CausalGraph": {
+        "definition": "{ nodes: [EventNode], timelines: [EventNode], worldlines: [Timeline] }",
+        "line": 4
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:RouterConfig": {
+        "definition": "{ gen-roles: [Role], critic: Role, max-gens: Int, max-latency: Int, risk-thresh: Float }",
+        "line": 5
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:RuntimeCommand": {
+        "definition": "{ op: Commit | Retry | Rollback, interventions: [Intervention], truncate-at: Int | Null, delta-prefill: Str | Null, payload: Any, metadata: Opaque }",
+        "line": 6
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:Intervention": {
+        "definition": "GrammarMask | TempDown | SemBias",
+        "line": 7
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:OmegaScore": {
+        "definition": "{ E: Float, S: Float, T: Float, total: Float }",
+        "line": 8
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:KernelState": {
+        "definition": "{ ir-stream: IRStream, graph: CausalGraph, kv-pos: Int, omega: OmegaScore }",
+        "line": 9
+      },
+      "docs__ir__chron-llm-r1-interface-spec-v1.2.spec:BackendState": {
+        "definition": "{ kv-cache: [Float], cursor: Int }",
+        "line": 10
+      },
+      "docs__ir__knowledge-system.spec:KnowledgeSystem": {
+        "definition": "{ meta: Meta, design: Design, executable: Executable }",
+        "line": 1
+      },
+      "docs__ir__knowledge-system.spec:Meta": {
+        "definition": "{ foundation: Foundation, governance: Governance }",
+        "line": 2
+      },
+      "docs__ir__knowledge-system.spec:Foundation": {
+        "definition": "{ purpose: Concept, philosophy: Concept, direction: Concept }",
+        "line": 3
+      },
+      "docs__ir__knowledge-system.spec:Governance": {
+        "definition": "{ policies: [Lifecycle | Versioning | Freeze | Amendment | Compatibility | Review | ReferenceRules | Traceability] }",
+        "line": 4
+      },
+      "docs__ir__knowledge-system.spec:Design": {
+        "definition": "{ constitution: Constitution, domainModel: DomainModel, charter: Charter, specification: Specification }",
+        "line": 5
+      },
+      "docs__ir__knowledge-system.spec:Constitution": {
+        "definition": "{ principles: [Concept], invariants: [Rule] }",
+        "line": 6
+      },
+      "docs__ir__knowledge-system.spec:DomainModel": {
+        "definition": "{ concepts: [Concept], entities: [Entity] }",
+        "line": 7
+      },
+      "docs__ir__knowledge-system.spec:Charter": {
+        "definition": "{ responsibilities: [Responsibility], boundaries: [Boundary] }",
+        "line": 8
+      },
+      "docs__ir__knowledge-system.spec:Specification": {
+        "definition": "{ interfaces: [Interface], contracts: [Contract], rules: [Rule] }",
+        "line": 9
+      },
+      "docs__ir__knowledge-system.spec:Executable": {
+        "definition": "{ runtime: Runtime }",
+        "line": 10
+      },
+      "docs__ir__knowledge-system.spec:Runtime": {
+        "definition": "{ implementations: [Implementation] }",
+        "line": 11
+      },
+      "docs__ir__phase-f-charter.spec:active_inlet": {
+        "definition": "InletVersion",
+        "line": 16
+      },
+      "docs__ir__phase-f-charter.spec:phase_f_state": {
+        "definition": "Immutable",
+        "line": 16
+      },
+      "docs__ir__phase-f-charter.spec:PRE": {
+        "definition": "",
+        "line": 16
+      },
+      "docs__ir__phase-f-charter.spec:normalize_input": {
+        "definition": "side_effects == 0",
+        "line": 16
+      },
+      "docs__ir__phase-f-charter.spec:boundary_inlet": {
+        "definition": "input_type == NormalizedRep",
+        "line": 16
+      },
+      "docs__ir__phase-f-charter.spec:F0": {
+        "definition": "History -> ProjectionModel -> SemanticModel -> Graph -> Observation -> boundary_inlet -> CandidateEvent",
+        "line": 34
+      },
+      "docs__ir__phase-f-charter.spec:C2": {
+        "definition": "ExternalRep -> normalize_input -> boundary_inlet -> CandidateEvent -> commit -> CanonicalEvent",
+        "line": 34
+      },
+      "docs__ir__phase-f-charter.spec:C3": {
+        "definition": "Observation -> map_decision -> RuntimeDecision -> RuntimeProcessing",
+        "line": 34
+      },
+      "docs__ir__phase-f-charter.spec:MAPS": {
+        "definition": "",
+        "line": 34
+      },
+      "docs__ir__phase-f-charter.spec:decision_map": {
+        "definition": "{normal",
+        "line": 34
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:PayloadRef = {hash": {
+        "definition": "Str, type:Kw, size:Int, storage:Kw}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:CausalNode = {id": {
+        "definition": "Str, type:Kw, payload-ref:PayloadRef, meta:Any}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:CausalEdge = {from": {
+        "definition": "Str, to:Str, type:Kw}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:CausalGraph = {nodes": {
+        "definition": "Set<CausalNode>, edges:Set<CausalEdge>}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:ContextNode = {id": {
+        "definition": "Str, type:Kw, content:Str, feedbacks:List<Str>}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:PrefillState = {context": {
+        "definition": "List<ContextNode>, target-id:Str, hash:Str}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:World = {id": {
+        "definition": "Str, root:Str, head:Str, policy:Kw, meta:Any, lifecycle:Kw}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:Registry = {worlds": {
+        "definition": "Map<Str,World>, ancestry:Map<Str,Str>, active-id:Str?, graph:CausalGraph, memory:MemStore}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:ObsWorld = {id": {
+        "definition": "Str, root:Str, head:Str, policy:Kw, meta:Any, lifecycle:Kw, parent:Str?}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:ObsRegistry = {ids": {
+        "definition": "List<Str>, active:Str?, archived:List<Str>}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:ObsAncestry = {child": {
+        "definition": "Str, parent:Str, path:List<Str>}",
+        "line": 14
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:ObsDiff = {changed": {
+        "definition": "Bool, fields:List<Kw>}",
+        "line": 14
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:PayloadRef = { hash": {
+        "definition": "SHA256, size:U64, storage:Enum{:memory, :disk, :remote} }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:Node = { id": {
+        "definition": "ID, type:Kw, payload_ref:PayloadRef, causal_depth:U64, meta:Map }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:Edge = { from": {
+        "definition": "ID, to:ID, type:Enum{:causal, :eval} }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:Graph = { nodes": {
+        "definition": "Map<ID, Node>, edges:[Edge] }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:Eval = { id": {
+        "definition": "ID, score:Float, eval_type:Kw, content:Str }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:ContextNode = { id": {
+        "definition": "ID, type:Kw, content:Str }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:FeedbackContext = { target_id": {
+        "definition": "ID, feedbacks:Map<ID, [Eval]> }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:PrefillState = { context": {
+        "definition": "[ContextNode], target_id:ID, hash:SHA256 }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:World = { id": {
+        "definition": "ID, graph:Ref<Graph>, mem:Ref<MemStore>, root:ID, head:ID, policy:Map, meta:Map, lifecycle:Enum{:created, :active, :inactive, :archived} }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:Registry = { worlds": {
+        "definition": "[World], ancestry:Map<ID, ID>, active:ID|NIL, graph:Ref<Graph>, mem:Ref<MemStore> }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:WorldObs = { ver": {
+        "definition": "U16, world_id:ID, root_id:ID, head_id:ID, policy:Map, meta:Map, lifecycle:Enum, parent_id:ID|NIL }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:RegistryObs = { ver": {
+        "definition": "U16, world_ids:[ID], active_id:ID|NIL, archived_ids:[ID] }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:AncestryObs = { world_id": {
+        "definition": "ID, parent_id:ID|NIL, path:[ID] }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:DiffObs = { changed": {
+        "definition": "Bool, fields:[Str] }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INVARIANTS": {
+        "definition": "",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INV-1 (Graph-Unique-Node)": {
+        "definition": "Unique(keys(Graph.nodes))",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INV-2 (Mem-Content-Addr)": {
+        "definition": "ContentAddr(PayloadRef.hash == SHA256(content))",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INV-3 (World-Head-Valid)": {
+        "definition": "World.head in keys(World.graph.nodes)",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INV-4 (Commit-Atomic)": {
+        "definition": "Atomic(GraphAppend, HeadAdvance)",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INV-5 (Obs-Primitive)": {
+        "definition": "Type(x) in {null, bool, str, num, char, kw, list}",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INV-6 (Head-Commit-Truth)": {
+        "definition": "kernel-commit-world! == ONLY(head_advance)",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INV-7 (Replay-Determinism)": {
+        "definition": "Hash(Graph + MemStore + Policy) == PrefillHash",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INV-8 (Causal-Eval-Isolated)": {
+        "definition": "Evaluation edges (:eval) MUST NOT enter PrefillState or prompt context sequence",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:INV-9 (Obs-Read-Only)": {
+        "definition": "Snapshot & Observation operations MUST NOT mutate World, Registry, or Graph state",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:OPERATIONS": {
+        "definition": "",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:add-node!(g": {
+        "definition": "Ref<Graph>, n:Node) -> Ref<Graph>",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:PRE": {
+        "definition": "exists(r.worlds, id)",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:POST": {
+        "definition": "find-world(r', id).lifecycle == :archived AND (r.active == id -> r'.active == NIL)",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:add-edge!(g": {
+        "definition": "Ref<Graph>, e:Edge) -> Ref<Graph>",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:causal-subgraph(g": {
+        "definition": "Ref<Graph>, target_id:ID) -> [Node]",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:FILTER": {
+        "definition": "edge.type == :causal",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:ORDER": {
+        "definition": "Topological (Root -> Target)",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:project-context(g": {
+        "definition": "Ref<Graph>, m:Ref<MemStore>, target_id:ID) -> [ContextNode]",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:LOGIC": {
+        "definition": "Traverse causal ancestors -> Query outgoing :eval edges for each ancestor -> Map NodeID to [Eval]",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:project-feedback-context(g": {
+        "definition": "Ref<Graph>, target_id:ID) -> FeedbackContext",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:canonical-prompt(ctx": {
+        "definition": "[ContextNode]) -> Str",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:RULE": {
+        "definition": "Data-only snapshot, No mutation",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:build-prefill-state(g": {
+        "definition": "Ref<Graph>, m:Ref<MemStore>, target_id:ID) -> PrefillState",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:make-world(id": {
+        "definition": "ID, g:Ref<Graph>, m:Ref<MemStore>, root:ID, head:ID, policy:Map, meta:Map) -> World",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:fork-world(parent": {
+        "definition": "World, child_id:ID) -> World",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:replace-world-metadata!(w": {
+        "definition": "World, new_meta:Map) -> World",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:kernel-commit-world!(w": {
+        "definition": "World, node:Node) -> World",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:SEQ": {
+        "definition": "add-node!(w.graph, node); w.head = node.id",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:replay-world(w": {
+        "definition": "World) -> { id:ID, head_id:ID, policy:Map, meta:Map, hash:SHA256 }",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:register-world(r": {
+        "definition": "Registry, w:World) -> Registry",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:set-active-world(r": {
+        "definition": "Registry, id:ID) -> Registry",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:archive-world(r": {
+        "definition": "Registry, id:ID) -> Registry",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:snapshot-world(w": {
+        "definition": "World) -> WorldObs",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:snapshot-registry(r": {
+        "definition": "Registry) -> RegistryObs",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:snapshot-ancestry(w": {
+        "definition": "World) -> AncestryObs",
+        "line": 125
+      },
+      "docs__spec__ir__R2.0-B_C_World_Runtime_Observation_Contract_v1.0.spec:snapshot-diff(w1": {
+        "definition": "World, w2:World) -> DiffObs",
+        "line": 125
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:Node": {
+        "definition": "{id: ID, role: Role, ts: Time}",
+        "line": 1
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:Role": {
+        "definition": "reply | temporal | bridge",
+        "line": 2
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:Edge": {
+        "definition": "{from: ID, to: ID, rel: Role, str: Float[0,1], cnt: Int}",
+        "line": 3
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:Graph": {
+        "definition": "{nodes: Node[], edges: Edge[], clusters: Cluster[], meta: Map}",
+        "line": 4
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:Cluster": {
+        "definition": "{id: ID, type: Role, nodes: ID[], conns: Edge[], stab: Float}",
+        "line": 5
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:ThreeClusterGraph": {
+        "definition": "{A: Cluster, B: Cluster, C: Cluster}",
+        "line": 6
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:Trajectory": {
+        "definition": "{start: ID, steps: Int, path: ID[], term: ID, cycle: Cycle?, att: Attractor?}",
+        "line": 7
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:EventSelection": {
+        "definition": "{curr: ID, edge: Edge, str: Float, alts: Edge[]}",
+        "line": 8
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:Cycle": {
+        "definition": "{id: ID, nodes: ID[], len: Int, freq: Int, stab: Float, type: Role}",
+        "line": 9
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:CycleResult": {
+        "definition": "{cycles: Cycle[], periodic: Bool, period: Int}",
+        "line": 10
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:SCC": {
+        "definition": "{id: ID, nodes: ID[], reach: Bool, is_att: Bool, stable: Bool}",
+        "line": 11
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:SCCResult": {
+        "definition": "{comps: SCC[], conn_score: Float}",
+        "line": 12
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:Attractor": {
+        "definition": "{id: ID, type: cycle | fixed, nodes: ID[], stab: Float, rec: Int}",
+        "line": 13
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:Basin": {
+        "definition": "{att: Attractor, nodes: ID[], mass: Int, ratio: Float[0,1], cov: Area}",
+        "line": 14
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:BasinResult": {
+        "definition": "{basins: Basin[], total_att: Int, conv_rate: Float}",
+        "line": 15
+      },
+      "experiments__ir__scc.spec:Node": {
+        "definition": "ID",
+        "line": 1
+      },
+      "experiments__ir__scc.spec:Edge": {
+        "definition": "{from: Node, to: Node}",
+        "line": 2
+      },
+      "experiments__ir__scc.spec:Graph": {
+        "definition": "{nodes: [Node], edges: [Edge]}",
+        "line": 3
+      },
+      "experiments__ir__scc.spec:SCC": {
+        "definition": "[Node]",
+        "line": 4
+      },
+      "experiments__ir__scc.spec:SCCList": {
+        "definition": "[SCC]",
+        "line": 5
+      },
+      "graph-runtime__ir__causal.spec:Node": {
+        "definition": "{id: ID}",
+        "line": 2
+      },
+      "graph-runtime__ir__causal.spec:Edge": {
+        "definition": "{from: ID, to: ID, type: Symbol}",
+        "line": 3
+      },
+      "graph-runtime__ir__causal.spec:Graph": {
+        "definition": "{nodes: [Node], edges: [Edge]}",
+        "line": 4
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:PayloadRef": {
+        "definition": "{",
+        "line": 10
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:NodeID": {
+        "definition": "String          // UUID v4 format",
+        "line": 16
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:Keyword": {
+        "definition": "String",
+        "line": 17
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:Node": {
+        "definition": "{",
+        "line": 19
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:Edge": {
+        "definition": "{",
+        "line": 27
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:Graph": {
+        "definition": "{",
+        "line": 33
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:Eval": {
+        "definition": "{",
+        "line": 38
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:ContextNode": {
+        "definition": "{",
+        "line": 45
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:FeedbackContext": {
+        "definition": "{",
+        "line": 51
+      },
+      "graph-runtime__ir__chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec:PrefillState": {
+        "definition": "{",
+        "line": 56
+      },
+      "graph-runtime__ir__graph.spec:ID": {
+        "definition": "Symbol | String",
+        "line": 1
+      },
+      "graph-runtime__ir__graph.spec:Keyword": {
+        "definition": "Symbol",
+        "line": 2
+      },
+      "graph-runtime__ir__graph.spec:Ref": {
+        "definition": "Any",
+        "line": 3
+      },
+      "graph-runtime__ir__graph.spec:Metadata": {
+        "definition": "Map<String, Any>",
+        "line": 4
+      },
+      "llama-agent__ir__causal-kernel.spec:Event = {idx": {
+        "definition": "Int, clk: Int, wld: Int, kind: Sym, pay: {txt: Str, tgt: Str?, meta: Map}}",
+        "line": 9
+      },
+      "llama-agent__ir__causal-kernel.spec:WAL = {store": {
+        "definition": "[Event], clk: Int, stage: [Event]}",
+        "line": 9
+      },
+      "llama-agent__ir__causal-kernel.spec:Node = {id": {
+        "definition": "Int, ev: Event, cls: NodeCls, clk: Int, wld: Int}",
+        "line": 9
+      },
+      "llama-agent__ir__causal-kernel.spec:Edge = {src": {
+        "definition": "Int, dst: Int, typ: Temporal | Causal}",
+        "line": 9
+      },
+      "llama-agent__ir__causal-kernel.spec:Graph = {nodes": {
+        "definition": "Map<Int, Node>, edges: [Edge], par: Map<Int, Int>}",
+        "line": 9
+      },
+      "llama-agent__ir__causal-kernel.spec:Kernel = {wal": {
+        "definition": "WAL, cur-wld: Int}",
+        "line": 9
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:Symbol =": {
+        "definition": "user-message | :assistant-reply | :branch | :ok | :degraded",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:HistoryEntry = {kind": {
+        "definition": "Symbol, text: String}",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:ContextObject = {system_prompt": {
+        "definition": "String?, history: [HistoryEntry], memory_context: Any?, metadata: Any?}",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:KernelState = {world_id": {
+        "definition": "Integer, health: Symbol, context: ContextObject}",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:Kernel = {wal": {
+        "definition": "WAL, graph: Graph?, current_world: Integer}",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:if k.graph": {
+        "definition": "nil return :ok",
+        "line": 54
+      },
+      "llama-agent__ir__chron-llm-runtime.spec:KernelState = { world_id": {
+        "definition": "ID, health: Status, context: ContextObject }",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm-runtime.spec:RuntimeEnv = { kernel": {
+        "definition": "Kernel }",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm.spec:Event": {
+        "definition": "header:Header, payload:PropertyList [Persistent]",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm.spec:Header": {
+        "definition": "index:WALPos, causal-id:WorldlineID, kind:Symbol [ManagedBy:Kernel]",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm.spec:Node": {
+        "definition": "id:ID, kind:Symbol, content:Any, parent:NodeRef, worldline:WorldlineID, status:Active|Fault [RuntimeObject]",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm.spec:Context": {
+        "definition": "model:ModelPtr, ctx:LLamaCtx, n-past:Int",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm.spec:Sampler": {
+        "definition": "temp:Float, top-p:Float",
+        "line": 6
+      },
+      "llama-agent__ir__chron-llm.spec:*n-past*": {
+        "definition": "Int = 0",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:OPS": {
+        "definition": "",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:init-chron-llm(path": {
+        "definition": "String, size:Int) -> Context",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:PRE": {
+        "definition": "ctx.n-past == len(PromptTokens)",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:POST": {
+        "definition": "ctx.n-past == len(PromptTokens) + len(buf)",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:tokenize(model": {
+        "definition": "ModelPtr, text:String) -> List<Token>",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:ALGO": {
+        "definition": "UTF8(text) -> Pass1(Size) -> Pass2(Tokens)",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:ERR": {
+        "definition": "len(Tokens) <= 0",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:prefill-prompt(ctx": {
+        "definition": "Context, tokens:List<Token>) -> Void",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:EXEC": {
+        "definition": "Token(id) -> Piece -> Bytes -> Console",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:generate(ctx": {
+        "definition": "Context, model:ModelPtr, temp:Float, top-p:Float, max:Int) -> String",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:LOOP max": {
+        "definition": "",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:RET": {
+        "definition": "Bytes",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:print-token-stream(model": {
+        "definition": "ModelPtr, id:Token) -> ByteVector",
+        "line": 41
+      },
+      "llama-agent__ir__delta3-agent.spec:AgentState = { goal": {
+        "definition": "Str, context: Str, todo: [Str], issues: [Str] }",
+        "line": 8
+      },
+      "llama-agent__ir__delta3-agent.spec:Env = { n_past": {
+        "definition": "Int, sys_prompt: Str, agent_state: AgentState }",
+        "line": 8
+      },
+      "llama-agent__ir__delta3-agent.spec:GLOBALS": {
+        "definition": "",
+        "line": 8
+      },
+      "llama-agent__ir__delta3-agent.spec:ENV": {
+        "definition": "Env",
+        "line": 8
+      },
+      "llama-agent__ir__delta3-agent.spec:THRESHOLD_RESET": {
+        "definition": "Float = 0.85",
+        "line": 8
+      },
+      "llama-agent__ir__delta3-agent.spec:if cmd": {
+        "definition": "\":reset\": perform_stateful_reset(); continue",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:INV_RESET_IDENTITY: After(perform_stateful_reset), ENV.sys_prompt": {
+        "definition": "Before(ENV.sys_prompt)",
+        "line": 75
+      },
+      "llama-agent__ir__ffi-bindings.spec:event = struct(index": {
+        "definition": "int, causal-id:any, kind:symbol, payload:any)",
+        "line": 10
+      },
+      "llama-agent__ir__ffi-bindings.spec:*n-past*": {
+        "definition": "int32",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:EXPORTS(KERNEL_ABI)": {
+        "definition": "",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:EXPORTS(RUNTIME_API)": {
+        "definition": "",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:FFI_OPS": {
+        "definition": "",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-model-load(path": {
+        "definition": "str) -> ptr-model",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-init(m": {
+        "definition": "ptr-model, n_ctx:int) -> ptr-ctx",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-model-get-vocab(m": {
+        "definition": "ptr-model) -> ptr-vocab",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-eval(ctx": {
+        "definition": "ptr-ctx, buf:[llama-token], count:int, n_past:int) -> int32",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-token-to-piece(m": {
+        "definition": "ptr-model, tok:id, buf:str[], len:int) -> int",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-tokenize(vocab": {
+        "definition": "ptr-vocab, text:str, len:int, out:[llama-token], max_tok:int, add_special:bool, parse_special:bool) -> int",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-is-eog(ctx": {
+        "definition": "ptr-ctx, tok:id) -> bool",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-sampler-init(temp": {
+        "definition": "f32, top_p:f32) -> ptr-sampler",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-sampler-sample(samp": {
+        "definition": "ptr-sampler, ctx:ptr-ctx) -> llama-token",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-sampler-free(samp": {
+        "definition": "ptr-sampler)",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-free(ctx": {
+        "definition": "ptr-ctx)",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-model-free(m": {
+        "definition": "ptr-model)",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-reset-kv(ctx": {
+        "definition": "ptr-ctx)",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:INVARIANTS": {
+        "definition": "",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:INV stateless": {
+        "definition": "Module holds only native pointers. No inference logic.",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:INV abi_1to1": {
+        "definition": "FFI calls map 1:1 to C Wrapper -> llama.cpp.",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:INV error_pass_through": {
+        "definition": "Return values passed up; no local handling.",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:INV mock_compat": {
+        "definition": "ABI matches ffi-bindings-mock.lisp.",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:LIFECYCLE_SEQ": {
+        "definition": "",
+        "line": 45
+      },
+      "llama-agent__ir__generate.spec:Status = Enum{": {
+        "definition": "ok, :warning, :fault}",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:ImmuneRes = { status": {
+        "definition": "Status, entropy:F32 }",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:GenConfig = { temp": {
+        "definition": "F32, top_p:F32, max_tokens:U32 }",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:GenState = { model": {
+        "definition": "LlamaModelHdl, ctx:LlamaCtxt, sampler:LlamaSampler, n_past:U32, step:U32 }",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:GenResult = Enum{": {
+        "definition": "eos, :fault, :nil}",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:INVARIANTS": {
+        "definition": "",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:INV-1 (Fault-No-Commit)": {
+        "definition": "ir.status == :fault IMPLIES NOT committed(kernel)",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:INV-2 (Rollback-Stage-Empty)": {
+        "definition": "rolled_back(kernel) IMPLIES stage_is_empty()",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:INV-3 (Fault-KV-Reset)": {
+        "definition": "ir.status == :fault IMPLIES kv_cache_reset(ctx)",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:INV-4 (Step-Limit-Bound)": {
+        "definition": "s.step <= cfg.max_tokens + 1",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:OPERATIONS": {
+        "definition": "",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:init-chron-llm(model_path": {
+        "definition": "Str, prompt:Str, cfg:GenConfig) -> GenState",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:POST": {
+        "definition": "RESULT == :fault",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:fault-recovery!(s": {
+        "definition": "GenState, kernel:KernelRef) -> GenResult",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:PRE": {
+        "definition": "max_tokens > 0",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:SEQ": {
+        "definition": "my-sampler-free(s.sampler); my-llama-free(s.ctx); my-llama-model-free(s.model)",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:cleanup!(s": {
+        "definition": "GenState)",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:run-llm-generation-with-sensors(model_path": {
+        "definition": "Str, prompt:Str, max_tokens:U32, kernel:KernelRef) -> GenResult",
+        "line": 42
+      },
+      "llama-agent__ir__generate.spec:LOGIC": {
+        "definition": "Loop step sampling while s.step <= max_tokens; check-immune-status(); trigger fault-recovery! if fault.",
+        "line": 42
+      },
+      "llama-agent__ir__immune-system.spec:Ctx": {
+        "definition": "opaque_ptr",
+        "line": 3
+      },
+      "llama-agent__ir__immune-system.spec:Logits": {
+        "definition": "float[]",
+        "line": 4
+      },
+      "llama-agent__ir__immune-system.spec:Status": {
+        "definition": ":healthy | :warning | :fault",
+        "line": 5
+      },
+      "llama-agent__ir__immune-system.spec:Result": {
+        "definition": "tuple(Status, Float)",
+        "line": 6
+      },
+      "llama-agent__ir__llama-agent.spec:*system-dir*": {
+        "definition": "Path = (uiop:pathname-directory-pathname *load-pathname*)",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:*use-mock-physical-p*": {
+        "definition": "Boolean",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:OPS": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:load-system-file(filename)": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:SEQUENCE": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:INIT_QUICKLISP()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:ql": {
+        "definition": "quickload(\"babel\")",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:LOAD_PHYSICAL()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:LOAD_LLM()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:LOAD_CORE()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:LOAD_GRAPH()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:LOAD_WORLD()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:LOAD_IMMUNE()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:LOAD_RUNTIME()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:LOAD_GENERATION()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:LOAD_TEST()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:API": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:start-delta3(model-path=\"/path/to/model.gguf\")": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:start-delta3-stub()": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:INVARIANTS": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:INV_LoadOrder": {
+        "definition": "[Physical, LLM, Core, Graph, World, Immune, Runtime, Generation, Test]",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:INV_NoReverseDep": {
+        "definition": "Layers depend only on preceding layers",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:INV_PhysicalSwap": {
+        "definition": "Physical Layer is sole swappable unit (Mock/FFI)",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:INV_FailFast": {
+        "definition": "Stop on missing files/Quicklisp; No recovery",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:NON_RESPONSIBILITIES": {
+        "definition": "",
+        "line": 91
+      },
+      "llama-agent__ir__llama-agent.spec:PHASE_1_1_CONSTRAINTS": {
+        "definition": "",
+        "line": 91
+      },
+      "memory__ir__store.spec:store": {
+        "definition": "Map{test=equal}",
+        "line": 6
+      },
+      "observability__ir__world-snapshot.spec:PrimitiveLeaf": {
+        "definition": "null | t | string | number | char | keyword",
+        "line": 23
+      },
+      "observability__ir__world-snapshot.spec:PrimitiveTree": {
+        "definition": "PrimitiveLeaf | (cons PrimitiveTree PrimitiveTree)",
+        "line": 24
+      },
+      "runtime__ir__chron-llm-r1-ir-observation-layer-spec-v1.0.spec:DivRes": {
+        "definition": "STRUCT {",
+        "line": 5
+      },
+      "runtime__ir__divergence.spec:Profile": {
+        "definition": "chron-observation-layer.DivRes",
+        "line": 5
+      },
+      "runtime__ir__divergence.spec:Prompt": {
+        "definition": "STRING",
+        "line": 6
+      },
+      "runtime__ir__ir.spec:Phase": {
+        "definition": "{0:PREFILL | 1:GENERATION | 2:FINALIZE}",
+        "line": 9
+      },
+      "runtime__ir__ir.spec:TOKEN_ID": {
+        "definition": "INT",
+        "line": 10
+      },
+      "runtime__ir__ir.spec:ID": {
+        "definition": "PTR",
+        "line": 11
+      },
+      "runtime__ir__ir.spec:IR": {
+        "definition": "STRUCT {",
+        "line": 13
+      },
+      "runtime__ir__ir.spec:IR_Buffer": {
+        "definition": "STRUCT {",
+        "line": 22
+      },
+      "runtime__ir__stream.spec:Stream": {
+        "definition": "ir.IR_Buffer",
+        "line": 4
+      },
+      "runtime__r0__ir__chat-loop.spec:Session": {
+        "definition": "{ model: ModelRef | Nil, history: History }",
+        "line": 4
+      },
+      "runtime__r0__ir__chat-loop.spec:Event": {
+        "definition": "{ role: 'user' | 'assistant', content: Str }",
+        "line": 5
+      },
+      "runtime__r0__ir__chat-loop.spec:Trace": {
+        "definition": "{ user-text: Str, prompt: Str, raw: Str, parsed: Str, h-before: Snap, h-after: Snap, p-len: Int, r-len: Int, hs-b: Int, hs-a: Int }",
+        "line": 6
+      },
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec:Session": {
+        "definition": "{ model: ModelRef, history: History }",
+        "line": 5
+      },
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec:HistoryEvent": {
+        "definition": "{ role: Role, content: Text }",
+        "line": 6
+      },
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec:History": {
+        "definition": "[HistoryEvent]",
+        "line": 7
+      },
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec:R0Trace": {
+        "definition": "{ user_text: Text, prompt: Text, raw: RawData, parsed: ParsedData, history_before: History, history_after: History, prompt_len: Int, response_len: Int }",
+        "line": 10
+      },
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec:PhysicalEvent": {
+        "definition": "{ causal_id: ID, token_id: TokenID, kv_pos: Pos, entropy: Float, timestamp: Time }",
+        "line": 13
+      },
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec:IR": {
+        "definition": "{ ctx_id: ID, pos: Pos, phase: Phase, token: Token, score: Score }",
+        "line": 16
+      },
+      "runtime__r0__ir__chron-llm-r0-session-execution-layer-spec-v1.0.spec:RuntimeCommand": {
+        "definition": "{ op: OpType, interventions: [Intervention], truncate_at: Pos?, delta_prefill: Prefill?, payload: Any, metadata: Meta }",
+        "line": 20
+      },
+      "runtime__r0__ir__history.spec:HistoryEvent": {
+        "definition": "{ role: Any , content: Any }",
+        "line": 2
+      },
+      "runtime__r0__ir__history.spec:History": {
+        "definition": "{ events: Vector[HistoryEvent] }",
+        "line": 3
+      },
+      "runtime__r0__ir__llama-run.spec:Prompt": {
+        "definition": "String",
+        "line": 4
+      },
+      "runtime__r0__ir__llama-run.spec:Response": {
+        "definition": "String",
+        "line": 5
+      },
+      "runtime__r0__ir__llama-run.spec:ProcRes": {
+        "definition": "{out: String, err: String}",
+        "line": 6
+      },
+      "runtime__r0__ir__prompt.spec:History": {
+        "definition": "{ events: [Event] }",
+        "line": 3
+      },
+      "runtime__r0__ir__prompt.spec:Event": {
+        "definition": "{ role: Str, content: Str }",
+        "line": 4
+      },
+      "runtime__r0__ir__trace.spec:History": {
+        "definition": "EXTERNAL",
+        "line": 3
+      },
+      "runtime__r0__ir__trace.spec:R0Trace": {
+        "definition": "{",
+        "line": 5
+      },
+      "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec:IR_Event": {
+        "definition": "{pos:int, phase:int, token:int, score:float}",
+        "line": 1
+      },
+      "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec:DSL_Op": {
+        "definition": "{type:sym, payload:any, meta:{}}",
+        "line": 2
+      },
+      "runtime__r1__ir__chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.spec:Candidate": {
+        "definition": "{ops:[DSL_Op], status:\"pending\"}",
+        "line": 3
+      },
+      "specs__00-meta-model.spec:Identifier": {
+        "definition": "StringConstraint(Pattern: \"^[a-z][a-z0-9\\-_]*$\")",
+        "line": 6
+      },
+      "specs__00-meta-model.spec:ModulePath": {
+        "definition": "List<Identifier>   -- \u968e\u5c64\u7684\u30e2\u30b8\u30e5\u30fc\u30ebID",
+        "line": 7
+      },
+      "specs__00-meta-model.spec:TypeID": {
+        "definition": "StringConstraint(Pattern: \"^[A-Z][a-zA-Z0-9]*$\")",
+        "line": 8
+      },
+      "specs__00-meta-model.spec:VersionExpr": {
+        "definition": "StringConstraint(Pattern: \"^v[0-9]+\\.[0-9]+\\.[0-9]+$\")",
+        "line": 9
+      },
+      "specs__01-semantic-model.spec:EventID": {
+        "definition": "IDType(NamespacedID(\"event\"))",
+        "line": 31
+      },
+      "specs__01-semantic-model.spec:StateID": {
+        "definition": "IDType(NamespacedID(\"state\"))",
+        "line": 34
+      },
+      "specs__01-semantic-model.spec:WorldlineID": {
+        "definition": "IDType(NamespacedID(\"worldline\"))",
+        "line": 37
+      },
+      "specs__02-constitution.spec:CanonicalStateID": {
+        "definition": "",
+        "line": 35
+      },
+      "specs__02-constitution.spec:AuthorityID": {
+        "definition": "",
+        "line": 38
+      },
+      "specs__03-chron-semantic-extension.spec:EvidenceID": {
+        "definition": "IDType(NamespacedID(\"evidence\"))",
+        "line": 38
+      },
+      "specs__03-chron-semantic-extension.spec:ProposalID": {
+        "definition": "IDType(NamespacedID(\"proposal\"))",
+        "line": 41
+      },
+      "specs__03-chron-semantic-extension.spec:CommitID": {
+        "definition": "IDType(NamespacedID(\"commit\"))",
+        "line": 44
+      },
+      "specs__03-chron-semantic-extension.spec:CommitResultID": {
+        "definition": "IDType(NamespacedID(\"commit-result\"))",
+        "line": 47
+      },
+      "specs__03-chron-semantic-extension.spec:BranchID": {
+        "definition": "IDType(NamespacedID(\"branch\"))",
+        "line": 50
+      },
+      "specs__03-chron-semantic-extension.spec:MergeID": {
+        "definition": "IDType(NamespacedID(\"merge\"))",
+        "line": 53
+      },
+      "specs__03-chron-semantic-extension.spec:SharedPrefixID": {
+        "definition": "IDType(NamespacedID(\"shared-prefix\"))",
+        "line": 56
+      },
+      "specs__04-runtime-model.spec:ObservationID": {
+        "definition": "IDType(NamespacedID(\"observation\"))",
+        "line": 34
+      },
+      "specs__04-runtime-model.spec:ValidatorID": {
+        "definition": "IDType(NamespacedID(\"validator\"))",
+        "line": 37
+      },
+      "specs__04-runtime-model.spec:RouterID": {
+        "definition": "IDType(NamespacedID(\"router\"))",
+        "line": 40
+      },
+      "specs__04-runtime-model.spec:SchedulerID": {
+        "definition": "IDType(NamespacedID(\"scheduler\"))",
+        "line": 43
+      },
+      "specs__04-runtime-model.spec:ExecutionTaskID": {
+        "definition": "IDType(NamespacedID(\"execution-task\"))",
+        "line": 46
+      },
+      "specs__04-runtime-model.spec:CommitRequestID": {
+        "definition": "IDType(NamespacedID(\"commit-request\"))",
+        "line": 49
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:TestMockProvider": {
+        "definition": "{ input_sequence: [Str], execution_log: [Action] }",
+        "line": 6
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:InferenceObservation": {
+        "definition": "{ raw_text: Str, finish_reason: Symbol, config: List, provider_metadata: List }",
+        "line": 6
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:WorldState": {
+        "definition": "{ causal_id: Str, parent_id: Str, retry_count: Int }",
+        "line": 6
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:Action": {
+        "definition": "{ physical_type: Symbol }",
+        "line": 6
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:genesis": {
+        "definition": "WorldState",
+        "line": 19
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:mock_provider": {
+        "definition": "TestMockProvider",
+        "line": 19
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:current_world": {
+        "definition": "WorldState",
+        "line": 19
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:iteration_count": {
+        "definition": "Int",
+        "line": 19
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:PipelineStep": {
+        "definition": "",
+        "line": 33
+      },
+      "tests__md__ir__r2-0-a-tests.spec:Node": {
+        "definition": "{id: Str, role: :sys | :user | :eval}",
+        "line": 3
+      },
+      "tests__md__ir__r2-0-a-tests.spec:Edge": {
+        "definition": "{src: Str, dst: Str, type: :causal | :eval}",
+        "line": 4
+      },
+      "tests__md__ir__r2-0-a-tests.spec:Graph": {
+        "definition": "{nodes: [Node], edges: [Edge]}",
+        "line": 5
+      },
+      "tests__md__ir__r2-0-a-tests.spec:Store": {
+        "definition": "Map<Ref, Payload>",
+        "line": 6
+      },
+      "tests__md__ir__r2-0-b-tests.spec:PayloadRef = { hash": {
+        "definition": "SHA256, size:U64, storage:Enum{:memory, :disk, :remote} }",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-b-tests.spec:Node = { id": {
+        "definition": "ID, type:Kw, payload_ref:PayloadRef, causal_depth:U64, meta:Map }",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-b-tests.spec:Edge = { from": {
+        "definition": "ID, to:ID, type:Enum{:causal, :eval} }",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-b-tests.spec:Graph = { nodes": {
+        "definition": "Map<ID, Node>, edges:[Edge] }",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-b-tests.spec:World = { id": {
+        "definition": "ID, graph:Ref<Graph>, mem:Ref<MemStore>, root:ID, head:ID, policy:Map, meta:Map, lifecycle:Enum{:created, :active, :inactive, :archived} }",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-b-tests.spec:Registry = { worlds": {
+        "definition": "[World], ancestry:Map<ID, ID>, active:ID|NIL, graph:Ref<Graph>, mem:Ref<MemStore> }",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-b-tests.spec:UTILS": {
+        "definition": "",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-b-tests.spec:%b-assert(cond": {
+        "definition": "Bool, desc:Str) -> Bool | Error(\"R2.0-B invariant failed: ~A\")",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-b-tests.spec:%b-fixture() -> (g": {
+        "definition": "Ref<Graph>, m:Ref<MemStore>, w:World, r:Registry)",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-b-tests.spec:INIT g.nodes = {\"root\"": {
+        "definition": "{id:\"root\", type::root, payload_ref:{hash:\"0\", size:0, storage::memory}, causal_depth:0, meta:{}}};",
+        "line": 27
+      },
+      "tests__md__ir__r2-0-c-tests.spec:PayloadRef = { hash": {
+        "definition": "SHA256, size:U64, storage:Enum{:memory, :disk, :remote} }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:Node = { id": {
+        "definition": "ID, type:Kw, payload_ref:PayloadRef, causal_depth:U64, meta:Map }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:Edge = { from": {
+        "definition": "ID, to:ID, type:Enum{:causal, :eval} }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:Graph = { nodes": {
+        "definition": "Map<ID, Node>, edges:[Edge] }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:World = { id": {
+        "definition": "ID, graph:Ref<Graph>, mem:Ref<MemStore>, root:ID, head:ID, policy:Map, meta:Map, lifecycle:Enum{:created, :active, :inactive, :archived} }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:Registry = { worlds": {
+        "definition": "[World], ancestry:Map<ID, ID>, active:ID|NIL, graph:Ref<Graph>, mem:Ref<MemStore> }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:WorldObs = { ver": {
+        "definition": "U16, world_id:ID, root_id:ID, head_id:ID, policy:Map, meta:Map, lifecycle:Enum{:created, :active, :inactive, :archived}, parent_id:ID|NIL }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:RegistryObs = { ver": {
+        "definition": "U16, world_ids:[ID], active_id:ID|NIL, archived_ids:[ID] }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:AncestryObs = { world_id": {
+        "definition": "ID, parent_id:ID|NIL, path:[ID] }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:DiffObs = { changed": {
+        "definition": "Bool, fields:[Str] }",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:UTILS": {
+        "definition": "",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:%c-assert(cond": {
+        "definition": "Bool, desc:Str) -> Bool | Error(\"R2.0-C invariant failed: ~A\")",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:%c-fixture() -> (g": {
+        "definition": "Ref<Graph>, m:Ref<MemStore>, w:World, r:Registry, child:World)",
+        "line": 34
+      },
+      "tests__md__ir__r2-0-c-tests.spec:INIT g.nodes = {\"root\"": {
+        "definition": "{id:\"root\", type::root, payload_ref:{hash:\"0\", size:0, storage::memory}, causal_depth:0, meta:{}}};",
+        "line": 34
+      },
+      "tests__md__ir__r2-2-e-tests.spec:Obs": {
+        "definition": "{ finish-reason: Sym | raw-text: Str | error-info: Any }",
+        "line": 4
+      },
+      "tests__md__ir__r2-2-e-tests.spec:Decision": {
+        "definition": "{ inference-decision-type: Sym }",
+        "line": 5
+      },
+      "tests__md__ir__r2-2-e-tests.spec:Policy": {
+        "definition": "List[Rule]",
+        "line": 6
+      },
+      "tests__md__ir__r2-2-e-tests.spec:Rule": {
+        "definition": "{ cond: Sym -> act: Sym, params: Any }",
+        "line": 7
+      }
+    },
+    "enums": {
+      "docs__ir__01-domain-model.spec:Source": {
+        "values": [
+          "user",
+          "assistant",
+          "tool",
+          "system"
+        ],
+        "line": 6
+      },
+      "docs__ir__01-domain-model.spec:Intent": {
+        "values": [
+          "append",
+          "reflect",
+          "tool",
+          "memory-read",
+          "memory-write",
+          "recover",
+          "summarize"
+        ],
+        "line": 7
+      },
+      "docs__ir__01-domain-model.spec:ReqKind": {
+        "values": [
+          "commit-request",
+          "reject-request",
+          "defer-request",
+          "retry-request",
+          "retry-penalty-request",
+          "abort-request"
+        ],
+        "line": 8
+      },
+      "docs__ir__01-domain-model.spec:CmdKind": {
+        "values": [
+          "proceed",
+          "discard",
+          "sleep",
+          "regenerate",
+          "regenerate-with-penalty",
+          "terminate"
+        ],
+        "line": 9
+      }
+    },
+    "ops": {
+      "docs__ir__00-constitution.spec:Commit": {
+        "params": "Canonical'",
+        "line": 9
+      },
+      "docs__ir__00-constitution.spec:Derive": {
+        "params": "Derived",
+        "line": 10
+      },
+      "docs__ir__99-open-questions.spec:Commit": {
+        "params": "id: EventID",
+        "line": 6
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:observe(s:State)": {
+        "params": "o:Observation | PRE:true, POST:s==s'",
+        "line": 54
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:diff(o1:Observation, o2:Observation)": {
+        "params": "d:DiffResult | PRE:true, POST:o1==o1', o2==o2'",
+        "line": 54
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:get_world_obs(id:ID)": {
+        "params": "WorldObs",
+        "line": 54
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:INV_READ_ONLY: observe(s)": {
+        "params": "o | s==s'",
+        "line": 54
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:INV_NO_SIDE_EFFECTS: observe(s)": {
+        "params": "o | !mutate(s)",
+        "line": 54
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:INV_IMMUTABLE_OBS: created(o)": {
+        "params": "!mutate(o)",
+        "line": 54
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:D1: observe(w)": {
+        "params": "o | w==w'",
+        "line": 54
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:D2: observe(r)": {
+        "params": "o | r==r'",
+        "line": 54
+      },
+      "docs__ir__Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.spec:D7: created(o)": {
+        "params": "!mutate(o)",
+        "line": 54
+      },
+      "docs__ir__Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.spec:Commit": {
+        "params": "CommitResult:",
+        "line": 23
+      },
+      "docs__ir__phase-f-charter.spec:normalize_input(raw: ExternalRep)": {
+        "params": "NormalizedRep",
+        "line": 8
+      },
+      "docs__ir__phase-f-charter.spec:normalize_output(raw: Output)": {
+        "params": "NormalizedRep",
+        "line": 8
+      },
+      "docs__ir__phase-f-charter.spec:boundary_inlet(v: InletVersion, n: NormalizedRep)": {
+        "params": "CandidateEvent",
+        "line": 8
+      },
+      "docs__ir__phase-f-charter.spec:map_decision(o: Observation)": {
+        "params": "RuntimeDecision",
+        "line": 8
+      },
+      "docs__ir__phase-f-charter.spec:commit(c: CandidateEvent)": {
+        "params": "CanonicalEvent",
+        "line": 8
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:store-payload(store:MemStore, content:Str)": {
+        "params": "PayloadRef:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:load-payload(store:MemStore, ref:PayloadRef)": {
+        "params": "Str:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:add-node!(graph:CausalGraph, node:CausalNode)": {
+        "params": "Void:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:add-edge!(graph:CausalGraph, edge:CausalEdge)": {
+        "params": "Void:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:causal-subgraph(graph:CausalGraph, target:Str)": {
+        "params": "List<CausalNode>:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:project-context(graph:CausalGraph, store:MemStore, target:Str, evals:Bool)": {
+        "params": "List<ContextNode>:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:return map(n": {
+        "params": "{id:n.id, type:n.type, content:load-payload(store, n.payload-ref), feedbacks:if(evals) get-evals(n) else []})",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:canonical-prompt(ctx:List<ContextNode>)": {
+        "params": "Str:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:build-prefill-state(graph:CausalGraph, store:MemStore, target:Str)": {
+        "params": "PrefillState:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:register-world(reg:Registry, world:World)": {
+        "params": "Void:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:set-active-world(reg:Registry, id:Str)": {
+        "params": "Void:",
+        "line": 59
+      },
+      "docs__spec__ir__Chron-R2.0-World-Graph-Runtime-Specification-v1.0.spec:archive-world(reg:Registry, id:Str)": {
+        "params": "Void:",
+        "line": 59
+      },
+      "experiments__ir__chron-llm-spec-v0.2.spec:build_basin_structure": {
+        "params": "bs: Basin[]",
+        "line": 24
+      },
+      "llama-agent__ir__causal-kernel.spec:append(k, kind, pay)": {
+        "params": "Event:",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:stage(k, kind, pay)": {
+        "params": "Event:",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:discard(k)": {
+        "params": "Void:",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:commit(k)": {
+        "params": "Void:",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:branch(k, new-wld)": {
+        "params": "Void:",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:classify(kind)": {
+        "params": "NodeCls:",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:if kind in [:user-msg, :asst-reply]": {
+        "params": "Dialogue",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:if kind in [:tool-start, :tool-timeout, :tool-abort, :tool-commit]": {
+        "params": "Tool",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:if kind in [:struct-fault, :tool-fault]": {
+        "params": "Fault",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:lift(k)": {
+        "params": "Graph:",
+        "line": 66
+      },
+      "llama-agent__ir__causal-kernel.spec:clean(g, wld)": {
+        "params": "[Event]:",
+        "line": 66
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:kernel-submit-user-input(k: Kernel, text: String)": {
+        "params": "KernelState",
+        "line": 54
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:kernel-submit-assistant-reply(k: Kernel, text: String)": {
+        "params": "KernelState",
+        "line": 54
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:kernel-create-world(k: Kernel)": {
+        "params": "Integer",
+        "line": 54
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:kernel-current-state(k: Kernel)": {
+        "params": "KernelState",
+        "line": 54
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:kernel-health(k: Kernel)": {
+        "params": "Symbol",
+        "line": 54
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:%kernel-commit-event(k: Kernel, kind: Symbol, payload: Map)": {
+        "params": "KernelState",
+        "line": 54
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:return map(n": {
+        "params": "{kind: n.kind, text: n.payload.text | \"\"})",
+        "line": 54
+      },
+      "llama-agent__ir__chron-llm-kernel.spec:kernel-build-context-view(k: Kernel)": {
+        "params": "ContextObject",
+        "line": 54
+      },
+      "llama-agent__ir__chron-llm-runtime.spec:init()": {
+        "params": "RuntimeEnv:",
+        "line": 36
+      },
+      "llama-agent__ir__chron-llm-runtime.spec:main_loop(env: RuntimeEnv)": {
+        "params": "Void:",
+        "line": 36
+      },
+      "llama-agent__ir__chron-llm.spec:init-chron-llm(path:String, size:Int)": {
+        "params": "Context",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:tokenize(model:ModelPtr, text:String)": {
+        "params": "List<Token>",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:prefill-prompt(ctx:Context, tokens:List<Token>)": {
+        "params": "Void",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:generate(ctx:Context, model:ModelPtr, temp:Float, top-p:Float, max:Int)": {
+        "params": "String",
+        "line": 41
+      },
+      "llama-agent__ir__chron-llm.spec:print-token-stream(model:ModelPtr, id:Token)": {
+        "params": "ByteVector",
+        "line": 41
+      },
+      "llama-agent__ir__delta3-agent.spec:my_llama_reset_kv()": {
+        "params": "Void:",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:get_kv_usage()": {
+        "params": "Float:",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:should_trigger_reset_p()": {
+        "params": "Bool:",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:format_agent_state_to_prompt(s: AgentState)": {
+        "params": "Str:",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:my_llama_tokenize(t: Str)": {
+        "params": "[Int]:",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:my_llama_decode(tokens: [Int])": {
+        "params": "Void:",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:update_agent_state_from_summary(summary: Str)": {
+        "params": "Void:",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:perform_stateful_reset()": {
+        "params": "Void:",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:agent_main_loop()": {
+        "params": "Void:",
+        "line": 75
+      },
+      "llama-agent__ir__delta3-agent.spec:INV_KV_MEMORY_SEP: KV Cache != AgentState; Reset(KV)": {
+        "params": "Restore(AgentState)",
+        "line": 75
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-model-load(path:str)": {
+        "params": "ptr-model",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-init(m:ptr-model, n_ctx:int)": {
+        "params": "ptr-ctx",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-model-get-vocab(m:ptr-model)": {
+        "params": "ptr-vocab",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-eval(ctx:ptr-ctx, buf:[llama-token], count:int, n_past:int)": {
+        "params": "int32",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-token-to-piece(m:ptr-model, tok:id, buf:str[], len:int)": {
+        "params": "int",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-tokenize(vocab:ptr-vocab, text:str, len:int, out:[llama-token], max_tok:int, add_special:bool, parse_special:bool)": {
+        "params": "int",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-llama-is-eog(ctx:ptr-ctx, tok:id)": {
+        "params": "bool",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-sampler-init(temp:f32, top_p:f32)": {
+        "params": "ptr-sampler",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:my-sampler-sample(samp:ptr-sampler, ctx:ptr-ctx)": {
+        "params": "llama-token",
+        "line": 45
+      },
+      "llama-agent__ir__ffi-bindings.spec:INV abi_1to1 : FFI calls map 1:1 to C Wrapper": {
+        "params": "llama.cpp.",
+        "line": 45
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:fetch_observation(p: TestMockProvider, a: Action)": {
+        "params": "InferenceObservation",
+        "line": 13
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:evaluate_observation(w: WorldState, o: InferenceObservation)": {
+        "params": "Decision",
+        "line": 13
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:derive_ops(d: Decision)": {
+        "params": "[Op]",
+        "line": 13
+      },
+      "tests__md__ir__phase0-big-bang-test.spec:scheduler_step(w: WorldState, ops: [Op], id: Str)": {
+        "params": "(WorldState, Action)",
+        "line": 13
+      },
+      "tests__md__ir__r2-0-b-tests.spec:make-world(id:ID, g:Ref<Graph>, m:Ref<MemStore>, root:ID, head:ID, policy:Map, meta:Map)": {
+        "params": "World",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:fork-world(parent:World, child_id:ID)": {
+        "params": "World",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:replace-world-metadata!(w:World, new_meta:Map)": {
+        "params": "World",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:kernel-commit-world!(w:World, node:Node)": {
+        "params": "World",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:register-world(r:Registry, w:World)": {
+        "params": "Registry",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:set-active-world(r:Registry, id:ID)": {
+        "params": "Registry",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:archive-world(r:Registry, id:ID)": {
+        "params": "Registry",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:replay-world(w:World)": {
+        "params": "{ id:ID, head_id:ID, policy:Map, meta:Map, hash:SHA256 }",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:POST: unique(make-world().id); register-world(r, dup_w)": {
+        "params": "Error",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:POST: archive-world(r, w.id) => r'.active != w.id AND set-active-world(r', w.id)": {
+        "params": "Error",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:INV_FORK_SHARE              : fork-world(p, c_id)": {
+        "params": "c.graph eq p.graph AND c.mem eq p.mem",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-b-tests.spec:INV_META_COW                : replace-world-metadata!(w, meta)": {
+        "params": "Copy-on-Write metadata mutation; graph/mem shared",
+        "line": 82
+      },
+      "tests__md__ir__r2-0-c-tests.spec:snapshot-world(w:World)": {
+        "params": "WorldObs",
+        "line": 64
+      },
+      "tests__md__ir__r2-0-c-tests.spec:snapshot-registry(r:Registry)": {
+        "params": "RegistryObs",
+        "line": 64
+      },
+      "tests__md__ir__r2-0-c-tests.spec:snapshot-ancestry(w:World)": {
+        "params": "AncestryObs",
+        "line": 64
+      },
+      "tests__md__ir__r2-0-c-tests.spec:snapshot-diff(w1:World, w2:World)": {
+        "params": "DiffObs",
+        "line": 64
+      }
+    },
+    "invariants": {}
+  },
+  "tags": [
+    "has_theorems",
+    "common_lisp_defstruct",
+    "has_producer_consumer",
+    "common_lisp_deftype",
+    "section:Regex",
+    "section:\u5065\u5168\u6027\u5b9a\u7406",
+    "has_ownership"
+  ]
+}
