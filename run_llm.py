@@ -18,6 +18,10 @@ LLAMA_MODEL = "../models/Qwen3.6-35B-A3B-MTP/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf"
 # 職場環境用 (Windows側のOllama API)
 OLLAMA_URL = "http://172.18.0.1:11434/api/generate"
 OLLAMA_MODEL = "hf.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q4_K_M"
+
+# 職場環境用 (PrismML Bonsai 2 CUDA)
+LLAMA_BIN_PRISM = "../llama.cpp-prism/build/bin/llama-cli"
+LLAMA_MODEL_PRISM = "../models/Ternary-Bonsai-2-27B-PTQ1_0.gguf"
 # --------------
 
 
@@ -64,6 +68,19 @@ def run_ollama(prompt_text):
     except urllib.error.URLError as e:
         return f"[Error] Ollama接続エラー: {e}"
 
+def run_prism(prompt_text):
+    cmd = [
+        LLAMA_BIN_PRISM,
+        "-m", LLAMA_MODEL_PRISM,
+        "-c", "32768",
+        "--temp", "1.0",
+        "--top-p", "0.95",
+        "--top-k", "20",
+        "--min-p", "0.05",
+        "-p", prompt_text,
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    return result.stdout
 
 def parse_thinking_and_result(output_text):
     """思考プロセスと結果を分離するパーサー（拡張版）"""
@@ -117,9 +134,9 @@ def main():
     parser = argparse.ArgumentParser(description="LLM Batch/Targeted Processor")
     parser.add_argument(
         "--mode",
-        choices=["llama", "ollama"],
+        choices=["llama", "ollama", "prism"],
         default="ollama",
-        help="実行環境の選択 (default: ollama)",
+        help="実行環境の選択"
     )
     parser.add_argument(
         "-t",
@@ -148,7 +165,13 @@ def main():
         print("実行対象のファイルがありません。処理を終了します。")
         return
 
-    active_model = LLAMA_MODEL if args.mode == "llama" else OLLAMA_MODEL
+    if args.mode == "llama":
+        active_model = LLAMA_MODEL
+    elif args.mode == "prism":
+        active_model = LLAMA_MODEL_PRISM
+    else:
+        active_model = OLLAMA_MODEL
+
 
     print(f"環境: {args.mode.upper()}")
     print(f"モデル: {active_model}")
@@ -176,8 +199,11 @@ Analyze the following specification component data. Generate a structured analys
 
         if args.mode == "llama":
             output = run_llama_cpp(prompt_text)
+        elif args.mode == "prism":
+            output = run_prism(prompt_text)
         else:
             output = run_ollama(prompt_text)
+
 
         thinking, result = parse_thinking_and_result(output)
 
