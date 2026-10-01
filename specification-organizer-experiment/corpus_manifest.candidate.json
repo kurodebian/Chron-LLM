@@ -1,0 +1,836 @@
+{
+  "manifest_version": "0.1",
+  "repository_root": "/home/junu/Chron-LLM",
+  "excluded_directories": [
+    ".git",
+    ".pytest_cache",
+    ".venv",
+    "archive",
+    "old"
+  ],
+  "canonical_spec_policy": {
+    "input_forbidden": true,
+    "expected_spec_count": 103
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "source_role": "SECONDARY_REFERENCE",
+      "observation_eligible": false,
+      "size_bytes": 5758,
+      "sha256": "de54f76c05160beaa13e549b22774df7230a91ca610b2ef8f6908eaaf886c024"
+    },
+    {
+      "path": "chron-llm-causal/CAUSAL_SPECIFICATION_MATRIX.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 8348,
+      "sha256": "a6019581362c201f32f172158730a4a0a35d46bd9e6b8679cb1f5be89d71dc93"
+    },
+    {
+      "path": "chron-llm-causal/CAUSAL_VERIFICATION_EVIDENCE.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 2411,
+      "sha256": "54f1abae6f81cd9e8aecd9765b1a9a72bc07873f0b4bcb21ec482ee502ca05a1"
+    },
+    {
+      "path": "chron-llm-causal/delta1_delta2_traceability.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 2058,
+      "sha256": "cb84f69cf4b2e51e44ad0682e6c2495d0d3d99a1965df04dc68a59345d62ae01"
+    },
+    {
+      "path": "chron-llm-causal/docs/specs/component-001.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 650,
+      "sha256": "f9509ad6b9798c35b494fe2542f826f8d0dd625827b557abd8aef68a6aa784d5"
+    },
+    {
+      "path": "chron-llm-causal/tests/fixtures/spec_component_001.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 649,
+      "sha256": "202f8805f813881325a4af6aabc2ce3be52107501e2eeda36a90dc05b4d4b304"
+    },
+    {
+      "path": "docs/00-constitution.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 3159,
+      "sha256": "8105e2b4fd18f21c34ed58dc3b4ed50824f58342d5169eba1d2e340069dfb557"
+    },
+    {
+      "path": "docs/01-domain-model.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 4944,
+      "sha256": "a7dd00e9e19da96be857d1876d874a725964d26f97b10ae96865990a49afe7c6"
+    },
+    {
+      "path": "docs/02-operational-semantics.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 5063,
+      "sha256": "91b4f86529b0cd78b106361e18201e0fcc33469a5b84d224b4e710bec8b88c8a"
+    },
+    {
+      "path": "docs/03-reference-runtime.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 593,
+      "sha256": "c02e3450ef10744841ff0e32012425c0805f96870487f9e0b341470b739cdc76"
+    },
+    {
+      "path": "docs/04-runtime-pipeline.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 3596,
+      "sha256": "81a1a8ecd15eca1af22dcbfddb97866b11387c92c9f6b2e33d3f608da2d16dd4"
+    },
+    {
+      "path": "docs/05-validation-pipeline.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 4572,
+      "sha256": "9bf60f628c59eff7edee95e212440ebe84c5b0002c27a42f06b2f9aa20655f55"
+    },
+    {
+      "path": "docs/06-kernel-state-machine.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 4813,
+      "sha256": "276338ef9624cc9a9cce870f261270f3d62f3de8fd10d30b2c1e14d6fd7f5c44"
+    },
+    {
+      "path": "docs/07-chron-mapping.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 1733,
+      "sha256": "f031bb972bd30f5cf4d1fb7ef83fdfafa003d1b8b1a80a28a3d78aacb403de4a"
+    },
+    {
+      "path": "docs/08-memory-model.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 1426,
+      "sha256": "6b982a8a7abb33c6e7c54848a91fce4ddc52f439084fd7192c0b911ddaaeddd9"
+    },
+    {
+      "path": "docs/09-runtime-scheduling.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 921,
+      "sha256": "eaa6f9eddcc252b866c7eefb38a0a1e9a86d4fbf2d619bb2c31991d7f77e5ba8"
+    },
+    {
+      "path": "docs/10-tool-execution.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 795,
+      "sha256": "306e129b99beedee2988793ff1ccaa387a05508829da0ba96920aa141c6b44ed"
+    },
+    {
+      "path": "docs/11-prompt-builder.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 933,
+      "sha256": "468c6a6779a6e62fcafde6f6e9461c7051826e64fb98a4d916b9d2db2ef13079"
+    },
+    {
+      "path": "docs/12-recovery.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 994,
+      "sha256": "faf3ccedd338cfaa1f2bfed3a7425fdb1fbcca1ff8511f93826358b10c144311"
+    },
+    {
+      "path": "docs/13-worldline-branching.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 819,
+      "sha256": "46f8deb21c9228bd6fbbae6661acf36c67a01ebc44d7f3cb4034cf75406cfa42"
+    },
+    {
+      "path": "docs/14-wal-engine.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 5502,
+      "sha256": "d7f80ce161fe7097024baa9f625136d518c56ed61a522ec9ff9e5e0f1c1a915a"
+    },
+    {
+      "path": "docs/99-open-questions.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 2068,
+      "sha256": "961d6d5e659b5695561bd2428a22eddf9914167d66736c387b9437ccdf16749f"
+    },
+    {
+      "path": "docs/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 12043,
+      "sha256": "fa75d5c8e8393bc5f5b92c4b0174493d3b15be8efa7db52f55c654c2616b4d95"
+    },
+    {
+      "path": "docs/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 9368,
+      "sha256": "c9f4f8e1228f337583ad156aac20e68302cbb81ac04dd01b028b23006b511234"
+    },
+    {
+      "path": "docs/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 11010,
+      "sha256": "b6e15a91653b8af573e754673bf846b6dd330aeadee0aea75b0e62c300243636"
+    },
+    {
+      "path": "docs/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 8611,
+      "sha256": "a9af0854850a3e3f087482e7617105d22c308de954da1403d1f2e9155cb5c401"
+    },
+    {
+      "path": "docs/PR_BODY.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 1677,
+      "sha256": "24b74176823c5e0edd3a0df6981b00f9d7b4faf33a61ab856549dac410ed3f42"
+    },
+    {
+      "path": "docs/architecture-v1.1.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 6362,
+      "sha256": "daaa3cca4d3933f235cca8b69310ab4b6193e4ae00e15b221732f1528918f18e"
+    },
+    {
+      "path": "docs/chron-llm-r1-interface-spec-v1.2.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 9283,
+      "sha256": "40f2eb0e42314299f1101a751c6176b7e7e5a49b7b632e1dc526f5ec91838841"
+    },
+    {
+      "path": "docs/integration/phaseA_integration_test_plan.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 3124,
+      "sha256": "be94ce7e81d17285fed6c6db6dc177b17799d198eb3a311b68485c4a71448f88"
+    },
+    {
+      "path": "docs/knowledge-system.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 4031,
+      "sha256": "33a350cfa4003075376a30c856c55cd8b187544047d1befa6fabe3d9c7869cc9"
+    },
+    {
+      "path": "docs/migration-v0.1-to-v0.2.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 2011,
+      "sha256": "4ea43683edecb7301be79c7d38899366e130ecc55ad256d5756058e261df0ae0"
+    },
+    {
+      "path": "docs/phase-a-charter.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 529,
+      "sha256": "0e3952297a92c59aaa45f5b39d335b0aad70aa5ea74b0a8aab2d3a189be80bee"
+    },
+    {
+      "path": "docs/phase-b-charter.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 625,
+      "sha256": "2513fc04bc22112532d6c15217ff3b369cf6e1ea56c253b7984376da1803b908"
+    },
+    {
+      "path": "docs/phase-c-charter.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 1817,
+      "sha256": "4dbae315d68c569b576a2dd311e841bc7736e4f3c6dc5e7bcc6e1bcbe38a2584"
+    },
+    {
+      "path": "docs/phase-d-charter.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 1130,
+      "sha256": "cb17c67145bd70f0349cb5e7b3e65c457ca0d04ad6bcccb0759daabc2cbac43d"
+    },
+    {
+      "path": "docs/phase-e-charter.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 3630,
+      "sha256": "b9ff0ea57f4cde56ea13297241cf0de4268b8a9890ab2cda066c5cdd936d5379"
+    },
+    {
+      "path": "docs/phase-f-charter.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 3970,
+      "sha256": "62b0df25eaff4dbc9d76105a89bf0d62415996647f1d108c30185d15bb22813f"
+    },
+    {
+      "path": "docs/pull_request_template.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 245,
+      "sha256": "b7a38bac525774f900c51d90aa43e146800ab12ed7041250228f22a7ca2788fa"
+    },
+    {
+      "path": "docs/r2-0-c-freeze-report.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 3704,
+      "sha256": "fae0122495fc0f8c70149af9a2c2c55e7908de5b362690130d559c2949f90f65"
+    },
+    {
+      "path": "docs/reference/knowledge-rationale.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 3502,
+      "sha256": "bac0ba4b10bf722e8bda54411174caa005734396841df01deaaa43b9756cdc5b"
+    },
+    {
+      "path": "docs/spec/Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 3624,
+      "sha256": "7c452ecb90948bc356545899de2c534ae6c10136641afd233810a9eaba970b07"
+    },
+    {
+      "path": "docs/spec/Chron-LLM_R2.1-Kernel_Freeze_Spec.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 10382,
+      "sha256": "2fbf5baf957220d3128daf2a565c7b7f7abc2fe61885d3426fb170ad62e981fa"
+    },
+    {
+      "path": "docs/spec/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 7447,
+      "sha256": "648a210b17703fefb6e80b8c19b8e59746d57f6433669e07a9d5ee86a6031ec2"
+    },
+    {
+      "path": "docs/spec/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.md",
+      "source_role": "SPEC_CHARTER_OR_HISTORY",
+      "observation_eligible": false,
+      "size_bytes": 7599,
+      "sha256": "c846cf42dc8484c4b0f2bd821514b2e5a7b033741ac92b6811e59b94f1b66b0d"
+    },
+    {
+      "path": "experiments/.aider.chat.history.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 991,
+      "sha256": "8691a372d3c7d47202b43ae4bbb657967bdecf4c352c77cf2d7e5b9381628698"
+    },
+    {
+      "path": "experiments/3cluster.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 7689,
+      "sha256": "b4e0a18a81338e9669efd3e82a4252d6c9f9536bc9c9a0b0f4c3b86a086f2a4e"
+    },
+    {
+      "path": "experiments/basin.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 7446,
+      "sha256": "aa279e9473650351feb927bcf9162c3249f4f00bb3a5261625f78c12cdf68f67"
+    },
+    {
+      "path": "experiments/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 3992,
+      "sha256": "7d2cb18c7e63101b1e58f61cd9100787ebbb5aece52f762adefee7e2bc44492b"
+    },
+    {
+      "path": "experiments/chron-llm-spec-v0.2.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 13703,
+      "sha256": "770fbf2bcdc738a0d4fbbb103ce3098ab3d6f50e9a6ec5d2cb90f14f5103e1f2"
+    },
+    {
+      "path": "experiments/cycle.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 7466,
+      "sha256": "4f934f7173fd10fafce08ae32a368b1cc904b99146ceb60ea8956abbf3018fff"
+    },
+    {
+      "path": "experiments/dynamics.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 8000,
+      "sha256": "a04d9cee473218570ba0658930ac25078b70b039111c1df2794276ba0b4b8b7d"
+    },
+    {
+      "path": "experiments/scc.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 8330,
+      "sha256": "b7f34b0eddc0acb3aba2ed84b13dd71e61269ac1b077f41aa91a29e390eefd0c"
+    },
+    {
+      "path": "graph-runtime/causal.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 8092,
+      "sha256": "4fc100dcb4f3160c6bdbaff2e728162ed5342bf5c6790f4824c564f63ecfa9c2"
+    },
+    {
+      "path": "graph-runtime/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 7408,
+      "sha256": "c0418f29bcfc133508f4e7b0bc6473d5f8db0b3c563608c447de94c3f6ee2e7a"
+    },
+    {
+      "path": "graph-runtime/graph.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 9188,
+      "sha256": "d15da1ac8dd3bf39e73e60e426dcefe22ec71ad69dec827db2379a32ec54abad"
+    },
+    {
+      "path": "graph-runtime/prefill.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 9775,
+      "sha256": "51620682e23516501f58e53fed56f88e85848082a28493b63bab285aa37bed3e"
+    },
+    {
+      "path": "graph-runtime/projection.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 10166,
+      "sha256": "a09b1aee136c908d1613044bdd12ec682cb77e3b6628e762ead8de0fcab5c445"
+    },
+    {
+      "path": "llama-agent/causal-kernel.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 7524,
+      "sha256": "c365d77639d2a4c772fdd7e5adba3107453aa78541939378394c4e19eced51aa"
+    },
+    {
+      "path": "llama-agent/chron-llm-graph.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 7758,
+      "sha256": "9ecc5c7f00dbed0a7617aba44f8b7f3f3484ac775dde253ca81acc7c5b7b5dec"
+    },
+    {
+      "path": "llama-agent/chron-llm-immune.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 7888,
+      "sha256": "7f2ee2c790d6e6dce7ee48ff3a2943cbdd3bd603af2b67f65f6bec719f21152a"
+    },
+    {
+      "path": "llama-agent/chron-llm-kernel.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 8865,
+      "sha256": "bc50e1841ad798f87a02229962f94536435f9c3a03111ca32f510e453f660e5f"
+    },
+    {
+      "path": "llama-agent/chron-llm-runtime.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 7761,
+      "sha256": "fbab557d8ebc70a23574d189a7d4bd8c95681e6e7da493436e984da17fb3763d"
+    },
+    {
+      "path": "llama-agent/chron-llm-world.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 8062,
+      "sha256": "def2160e27aa8cf9084778af5a139ad7021a9169c303782c6508d6d8797d748f"
+    },
+    {
+      "path": "llama-agent/chron-llm.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 9078,
+      "sha256": "929b98ac0488d3bd077c0a9a6552992945893706c7455d7c41e9cc2d7e5c7135"
+    },
+    {
+      "path": "llama-agent/delta3-agent.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 7680,
+      "sha256": "97801c6faa95e6344d3b082ccfb3c1a7940a0d5813399c87a709a833b9fea32c"
+    },
+    {
+      "path": "llama-agent/ffi-bindings-mock.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 7747,
+      "sha256": "c87d7d72277cbbbf4663331cd5357001728dcf0487b2753f2ab0132445ea7e4e"
+    },
+    {
+      "path": "llama-agent/ffi-bindings.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 8596,
+      "sha256": "2e7f314de7bbfa5b7846d4664584019de5347d11d83741e4829587a294963dcd"
+    },
+    {
+      "path": "llama-agent/generate.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 8484,
+      "sha256": "35b730425660aadd809f439088fb76bea53a3ab2cde9f8129400b6191f1600bd"
+    },
+    {
+      "path": "llama-agent/immune-system.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 7967,
+      "sha256": "53cb36b57746d457c1bb9b96554a481343f324b105625fd017c5f9928763749a"
+    },
+    {
+      "path": "llama-agent/llama-agent.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 8690,
+      "sha256": "22206cde0142a674549051eaece3e32331ed8ab5c7dbf5d72fb35d8b88dbfcde"
+    },
+    {
+      "path": "llama-agent/llama-agent2.md",
+      "source_role": "UNCLASSIFIED_INSPECTION",
+      "observation_eligible": false,
+      "size_bytes": 6335,
+      "sha256": "95e4635a229aac9465363306ad13b82569046aa640b6bffeaadb1419c95bb90e"
+    },
+    {
+      "path": "memory/store.md",
+      "source_role": "SECONDARY_REFERENCE",
+      "observation_eligible": false,
+      "size_bytes": 4767,
+      "sha256": "ad9ebc28a938ebc58fe3057c266b8c07a062f3a3300a50e2fbebe4c7c3f645a5"
+    },
+    {
+      "path": "observability/world-snapshot.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 6173,
+      "sha256": "76cd3474c2bf20fe86dc53150def46b86803599695caf1f8d69e4d5132713fed"
+    },
+    {
+      "path": "registry/registry.md",
+      "source_role": "SECONDARY_REFERENCE",
+      "observation_eligible": false,
+      "size_bytes": 7061,
+      "sha256": "f75b5f492ede83a65d6b0bada888d0a174db550fed52d922f18a4938e6692663"
+    },
+    {
+      "path": "results/out_component-001.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 7169,
+      "sha256": "73963ba8450dc8db5732b216d3ee0baee6d195e3cd6f525c3422e73aeeda070b"
+    },
+    {
+      "path": "results/out_component-002.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 7479,
+      "sha256": "5d715e63ad371f88d58a018e99a1369ddbcb1ce071207c5fcd3f04a7a0358aaa"
+    },
+    {
+      "path": "results/out_component-003.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 8434,
+      "sha256": "67988d9e229088c66a8ce435aa8896314891a5b90032f23f50fa424856cd696e"
+    },
+    {
+      "path": "results/out_component-004.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 6684,
+      "sha256": "e7e9061f932690e45c6fc32f2730a898034a6afb0d2d1a907c8f413ed6ceaa74"
+    },
+    {
+      "path": "results/out_component-005.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 7028,
+      "sha256": "3f0a789057cc20b275d6fd39e9a7fe5330dbbf73a5edf7eb69f00e4ab2042739"
+    },
+    {
+      "path": "results/out_component-007.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 6310,
+      "sha256": "3976abed3733a48c254cb1ce5bc2fc8248db137da0a15625e4177e08c422951b"
+    },
+    {
+      "path": "results/out_component-008.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 8413,
+      "sha256": "c279b3a782062c2276b4747d9259788651826fadf5a4139d03ab69d2ee6f0394"
+    },
+    {
+      "path": "results/out_component-009.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 6078,
+      "sha256": "c61ea3960407458070f9605159612df5a89f1b2dba31f52bff7355e4c74974c7"
+    },
+    {
+      "path": "results/out_component-010.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 5323,
+      "sha256": "8623f681d9c45d28c044292392f0388c3cb63c2b54a9b78ba854b82886b397d4"
+    },
+    {
+      "path": "results/out_component-011.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 7815,
+      "sha256": "06db6702060077cf1d96a407a303e1e949e9cd89ec1ee073facae2c654fd588e"
+    },
+    {
+      "path": "results/out_component-012.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 3768,
+      "sha256": "68a7d7d1f7e1ccd8718541ae04f94bfb69d3917d9cb74d15e8cb345b0d4b1f83"
+    },
+    {
+      "path": "results/out_component-013.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 5743,
+      "sha256": "f65718f3b5292856eebc18d60c08154e0b3d1bdcfafb65799c1976a11e04673d"
+    },
+    {
+      "path": "runtime/ir/callback.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 5574,
+      "sha256": "ae77bf0cab6a8c6e463ba82797d57a7baba8290d032674207467cc9fdbca3115"
+    },
+    {
+      "path": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 6703,
+      "sha256": "16e09047dfdf992edd3c5bfed7d2ec2d55a2113f81501eae58fe8d3725f4c610"
+    },
+    {
+      "path": "runtime/ir/divergence.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 6981,
+      "sha256": "85a6591b9c5e2e33aa7a52ca037f1117727c56db7a2638a73188fa8dc62d8cbd"
+    },
+    {
+      "path": "runtime/ir/ffi.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 7747,
+      "sha256": "e50dfc681a9d2473cafacb3dc6e49e948a9760aa4bdc81a6c6a2f5eb09d41595"
+    },
+    {
+      "path": "runtime/ir/ir.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 8527,
+      "sha256": "de2c4b73960197d4e640448a18bbd24ca50fdee6e05dc602890ae07d2c5a22c7"
+    },
+    {
+      "path": "runtime/ir/stream.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 9121,
+      "sha256": "c0689df0501c17b8d60affbdab73ebb2b0a71f9571b68b51a516bd8dda20ce92"
+    },
+    {
+      "path": "runtime/md/llama-engine.md",
+      "source_role": "SECONDARY_REFERENCE",
+      "observation_eligible": false,
+      "size_bytes": 2595,
+      "sha256": "1c23ba7ad17a3ea74fa12d7866a855615bf4cf50f798d1083c096b318aaf3423"
+    },
+    {
+      "path": "runtime/r0/api.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 3708,
+      "sha256": "908d0bc6723e01bb3aa40d0ad781179b5d9d54a027ddd6b758214505d03b2c5e"
+    },
+    {
+      "path": "runtime/r0/chat-loop.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 6864,
+      "sha256": "3bd927bc30cbc0a42b4461730c5eb182929815ad0b07f661eddbef188a35bc67"
+    },
+    {
+      "path": "runtime/r0/chron-llm-r0-session-execution-layer-spec-v1.0.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 5453,
+      "sha256": "b05b833b238285d02e21f9d1881b5e33bd131e1537c6c4ad251428ede1fcf5fd"
+    },
+    {
+      "path": "runtime/r0/history.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 6119,
+      "sha256": "edfd417c126d535b538338ffad233c7ca4c0db458ae6dd5e0ebaf4857e00c4bf"
+    },
+    {
+      "path": "runtime/r0/llama-run.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 5035,
+      "sha256": "606ca5bbb89d1bcd34bdc58253c8e4d88148e42faeb0491b06f216d5947981f6"
+    },
+    {
+      "path": "runtime/r0/prompt.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 4641,
+      "sha256": "7e460f96fb9bdd64a00900f54f270bde48f80c235d623767bc32f1ea16c2df91"
+    },
+    {
+      "path": "runtime/r0/trace.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 6170,
+      "sha256": "2bb9dacf594ab31740f66031dd78ce1ee9d743f8391d8c8f62a15e4885f7117b"
+    },
+    {
+      "path": "runtime/r1/chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 4343,
+      "sha256": "576d3fd6185032f91f6570bef385d2ef54bff7fcf71c8c5d3222c9b9b5b63655"
+    },
+    {
+      "path": "runtime/r1/core.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 8688,
+      "sha256": "623c95af6cfa69e88df57cccc2dd2b5e0be8e7d7b664ebf15decd91df98b50ed"
+    },
+    {
+      "path": "runtime/r1/package.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 7035,
+      "sha256": "51dbba961722513308e441cced069580bd0edd3227e30ae4657c176b949ac532"
+    },
+    {
+      "path": "specification-organizer-experiment/AGENTS.md",
+      "source_role": "SECONDARY_REFERENCE",
+      "observation_eligible": false,
+      "size_bytes": 4358,
+      "sha256": "99712c0ca9d725f62e46f740ffad8f814ba6b6db4e5b91604c670580d2d05417"
+    },
+    {
+      "path": "specification-organizer-experiment/CAUSAL_NODE_CLASSIFICATION_GUIDE_v0.md",
+      "source_role": "SECONDARY_REFERENCE",
+      "observation_eligible": false,
+      "size_bytes": 4128,
+      "sha256": "315efc7d8ffcac968ddf80ec4ecc3c11e16c3a15745857c187da9b983159e831"
+    },
+    {
+      "path": "specification-organizer-experiment/results/e2e-baseline-2026-09-17/AGENTS.md",
+      "source_role": "SECONDARY_REFERENCE",
+      "observation_eligible": false,
+      "size_bytes": 4358,
+      "sha256": "99712c0ca9d725f62e46f740ffad8f814ba6b6db4e5b91604c670580d2d05417"
+    },
+    {
+      "path": "specification-organizer-experiment/results/e2e-baseline-2026-09-17/RESULT.md",
+      "source_role": "SECONDARY_REFERENCE",
+      "observation_eligible": false,
+      "size_bytes": 6252,
+      "sha256": "3ca13eec153b86ab92577932a0fc70a2d1b2828371e50d1b5443e6c3c16ed0d1"
+    },
+    {
+      "path": "tests/md/phase0-big-bang-test.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 3302,
+      "sha256": "d90bdc6ae9e174951fb274354b098e839644602cf41d1237c2a760b0018e5c1a"
+    },
+    {
+      "path": "tests/md/r2-0-a-tests.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 3473,
+      "sha256": "73dfc72d455f2a6f996d5a6d2c1cfa015702dc232b9a2e611139f640532c5fbc"
+    },
+    {
+      "path": "tests/md/r2-0-b-tests.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 5567,
+      "sha256": "3e5d959f5fb5b87b51c82c455cf183a33cd02cc18d490bb529730ed274f40106"
+    },
+    {
+      "path": "tests/md/r2-0-c-tests.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 5486,
+      "sha256": "be7e11d6b964ee2c1a22cb27f3d5e1e13aa0e473ca7e04e0f69d67bd1a35f782"
+    },
+    {
+      "path": "tests/md/r2-1-b-tests.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 4660,
+      "sha256": "98a5f1b33a3b001aa33ef8f37103fe69790a09c3c4b8b0faa49f3ec216ba1a4d"
+    },
+    {
+      "path": "tests/md/r2-2-e-tests.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 3639,
+      "sha256": "240fb825756f133aabbb44b0424a30b247dcf1adbf28e92e2dcc04a2cb69de3a"
+    },
+    {
+      "path": "tests/md/r2-3-s-tests.md",
+      "source_role": "NON_SPEC_ARTIFACT",
+      "observation_eligible": false,
+      "size_bytes": 4422,
+      "sha256": "53668491bb66587d1f32216888727f33840680c35017623a4e6518c2fd0ca9c1"
+    },
+    {
+      "path": "tools/spec-index/README.md",
+      "source_role": "SECONDARY_REFERENCE",
+      "observation_eligible": false,
+      "size_bytes": 1166,
+      "sha256": "5537273697498a8a2a7dfbe864de7349ea3acf5012f7d57ac1aff6df657ec3ee"
+    },
+    {
+      "path": "world/world.md",
+      "source_role": "PRIMARY_SPEC_SOURCE",
+      "observation_eligible": true,
+      "size_bytes": 8783,
+      "sha256": "a6db858f186867be4dd99e760400024147bc0a2e3fcf0662d682f842e85c9307"
+    }
+  ]
+}
