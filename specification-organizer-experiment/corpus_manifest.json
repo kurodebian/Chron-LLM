@@ -1,0 +1,422 @@
+{
+  "manifest_version": "A-0d.1",
+  "status": "FROZEN",
+  "repository_root": "/home/junu/Chron-LLM",
+  "observation_corpus": {
+    "count": 49,
+    "canonical_spec_input_forbidden": true,
+    "canonical_spec_expected_count": 103
+  },
+  "freeze": {
+    "hash_algorithm": "sha256",
+    "input_set_digest": "0eb7cbc9d56991560cc3d5c5e7453e0b1f9cc803d84dc227dff1ff4e25df8983"
+  },
+  "files": [
+    {
+      "path": "docs/00-constitution.md",
+      "source_role": "FORMAL_CONSTITUTION",
+      "observation_eligible": true,
+      "size_bytes": 3159,
+      "line_count": 154,
+      "sha256": "8105e2b4fd18f21c34ed58dc3b4ed50824f58342d5169eba1d2e340069dfb557"
+    },
+    {
+      "path": "docs/01-domain-model.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 4944,
+      "line_count": 266,
+      "sha256": "a7dd00e9e19da96be857d1876d874a725964d26f97b10ae96865990a49afe7c6"
+    },
+    {
+      "path": "docs/02-operational-semantics.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 5063,
+      "line_count": 301,
+      "sha256": "91b4f86529b0cd78b106361e18201e0fcc33469a5b84d224b4e710bec8b88c8a"
+    },
+    {
+      "path": "docs/03-reference-runtime.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 593,
+      "line_count": 28,
+      "sha256": "c02e3450ef10744841ff0e32012425c0805f96870487f9e0b341470b739cdc76"
+    },
+    {
+      "path": "docs/04-runtime-pipeline.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 3596,
+      "line_count": 188,
+      "sha256": "81a1a8ecd15eca1af22dcbfddb97866b11387c92c9f6b2e33d3f608da2d16dd4"
+    },
+    {
+      "path": "docs/05-validation-pipeline.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 4572,
+      "line_count": 280,
+      "sha256": "9bf60f628c59eff7edee95e212440ebe84c5b0002c27a42f06b2f9aa20655f55"
+    },
+    {
+      "path": "docs/06-kernel-state-machine.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 4813,
+      "line_count": 376,
+      "sha256": "276338ef9624cc9a9cce870f261270f3d62f3de8fd10d30b2c1e14d6fd7f5c44"
+    },
+    {
+      "path": "docs/07-chron-mapping.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 1733,
+      "line_count": 50,
+      "sha256": "f031bb972bd30f5cf4d1fb7ef83fdfafa003d1b8b1a80a28a3d78aacb403de4a"
+    },
+    {
+      "path": "docs/08-memory-model.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 1426,
+      "line_count": 104,
+      "sha256": "6b982a8a7abb33c6e7c54848a91fce4ddc52f439084fd7192c0b911ddaaeddd9"
+    },
+    {
+      "path": "docs/09-runtime-scheduling.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 921,
+      "line_count": 75,
+      "sha256": "eaa6f9eddcc252b866c7eefb38a0a1e9a86d4fbf2d619bb2c31991d7f77e5ba8"
+    },
+    {
+      "path": "docs/10-tool-execution.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 795,
+      "line_count": 45,
+      "sha256": "306e129b99beedee2988793ff1ccaa387a05508829da0ba96920aa141c6b44ed"
+    },
+    {
+      "path": "docs/11-prompt-builder.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 933,
+      "line_count": 76,
+      "sha256": "468c6a6779a6e62fcafde6f6e9461c7051826e64fb98a4d916b9d2db2ef13079"
+    },
+    {
+      "path": "docs/12-recovery.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 994,
+      "line_count": 83,
+      "sha256": "faf3ccedd338cfaa1f2bfed3a7425fdb1fbcca1ff8511f93826358b10c144311"
+    },
+    {
+      "path": "docs/13-worldline-branching.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 819,
+      "line_count": 64,
+      "sha256": "46f8deb21c9228bd6fbbae6661acf36c67a01ebc44d7f3cb4034cf75406cfa42"
+    },
+    {
+      "path": "docs/14-wal-engine.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 5502,
+      "line_count": 82,
+      "sha256": "d7f80ce161fe7097024baa9f625136d518c56ed61a522ec9ff9e5e0f1c1a915a"
+    },
+    {
+      "path": "docs/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.md",
+      "source_role": "FORMAL_CONSTITUTION",
+      "observation_eligible": true,
+      "size_bytes": 12043,
+      "line_count": 899,
+      "sha256": "fa75d5c8e8393bc5f5b92c4b0174493d3b15be8efa7db52f55c654c2616b4d95"
+    },
+    {
+      "path": "docs/Chron-LLM_R2.0-B_World_Runtime_Constitution_Spec.md",
+      "source_role": "FORMAL_CONSTITUTION",
+      "observation_eligible": true,
+      "size_bytes": 9368,
+      "line_count": 473,
+      "sha256": "c9f4f8e1228f337583ad156aac20e68302cbb81ac04dd01b028b23006b511234"
+    },
+    {
+      "path": "docs/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.md",
+      "source_role": "FORMAL_CONSTITUTION",
+      "observation_eligible": true,
+      "size_bytes": 11010,
+      "line_count": 457,
+      "sha256": "b6e15a91653b8af573e754673bf846b6dd330aeadee0aea75b0e62c300243636"
+    },
+    {
+      "path": "docs/Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.md",
+      "source_role": "FORMAL_CONSTITUTION",
+      "observation_eligible": true,
+      "size_bytes": 8611,
+      "line_count": 565,
+      "sha256": "a9af0854850a3e3f087482e7617105d22c308de954da1403d1f2e9155cb5c401"
+    },
+    {
+      "path": "docs/chron-llm-r1-interface-spec-v1.2.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 9283,
+      "line_count": 690,
+      "sha256": "40f2eb0e42314299f1101a751c6176b7e7e5a49b7b632e1dc526f5ec91838841"
+    },
+    {
+      "path": "docs/spec/Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.md",
+      "source_role": "FORMAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 3624,
+      "line_count": 62,
+      "sha256": "7c452ecb90948bc356545899de2c534ae6c10136641afd233810a9eaba970b07"
+    },
+    {
+      "path": "docs/spec/Chron-LLM_R2.1-Kernel_Freeze_Spec.md",
+      "source_role": "FORMAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 10382,
+      "line_count": 156,
+      "sha256": "2fbf5baf957220d3128daf2a565c7b7f7abc2fe61885d3426fb170ad62e981fa"
+    },
+    {
+      "path": "docs/spec/Chron-R2.0-World-Graph-Runtime-Specification-v1.0.md",
+      "source_role": "FORMAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 7447,
+      "line_count": 675,
+      "sha256": "648a210b17703fefb6e80b8c19b8e59746d57f6433669e07a9d5ee86a6031ec2"
+    },
+    {
+      "path": "docs/spec/R2.0-B_C_World_Runtime_Observation_Contract_v1.0.md",
+      "source_role": "FORMAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 7599,
+      "line_count": 627,
+      "sha256": "c846cf42dc8484c4b0f2bd821514b2e5a7b033741ac92b6811e59b94f1b66b0d"
+    },
+    {
+      "path": "experiments/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.md",
+      "source_role": "EXPERIMENTAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 3992,
+      "line_count": 160,
+      "sha256": "7d2cb18c7e63101b1e58f61cd9100787ebbb5aece52f762adefee7e2bc44492b"
+    },
+    {
+      "path": "experiments/chron-llm-spec-v0.2.md",
+      "source_role": "EXPERIMENTAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 13703,
+      "line_count": 326,
+      "sha256": "770fbf2bcdc738a0d4fbbb103ce3098ab3d6f50e9a6ec5d2cb90f14f5103e1f2"
+    },
+    {
+      "path": "graph-runtime/causal.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 8092,
+      "line_count": 816,
+      "sha256": "4fc100dcb4f3160c6bdbaff2e728162ed5342bf5c6790f4824c564f63ecfa9c2"
+    },
+    {
+      "path": "graph-runtime/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.md",
+      "source_role": "FORMAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 7408,
+      "line_count": 492,
+      "sha256": "c0418f29bcfc133508f4e7b0bc6473d5f8db0b3c563608c447de94c3f6ee2e7a"
+    },
+    {
+      "path": "graph-runtime/graph.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 9188,
+      "line_count": 1124,
+      "sha256": "d15da1ac8dd3bf39e73e60e426dcefe22ec71ad69dec827db2379a32ec54abad"
+    },
+    {
+      "path": "graph-runtime/prefill.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 9775,
+      "line_count": 1100,
+      "sha256": "51620682e23516501f58e53fed56f88e85848082a28493b63bab285aa37bed3e"
+    },
+    {
+      "path": "graph-runtime/projection.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 10166,
+      "line_count": 1118,
+      "sha256": "a09b1aee136c908d1613044bdd12ec682cb77e3b6628e762ead8de0fcab5c445"
+    },
+    {
+      "path": "observability/world-snapshot.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 6173,
+      "line_count": 132,
+      "sha256": "76cd3474c2bf20fe86dc53150def46b86803599695caf1f8d69e4d5132713fed"
+    },
+    {
+      "path": "runtime/ir/callback.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 5574,
+      "line_count": 482,
+      "sha256": "ae77bf0cab6a8c6e463ba82797d57a7baba8290d032674207467cc9fdbca3115"
+    },
+    {
+      "path": "runtime/ir/chron-llm-r1-ir-observation-layer-spec-v1.0.md",
+      "source_role": "FORMAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 6703,
+      "line_count": 466,
+      "sha256": "16e09047dfdf992edd3c5bfed7d2ec2d55a2113f81501eae58fe8d3725f4c610"
+    },
+    {
+      "path": "runtime/ir/divergence.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 6981,
+      "line_count": 623,
+      "sha256": "85a6591b9c5e2e33aa7a52ca037f1117727c56db7a2638a73188fa8dc62d8cbd"
+    },
+    {
+      "path": "runtime/ir/ffi.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 7747,
+      "line_count": 527,
+      "sha256": "e50dfc681a9d2473cafacb3dc6e49e948a9760aa4bdc81a6c6a2f5eb09d41595"
+    },
+    {
+      "path": "runtime/ir/ir.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 8527,
+      "line_count": 721,
+      "sha256": "de2c4b73960197d4e640448a18bbd24ca50fdee6e05dc602890ae07d2c5a22c7"
+    },
+    {
+      "path": "runtime/ir/stream.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 9121,
+      "line_count": 838,
+      "sha256": "c0689df0501c17b8d60affbdab73ebb2b0a71f9571b68b51a516bd8dda20ce92"
+    },
+    {
+      "path": "runtime/r0/api.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 3708,
+      "line_count": 381,
+      "sha256": "908d0bc6723e01bb3aa40d0ad781179b5d9d54a027ddd6b758214505d03b2c5e"
+    },
+    {
+      "path": "runtime/r0/chat-loop.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 6864,
+      "line_count": 627,
+      "sha256": "3bd927bc30cbc0a42b4461730c5eb182929815ad0b07f661eddbef188a35bc67"
+    },
+    {
+      "path": "runtime/r0/chron-llm-r0-session-execution-layer-spec-v1.0.md",
+      "source_role": "FORMAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 5453,
+      "line_count": 407,
+      "sha256": "b05b833b238285d02e21f9d1881b5e33bd131e1537c6c4ad251428ede1fcf5fd"
+    },
+    {
+      "path": "runtime/r0/history.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 6119,
+      "line_count": 495,
+      "sha256": "edfd417c126d535b538338ffad233c7ca4c0db458ae6dd5e0ebaf4857e00c4bf"
+    },
+    {
+      "path": "runtime/r0/llama-run.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 5035,
+      "line_count": 416,
+      "sha256": "606ca5bbb89d1bcd34bdc58253c8e4d88148e42faeb0491b06f216d5947981f6"
+    },
+    {
+      "path": "runtime/r0/prompt.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 4641,
+      "line_count": 525,
+      "sha256": "7e460f96fb9bdd64a00900f54f270bde48f80c235d623767bc32f1ea16c2df91"
+    },
+    {
+      "path": "runtime/r0/trace.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 6170,
+      "line_count": 592,
+      "sha256": "2bb9dacf594ab31740f66031dd78ce1ee9d743f8391d8c8f62a15e4885f7117b"
+    },
+    {
+      "path": "runtime/r1/chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.md",
+      "source_role": "FORMAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 4343,
+      "line_count": 364,
+      "sha256": "576d3fd6185032f91f6570bef385d2ef54bff7fcf71c8c5d3222c9b9b5b63655"
+    },
+    {
+      "path": "runtime/r1/core.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 8688,
+      "line_count": 845,
+      "sha256": "623c95af6cfa69e88df57cccc2dd2b5e0be8e7d7b664ebf15decd91df98b50ed"
+    },
+    {
+      "path": "runtime/r1/package.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 7035,
+      "line_count": 511,
+      "sha256": "51dbba961722513308e441cced069580bd0edd3227e30ae4657c176b949ac532"
+    },
+    {
+      "path": "world/world.md",
+      "source_role": "ARCHITECTURAL_SPECIFICATION",
+      "observation_eligible": true,
+      "size_bytes": 8783,
+      "line_count": 816,
+      "sha256": "a6db858f186867be4dd99e760400024147bc0a2e3fcf0662d682f842e85c9307"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "chron-llm-causal/CAUSAL_SPECIFICATION_MATRIX.md",
+      "reason": "LEGACY_CAUSAL_ARTIFACT"
+    },
+    {
+      "path": "chron-llm-causal/docs/specs/component-001.md",
+      "reason": "LEGACY_CAUSAL_ARTIFACT"
+    },
+    {
+      "path": "chron-llm-causal/tests/fixtures/spec_component_001.md",
+      "reason": "LEGACY_CAUSAL_ARTIFACT"
+    }
+  ]
+}
