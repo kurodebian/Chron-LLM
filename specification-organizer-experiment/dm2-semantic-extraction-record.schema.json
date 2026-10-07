@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chron-llm.local/schema/dm2-semantic-extraction-record.schema.json",
+  "title": "DM-2-3 Semantic Extraction Record",
+  "description": "Semantic extraction record for one immutable A-1a canonical unit.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "unit_id",
+    "line_start",
+    "line_end",
+    "source_text",
+    "semantic_kind",
+    "semantic_evidence",
+    "semantic_attributes"
+  ],
+  "properties": {
+    "unit_id": {
+      "type": "string",
+      "pattern": "^u[0-9]{4}$"
+    },
+    "line_start": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "line_end": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_text": {
+      "type": "string"
+    },
+    "semantic_kind": {
+      "type": "string",
+      "enum": [
+        "Heading",
+        "Requirement",
+        "Constraint",
+        "Definition",
+        "Description",
+        "Procedure",
+        "State",
+        "Event",
+        "Exception",
+        "Unclassified"
+      ]
+    },
+    "semantic_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phrases",
+        "lines"
+      ],
+      "properties": {
+        "phrases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "semantic_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modality",
+        "structural_form",
+        "semantic_strength",
+        "semantic_scope"
+      ],
+      "properties": {
+        "modality": {
+          "type": "string",
+          "enum": [
+            "must",
+            "shall",
+            "should",
+            "may",
+            "cannot",
+            "prohibited",
+            "required",
+            "optional",
+            "none"
+          ]
+        },
+        "structural_form": {
+          "type": "string",
+          "enum": [
+            "heading",
+            "paragraph",
+            "bullet-list",
+            "numbered-list",
+            "procedure-block",
+            "other"
+          ]
+        },
+        "semantic_strength": {
+          "type": "string",
+          "enum": [
+            "strong",
+            "weak",
+            "descriptive",
+            "definitional",
+            "none"
+          ]
+        },
+        "semantic_scope": {
+          "type": "string",
+          "enum": [
+            "global",
+            "system-wide",
+            "component-specific",
+            "local",
+            "unspecified"
+          ]
+        }
+      }
+    }
+  }
+}

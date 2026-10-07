@@ -1,0 +1,2 @@
+root ::= object
+object ::= "{" "\"boundaries\"" "}"

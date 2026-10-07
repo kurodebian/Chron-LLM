@@ -1,0 +1,95 @@
+{
+  "contract_version": "A-1a-O.2",
+  "status": "FROZEN",
+
+  "input": {
+    "source_document_path": "string",
+    "source_text": "string",
+    "line_numbering": "1-based-inclusive",
+    "canonical_spec_input_forbidden": true,
+    "legacy_causal_artifact_forbidden": true
+  },
+
+  "llm_output": {
+    "structure": {
+      "boundaries": [
+        {
+          "line_start": "integer",
+          "line_end": "integer"
+        }
+      ]
+    },
+    "must": [
+      "line_start >= 1",
+      "line_end >= line_start",
+      "boundaries_in_document_order",
+      "no_overlapping_spans",
+      "no_duplicate_spans"
+    ],
+    "must_not": [
+      "emit_source_text",
+      "emit_semantic_kind",
+      "emit_node_type",
+      "emit_causal_role",
+      "emit_normative_role",
+      "emit_state_role",
+      "emit_transition_role",
+      "emit_event_role",
+      "emit_relation_kind",
+      "emit_edges_or_graph_structure"
+    ]
+  },
+
+  "raw_observation_validation": {
+    "must": [
+      "reject_out_of_range_spans",
+      "reject_zero_length_spans",
+      "reject_unsorted_boundaries",
+      "reject_overlapping_boundaries",
+      "reject_duplicate_boundaries"
+    ],
+    "on_invalid": {
+      "action": "reject_observation",
+      "produce": "diagnostic_record",
+      "must_not": ["repair_invalid_spans", "silently_drop_invalid_spans"]
+    }
+  },
+
+  "normalization": {
+    "performed_by": "A-1a-N deterministic normalizer",
+    "steps": [
+      "validate_llm_output_schema",
+      "regenerate_source_text_from_original_file",
+      "assign_unit_id_as_u0001..uNNNN"
+    ]
+  },
+
+  "validation": {
+    "performed_by": "A-1a-V deterministic validator",
+    "must": [
+      "unit_id_unique_within_document",
+      "line_start <= line_end",
+      "source_text_matches_original_file",
+      "unit_order_matches_document_order",
+      "no_whitespace-only_units",
+      "no_forbidden_semantic_fields_present"
+    ]
+  },
+
+  "provenance": {
+    "llm_inference": {
+      "nondeterministic_allowed": true,
+      "reproducibility_metadata_recommended": [
+        "model_sha256",
+        "runtime_revision",
+        "prompt_sha256",
+        "sampling_parameters",
+        "seed",
+        "input_sha256"
+      ]
+    },
+    "canonicalization": {
+      "role": "prevent_llm_nondeterminism_from_becoming_canonical_truth"
+    }
+  }
+}

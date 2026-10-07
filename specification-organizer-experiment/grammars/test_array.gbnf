@@ -1,0 +1,4 @@
+root ::= object
+object ::= "{" ws "\"boundaries\"" ws ":" ws array ws "}"
+array ::= "[" ws "]"
+ws ::= " "*

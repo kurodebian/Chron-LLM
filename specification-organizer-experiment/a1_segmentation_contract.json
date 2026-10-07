@@ -1,0 +1,79 @@
+{
+  "contract_version": "A-1.1",
+  "status": "FROZEN",
+
+  "input": {
+    "manifest": "corpus_manifest.json",
+    "document_count_expected": 49,
+    "canonical_spec_input_forbidden": true,
+    "legacy_causal_artifact_forbidden": true
+  },
+
+  "output": {
+    "directory": "semantic_units/",
+    "file_extension": ".units.json",
+    "structure": {
+      "document_path": "string",
+      "units": [
+        {
+          "unit_id": "string",
+          "line_start": "integer",
+          "line_end": "integer",
+          "source_text": "string"
+        }
+      ]
+    }
+  },
+
+  "segmentation_rules": {
+    "must": [
+      "preserve_exact_source_text",
+      "preserve_document_order",
+      "preserve_line_span",
+      "allow_one_to_many_units",
+      "allow_ambiguous_boundaries",
+      "allow_split_merge_variants_in_comparison_only"
+    ],
+    "must_not": [
+      "invent_text",
+      "modify_text",
+      "normalize_text",
+      "classify_semantic_meaning",
+      "assign_semantic_kind",
+      "assign_node_type",
+      "assign_causal_role",
+      "assign_normative_role",
+      "assign_state_role",
+      "assign_transition_role",
+      "assign_event_role",
+      "assign_relation_kind",
+      "read_canonical_spec_corpus",
+      "read_legacy_causal_artifacts",
+      "merge_units_based_on_semantic_guess",
+      "split_units_based_on_taxonomy",
+      "emit_whitespace_units"
+    ]
+  },
+
+  "provenance": {
+    "dm2_segmentation": {
+      "role": "HUMAN_PRELIMINARY_SEGMENTATION",
+      "usage": "baseline_comparison_only",
+      "must_not": "override_independent_segmentation"
+    }
+  },
+
+  "comparison": {
+    "enabled": true,
+    "categories": ["agreement", "split", "merge", "missing", "ambiguous"]
+  },
+
+  "validation": {
+    "must": [
+      "unit_id_unique_within_document",
+      "line_start <= line_end",
+      "source_text_matches_original_file",
+      "unit_order_matches_document_order"
+    ]
+  }
+}

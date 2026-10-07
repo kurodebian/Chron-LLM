@@ -1,0 +1,15 @@
+root ::= object
+
+object ::= "{" ws "\"boundaries\"" ws ":" ws array ws "}"
+
+array ::= "[" ws (boundary (ws "," ws boundary)*)? ws "]"
+
+boundary ::= "{" ws line_start_field ws "," ws line_end_field ws "}"
+
+line_start_field ::= "\"line_start\"" ws ":" ws integer
+line_end_field ::= "\"line_end\"" ws ":" ws integer
+
+integer ::= digit+
+digit ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+ws ::= [ \t\n]*

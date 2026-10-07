@@ -1,0 +1,3 @@
+root ::= object
+object ::= "{" ws "\"boundaries\"" ws "}"
+ws ::= " "*

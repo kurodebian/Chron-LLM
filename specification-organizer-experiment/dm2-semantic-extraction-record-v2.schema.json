@@ -1,0 +1,312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chron-llm.local/schema/dm2-semantic-extraction-record-v2.schema.json",
+  "title": "DM-2 Semantic Extraction Record v2",
+  "description": "Semantic extraction record for one immutable A-1a canonical unit, including explicit semantic resolution state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "unit_id",
+    "line_start",
+    "line_end",
+    "source_text",
+    "semantic_kind",
+    "semantic_evidence",
+    "semantic_attributes",
+    "resolution"
+  ],
+  "properties": {
+    "unit_id": {
+      "type": "string",
+      "pattern": "^u[0-9]{4}$"
+    },
+    "line_start": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "line_end": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_text": {
+      "type": "string"
+    },
+    "semantic_kind": {
+      "type": "string",
+      "enum": [
+        "Heading",
+        "Requirement",
+        "Constraint",
+        "Definition",
+        "Description",
+        "Procedure",
+        "State",
+        "Event",
+        "Exception",
+        "Unclassified"
+      ]
+    },
+    "semantic_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["phrases", "lines"],
+      "properties": {
+        "phrases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lines": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "semantic_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modality",
+        "structural_form",
+        "semantic_strength",
+        "semantic_scope"
+      ],
+      "properties": {
+        "modality": {
+          "type": "string",
+          "enum": [
+            "must",
+            "shall",
+            "should",
+            "may",
+            "cannot",
+            "prohibited",
+            "required",
+            "optional",
+            "none"
+          ]
+        },
+        "structural_form": {
+          "type": "string",
+          "enum": [
+            "heading",
+            "paragraph",
+            "bullet-list",
+            "numbered-list",
+            "procedure-block",
+            "other"
+          ]
+        },
+        "semantic_strength": {
+          "type": "string",
+          "enum": ["strong", "weak", "descriptive", "definitional", "none"]
+        },
+        "semantic_scope": {
+          "type": "string",
+          "enum": [
+            "global",
+            "system-wide",
+            "component-specific",
+            "local",
+            "unspecified"
+          ]
+        }
+      }
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["resolved", "unknown", "ambiguous"]
+        },
+        "reason": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "insufficient_evidence",
+            "multiple_plausible_interpretations",
+            "no_matching_category",
+            "context_required",
+            "unresolved"
+          ]
+        },
+        "candidate_kinds": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "Heading",
+              "Requirement",
+              "Constraint",
+              "Definition",
+              "Description",
+              "Procedure",
+              "State",
+              "Event",
+              "Exception"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "resolution": {
+            "properties": {
+              "status": {
+                "const": "resolved"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["resolution"]
+      },
+      "then": {
+        "properties": {
+          "semantic_kind": {
+            "not": {
+              "const": "Unclassified"
+            }
+          },
+          "resolution": {
+            "properties": {
+              "reason": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "resolution": {
+            "properties": {
+              "status": {
+                "const": "unknown"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["resolution"]
+      },
+      "then": {
+        "properties": {
+          "semantic_kind": {
+            "const": "Unclassified"
+          },
+          "resolution": {
+            "required": ["status", "reason"],
+            "properties": {
+              "reason": {
+                "enum": [
+                  "insufficient_evidence",
+                  "no_matching_category",
+                  "context_required",
+                  "unresolved"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "resolution": {
+            "properties": {
+              "status": {
+                "const": "ambiguous"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["resolution"]
+      },
+      "then": {
+        "properties": {
+          "semantic_kind": {
+            "const": "Unclassified"
+          },
+          "resolution": {
+            "required": ["status", "reason", "candidate_kinds"],
+            "properties": {
+              "reason": {
+                "const": "multiple_plausible_interpretations"
+              },
+              "candidate_kinds": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "resolution": {
+            "properties": {
+              "status": {
+                "const": "resolved"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["resolution"]
+      },
+      "then": {
+        "not": {
+          "properties": {
+            "resolution": {
+              "required": ["candidate_kinds"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "resolution": {
+            "properties": {
+              "status": {
+                "const": "unknown"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["resolution"]
+      },
+      "then": {
+        "not": {
+          "properties": {
+            "resolution": {
+              "required": ["candidate_kinds"]
+            }
+          }
+        }
+      }
+    }
+  ]
+}
