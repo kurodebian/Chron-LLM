@@ -62,7 +62,7 @@ def detect_boundaries_llm(document_path: str, lines: list[str]) -> dict:
         top_k=40,
         top_p=1.0,
         seed=0,
-        n_predict=2048,
+        n_predict=4096,
         single_turn=True,
 
         simple_io=True,

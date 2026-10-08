@@ -1,0 +1,323 @@
+{
+  "document_path": "docs/00-constitution.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 2,
+      "source_text": "# Agent Causality Constitution v1.0\n(Baseline Constitution)\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 6,
+      "line_end": 6,
+      "source_text": "# Purpose\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 8,
+      "line_end": 8,
+      "source_text": "This Constitution defines the minimum constitutional principles governing authoritative causal state evolution.\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 10,
+      "line_end": 10,
+      "source_text": "It specifies constitutional responsibilities rather than implementation.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 12,
+      "line_end": 12,
+      "source_text": "All implementation details remain outside the constitutional scope.\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 16,
+      "line_end": 16,
+      "source_text": "# Scope\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 18,
+      "line_end": 18,
+      "source_text": "This Constitution defines only:\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 20,
+      "line_end": 23,
+      "source_text": "* authoritative state\n* constitutional invariants\n* causal constraints\n\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 24,
+      "line_end": 26,
+      "source_text": "Representation, algorithms, processing order, validation,\nstorage, transport, synchronization, optimization,\nand implementation details are intentionally unspecified.\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 28,
+      "line_end": 28,
+      "source_text": "Any implementation conforming to these constitutional constraints is valid.\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 32,
+      "line_end": 32,
+      "source_text": "## 1. Fundamental Principles\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 34,
+      "line_end": 41,
+      "source_text": "* Canonical is the sole authoritative state.\n* Only Commit may mutate Canonical.\n* Evidence consists of committed Events.\n* Evidence is causally ordered.\n* Derived is reproducible, deterministic, and non-authoritative.\n* Derived SHALL NOT introduce authoritative information.\n* Working is ephemeral and non-authoritative.\n* External is non-authoritative.\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 45,
+      "line_end": 45,
+      "source_text": "## 2. Session\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 47,
+      "line_end": 47,
+      "source_text": "A Session consists of four constitutional state categories:\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 49,
+      "line_end": 52,
+      "source_text": "* Canonical\n* Working\n* Derived\n* External\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 54,
+      "line_end": 54,
+      "source_text": "### Canonical\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 56,
+      "line_end": 56,
+      "source_text": "Authoritative state.\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 58,
+      "line_end": 58,
+      "source_text": "### Working\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 60,
+      "line_end": 60,
+      "source_text": "Ephemeral, non-authoritative state.\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 62,
+      "line_end": 62,
+      "source_text": "### Derived\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 64,
+      "line_end": 64,
+      "source_text": "A non-authoritative representation derived from Canonical.\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 66,
+      "line_end": 66,
+      "source_text": "Derived does not possess authority.\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 68,
+      "line_end": 68,
+      "source_text": "### External\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 70,
+      "line_end": 70,
+      "source_text": "Non-authoritative state outside Canonical.\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 74,
+      "line_end": 74,
+      "source_text": "## 3. Event\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 76,
+      "line_end": 76,
+      "source_text": "An Event possesses:\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 78,
+      "line_end": 80,
+      "source_text": "* identity\n* payload\n* metadata\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 82,
+      "line_end": 82,
+      "source_text": "Evidence consists of committed Events.\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 84,
+      "line_end": 84,
+      "source_text": "Evidence is causally ordered.\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 88,
+      "line_end": 88,
+      "source_text": "## 4. Candidate\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 90,
+      "line_end": 90,
+      "source_text": "A Candidate is a non-authoritative proposal.\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 92,
+      "line_end": 92,
+      "source_text": "Its representation is implementation-defined.\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 96,
+      "line_end": 96,
+      "source_text": "## 5. Commit\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 98,
+      "line_end": 98,
+      "source_text": "Only Commit may mutate any authoritative component of Canonical.\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 100,
+      "line_end": 100,
+      "source_text": "Commit incorporates Evidence into Canonical.\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 102,
+      "line_end": 102,
+      "source_text": "Commit establishes the next authoritative Canonical state.\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 104,
+      "line_end": 104,
+      "source_text": "Commit preserves all constitutional invariants.\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 106,
+      "line_end": 106,
+      "source_text": "The behavior of Commit is implementation-defined except where constrained by this Constitution.\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 110,
+      "line_end": 110,
+      "source_text": "## 6. Derivation\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 112,
+      "line_end": 112,
+      "source_text": "Derived is obtained by applying Derive to Canonical.\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 114,
+      "line_end": 114,
+      "source_text": "Derive is:\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 116,
+      "line_end": 117,
+      "source_text": "* deterministic\n* side-effect-free\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 119,
+      "line_end": 119,
+      "source_text": "The derivation mechanism is implementation-defined.\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 123,
+      "line_end": 123,
+      "source_text": "## 7. Authoritative Causality\n"
+    },
+    {
+      "unit_id": "u0045",
+      "line_start": 125,
+      "line_end": 125,
+      "source_text": "Authoritative state evolves only through Commit.\n"
+    },
+    {
+      "unit_id": "u0046",
+      "line_start": 127,
+      "line_end": 127,
+      "source_text": "No operation other than Commit may directly mutate Canonical.\n"
+    },
+    {
+      "unit_id": "u0047",
+      "line_start": 129,
+      "line_end": 129,
+      "source_text": "The ordering of non-authoritative processing is implementation-defined.\n"
+    },
+    {
+      "unit_id": "u0048",
+      "line_start": 133,
+      "line_end": 133,
+      "source_text": "## 8. Constitutional Invariants\n"
+    },
+    {
+      "unit_id": "u0049",
+      "line_start": 135,
+      "line_end": 144,
+      "source_text": "* Canonical is authoritative.\n* Only Commit may mutate Canonical.\n* Evidence consists of committed Events.\n* Evidence is causally ordered.\n* Candidate is not Canonical.\n* Working is not Canonical.\n* Derived is not Canonical.\n* External is not Canonical.\n* Rejected proposals preserve Canonical.\n* Deferred proposals preserve Canonical.\n"
+    },
+    {
+      "unit_id": "u0050",
+      "line_start": 148,
+      "line_end": 148,
+      "source_text": "## 9. Evolution\n"
+    },
+    {
+      "unit_id": "u0051",
+      "line_start": 150,
+      "line_end": 150,
+      "source_text": "This Constitution intentionally specifies only the minimum constitutional constraints.\n"
+    },
+    {
+      "unit_id": "u0052",
+      "line_start": 152,
+      "line_end": 152,
+      "source_text": "Future amendments SHALL preserve constitutional consistency.\n"
+    },
+    {
+      "unit_id": "u0053",
+      "line_start": 154,
+      "line_end": 154,
+      "source_text": "No new constitutional principle SHALL be introduced unless existing principles cannot adequately express the required constitutional responsibility.\n"
+    }
+  ]
+}

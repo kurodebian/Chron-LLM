@@ -1,0 +1,425 @@
+{
+  "document_path": "docs/01-domain-model.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Agent Domain Model v1.0 (Baseline)\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 3,
+      "source_text": "# Purpose\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 5,
+      "line_end": 5,
+      "source_text": "This Domain Model defines the architectural concepts used by the Agent to instantiate the constitutional responsibilities defined by the Constitution.\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 7,
+      "line_end": 7,
+      "source_text": "It defines conceptual entities and relationships, not implementation details.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 9,
+      "line_end": 9,
+      "source_text": "# Scope\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 11,
+      "line_end": 11,
+      "source_text": "This document defines:\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 13,
+      "line_end": 16,
+      "source_text": "- conceptual entities\n- state categories\n- ownership of conceptual entities\n- producer / consumer relationships\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 18,
+      "line_end": 18,
+      "source_text": "This document does **not** define:\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 20,
+      "line_end": 25,
+      "source_text": "- representations\n- algorithms\n- execution order\n- storage\n- runtime implementations\n- operational semantics\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 27,
+      "line_end": 27,
+      "source_text": "# Event\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 29,
+      "line_end": 29,
+      "source_text": "An Event represents a causal fact.\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 31,
+      "line_end": 47,
+      "source_text": "```\nEvent {\n    id\n    source ∈ {\n        user,\n        assistant,\n        tool,\n        system\n    }\n    content\n    metadata {\n        timestamp\n        seq\n        causal-reference?\n    }\n}\n```\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 49,
+      "line_end": 49,
+      "source_text": "Source identifies the origin of an Event.\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 51,
+      "line_end": 51,
+      "source_text": "Source does not determine authority.\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 53,
+      "line_end": 53,
+      "source_text": "Committed Events constitute Evidence.\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 55,
+      "line_end": 55,
+      "source_text": "Evidence is causally ordered.\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 57,
+      "line_end": 57,
+      "source_text": "# Candidate\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 59,
+      "line_end": 59,
+      "source_text": "A Candidate represents a non-authoritative proposal.\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 61,
+      "line_end": 70,
+      "source_text": "```\nCandidate {\n    id\n    origin\n    intent\n    content\n    constraints\n    metadata\n}\n```\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 72,
+      "line_end": 72,
+      "source_text": "Intent describes the proposed operation.\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 74,
+      "line_end": 84,
+      "source_text": "```\nintent ∈ {\n    append,\n    reflect,\n    tool,\n    memory-read,\n    memory-write,\n    recover,\n    summarize\n}\n```\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 86,
+      "line_end": 86,
+      "source_text": "Candidate representation is implementation-defined.\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 88,
+      "line_end": 88,
+      "source_text": "An implementation may represent a Candidate using an intermediate form such as OperationIR.\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 90,
+      "line_end": 90,
+      "source_text": "# ValidationReport\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 92,
+      "line_end": 92,
+      "source_text": "ValidationReport represents the objective facts collected during validation.\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 94,
+      "line_end": 94,
+      "source_text": "Its detailed structure is defined by the Validation Pipeline specification.\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 96,
+      "line_end": 96,
+      "source_text": "# RuntimeRequest\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 98,
+      "line_end": 98,
+      "source_text": "RuntimeRequest represents a declarative request produced by PolicyRouter.\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 100,
+      "line_end": 105,
+      "source_text": "```\nRuntimeRequest {\n    kind\n    payload\n}\n```\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 107,
+      "line_end": 116,
+      "source_text": "```\nkind ∈ {\n    commit-request\n    reject-request\n    defer-request\n    retry-request\n    retry-penalty-request\n    abort-request\n}\n```\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 118,
+      "line_end": 118,
+      "source_text": "Its detailed structure and semantics are defined by the Validation Pipeline specification.\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 120,
+      "line_end": 120,
+      "source_text": "# RuntimeCommand\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 122,
+      "line_end": 122,
+      "source_text": "RuntimeCommand represents a declarative command emitted by the Kernel for execution by the Runtime.\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 124,
+      "line_end": 129,
+      "source_text": "```\nRuntimeCommand {\n    kind\n    payload\n}\n```\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 131,
+      "line_end": 140,
+      "source_text": "```\nkind ∈ {\n    proceed\n    discard\n    sleep\n    regenerate\n    regenerate-with-penalty\n    terminate\n}\n```\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 142,
+      "line_end": 142,
+      "source_text": "Its detailed structure and semantics are defined by the Kernel State Machine specification.\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 144,
+      "line_end": 144,
+      "source_text": "# FaultEvent\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 146,
+      "line_end": 146,
+      "source_text": "FaultEvent represents deterministic diagnostic information produced by the Kernel.\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 148,
+      "line_end": 154,
+      "source_text": "```\nFaultEvent {\n    type\n    reason\n    metadata\n}\n```\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 156,
+      "line_end": 156,
+      "source_text": "Its operational semantics are defined by the Kernel State Machine specification.\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 158,
+      "line_end": 158,
+      "source_text": "# Session\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 160,
+      "line_end": 160,
+      "source_text": "A Session consists of four constitutional state categories.\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 162,
+      "line_end": 169,
+      "source_text": "```\nSession {\n    Canonical\n    Working\n    Derived\n    External\n}\n```\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 171,
+      "line_end": 171,
+      "source_text": "Session is the top-level runtime container.\n"
+    },
+    {
+      "unit_id": "u0045",
+      "line_start": 173,
+      "line_end": 173,
+      "source_text": "# Canonical\n"
+    },
+    {
+      "unit_id": "u0046",
+      "line_start": 175,
+      "line_end": 175,
+      "source_text": "Canonical is the authoritative state.\n"
+    },
+    {
+      "unit_id": "u0047",
+      "line_start": 177,
+      "line_end": 183,
+      "source_text": "```\nCanonical {\n    Evidence\n    Configuration\n    MemoryReference\n}\n```\n"
+    },
+    {
+      "unit_id": "u0048",
+      "line_start": 185,
+      "line_end": 185,
+      "source_text": "Canonical is mutated only through Commit.\n"
+    },
+    {
+      "unit_id": "u0049",
+      "line_start": 187,
+      "line_end": 187,
+      "source_text": "# Working\n"
+    },
+    {
+      "unit_id": "u0050",
+      "line_start": 189,
+      "line_end": 189,
+      "source_text": "Working is ephemeral and non-authoritative state.\n"
+    },
+    {
+      "unit_id": "u0051",
+      "line_start": 191,
+      "line_end": 196,
+      "source_text": "```\nWorking {\n    Candidate\n    ProcessingState\n}\n```\n"
+    },
+    {
+      "unit_id": "u0052",
+      "line_start": 198,
+      "line_end": 198,
+      "source_text": "Working contains temporary information used during non-authoritative processing.\n"
+    },
+    {
+      "unit_id": "u0053",
+      "line_start": 200,
+      "line_end": 200,
+      "source_text": "# Derived\n"
+    },
+    {
+      "unit_id": "u0054",
+      "line_start": 202,
+      "line_end": 202,
+      "source_text": "Derived is a non-authoritative representation derived from Canonical.\n"
+    },
+    {
+      "unit_id": "u0055",
+      "line_start": 204,
+      "line_end": 209,
+      "source_text": "```\nDerived {\n    Projection\n    Analysis\n}\n```\n"
+    },
+    {
+      "unit_id": "u0056",
+      "line_start": 211,
+      "line_end": 211,
+      "source_text": "Derived is reproducible and does not introduce authoritative information.\n"
+    },
+    {
+      "unit_id": "u0057",
+      "line_start": 213,
+      "line_end": 213,
+      "source_text": "# External\n"
+    },
+    {
+      "unit_id": "u0058",
+      "line_start": 215,
+      "line_end": 215,
+      "source_text": "External represents non-authoritative state outside Canonical.\n"
+    },
+    {
+      "unit_id": "u0059",
+      "line_start": 217,
+      "line_end": 221,
+      "source_text": "```\nExternal {\n    ExternalReference\n}\n```\n"
+    },
+    {
+      "unit_id": "u0060",
+      "line_start": 223,
+      "line_end": 223,
+      "source_text": "# Context\n"
+    },
+    {
+      "unit_id": "u0061",
+      "line_start": 225,
+      "line_end": 225,
+      "source_text": "Context represents the information required to interpret current Agent operation.\n"
+    },
+    {
+      "unit_id": "u0062",
+      "line_start": 227,
+      "line_end": 231,
+      "source_text": "```\nContext {\n    CanonicalReference\n}\n```\n"
+    },
+    {
+      "unit_id": "u0063",
+      "line_start": 233,
+      "line_end": 233,
+      "source_text": "Its concrete representation is implementation-defined.\n"
+    },
+    {
+      "unit_id": "u0064",
+      "line_start": 235,
+      "line_end": 235,
+      "source_text": "# Ownership\n"
+    },
+    {
+      "unit_id": "u0065",
+      "line_start": 237,
+      "line_end": 247,
+      "source_text": "| Object | Owner | Reader |\n| --- | --- | --- |\n| Candidate | Runtime | Validation, Kernel |\n| ValidationReport | Validation | PolicyRouter |\n| RuntimeRequest | PolicyRouter | Kernel |\n| RuntimeCommand | Kernel | Runtime |\n| FaultEvent | Kernel | Observability |\n| Canonical | Kernel | Replay, Validation |\n| Working | Runtime | Runtime |\n| Derived | Replay | Runtime |\n| External | Runtime | Runtime |\n"
+    },
+    {
+      "unit_id": "u0066",
+      "line_start": 249,
+      "line_end": 249,
+      "source_text": "Ownership specifies the component responsible for creating or mutating the corresponding object.\n"
+    },
+    {
+      "unit_id": "u0067",
+      "line_start": 251,
+      "line_end": 251,
+      "source_text": "# Producer / Consumer\n"
+    },
+    {
+      "unit_id": "u0068",
+      "line_start": 253,
+      "line_end": 262,
+      "source_text": "| Object           | Produced by  | Consumed by        |\n| ---------------- | ------------ | ------------------ |\n| Event            | Commit       | Replay, History    |\n| Candidate        | Backend      | Validation         |\n| ValidationReport | Validation   | PolicyRouter       |\n| RuntimeRequest   | PolicyRouter | Kernel             |\n| RuntimeCommand   | Kernel       | Runtime            |\n| FaultEvent       | Kernel       | Observability      |\n| Derived          | Replay       | Prompt Builder     |\n| Canonical        | Commit       | Replay, Validation |\n"
+    },
+    {
+      "unit_id": "u0069",
+      "line_start": 264,
+      "line_end": 264,
+      "source_text": "Producer / Consumer relationships describe the architectural flow of conceptual objects.\n"
+    },
+    {
+      "unit_id": "u0070",
+      "line_start": 266,
+      "line_end": 266,
+      "source_text": "Operational semantics are defined by the corresponding specifications.\n"
+    }
+  ]
+}
