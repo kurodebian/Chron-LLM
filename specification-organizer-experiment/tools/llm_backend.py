@@ -34,6 +34,7 @@ class LLMConfig:
     # Prism Bonsai CLI execution controls.
     simple_io: bool = False
     display_prompt: bool = True
+    machine_output: bool = False
     show_timings: bool = True
     reasoning: str | None = None
 
@@ -82,6 +83,9 @@ def build_command(
 
     if not config.display_prompt:
         command.append("--no-display-prompt")
+
+    if config.machine_output:
+        command.append("--machine-output")
 
     if not config.show_timings:
         command.append("--no-show-timings")
@@ -196,6 +200,7 @@ def call_llm(
             "single_turn": config.single_turn,
             "simple_io": config.simple_io,
             "display_prompt": config.display_prompt,
+            "machine_output": config.machine_output,
             "show_timings": config.show_timings,
             "reasoning": config.reasoning,
         },

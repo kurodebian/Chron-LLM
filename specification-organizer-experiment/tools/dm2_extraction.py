@@ -21,15 +21,263 @@ MUST NOT modify unit_id.
 MUST NOT modify line_start.
 MUST NOT modify line_end.
 MUST NOT modify source_text.
+MUST NOT perform causal extraction.
+MUST NOT generate causal relations.
+MUST NOT generate graph structure.
 
-Do not perform causal extraction.
-Do not generate causal relations.
-Do not generate graph structure.
-
+You MUST return exactly ONE JSON object.
 Return JSON only.
+Do not output Markdown.
+Do not output code fences.
+Do not output explanations.
+Do not output any text before or after the JSON object.
 
-Canonical unit:
+## Required output structure
+
+The JSON object MUST contain exactly these top-level fields:
+
+- unit_id
+- line_start
+- line_end
+- source_text
+- semantic_kind
+- semantic_evidence
+- semantic_attributes
+- resolution
+
+No other top-level fields are permitted.
+
+## Canonical identity fields
+
+Copy these fields from the canonical unit EXACTLY:
+
+- unit_id
+- line_start
+- line_end
+- source_text
+
+Never infer, rewrite, normalize, truncate, or otherwise modify them.
+
+## semantic_kind
+
+semantic_kind MUST be exactly one of:
+
+- Heading
+- Requirement
+- Constraint
+- Definition
+- Description
+- Procedure
+- State
+- Event
+- Exception
+- Unclassified
+
+Do not invent categories.
+Do not use lowercase or aliases.
+
+## semantic_evidence
+
+semantic_evidence MUST have exactly these fields:
+
+{{
+  "phrases": ["..."],
+  "lines": [1]
+}}
+
+- phrases: exact phrases from source_text that support the semantic classification.
+- lines: source line numbers supporting the classification.
+- Do not invent evidence that is not present in the canonical unit.
+
+## semantic_attributes
+
+semantic_attributes MUST have exactly these fields:
+
+{{
+  "modality": "...",
+  "structural_form": "...",
+  "semantic_strength": "...",
+  "semantic_scope": "..."
+}}
+
+modality MUST be one of:
+
+- must
+- shall
+- should
+- may
+- cannot
+- prohibited
+- required
+- optional
+- none
+
+structural_form MUST be one of:
+
+- heading
+- paragraph
+- bullet-list
+- numbered-list
+- procedure-block
+- other
+
+semantic_strength MUST be one of:
+
+- strong
+- weak
+- descriptive
+- definitional
+- none
+
+semantic_scope MUST be one of:
+
+- global
+- system-wide
+- component-specific
+- local
+- unspecified
+
+## resolution
+
+resolution MUST have:
+
+{{
+  "status": "...",
+  "reason": null
+}}
+
+status MUST be exactly one of:
+
+- resolved
+- unknown
+- ambiguous
+
+### If status is "resolved"
+
+- semantic_kind MUST NOT be "Unclassified".
+- reason MUST be null.
+- candidate_kinds MUST NOT be present.
+
+Example:
+
+{{
+  "status": "resolved",
+  "reason": null
+}}
+
+### If status is "unknown"
+
+- semantic_kind MUST be "Unclassified".
+- reason MUST be one of:
+  - insufficient_evidence
+  - no_matching_category
+  - context_required
+  - unresolved
+- candidate_kinds MUST NOT be present.
+
+Example:
+
+{{
+  "status": "unknown",
+  "reason": "insufficient_evidence"
+}}
+
+### If status is "ambiguous"
+
+- semantic_kind MUST be "Unclassified".
+- reason MUST be exactly:
+  "multiple_plausible_interpretations"
+- candidate_kinds MUST be present.
+- candidate_kinds MUST contain at least two distinct valid semantic kinds.
+- candidate_kinds MUST NOT contain "Unclassified".
+
+Example:
+
+{{
+  "status": "ambiguous",
+  "reason": "multiple_plausible_interpretations",
+  "candidate_kinds": [
+    "Requirement",
+    "Constraint"
+  ]
+}}
+
+## Forbidden legacy output format
+
+Do NOT use the old semantic extraction format.
+
+NEVER emit these fields:
+
+- semantic_type
+- subject
+- predicate
+- object
+- polarity
+
+These fields are NOT part of DM-2 V2.
+
+## Forbidden causal/graph fields
+
+NEVER emit:
+
+- claims
+- entities
+- actions
+- conditions
+- causes
+- effects
+- dependencies
+- triggers
+- mutations
+- transitions
+- causal_relations
+- causal_confidence
+- edges
+- graph
+
+## Example
+
+For the canonical unit:
+
+{{
+  "unit_id": "u0001",
+  "line_start": 13,
+  "line_end": 15,
+  "source_text": "The system SHALL preserve canonical evidence."
+}}
+
+a valid resolved output is:
+
+{{
+  "unit_id": "u0001",
+  "line_start": 13,
+  "line_end": 15,
+  "source_text": "The system SHALL preserve canonical evidence.",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {{
+    "phrases": ["SHALL preserve canonical evidence"],
+    "lines": [13]
+  }},
+  "semantic_attributes": {{
+    "modality": "shall",
+    "structural_form": "paragraph",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  }},
+  "resolution": {{
+    "status": "resolved",
+    "reason": null
+  }}
+}}
+
+Do not copy this example blindly.
+Classify the supplied canonical unit according to its actual content.
+
+## Canonical unit
+
 {json.dumps(canonical_unit, ensure_ascii=False, indent=2)}
+
+Return exactly one DM-2 V2 JSON object and nothing else.
 """.strip()
 
 
@@ -90,6 +338,7 @@ def extract_dm2_record_llm(
         seed=0,
         n_predict=2048,
         single_turn=True,
+        machine_output=True,
         simple_io=True,
         display_prompt=False,
         show_timings=False,
