@@ -1,0 +1,149 @@
+{
+  "document_path": "docs/09-runtime-scheduling.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM Runtime Scheduling Specification\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 4,
+      "source_text": "**Status:** Normative\n**Version:** R1\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 6,
+      "line_end": 6,
+      "source_text": "# Purpose\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 8,
+      "line_end": 8,
+      "source_text": "Define deterministic runtime scheduling.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 10,
+      "line_end": 10,
+      "source_text": "# Queues\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 12,
+      "line_end": 12,
+      "source_text": "## IngressQueue\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 14,
+      "line_end": 14,
+      "source_text": "Receives external Events.\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 16,
+      "line_end": 16,
+      "source_text": "## ReadyQueue\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 18,
+      "line_end": 23,
+      "source_text": "Execution queue.\n\nOrdering:\n- Canonical causal order (Lamport Clock)\n- FIFO within identical causal order\n\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 24,
+      "line_end": 24,
+      "source_text": "## IsolatedQueue\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 26,
+      "line_end": 28,
+      "source_text": "Contains fault-isolated executions.\n\nNormal dialogue execution MUST NOT depend on this queue.\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 30,
+      "line_end": 30,
+      "source_text": "# Retry Policy\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 32,
+      "line_end": 32,
+      "source_text": "## retry\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 34,
+      "line_end": 37,
+      "source_text": "Maximum retries\n```\n3\n```\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 39,
+      "line_end": 39,
+      "source_text": "## retry-with-penalty\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 41,
+      "line_end": 52,
+      "source_text": "Maximum retries\n```\n2\n```\n\nPenalty\n\n```\ntemperature += 0.2\n\ntop-p -= 0.1\n```\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 54,
+      "line_end": 57,
+      "source_text": "Penalty applies only to Working state.\n\nCanonical remains unchanged.\n\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 58,
+      "line_end": 58,
+      "source_text": "## abort\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 60,
+      "line_end": 66,
+      "source_text": "```\nKernel emits FaultEvent\n\n↓\n\nTerminate runtime branch\n```\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 68,
+      "line_end": 68,
+      "source_text": "# Invariants\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 70,
+      "line_end": 70,
+      "source_text": "Scheduling is deterministic.\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 72,
+      "line_end": 72,
+      "source_text": "Ordering depends only on Canonical causal state.\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 74,
+      "line_end": 74,
+      "source_text": "Retry processing SHALL NOT mutate Canonical.\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 76,
+      "line_end": 76,
+      "source_text": "Fault isolation SHALL NOT affect normal dialogue replay."
+    }
+  ]
+}

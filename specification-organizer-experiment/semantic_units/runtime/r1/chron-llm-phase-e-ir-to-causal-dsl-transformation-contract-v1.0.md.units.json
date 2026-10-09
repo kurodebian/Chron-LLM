@@ -1,0 +1,137 @@
+{
+  "document_path": "runtime/r1/chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 2,
+      "source_text": "# Chron-LLM Phase E Specification\n## IR to Causal DSL Transformation Contract v1.0\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 4,
+      "line_end": 11,
+      "source_text": "Status: Design Frozen Baseline\nLayer: Phase E Translation Layer\nScope:\nIR Stream → Causal DSL → Candidate\nRelation:\nUpstream: R1 IR Observation Layer\nDownstream: R1 Causal Kernel\nPhase-E の役割定義\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 13,
+      "line_end": 17,
+      "source_text": "Phase-E の責務は：\n\n非権威的な推論観測（IR）を、Kernel が評価可能な因果操作表現（DSL）へ正規化すること\n\nである。\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 19,
+      "line_end": 29,
+      "source_text": "重要なのは：\n\nPhase-E は判断しない\n\n行わない：\n\ncommit判断\nrollback判断\nretry判断\n世界線選択\n\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 30,
+      "line_end": 35,
+      "source_text": "行う：\n\n構造化\n正規化\n因果操作への変換\nArchitecture Position\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 37,
+      "line_end": 65,
+      "source_text": "正式な流れ：\n\nllama.cpp\n    |\n    v\nPhysical Event\n    |\n    v\nIR Stream\n    |\n    v\nPhase E\nIR → Causal DSL\n    |\n    v\nCandidate\n    |\n    v\nValidation\n    |\n    v\nPolicy Router\n    |\n    v\nKernel Transition\n    |\n    v\nCanonical\nDSL Design Principle\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 67,
+      "line_end": 78,
+      "source_text": "DSL は Lisp S-expression を採用する。\n\n理由：\n\nChron-LLM 自体が Common Lisp Kernel であり、\n\nparser不要\nmacro拡張可能\ndebug容易\nimmutable dataとして扱える\n\nため。\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 80,
+      "line_end": 97,
+      "source_text": "Causal DSL Core Syntax v1.0\n1. EMIT\n\n生成イベント。\n\n(emit\n :token 1532\n :position 42\n :confidence 0.83)\n\n意味：\n\nLLMがtokenを生成した\n\nただし：\n\n正史ではない\nCandidate生成用データ\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 98,
+      "line_end": 116,
+      "source_text": "2. OBSERVE\n\n観測結果。\n\n(observe\n :type :stagnation\n :score 0.91)\n\n例：\n\n(observe\n :type :divergence\n :score 0.42)\n\n用途：\n\nPhase G → Phase E → Kernel\n\nの情報伝達。\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 118,
+      "line_end": 132,
+      "source_text": "3. PROPOSE\n\nCandidate化。\n\n(propose\n :intent :append\n :payload \"生成文章\")\n\nこれは：\n\nDSL\n ↓\nCandidate\n\nへの境界。\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 134,
+      "line_end": 148,
+      "source_text": "4. BRANCH\n\n世界線候補生成。\n\n(branch\n :causal-id \"world-02\"\n :parent \"world-01\")\n\n意味：\n\n新しい可能世界を作る。\n\n注意：\n\nbranchしただけではCanonical変更なし。\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 150,
+      "line_end": 176,
+      "source_text": "5. COMMIT\n\nこれはDSL内では予約命令。\n\n(commit\n :intent :append)\n\nただし：\n\nPhase Eでは発行禁止。\n\n理由：\n\ncommit権限はKernelのみ。\n\n正式ルール：\n\nDSL COMMIT\n    |\n    v\nCandidate metadata\n    |\n    v\nPolicy Router\n    |\n    v\nKernel Commit\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 177,
+      "line_end": 189,
+      "source_text": "DSL Data Model\n(defstruct causal-op\n  type\n  payload\n  metadata)\n\n例：\n\n(make-causal-op\n :type :emit\n :payload token\n :metadata\n '(:pos 12))\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 190,
+      "line_end": 204,
+      "source_text": "IR → DSL Mapping\nIR\n(ir\n :pos 10\n :phase 1\n :token 534\n :score 0.7)\n\n↓\n\nDSL\n(emit\n :token 534\n :position 10\n :confidence 0.7)\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 205,
+      "line_end": 232,
+      "source_text": "Translation Contract\ntranslate-ir-stream(ir-stream)\n\n保証：\n\nDeterministic\n\n同一IR:\n\nIR A\n\nは必ず：\n\nDSL A\n\nになる。\n\nLoss Controlled\n\nPhase E は情報を勝手に破棄しない。\n\n保持：\n\ntoken\nposition\nphase\nscore\ncausal metadata\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 233,
+      "line_end": 237,
+      "source_text": "Non-authoritative\n\nDSL生成では：\n\nCanonical変更禁止。\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 239,
+      "line_end": 263,
+      "source_text": "Candidate Integration\n\n変換後：\n\nCausal DSL\n\n      |\n      v\n\nCandidate\n\n      |\n      v\n\nValidationReport\n\n      |\n      v\n\nPolicyRouter\n\n      |\n      v\n\nCommit\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 264,
+      "line_end": 278,
+      "source_text": "Translation Boundary\n\nFrozen:\n\nDSL opcode\noperand形式\nIR→DSL deterministic mapping\nCandidate変換契約\n\nFlexible:\n\ndetector種類\nsemantic extractor\nscoring model\noptimization\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 279,
+      "line_end": 309,
+      "source_text": "最重要設計制約\n\nPhase-E は「意味理解器」ではない。\n\nつまり：\n\n誤った設計:\n\nIR\n |\nAI解析\n |\n意味判断\n |\nDSL\n\nではない。\n\n正しい設計:\n\nIR\n |\n構造抽出\n |\n正規化\n |\nDSL\n |\nKernel判断\n\nである。\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 311,
+      "line_end": 311,
+      "source_text": "意味判断は Kernel Policy または将来の Semantic Layer の責務。\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 313,
+      "line_end": 350,
+      "source_text": "Chron-LLM 最終レイヤ構造\n                 LLM\n\n                  |\n                  v\n\n        Physical Event Stream\n\n                  |\n                  v\n\n          R1 Observation\n\n                  |\n                  v\n\n             Phase E\n       IR → Causal DSL\n\n                  |\n                  v\n\n          R1 Runtime Core\n\n                  |\n                  v\n\n          Causal Kernel\n\n                  |\n                  v\n\n             Canonical\n\n                  |\n                  v\n\n             Worldline\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 351,
+      "line_end": 365,
+      "source_text": "最終評価\n\nPhase-E の設計方針は以下で凍結するのが適切。\n\nDSL = S式\nPhase-E = 翻訳のみ\ncommit権限なし\nCandidate生成まで担当\nKernelが因果判断を担当\n\nこの境界を守れば、Chron-LLM は「LLMの内部状態を操作するシステム」ではなく、\n\n観測 → 正規化 → 因果評価 → 権威状態更新\n\nという決定的ランタイムとして成立する。"
+    }
+  ]
+}

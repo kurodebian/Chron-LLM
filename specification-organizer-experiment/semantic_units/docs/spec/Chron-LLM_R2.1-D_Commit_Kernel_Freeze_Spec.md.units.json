@@ -1,0 +1,77 @@
+{
+  "document_path": "docs/spec/Chron-LLM_R2.1-D_Commit_Kernel_Freeze_Spec.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM R2.1-D Commit Kernel Specification (FREEZE)\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 6,
+      "source_text": "- **Version:** R2.1.0-FREEZE\n- **Target Component:** Phase-D Commit Kernel (`chron.kernel.wal` / `chron.kernel.state-machine`)\n- **Status:** APPROVED & FROZEN\n- **Upstream Spec:** `Chron-LLM_R2.0-D_Commit_Kernel_Constitution_Spec.md`\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 10,
+      "line_end": 10,
+      "source_text": "## 1. フリーズ宣言 (Freeze Declaration)\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 12,
+      "line_end": 13,
+      "source_text": "本仕様書は、Chron-LLM R2.1 における Commit Kernel の物理バイナリレイアウト、クラッシュリカバリプロトコル、およびトランザクション整合性ルールを不可変（Frozen）として定義する。\n本仕様に反する変更はメジャーバージョンアップ（R3.0）を除き認められない。\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 17,
+      "line_end": 17,
+      "source_text": "## 2. 不変条件 (Core Invariants)\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 19,
+      "line_end": 26,
+      "source_text": "1. **Strict 48-Byte Header Alignment**: WAL ヘッダーは 48 バイト固定とし、すべての 64bit フィールドは 8 バイト境界に配置する。CPUの非整列アクセスを一切発生させない。\n2. **Fail-Stop Verification**: レコードの破損、切り欠き（Torn Write）、CRC不一致を検出した時点で直ちにスキャンを中断し、それ以降のデータをTruncateする。\n3. **3-Way Recovery Protocol**:\n   - `PREPARED` のみ $\\rightarrow$ `ABORT` レコード追記によるロールバック\n   - `COMMITTED` 存在 $\\rightarrow$ State Machine へのロールフォワード適用\n   - `ABORTED` 存在 $\\rightarrow$ 無効としてスキップ\n4. **Non-Signaling Fact Return**: 正常系・異常系ともに Lisp `error` コンディションの送出を禁止し、多値ファクト `(values result status-tag)` で結果を返却する。\n5. **Safe Reader Boundaries**: ペイロード（S式）デコード時は `*read-eval*` を `nil` に固定し、任意のコード実行攻撃を物理遮断する。\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 30,
+      "line_end": 30,
+      "source_text": "## 3. 物理フォーマット仕様 (Physical Binary Spec)\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 32,
+      "line_end": 44,
+      "source_text": "+-----------------------------------------------------------------------+\n| Header (48 Bytes)                                                     |\n| [0..3] Magic ('CHWA')  [4..5] Version (0x0201)  [6] Type  [7] Flags   |\n| [8..15] TxID           [16..23] Clock                                 |\n| [24..31] Target Hash High  [32..39] Target Hash Low                   |\n| [40..43] Payload Len   [44..47] Reserved                              |\n+-----------------------------------------------------------------------+\n| Payload (L Bytes)                                                     |\n+-----------------------------------------------------------------------+\n| CRC32C (4 Bytes)                                                      |\n+-----------------------------------------------------------------------+\n| Padding (0..7 Bytes to ensure total record size is 8-byte aligned)    |\n+-----------------------------------------------------------------------+\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 49,
+      "line_end": 49,
+      "source_text": "## 4. Kernel State Machine & ロック境界\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 51,
+      "line_end": 55,
+      "source_text": "1. **排他制御**: `sb-thread:mutex` によるカーネル一括排他ロック。2PC（Prepare/Commit/Abort）処理中は状態遷移のアトミック性を保証する。\n2. **2PC 状態遷移**:\n   - `IDLE` $\\rightarrow$ `PREPARED` (`write-prepare-record` & `fdatasync`)\n   - `PREPARED` $\\rightarrow$ `COMMITTED` (`write-commit-record` & `fdatasync` & State Machine Apply)\n   - `PREPARED` $\\rightarrow$ `ABORTED` (`write-abort-record` & `fdatasync`)\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 59,
+      "line_end": 59,
+      "source_text": "## 5. 構成ファイル一覧\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 61,
+      "line_end": 63,
+      "source_text": "- `runtime/phase-d/wal.lisp`: WAL物理エンコード/デコード/リカバリエンジン\n- `runtime/phase-d/state-machine.lisp`: 2PC メモリ状態管理およびスレッド同期\n- `chron-r2-0-d.asd`: Phase-D パッケージ構成定義"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "document_path": "docs/12-recovery.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM Recovery Specification\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 4,
+      "source_text": "**Status:** Normative\n**Version:** R1\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 6,
+      "line_end": 6,
+      "source_text": "# Purpose\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 8,
+      "line_end": 8,
+      "source_text": "Define deterministic recovery from abnormal runtime interruption.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 10,
+      "line_end": 10,
+      "source_text": "# Recovery Boundary\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 12,
+      "line_end": 12,
+      "source_text": "Recovery reconstructs non-authoritative runtime state.\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 14,
+      "line_end": 14,
+      "source_text": "Recovery SHALL NOT mutate Canonical.\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 16,
+      "line_end": 16,
+      "source_text": "Only Commit may mutate Canonical.\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 18,
+      "line_end": 18,
+      "source_text": "# Input\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 20,
+      "line_end": 23,
+      "source_text": "```\nCanonical\nMemoryRef\n```\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 25,
+      "line_end": 25,
+      "source_text": "# Output\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 27,
+      "line_end": 29,
+      "source_text": "```\nRecovered Context\n```\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 31,
+      "line_end": 31,
+      "source_text": "# Recovery Procedure\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 33,
+      "line_end": 55,
+      "source_text": "```\nCanonical\n\n↓\n\nReplay\n\n↓\n\nDerived Reconstruction\n\n↓\n\nMemoryRef Reconstruction\n\n↓\n\nWorking Reconstruction\n\n↓\n\nResume Runtime\n```\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 57,
+      "line_end": 57,
+      "source_text": "# Allowed Operations\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 59,
+      "line_end": 66,
+      "source_text": "Recovery MAY:\n\n- destroy runtime cache\n- destroy KV cache\n- reconstruct Prefill\n- reconstruct Derived\n- reconstruct Working\n- resume execution\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 68,
+      "line_end": 68,
+      "source_text": "# Forbidden Operations\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 70,
+      "line_end": 75,
+      "source_text": "Recovery SHALL NOT:\n\n- mutate Canonical\n- create authoritative Events\n- bypass Commit\n\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 76,
+      "line_end": 76,
+      "source_text": "# Invariants\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 78,
+      "line_end": 78,
+      "source_text": "Recovery is deterministic.\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 80,
+      "line_end": 80,
+      "source_text": "Recovery is replay compatible.\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 82,
+      "line_end": 82,
+      "source_text": "Previous Canonical states remain recoverable.\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 84,
+      "line_end": 84,
+      "source_text": "Recovery does not introduce authoritative information."
+    }
+  ]
+}

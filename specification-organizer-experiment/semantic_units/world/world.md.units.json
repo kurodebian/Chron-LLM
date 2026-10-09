@@ -1,0 +1,725 @@
+{
+  "document_path": "world/world.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM R2.0-B 仕様書\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 3,
+      "source_text": "## World Runtime Layer Specification\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 7,
+      "line_end": 7,
+      "source_text": "# 1. 概要\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 9,
+      "line_end": 9,
+      "source_text": "## 目的\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 11,
+      "line_end": 32,
+      "source_text": "本モジュールは **World Runtime Layer** を定義する。\n\nWorld は Chron-LLM において\n\n> **Canonical Graph に対する独立した実行ビュー(View)**\n\nであり、\n\nTruth（Graph・Memory）を変更せず、\n\n各世界線ごとに\n\n* Head\n* Projection Policy\n* Metadata\n* Lifecycle\n\nのみを保持する。\n\nGraphそのものは唯一であり、\nWorldはその上に存在する軽量なビューである。\n\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 35,
+      "line_end": 35,
+      "source_text": "# 2. 設計責務\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 37,
+      "line_end": 37,
+      "source_text": "## Responsibility\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 39,
+      "line_end": 49,
+      "source_text": "World Runtime は以下のみ担当する。\n\n* World生成\n* World Fork\n* Head管理\n* Metadata管理\n* Projection Policy保持\n* Lifecycle管理\n* Replay生成\n* Kernel Commit境界\n\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 52,
+      "line_end": 52,
+      "source_text": "## Non Responsibility\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 54,
+      "line_end": 64,
+      "source_text": "本モジュールは以下を担当しない。\n\n* Graph生成\n* Payload保存\n* Projectionアルゴリズム\n* Prompt生成\n* Memory管理\n* Registry管理\n* Scheduler\n* LLM推論\n\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 67,
+      "line_end": 67,
+      "source_text": "# 3. 基本設計思想\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 69,
+      "line_end": 84,
+      "source_text": "ソースコメントより重要な設計思想が明示されている。\n\n> Mutable values below are private cells.\n\nつまり\n\n**Worldは外部から直接変更できない。**\n\n変更可能なのは\n\n* Kernel Commit\n* Metadata更新\n* Lifecycle更新\n\nのみである。\n\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 87,
+      "line_end": 102,
+      "source_text": "さらに\n\n```text\nGraph and memory references are deliberately shared,\nnever copied.\n```\n\nGraph\n\nMemory\n\nは\n\n**絶対にコピーされない。**\n\n---\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 104,
+      "line_end": 108,
+      "source_text": "# 4. World構造\n\n```lisp\n(defstruct world ...)\n```\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 110,
+      "line_end": 110,
+      "source_text": "## 内部構造\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 112,
+      "line_end": 122,
+      "source_text": "| フィールド             | 意味                |\n| ----------------- | ----------------- |\n| id                | World識別子          |\n| graph-ref         | Canonical Graph参照 |\n| memory-ref        | Memory Store参照    |\n| root-node         | Root Node         |\n| head-cell         | 現在Head            |\n| projection-policy | Projection設定      |\n| metadata          | 任意メタ情報            |\n| lifecycle         | 状態                |\n\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 125,
+      "line_end": 125,
+      "source_text": "## 内部実装\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 127,
+      "line_end": 127,
+      "source_text": "### head-cell\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 129,
+      "line_end": 150,
+      "source_text": "```lisp\n(list head-node)\n```\n\nとして保持される。\n\nつまり\n\n```text\n(head)\n```\n\nという1要素リストである。\n\nこれは\n\n```lisp\n(setf (car cell) ...)\n```\n\nだけで更新できるようにするため。\n\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 153,
+      "line_end": 153,
+      "source_text": "### metadata\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 155,
+      "line_end": 164,
+      "source_text": "同様に\n\n```lisp\n(list metadata)\n```\n\nとして保持。\n\nCopy-on-write更新専用。\n\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 167,
+      "line_end": 167,
+      "source_text": "### lifecycle\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 169,
+      "line_end": 174,
+      "source_text": "同様。\n\n```lisp\n(list :created)\n```\n\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 177,
+      "line_end": 177,
+      "source_text": "# 5. 公開アクセサ\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 179,
+      "line_end": 179,
+      "source_text": "## world-id\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 181,
+      "line_end": 182,
+      "source_text": "ID取得。\n\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 185,
+      "line_end": 185,
+      "source_text": "## world-graph-ref\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 187,
+      "line_end": 192,
+      "source_text": "共有Graph取得。\n\n参照そのもの。\n\nコピーしない。\n\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 195,
+      "line_end": 195,
+      "source_text": "## world-memory-ref\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 197,
+      "line_end": 200,
+      "source_text": "共有Memory取得。\n\nコピーしない。\n\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 203,
+      "line_end": 203,
+      "source_text": "## world-root-node\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 205,
+      "line_end": 206,
+      "source_text": "Root取得。\n\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 209,
+      "line_end": 209,
+      "source_text": "## world-head-node\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 211,
+      "line_end": 216,
+      "source_text": "```lisp\n(car head-cell)\n```\n\nを返す。\n\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 219,
+      "line_end": 219,
+      "source_text": "## world-projection-policy\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 221,
+      "line_end": 230,
+      "source_text": "```lisp\n(copy-tree ...)\n```\n\nで返す。\n\nつまり\n\n**外部変更禁止**\n\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 233,
+      "line_end": 233,
+      "source_text": "## world-metadata\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 235,
+      "line_end": 242,
+      "source_text": "こちらも\n\n```lisp\ncopy-tree\n```\n\nで返す。\n\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 245,
+      "line_end": 245,
+      "source_text": "## world-lifecycle\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 247,
+      "line_end": 248,
+      "source_text": "現在状態取得。\n\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 251,
+      "line_end": 251,
+      "source_text": "# 6. Graph整合性検証\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 253,
+      "line_end": 258,
+      "source_text": "内部関数\n\n```lisp\n%require-graph-node\n```\n\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 261,
+      "line_end": 261,
+      "source_text": "## 役割\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 263,
+      "line_end": 272,
+      "source_text": "Graph内にNodeが存在するか確認する。\n\n存在しなければ\n\n```text\nRoot node must exist...\n```\n\n等の例外を送出。\n\n"
+    },
+    {
+      "unit_id": "u0045",
+      "line_start": 275,
+      "line_end": 275,
+      "source_text": "# 7. World生成\n"
+    },
+    {
+      "unit_id": "u0046",
+      "line_start": 277,
+      "line_end": 277,
+      "source_text": "## make-world\n"
+    },
+    {
+      "unit_id": "u0047",
+      "line_start": 279,
+      "line_end": 279,
+      "source_text": "---\n"
+    },
+    {
+      "unit_id": "u0048",
+      "line_start": 281,
+      "line_end": 281,
+      "source_text": "### 入力\n"
+    },
+    {
+      "unit_id": "u0049",
+      "line_start": 283,
+      "line_end": 290,
+      "source_text": "* id\n* graph\n* memory\n* root-node\n* head-node\n* projection-policy\n* metadata(optional)\n\n"
+    },
+    {
+      "unit_id": "u0050",
+      "line_start": 293,
+      "line_end": 293,
+      "source_text": "### 実行手順\n"
+    },
+    {
+      "unit_id": "u0051",
+      "line_start": 295,
+      "line_end": 303,
+      "source_text": "① ID検証\n\n空文字は禁止。\n\n```\nA world requires\na non-empty stable id.\n```\n\n"
+    },
+    {
+      "unit_id": "u0052",
+      "line_start": 306,
+      "line_end": 311,
+      "source_text": "② Root存在確認\n\n```\n%require-graph-node\n```\n\n"
+    },
+    {
+      "unit_id": "u0053",
+      "line_start": 314,
+      "line_end": 314,
+      "source_text": "③ Head存在確認\n"
+    },
+    {
+      "unit_id": "u0054",
+      "line_start": 318,
+      "line_end": 327,
+      "source_text": "④ World生成\n\n内部では\n\n```\n%make-world\n```\n\nを使用。\n\n"
+    },
+    {
+      "unit_id": "u0055",
+      "line_start": 330,
+      "line_end": 330,
+      "source_text": "### コピー規則\n"
+    },
+    {
+      "unit_id": "u0056",
+      "line_start": 332,
+      "line_end": 339,
+      "source_text": "| 項目        | コピー |\n| --------- | --- |\n| Graph     | ×   |\n| Memory    | ×   |\n| Policy    | ○   |\n| Metadata  | ○   |\n| Lifecycle | ○   |\n\n"
+    },
+    {
+      "unit_id": "u0057",
+      "line_start": 342,
+      "line_end": 342,
+      "source_text": "# 8. World Fork\n"
+    },
+    {
+      "unit_id": "u0058",
+      "line_start": 344,
+      "line_end": 347,
+      "source_text": "```\nfork-world\n```\n\n"
+    },
+    {
+      "unit_id": "u0059",
+      "line_start": 350,
+      "line_end": 350,
+      "source_text": "## 目的\n"
+    },
+    {
+      "unit_id": "u0060",
+      "line_start": 352,
+      "line_end": 353,
+      "source_text": "親Worldから子World生成。\n\n"
+    },
+    {
+      "unit_id": "u0061",
+      "line_start": 356,
+      "line_end": 362,
+      "source_text": "コピーされるもの\n\n```\nProjection Policy\nMetadata\n```\n\n"
+    },
+    {
+      "unit_id": "u0062",
+      "line_start": 365,
+      "line_end": 373,
+      "source_text": "共有されるもの\n\n```\nGraph\nMemory\nRoot\nHead\n```\n\n"
+    },
+    {
+      "unit_id": "u0063",
+      "line_start": 376,
+      "line_end": 381,
+      "source_text": "親子関係は\n\n**Registry側が保持**\n\nとコメントされている。\n\n"
+    },
+    {
+      "unit_id": "u0064",
+      "line_start": 384,
+      "line_end": 384,
+      "source_text": "# 9. Metadata更新\n"
+    },
+    {
+      "unit_id": "u0065",
+      "line_start": 386,
+      "line_end": 401,
+      "source_text": "```\nreplace-world-metadata!\n```\n\n---\n\nCopy-on-write。\n\n```\n(copy-tree metadata)\n```\n\nを保存。\n\nGraphには一切影響しない。\n\n"
+    },
+    {
+      "unit_id": "u0066",
+      "line_start": 404,
+      "line_end": 404,
+      "source_text": "# 10. Lifecycle更新\n"
+    },
+    {
+      "unit_id": "u0067",
+      "line_start": 406,
+      "line_end": 417,
+      "source_text": "内部関数\n\n```\n%set-world-lifecycle!\n```\n\n---\n\n状態を書き換えるだけ。\n\n外部公開されない。\n\n"
+    },
+    {
+      "unit_id": "u0068",
+      "line_start": 420,
+      "line_end": 420,
+      "source_text": "# 11. Kernel Commit\n"
+    },
+    {
+      "unit_id": "u0069",
+      "line_start": 422,
+      "line_end": 439,
+      "source_text": "最重要関数。\n\n```\nkernel-commit-world!\n```\n\n---\n\nコメント\n\n> The Kernel's visibility boundary\n\nつまり\n\n**KernelがTruthを公開する唯一の境界**\n\nである。\n\n"
+    },
+    {
+      "unit_id": "u0070",
+      "line_start": 442,
+      "line_end": 442,
+      "source_text": "## 入力\n"
+    },
+    {
+      "unit_id": "u0071",
+      "line_start": 444,
+      "line_end": 447,
+      "source_text": "World\n\nNode\n\n"
+    },
+    {
+      "unit_id": "u0072",
+      "line_start": 450,
+      "line_end": 450,
+      "source_text": "## 検証\n"
+    },
+    {
+      "unit_id": "u0073",
+      "line_start": 452,
+      "line_end": 465,
+      "source_text": "Node型確認\n\n```\ncausal-node-p\n```\n\n失敗\n\n```\nA kernel commit\nrequires\na causal-node.\n```\n\n"
+    },
+    {
+      "unit_id": "u0074",
+      "line_start": 468,
+      "line_end": 468,
+      "source_text": "## ID重複確認\n"
+    },
+    {
+      "unit_id": "u0075",
+      "line_start": 470,
+      "line_end": 483,
+      "source_text": "Graph内検索\n\n```\nget-node\n```\n\n存在した場合\n\n```\nCommitted node ids\nare immutable\n```\n\n---\n"
+    },
+    {
+      "unit_id": "u0076",
+      "line_start": 485,
+      "line_end": 485,
+      "source_text": "## Commit順序\n"
+    },
+    {
+      "unit_id": "u0077",
+      "line_start": 487,
+      "line_end": 497,
+      "source_text": "ソースコメント\n\n```\nsole R2.0-B\nhead advancement operation\n```\n\nつまり\n\nHead更新はここだけ。\n\n"
+    },
+    {
+      "unit_id": "u0078",
+      "line_start": 500,
+      "line_end": 513,
+      "source_text": "実行順序\n\n```\nadd-node!\n\n↓\n\nhead更新\n```\n\nGraphへ追加される前に\n\nHeadを書き換えることはない。\n\n"
+    },
+    {
+      "unit_id": "u0079",
+      "line_start": 516,
+      "line_end": 516,
+      "source_text": "## 戻り値\n"
+    },
+    {
+      "unit_id": "u0080",
+      "line_start": 518,
+      "line_end": 519,
+      "source_text": "World自身。\n\n"
+    },
+    {
+      "unit_id": "u0081",
+      "line_start": 522,
+      "line_end": 522,
+      "source_text": "# 12. Projection Policy\n"
+    },
+    {
+      "unit_id": "u0082",
+      "line_start": 524,
+      "line_end": 541,
+      "source_text": "内部関数\n\n```\n%policy-includes-evaluations-p\n```\n\n---\n\nPolicyから\n\n```\n:include-evaluations\n```\n\n取得。\n\n真ならReplay対象へ含める。\n\n"
+    },
+    {
+      "unit_id": "u0083",
+      "line_start": 544,
+      "line_end": 544,
+      "source_text": "# 13. Replay\n"
+    },
+    {
+      "unit_id": "u0084",
+      "line_start": 546,
+      "line_end": 549,
+      "source_text": "```\nreplay-world\n```\n\n"
+    },
+    {
+      "unit_id": "u0085",
+      "line_start": 552,
+      "line_end": 567,
+      "source_text": "コメント\n\n```\nPure,\ndeterministic\nexecution state\n```\n\nつまり\n\nReplayは\n\n**純粋関数**\n\nである。\n\n"
+    },
+    {
+      "unit_id": "u0086",
+      "line_start": 570,
+      "line_end": 570,
+      "source_text": "## 手順\n"
+    },
+    {
+      "unit_id": "u0087",
+      "line_start": 572,
+      "line_end": 585,
+      "source_text": "① Policy取得\n\n↓\n\n② build-prefill-state呼び出し\n\n↓\n\n③ Prefill Hash取得\n\n↓\n\n④ Replay情報生成\n\n"
+    },
+    {
+      "unit_id": "u0088",
+      "line_start": 588,
+      "line_end": 607,
+      "source_text": "内部で\n\n```\nbuild-prefill-state\n```\n\nへ渡す情報\n\n```\nGraph\n\nMemory\n\nHead\n\nPolicy\n```\n\nのみ。\n\n"
+    },
+    {
+      "unit_id": "u0089",
+      "line_start": 610,
+      "line_end": 610,
+      "source_text": "## 出力\n"
+    },
+    {
+      "unit_id": "u0090",
+      "line_start": 612,
+      "line_end": 625,
+      "source_text": "Replay結果\n\n```\n:world-id\n\n:head-node\n\n:projection-policy\n\n:metadata\n\n:prefill-hash\n```\n\n"
+    },
+    {
+      "unit_id": "u0091",
+      "line_start": 628,
+      "line_end": 657,
+      "source_text": "ここで重要なのは\n\n```\nPrefillそのもの\n```\n\nではなく\n\n```\nPrefill Hash\n```\n\nのみ返すこと。\n\nコメントでも\n\n```\ncanonical replay-visible representation\n```\n\nと説明されている。\n\nつまり\n\nReplay結果の正体は\n\n**Content Address**\n\nである。\n\n"
+    },
+    {
+      "unit_id": "u0092",
+      "line_start": 660,
+      "line_end": 660,
+      "source_text": "# 14. 不変条件（Invariants）\n"
+    },
+    {
+      "unit_id": "u0093",
+      "line_start": 662,
+      "line_end": 662,
+      "source_text": "## I-1\n"
+    },
+    {
+      "unit_id": "u0094",
+      "line_start": 664,
+      "line_end": 665,
+      "source_text": "World IDは空不可。\n\n"
+    },
+    {
+      "unit_id": "u0095",
+      "line_start": 668,
+      "line_end": 668,
+      "source_text": "## I-2\n"
+    },
+    {
+      "unit_id": "u0096",
+      "line_start": 670,
+      "line_end": 671,
+      "source_text": "Graph参照は共有。\n\n"
+    },
+    {
+      "unit_id": "u0097",
+      "line_start": 674,
+      "line_end": 674,
+      "source_text": "## I-3\n"
+    },
+    {
+      "unit_id": "u0098",
+      "line_start": 676,
+      "line_end": 677,
+      "source_text": "Memory参照は共有。\n\n"
+    },
+    {
+      "unit_id": "u0099",
+      "line_start": 680,
+      "line_end": 680,
+      "source_text": "## I-4\n"
+    },
+    {
+      "unit_id": "u0100",
+      "line_start": 682,
+      "line_end": 683,
+      "source_text": "Projection Policyはコピー。\n\n"
+    },
+    {
+      "unit_id": "u0101",
+      "line_start": 686,
+      "line_end": 686,
+      "source_text": "## I-5\n"
+    },
+    {
+      "unit_id": "u0102",
+      "line_start": 688,
+      "line_end": 689,
+      "source_text": "Metadataはコピー。\n\n"
+    },
+    {
+      "unit_id": "u0103",
+      "line_start": 692,
+      "line_end": 692,
+      "source_text": "## I-6\n"
+    },
+    {
+      "unit_id": "u0104",
+      "line_start": 694,
+      "line_end": 701,
+      "source_text": "Head更新は\n\n```\nkernel-commit-world!\n```\n\nのみ。\n\n"
+    },
+    {
+      "unit_id": "u0105",
+      "line_start": 704,
+      "line_end": 704,
+      "source_text": "## I-7\n"
+    },
+    {
+      "unit_id": "u0106",
+      "line_start": 706,
+      "line_end": 707,
+      "source_text": "Node ID再利用禁止。\n\n"
+    },
+    {
+      "unit_id": "u0107",
+      "line_start": 710,
+      "line_end": 710,
+      "source_text": "## I-8\n"
+    },
+    {
+      "unit_id": "u0108",
+      "line_start": 712,
+      "line_end": 713,
+      "source_text": "Replayは決定論。\n\n"
+    },
+    {
+      "unit_id": "u0109",
+      "line_start": 716,
+      "line_end": 716,
+      "source_text": "## I-9\n"
+    },
+    {
+      "unit_id": "u0110",
+      "line_start": 718,
+      "line_end": 719,
+      "source_text": "Root Nodeは変更されない。\n\n"
+    },
+    {
+      "unit_id": "u0111",
+      "line_start": 722,
+      "line_end": 722,
+      "source_text": "## I-10\n"
+    },
+    {
+      "unit_id": "u0112",
+      "line_start": 724,
+      "line_end": 725,
+      "source_text": "HeadはGraph上に存在するNodeのみ。\n\n"
+    },
+    {
+      "unit_id": "u0113",
+      "line_start": 728,
+      "line_end": 728,
+      "source_text": "# 15. 状態遷移\n"
+    },
+    {
+      "unit_id": "u0114",
+      "line_start": 730,
+      "line_end": 743,
+      "source_text": "```text\nmake-world\n      │\n      ▼\n Created\n      │\n      │ commit\n      ▼\n Head Advance\n      │\n      │ replay\n      ▼\n Execution State\n```\n"
+    },
+    {
+      "unit_id": "u0115",
+      "line_start": 747,
+      "line_end": 747,
+      "source_text": "# 16. Kernel Commitシーケンス\n"
+    },
+    {
+      "unit_id": "u0116",
+      "line_start": 749,
+      "line_end": 778,
+      "source_text": "```text\nKernel\n\n │\n\n ▼\n\nValidate Node\n\n │\n\n ▼\n\nGraphへ追加\n\n │\n\n ▼\n\nHead更新\n\n │\n\n ▼\n\nReplay可能\n```\n\nこの順序はコード中で明示されており、`add-node!` の成功後にのみ Head が更新されるため、未登録ノードを指す Head は発生しない。\n\n"
+    },
+    {
+      "unit_id": "u0117",
+      "line_start": 781,
+      "line_end": 781,
+      "source_text": "# 17. モジュール構成\n"
+    },
+    {
+      "unit_id": "u0118",
+      "line_start": 783,
+      "line_end": 803,
+      "source_text": "```text\n                World\n                   │\n      ┌────────────┴────────────┐\n      │                         │\n      ▼                         ▼\n Shared Graph             Shared Memory\n      │                         │\n      └────────────┬────────────┘\n                   │\n            Projection Policy\n                   │\n                   ▼\n             build-prefill-state\n                   │\n                   ▼\n             replay-world\n                   │\n                   ▼\n              Prefill Hash\n```\n"
+    },
+    {
+      "unit_id": "u0119",
+      "line_start": 807,
+      "line_end": 807,
+      "source_text": "# 18. 設計上の特徴\n"
+    },
+    {
+      "unit_id": "u0120",
+      "line_start": 809,
+      "line_end": 816,
+      "source_text": "この実装は **「Truth と View の厳密な分離」** を中心原則としている点が特徴である。\n\n* **Graph と Memory は共有・不変**であり、World はそれらへの参照のみを保持する。\n* **World は軽量なビュー**であり、Head・Policy・Metadata・Lifecycle といった実行時状態だけを管理する。\n* **Head の更新は `kernel-commit-world!` に限定**され、Graph 更新と一体化した唯一の公開境界となる。\n* **Replay は `build-prefill-state` の結果をハッシュ化した内容アドレス (`prefill-hash`) を返す**ことで、内部表現に依存しない決定論的な再実行識別子を提供する。\n\nこれにより、複数の World が同一の Canonical Graph を共有しながら、それぞれ異なる実行ビューとして独立して扱えるアーキテクチャになっている。\n"
+    }
+  ]
+}

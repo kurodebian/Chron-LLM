@@ -1,0 +1,167 @@
+{
+  "document_path": "graph-runtime/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 2,
+      "source_text": "# Chron-LLM R2 Graph Runtime Specification\n## Causal Graph / Projection / Prefill Reconstruction Contract v1.0\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 4,
+      "line_end": 13,
+      "source_text": "**Status:** Stable Candidate  \n**Version:** v1.0  \n**Layer:** R2 Graph Runtime Layer  \n**Package:** `chron-r2-0-a`  \n**Scope:**  \n- Causal Graph Representation\n- Causal Ancestry Resolution\n- Context Projection\n- Evaluation Attachment\n- Deterministic Prefill Reconstruction\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 15,
+      "line_end": 25,
+      "source_text": "**Relation:**\n\n\nUpstream:\nR1 Kernel Core\nCanonical State / Event Stream\n\nDownstream:\nLLM Backend Prefill\nPhase E Causal DSL Runtime\nWorldline Execution\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 30,
+      "line_end": 43,
+      "source_text": "# 0. Purpose（目的）\n\nR2 Graph Runtime Layer は、R1 Kernel によって管理される正史状態を、LLM 実行に必要な **因果コンテキスト** へ変換する実行基盤である。\n\n本レイヤは以下の責務を持つ。\n\n- Causal Graph の保持\n- 因果祖先探索\n- Canonical Context の射影\n- Evaluation 情報の任意統合\n- Deterministic Prompt Reconstruction\n- Prefill State の生成\n\nR2 Graph Runtime は Canonical 状態そのものを変更せず、既存の因果構造から実行用状態を再構成する。\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 47,
+      "line_end": 82,
+      "source_text": "# 1. Architecture Overview\n\n         R1 Canonical State\n                |\n                v\n\n        Causal Graph Runtime\n\n    +-----------+------------+\n    |                        |\n    v                        v\n\ncausal-subgraph() project-context()\n\n    |                        |\n    +-----------+------------+\n\n                |\n                v\n\n          Context Nodes\n\n                |\n                v\n\n      canonical-prompt()\n\n                |\n                v\n\n         Prefill State\n\n                |\n                v\n\n          LLM Backend\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 86,
+      "line_end": 96,
+      "source_text": "# 2. Core Design Principles\n\n## 2.1 Non-destructive Projection\n\nGraph Runtime は読み取り専用の投影処理を行う。\n\n保証：\n\n- Graph は変更されない\n- Payload は参照取得のみ\n- Projection は純粋な再構成処理\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 100,
+      "line_end": 109,
+      "source_text": "## 2.2 Causal Separation\n\nGraph Edge は種類によって意味を分離する。\n\n現在定義される Edge:\n\n| Type | Meaning |\n|---|---|\n| `:causal` | 因果関係 |\n| `:eval` | 評価・フィードバック関係 |\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 113,
+      "line_end": 127,
+      "source_text": "## 2.3 Deterministic Reconstruction\n\n同一 Graph、同一 Store、同一 Prompt Builder から生成される Prefill は同一となる。\n\n\nGraph\n+\nPayload Store\n+\nPrompt Builder\n\n    |\n    v\n\nPrefill Hash\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 132,
+      "line_end": 157,
+      "source_text": "# 3. Causal Graph Model\n\n## 3.1 Causal Node\n\n```lisp\n(defstruct\n    (causal-node\n       (:constructor make-causal-node\n           (id type payload-ref &optional metadata)))\n  id\n  type\n  payload-ref\n  metadata)\nFields\nField\tType\tDescription\nid\tObject\tNode identifier\ntype\tKeyword\tNode semantic type\npayload-ref\tPayload Reference\tExternal content reference\nmetadata\tAny\tAdditional causal metadata\nGuarantee\n\ncausal-node は immutable object として扱う。\n\n:read-only t\n\nにより生成後の変更を禁止する。\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 159,
+      "line_end": 171,
+      "source_text": "4. Causal Edge Model\n(defstruct\n    (causal-edge\n       (:constructor make-causal-edge\n           (from to type)))\n  from\n  to\n  type)\nFields\nField\tDescription\nfrom\tSource node\nto\tDestination node\ntype\tEdge semantic\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 172,
+      "line_end": 190,
+      "source_text": "5. Causal Graph\n(defstruct\n    (causal-graph\n       (:constructor make-causal-graph\n           (&key nodes edges)))\n  nodes\n  edges)\nStructure\nCausal Graph\n\nNodes:\n    N1\n    N2\n    N3\n\nEdges:\n\nN1 --:causal--> N2\nN2 --:eval----> E1\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 191,
+      "line_end": 202,
+      "source_text": "6. Graph API\n6.1 Node Lookup\n(defun get-node (graph id))\nContract\n\n指定 ID の Node を取得する。\n\n存在しない場合：\n\nnil\n\nを返す。\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 204,
+      "line_end": 215,
+      "source_text": "6.2 Node Addition\n(defun add-node! (graph node))\nValidation\n\n保証：\n\nnode は causal-node である\nduplicate idは禁止\n\nViolation:\n\nDuplicate node id\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 216,
+      "line_end": 224,
+      "source_text": "6.3 Edge Addition\n(defun add-edge! (graph edge))\nValidation\n\n保証：\n\nedge は causal-edge\nfrom node が存在\nto node が存在\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 225,
+      "line_end": 266,
+      "source_text": "7. Causal Subgraph Resolution\ncausal-subgraph\n(defun causal-subgraph\n    (graph target-id))\nPurpose\n\nTarget Node に至る因果祖先を抽出する。\n\n対象 Edge:\n\n:type :causal\n\nのみ。\n\nAlgorithm\ntarget\n |\n v\n\nincoming :causal edge\n\n |\n v\n\nparent\n\n |\n v\n\nroot\n\n探索後：\n\nroot → ... → target\n\nの順序で返却。\n\nGuarantee\ndeterministic ordering\ncycle safe\nnon-destructive\ncausal relation only\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 267,
+      "line_end": 286,
+      "source_text": "8. Context Projection Layer\nContext Node\n(defstruct\n    (context-node\n       (:constructor make-context-node\n           (id type content feedbacks)))\n  id\n  type\n  content\n  feedbacks)\nRole\n\nCausal Node を LLM Context 用形式へ変換する中間表現。\n\nFields\nField\tDescription\nid\tOriginal node id\ntype\tNode type\ncontent\tLoaded payload\nfeedbacks\tEvaluation payload\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 287,
+      "line_end": 307,
+      "source_text": "9. Evaluation Association\nassociated-evaluations\n(defun associated-evaluations\n    (graph node-id))\nPurpose\n\nNode から outgoing :eval edge を探索する。\n\nExample:\n\nNode A\n\n |\n :eval\n\n v\n\nEvaluation Node\nGuarantee\ninsertion order preserved\ncausal relationには影響しない\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 308,
+      "line_end": 349,
+      "source_text": "10. Context Projection\nproject-context\n(defun project-context\n    (graph store target-id\n           &key include-evaluations))\nProcessing\ntarget-id\n\n ↓\n\ncausal-subgraph\n\n ↓\n\ncausal nodes\n\n ↓\n\nload payload\n\n ↓\n\ncontext-node\nEvaluation Inclusion\n\nDefault:\n\ninclude-evaluations = nil\n\nの場合：\n\ncausal facts only\n\nとなる。\n\ntrue の場合：\n\ncausal facts\n +\nevaluation feedback\n\nを含む。\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 351,
+      "line_end": 364,
+      "source_text": "11. Prefill Reconstruction Layer\nPrefill State\n(defstruct\n    (prefill-state\n       (:constructor make-prefill-state\n           (context target-id hash)))\n  context\n  target-id\n  hash)\nFields\nField\tDescription\ncontext\tProjected context\ntarget-id\tReconstruction target\nhash\tPrompt identity\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 365,
+      "line_end": 378,
+      "source_text": "12. Canonical Prompt Builder\ncanonical-prompt\n(defun canonical-prompt\n    (context))\nOutput Format\n(prompt\n (:node ID\n  :type TYPE\n  :content CONTENT\n  :feedback FEEDBACK))\nGuarantee\ndeterministic serialization\nmachine-readable format\nreplay compatible\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 379,
+      "line_end": 413,
+      "source_text": "13. Prefill State Construction\nbuild-prefill-state\n(defun build-prefill-state\n    (graph store target-id\n           &key include-evaluations\n                prompt-builder))\nPipeline\nGraph\n\n ↓\n\nproject-context\n\n ↓\n\nPrompt Builder\n\n ↓\n\nSHA256\n\n ↓\n\nPrefill State\nValidation\n\nPrompt Builder:\n\nMust return:\n\nstring\n\nOtherwise:\n\nPrompt builder must return a string\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 414,
+      "line_end": 428,
+      "source_text": "14. Runtime Guarantees\n14.1 Deterministic Reconstruction\n\n同一入力:\n\nGraph\nStore\nPrompt Builder\nTarget ID\n\nから同一:\n\nPrefill Hash\n\nを生成する。\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 430,
+      "line_end": 436,
+      "source_text": "14.2 Causal Integrity\n\nPrefill Context は：\n\n:causal\n\nEdge のみを基礎とする。\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 438,
+      "line_end": 448,
+      "source_text": "14.3 Evaluation Isolation\n\nEvaluation は optional metadata として扱う。\n\nCAUSAL STATE\n\n+\n\nOPTIONAL EVALUATION\n\nであり、正史因果とは分離される。\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 450,
+      "line_end": 461,
+      "source_text": "15. Frozen Boundary\nFrozen\ncausal-node structure\ncausal-edge semantics\ncausal-subgraph behavior\ncontext projection contract\nprefill-state identity\nFlexible\npayload storage backend\nprompt-builder format\nadditional edge types\nevaluation schema\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 462,
+      "line_end": 477,
+      "source_text": "16. Module Dependency\ngraph.lisp\n      |\n      v\n\ncausal.lisp\n\n      |\n      v\n\nprojection.lisp\n\n      |\n      v\n\nprefill.lisp\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 478,
+      "line_end": 492,
+      "source_text": "Final Statement\n\nChron-LLM R2 Graph Runtime Specification\nCausal Graph / Projection / Prefill Reconstruction Contract v1.0\n\nは、R1 Kernel の Canonical State を LLM 実行可能な因果コンテキストへ変換する Runtime Boundary を定義する。\n\n本レイヤは：\n\n因果グラフ保持\n因果祖先解決\nContext Projection\nPrompt Reconstruction\nPrefill Identity\n\n"
+    }
+  ]
+}

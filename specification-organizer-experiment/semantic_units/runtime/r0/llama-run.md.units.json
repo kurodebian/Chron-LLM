@@ -1,0 +1,617 @@
+{
+  "document_path": "runtime/r0/llama-run.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM R0 Runtime\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 3,
+      "source_text": "## Llama Backend Interface Specification v1.0\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 5,
+      "line_end": 5,
+      "source_text": "**Status**\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 7,
+      "line_end": 8,
+      "source_text": "* Stable\n* R0 Reference Runtime\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 10,
+      "line_end": 10,
+      "source_text": "**Layer**\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 12,
+      "line_end": 13,
+      "source_text": "* Backend Adapter\n* Physical Runtime Interface\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 15,
+      "line_end": 15,
+      "source_text": "**Scope**\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 17,
+      "line_end": 23,
+      "source_text": "```\nPrompt\n    ↓\nllama.cpp CLI\n    ↓\nRaw Text\n```\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 27,
+      "line_end": 27,
+      "source_text": "# 1. 目的\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 29,
+      "line_end": 29,
+      "source_text": "本モジュールは、Chron-R0 RuntimeからLLMを利用するための最小バックエンドである。\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 31,
+      "line_end": 31,
+      "source_text": "R0では\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 33,
+      "line_end": 41,
+      "source_text": "```\nHistory\n    ↓\nPrompt Projection\n    ↓\nBackend\n    ↓\nGenerated Text\n```\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 43,
+      "line_end": 43,
+      "source_text": "のみを担当し、\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 45,
+      "line_end": 48,
+      "source_text": "* Validation\n* Candidate\n* Kernel\n* World\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 50,
+      "line_end": 50,
+      "source_text": "などは一切扱わない。\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 54,
+      "line_end": 54,
+      "source_text": "# 2. パッケージ\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 56,
+      "line_end": 58,
+      "source_text": "```\nchronos-r0.llama\n```\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 60,
+      "line_end": 60,
+      "source_text": "Export\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 62,
+      "line_end": 64,
+      "source_text": "```\nllama-run\n```\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 66,
+      "line_end": 66,
+      "source_text": "公開APIはこの1関数のみである。\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 70,
+      "line_end": 70,
+      "source_text": "# 3. アーキテクチャ\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 72,
+      "line_end": 94,
+      "source_text": "```\nHistory\n\n↓\n\nPrompt\n\n↓\n\nllama-run()\n\n↓\n\nllama.cpp\n\n↓\n\nstdout\n\n↓\n\nString\n```\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 96,
+      "line_end": 96,
+      "source_text": "CLIをBackendとして利用する非常に単純なAdapterとなる。\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 100,
+      "line_end": 100,
+      "source_text": "# 4. Public API\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 102,
+      "line_end": 104,
+      "source_text": "```\n(llama-run prompt)\n```\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 106,
+      "line_end": 106,
+      "source_text": "## 引数\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 108,
+      "line_end": 110,
+      "source_text": "```\nprompt\n```\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 112,
+      "line_end": 112,
+      "source_text": "型\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 114,
+      "line_end": 116,
+      "source_text": "```\nstring\n```\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 118,
+      "line_end": 118,
+      "source_text": "Prompt Projection層が生成した完全なプロンプト。\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 122,
+      "line_end": 122,
+      "source_text": "## 戻り値\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 124,
+      "line_end": 126,
+      "source_text": "```\nstring\n```\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 128,
+      "line_end": 128,
+      "source_text": "llama.cpp が標準出力へ生成した全文。\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 130,
+      "line_end": 130,
+      "source_text": "整形は行わない。\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 134,
+      "line_end": 134,
+      "source_text": "# 5. 実装方式\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 136,
+      "line_end": 136,
+      "source_text": "LLM実行には\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 138,
+      "line_end": 140,
+      "source_text": "```\nuiop:run-program\n```\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 142,
+      "line_end": 142,
+      "source_text": "を使用する。\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 144,
+      "line_end": 146,
+      "source_text": "```\n(uiop:run-program ...)\n```\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 148,
+      "line_end": 148,
+      "source_text": "同期実行であり、\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 150,
+      "line_end": 150,
+      "source_text": "呼び出し側は終了まで待機する。\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 154,
+      "line_end": 154,
+      "source_text": "# 6. llama.cpp 実行構成\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 156,
+      "line_end": 156,
+      "source_text": "実行ファイル\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 158,
+      "line_end": 160,
+      "source_text": "```\n/home/junu/lisp-os/llama.cpp/build/bin/llama-completion\n```\n"
+    },
+    {
+      "unit_id": "u0045",
+      "line_start": 162,
+      "line_end": 162,
+      "source_text": "モデル\n"
+    },
+    {
+      "unit_id": "u0046",
+      "line_start": 164,
+      "line_end": 166,
+      "source_text": "```\n/home/junu/models/Llama-3.2-3B-Instruct-Q4_K_M.gguf\n```\n"
+    },
+    {
+      "unit_id": "u0047",
+      "line_start": 168,
+      "line_end": 168,
+      "source_text": "実行オプション\n"
+    },
+    {
+      "unit_id": "u0048",
+      "line_start": 170,
+      "line_end": 172,
+      "source_text": "```\n--single-turn\n```\n"
+    },
+    {
+      "unit_id": "u0049",
+      "line_start": 174,
+      "line_end": 174,
+      "source_text": "単一ターン生成。\n"
+    },
+    {
+      "unit_id": "u0050",
+      "line_start": 178,
+      "line_end": 180,
+      "source_text": "```\n--n-predict 128\n```\n"
+    },
+    {
+      "unit_id": "u0051",
+      "line_start": 182,
+      "line_end": 182,
+      "source_text": "最大生成トークン数\n"
+    },
+    {
+      "unit_id": "u0052",
+      "line_start": 184,
+      "line_end": 186,
+      "source_text": "```\n128\n```\n"
+    },
+    {
+      "unit_id": "u0053",
+      "line_start": 190,
+      "line_end": 192,
+      "source_text": "```\n--system-prompt\n```\n"
+    },
+    {
+      "unit_id": "u0054",
+      "line_start": 194,
+      "line_end": 194,
+      "source_text": "固定System Prompt\n"
+    },
+    {
+      "unit_id": "u0055",
+      "line_start": 196,
+      "line_end": 198,
+      "source_text": "```\nあなたは日本語で丁寧で簡潔に答えるアシスタントです。\n```\n"
+    },
+    {
+      "unit_id": "u0056",
+      "line_start": 202,
+      "line_end": 204,
+      "source_text": "```\n-p prompt\n```\n"
+    },
+    {
+      "unit_id": "u0057",
+      "line_start": 206,
+      "line_end": 206,
+      "source_text": "Prompt Projection層が生成した全文を入力する。\n"
+    },
+    {
+      "unit_id": "u0058",
+      "line_start": 210,
+      "line_end": 210,
+      "source_text": "# 7. 実行フロー\n"
+    },
+    {
+      "unit_id": "u0059",
+      "line_start": 212,
+      "line_end": 229,
+      "source_text": "```\nPrompt\n      │\n      ▼\nllama-run\n      │\n      ▼\nrun-program\n      │\n      ▼\nllama-completion\n      │\n      ▼\nstdout\n      │\n      ▼\nCommon Lisp String\n```\n"
+    },
+    {
+      "unit_id": "u0060",
+      "line_start": 233,
+      "line_end": 233,
+      "source_text": "# 8. エラー処理\n"
+    },
+    {
+      "unit_id": "u0061",
+      "line_start": 235,
+      "line_end": 237,
+      "source_text": "```\n:error-output :string\n```\n"
+    },
+    {
+      "unit_id": "u0062",
+      "line_start": 239,
+      "line_end": 239,
+      "source_text": "stderrは取得される。\n"
+    },
+    {
+      "unit_id": "u0063",
+      "line_start": 243,
+      "line_end": 245,
+      "source_text": "```\n:ignore-error-status t\n```\n"
+    },
+    {
+      "unit_id": "u0064",
+      "line_start": 247,
+      "line_end": 247,
+      "source_text": "プロセス終了コードによる例外は送出しない。\n"
+    },
+    {
+      "unit_id": "u0065",
+      "line_start": 249,
+      "line_end": 249,
+      "source_text": "つまり\n"
+    },
+    {
+      "unit_id": "u0066",
+      "line_start": 251,
+      "line_end": 253,
+      "source_text": "```\nBackend Failure\n```\n"
+    },
+    {
+      "unit_id": "u0067",
+      "line_start": 255,
+      "line_end": 255,
+      "source_text": "であっても\n"
+    },
+    {
+      "unit_id": "u0068",
+      "line_start": 257,
+      "line_end": 257,
+      "source_text": "Lisp Runtimeは停止しない。\n"
+    },
+    {
+      "unit_id": "u0069",
+      "line_start": 259,
+      "line_end": 259,
+      "source_text": "上位層が必要に応じて内容を解析する設計となっている。\n"
+    },
+    {
+      "unit_id": "u0070",
+      "line_start": 263,
+      "line_end": 263,
+      "source_text": "# 9. 設計原則\n"
+    },
+    {
+      "unit_id": "u0071",
+      "line_start": 265,
+      "line_end": 265,
+      "source_text": "## Backend Isolation\n"
+    },
+    {
+      "unit_id": "u0072",
+      "line_start": 267,
+      "line_end": 267,
+      "source_text": "LLM固有仕様は本モジュールに閉じ込める。\n"
+    },
+    {
+      "unit_id": "u0073",
+      "line_start": 269,
+      "line_end": 269,
+      "source_text": "R0 Runtimeは\n"
+    },
+    {
+      "unit_id": "u0074",
+      "line_start": 271,
+      "line_end": 273,
+      "source_text": "```\nString → String\n```\n"
+    },
+    {
+      "unit_id": "u0075",
+      "line_start": 275,
+      "line_end": 275,
+      "source_text": "という抽象インターフェースのみ利用する。\n"
+    },
+    {
+      "unit_id": "u0076",
+      "line_start": 279,
+      "line_end": 279,
+      "source_text": "## Stateless\n"
+    },
+    {
+      "unit_id": "u0077",
+      "line_start": 281,
+      "line_end": 281,
+      "source_text": "状態を保持しない。\n"
+    },
+    {
+      "unit_id": "u0078",
+      "line_start": 283,
+      "line_end": 283,
+      "source_text": "保持するもの\n"
+    },
+    {
+      "unit_id": "u0079",
+      "line_start": 285,
+      "line_end": 285,
+      "source_text": "なし\n"
+    },
+    {
+      "unit_id": "u0080",
+      "line_start": 287,
+      "line_end": 287,
+      "source_text": "保持しないもの\n"
+    },
+    {
+      "unit_id": "u0081",
+      "line_start": 289,
+      "line_end": 293,
+      "source_text": "* Session\n* History\n* Candidate\n* Kernel State\n* KV Cache\n"
+    },
+    {
+      "unit_id": "u0082",
+      "line_start": 297,
+      "line_end": 297,
+      "source_text": "## Synchronous Execution\n"
+    },
+    {
+      "unit_id": "u0083",
+      "line_start": 299,
+      "line_end": 301,
+      "source_text": "```\nPrompt\n```\n"
+    },
+    {
+      "unit_id": "u0084",
+      "line_start": 303,
+      "line_end": 303,
+      "source_text": "↓\n"
+    },
+    {
+      "unit_id": "u0085",
+      "line_start": 305,
+      "line_end": 307,
+      "source_text": "```\nBlocking Execution\n```\n"
+    },
+    {
+      "unit_id": "u0086",
+      "line_start": 309,
+      "line_end": 309,
+      "source_text": "↓\n"
+    },
+    {
+      "unit_id": "u0087",
+      "line_start": 311,
+      "line_end": 313,
+      "source_text": "```\nGenerated Text\n```\n"
+    },
+    {
+      "unit_id": "u0088",
+      "line_start": 315,
+      "line_end": 315,
+      "source_text": "逐次生成は扱わない。\n"
+    },
+    {
+      "unit_id": "u0089",
+      "line_start": 319,
+      "line_end": 319,
+      "source_text": "# 10. R0での責務\n"
+    },
+    {
+      "unit_id": "u0090",
+      "line_start": 321,
+      "line_end": 321,
+      "source_text": "担当\n"
+    },
+    {
+      "unit_id": "u0091",
+      "line_start": 323,
+      "line_end": 329,
+      "source_text": "* Prompt送信\n* CLI起動\n* モデル指定\n* System Prompt指定\n* 生成結果取得\n* stderr取得\n\n"
+    },
+    {
+      "unit_id": "u0092",
+      "line_start": 330,
+      "line_end": 330,
+      "source_text": "担当外\n"
+    },
+    {
+      "unit_id": "u0093",
+      "line_start": 332,
+      "line_end": 343,
+      "source_text": "* Prompt生成\n* History管理\n* Token Streaming\n* Validation\n* Retry\n* Temperature制御\n* Candidate生成\n* Commit\n* World管理\n* Memory管理\n* Graph管理\n\n"
+    },
+    {
+      "unit_id": "u0094",
+      "line_start": 346,
+      "line_end": 346,
+      "source_text": "# 11. データフロー\n"
+    },
+    {
+      "unit_id": "u0095",
+      "line_start": 348,
+      "line_end": 368,
+      "source_text": "```\nHistory\n      │\n      ▼\nPrompt Projection\n      │\n      ▼\nPrompt String\n      │\n      ▼\nllama-run\n      │\n      ▼\nllama.cpp CLI\n      │\n      ▼\nRaw Text\n      │\n      ▼\nR0 Runtime\n```\n"
+    },
+    {
+      "unit_id": "u0096",
+      "line_start": 372,
+      "line_end": 372,
+      "source_text": "# 12. アーキテクチャ上の位置\n"
+    },
+    {
+      "unit_id": "u0097",
+      "line_start": 374,
+      "line_end": 399,
+      "source_text": "```\n┌────────────────────┐\n│ History            │\n└─────────┬──────────┘\n          │\n          ▼\n┌────────────────────┐\n│ Prompt Projection  │\n└─────────┬──────────┘\n          │\n          ▼\n┌────────────────────┐\n│ llama-run          │\n│ Backend Adapter    │\n└─────────┬──────────┘\n          │\n          ▼\n┌────────────────────┐\n│ llama.cpp CLI      │\n└─────────┬──────────┘\n          │\n          ▼\n┌────────────────────┐\n│ Generated Text     │\n└────────────────────┘\n```\n"
+    },
+    {
+      "unit_id": "u0098",
+      "line_start": 403,
+      "line_end": 403,
+      "source_text": "# 13. 将来拡張\n"
+    },
+    {
+      "unit_id": "u0099",
+      "line_start": 405,
+      "line_end": 405,
+      "source_text": "本APIはバックエンド非依存のインターフェースとして設計されており、`llama.cpp` 固有の実装を他の推論エンジンへ置き換えることが可能である。\n"
+    },
+    {
+      "unit_id": "u0100",
+      "line_start": 407,
+      "line_end": 407,
+      "source_text": "置き換え候補例:\n"
+    },
+    {
+      "unit_id": "u0101",
+      "line_start": 409,
+      "line_end": 414,
+      "source_text": "* llama.cpp Server\n* llama.cpp C API\n* Ollama\n* vLLM\n* OpenAI Compatible API\n* LM Studio API\n"
+    },
+    {
+      "unit_id": "u0102",
+      "line_start": 416,
+      "line_end": 416,
+      "source_text": "これらはすべて `llama-run(prompt) -> string` の契約を維持する限り、R0 Runtimeの他のモジュールを変更せずに差し替えられる。\n"
+    }
+  ]
+}

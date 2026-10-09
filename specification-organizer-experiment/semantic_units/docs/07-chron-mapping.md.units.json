@@ -1,0 +1,95 @@
+{
+  "document_path": "docs/07-chron-mapping.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-OS ↔ Chron-LLM Mapping\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 3,
+      "source_text": "**Status:** Informative\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 5,
+      "line_end": 6,
+      "source_text": "This document describes the conceptual correspondence between\nChron-LLM runtime abstractions and Chron-OS kernel concepts.\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 8,
+      "line_end": 8,
+      "source_text": "It is descriptive only and introduces no normative requirements.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 10,
+      "line_end": 29,
+      "source_text": "| Chron-LLM | Chron-OS |\n|-----------|----------|\n| Candidate | proposalIR |\n| Validation | Δ0 Validator |\n| ValidationReport | Δ0 Validation Report |\n| PolicyRouter | Δ0 Resolution Policy |\n| Kernel | Runtime Kernel |\n| Commit | Commit |\n| Event | WAL Entry |\n| History | WAL |\n| Canonical | Canonical State |\n| DeferredQueue | Deferred Proposal Queue |\n| Replay | replay(snapshot) |\n| Derived | snapshot / derived projection |\n| Session | kernel-state |\n| Context | replay input |\n| MemoryRef | Runtime Reference Store |\n| Config | Runtime Configuration |\n| FaultEvent | Fault Event |\n| External | external store |\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 31,
+      "line_end": 31,
+      "source_text": "## Notes\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 33,
+      "line_end": 33,
+      "source_text": "- **Candidate** is the Chron-LLM representation of Chron-OS `proposalIR`.\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 35,
+      "line_end": 35,
+      "source_text": "- **Validation** corresponds to the deterministic Δ0 validation stage.\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 37,
+      "line_end": 37,
+      "source_text": "- **ValidationReport** is the structured collection of validation facts produced by Validation before policy interpretation.\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 39,
+      "line_end": 39,
+      "source_text": "- **PolicyRouter** corresponds to the deterministic policy layer that interprets a `ValidationReport` and produces a `RuntimeRequest`.\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 41,
+      "line_end": 42,
+      "source_text": "- **Kernel** executes authoritative state transitions.\n  Commit is the only operation authorized to mutate Canonical state.\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 44,
+      "line_end": 44,
+      "source_text": "- **History** is represented by the Chron-OS Write-Ahead Log (WAL).\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 46,
+      "line_end": 46,
+      "source_text": "- **Replay** deterministically derives runtime context from Canonical history.\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 48,
+      "line_end": 48,
+      "source_text": "- **Derived** represents deterministic projections reconstructed from Canonical.\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 50,
+      "line_end": 50,
+      "source_text": "- This mapping is conceptual only and does not imply identical implementation details.\n"
+    }
+  ]
+}

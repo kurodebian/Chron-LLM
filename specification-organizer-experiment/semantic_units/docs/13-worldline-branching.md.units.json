@@ -1,0 +1,119 @@
+{
+  "document_path": "docs/13-worldline-branching.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM Worldline Branching Specification\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 4,
+      "source_text": "**Status:** Normative\n**Version:** R1\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 6,
+      "line_end": 6,
+      "source_text": "# Purpose\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 8,
+      "line_end": 8,
+      "source_text": "Define deterministic worldline branching.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 10,
+      "line_end": 10,
+      "source_text": "# Worldline\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 12,
+      "line_end": 12,
+      "source_text": "A worldline is identified by\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 14,
+      "line_end": 16,
+      "source_text": "```\ncausal-id\n```\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 18,
+      "line_end": 18,
+      "source_text": "# Branch Conditions\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 20,
+      "line_end": 20,
+      "source_text": "A new causal-id SHALL be generated when\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 22,
+      "line_end": 25,
+      "source_text": "- discontinuity detected\n- abort issued\n- drift detected three consecutive times\n- stagnation detected five consecutive times\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 27,
+      "line_end": 27,
+      "source_text": "# Branch Procedure\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 29,
+      "line_end": 51,
+      "source_text": "```\nGenerate new causal-id\n\n↓\n\nDestroy KV Cache\n\n↓\n\nTraverse Graph using causal edges only\n\n↓\n\nConstruct clean Prefill\n\n↓\n\nRecord new causal-id\n\n↓\n\nResume execution\n```\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 53,
+      "line_end": 53,
+      "source_text": "# Canonical\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 55,
+      "line_end": 55,
+      "source_text": "The new causal-id SHALL be committed through Commit.\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 57,
+      "line_end": 57,
+      "source_text": "Only Commit may mutate Canonical.\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 59,
+      "line_end": 59,
+      "source_text": "# Invariants\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 61,
+      "line_end": 61,
+      "source_text": "Worldline branching is deterministic.\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 63,
+      "line_end": 63,
+      "source_text": "Branch history remains replayable.\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 65,
+      "line_end": 65,
+      "source_text": "Previous worldlines remain immutable."
+    }
+  ]
+}

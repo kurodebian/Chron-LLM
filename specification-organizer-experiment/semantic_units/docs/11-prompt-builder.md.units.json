@@ -1,0 +1,137 @@
+{
+  "document_path": "docs/11-prompt-builder.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM Prompt Builder Specification\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 4,
+      "source_text": "**Status:** Normative\n**Version:** R1\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 6,
+      "line_end": 6,
+      "source_text": "# Purpose\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 8,
+      "line_end": 8,
+      "source_text": "Define deterministic prompt construction.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 10,
+      "line_end": 10,
+      "source_text": "# Prompt Components\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 12,
+      "line_end": 12,
+      "source_text": "Prompt SHALL be derived from:\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 14,
+      "line_end": 18,
+      "source_text": "- Summary\n- Graph\n- MemoryRef\n- Config\n\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 19,
+      "line_end": 19,
+      "source_text": "All prompt components SHALL originate from:\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 21,
+      "line_end": 24,
+      "source_text": "- Canonical\n- deterministic Derived state\n- deterministic Runtime Configuration\n\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 25,
+      "line_end": 25,
+      "source_text": "# Construction\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 27,
+      "line_end": 51,
+      "source_text": "```\nCanonical\n\n↓\n\nReplay\n\n↓\n\nDerived Context\n\n↓\n\nSummary\n\nGraph\n\nMemoryRef\n\nConfig\n\n↓\n\nPrompt\n```\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 53,
+      "line_end": 53,
+      "source_text": "# Exclusions\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 55,
+      "line_end": 55,
+      "source_text": "Prompt SHALL NOT contain:\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 57,
+      "line_end": 61,
+      "source_text": "- Observation\n- FaultEvent\n- detector outputs\n- runtime metrics\n\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 62,
+      "line_end": 62,
+      "source_text": "Observation is runtime control information only.\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 64,
+      "line_end": 64,
+      "source_text": "FaultEvent is diagnostic information only.\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 66,
+      "line_end": 66,
+      "source_text": "Neither introduces authoritative information into Prompt construction.\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 68,
+      "line_end": 68,
+      "source_text": "# Invariants\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 70,
+      "line_end": 70,
+      "source_text": "Prompt generation is deterministic.\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 72,
+      "line_end": 72,
+      "source_text": "Prompt construction SHALL NOT mutate Canonical.\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 74,
+      "line_end": 74,
+      "source_text": "Prompt depends only on:\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 76,
+      "line_end": 77,
+      "source_text": "- deterministic Replay outputs\n- deterministic Configuration"
+    }
+  ]
+}

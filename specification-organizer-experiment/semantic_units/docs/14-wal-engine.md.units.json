@@ -1,0 +1,125 @@
+{
+  "document_path": "docs/14-wal-engine.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM WAL (Write-Ahead Logging) Engine Specification\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 5,
+      "source_text": "- **Version:** 2.0.0\n- **Status:** Draft / Implementation Phase\n- **Target Subsystem:** Phase-D Commit Kernel & Recovery Engine (`chron.kernel.wal`)\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 9,
+      "line_end": 9,
+      "source_text": "## 1. 概要 (Overview)\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 11,
+      "line_end": 12,
+      "source_text": "Chron-LLM の 2PC (Two-Phase Commit) トランザクション永続化およびクラッシュ復旧を担保する WAL (Write-Ahead Logging) エンジンの物理フォーマットと動作モデルを定義する。\n本エンジンは SBCL ネイティブの POSIX I/O (`fdatasync`, `O_APPEND`) を直接叩くことで、ゼロコピーに近い最小オーバーヘッドでのアトミック追記と Fail-Stop 型クラッシュリカバリを実現する。\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 16,
+      "line_end": 16,
+      "source_text": "## 2. 物理レコードフォーマット (Physical Record Format)\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 18,
+      "line_end": 18,
+      "source_text": "すべての WAL レコードは **48バイト固定長ヘッダー**、**可変長ペイロード**、**4バイト CRC32C**、および **アライメントパディング** で構成される。\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 20,
+      "line_end": 20,
+      "source_text": "### 2.1 ヘッダーレイアウト (48 Bytes Fixed Header)\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 22,
+      "line_end": 22,
+      "source_text": "メモリおよび CPU 非整列アクセスコストを排除するため、すべての 8 バイト境界フィールドは 8 の倍数オフセットにアライメントされる。\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 24,
+      "line_end": 35,
+      "source_text": "| オフセット | サイズ | フィールド名 | 型 | 説明 |\n|---|---|---|---|---|\n| `0..3` | 4B | Magic | `uint32_le` | 固定識別子 `'CHWA'` (`0x43485741`) |\n| `4..5` | 2B | Version | `uint16_le` | フォーマットバージョン (`0x0201`) |\n| `6` | 1B | Record Type | `uint8` | レコード種別 (1: PREPARE, 2: COMMIT, 3: ABORT, 4: CHECKPOINT, 5: RECOVERY_COMPLETE) |\n| `7` | 1B | Flags | `uint8` | 予約領域 (現状 `0x00`) |\n| `8..15` | 8B | Tx-ID | `uint64_le` | トランザクション ID (64bit 整数) |\n| `16..23` | 8B | Tentative Clock | `uint64_le` | 論理クロック / タグ |\n| `24..31` | 8B | Target Hash High | `uint64_le` | 128bit ノードハッシュ上位 64bit |\n| `32..39` | 8B | Target Hash Low | `uint64_le` | 128bit ノードハッシュ下位 64bit |\n| `40..43` | 4B | Payload Length | `uint32_le` | 後続する可変長ペイロードのバイト数 ($L$) |\n| `44..47` | 4B | Reserved | `uint32_le` | 将来拡張用パディング (`0x00000000`) |\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 37,
+      "line_end": 37,
+      "source_text": "### 2.2 レコード全体のアライメントと CRC32C\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 39,
+      "line_end": 42,
+      "source_text": "1. **Header**: Offset `0`〜`47` (48 bytes)\n2. **Payload**: Offset `48`〜`48+L-1` ($L$ bytes)\n3. **CRC32C**: Offset `48+L`〜`48+L+3` (4 bytes, Header + Payload に対するチェックサム)\n4. **Padding**: 0〜7 バイトのパディングを挿入し、レコード全体の総バイト数が **8 の倍数** になるよう調整する。\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 46,
+      "line_end": 46,
+      "source_text": "## 3. レコード種別 (Record Types)\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 48,
+      "line_end": 52,
+      "source_text": "- `0x01` **PREPARE**: トランザクションの準備状態を書き込む。UTF-8 エンコードされた S 式ペイロードを保持。\n- `0x02` **COMMIT**: トランザクションのコミットを確定。\n- `0x03` **ABORT**: トランザクションの中断を確定。\n- `0x04` **CHECKPOINT**: システムのスナップショット起点を示すマーカー。\n- `0x05` **RECOVERY_COMPLETE**: リカバリ処理完了を示すマーカー。\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 56,
+      "line_end": 56,
+      "source_text": "## 4. スキャン & 検証パイプライン (Scan & Validation)\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 58,
+      "line_end": 58,
+      "source_text": "ファイル読み込み（またはリカバリ）時は、段階的検証により不完全な書き込み（Torn Writes / Partial Writes）を検出し、検出時点で即座にスキャンをストップ（Fail-Stop）する。\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 60,
+      "line_end": 65,
+      "source_text": "1. **Header Boundary Check**: 残りバイト数が 48 バイト未満の場合は即座に終了。\n2. **Magic & Version Match**: `Magic == 0x43485741` かつ `Version == 0x0201` であることを検証。\n3. **Payload Bounds Check**: `Payload Length` が最大許容長 (`*max-payload-bytes*`, デフォルト 64KB) を超えていないか検証。\n4. **Record Length Availability**: ファイルの残りバイト数が `48 + Payload Length + 4 + Padding` 以上存在するか検証。\n5. **CRC32C Checksum Validation**: ヘッダー + ペイロード部分に対する CRC32C 計算値が、レコード末尾の 4 バイト CRC32C 値と一致するか検証。\n\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 68,
+      "line_end": 68,
+      "source_text": "## 5. 3-Way リカバリプロトコル (3-Way Recovery Protocol)\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 70,
+      "line_end": 75,
+      "source_text": "1. **File Truncation**: スキャンによって特定された最後の正常な完全レコード位置 (`valid-offset`) 以降の不完全データを POSIX `ftruncate` で直ちに物理切り捨て。\n2. **Transaction State Classification**:\n   - **PREPARED のみ** (COMMIT も ABORT も無し) $\\rightarrow$ **ROLLBACK** (WAL に `ABORT` レコードを追記・同期)。\n   - **COMMITTED 存在** $\\rightarrow$ **ROLLFORWARD** (S 式ペイロードを安全にリードし、State Machine に適用)。\n   - **ABORTED 存在** $\\rightarrow$ **IGNORE** (無視)。\n3. **Recovery Completion**: リカバリ完了後、WAL ファイルに `RECOVERY_COMPLETE` レコードを発行し `fdatasync` を強制。\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 79,
+      "line_end": 79,
+      "source_text": "## 6. セキュリティと堅牢性 (Security & Error Handling)\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 81,
+      "line_end": 83,
+      "source_text": "- **Safe Read Policy**: S 式リード時、`*read-eval*` を `nil` に厳格束縛し、`read-from-string` による不審なコード実行攻撃を防ぐ。\n- **Return Values over Signaled Errors**: ファイル書き込み・アペンド処理において `error` コンディションの送出を回避し、`values` による二値ファクト返却（例: `(values nil :payload-too-large)`) に統一する。\n- **POSIX Flags**: 通常書込用 FD は `O_CREAT | O_WRONLY | O_APPEND` (Mode `#o644`) でオープンする。"
+    }
+  ]
+}

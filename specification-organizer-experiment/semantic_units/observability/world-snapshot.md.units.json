@@ -1,0 +1,131 @@
+{
+  "document_path": "observability/world-snapshot.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Package Specification: chron-r2-0-c\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 4,
+      "source_text": "## Purpose\nDefines a data-only boundary for snapshotting domain entities (Worlds, Registries) into immutable observation structures. Ensures all stored fields contain only primitive values suitable for serialization or external consumption. Provides APIs to construct these observations from domain objects and compute structural diffs between them.\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 6,
+      "line_end": 6,
+      "source_text": "Relies on package `chron-r2-0-a` for underlying domain types (`world-p`, `world-registry-p`, etc.).\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 8,
+      "line_end": 8,
+      "source_text": "## Constants & Invariants\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 10,
+      "line_end": 13,
+      "source_text": "### Schema Version\n- **Symbol**: `+observation-schema-version+`\n- **Value**: `1`\n- All observation structures embed this version as their first slot.\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 15,
+      "line_end": 19,
+      "source_text": "### Primitive Tree Invariant\nObservation fields must contain only \"primitive trees\" to guarantee serializability and immutability:\n- **Primitive Leaf**: `null`, `t`, string, number, character, or keyword.\n- **Primitive Tree**: A primitive leaf, or a cons cell where both car and cdr are primitive trees.\n- **Enforcement**: Builders validate inputs via `%require-primitive-tree`. Accessors deep-copy strings and lists (`%copy-primitive-tree`) on retrieval to prevent external mutation of internal state.\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 21,
+      "line_end": 21,
+      "source_text": "## Observation Structures\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 23,
+      "line_end": 23,
+      "source_text": "All observations are implemented as fixed-length vectors with read-only slots. Internal constructors are prefixed with `%make-`; public construction is handled by `build-*` functions.\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 25,
+      "line_end": 37,
+      "source_text": "### World Observation\nRepresents a snapshot of a single world's structural metadata.\n- **Type Predicate**: `world-observation-p` (checks vector length 8 and schema version)\n- **Equality**: `world-observation-equal`\n- **Fields & Accessors**:\n  - `schema-version`: Integer (read-only, no copy)\n  - `world-id`: Primitive tree\n  - `root-node-id`: Primitive tree\n  - `head-node-id`: Primitive tree\n  - `projection-policy`: Primitive tree\n  - `metadata`: Primitive tree\n  - `lifecycle`: Value (read-only, no copy)\n  - `parent-world-id`: Primitive tree\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 39,
+      "line_end": 47,
+      "source_text": "### Registry Observation\nRepresents a snapshot of the world registry's state.\n- **Type Predicate**: `registry-observation-p` (checks vector length 4 and schema version)\n- **Equality**: `registry-observation-equal`\n- **Fields & Accessors**:\n  - `schema-version`: Integer\n  - `world-ids`: Primitive tree (list of world IDs)\n  - `active-world-id`: Primitive tree\n  - `archived-world-ids`: Primitive tree (list of archived world IDs)\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 49,
+      "line_end": 57,
+      "source_text": "### Ancestry Observation\nRepresents the lineage relationship for a specific world.\n- **Type Predicate**: `ancestry-observation-p` (checks vector length 4 and schema version)\n- **Equality**: `ancestry-observation-equal`\n- **Fields & Accessors**:\n  - `schema-version`: Integer\n  - `world-id`: Primitive tree\n  - `parent-world-id`: Primitive tree\n  - `ancestry-path`: Primitive tree (list starting with world-id, followed by parent)\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 59,
+      "line_end": 66,
+      "source_text": "### Diff Observation\nRepresents the result of comparing two observations.\n- **Type Predicate**: `diff-observation-p` (checks vector length 3 and schema version)\n- **Equality**: `diff-observation-equal`\n- **Fields & Accessors**:\n  - `schema-version`: Integer\n  - `changed-p`: Boolean\n  - `changed-fields`: Primitive tree (list of symbols indicating differing fields, or `(:type)` on type mismatch)\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 68,
+      "line_end": 68,
+      "source_text": "## Public API: Builders\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 70,
+      "line_end": 70,
+      "source_text": "Constructs observation structures from domain objects. Validates inputs and enforces the primitive tree invariant.\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 72,
+      "line_end": 79,
+      "source_text": "### build-world-observation\n```lisp\n(build-world-observation world &key parent-world-id)\n```\n- **Parameters**:\n  - `world`: Must satisfy `world-p`.\n  - `parent-world-id` (optional): Primitive tree value for lineage tracking.\n- **Behavior**: Extracts structural fields from the domain world object using internal accessors (`world-id`, `world-root-node`, etc.). Errors if `world` is invalid.\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 81,
+      "line_end": 91,
+      "source_text": "### build-registry-observation\n```lisp\n(build-registry-observation registry)\n```\n- **Parameters**:\n  - `registry`: Must satisfy `world-registry-p`.\n- **Behavior**: \n  - Collects all world IDs via `(list-worlds registry)`.\n  - Identifies active world ID via `(active-world registry)`.\n  - Filters archived worlds by checking if `(world-lifecycle world)` equals `:archived`.\n  - Errors if `registry` is invalid.\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 93,
+      "line_end": 103,
+      "source_text": "### build-ancestry-observation\n```lisp\n(build-ancestry-observation registry world-id)\n```\n- **Parameters**:\n  - `registry`: Must satisfy `world-registry-p`.\n  - `world-id`: Identifier to look up.\n- **Behavior**: \n  - Queries internal ancestry map (`chron-r2-0-a::world-registry-ancestry`).\n  - Errors if no parent entry exists for the given world ID.\n  - Constructs `ancestry-path` as `(cons world-id parent-world-id)`.\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 105,
+      "line_end": 117,
+      "source_text": "### build-diff-observation\n```lisp\n(build-diff-observation left right)\n```\n- **Parameters**: Two observation structures.\n- **Behavior**: \n  - Dispatches based on the type of both arguments:\n    - If both are `world-observation`: compares all world fields.\n    - If both are `registry-observation`: compares registry fields.\n    - If both are `ancestry-observation`: compares ancestry fields.\n    - If types match but are not recognized observation pairs: returns no changes.\n    - If types differ: sets `changed-p` to true and `changed-fields` to `(:type)`.\n  - Returns a new `diff-observation` containing the list of differing field symbols.\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 119,
+      "line_end": 119,
+      "source_text": "## Public API: Describers\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 121,
+      "line_end": 128,
+      "source_text": "Convenience aliases that delegate directly to the corresponding builder functions.\n\n| Function | Delegates To | Purpose |\n|----------|--------------|---------|\n| `describe-world` | `build-world-observation` | Snapshot a world entity. |\n| `describe-registry` | `build-registry-observation` | Snapshot registry state. |\n| `describe-ancestry` | `build-ancestry-observation` | Snapshot lineage for a world ID. |\n| `describe-diff` | `build-diff-observation` | Compute diff between two observations. |\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 130,
+      "line_end": 133,
+      "source_text": "## Implementation Notes\n- **Immutability**: Observations are vectors with read-only slots. Accessors return deep-copies of mutable primitive trees to prevent aliasing issues.\n- **Data Boundary**: Builders accept only primitive snapshot values or domain objects; they do not expose internal world/registry mutation capabilities.\n- **Error Handling**: All builders signal errors if required preconditions (type checks, existence checks) are violated."
+    }
+  ]
+}

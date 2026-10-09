@@ -1,0 +1,143 @@
+{
+  "document_path": "docs/10-tool-execution.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM Tool Execution Specification\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 4,
+      "source_text": "**Status:** Normative\n**Version:** R1\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 6,
+      "line_end": 6,
+      "source_text": "# Purpose\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 8,
+      "line_end": 8,
+      "source_text": "Define deterministic execution of external tools.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 10,
+      "line_end": 10,
+      "source_text": "# Tool Events\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 12,
+      "line_end": 12,
+      "source_text": "- tool-call-start\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 14,
+      "line_end": 14,
+      "source_text": "- tool-call-timeout\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 16,
+      "line_end": 16,
+      "source_text": "- tool-call-abort\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 18,
+      "line_end": 18,
+      "source_text": "- tool-call-commit\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 20,
+      "line_end": 20,
+      "source_text": "Tool Events represent tool execution facts.\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 22,
+      "line_end": 22,
+      "source_text": "Tool Events become authoritative only through Commit.\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 24,
+      "line_end": 24,
+      "source_text": "# Tool Isolation\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 26,
+      "line_end": 26,
+      "source_text": "Tool failures SHALL NOT affect dialogue execution.\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 28,
+      "line_end": 28,
+      "source_text": "Tool execution maintains the same causal-id.\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 30,
+      "line_end": 30,
+      "source_text": "Tool execution SHALL NOT bypass the Commit boundary.\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 32,
+      "line_end": 32,
+      "source_text": "# Retry\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 34,
+      "line_end": 34,
+      "source_text": "Retries occur only within the tool execution stream.\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 36,
+      "line_end": 36,
+      "source_text": "Dialogue execution remains unaffected.\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 38,
+      "line_end": 38,
+      "source_text": "Retry processing SHALL NOT mutate Canonical directly.\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 40,
+      "line_end": 40,
+      "source_text": "# Invariants\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 42,
+      "line_end": 42,
+      "source_text": "Tool execution is causally isolated.\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 44,
+      "line_end": 44,
+      "source_text": "Tool execution does not bypass Commit.\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 46,
+      "line_end": 46,
+      "source_text": "Dialogue replay remains deterministic."
+    }
+  ]
+}

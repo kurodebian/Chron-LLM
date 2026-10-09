@@ -1,0 +1,389 @@
+{
+  "document_path": "runtime/r0/api.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM R0 Runtime\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 3,
+      "source_text": "# Start Entry Specification v1.0\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 5,
+      "line_end": 5,
+      "source_text": "**Status:** Frozen Reference Specification\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 7,
+      "line_end": 7,
+      "source_text": "**Layer:** R0 Entry Layer\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 9,
+      "line_end": 9,
+      "source_text": "**Package:** `chronos-r0`\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 13,
+      "line_end": 13,
+      "source_text": "# 1. 概要\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 15,
+      "line_end": 26,
+      "source_text": "このファイルは **Chron-LLM R0** の最上位エントリポイントを定義する。\n\n責務は極めて限定されており、\n\n* Runtime生成\n* Chat Loop実行\n\nを実装せず、\n\n**チャットシステムへの起動委譲のみ**\n\nを行う。\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 30,
+      "line_end": 30,
+      "source_text": "# 2. アーキテクチャ上の位置\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 32,
+      "line_end": 51,
+      "source_text": "```\nUser\n\n  │\n\n  ▼\n\nstart-chat\n  │\n\n  ▼\n\nchronos-r0.chat:start-chat\n\n  │\n\n  ▼\n\nChat Runtime\n```\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 53,
+      "line_end": 57,
+      "source_text": "本ファイルは\n\n**Facade**\n\nとしてのみ存在する。\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 61,
+      "line_end": 61,
+      "source_text": "# 3. Package\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 63,
+      "line_end": 65,
+      "source_text": "```\nchronos-r0\n```\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 67,
+      "line_end": 67,
+      "source_text": "このパッケージに属する。\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 71,
+      "line_end": 71,
+      "source_text": "# 4. 公開API\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 73,
+      "line_end": 75,
+      "source_text": "```\nstart-chat\n```\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 77,
+      "line_end": 77,
+      "source_text": "のみを提供する。\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 81,
+      "line_end": 81,
+      "source_text": "# 5. 関数仕様\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 83,
+      "line_end": 83,
+      "source_text": "## start-chat\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 85,
+      "line_end": 87,
+      "source_text": "```\n(start-chat)\n```\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 89,
+      "line_end": 89,
+      "source_text": "### 役割\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 91,
+      "line_end": 91,
+      "source_text": "R0チャットシステムを起動する。\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 95,
+      "line_end": 95,
+      "source_text": "### 実装\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 97,
+      "line_end": 100,
+      "source_text": "```\n(defun start-chat ()\n    (chronos-r0.chat:start-chat))\n```\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 104,
+      "line_end": 104,
+      "source_text": "### 動作\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 106,
+      "line_end": 119,
+      "source_text": "関数自身は\n\n* Runtime生成しない\n* Prompt生成しない\n* Session生成しない\n* History生成しない\n\n単純に\n\n```\nchronos-r0.chat:start-chat\n```\n\nへ処理を委譲する。\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 123,
+      "line_end": 123,
+      "source_text": "# 6. 責務\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 125,
+      "line_end": 143,
+      "source_text": "この層の責務は\n\n```\nEntry Point\n```\n\nのみである。\n\nつまり\n\n```\n起動要求\n\n↓\n\nChat Runtimeへ転送\n```\n\nのみ行う。\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 147,
+      "line_end": 147,
+      "source_text": "# 7. 非責務\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 149,
+      "line_end": 149,
+      "source_text": "このモジュールは以下を一切実装しない。\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 151,
+      "line_end": 153,
+      "source_text": "## Prompt構築\n\n×\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 157,
+      "line_end": 159,
+      "source_text": "## History管理\n\n×\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 163,
+      "line_end": 165,
+      "source_text": "## Session管理\n\n×\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 169,
+      "line_end": 171,
+      "source_text": "## Runtime生成\n\n×\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 175,
+      "line_end": 177,
+      "source_text": "## Replay\n\n×\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 181,
+      "line_end": 183,
+      "source_text": "## Commit\n\n×\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 187,
+      "line_end": 189,
+      "source_text": "## Validation\n\n×\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 193,
+      "line_end": 195,
+      "source_text": "## Policy\n\n×\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 199,
+      "line_end": 201,
+      "source_text": "## LLM呼び出し\n\n×\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 205,
+      "line_end": 207,
+      "source_text": "## World管理\n\n×\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 211,
+      "line_end": 213,
+      "source_text": "## Graph管理\n\n×\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 217,
+      "line_end": 219,
+      "source_text": "## Memory管理\n\n×\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 223,
+      "line_end": 223,
+      "source_text": "# 8. 入出力仕様\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 225,
+      "line_end": 225,
+      "source_text": "入力\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 227,
+      "line_end": 229,
+      "source_text": "```\nなし\n```\n"
+    },
+    {
+      "unit_id": "u0045",
+      "line_start": 231,
+      "line_end": 231,
+      "source_text": "出力\n"
+    },
+    {
+      "unit_id": "u0046",
+      "line_start": 233,
+      "line_end": 235,
+      "source_text": "```\nchronos-r0.chat:start-chat\n```\n"
+    },
+    {
+      "unit_id": "u0047",
+      "line_start": 237,
+      "line_end": 237,
+      "source_text": "の戻り値をそのまま返す。\n"
+    },
+    {
+      "unit_id": "u0048",
+      "line_start": 239,
+      "line_end": 239,
+      "source_text": "戻り値を加工しない。\n"
+    },
+    {
+      "unit_id": "u0049",
+      "line_start": 243,
+      "line_end": 243,
+      "source_text": "# 9. 呼び出し契約\n"
+    },
+    {
+      "unit_id": "u0050",
+      "line_start": 245,
+      "line_end": 251,
+      "source_text": "```\nstart-chat()\n\n↓\n\nchronos-r0.chat:start-chat()\n```\n"
+    },
+    {
+      "unit_id": "u0051",
+      "line_start": 253,
+      "line_end": 253,
+      "source_text": "以外の副作用を持たない。\n"
+    },
+    {
+      "unit_id": "u0052",
+      "line_start": 257,
+      "line_end": 257,
+      "source_text": "# 10. データフロー\n"
+    },
+    {
+      "unit_id": "u0053",
+      "line_start": 259,
+      "line_end": 279,
+      "source_text": "```\nApplication\n\n     │\n\n     ▼\n\nstart-chat\n\n     │\n\n     ▼\n\nchronos-r0.chat:start-chat\n\n     │\n\n     ▼\n\nChat Runtime\n```\n"
+    },
+    {
+      "unit_id": "u0054",
+      "line_start": 283,
+      "line_end": 283,
+      "source_text": "# 11. 境界\n"
+    },
+    {
+      "unit_id": "u0055",
+      "line_start": 285,
+      "line_end": 307,
+      "source_text": "本モジュールは\n\n```\nApplication Layer\n```\n\nと\n\n```\nChat Runtime\n```\n\nとの境界である。\n\n```\nApplication\n    │\n    ▼\nEntry\n    │\n    ▼\nRuntime\n```\n"
+    },
+    {
+      "unit_id": "u0056",
+      "line_start": 311,
+      "line_end": 311,
+      "source_text": "# 12. 設計原則\n"
+    },
+    {
+      "unit_id": "u0057",
+      "line_start": 313,
+      "line_end": 313,
+      "source_text": "## Thin Entry\n"
+    },
+    {
+      "unit_id": "u0058",
+      "line_start": 315,
+      "line_end": 321,
+      "source_text": "本モジュールは\n\n**薄いエントリポイント**\n\nとして設計されている。\n\n処理を保持しない。\n"
+    },
+    {
+      "unit_id": "u0059",
+      "line_start": 325,
+      "line_end": 325,
+      "source_text": "## Delegation\n"
+    },
+    {
+      "unit_id": "u0060",
+      "line_start": 327,
+      "line_end": 333,
+      "source_text": "全責務を\n\n```\nchronos-r0.chat\n```\n\nへ委譲する。\n"
+    },
+    {
+      "unit_id": "u0061",
+      "line_start": 337,
+      "line_end": 337,
+      "source_text": "## Stable API\n"
+    },
+    {
+      "unit_id": "u0062",
+      "line_start": 339,
+      "line_end": 349,
+      "source_text": "アプリケーションは\n\n```\nstart-chat\n```\n\nのみ知っていればよい。\n\n内部実装が変更されても\n\nAPIは維持される。\n"
+    },
+    {
+      "unit_id": "u0063",
+      "line_start": 353,
+      "line_end": 353,
+      "source_text": "# 13. アーキテクチャ上の意義\n"
+    },
+    {
+      "unit_id": "u0064",
+      "line_start": 355,
+      "line_end": 369,
+      "source_text": "この構成により、\n\n```\nApplication\n        │\n        ▼\nEntry API\n        │\n        ▼\nChat Runtime\n```\n\nという依存関係が固定される。\n\nApplicationはチャット実装の詳細を知らずに起動でき、Runtime側は内部構造を自由に変更できるため、**エントリポイントと実行系の疎結合**が実現される。\n"
+    }
+  ]
+}

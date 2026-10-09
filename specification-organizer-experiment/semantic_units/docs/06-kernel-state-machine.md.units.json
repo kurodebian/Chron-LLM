@@ -1,0 +1,659 @@
+{
+  "document_path": "docs/06-kernel-state-machine.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM Kernel State Machine Specification\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 5,
+      "source_text": "**Status:** Normative  \n**Version:** R1  \n**Scope:** Deterministic authoritative state transitions executed by the Kernel.\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 7,
+      "line_end": 7,
+      "source_text": "# 1. Purpose\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 9,
+      "line_end": 9,
+      "source_text": "This specification defines the deterministic state transitions executed by the Chron-LLM Kernel.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 11,
+      "line_end": 11,
+      "source_text": "The Kernel is the sole component authorized to execute RuntimeRequests and mutate the authoritative system state.\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 13,
+      "line_end": 13,
+      "source_text": "This document defines **how authoritative state changes**.\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 15,
+      "line_end": 15,
+      "source_text": "It does not define Validation, PolicyRouter, or Runtime behavior.\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 17,
+      "line_end": 17,
+      "source_text": "# 2. Design Principles\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 19,
+      "line_end": 19,
+      "source_text": "## Single Mutator\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 21,
+      "line_end": 21,
+      "source_text": "Only the Kernel may mutate\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 23,
+      "line_end": 25,
+      "source_text": "- Canonical\n- DeferredQueue\n- FaultEvent Log\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 27,
+      "line_end": 27,
+      "source_text": "## Deterministic State Transition\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 29,
+      "line_end": 29,
+      "source_text": "The Kernel performs\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 31,
+      "line_end": 34,
+      "source_text": "- no validation\n- no policy interpretation\n- no external I/O\n- no Backend invocation\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 36,
+      "line_end": 36,
+      "source_text": "Given identical inputs, the Kernel SHALL produce identical outputs.\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 38,
+      "line_end": 38,
+      "source_text": "## Runtime Separation\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 40,
+      "line_end": 40,
+      "source_text": "The Kernel emits RuntimeCommands.\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 42,
+      "line_end": 42,
+      "source_text": "Execution of RuntimeCommands belongs exclusively to the Runtime.\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 44,
+      "line_end": 44,
+      "source_text": "## Clock-Driven Execution\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 46,
+      "line_end": 46,
+      "source_text": "Kernel state evolution depends solely on Canonical advancement.\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 48,
+      "line_end": 48,
+      "source_text": "Wall-clock time shall not affect Kernel state transitions.\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 50,
+      "line_end": 50,
+      "source_text": "# 3. Kernel State\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 52,
+      "line_end": 52,
+      "source_text": "The Kernel operates on\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 54,
+      "line_end": 56,
+      "source_text": "```\nKernelState\n```\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 58,
+      "line_end": 58,
+      "source_text": "whose structure is defined by the Domain Model.\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 60,
+      "line_end": 60,
+      "source_text": "KernelState contains\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 62,
+      "line_end": 64,
+      "source_text": "- Canonical\n- DeferredQueue\n- Working\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 66,
+      "line_end": 66,
+      "source_text": "# 4. Kernel Function\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 68,
+      "line_end": 68,
+      "source_text": "The deterministic transition function is\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 70,
+      "line_end": 81,
+      "source_text": "```\nKernel(\n    RuntimeRequest,\n    KernelState,\n    Config\n)\n→\n(\n    KernelState',\n    RuntimeCommand\n)\n```\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 83,
+      "line_end": 83,
+      "source_text": "where\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 85,
+      "line_end": 86,
+      "source_text": "- RuntimeRequest is produced by PolicyRouter.\n- RuntimeCommand is consumed by the Runtime.\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 88,
+      "line_end": 88,
+      "source_text": "# 5. RuntimeCommand\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 90,
+      "line_end": 90,
+      "source_text": "The RuntimeCommand domain object is defined by the Domain Model.\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 92,
+      "line_end": 92,
+      "source_text": "This specification defines its execution semantics.\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 94,
+      "line_end": 94,
+      "source_text": "Typical commands are\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 96,
+      "line_end": 108,
+      "source_text": "```\nproceed\n\ndiscard\n\nsleep\n\nregenerate\n\nregenerate-with-penalty\n\nterminate\n```\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 110,
+      "line_end": 110,
+      "source_text": "Execution semantics belong to the Runtime.\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 112,
+      "line_end": 112,
+      "source_text": "# 6. State Transition Rules\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 114,
+      "line_end": 114,
+      "source_text": "## commit-request\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 116,
+      "line_end": 116,
+      "source_text": "The Candidate is materialized into one or more Events.\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 119,
+      "line_end": 126,
+      "source_text": "Working.Candidate\n        │\n        ▼\nEvent Mapping\n        │\n        ▼\nCommit(Event)\n```\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 128,
+      "line_end": 128,
+      "source_text": "Mutation\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 131,
+      "line_end": 142,
+      "source_text": "Canonical.History++\n\nif Event.intent ∈ {\n\n    memory-write\n\n    recover\n\n}\n\nCanonical.MemoryRef++\n```\n"
+    },
+    {
+      "unit_id": "u0045",
+      "line_start": 144,
+      "line_end": 144,
+      "source_text": "Lamport Clock advances.\n"
+    },
+    {
+      "unit_id": "u0046",
+      "line_start": 146,
+      "line_end": 146,
+      "source_text": "DeferredQueue remains unchanged.\n"
+    },
+    {
+      "unit_id": "u0047",
+      "line_start": 148,
+      "line_end": 148,
+      "source_text": "Working is reinitialized.\n"
+    },
+    {
+      "unit_id": "u0048",
+      "line_start": 150,
+      "line_end": 150,
+      "source_text": "RuntimeCommand\n"
+    },
+    {
+      "unit_id": "u0049",
+      "line_start": 152,
+      "line_end": 154,
+      "source_text": "```\nproceed\n```\n"
+    },
+    {
+      "unit_id": "u0050",
+      "line_start": 158,
+      "line_end": 158,
+      "source_text": "## reject-request\n"
+    },
+    {
+      "unit_id": "u0051",
+      "line_start": 160,
+      "line_end": 160,
+      "source_text": "Mutation\n"
+    },
+    {
+      "unit_id": "u0052",
+      "line_start": 162,
+      "line_end": 168,
+      "source_text": "```\nCanonical unchanged\n\nDeferredQueue unchanged\n\nWorking reinitialized\n```\n"
+    },
+    {
+      "unit_id": "u0053",
+      "line_start": 170,
+      "line_end": 170,
+      "source_text": "RuntimeCommand\n"
+    },
+    {
+      "unit_id": "u0054",
+      "line_start": 172,
+      "line_end": 174,
+      "source_text": "```\ndiscard\n```\n"
+    },
+    {
+      "unit_id": "u0055",
+      "line_start": 178,
+      "line_end": 178,
+      "source_text": "## defer-request\n"
+    },
+    {
+      "unit_id": "u0056",
+      "line_start": 180,
+      "line_end": 180,
+      "source_text": "Mutation\n"
+    },
+    {
+      "unit_id": "u0057",
+      "line_start": 182,
+      "line_end": 188,
+      "source_text": "```\nDeferredQueue.enqueue(\n\n    Working.Candidate\n\n)\n```\n"
+    },
+    {
+      "unit_id": "u0058",
+      "line_start": 190,
+      "line_end": 194,
+      "source_text": "```\nCanonical unchanged\n\nWorking preserved\n```\n"
+    },
+    {
+      "unit_id": "u0059",
+      "line_start": 196,
+      "line_end": 196,
+      "source_text": "RuntimeCommand\n"
+    },
+    {
+      "unit_id": "u0060",
+      "line_start": 198,
+      "line_end": 200,
+      "source_text": "```\nsleep\n```\n"
+    },
+    {
+      "unit_id": "u0061",
+      "line_start": 204,
+      "line_end": 204,
+      "source_text": "## retry-request\n"
+    },
+    {
+      "unit_id": "u0062",
+      "line_start": 206,
+      "line_end": 206,
+      "source_text": "Mutation\n"
+    },
+    {
+      "unit_id": "u0063",
+      "line_start": 208,
+      "line_end": 214,
+      "source_text": "```\nCanonical unchanged\n\nDeferredQueue unchanged\n\nWorking preserved\n```\n"
+    },
+    {
+      "unit_id": "u0064",
+      "line_start": 216,
+      "line_end": 216,
+      "source_text": "RuntimeCommand\n"
+    },
+    {
+      "unit_id": "u0065",
+      "line_start": 218,
+      "line_end": 220,
+      "source_text": "```\nregenerate\n```\n"
+    },
+    {
+      "unit_id": "u0066",
+      "line_start": 224,
+      "line_end": 224,
+      "source_text": "## retry-penalty-request\n"
+    },
+    {
+      "unit_id": "u0067",
+      "line_start": 226,
+      "line_end": 226,
+      "source_text": "Mutation\n"
+    },
+    {
+      "unit_id": "u0068",
+      "line_start": 228,
+      "line_end": 232,
+      "source_text": "```\nCanonical unchanged\n\nDeferredQueue unchanged\n```\n"
+    },
+    {
+      "unit_id": "u0069",
+      "line_start": 234,
+      "line_end": 236,
+      "source_text": "```\nWorking.GenerationPolicy updated\n```\n"
+    },
+    {
+      "unit_id": "u0070",
+      "line_start": 238,
+      "line_end": 238,
+      "source_text": "or\n"
+    },
+    {
+      "unit_id": "u0071",
+      "line_start": 240,
+      "line_end": 242,
+      "source_text": "```\nWorking.DecodingPolicy updated\n```\n"
+    },
+    {
+      "unit_id": "u0072",
+      "line_start": 244,
+      "line_end": 244,
+      "source_text": "according to the configured penalty policy.\n"
+    },
+    {
+      "unit_id": "u0073",
+      "line_start": 246,
+      "line_end": 246,
+      "source_text": "RuntimeCommand\n"
+    },
+    {
+      "unit_id": "u0074",
+      "line_start": 248,
+      "line_end": 250,
+      "source_text": "```\nregenerate-with-penalty\n```\n"
+    },
+    {
+      "unit_id": "u0075",
+      "line_start": 254,
+      "line_end": 254,
+      "source_text": "## abort-request\n"
+    },
+    {
+      "unit_id": "u0076",
+      "line_start": 256,
+      "line_end": 256,
+      "source_text": "Mutation\n"
+    },
+    {
+      "unit_id": "u0077",
+      "line_start": 258,
+      "line_end": 264,
+      "source_text": "```\nCanonical unchanged\n\nDeferredQueue unchanged\n\nWorking preserved\n```\n"
+    },
+    {
+      "unit_id": "u0078",
+      "line_start": 266,
+      "line_end": 266,
+      "source_text": "Kernel emits a deterministic FaultEvent.\n"
+    },
+    {
+      "unit_id": "u0079",
+      "line_start": 268,
+      "line_end": 268,
+      "source_text": "RuntimeCommand\n"
+    },
+    {
+      "unit_id": "u0080",
+      "line_start": 270,
+      "line_end": 272,
+      "source_text": "```\nterminate\n```\n"
+    },
+    {
+      "unit_id": "u0081",
+      "line_start": 274,
+      "line_end": 274,
+      "source_text": "# 7. DeferredQueue\n"
+    },
+    {
+      "unit_id": "u0082",
+      "line_start": 276,
+      "line_end": 276,
+      "source_text": "DeferredQueue is owned exclusively by the Kernel.\n"
+    },
+    {
+      "unit_id": "u0083",
+      "line_start": 278,
+      "line_end": 278,
+      "source_text": "Candidates are revalidated only after Canonical advances.\n"
+    },
+    {
+      "unit_id": "u0084",
+      "line_start": 280,
+      "line_end": 280,
+      "source_text": "Wakeup condition\n"
+    },
+    {
+      "unit_id": "u0085",
+      "line_start": 282,
+      "line_end": 300,
+      "source_text": "```\nCommit(Event)\n\n↓\n\nLamport Clock++\n\n↓\n\nCanonical advances\n\n↓\n\nDeferredQueue Wakeup\n\n↓\n\nRevalidation\n```\n"
+    },
+    {
+      "unit_id": "u0086",
+      "line_start": 302,
+      "line_end": 302,
+      "source_text": "Timeout-based wakeup is outside the scope of R1.\n"
+    },
+    {
+      "unit_id": "u0087",
+      "line_start": 304,
+      "line_end": 304,
+      "source_text": "# 8. Canonical Advancement\n"
+    },
+    {
+      "unit_id": "u0088",
+      "line_start": 306,
+      "line_end": 306,
+      "source_text": "Canonical advances if and only if Commit succeeds.\n"
+    },
+    {
+      "unit_id": "u0089",
+      "line_start": 308,
+      "line_end": 308,
+      "source_text": "Canonical advancement consists of\n"
+    },
+    {
+      "unit_id": "u0090",
+      "line_start": 310,
+      "line_end": 314,
+      "source_text": "1. Event persistence\n2. History update\n3. MemoryRef update (when applicable)\n4. Lamport Clock increment\n\n"
+    },
+    {
+      "unit_id": "u0091",
+      "line_start": 315,
+      "line_end": 315,
+      "source_text": "Canonical advancement is the sole trigger for DeferredQueue wakeup.\n"
+    },
+    {
+      "unit_id": "u0092",
+      "line_start": 317,
+      "line_end": 317,
+      "source_text": "# 9. FaultEvent\n"
+    },
+    {
+      "unit_id": "u0093",
+      "line_start": 319,
+      "line_end": 319,
+      "source_text": "FaultEvent is emitted only during an `abort-request` transition.\n"
+    },
+    {
+      "unit_id": "u0094",
+      "line_start": 321,
+      "line_end": 321,
+      "source_text": "FaultEvent is non-authoritative.\n"
+    },
+    {
+      "unit_id": "u0095",
+      "line_start": 323,
+      "line_end": 323,
+      "source_text": "Its ABI is defined in\n"
+    },
+    {
+      "unit_id": "u0096",
+      "line_start": 325,
+      "line_end": 327,
+      "source_text": "```\n01-domain-model.md\n```\n"
+    },
+    {
+      "unit_id": "u0097",
+      "line_start": 329,
+      "line_end": 329,
+      "source_text": "# 10. Determinism Guarantee\n"
+    },
+    {
+      "unit_id": "u0098",
+      "line_start": 331,
+      "line_end": 331,
+      "source_text": "Given identical\n"
+    },
+    {
+      "unit_id": "u0099",
+      "line_start": 333,
+      "line_end": 335,
+      "source_text": "- KernelState\n- RuntimeRequest\n- Config\n"
+    },
+    {
+      "unit_id": "u0100",
+      "line_start": 337,
+      "line_end": 337,
+      "source_text": "the Kernel SHALL always produce identical\n"
+    },
+    {
+      "unit_id": "u0101",
+      "line_start": 339,
+      "line_end": 340,
+      "source_text": "- KernelState'\n- RuntimeCommand\n"
+    },
+    {
+      "unit_id": "u0102",
+      "line_start": 342,
+      "line_end": 342,
+      "source_text": "independent of\n"
+    },
+    {
+      "unit_id": "u0103",
+      "line_start": 344,
+      "line_end": 347,
+      "source_text": "- platform\n- language\n- operating system\n- execution timing\n"
+    },
+    {
+      "unit_id": "u0104",
+      "line_start": 349,
+      "line_end": 349,
+      "source_text": "# 11. Constitutional Invariants\n"
+    },
+    {
+      "unit_id": "u0105",
+      "line_start": 351,
+      "line_end": 351,
+      "source_text": "The following invariants are enforced.\n"
+    },
+    {
+      "unit_id": "u0106",
+      "line_start": 353,
+      "line_end": 357,
+      "source_text": "- Only Commit may mutate Canonical.\n- RuntimeCommand never mutates Canonical.\n- DeferredQueue is owned exclusively by the Kernel.\n- Kernel never invokes the Backend.\n- Kernel state transitions are deterministic and atomic.\n"
+    },
+    {
+      "unit_id": "u0107",
+      "line_start": 359,
+      "line_end": 359,
+      "source_text": "# 12. Architectural Position\n"
+    },
+    {
+      "unit_id": "u0108",
+      "line_start": 361,
+      "line_end": 375,
+      "source_text": "```\nRuntimeRequest\n        │\n        ▼\nKernel\n        │\n        ▼\nKernelState'\n        │\n        ▼\nRuntimeCommand\n        │\n        ▼\nRuntime\n```\n"
+    },
+    {
+      "unit_id": "u0109",
+      "line_start": 377,
+      "line_end": 377,
+      "source_text": "The Kernel forms the deterministic execution boundary between PolicyRouter and Runtime."
+    }
+  ]
+}

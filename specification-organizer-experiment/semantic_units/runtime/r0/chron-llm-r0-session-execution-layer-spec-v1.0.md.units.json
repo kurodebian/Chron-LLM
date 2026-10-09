@@ -1,0 +1,305 @@
+{
+  "document_path": "runtime/r0/chron-llm-r0-session-execution-layer-spec-v1.0.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 2,
+      "source_text": "# Chron-LLM Runtime Architecture Specification\n# R0/R1 Unified Execution & Observation Contract v1.0\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 4,
+      "line_end": 7,
+      "source_text": "**Status:** Frozen Baseline  \n**Version:** v1.0  \n**Architecture:** Chron-LLM R1  \n**Scope:** Runtime Execution / Observation Boundary\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 11,
+      "line_end": 13,
+      "source_text": "# 0. Architecture Overview\n\nChron-LLM は以下の3層で構成される。\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 15,
+      "line_end": 43,
+      "source_text": "                User\n                 |\n                 v\n\n    +-------------------------+\n    | R0 Session Execution    |\n    | Execution Contract     |\n    +-------------------------+\n\n                 |\n                 v\n\n    +-------------------------+\n    | R1 IR Observation       |\n    | Observation Contract   |\n    +-------------------------+\n\n                 |\n                 v\n\n    +-------------------------+\n    | Causal Kernel           |\n    | Phase D/E/F/G           |\n    +-------------------------+\n\n                 |\n                 v\n\n    llama.cpp Backend\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 47,
+      "line_end": 49,
+      "source_text": "# 1. Core Architecture Principle\n\nChron-LLM は、\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 51,
+      "line_end": 53,
+      "source_text": "> LLM の非決定的生成過程を、Kernelによる観測可能な状態遷移として扱う Runtime Architecture\n\nである。\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 55,
+      "line_end": 61,
+      "source_text": "責務：\n\n| Layer | Role |\n|-|-|\n| R0 | Conversation Execution |\n| R1 | Generation Observation |\n| Kernel | Causal Computation |\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 63,
+      "line_end": 72,
+      "source_text": "LLM は：\n\n\nDecision Maker\nではなく\n\nGeneration Engine\n\n\nとして扱われる。\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 76,
+      "line_end": 78,
+      "source_text": "# 2. R0 Session Execution Layer\n\n## Purpose\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 80,
+      "line_end": 80,
+      "source_text": "R0 は対話実行の基底Runtimeである。\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 82,
+      "line_end": 88,
+      "source_text": "責務：\n\n- Session管理\n- History管理\n- Prompt生成\n- llama.cpp呼び出し\n- Execution Trace生成\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 90,
+      "line_end": 95,
+      "source_text": "非責務：\n\n- Token観測\n- 因果判断\n- rollback\n- KV操作\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 99,
+      "line_end": 101,
+      "source_text": "# 3. R0 Architecture\n\n\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 102,
+      "line_end": 131,
+      "source_text": "User Input\n\n|\nv\n\nstart-chat\n\n|\nv\n\nchat()\n\n|\n+-------------+\n|             |\nv             v\n\nHistory Prompt\nLayer Projection\n\n|\nv\n\nllama-run\n\n|\nv\n\nTrace Layer\n\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 135,
+      "line_end": 138,
+      "source_text": "# 4. R0 Data Model\n\n\n## Session\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 140,
+      "line_end": 153,
+      "source_text": "```lisp\n(defstruct session\n  model\n  history)\nHistory Event\n(defstruct history-event\n  role\n  content)\nHistory\n(defstruct history\n  (events\n    (make-array 0\n                :adjustable t\n                :fill-pointer 0)))\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 155,
+      "line_end": 160,
+      "source_text": "保証：\n\nordered\nappend-oriented\nsnapshot可能\nconversation state表現\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 161,
+      "line_end": 170,
+      "source_text": "5. R0 Trace Contract\n(defstruct r0-trace\n  user-text\n  prompt\n  raw\n  parsed\n  history-before\n  history-after\n  prompt-length\n  response-length)\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 172,
+      "line_end": 176,
+      "source_text": "Trace目的：\n\nDebug\nExecution comparison\nReconstruction\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 178,
+      "line_end": 188,
+      "source_text": "注意：\n\nR0 Trace は\n\n「完全決定論Replay」\n\nではなく、\n\n「実行状態再構成」\n\nを提供する。\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 190,
+      "line_end": 191,
+      "source_text": "6. R1 IR Observation Layer\nPurpose\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 193,
+      "line_end": 193,
+      "source_text": "LLM生成過程をtoken単位で観測する。\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 195,
+      "line_end": 201,
+      "source_text": "R1は：\n\n非侵襲\n非権威\nappend-only\n\nの観測契約である。\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 203,
+      "line_end": 205,
+      "source_text": "7. Physical Event\n\nBackendから発生する生イベント。\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 207,
+      "line_end": 212,
+      "source_text": "(defstruct physical-event\n  causal-id\n  token-id\n  kv-pos\n  entropy\n  timestamp)\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 214,
+      "line_end": 220,
+      "source_text": "責務：\n\nllama.cpp\n\n↓\n\nPhysical Event Stream\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 222,
+      "line_end": 224,
+      "source_text": "8. IR Stream Contract\n\nPhysical EventをKernel内部形式へ正規化する。\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 226,
+      "line_end": 238,
+      "source_text": "Physical Event\n\n      |\n      v\n\nNormalize\n\n      |\n      v\n\nIR Stream\n\nIRはChron-LLM内部時間軸の唯一の入力。\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 240,
+      "line_end": 246,
+      "source_text": "9. IR Data Model\n(defstruct ir\n  ctx-id\n  pos\n  phase\n  token\n  score)\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 248,
+      "line_end": 253,
+      "source_text": "保証：\n\nimmutable\nordered\nsemantic-free\nnon-authoritative\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 254,
+      "line_end": 283,
+      "source_text": "10. IR Observation Pipeline\nllama.cpp\n\n   |\n   v\n\nphysical-event\n\n   |\n   v\n\nir-callback\n\n   |\n   v\n\nir-stream\n\n   |\n   +-------------+\n   |             |\n   v             v\n\nReplay       Analysis\n\n             |\n             v\n\n        Divergence\n        Sensors\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 284,
+      "line_end": 287,
+      "source_text": "11. IR Analysis\nextract-actions\n\n生成phaseのみ抽出。\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 289,
+      "line_end": 291,
+      "source_text": "divergence-profile\n\n複数試行比較。\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 293,
+      "line_end": 298,
+      "source_text": "出力：\n\nField\tMeaning\nstep\ttoken位置\nall-same\t完全一致\np-same\t一致確率\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 299,
+      "line_end": 301,
+      "source_text": "12. Kernel Connection\n\nR0/R1 はKernelへ直接介入しない。\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 303,
+      "line_end": 313,
+      "source_text": "入力：\n\nR0 Trace\n\n+\n\nIR Stream\n\n↓\n\nKernel\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 315,
+      "line_end": 320,
+      "source_text": "Kernelが担当：\n\nCausal Graph\nWorldline\nRollback\nPolicy Decision\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 321,
+      "line_end": 323,
+      "source_text": "13. RuntimeCommand Boundary\n\nKernelからBackendへの唯一の制御境界。\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 325,
+      "line_end": 331,
+      "source_text": "(defstruct runtime-command\n  op\n  interventions\n  truncate-at\n  delta-prefill\n  payload\n  metadata)\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 333,
+      "line_end": 338,
+      "source_text": "Operation:\n\nop\tmeaning\n:commit\tstate commit\n:retry\tregenerate\n:rollback\trestore\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 339,
+      "line_end": 351,
+      "source_text": "14. Frozen Boundary\nFrozen\nR0\nsession structure\nhistory-event\ntrace contract\nR1\nphysical-event flow\nIR format\nobservation boundary\nKernel\nRuntimeCommand ABI\nPhase boundary\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 352,
+      "line_end": 354,
+      "source_text": "15. Flexible\n\n変更可能：\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 356,
+      "line_end": 360,
+      "source_text": "prompt template\nbackend implementation\nsensor algorithm\nΩ calculation\nvisualization\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 361,
+      "line_end": 388,
+      "source_text": "16. Final Architecture Position\nChron-LLM\n\n+-----------------------------+\n| R0 Session Execution        |\n| Conversation Runtime        |\n+-----------------------------+\n\n             |\n\n+-----------------------------+\n| R1 IR Observation           |\n| Generation Measurement      |\n+-----------------------------+\n\n             |\n\n+-----------------------------+\n| Causal Kernel               |\n| Deterministic Control       |\n+-----------------------------+\n\n             |\n\n+-----------------------------+\n| llama.cpp Backend           |\n| Physical Execution          |\n+-----------------------------+\n"
+    },
+    {
+      "unit_id": "u0045",
+      "line_start": 389,
+      "line_end": 392,
+      "source_text": "Final Statement\n\nChron-LLM Runtime Architecture\nR0/R1 Unified Execution & Observation Contract v1.0\n"
+    },
+    {
+      "unit_id": "u0046",
+      "line_start": 394,
+      "line_end": 400,
+      "source_text": "は、Chron-LLMにおける\n\n実行\n観測\n因果制御\n\nの境界を正式定義する基盤仕様である。\n"
+    },
+    {
+      "unit_id": "u0047",
+      "line_start": 402,
+      "line_end": 402,
+      "source_text": "R0 は「何を実行したか」を記録する。\n"
+    },
+    {
+      "unit_id": "u0048",
+      "line_start": 404,
+      "line_end": 404,
+      "source_text": "R1 は「どのように生成されたか」を観測する。\n"
+    },
+    {
+      "unit_id": "u0049",
+      "line_start": 406,
+      "line_end": 406,
+      "source_text": "Kernel は「次に何を許可するか」を決定する。\n"
+    },
+    {
+      "unit_id": "u0050",
+      "line_start": 408,
+      "line_end": 408,
+      "source_text": "この三層分離により、LLMの非決定性を保持したまま、決定的な因果制御システムとして拡張可能になる。"
+    }
+  ]
+}

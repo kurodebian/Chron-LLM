@@ -1,0 +1,107 @@
+{
+  "document_path": "experiments/chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 4,
+      "source_text": "📘 Chron-LLM Experimental Causal Dynamics Model\nFormal Graph & Basin Specification v1.0\nStatus: Experimental / Mathematical Foundation\nScope: Graph Dynamics / SCC / Attractor / Basin / Cycle Detection\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 5,
+      "line_end": 11,
+      "source_text": "Relation:\n\nUpstream: IR Observation Layer\n\nDownstream: Phase‑E (IR → Causal DSL)\n\nUsed by: Causal Kernel (Phase D/E/F/G)\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 13,
+      "line_end": 30,
+      "source_text": "1. Purpose（目的）\nこの実験モジュールは、Chron‑LLM の因果カーネルが扱う\n\n世界線の構造（Graph）\n\n因果遷移（Edges）\n\n再帰的振る舞い（Cycles）\n\n安定点（Attractors）\n\n収束領域（Basins）\n\n強連結成分（SCC）\n\nを形式的に定義するための数学モデルである。\n\nPhase‑E の DSL は、このモデルを 「トークン列 → 因果グラフ」 に写像するための意味論として利用する。\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 32,
+      "line_end": 40,
+      "source_text": "2. Graph Model（グラフモデル）\n2.1 Node\nlisp\n(defstruct node id role)\nFields\nField\tMeaning\nid\tノード識別子\nrole\treply / temporal / bridge\n\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 42,
+      "line_end": 50,
+      "source_text": "2.2 Edge\nlisp\n(defstruct edge from to relation strength)\nFields\nField\tMeaning\nfrom\t出発ノード\nto\t到達ノード\nrelation\treply / temporal / bridge\nstrength\t遷移の強度（確率・重み）\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 53,
+      "line_end": 55,
+      "source_text": "2.3 Graph\nlisp\n(defstruct graph nodes edges)\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 56,
+      "line_end": 65,
+      "source_text": "3. Example: 3‑Cluster Graph\nA/B/C の3クラスターを持つ典型的な因果遷移モデル。\n\nA: reply cluster（強い循環）\n\nB: temporal cluster（弱い循環）\n\nC: bridge cluster（A/B を接続）\n\nこの構造は LLM の生成行動の「局所安定性」や「モード遷移」を模倣する。\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 67,
+      "line_end": 73,
+      "source_text": "4. Dynamics（因果ダイナミクス）\n4.1 next-event\nlisp\n(defun next-event (graph node-id)\nnode-id から出る edge のうち 最も強い遷移を選択\n\nLLM の「次トークン選択」に相当する\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 75,
+      "line_end": 80,
+      "source_text": "4.2 rollout*\nlisp\n(defun rollout* (graph start steps)\nstart ノードから steps 回遷移\n\nLLM の「生成トークン列」を模倣する\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 82,
+      "line_end": 87,
+      "source_text": "4.3 find-attractor\nlisp\n(defun find-attractor (graph start steps)\nrollout の最終ノード\n\nLLM の「最終的に落ち着くモード」を表す\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 89,
+      "line_end": 95,
+      "source_text": "5. Cycle Detection（再帰構造）\n5.1 find-cycle\nlisp\n(defun find-cycle (path)\npath の末尾に現れる再帰的サイクルを抽出\n\nLLM の「反復パターン」を検出する\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 97,
+      "line_end": 102,
+      "source_text": "5.2 find-recurrent-cycle\nlisp\n(defun find-recurrent-cycle (graph start steps)\nrollout → cycle 抽出\n\nLLM の「モード循環」を観測する\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 104,
+      "line_end": 110,
+      "source_text": "6. Basin Analysis（収束領域解析）\n6.1 build-basin-map\nlisp\n(defun build-basin-map (graph nodes steps)\n各ノードがどの attractor に落ちるかを計測\n\nattractor → basin の対応を構築\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 112,
+      "line_end": 122,
+      "source_text": "6.2 Basin Structure\nlisp\n(defstruct basin attractor nodes mass ratio)\nMeaning\nattractor: 収束先\n\nnodes: basin に属するノード\n\nmass: basin の大きさ\n\nratio: 全体に対する割合\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 124,
+      "line_end": 130,
+      "source_text": "7. SCC（強連結成分）\n7.1 compute-sccs\nlisp\n(defun compute-sccs (graph nodes)\nグラフの強連結成分を抽出\n\nLLM の「閉じたモード集合」を特定する\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 132,
+      "line_end": 153,
+      "source_text": "8. Why This Matters for Phase‑E\nPhase‑E（IR → Causal DSL）は、\n「トークン列を因果グラフとして解釈する」  \nという役割を持つ。\n\nこの実験モジュールはそのための数学的基盤であり、以下を提供する：\n\nトークン遷移 → グラフ遷移\n\n反復生成 → Cycle\n\nモード安定性 → Attractor\n\n世界線の局所構造 → SCC\n\n世界線の大域構造 → Basin\n\nつまり、Phase‑E の DSL はこのモデルを使って：\n\nIR Stream を「因果グラフの操作列（Causal DSL）」に変換する\n\nという仕様を定義することになる。\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 155,
+      "line_end": 161,
+      "source_text": "Final Statement\nこの experiments/ モジュールは、\nChron‑LLM の因果カーネルが扱う世界線ダイナミクスの 形式的・数学的基盤である。\n\nPhase‑E の仕様書（chron-llm-phase-e-ir-to-causal-dsl-transformation-contract-v1.0.md）では、\nこのモデルを DSL の意味論（Semantics）として採用し、\nIR → DSL → Kernel の因果パイプラインを完成させる。"
+    }
+  ]
+}

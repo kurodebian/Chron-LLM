@@ -1,0 +1,53 @@
+{
+  "document_path": "docs/03-reference-runtime.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "Runtime R1\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 3,
+      "source_text": "Reference implementation.\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 5,
+      "line_end": 5,
+      "source_text": "Non-normative.\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 7,
+      "line_end": 7,
+      "source_text": "Conforms to:\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 9,
+      "line_end": 16,
+      "source_text": "- Agent Causality Constitution\n- Phase A–F\n- Operational Semantics R1\n- Validation Pipeline R0\n- Architecture V1.1\n- Memory Model R1\n- Scheduling R1\n- Worldline R1\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 18,
+      "line_end": 18,
+      "source_text": "Coordinates the following runtime components:\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 20,
+      "line_end": 27,
+      "source_text": "- Chat Loop\n- Prompt Builder\n- LLM Backend\n- Memory Integration\n- Validation Pipeline Integration\n- Runtime Scheduling\n- Persistence Integration\n\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 28,
+      "line_end": 28,
+      "source_text": "This document specifies how the reference runtime composes existing normative components into an executable runtime. It introduces no additional runtime semantics.\n"
+    }
+  ]
+}

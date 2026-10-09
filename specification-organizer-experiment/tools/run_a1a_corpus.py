@@ -17,6 +17,7 @@ from tools.a1_segment import (
     detect_boundaries_llm,
     load_source,
     normalize_boundaries,
+    update_a1_diagnostic,
     validate_raw_observation,
     write_units,
 )
@@ -102,7 +103,21 @@ def run_document(repository_root: Path, document_path: str) -> Path:
         lines=lines,
     )
 
-    validate_raw_observation(observation, lines)
+    try:
+        validate_raw_observation(observation, lines)
+    except Exception as exc:
+        update_a1_diagnostic(
+            document_path,
+            validation_status="failed",
+            error=f"{type(exc).__name__}: {exc}",
+        )
+        raise
+    else:
+        update_a1_diagnostic(
+            document_path,
+            validation_status="passed",
+            error=None,
+        )
 
     units = normalize_boundaries(
         observation,
@@ -127,6 +142,42 @@ def run_document(repository_root: Path, document_path: str) -> Path:
 
     return absolute_output
 
+
+def artifact_path(document_path: str) -> Path:
+    relative = Path(document_path)
+
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError(
+            f"INVALID_DOCUMENT_PATH: {document_path}"
+        )
+
+    root = Path("semantic_units").resolve()
+    candidate = (
+        root / f"{document_path}.units.json"
+    ).resolve()
+
+    try:
+        candidate.relative_to(root)
+    except ValueError as exc:
+        raise ValueError(
+            f"ARTIFACT_PATH_ESCAPE: {document_path}"
+        ) from exc
+
+    return candidate
+
+
+def validate_artifact_from_repository_root(
+    output_path: Path,
+    repository_root: Path,
+) -> None:
+    absolute_output = output_path.resolve()
+    original_cwd = Path.cwd()
+
+    try:
+        os.chdir(repository_root)
+        validate_units_json(str(absolute_output))
+    finally:
+        os.chdir(original_cwd)
 
 def main() -> int:
     parser = argparse.ArgumentParser(
@@ -162,16 +213,22 @@ def main() -> int:
         parser.error("--start must be >= 0")
 
     manifest_path = args.manifest.resolve()
-    manifest = load_manifest(manifest_path)
+
+    try:
+        manifest = load_manifest(manifest_path)
+    except Exception as exc:
+        print(f"FATAL: Failed to load manifest {manifest_path}: {exc}")
+        return 1
 
     repository_root = Path(
         manifest["repository_root"]
     ).resolve()
 
     if not repository_root.is_dir():
-        raise FileNotFoundError(
-            f"REPOSITORY_ROOT_NOT_FOUND: {repository_root}"
+        print(
+            f"FATAL: REPOSITORY_ROOT_NOT_FOUND: {repository_root}"
         )
+        return 1
 
     entries = manifest["files"]
 
@@ -181,37 +238,77 @@ def main() -> int:
         selected = selected[:args.limit]
 
     if not selected:
-        raise ValueError("NO_INPUT: selected manifest range is empty")
+        print("FATAL: NO_INPUT: selected manifest range is empty")
+        return 1
 
     print(
         f"A-1a corpus run: {len(selected)} document(s) "
         f"from manifest {manifest_path}"
     )
 
+    created_count = 0
+    reused_count = 0
+    failure_count = 0
+
     for offset, entry in enumerate(
         selected,
         start=args.start + 1,
     ):
         if not isinstance(entry, dict):
-            raise ValueError(
-                f"INVALID_MANIFEST_ENTRY: index={offset}"
+            print(
+                f"[{offset}/{len(entries)}] "
+                f"FAIL: INVALID_MANIFEST_ENTRY"
             )
+            failure_count += 1
+            continue
 
         document_path = entry.get("path")
 
         if not isinstance(document_path, str) or not document_path:
-            raise ValueError(
-                f"INVALID_MANIFEST_ENTRY: missing path at index={offset}"
+            print(
+                f"[{offset}/{len(entries)}] "
+                f"FAIL: INVALID_MANIFEST_ENTRY: missing path"
             )
+            failure_count += 1
+            continue
 
         print(f"[{offset}/{len(entries)}] {document_path}")
 
-        output_path = run_document(
-            repository_root,
-            document_path,
-        )
+        try:
+            output_path = artifact_path(document_path)
 
-        print(f"  PASS: {output_path}")
+            if output_path.exists():
+                validate_artifact_from_repository_root(
+                    output_path,
+                    repository_root,
+                )
+                print(f"  REUSE: {output_path}")
+                reused_count += 1
+                continue
+
+            created_path = run_document(
+                repository_root,
+                document_path,
+            )
+            print(f"  PASS: {created_path}")
+            created_count += 1
+
+        except Exception as exc:
+            print(f"  FAIL: {document_path}: {exc}")
+            failure_count += 1
+            continue
+
+    print(
+        "SUMMARY: "
+        f"created={created_count}, "
+        f"reused={reused_count}, "
+        f"failed={failure_count}, "
+        f"selected={len(selected)}"
+    )
+
+    if failure_count > 0:
+        print("RESULT FAIL")
+        return 1
 
     print("RESULT PASS")
     return 0

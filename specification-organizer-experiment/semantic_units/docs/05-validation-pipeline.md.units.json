@@ -1,0 +1,455 @@
+{
+  "document_path": "docs/05-validation-pipeline.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM Validation Pipeline Specification\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 5,
+      "source_text": "**Status:** Normative  \n**Version:** R1  \n**Scope:** Deterministic validation and policy routing.\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 7,
+      "line_end": 7,
+      "source_text": "# 1. Purpose\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 9,
+      "line_end": 9,
+      "source_text": "This specification defines the deterministic validation boundary between non-authoritative Candidate generation and the deterministic Chron-LLM runtime.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 11,
+      "line_end": 11,
+      "source_text": "The Validation Pipeline is responsible for:\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 13,
+      "line_end": 16,
+      "source_text": "- collecting objective facts\n- producing a ValidationReport\n- interpreting those facts through PolicyRouter\n- producing a RuntimeRequest\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 18,
+      "line_end": 18,
+      "source_text": "This document does **not** define:\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 20,
+      "line_end": 23,
+      "source_text": "- kernel state transitions\n- canonical mutation\n- deferred execution\n- runtime execution\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 25,
+      "line_end": 25,
+      "source_text": "These are defined by the Kernel State Machine.\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 27,
+      "line_end": 27,
+      "source_text": "# 2. Design Principles\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 29,
+      "line_end": 29,
+      "source_text": "## DP-1. Separation of Responsibilities\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 31,
+      "line_end": 31,
+      "source_text": "Validation performs validation only.\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 33,
+      "line_end": 33,
+      "source_text": "PolicyRouter performs interpretation only.\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 35,
+      "line_end": 35,
+      "source_text": "Kernel performs state transition only.\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 37,
+      "line_end": 37,
+      "source_text": "## DP-2. Fact-Oriented Reporting\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 39,
+      "line_end": 39,
+      "source_text": "Validation never returns decisions.\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 41,
+      "line_end": 41,
+      "source_text": "Validation returns facts only.\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 43,
+      "line_end": 43,
+      "source_text": "No PASS/FAIL state is required.\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 45,
+      "line_end": 45,
+      "source_text": "Success is represented by the absence of violations.\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 47,
+      "line_end": 47,
+      "source_text": "## DP-3. Deterministic Validation\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 49,
+      "line_end": 49,
+      "source_text": "Given identical\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 51,
+      "line_end": 53,
+      "source_text": "- Candidate\n- Canonical\n- Config\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 55,
+      "line_end": 55,
+      "source_text": "Validation MUST produce an identical ValidationReport.\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 57,
+      "line_end": 57,
+      "source_text": "Validation MUST NOT depend on\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 59,
+      "line_end": 61,
+      "source_text": "- timing\n- randomness\n- external mutable state\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 63,
+      "line_end": 63,
+      "source_text": "## DP-4. Configuration Independence\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 65,
+      "line_end": 65,
+      "source_text": "Configuration MAY modify routing policy.\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 67,
+      "line_end": 67,
+      "source_text": "Configuration MUST NOT modify\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 69,
+      "line_end": 70,
+      "source_text": "- validation semantics\n- observation measurement semantics\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 72,
+      "line_end": 72,
+      "source_text": "# 3. Pipeline\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 74,
+      "line_end": 91,
+      "source_text": "```\nCandidate\n      │\n      ▼\nValidation\n      │\n      ▼\nValidationReport\n      │\n      ▼\nPolicyRouter\n      │\n      ▼\nRuntimeRequest\n      │\n      ▼\nKernel\n```\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 93,
+      "line_end": 93,
+      "source_text": "RuntimeRequest is consumed exclusively by the Kernel.\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 95,
+      "line_end": 95,
+      "source_text": "Kernel behavior is defined by the Kernel State Machine.\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 97,
+      "line_end": 97,
+      "source_text": "# 4. Validation Layers\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 99,
+      "line_end": 99,
+      "source_text": "Validation consists of four deterministic layers.\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 101,
+      "line_end": 115,
+      "source_text": "```\nSyntaxCheck\n      │\n      ▼\nSemanticConsistencyCheck\n      │\n      ▼\nInvariantCheck\n      │\n      ▼\nObservationCheck\n      │\n      ▼\nValidationReport\n```\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 117,
+      "line_end": 117,
+      "source_text": "Each layer contributes objective facts.\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 119,
+      "line_end": 119,
+      "source_text": "No layer performs routing.\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 121,
+      "line_end": 121,
+      "source_text": "No layer mutates runtime state.\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 123,
+      "line_end": 123,
+      "source_text": "# 5. ValidationReport\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 125,
+      "line_end": 134,
+      "source_text": "```\nValidationReport\n{\n    candidate-id\n    syntax-violations\n    semantic-violations\n    invariant-violations\n    observations\n}\n```\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 136,
+      "line_end": 136,
+      "source_text": "ValidationReport contains facts only.\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 138,
+      "line_end": 138,
+      "source_text": "It contains no routing decision.\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 140,
+      "line_end": 140,
+      "source_text": "# 6. Observation\n"
+    },
+    {
+      "unit_id": "u0045",
+      "line_start": 142,
+      "line_end": 142,
+      "source_text": "Observation records structural runtime facts.\n"
+    },
+    {
+      "unit_id": "u0046",
+      "line_start": 144,
+      "line_end": 152,
+      "source_text": "```\nObservation\n{\n    detector\n    score\n    threshold\n    facts\n}\n```\n"
+    },
+    {
+      "unit_id": "u0047",
+      "line_start": 154,
+      "line_end": 154,
+      "source_text": "Observation\n"
+    },
+    {
+      "unit_id": "u0048",
+      "line_start": 156,
+      "line_end": 158,
+      "source_text": "- contains no routing logic\n- contains no runtime decision\n- never rejects a Candidate\n"
+    },
+    {
+      "unit_id": "u0049",
+      "line_start": 160,
+      "line_end": 160,
+      "source_text": "# 7. PolicyRouter\n"
+    },
+    {
+      "unit_id": "u0050",
+      "line_start": 162,
+      "line_end": 162,
+      "source_text": "PolicyRouter consumes a ValidationReport and produces a RuntimeRequest.\n"
+    },
+    {
+      "unit_id": "u0051",
+      "line_start": 164,
+      "line_end": 170,
+      "source_text": "```\nPolicyRouter(\n    ValidationReport,\n    Config\n)\n→ RuntimeRequest\n```\n"
+    },
+    {
+      "unit_id": "u0052",
+      "line_start": 172,
+      "line_end": 172,
+      "source_text": "RuntimeRequest is declarative.\n"
+    },
+    {
+      "unit_id": "u0053",
+      "line_start": 174,
+      "line_end": 174,
+      "source_text": "It requests a runtime operation.\n"
+    },
+    {
+      "unit_id": "u0054",
+      "line_start": 176,
+      "line_end": 176,
+      "source_text": "It performs no state transition.\n"
+    },
+    {
+      "unit_id": "u0055",
+      "line_start": 178,
+      "line_end": 178,
+      "source_text": "# 8. RuntimeRequest\n"
+    },
+    {
+      "unit_id": "u0056",
+      "line_start": 180,
+      "line_end": 180,
+      "source_text": "The RuntimeRequest domain object is defined by the Domain Model.\n"
+    },
+    {
+      "unit_id": "u0057",
+      "line_start": 182,
+      "line_end": 182,
+      "source_text": "This specification defines the permitted RuntimeRequest kinds.\n"
+    },
+    {
+      "unit_id": "u0058",
+      "line_start": 184,
+      "line_end": 200,
+      "source_text": "```\nRuntimeRequest ∈ {\n\n    commit-request\n\n    reject-request\n\n    defer-request\n\n    retry-request\n\n    retry-penalty-request\n\n    abort-request\n\n}\n```\n"
+    },
+    {
+      "unit_id": "u0059",
+      "line_start": 202,
+      "line_end": 202,
+      "source_text": "The semantics of RuntimeRequest execution are defined by the Kernel State Machine.\n"
+    },
+    {
+      "unit_id": "u0060",
+      "line_start": 204,
+      "line_end": 204,
+      "source_text": "# 9. Routing Rules\n"
+    },
+    {
+      "unit_id": "u0061",
+      "line_start": 206,
+      "line_end": 206,
+      "source_text": "The following rules define the deterministic evaluation order.\n"
+    },
+    {
+      "unit_id": "u0062",
+      "line_start": 208,
+      "line_end": 208,
+      "source_text": "The resulting RuntimeRequest is determined according to the configured routing policy.\n"
+    },
+    {
+      "unit_id": "u0063",
+      "line_start": 210,
+      "line_end": 236,
+      "source_text": "```\nsyntax violation\n        ↓\nreject-request\n\nsemantic violation\n        ↓\nreject-request\n\nunrecoverable invariant\n        ↓\nreject-request\n\nrecoverable invariant\n        ↓\ndefer-request\n\nobservation threshold exceeded\n        ↓\nconfigured retry /\nretry-penalty /\nabort\n\notherwise\n        ↓\ncommit-request\n```\n"
+    },
+    {
+      "unit_id": "u0064",
+      "line_start": 238,
+      "line_end": 238,
+      "source_text": "# 10. Configuration\n"
+    },
+    {
+      "unit_id": "u0065",
+      "line_start": 240,
+      "line_end": 240,
+      "source_text": "Configuration MAY define\n"
+    },
+    {
+      "unit_id": "u0066",
+      "line_start": 242,
+      "line_end": 245,
+      "source_text": "- retry limit\n- penalty strategy\n- detector thresholds\n- routing policy\n"
+    },
+    {
+      "unit_id": "u0067",
+      "line_start": 247,
+      "line_end": 247,
+      "source_text": "Configuration SHALL NOT modify\n"
+    },
+    {
+      "unit_id": "u0068",
+      "line_start": 249,
+      "line_end": 250,
+      "source_text": "- validation semantics\n- observation semantics\n"
+    },
+    {
+      "unit_id": "u0069",
+      "line_start": 252,
+      "line_end": 252,
+      "source_text": "# 11. Determinism Guarantee\n"
+    },
+    {
+      "unit_id": "u0070",
+      "line_start": 254,
+      "line_end": 254,
+      "source_text": "The following functions are deterministic.\n"
+    },
+    {
+      "unit_id": "u0071",
+      "line_start": 256,
+      "line_end": 261,
+      "source_text": "```\n(Candidate, Canonical, Config)\n        │\n        ▼\nValidationReport\n```\n"
+    },
+    {
+      "unit_id": "u0072",
+      "line_start": 263,
+      "line_end": 268,
+      "source_text": "```\n(ValidationReport, Config)\n        │\n        ▼\nRuntimeRequest\n```\n"
+    },
+    {
+      "unit_id": "u0073",
+      "line_start": 270,
+      "line_end": 270,
+      "source_text": "# 12. Constitutional Invariants\n"
+    },
+    {
+      "unit_id": "u0074",
+      "line_start": 272,
+      "line_end": 272,
+      "source_text": "The following principles are constitutionally frozen.\n"
+    },
+    {
+      "unit_id": "u0075",
+      "line_start": 274,
+      "line_end": 281,
+      "source_text": "- Validation collects facts only.\n- ValidationReport contains facts only.\n- Observation contains structural facts only.\n- PolicyRouter interprets facts only.\n- Validation is deterministic.\n- RuntimeRequest is declarative.\n- RuntimeRequest is consumed exclusively by the Kernel.\n- Configuration cannot change validation semantics."
+    }
+  ]
+}

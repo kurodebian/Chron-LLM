@@ -1,0 +1,269 @@
+{
+  "document_path": "experiments/chron-llm-spec-v0.2.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron‑LLM 統合仕様書 v0.2\r\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 3,
+      "source_text": "## 1. 全体構造マップ\r\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 5,
+      "line_end": 5,
+      "source_text": "### 1.1 モジュール一覧と階層関係\r\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 7,
+      "line_end": 30,
+      "source_text": "```\r\nChron-LLM Causal Dynamics Architecture v0.2\r\n│\r\n├── Phase-E Trace Analysis Layer (上位層)\r\n│   ├── Graph Runtime (状態遷移グラフ生成)\r\n│   └── Event Stream → Trajectory 変換\r\n│\r\n├── Topology Analysis Layer (scc.md)\r\n│   ├── SCC 解析：mutual reachability の抽出\r\n│   └── Attractor Candidate の特定\r\n│\r\n├── Dynamics Execution Layer (dynamics.md)\r\n│   ├── next-event: トークン選択/遷移決定\r\n│   ├── rollout*: 状態遷移列の生成\r\n│   └── Trajectory Path の構築\r\n│\r\n├── Cycle Detection Layer (cycle.md)\r\n│   ├── find-cycle: 末尾再帰サイクル抽出\r\n│   └── find-recurrent-cycle: モード循環検出\r\n│\r\n└── Basin Analysis Layer (basin.md)\r\n    ├── build-basin-map: attractor → basin 対応構築\r\n    └── build-basin-structure: 収束領域統計構造生成\r\n```\r\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 32,
+      "line_end": 32,
+      "source_text": "### 1.2 依存関係グラフ\r\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 34,
+      "line_end": 54,
+      "source_text": "```mermaid\r\ngraph TD\r\n    Graph[Graph Model] --> next_event[next-event]\r\n    next_event --> rollout*[rollout*]\r\n    rollout* --> Trajectory[Trajectory Path]\r\n    \r\n    Trajectory --> find_cycle[find-cycle]\r\n    Trajectory --> find_attractor[find-attractor]\r\n    \r\n    find_cycle --> Recurrent_Cycle[Recurrent Cycle]\r\n    find_attractor --> Attractor_Candidate[Attractor Candidate]\r\n    \r\n    SCC_Analysis[SCC Analysis] --> Cycle_Detection[Cycle Detection]\r\n    SCC_Analysis --> Attractor_Analysis[Attractor Analysis]\r\n    \r\n    Recurrent_Cycle --> Basin_Analysis[Basin Analysis]\r\n    Attractor_Candidate --> Basin_Analysis\r\n    \r\n    Basin_Analysis --> build_basin_map[build-basin-map]\r\n    build_basin_map --> basin_structure[Basin Structure]\r\n```\r\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 58,
+      "line_end": 58,
+      "source_text": "## 2. 共通データ構造定義（Lisp）\r\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 60,
+      "line_end": 60,
+      "source_text": "### 2.1 Graph Model\r\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 62,
+      "line_end": 83,
+      "source_text": "```lisp\r\n;; ノード構造 (各状態/トークンに対応)\r\n(defstruct node\r\n  id      ; ノード識別子 (unique identifier)\r\n  role    ; reply / temporal / bridge\r\n  timestamp) ; 時間スタンプ（ Chron-OS 対応）\r\n\r\n;; エッジ構造 (遷移関係)\r\n(defstruct edge\r\n  from        ; 出発ノード ID\r\n  to          ; 到達ノード ID\r\n  relation    ; reply / temporal / bridge\r\n  strength    ; 遷移の強度 (確率・重み 0.0-1.0)\r\n  count       ; 発生頻度 counter)\r\n\r\n;; グラフ構造 (全体状態空間)\r\n(defstruct graph\r\n  nodes     ; (list of node)\r\n  edges     ; (list of edge)\r\n  clusters  ; クラスター情報 (A/B/C cluster)\r\n  metadata) ; version, created_at, etc.\r\n```\r\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 85,
+      "line_end": 85,
+      "source_text": "### 2.2 Dynamics Structures\r\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 87,
+      "line_end": 103,
+      "source_text": "```lisp\r\n;; rollout 実行結果 (Trajectory Path)\r\n(defstruct trajectory-path\r\n  start-node      ; 開始ノード ID\r\n  steps           ; 遷移回数\r\n  path            ; (list of node-id) 遷移経路\r\n  terminal-node   ; 終端ノード\r\n  detected-cycle  ; 検出されたサイクル（あれば）\r\n  attractor       ; 収束先アトラクター）\r\n\r\n;; next-event 選択結果\r\n(defstruct event-selection\r\n  current-node    ; 現在ノード ID\r\n  selected-edge   ; 選択されたエッジ\r\n  strength        ; 遷移強度\r\n  alternatives    ; 他の候補 (for analysis)\r\n```\r\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 105,
+      "line_end": 105,
+      "source_text": "### 2.3 Cycle Structures\r\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 107,
+      "line_end": 122,
+      "source_text": "```lisp\r\n;; 再帰サイクル構造\r\n(defstruct recurrent-cycle\r\n  cycle-id        ; サイクル識別子\r\n  nodes           ; (list of node-id) サイクル構成ノード\r\n  length          ; サイクル長さ (ステップ数)\r\n  frequency       ; 発生頻度\r\n  stability       ; 安定性スコア（再出現率）\r\n  attractor-type  ; reply-cluster / temporal-bridge)\r\n\r\n;; Cycle Detection Result\r\n(defstruct cycle-detection-result\r\n  cycles          ; (list of recurrent-cycle)\r\n  is-periodic     ; 周期性判定 (boolean)\r\n  period-length   ; 周期長\r\n```\r\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 124,
+      "line_end": 124,
+      "source_text": "### 2.4 SCC Structures\r\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 126,
+      "line_end": 139,
+      "source_text": "```lisp\r\n;; 強連結成分構造\r\n(defstruct scc-component\r\n  component-id    ; コンポーネント識別子\r\n  nodes           ; (list of node-id) 所属ノード\r\n  reachability    ; mutual reachability 情報\r\n  is-attractor    ; attractor と同一かどうか（false）\r\n  stable-dynamics ; 安定再生成性 flag)\r\n\r\n;; SCC Analysis Result\r\n(defstruct scc-analysis-result\r\n  components      ; (list of scc-component)\r\n  graph-connectedness ; グラフの連結度スコア\r\n```\r\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 141,
+      "line_end": 141,
+      "source_text": "### 2.5 Basin Structures\r\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 143,
+      "line_end": 165,
+      "source_text": "```lisp\r\n;; アトラクター構造\r\n(defstruct attractor\r\n  attractor-id    ; 識別子 (cycle / terminal-point)\r\n  type            ; cycle / fixed-point\r\n  nodes           ; (list of node-id) 代表ノード\r\n  stability       ; 安定性スコア\r\n  recurrence      ; 再帰頻度\r\n\r\n;; バスイン構造（引き込み領域）\r\n(defstruct basin\r\n  attractor       ; (attractor) 収束先アトラクター\r\n  nodes           ; (list of node-id) 所属ノード\r\n  mass            ; size (ノード数)\r\n  ratio           ; 全体に対する割合 (0.0-1.0)\r\n  coverage-area   ; 状態空間カバー範囲\r\n\r\n;; Basin Analysis Result\r\n(defstruct basin-analysis-result\r\n  basins          ; (list of basin)\r\n  total-attractors ; 総アトラクター数\r\n  convergence-rate; 収束率統計\r\n```\r\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 167,
+      "line_end": 167,
+      "source_text": "### 2.6 Cluster Structures（3cluster モデル）\r\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 169,
+      "line_end": 183,
+      "source_text": "```lisp\r\n;; クラスター構造\r\n(defstruct cluster\r\n  cluster-id      ; A / B / C など\r\n  type            ; reply-cluster / temporal-cluster / bridge-cluster\r\n  nodes           ; (list of node-id) 所属ノード\r\n  connections     ; 他のクラスターへの遷移エッジ\r\n  stability       ; クラスター安定性スコア\r\n\r\n;; 3-Cluster Graph Example\r\n(defstruct three-cluster-graph\r\n  cluster-a       ; (cluster) reply cluster(強い循環)\r\n  cluster-b       ; (cluster) temporal cluster(弱い循環)\r\n  cluster-c       ; (cluster) bridge cluster(A/Bを接続)\r\n```\r\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 187,
+      "line_end": 187,
+      "source_text": "## 3. 各モジュールの責務境界と入出力仕様\r\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 189,
+      "line_end": 189,
+      "source_text": "### 3.1 scc.md（強連結成分解析）\r\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 191,
+      "line_end": 197,
+      "source_text": "| 項目 | 仕様 |\r\n|------|------|\r\n| **責務** | グラフ内の mutual reachability を抽出し、SCC を特定 |\r\n| **入力** | Graph, nodes (list of node-id) |\r\n| **出力** | scc-analysis-result (components, connectedness score) |\r\n| **依存** | graph.md（Graph Model） |\r\n| **非同期性** | SCC ≠ Attractor（SCC は mutual reachability、Attractor は stable recurrent dynamics）[1] |\r\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 199,
+      "line_end": 199,
+      "source_text": "### 3.2 dynamics.md（状態遷移・力学系）\r\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 201,
+      "line_end": 207,
+      "source_text": "| 項目 | 仕様 |\r\n|------|------|\r\n| **責務** | Graph Runtime の State Transition Executor として動作 |\r\n| **入力** | Node, Event, Transition Rule |\r\n| **出力** | Trajectory Path (rollout path) |\r\n| **依存** | graph.md（Graph Model） |\r\n| **Chron-OS 対応** | World State → Node / Event → Edge / Execution Trace → rollout path[2] |\r\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 209,
+      "line_end": 209,
+      "source_text": "### 3.3 cycle.md（周期軌道検出）\r\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 211,
+      "line_end": 217,
+      "source_text": "| 項目 | 仕様 |\r\n|------|------|\r\n| **責務** | rollout trajectory の終端周期を検出し、再帰的構造を抽出 |\r\n| **入力** | Trajectory Path (rollout path) |\r\n| **出力** | recurrent-cycle, is-periodic flag |\r\n| **依存** | dynamics.md（Trajectory Path） |\r\n| **機能** | `find-cycle` / `find-recurrent-cycle` プリミティブ[3] |\r\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 219,
+      "line_end": 219,
+      "source_text": "### 3.4 basin.md（引き込み領域解析）\r\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 221,
+      "line_end": 227,
+      "source_text": "| 項目 | 仕様 |\r\n|------|------|\r\n| **責務** | attractor への収束構造を解析し、各アトラクターの吸引領域を特定 |\r\n| **入力** | Graph, Nodes, Transition depth, Attractor candidates |\r\n| **出力** | basin objects (attractor, nodes, mass, ratio) |\r\n| **依存** | cycle.md（Recurrent Cycle）、dynamics.md（Trajectory Path） |\r\n| **特性** | deterministic / observational / non-authoritative / replay-compatible[5] |\r\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 229,
+      "line_end": 229,
+      "source_text": "### 3.5 3cluster.md（クラスタリングモデル）\r\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 231,
+      "line_end": 237,
+      "source_text": "| 項目 | 仕様 |\r\n|------|------|\r\n| **責務** | A/B/C の3クラスターを持つ検証用 Graph モデル |\r\n| **入力** | None (static model definition) |\r\n| **出力** | Expected attractor candidates (A cycle, B cycle) |\r\n| **依存** | graph.md（Graph Model） |\r\n| **用途** | Runtime state graph / Event transition graph / Worldline graph の検証[6] |\r\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 241,
+      "line_end": 241,
+      "source_text": "## 4. 未確定仕様・補完が必要な箇所\r\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 243,
+      "line_end": 243,
+      "source_text": "### 4.1 技術的曖昧点\r\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 245,
+      "line_end": 250,
+      "source_text": "| ID | 問題点 | 推奨対応 | 優先度 |\r\n|----|--------|----------|--------|\r\n| **U001** | `rollout*` の終了条件が明記されていない（max steps? convergence threshold?） | max-steps と convergence-threshold の両方をサポートする仕様を追加 | High |\r\n| **U002** | `find-attractor` が返す \"terminal node\" の定義が不明（単一ノード？サイクル？） | attractor-type (cycle/fixed-point) を明確化し、cycle-candidate も含める | High |\r\n| **U003** | Basin analysis の `mass` と `ratio` の計算基準が未定義（ノード数？遷移頻度？） | mass = node count, ratio = basin_nodes / total_nodes と規定 | Medium |\r\n| **U004** | SCC と Attractor の区別は明記されているが、SCC が Attractor に変換される条件が不明 | SCC → Attractor 変換の閾値（stability score threshold）を定義 | Medium |\r\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 252,
+      "line_end": 252,
+      "source_text": "### 4.2 Chron-OS Mapping 補完\r\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 254,
+      "line_end": 257,
+      "source_text": "| ID | 問題点 | 推奨対応 | 優先度 |\r\n|----|--------|----------|--------|\r\n| **U005** | Chron-OS のどのレイヤーに相当するか、一部のモジュールで不明確 | Topology Analysis Layer / State Transition Executor / Basin Structure Analysis Layer を統一仕様へ明記 | Medium |\r\n| **U006** | Phase-E Trace Analysis 層との接続仕様が断片的 | IR Stream → Causal DSL → Kernel のパイプラインを統合ドキュメントに追加 | High |\r\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 259,
+      "line_end": 259,
+      "source_text": "### 4.3 データ構造の不足\r\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 261,
+      "line_end": 265,
+      "source_text": "| ID | 問題点 | 推奨対応 |\r\n|----|--------|----------|\r\n| **U007** | `transition depth` の計算方法が未定義（hops? time steps?） | transition-depth = number of rollout steps と規定 |\r\n| **U008** | Cluster type (reply/temporal/bridge) の判定基準が不明 | reply: high recurrence rate / temporal: low stability / bridge: multi-cluster connections と定義 |\r\n| **U009** | `stability score` の計算式が未明記 | stability = cycle_reappearance_rate / total_observations と規定 |\r\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 267,
+      "line_end": 267,
+      "source_text": "### 4.4 拡張性に関する課題\r\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 269,
+      "line_end": 272,
+      "source_text": "- [ ] **Cross-module consistency**: モジュール間で重複する関数（例：find-attractor が dynamics.md と basin.md で両方定義されている）の統合が必要\r\n- [ ] **Error handling**: グラフが非連結、無限ループ、サイクル検出失敗時のフォールバック仕様未定義\r\n- [ ] **Performance metrics**: 各解析モジュールの実行時間・メモリ使用量のメトリクス収集仕様未定義\r\n\r\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 275,
+      "line_end": 275,
+      "source_text": "## 5. 統合アーキテクチャ（最終版）\r\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 277,
+      "line_end": 310,
+      "source_text": "```\r\n┌─────────────────────────────────────────────────────────────┐\r\n│                    Chron-LLM Causal Kernel                  │\r\n│                     (Phase E Trace Analysis)                │\r\n└───────────────────┬─────────────────────────────────────────┘\r\n                    │\r\n        ┌───────────▼───────────┐\r\n        │   Graph Runtime       │ ← IR Stream → Event Stream\r\n        │   (State Transition)  │\r\n        └───────┬───────────────┘\r\n                │ rollout*\r\n    ┌───────────▼───────────┐\r\n    │   Trajectory Path     │\r\n    └───────┬───────┬───────┘\r\n            │       │\r\n    ┌───────▼───┐ ┌─▼──────────┐\r\n    │find-cycle │ │find-attractor│ ← SCC Analysis (parallel)\r\n    └─────┬─────┘ └─────┬───────┘\r\n          │             │\r\n  ┌───────▼───────┐ ┌───▼────────┐\r\n  │Recurrent Cycle│ │Attractor   │\r\n  │               │ │Candidate   │\r\n  └───────┬───────┘ └─────┬──────┘\r\n          │               │\r\n          └───────┬───────┘\r\n                  ▼\r\n        ┌─────────────────┐\r\n        │ build-basin-map │\r\n        └────────┬────────┘\r\n                 ▼\r\n        ┌─────────────────┐\r\n        │Basin Structure  │ ← Output: attractor domains, convergence stats\r\n        └─────────────────┘\r\n```\r\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 314,
+      "line_end": 314,
+      "source_text": "## 6. 参考文献（ソース ID）\r\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 316,
+      "line_end": 321,
+      "source_text": "- [1] scc.md - SCC と Attractor の区別、Architectural Position\r\n- [2] dynamics.md - Chron-OS Mapping (State Transition Executor), Basin Analysis flow\r\n- [3] cycle.md - find-cycle / find-recurrent-cycle プリミティブ、Architectural Position\r\n- [4] chron-llm-r1-dynamical-analysis-experiment-spec-v0.1.md - Graph Model, Dynamics, Cycle Detection, Basin Analysis の基本仕様\r\n- [5] basin.md - Basin Structure Analysis Specification v1.0, Chron-LLM/Chron-OS Mapping\r\n- [6] 3cluster.md - 3-Cluster compatibility, Expected attractor candidates\r\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 325,
+      "line_end": 327,
+      "source_text": "**作成日**: 2024  \r\n**バージョン**: Integrated Specification v0.2  \r\n**ステータス**: Experimental / Mathematical Foundation (Phase-E DSL Semantics Ready)"
+    }
+  ]
+}

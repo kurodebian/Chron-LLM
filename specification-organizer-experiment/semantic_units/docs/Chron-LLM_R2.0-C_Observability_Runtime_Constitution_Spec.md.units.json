@@ -1,0 +1,893 @@
+{
+  "document_path": "docs/Chron-LLM_R2.0-C_Observability_Runtime_Constitution_Spec.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 1,
+      "source_text": "# Chron-LLM R2.0-C Observability Runtime Constitution Specification\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 3,
+      "line_end": 10,
+      "source_text": "**Document ID:** CHRON-R2.0-C-OBSERVABILITY-CONSTITUTION  \n**Constitution Revision:** 1.0  \n**Status:** DRAFT (Freeze Candidate)  \n**Classification:** Constitution-Level Specification  \n**Layer:** R2.0-C Observability Runtime  \n**Depends on:**\n- Chron-LLM R2.0-A Graph Runtime Core Constitution\n- Chron-LLM R2.0-B World Runtime Constitution\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 12,
+      "line_end": 12,
+      "source_text": "# 1. Purpose\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 14,
+      "line_end": 14,
+      "source_text": "R2.0-C defines the **Observability Runtime** of Chron-LLM.\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 16,
+      "line_end": 16,
+      "source_text": "Its purpose is to provide a deterministic, read-only observation layer for inspecting the state of the Kernel, Canonical Graph, Memory Store, Worlds, and Registry.\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 18,
+      "line_end": 18,
+      "source_text": "This specification defines **observation semantics**, not presentation.\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 20,
+      "line_end": 20,
+      "source_text": "# 2. Design Principles\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 22,
+      "line_end": 22,
+      "source_text": "The Observability Runtime SHALL satisfy the following principles:\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 24,
+      "line_end": 30,
+      "source_text": "- Read-only\n- Deterministic\n- Accurate\n- Presentation-independent\n- Non-authoritative\n- Layer-separated\n- Stable across compatible releases\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 32,
+      "line_end": 32,
+      "source_text": "# 3. Scope\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 34,
+      "line_end": 34,
+      "source_text": "The Observability Runtime MAY observe:\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 36,
+      "line_end": 40,
+      "source_text": "- constitutionally observable Kernel state\n- Canonical Graph\n- Memory Store\n- World\n- Registry\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 42,
+      "line_end": 42,
+      "source_text": "The Observability Runtime SHALL NOT modify any of them.\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 44,
+      "line_end": 44,
+      "source_text": "# 4. Non-Goals\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 46,
+      "line_end": 46,
+      "source_text": "The Observability Runtime does **not** provide:\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 48,
+      "line_end": 60,
+      "source_text": "- Execution\n- Scheduling\n- Backend integration\n- Evaluator logic\n- Commit operations\n- Graph mutation\n- Memory mutation\n- World creation\n- World modification\n- Registry modification\n- Persistence\n- Merge\n- Distributed coordination\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 62,
+      "line_end": 62,
+      "source_text": "# 5. Read-Only Contract\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 64,
+      "line_end": 64,
+      "source_text": "The Observability Runtime MUST NOT mutate:\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 66,
+      "line_end": 70,
+      "source_text": "- Canonical Graph\n- Memory Store\n- World\n- Registry\n- Kernel State\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 72,
+      "line_end": 72,
+      "source_text": "Observation SHALL have no side effects.\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 74,
+      "line_end": 74,
+      "source_text": "# 6. Deterministic Observation Contract\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 76,
+      "line_end": 76,
+      "source_text": "Given identical constitutionally observable Kernel state,\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 78,
+      "line_end": 78,
+      "source_text": "the produced Observation MUST be identical.\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 80,
+      "line_end": 80,
+      "source_text": "Observation determinism is defined solely by the constitutionally observable Kernel state.\n"
+    },
+    {
+      "unit_id": "u0025",
+      "line_start": 82,
+      "line_end": 82,
+      "source_text": "Observation MUST NOT depend on:\n"
+    },
+    {
+      "unit_id": "u0026",
+      "line_start": 84,
+      "line_end": 89,
+      "source_text": "- wall clock\n- process identifier\n- thread scheduling\n- memory addresses\n- random values\n- operating system timing\n"
+    },
+    {
+      "unit_id": "u0027",
+      "line_start": 91,
+      "line_end": 91,
+      "source_text": "# 7. Observation Accuracy Contract\n"
+    },
+    {
+      "unit_id": "u0028",
+      "line_start": 93,
+      "line_end": 93,
+      "source_text": "Observation is not Kernel state.\n"
+    },
+    {
+      "unit_id": "u0029",
+      "line_start": 95,
+      "line_end": 95,
+      "source_text": "Observation is a deterministic snapshot of the constitutionally observable Kernel state.\n"
+    },
+    {
+      "unit_id": "u0030",
+      "line_start": 97,
+      "line_end": 99,
+      "source_text": "```\nObservation ≠ Kernel State\n```\n"
+    },
+    {
+      "unit_id": "u0031",
+      "line_start": 100,
+      "line_end": 102,
+      "source_text": "```\nObservation = Constitutionally Observable Kernel State Snapshot\n```\n"
+    },
+    {
+      "unit_id": "u0032",
+      "line_start": 104,
+      "line_end": 104,
+      "source_text": "Observation MUST faithfully represent the constitutionally observable Kernel state defined by this Constitution.\n"
+    },
+    {
+      "unit_id": "u0033",
+      "line_start": 106,
+      "line_end": 108,
+      "source_text": "```\nObserved State == Actual Constitutionally Observable Kernel State\n```\n"
+    },
+    {
+      "unit_id": "u0034",
+      "line_start": 110,
+      "line_end": 110,
+      "source_text": "The Observability Runtime MUST NOT:\n"
+    },
+    {
+      "unit_id": "u0035",
+      "line_start": 112,
+      "line_end": 116,
+      "source_text": "- infer missing state\n- synthesize state\n- approximate state\n- fabricate state\n- hide constitutionally observable state\n"
+    },
+    {
+      "unit_id": "u0036",
+      "line_start": 118,
+      "line_end": 118,
+      "source_text": "An Observation represents a snapshot at a single logical point in time.\n"
+    },
+    {
+      "unit_id": "u0037",
+      "line_start": 120,
+      "line_end": 120,
+      "source_text": "Once created, an Observation MUST NOT change.\n"
+    },
+    {
+      "unit_id": "u0038",
+      "line_start": 122,
+      "line_end": 122,
+      "source_text": "# 8. Layer Separation Contract\n"
+    },
+    {
+      "unit_id": "u0039",
+      "line_start": 124,
+      "line_end": 124,
+      "source_text": "The architecture SHALL remain strictly layered.\n"
+    },
+    {
+      "unit_id": "u0040",
+      "line_start": 126,
+      "line_end": 134,
+      "source_text": "```\nKernel\n    ↑\nWorld Runtime\n    ↑\nObservability Runtime\n    ↑\nPresentation Layer\n```\n"
+    },
+    {
+      "unit_id": "u0041",
+      "line_start": 136,
+      "line_end": 136,
+      "source_text": "Dependencies SHALL be one-way.\n"
+    },
+    {
+      "unit_id": "u0042",
+      "line_start": 138,
+      "line_end": 138,
+      "source_text": "Specifically:\n"
+    },
+    {
+      "unit_id": "u0043",
+      "line_start": 140,
+      "line_end": 143,
+      "source_text": "- Kernel MUST NOT depend on Observability.\n- World Runtime MUST NOT depend on Presentation.\n- Observability MAY depend on Kernel and World Runtime.\n- Presentation MAY depend on Observability.\n"
+    },
+    {
+      "unit_id": "u0044",
+      "line_start": 145,
+      "line_end": 145,
+      "source_text": "# 9. Non-Authoritative Contract\n"
+    },
+    {
+      "unit_id": "u0045",
+      "line_start": 147,
+      "line_end": 147,
+      "source_text": "Kernel owns truth.\n"
+    },
+    {
+      "unit_id": "u0046",
+      "line_start": 149,
+      "line_end": 149,
+      "source_text": "Observability owns presentation-neutral observation.\n"
+    },
+    {
+      "unit_id": "u0047",
+      "line_start": 151,
+      "line_end": 151,
+      "source_text": "The Observability Runtime MUST NOT become a source of truth.\n"
+    },
+    {
+      "unit_id": "u0048",
+      "line_start": 153,
+      "line_end": 153,
+      "source_text": "# 10. Observation Object Contract\n"
+    },
+    {
+      "unit_id": "u0049",
+      "line_start": 155,
+      "line_end": 155,
+      "source_text": "The Observability Runtime produces immutable Observation Objects.\n"
+    },
+    {
+      "unit_id": "u0050",
+      "line_start": 157,
+      "line_end": 157,
+      "source_text": "Observation Objects represent deterministic snapshots of the constitutionally observable Kernel state.\n"
+    },
+    {
+      "unit_id": "u0051",
+      "line_start": 159,
+      "line_end": 159,
+      "source_text": "Observation Objects MUST be:\n"
+    },
+    {
+      "unit_id": "u0052",
+      "line_start": 161,
+      "line_end": 165,
+      "source_text": "- immutable\n- deterministic\n- presentation-independent\n- non-executable\n- side-effect free\n"
+    },
+    {
+      "unit_id": "u0053",
+      "line_start": 167,
+      "line_end": 167,
+      "source_text": "Observation Objects MUST NOT contain:\n"
+    },
+    {
+      "unit_id": "u0054",
+      "line_start": 169,
+      "line_end": 172,
+      "source_text": "- executable behavior\n- mutable references\n- lazy mutations\n- hidden state\n"
+    },
+    {
+      "unit_id": "u0055",
+      "line_start": 174,
+      "line_end": 174,
+      "source_text": "# 11. Observation Completeness Contract\n"
+    },
+    {
+      "unit_id": "u0056",
+      "line_start": 176,
+      "line_end": 176,
+      "source_text": "Observation Objects MUST contain sufficient information to completely describe the observed constitutionally observable Kernel state without requiring additional Observation requests.\n"
+    },
+    {
+      "unit_id": "u0057",
+      "line_start": 178,
+      "line_end": 178,
+      "source_text": "Consumers SHOULD NOT need to perform follow-up Observation requests to understand the observed constitutionally observable Kernel state.\n"
+    },
+    {
+      "unit_id": "u0058",
+      "line_start": 180,
+      "line_end": 180,
+      "source_text": "Observation Completeness applies only to the constitutionally observable state.\n"
+    },
+    {
+      "unit_id": "u0059",
+      "line_start": 182,
+      "line_end": 182,
+      "source_text": "It does NOT imply reconstruction of the entire Kernel state.\n"
+    },
+    {
+      "unit_id": "u0060",
+      "line_start": 184,
+      "line_end": 184,
+      "source_text": "# 12. Representation Independence Contract\n"
+    },
+    {
+      "unit_id": "u0061",
+      "line_start": 186,
+      "line_end": 186,
+      "source_text": "Observation Objects MUST be independent of presentation.\n"
+    },
+    {
+      "unit_id": "u0062",
+      "line_start": 188,
+      "line_end": 188,
+      "source_text": "Presentation is outside the scope of this Constitution.\n"
+    },
+    {
+      "unit_id": "u0063",
+      "line_start": 190,
+      "line_end": 190,
+      "source_text": "Possible presentation layers include:\n"
+    },
+    {
+      "unit_id": "u0064",
+      "line_start": 192,
+      "line_end": 200,
+      "source_text": "- CLI\n- GUI\n- Web UI\n- IDE plugins\n- GraphViz\n- JSON serialization\n- Markdown rendering\n- REST API\n- LLM agents\n"
+    },
+    {
+      "unit_id": "u0065",
+      "line_start": 202,
+      "line_end": 202,
+      "source_text": "All presentation layers consume the same Observation Objects.\n"
+    },
+    {
+      "unit_id": "u0066",
+      "line_start": 204,
+      "line_end": 204,
+      "source_text": "Presentation SHALL NOT alter observation semantics.\n"
+    },
+    {
+      "unit_id": "u0067",
+      "line_start": 206,
+      "line_end": 206,
+      "source_text": "# 13. Stable Observation Contract\n"
+    },
+    {
+      "unit_id": "u0068",
+      "line_start": 208,
+      "line_end": 208,
+      "source_text": "Observation semantics SHOULD remain stable across compatible releases.\n"
+    },
+    {
+      "unit_id": "u0069",
+      "line_start": 210,
+      "line_end": 210,
+      "source_text": "Semantic stability is guaranteed.\n"
+    },
+    {
+      "unit_id": "u0070",
+      "line_start": 212,
+      "line_end": 212,
+      "source_text": "Presentation formats MAY evolve independently.\n"
+    },
+    {
+      "unit_id": "u0071",
+      "line_start": 214,
+      "line_end": 214,
+      "source_text": "API names MAY evolve provided semantic compatibility is preserved.\n"
+    },
+    {
+      "unit_id": "u0072",
+      "line_start": 216,
+      "line_end": 216,
+      "source_text": "# 14. Observation Capability Contract\n"
+    },
+    {
+      "unit_id": "u0073",
+      "line_start": 218,
+      "line_end": 218,
+      "source_text": "This Constitution specifies **required observation capabilities**, not concrete API names.\n"
+    },
+    {
+      "unit_id": "u0074",
+      "line_start": 220,
+      "line_end": 220,
+      "source_text": "Every compliant implementation MUST provide capabilities equivalent to:\n"
+    },
+    {
+      "unit_id": "u0075",
+      "line_start": 222,
+      "line_end": 225,
+      "source_text": "1. World Observation\n2. Registry Observation\n3. World Ancestry Observation\n4. Observation Difference\n"
+    },
+    {
+      "unit_id": "u0076",
+      "line_start": 227,
+      "line_end": 227,
+      "source_text": "Implementations MAY expose these capabilities through any suitable API.\n"
+    },
+    {
+      "unit_id": "u0077",
+      "line_start": 229,
+      "line_end": 229,
+      "source_text": "# 15. Optional Observation Capabilities\n"
+    },
+    {
+      "unit_id": "u0078",
+      "line_start": 231,
+      "line_end": 231,
+      "source_text": "The following capabilities are outside the constitutional minimum and MAY be implemented independently:\n"
+    },
+    {
+      "unit_id": "u0079",
+      "line_start": 233,
+      "line_end": 241,
+      "source_text": "- Replay Observation\n- Graph Observation\n- Timeline Observation\n- Active Path Observation\n- Visualization\n- Graph Rendering\n- World Rendering\n- Event Trace Observation\n- Performance Observation\n"
+    },
+    {
+      "unit_id": "u0080",
+      "line_start": 243,
+      "line_end": 243,
+      "source_text": "These extensions MUST preserve all constitutional guarantees.\n"
+    },
+    {
+      "unit_id": "u0081",
+      "line_start": 245,
+      "line_end": 245,
+      "source_text": "# 16. Observation Difference Contract\n"
+    },
+    {
+      "unit_id": "u0082",
+      "line_start": 247,
+      "line_end": 247,
+      "source_text": "Observation Difference compares two Observation Objects.\n"
+    },
+    {
+      "unit_id": "u0083",
+      "line_start": 249,
+      "line_end": 249,
+      "source_text": "Observation Difference MUST:\n"
+    },
+    {
+      "unit_id": "u0084",
+      "line_start": 251,
+      "line_end": 254,
+      "source_text": "- be deterministic\n- be read-only\n- identify observable differences\n- preserve input objects\n"
+    },
+    {
+      "unit_id": "u0085",
+      "line_start": 256,
+      "line_end": 256,
+      "source_text": "It MUST NOT mutate either observation.\n"
+    },
+    {
+      "unit_id": "u0086",
+      "line_start": 258,
+      "line_end": 258,
+      "source_text": "# 17. World Observation Contract\n"
+    },
+    {
+      "unit_id": "u0087",
+      "line_start": 260,
+      "line_end": 260,
+      "source_text": "World Observation MUST include sufficient information to describe:\n"
+    },
+    {
+      "unit_id": "u0088",
+      "line_start": 262,
+      "line_end": 268,
+      "source_text": "- World identity\n- Current head\n- Root node\n- Projection policy\n- Metadata\n- Lifecycle state\n- Parent relationship (if any)\n"
+    },
+    {
+      "unit_id": "u0089",
+      "line_start": 270,
+      "line_end": 270,
+      "source_text": "The concrete representation is implementation-defined.\n"
+    },
+    {
+      "unit_id": "u0090",
+      "line_start": 272,
+      "line_end": 272,
+      "source_text": "# 18. Registry Observation Contract\n"
+    },
+    {
+      "unit_id": "u0091",
+      "line_start": 274,
+      "line_end": 274,
+      "source_text": "Registry Observation MUST expose:\n"
+    },
+    {
+      "unit_id": "u0092",
+      "line_start": 276,
+      "line_end": 279,
+      "source_text": "- registered worlds\n- active world\n- ancestry relationships\n- archived worlds\n"
+    },
+    {
+      "unit_id": "u0093",
+      "line_start": 281,
+      "line_end": 281,
+      "source_text": "Registry Observation MUST NOT expose implementation-specific internal caches unless explicitly requested.\n"
+    },
+    {
+      "unit_id": "u0094",
+      "line_start": 283,
+      "line_end": 283,
+      "source_text": "# 19. Observation Object Identity\n"
+    },
+    {
+      "unit_id": "u0095",
+      "line_start": 285,
+      "line_end": 285,
+      "source_text": "Observation Objects are value objects.\n"
+    },
+    {
+      "unit_id": "u0096",
+      "line_start": 287,
+      "line_end": 287,
+      "source_text": "Identity is determined solely by their observable contents.\n"
+    },
+    {
+      "unit_id": "u0097",
+      "line_start": 289,
+      "line_end": 289,
+      "source_text": "Two Observation Objects are equal iff all observable fields are equal.\n"
+    },
+    {
+      "unit_id": "u0098",
+      "line_start": 291,
+      "line_end": 291,
+      "source_text": "Implementation-specific object identity SHALL NOT affect observation semantics.\n"
+    },
+    {
+      "unit_id": "u0099",
+      "line_start": 293,
+      "line_end": 293,
+      "source_text": "# 20. Observation Lifecycle\n"
+    },
+    {
+      "unit_id": "u0100",
+      "line_start": 295,
+      "line_end": 295,
+      "source_text": "Observation Objects are immutable.\n"
+    },
+    {
+      "unit_id": "u0101",
+      "line_start": 297,
+      "line_end": 303,
+      "source_text": "```\nCreated\n    ↓\nConsumed\n    ↓\nDiscarded\n```\n"
+    },
+    {
+      "unit_id": "u0102",
+      "line_start": 305,
+      "line_end": 305,
+      "source_text": "Observation Objects SHALL NOT be modified after creation.\n"
+    },
+    {
+      "unit_id": "u0103",
+      "line_start": 307,
+      "line_end": 307,
+      "source_text": "# 21. ABI Independence Contract\n"
+    },
+    {
+      "unit_id": "u0104",
+      "line_start": 309,
+      "line_end": 309,
+      "source_text": "This Constitution defines semantic contracts.\n"
+    },
+    {
+      "unit_id": "u0105",
+      "line_start": 311,
+      "line_end": 311,
+      "source_text": "It does NOT prescribe:\n"
+    },
+    {
+      "unit_id": "u0106",
+      "line_start": 313,
+      "line_end": 317,
+      "source_text": "- function names\n- package names\n- file organization\n- serialization formats\n- transport protocols\n"
+    },
+    {
+      "unit_id": "u0107",
+      "line_start": 319,
+      "line_end": 319,
+      "source_text": "These remain implementation-defined.\n"
+    },
+    {
+      "unit_id": "u0108",
+      "line_start": 321,
+      "line_end": 321,
+      "source_text": "# 22. Verification Suite (D-Series)\n"
+    },
+    {
+      "unit_id": "u0109",
+      "line_start": 323,
+      "line_end": 323,
+      "source_text": "## D1 — World Non-Mutation\n"
+    },
+    {
+      "unit_id": "u0110",
+      "line_start": 325,
+      "line_end": 325,
+      "source_text": "Observation MUST NOT modify World.\n"
+    },
+    {
+      "unit_id": "u0111",
+      "line_start": 327,
+      "line_end": 327,
+      "source_text": "## D2 — Registry Non-Mutation\n"
+    },
+    {
+      "unit_id": "u0112",
+      "line_start": 329,
+      "line_end": 329,
+      "source_text": "Observation MUST NOT modify Registry.\n"
+    },
+    {
+      "unit_id": "u0113",
+      "line_start": 331,
+      "line_end": 331,
+      "source_text": "## D3 — Deterministic Observation\n"
+    },
+    {
+      "unit_id": "u0114",
+      "line_start": 333,
+      "line_end": 333,
+      "source_text": "Given identical constitutionally observable Kernel state,\n"
+    },
+    {
+      "unit_id": "u0115",
+      "line_start": 335,
+      "line_end": 335,
+      "source_text": "Observation Objects MUST be identical.\n"
+    },
+    {
+      "unit_id": "u0116",
+      "line_start": 337,
+      "line_end": 337,
+      "source_text": "## D4 — Accurate Ancestry\n"
+    },
+    {
+      "unit_id": "u0117",
+      "line_start": 339,
+      "line_end": 339,
+      "source_text": "World ancestry observations MUST exactly match Runtime state.\n"
+    },
+    {
+      "unit_id": "u0118",
+      "line_start": 341,
+      "line_end": 341,
+      "source_text": "## D5 — Deterministic Observation Difference\n"
+    },
+    {
+      "unit_id": "u0119",
+      "line_start": 343,
+      "line_end": 343,
+      "source_text": "Observation Difference MUST produce deterministic results.\n"
+    },
+    {
+      "unit_id": "u0120",
+      "line_start": 345,
+      "line_end": 345,
+      "source_text": "## D6 — Representation Independence\n"
+    },
+    {
+      "unit_id": "u0121",
+      "line_start": 347,
+      "line_end": 347,
+      "source_text": "Observation semantics MUST remain identical regardless of presentation layer.\n"
+    },
+    {
+      "unit_id": "u0122",
+      "line_start": 349,
+      "line_end": 349,
+      "source_text": "## D7 — Observation Object Immutability\n"
+    },
+    {
+      "unit_id": "u0123",
+      "line_start": 351,
+      "line_end": 351,
+      "source_text": "Observation Objects MUST remain immutable after creation.\n"
+    },
+    {
+      "unit_id": "u0124",
+      "line_start": 353,
+      "line_end": 353,
+      "source_text": "# 23. Conformance Requirements\n"
+    },
+    {
+      "unit_id": "u0125",
+      "line_start": 355,
+      "line_end": 355,
+      "source_text": "An implementation conforms to this Constitution iff:\n"
+    },
+    {
+      "unit_id": "u0126",
+      "line_start": 357,
+      "line_end": 358,
+      "source_text": "- all constitutional contracts are satisfied\n- D1–D7 PASS\n"
+    },
+    {
+      "unit_id": "u0127",
+      "line_start": 360,
+      "line_end": 360,
+      "source_text": "# 24. Out of Scope\n"
+    },
+    {
+      "unit_id": "u0128",
+      "line_start": 362,
+      "line_end": 362,
+      "source_text": "The following are intentionally excluded:\n"
+    },
+    {
+      "unit_id": "u0129",
+      "line_start": 364,
+      "line_end": 374,
+      "source_text": "- Backend ABI\n- Execution Runtime\n- Scheduler\n- Evaluator\n- Merge Runtime\n- Persistence\n- Distributed Registry\n- Networking\n- User Interface\n- Visualization implementations\n- Logging implementations\n"
+    },
+    {
+      "unit_id": "u0130",
+      "line_start": 376,
+      "line_end": 376,
+      "source_text": "# 25. Future Compatibility\n"
+    },
+    {
+      "unit_id": "u0131",
+      "line_start": 378,
+      "line_end": 378,
+      "source_text": "Future revisions MAY extend:\n"
+    },
+    {
+      "unit_id": "u0132",
+      "line_start": 380,
+      "line_end": 383,
+      "source_text": "- Observation capabilities\n- Optional observation APIs\n- Visualization systems\n- Serialization formats\n"
+    },
+    {
+      "unit_id": "u0133",
+      "line_start": 385,
+      "line_end": 385,
+      "source_text": "Future revisions MUST NOT violate:\n"
+    },
+    {
+      "unit_id": "u0134",
+      "line_start": 387,
+      "line_end": 391,
+      "source_text": "- Read-only Contract\n- Deterministic Observation Contract\n- Observation Object Contract\n- Representation Independence Contract\n- Layer Separation Contract\n"
+    },
+    {
+      "unit_id": "u0135",
+      "line_start": 393,
+      "line_end": 393,
+      "source_text": "# 26. Constitution Freeze Criteria\n"
+    },
+    {
+      "unit_id": "u0136",
+      "line_start": 395,
+      "line_end": 395,
+      "source_text": "Constitution Revision:\n"
+    },
+    {
+      "unit_id": "u0137",
+      "line_start": 396,
+      "line_end": 398,
+      "source_text": "```\n1.0\n```\n"
+    },
+    {
+      "unit_id": "u0138",
+      "line_start": 399,
+      "line_end": 399,
+      "source_text": "Freeze Target Status:\n"
+    },
+    {
+      "unit_id": "u0139",
+      "line_start": 400,
+      "line_end": 402,
+      "source_text": "```\nFROZEN\n```\n"
+    },
+    {
+      "unit_id": "u0140",
+      "line_start": 404,
+      "line_end": 404,
+      "source_text": "Freeze requires:\n"
+    },
+    {
+      "unit_id": "u0141",
+      "line_start": 406,
+      "line_end": 412,
+      "source_text": "- The Observation Runtime conforms to this Constitution.\n- All D1–D7 PASS.\n- Every constitutional observation capability has deterministic verification tests.\n- Observation Runtime implementation is complete.\n- Observation semantics are stable.\n- Observation Object semantics are frozen.\n- Backward compatibility is guaranteed.\n"
+    },
+    {
+      "unit_id": "u0142",
+      "line_start": 414,
+      "line_end": 414,
+      "source_text": "After Freeze:\n"
+    },
+    {
+      "unit_id": "u0143",
+      "line_start": 416,
+      "line_end": 418,
+      "source_text": "- This Constitution Revision becomes immutable.\n- Semantic compatibility is guaranteed.\n- Any breaking change requires a new Constitution Revision.\n"
+    },
+    {
+      "unit_id": "u0144",
+      "line_start": 420,
+      "line_end": 420,
+      "source_text": "# Appendix A — Architectural Position\n"
+    },
+    {
+      "unit_id": "u0145",
+      "line_start": 422,
+      "line_end": 442,
+      "source_text": "```\n                +---------------------------+\n                |      Presentation         |\n                | CLI / GUI / Web / IDE     |\n                +------------▲--------------+\n                             │\n                +------------│--------------+\n                |   R2.0-C Observability    |\n                | Observation Objects       |\n                +------------▲--------------+\n                             │\n                +------------│--------------+\n                |   R2.0-B World Runtime    |\n                | Views                     |\n                +------------▲--------------+\n                             │\n                +------------│--------------+\n                | R2.0-A Graph Runtime Core |\n                | Truth                     |\n                +---------------------------+\n```\n"
+    },
+    {
+      "unit_id": "u0146",
+      "line_start": 444,
+      "line_end": 444,
+      "source_text": "# Appendix B — Constitutional Principles Summary\n"
+    },
+    {
+      "unit_id": "u0147",
+      "line_start": 446,
+      "line_end": 446,
+      "source_text": "The Chron-LLM Observability Runtime is founded on the following constitutional principles:\n"
+    },
+    {
+      "unit_id": "u0148",
+      "line_start": 448,
+      "line_end": 458,
+      "source_text": "1. Truth belongs to the Kernel.\n2. Worlds are views.\n3. Observation never mutates truth.\n4. Observation is deterministic.\n5. Observation is presentation-independent.\n6. Observation Objects are immutable.\n7. Observation describes state; it never creates state.\n8. Presentation is outside the Constitution.\n9. Semantic compatibility takes precedence over implementation details.\n10. Observation Objects form a stable semantic interface for future Runtime layers.\n11. Observation is a deterministic snapshot of the constitutionally observable Kernel state, not the Kernel state itself."
+    }
+  ]
+}
