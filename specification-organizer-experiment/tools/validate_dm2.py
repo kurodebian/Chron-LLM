@@ -507,17 +507,23 @@ def validate_semantic_extraction(
                 "two candidate_kinds"
             )
 
-        if len(candidate_kinds) != len(set(candidate_kinds)):
-            raise ValueError(
-                "INVALID_DM2: V6 candidate_kinds must be unique"
-            )
-
         for candidate_kind in candidate_kinds:
+            if not isinstance(candidate_kind, str):
+                raise ValueError(
+                    "INVALID_DM2: V6 candidate_kind must be a string: "
+                    f"{candidate_kind!r}"
+                )
+
             if candidate_kind not in CLASSIFIED_SEMANTIC_KINDS:
                 raise ValueError(
                     "INVALID_DM2: V6 invalid candidate_kind: "
                     f"{candidate_kind!r}"
                 )
+
+        if len(candidate_kinds) != len(set(candidate_kinds)):
+            raise ValueError(
+                "INVALID_DM2: V6 candidate_kinds must be unique"
+            )
     # ------------------------------------------------------------
     # V8 — Forbidden Content Integrity
     # ------------------------------------------------------------

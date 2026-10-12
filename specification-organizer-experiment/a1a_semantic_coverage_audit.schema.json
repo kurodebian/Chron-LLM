@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "A1A-SCA.schema.json",
+  "title": "A1A Semantic Coverage Audit Report",
+  "description": "Draft schema for read-only semantic coverage audit reports. Structural validity does not establish semantic correctness.",
+  "type": "object",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/completedReport"
+    },
+    {
+      "$ref": "#/$defs/failedReport"
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "documentId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unitId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lineNumber": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "NON_SEMANTIC_GAP",
+        "STRUCTURAL_GAP",
+        "WHOLE_UNIT_OMISSION",
+        "PARTIAL_UNIT_OMISSION",
+        "AMBIGUOUS"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW"]
+    },
+    "finding": {
+      "type": "object",
+      "required": [
+        "finding_id",
+        "classification",
+        "source_line_start",
+        "source_line_end",
+        "covered_by_units",
+        "evidence",
+        "reason",
+        "confidence",
+        "review_required"
+      ],
+      "properties": {
+        "finding_id": {
+          "type": "string",
+          "pattern": "^F[0-9]{4,}$"
+        },
+        "classification": {
+          "$ref": "#/$defs/classification"
+        },
+        "source_line_start": {
+          "$ref": "#/$defs/lineNumber"
+        },
+        "source_line_end": {
+          "$ref": "#/$defs/lineNumber"
+        },
+        "covered_by_units": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/unitId" },
+          "uniqueItems": true
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "review_required": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "classificationCounts": {
+      "type": "object",
+      "required": [
+        "NON_SEMANTIC_GAP",
+        "STRUCTURAL_GAP",
+        "WHOLE_UNIT_OMISSION",
+        "PARTIAL_UNIT_OMISSION",
+        "AMBIGUOUS"
+      ],
+      "properties": {
+        "NON_SEMANTIC_GAP": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "STRUCTURAL_GAP": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "WHOLE_UNIT_OMISSION": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "PARTIAL_UNIT_OMISSION": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "AMBIGUOUS": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": ["finding_count", "by_classification"],
+      "properties": {
+        "finding_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "by_classification": {
+          "$ref": "#/$defs/classificationCounts"
+        }
+      },
+      "additionalProperties": false
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "audit_version": {
+          "const": "A1A-SCA.0.1"
+        },
+        "document_id": {
+          "$ref": "#/$defs/documentId"
+        },
+        "source_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "artifact_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "details": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "completedReport": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/identity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "audit_version",
+            "document_id",
+            "source_digest",
+            "artifact_digest",
+            "status",
+            "findings",
+            "summary"
+          ],
+          "properties": {
+            "status": { "const": "COMPLETED" },
+            "findings": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/finding" }
+            },
+            "summary": { "$ref": "#/$defs/summary" },
+            "diagnostics": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "failedReport": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/identity"
+        },
+        {
+          "type": "object",
+          "required": ["status", "error"],
+          "properties": {
+            "status": {
+              "enum": ["INPUT_INVALID", "AUDIT_FAILED"]
+            },
+            "error": { "$ref": "#/$defs/error" },
+            "diagnostics": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

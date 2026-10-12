@@ -1,0 +1,149 @@
+{
+  "document_path": "docs/Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.md",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "line_start": 1,
+      "line_end": 9,
+      "source_text": "# **Chron-LLM_R2.0-A_Graph_Runtime_Core_Constitution_Spec.md**\n\n**Document ID:** CHRON-R2.0-A-GRAPH-CONSTITUTION  \n**Constitution Revision:** 1.0  \n**Status:** FROZEN CANDIDATE  \n**Classification:** Constitution-Level Specification  \n**Layer:** R2.0-A Graph Runtime Core  \n**Target:** CodeX Implementation & Deterministic Verification Suite  \n\n"
+    },
+    {
+      "unit_id": "u0002",
+      "line_start": 10,
+      "line_end": 41,
+      "source_text": "# **0. Purpose**\n\nR2.0-A establishes the deterministic kernel foundation of Chron-LLM.\n\nIts purpose is to define the immutable boundary between:\n\n- Canonical History\n- Memory Content\n- Projection\n- Prompt Construction\n- Future Runtime Execution\n\nAll subsequent phases:\n\n- R2.0-B World Runtime\n- R2.0-C Observability Runtime\n- R2.0-D Commit Kernel\n- R2.1 Backend ABI\n- R2.2 Evaluator\n\nMUST operate within the deterministic boundaries defined here.\n\nR2.0-A guarantees:\n\n- deterministic causal structure\n- immutable Memory content\n- append-only Canonical Graph\n- deterministic Projection\n- pure Prompt generation\n- reproducible Prefill State\n\n# **0.1 Determinism Definition**\n"
+    },
+    {
+      "unit_id": "u0003",
+      "line_start": 42,
+      "line_end": 74,
+      "source_text": "\nChron-LLM determinism is defined as:\n\nGiven:\n\n```\nCanonical Graph Structure\n\n*\n\nMemory Store Content\n\n*\n\nProjection Policy\n\n*\n\nPrompt Builder Version\n```\n\nThen:\n\n```\nPrefill State MUST be identical\nin both content and hash.\n```\n\nIdentical logical inputs MUST always produce identical execution context.\n\nThis definition is the foundational invariant of the R2 series.\n\n# **1. Core Philosophy**\n"
+    },
+    {
+      "unit_id": "u0004",
+      "line_start": 75,
+      "line_end": 128,
+      "source_text": "\nChron-LLM separates:\n\n```\nFact\nKnowledge\nUsage\nExecution\nAuthority\n```\n\ninto independent layers.\n\n```\nGraph      = What happened (Causal Fact)\n\nMemory     = What content exists\n\nProjection = How information is selected\n\nPrompt     = How context is formatted\n\nBackend    = How generation is executed\n\nEvaluator  = How proposals are produced\n\nKernel     = What becomes Canonical truth\n```\n\nFundamental principles:\n\n```\nCausal is Fact.\n\nEvaluation is Knowledge.\n\nPrompt is Usage.\n\nCommit is Authority.\n```\n\nThe Graph stores historical facts only.\n\nThe Graph MUST NOT encode:\n\n- success\n- failure\n- quality\n- priority\n- preference\n\nThose belong to higher-level interpretation layers.\n\n# **2. Authority Boundary**\n"
+    },
+    {
+      "unit_id": "u0005",
+      "line_start": 129,
+      "line_end": 169,
+      "source_text": "\nChron-LLM authority hierarchy:\n\n```\nKernel\n|\n+-- Commit Kernel\n| |\n| +-- Canonical Event Creation\n| +-- Canonical Graph Append\n| +-- World Head Advancement\n|\n+-- Canonical Graph\n|\n+-- Memory Store\n|\n+-- Runtime Views\n|\n+-- World Runtime\n|\n+-- Observability Runtime\n|\n+-- Backend Runtime\n|\n+-- Evaluator Runtime\n```\n\nAuthority Rules:\n\n- Kernel owns Canonical transition authority.\n- Commit Kernel is the only mechanism allowed to mutate Canonical state.\n- Canonical Graph owns causal history structure.\n- Memory Store owns immutable content.\n- World Runtime owns execution views.\n- Observability Runtime owns read-only inspection.\n- Backend generates proposals.\n- Evaluator generates proposals and evaluations.\n\nNo component may bypass Commit Kernel.\n\n# **2.1 Canonical Mutation Rule**\n"
+    },
+    {
+      "unit_id": "u0006",
+      "line_start": 170,
+      "line_end": 213,
+      "source_text": "\nCanonical state mutation is restricted.\n\nForbidden:\n\n```\nBackend\n↓\nGraph Mutation\n\nEvaluator\n↓\nGraph Mutation\n\nProjection\n↓\nGraph Mutation\n```\n\nRequired:\n\n```\nProposal\n\n↓\n\nValidation\n\n↓\n\nCommit Kernel\n\n↓\n\nCanonical Event\n\n↓\n\nGraph Append\n```\n\nOnly Commit Kernel may create Canonical history.\n\n# **3. Memory Store Specification**\n"
+    },
+    {
+      "unit_id": "u0007",
+      "line_start": 214,
+      "line_end": 289,
+      "source_text": "\n## **3.1 Responsibility**\n\nMemory Store owns content.\n\nGraph stores references only.\n\n```\nGraph Node\n\n↓\n\npayload-ref\n\n↓\n\nMemory Store\n```\n\nGraph MUST NOT contain payload content.\n\n## **3.2 Payload Reference**\n\n```\n(defstruct payload-ref\nhash\ntype\nsize\nstorage)\n```\n\nFields:\n\n```\nhash      Content Address\n\ntype      :text | :json | :blob | :meta\n\nsize      Byte Size\n\nstorage   :memory | :disk | :remote\n```\n\n## **3.3 Required API**\n\n```\nstore-payload\n\nload-payload\n\npayload-exists-p\n```\n\n## **3.4 Memory Immutability**\n\nMemory Store MUST be immutable.\n\nRules:\n\n- Existing payload MUST NOT change.\n- Update creates new payload.\n- Hash MUST derive from content.\n\nExample:\n\n```\nstore(A)\n\nstore(A)\n\n↓\n\nsame hash\n```\n\n# **4. Canonical Graph Specification**\n"
+    },
+    {
+      "unit_id": "u0008",
+      "line_start": 290,
+      "line_end": 481,
+      "source_text": "\n## **4.1 Canonical Node**\n\n```\n(defstruct canonical-node\nid\ntype\npayload-ref\nmetadata)\n```\n\nNode Types:\n\n```\n:system\n\n:prompt\n\n:assistant\n\n:eval\n\n:feedback\n```\n\nNode Type Semantics:\n\n```\n:system\nSystem initialization event.\n\n:prompt\nPrompt construction event.\n\n:assistant\nGenerated response event.\n\n:eval\nEvaluation recording event.\n\n:feedback\nFeedback recording event.\n```\n\n## **Canonical History Recording Rule**\n\nAll accepted nodes are stored in Canonical Graph.\n\nCanonical Graph represents:\n\n```\nCanonical History\n=\nAll accepted historical events\n```\n\nHowever:\n\n```\nCanonical History\n≠\nCausal Execution History\n```\n\nA Canonical Node records a historical fact.\n\nIt does not automatically define execution causality.\n\nTherefore:\n\n```\nRecorded Fact\n≠\nCausal Fact\n```\n\n## **Node Type Authority Rule**\n\nOnly nodes connected through:\n\n:causal\n\nedges participate in execution causal lineage.\n\n`:eval` and `:feedback` nodes represent observational history.\n\nThey MAY:\n\n- exist inside Canonical Graph\n- reference Canonical Nodes\n- be used by Projection Layers\n- participate in analysis views\n\nThey MUST NOT:\n\n- define execution causality\n- become causal ancestors of execution events\n- modify existing causal lineage\n- directly affect Backend execution\n- directly mutate Canonical state\n\n## **Edge Separation Rule**\n\nCanonical relationships are separated by edge type.\n\nExecution causality:\n\n```\n:causal\n```\n\nEvaluation relationship:\n\n```\n:eval\n```\n\nFeedback relationship:\n\n```\n:feedback\n```\n\nTherefore:\n\n```\n:eval Node\n+\n:feedback Node\n```\nDO NOT\n\ncreate execution causality\n\n## **Projection Rule**\n\nEvaluation and feedback information MUST be accessed through explicit projection layers.\n\nEvaluation Projection\n\nFeedback Projection\n\nProjection MAY expose:\n\n- evaluation knowledge\n- feedback knowledge\n\nProjection MUST NOT:\n\n- mutate Canonical Graph\n- mutate Memory Store\n- modify causal lineage\n\n## **Causal Isolation Guarantee**\n\nThe existence of:\n\n:eval nodes\n\nor\n\n:feedback nodes\n\nMUST NOT change:\n\nCausal Graph Structure\n\nCausal Projection Result\n\nCausal Prefill State\n\nunless explicitly included by:\n\nProjection Policy\n\nFinal semantic distinction:\n\n:causal\n\nExecution history lineage\n\n:eval\n\nEvaluation observation history\n\n:feedback\n\nFeedback observation history\n\nNo non-causal node type may become a hidden source of execution causality.\n\n## **4.2 Node Contract**\n"
+    },
+    {
+      "unit_id": "u0009",
+      "line_start": 482,
+      "line_end": 502,
+      "source_text": "\nNodes MUST:\n\n- be immutable\n- reference immutable payload\n- represent accepted Canonical history only\n\nNodes MUST NOT:\n\n- contain mutable state\n- contain execution state\n- contain future predictions\n- contain hidden runtime state\n\nMetadata:\n\n- MAY contain immutable descriptive information.\n- MUST NOT contain mutable execution state.\n- MUST NOT become an alternative source of truth.\n\n## **4.3 Graph Edge**\n"
+    },
+    {
+      "unit_id": "u0010",
+      "line_start": 503,
+      "line_end": 542,
+      "source_text": "\n```\n(defstruct graph-edge\nfrom\nto\ntype)\n```\n\nEdge Types:\n\n```\n:causal\n\n:eval\n\n:feedback\n```\n\nMeaning:\n\n```\n:causal\nExecution lineage relationship.\n\n:eval\nEvaluation observation relationship.\n\n:feedback\nFeedback observation relationship.\n```\n\nOnly:\n\n```\n:causal\n```\n\nedges define execution causality.\n\n## **4.4 Graph**\n"
+    },
+    {
+      "unit_id": "u0011",
+      "line_start": 543,
+      "line_end": 577,
+      "source_text": "\n```\n(defstruct canonical-graph\nnode-store\nedge-store\nroot-id)\n```\n\nGraph Rules:\n\n- append-only\n- node mutation prohibited\n- edge mutation prohibited\n\nAll changes MUST be represented by new nodes or edges.\n\n## Root Node Contract\n\nroot-id MUST reference the immutable first Canonical Node.\n\nroot-id MUST NOT change after Graph creation.\n\nAll causal projection MUST originate from root-id.\n\n## Root Reachability Contract\n\nEvery :causal node MUST be reachable from root-id.\n\nNodes not reachable through :causal edges\nMUST NOT participate in causal execution history.\n\nA Canonical Graph containing unreachable causal nodes\nis invalid.\n\n# **5. Causal Projection**\n"
+    },
+    {
+      "unit_id": "u0012",
+      "line_start": 578,
+      "line_end": 617,
+      "source_text": "\nCausal Projection extracts historical causality.\n\nProjection is a deterministic view operation.\n\nThe Projection Layer:\n\n- MUST NOT mutate Graph.\n- MUST NOT create Canonical state.\n- MUST NOT change Memory.\n\nRule:\n\n`causal-subgraph`\n\nMUST traverse only:\n\n:causal\n\nedges.\n\nEvaluation information MUST:\n\n- NOT mutate causal history.\n- NOT appear in causal projection.\n- NOT define causal ordering.\n\nAPI:\n\n```\ncausal-subgraph(graph target-id)\n```\n\nOutput:\n\n```\nordered causal node sequence\n```\n\n# **6. Evaluation Projection**\n"
+    },
+    {
+      "unit_id": "u0013",
+      "line_start": 618,
+      "line_end": 633,
+      "source_text": "\nEvaluation exists as an independent knowledge layer.\n\nAPI:\n\n```\nassociated-evaluations(graph node-id)\n```\n\nEvaluation:\n\n- MAY reference causal nodes\n- MUST NOT modify causal structure\n- MUST NOT change historical fact\n\n# **7. Context Projection**\n"
+    },
+    {
+      "unit_id": "u0014",
+      "line_start": 634,
+      "line_end": 661,
+      "source_text": "\nContext Projection combines independent views.\n\n```\nCausal View\n\n*\n\nEvaluation View\n\n↓\n\nContext View\n```\n\nContext Node:\n\n```\n(defstruct context-node\nid\ntype\ncontent\nfeedbacks)\n```\n\nContext Projection MUST be deterministic.\n\n# **8. Prompt Builder Contract**\n"
+    },
+    {
+      "unit_id": "u0015",
+      "line_start": 662,
+      "line_end": 699,
+      "source_text": "\nPrompt Builder MUST be a pure function.\n\nInput:\n\n```\ncontext-node list\n```\n\nOutput:\n\n```\nprompt representation\n```\n\nMUST:\n\n- deterministic\n- side-effect free\n- reproducible\n\nMUST NOT:\n\n```\nGraph Access\n\nMemory Access\n\nRandom\n\nTimestamp\n\nExternal IO\n\nGlobal Mutation\n```\n\n# **9. Canonical Prompt Format**\n"
+    },
+    {
+      "unit_id": "u0016",
+      "line_start": 700,
+      "line_end": 708,
+      "source_text": "\n```\n(prompt\n(:node <id>\n:type <keyword>\n:content <string>\n:feedback (<string> ...)))\n```\n\n"
+    },
+    {
+      "unit_id": "u0017",
+      "line_start": 710,
+      "line_end": 742,
+      "source_text": "\n```\n(defstruct prefill-state\ncontext\ntarget-id\nhash)\n```\n\nGuarantee:\n\nGiven identical:\n\n```\nCanonical Graph\n\nMemory Store\n\nProjection Policy\n\nPrompt Builder Version\n```\n\nThen:\n\n```\nPrefill State MUST be identical.\n\nPrefill Hash MUST be identical.\n```\n\nWorld-specific differences MUST originate only from explicit Projection Policy differences.\n\n# **11. Verification Specification**\n"
+    },
+    {
+      "unit_id": "u0018",
+      "line_start": 743,
+      "line_end": 755,
+      "source_text": "\nR2.0-A MUST satisfy:\n\n| Test ID | Name | Objective |\n|---|---|---|\n| T1 | Memory Determinism      | Same content produces same hash              |\n| T2 | Graph Replay            | Same Canonical Graph and Memory reproduce identical causal sequence |\n| T3 | View Separation         | Evaluation nodes MUST NOT appear in causal projection |\n| T4 | Context Projection      | Causal View and Evaluation View merge without mutation |\n| T5 | Prefill Hash Stability  | Same Graph, Memory, Projection Policy, and Prompt Builder produce same hash |\n| T6 | Evaluation Independence | Existence of evaluation nodes MUST NOT alter causal-only Prefill State     |\n\n\n"
+    },
+    {
+      "unit_id": "u0019",
+      "line_start": 757,
+      "line_end": 799,
+      "source_text": "\nGiven identical:\n\n```\nCanonical Graph\n\nMemory Content\n\nCausal Projection Policy\n```\n\nThen:\n\n```\nCausal Prefill State MUST remain identical\n```\n\nregardless of the existence of additional:\n\n```\n:eval\n:feedback\n```\n\nnodes.\n\nEvaluation information MAY affect Prefill State only through an explicit:\n\n```\nEvaluation Projection Policy\n```\n\nEvaluation Projection MUST NOT mutate:\n\n```\nCanonical Graph\n\nMemory Store\n\nCausal History\n```\n\n# **12. Completion Criteria**\n"
+    },
+    {
+      "unit_id": "u0020",
+      "line_start": 800,
+      "line_end": 827,
+      "source_text": "\nR2.0-A is complete when:\n\n```\n[PASS]\n\nMemory Determinism\n\nGraph Determinism\n\nCausal/Evaluation Separation\n\nProjection Determinism\n\nPrompt Determinism\n\nPrefill Hash Stability\n\nEvaluation Independence\n```\n\nCanonical result:\n\n```\nCanonical Prefill Hash = sha256:<value>\n```\n\n# **13. Out of Scope**\n"
+    },
+    {
+      "unit_id": "u0021",
+      "line_start": 828,
+      "line_end": 849,
+      "source_text": "\nR2.0-A excludes:\n\n```\nBackend ABI\n\nllama.cpp integration\n\nKV Cache\n\nWorld Fork\n\nScheduler\n\nEvaluator Generation\n\nTool Execution\n\nPersistence\n```\n\n# **14. Next Phase: R2.0-B World Runtime**\n"
+    },
+    {
+      "unit_id": "u0022",
+      "line_start": 850,
+      "line_end": 873,
+      "source_text": "\nR2.0-B introduces:\n\n```\nWorld Identity\n\nForked Execution Views\n\nCopy-on-Write Metadata\n\nWorld Projection Policy\n```\n\nWorlds MUST preserve:\n\n```\nSingle Canonical Graph\n\nSingle Memory Store\n\nShared History\n```\n\n# **15. Implementation Rules**\n"
+    },
+    {
+      "unit_id": "u0023",
+      "line_start": 874,
+      "line_end": 885,
+      "source_text": "\nImplementation MUST:\n\n- preserve immutability\n- preserve deterministic behavior\n- use Commit Kernel for mutation\n- reject hidden global state\n- provide verification tests\n\nAny violation requires Constitution Revision.\n\n# **Final Statement**\n"
+    },
+    {
+      "unit_id": "u0024",
+      "line_start": 886,
+      "line_end": 900,
+      "source_text": "\nThis Constitution defines:\n\n- Canonical history boundary\n- Immutable content ownership\n- Causal data model\n- Projection semantics\n- Deterministic context generation\n\nR2.0-A establishes the immutable historical substrate.\n\nAll future Runtime layers MUST conform.\n\nOnly Commit Kernel may create Canonical history.\n "
+    }
+  ]
+}

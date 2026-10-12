@@ -650,6 +650,8 @@ def test_valid_ambiguous_resolution_is_accepted():
         ["Requirement", "Unclassified"],
         ["Requirement", "unknown"],
         ["Requirement", "FreeForm"],
+        ["Requirement", ["Constraint"]],
+        ["Requirement", {"kind": "Constraint"}],
     ],
 )
 def test_invalid_ambiguous_candidate_kinds_are_rejected(candidate_kinds):
