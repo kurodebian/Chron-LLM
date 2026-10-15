@@ -1,0 +1,604 @@
+[
+  {
+    "file": "pair_1.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_2.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_3.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.625,
+    "agree": false
+  },
+  {
+    "file": "pair_4.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_5.json",
+    "stored": "INDEPENDENT",
+    "jev": "PARENT_CHILD",
+    "confidence": 0.875,
+    "agree": false
+  },
+  {
+    "file": "pair_6.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_7.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_8.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.75,
+    "agree": false
+  },
+  {
+    "file": "pair_9.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.625,
+    "agree": false
+  },
+  {
+    "file": "pair_10.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_11.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_12.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_13.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 0.75,
+    "agree": false
+  },
+  {
+    "file": "pair_14.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_15.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_16.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_17.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "EXACT_DUPLICATE",
+    "confidence": 0.875,
+    "agree": false
+  },
+  {
+    "file": "pair_18.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.875,
+    "agree": true
+  },
+  {
+    "file": "pair_19.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_20.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.625,
+    "agree": true
+  },
+  {
+    "file": "pair_21.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.625,
+    "agree": false
+  },
+  {
+    "file": "pair_22.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_23.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_24.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_25.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_26.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_27.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_28.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.75,
+    "agree": false
+  },
+  {
+    "file": "pair_29.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_30.json",
+    "stored": "INDEPENDENT",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.875,
+    "agree": false
+  },
+  {
+    "file": "pair_31.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_32.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_33.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 0.625,
+    "agree": false
+  },
+  {
+    "file": "pair_34.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.625,
+    "agree": true
+  },
+  {
+    "file": "pair_35.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_36.json",
+    "stored": "EXACT_DUPLICATE",
+    "jev": "EXACT_DUPLICATE",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_37.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_38.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_39.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.875,
+    "agree": true
+  },
+  {
+    "file": "pair_40.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_41.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_42.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_43.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.5,
+    "agree": true
+  },
+  {
+    "file": "pair_44.json",
+    "stored": "INDEPENDENT",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_45.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 0.625,
+    "agree": false
+  },
+  {
+    "file": "pair_46.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.75,
+    "agree": true
+  },
+  {
+    "file": "pair_47.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_48.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_49.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_50.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_51.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 0.875,
+    "agree": true
+  },
+  {
+    "file": "pair_52.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_53.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.375,
+    "agree": false
+  },
+  {
+    "file": "pair_54.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 0.625,
+    "agree": true
+  },
+  {
+    "file": "pair_55.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 0.75,
+    "agree": true
+  },
+  {
+    "file": "pair_56.json",
+    "stored": "INDEPENDENT",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.75,
+    "agree": false
+  },
+  {
+    "file": "pair_57.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_58.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_59.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_60.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.625,
+    "agree": true
+  },
+  {
+    "file": "pair_61.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_62.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_63.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_64.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.875,
+    "agree": false
+  },
+  {
+    "file": "pair_65.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_66.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_67.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_68.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_69.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_70.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_71.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 0.625,
+    "agree": false
+  },
+  {
+    "file": "pair_72.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_73.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_74.json",
+    "stored": "INDEPENDENT",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_75.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_76.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_77.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_78.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_79.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 0.625,
+    "agree": true
+  },
+  {
+    "file": "pair_80.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_81.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  },
+  {
+    "file": "pair_82.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_83.json",
+    "stored": "SUPERSEDED",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_84.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARENT_CHILD",
+    "confidence": 1.0,
+    "agree": false
+  },
+  {
+    "file": "pair_85.json",
+    "stored": "PARENT_CHILD",
+    "jev": "PARENT_CHILD",
+    "confidence": 0.625,
+    "agree": true
+  },
+  {
+    "file": "pair_86.json",
+    "stored": "PARTIAL_OVERLAP",
+    "jev": "PARTIAL_OVERLAP",
+    "confidence": 1.0,
+    "agree": true
+  }
+]

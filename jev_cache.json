@@ -1,0 +1,1577 @@
+{
+  "c3f16c1c5484530b4919bf366d80f458fee0523a2f249c64a1ada2448ad234cb": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "d07f75f74b719b1f571a8375c9a164075ad5715975949becf0e04cd9086f1d09": {
+    "type": "choice",
+    "choice": "MERGE_B_INTO_A",
+    "probabilities": {
+      "KEEP_BOTH": 0.25,
+      "MERGE_B_INTO_A": 0.375,
+      "MERGE_A_INTO_B": 0.125,
+      "KEEP_A_DELETE_B": 0.0,
+      "DEPRECATE_OBSOLETE": 0.25
+    },
+    "confidence": 0.375,
+    "samples": 8,
+    "counts": {
+      "DEPRECATE_OBSOLETE": 2,
+      "KEEP_BOTH": 2,
+      "MERGE_B_INTO_A": 3,
+      "MERGE_A_INTO_B": 1
+    }
+  },
+  "0c01865c83dfc6bc78986d43fc870ef6cf2fc782a583d69dceefcf36e901da3a": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "0fb48909c76e159820cf179e525ad9bf30c1b085f95d262c49c8311fad4ef217": {
+    "type": "choice",
+    "choice": "MERGE_A_INTO_B",
+    "probabilities": {
+      "KEEP_BOTH": 0.0,
+      "MERGE_B_INTO_A": 0.25,
+      "MERGE_A_INTO_B": 0.75,
+      "KEEP_A_DELETE_B": 0.0,
+      "DEPRECATE_OBSOLETE": 0.0
+    },
+    "confidence": 0.75,
+    "samples": 8,
+    "counts": {
+      "MERGE_A_INTO_B": 6,
+      "MERGE_B_INTO_A": 2
+    }
+  },
+  "5db0705ece1a633f52c6f95781ff39d46630c3079e09e6c6006a8ec68c398f37": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.625,
+      "PARENT_CHILD": 0.375,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 5,
+      "PARENT_CHILD": 3
+    }
+  },
+  "34202f8dc0ef0249ff75567a13570d744a834744129eb256ee32fdcb6b5c70f7": {
+    "type": "choice",
+    "choice": "MERGE_B_INTO_A",
+    "probabilities": {
+      "KEEP_BOTH": 0.375,
+      "MERGE_B_INTO_A": 0.625,
+      "MERGE_A_INTO_B": 0.0,
+      "KEEP_A_DELETE_B": 0.0,
+      "DEPRECATE_OBSOLETE": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "MERGE_B_INTO_A": 5,
+      "KEEP_BOTH": 3
+    }
+  },
+  "0a8765b6fa8702f46643583decbabed23da17c11c852c2adc19fc5527a818f58": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "4d724646f11bbda093a765df7998d18af5794371efe358b6d710a227977a52bb": {
+    "type": "choice",
+    "choice": "MERGE_B_INTO_A",
+    "probabilities": {
+      "KEEP_BOTH": 0.25,
+      "MERGE_B_INTO_A": 0.75,
+      "MERGE_A_INTO_B": 0.0,
+      "KEEP_A_DELETE_B": 0.0,
+      "DEPRECATE_OBSOLETE": 0.0
+    },
+    "confidence": 0.75,
+    "samples": 8,
+    "counts": {
+      "KEEP_BOTH": 2,
+      "MERGE_B_INTO_A": 6
+    }
+  },
+  "9f2fe4815dbd13afc7102cee4ffd60eb1df8929fc0fbf05b153221b60d7d61b0": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.125,
+      "PARENT_CHILD": 0.875,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.875,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 7,
+      "PARTIAL_OVERLAP": 1
+    }
+  },
+  "1010a0b9b157de7a5a5569b8a7666ff916b4ffc7499155128c2db4a7c7c1f3a5": {
+    "type": "choice",
+    "choice": "KEEP_BOTH",
+    "probabilities": {
+      "KEEP_BOTH": 0.625,
+      "MERGE_B_INTO_A": 0.0,
+      "MERGE_A_INTO_B": 0.25,
+      "KEEP_A_DELETE_B": 0.0,
+      "DEPRECATE_OBSOLETE": 0.125
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "KEEP_BOTH": 5,
+      "MERGE_A_INTO_B": 2,
+      "DEPRECATE_OBSOLETE": 1
+    }
+  },
+  "6533afbf8cdd50daa4188a0a528e0f40b4cf34f86e0db02eeb3cb75f927bed10": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "e2b93d8580a38758ceb829f303ac8c7a06073ddb98ff0b3bd0b2b3fcb435633e": {
+    "type": "choice",
+    "choice": "KEEP_BOTH",
+    "probabilities": {
+      "KEEP_BOTH": 1.0,
+      "MERGE_B_INTO_A": 0.0,
+      "MERGE_A_INTO_B": 0.0,
+      "KEEP_A_DELETE_B": 0.0,
+      "DEPRECATE_OBSOLETE": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "KEEP_BOTH": 8
+    }
+  },
+  "5e940d7d23e15d457e7dd50742b5292b504cd4b32a6e54296ce285030e00b0c1": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "057b21f53bf3a7296bd35198bc66f3945f7f91a6cf9e2c149da33bdd92d1a55f": {
+    "type": "choice",
+    "choice": "MERGE_B_INTO_A",
+    "probabilities": {
+      "KEEP_BOTH": 0.125,
+      "MERGE_B_INTO_A": 0.375,
+      "MERGE_A_INTO_B": 0.0,
+      "KEEP_A_DELETE_B": 0.375,
+      "DEPRECATE_OBSOLETE": 0.125
+    },
+    "confidence": 0.375,
+    "samples": 8,
+    "counts": {
+      "KEEP_A_DELETE_B": 3,
+      "MERGE_B_INTO_A": 3,
+      "KEEP_BOTH": 1,
+      "DEPRECATE_OBSOLETE": 1
+    }
+  },
+  "3b4e87ad0e523f647241b984add46d69e78f5f09bdc73caa80499b00c6e315e4": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.75,
+      "PARENT_CHILD": 0.25,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.75,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 2,
+      "PARTIAL_OVERLAP": 6
+    }
+  },
+  "67b7cb20d1b11363bd149aa4e80e9a31499c142df12c0a800a7644301556b3e2": {
+    "type": "choice",
+    "choice": "KEEP_BOTH",
+    "probabilities": {
+      "KEEP_BOTH": 1.0,
+      "MERGE_B_INTO_A": 0.0,
+      "MERGE_A_INTO_B": 0.0,
+      "KEEP_A_DELETE_B": 0.0,
+      "DEPRECATE_OBSOLETE": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "KEEP_BOTH": 8
+    }
+  },
+  "00a871e5738d0de9befeb5699ca084424ac17cfeaf8ed1f52f8aecbfff999522": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.625,
+      "PARENT_CHILD": 0.375,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 3,
+      "PARTIAL_OVERLAP": 5
+    }
+  },
+  "673ecfee67c2e832105d4ce1c6af456e441b3412e6bc5b46f699763595ffed1a": {
+    "type": "choice",
+    "choice": "KEEP_BOTH",
+    "probabilities": {
+      "KEEP_BOTH": 1.0,
+      "MERGE_B_INTO_A": 0.0,
+      "MERGE_A_INTO_B": 0.0,
+      "KEEP_A_DELETE_B": 0.0,
+      "DEPRECATE_OBSOLETE": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "KEEP_BOTH": 8
+    }
+  },
+  "deb9fbe53ecc1aee88568b17d86106473073c47a49f6719de0789174e2204692": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "63e2a1e945cfd359601285b68101653f0c787e9d32294b9a3f24691b4d768884": {
+    "type": "choice",
+    "choice": "KEEP_BOTH",
+    "probabilities": {
+      "KEEP_BOTH": 1.0,
+      "MERGE_B_INTO_A": 0.0,
+      "MERGE_A_INTO_B": 0.0,
+      "KEEP_A_DELETE_B": 0.0,
+      "DEPRECATE_OBSOLETE": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "KEEP_BOTH": 8
+    }
+  },
+  "015071a7505a1a3226464bf2dbcbf083ec16603c3f38e28fda770ae8cc31c698": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "fa3700354f1080a5a06028203ecf6bf1b06aaa1f9f3d2d844a472f2bd9f82b41": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "1725066b833351d00093133257faab67d4a4b5dbd2002ee6f897872037083c80": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.25,
+      "PARENT_CHILD": 0.75,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.75,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 6,
+      "PARTIAL_OVERLAP": 2
+    }
+  },
+  "db739a61c56e3dd618741355349df1b3927803a726b9673558d566e05420721d": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "2d3e5c8c3062f5a2acd30de245b86688e1b32c677f29aadf325ea908846b81e6": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "bf1fd84d6e22dae69372e68ec5819d64f96e9ce2f5c7d1d55625113ca2193eaf": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "9c514f8c4a835a1f148c579636e4f27b89500ed1f21274d4b978fd056172f419": {
+    "type": "choice",
+    "choice": "EXACT_DUPLICATE",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.875,
+      "PARTIAL_OVERLAP": 0.125,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.875,
+    "samples": 8,
+    "counts": {
+      "EXACT_DUPLICATE": 7,
+      "PARTIAL_OVERLAP": 1
+    }
+  },
+  "c843b925c43ab222f8031547a86c4d502df2b2dd5469d7e0a9f2fda8314cea94": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.875,
+      "PARENT_CHILD": 0.125,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.875,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 7,
+      "PARENT_CHILD": 1
+    }
+  },
+  "f90e7860acec3bf72e33c82c4224832e2f85ccf9c96bd7193981f0ab9099629e": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "5ac30ffd142b7f4a016d7203a144b08319b801611deb50ae755aa1e08f1b069c": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.625,
+      "PARENT_CHILD": 0.375,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 5,
+      "PARENT_CHILD": 3
+    }
+  },
+  "c84fb8fb08c33aae046d780c697a3d833982ac1cb27fc0036f078f17b6b26f3e": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.625,
+      "PARENT_CHILD": 0.375,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 5,
+      "PARENT_CHILD": 3
+    }
+  },
+  "673ab2a122926e15841d4e579eb5b445290a3ccbda8bf1488986011b7e92ad78": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "48123a07041e1075e839aef72d3e4bd1b09f147a08727057768b6d39d3d2a2ac": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "92977ee34775aaefe5daa066873bf259f1b31fdfb1d6993bf22eeceaefbd1a94": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "ea0ac1738ec2fbd0ad22efe76194fe828a28d4a62057b75def92d6ae857d77a7": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "b082802a7030e6bc5a4aa6dc63ab37f874059df6f16babe061c0e0531862df8c": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "6edd67809fc1dbdf3049b0817f4a4587a8de3ad74ca1b29e2766ca47c72bd612": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "d326041f12a131dc31d85e18d53f3ac031102d2832ff89634b82d2f210e96375": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.75,
+      "PARENT_CHILD": 0.25,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.75,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 6,
+      "PARENT_CHILD": 2
+    }
+  },
+  "a26c94a3232bbcc555c5df6fbc8aceb78b9b043fae4d957c55935d65fda75766": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "3735ec4339b11600bdadddfd73af65815f8a26e13ddb79734fa58439f3b61bfb": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.875,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.125
+    },
+    "confidence": 0.875,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 7,
+      "INDEPENDENT": 1
+    }
+  },
+  "4ab1c4b0ef98c369d1f61ef27955c5a1ba36ce79de826a6fc0374fbf9ca4ad2c": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "38a71c687120f95f42009e6d1e8924f71920ff9cb1f02a5471803d451230abf3": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "c5364984d52189e4cab95ecf2fca10c368b960117bc2c34aa3644f9a93adad57": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.375,
+      "PARENT_CHILD": 0.625,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 3,
+      "PARENT_CHILD": 5
+    }
+  },
+  "b9f5046baec8774ec4fadb01efad35c4394f060d1366d3c95de27d0d7c81f0ec": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.625,
+      "PARENT_CHILD": 0.375,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 3,
+      "PARTIAL_OVERLAP": 5
+    }
+  },
+  "19ea8b94bdd617f7b65daf39179528398aaf9e4ee5bcbfd3a304cbd318d8522c": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "7ab6480666fc10012b0d6554642fb0ddbe239a76d4b3bfb1462fb5155b0b6825": {
+    "type": "choice",
+    "choice": "EXACT_DUPLICATE",
+    "probabilities": {
+      "EXACT_DUPLICATE": 1.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "EXACT_DUPLICATE": 8
+    }
+  },
+  "de90e5635fbfa2b1aa95ec3f73e0b08e2fa5f923397f73e7f0d3627ea0434f79": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "03824d9c1237928281851dbf60a7bb5fc559b107201d33f5c98c49d9b40056ea": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "fb4e5ffc7ca6a5fdfbbb58196abc5ba9e5914ed6ffca24014fa75395234b440f": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.125,
+      "PARTIAL_OVERLAP": 0.875,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.875,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 7,
+      "EXACT_DUPLICATE": 1
+    }
+  },
+  "e1102624c121b6828dbe6a47665fa8a4dd402d0b4a2f7623a52e96ead79ac2c1": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "7a1f8f04f88642c552d6f2e4f80deec288d248b442e6c262e5ca88a10024562d": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "badcd715e8dd9a0493b882c673fbed1f245c9c0cbe73a2c02323f9f3e9b0bdd1": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "fc009a29d742d4f7b44427d87969c4c38d84b05fa43c759c78f9ba72397e4cb5": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.5,
+      "PARENT_CHILD": 0.5,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.5,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 4,
+      "PARTIAL_OVERLAP": 4
+    }
+  },
+  "1b3e05fc524775a9e4a1c20935a9118720313238a608ea110f5984641f795e20": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "1d6ec66c357f6d377ddfbe1b0e9c9d5312dc92ef453b6599a83123095044b65c": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.375,
+      "PARENT_CHILD": 0.625,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 3,
+      "PARENT_CHILD": 5
+    }
+  },
+  "76c47f46726137d14ee0bcdbde18ebb4b31b4d8ae113a88d8336f43ef909216c": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.25,
+      "PARTIAL_OVERLAP": 0.75,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.75,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 6,
+      "EXACT_DUPLICATE": 2
+    }
+  },
+  "75534feaa7cdd70bc71f534e96f818bca0f50e5f50778d5fcbec668ca830ace2": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "592e637c6aa331d3691a0c113d686044e61fbc7c342832eafc09d4a331aca1fb": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "a6f9349172a313be98064efd0943216eac4009da51bbacb274d85469d52d23ab": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "5403d2d8150ddbd6e89426b2c1f4af685fef7130f14e367ecab848037e2bda0f": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "e46cd843cd4437945cc026dca8c4807e439cfa6e4d4cec73f23aa5f4c65c2c6d": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.125,
+      "PARENT_CHILD": 0.875,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.875,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 7,
+      "PARTIAL_OVERLAP": 1
+    }
+  },
+  "6e0ba3b0ba110d5731d307a65bce2027049954294dbca41f3d7f3cd4f11994bb": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "83316896e199e2d9b99109b88d5ea07ecace16a4b127330fb0ba10d4d41dcbac": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.25,
+      "PARTIAL_OVERLAP": 0.375,
+      "PARENT_CHILD": 0.375,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.375,
+    "samples": 8,
+    "counts": {
+      "EXACT_DUPLICATE": 2,
+      "PARENT_CHILD": 3,
+      "PARTIAL_OVERLAP": 3
+    }
+  },
+  "6f2dc19bd9e9d4c181baf83a0552dd4ca6ce5a10a0c6e81f3441ff9b63f86c52": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.375,
+      "PARENT_CHILD": 0.625,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 5,
+      "PARTIAL_OVERLAP": 3
+    }
+  },
+  "bedcc61af5fda084e4aad31af4ea8de045c1f677abc45f7ffe1cf589d797d71e": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.25,
+      "PARENT_CHILD": 0.75,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.75,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 6,
+      "PARTIAL_OVERLAP": 2
+    }
+  },
+  "5b8e68c9d74c5be0ccb4dfd0f3188f52ab966175e0dc1af6e2865296c4f4d7d6": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.75,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.25
+    },
+    "confidence": 0.75,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 6,
+      "INDEPENDENT": 2
+    }
+  },
+  "0e95fffa4c140eaf052b26b94359b71a5d4fdb0d5bb88b20ede01edd36838961": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "3d4246bd7814f245c99e9dcae145c4ff8e335c76e0837d3a95045ef72123a666": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "19cd3feaa1020256064c65f71dfbbbadb970e6cf05c83b02ca39d59b102d7653": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "afcb6208852a16e3657cff28e7bb4c4a928a821586bb21c0bc5c8851f2dc07c9": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.625,
+      "PARENT_CHILD": 0.375,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 5,
+      "PARENT_CHILD": 3
+    }
+  },
+  "ddad0617e1371377398cb0a2af36d6d8dcaedf37db5739c071c717ae9238c821": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "1aabb9005709c1d94dfa06c5c8e8f269f32ee9c5b3d50fc4f9d68572a8cdc522": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "f4958c38744bb306e91ba2f11cac259193d8a45a19a839cc7279d22ae1cdaeb7": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "abaa17bc73da76b77797aa2067e4bb7a874484177359f222c16680c1dcd3ce4a": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.875,
+      "PARENT_CHILD": 0.125,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.875,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 1,
+      "PARTIAL_OVERLAP": 7
+    }
+  },
+  "0502d00d25a32e3552a3c7db96fa73ff09dea7d33de52d2afa65ddca1f2b903e": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "e2ca7337c28274b6c9b4b981324d29c6028a98e5eda282ba773e5460d088ef91": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "1b3f0fb9ab1d3d3b9f05d2948dd84e718d8da258ebbd4ca5605f1fd9f41f3c97": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "450c6e3d6488b233132437cd350ec1444e71cba43856fb995552c09593023e64": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "c664349dc6c9701ff9523e47632a0057b2d8c0b9afdd5f0973cb1ba0718c5f52": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "c3e9022cc6d78405a839993cd241219af7c6f78b82b49e327f4e1036212cb3a5": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "49626ee197742bcace5c200c08b0063cd4c154faa7f96aac712cca8fc0746733": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.625,
+      "PARENT_CHILD": 0.375,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 5,
+      "PARENT_CHILD": 3
+    }
+  },
+  "2776408b7bf8a9ff1112c3c4f82efd102ee7d2a5f2725517deab3be3b53c2994": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "3426d5bfa984d23fe311573b26869fe31600fab4a5dcbed180239b728f1a3e5b": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "f4105c43c540d0e7ab373062f6ff0eb25ee88b1b263690055bdbfc739082e2ef": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "3220ca7d6cbe47ea873f11ff0ec1f6d65e63fa244959ef7dfdc7d46d25bba596": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "b2e079761d8d93614b575f23e527f4f2de3ab076849b176acbc262ff42ca12ac": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "eb5816a4ccb22cd8851b069a6642213e2486b89389b43fdfd96a999d60029cf2": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "4842af1b9a884c294967a816493ae204b15e4af4b0002aa68d2a7867ef92245f": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "f5987abcb484260ee90a4ebd09f3a9dd6cd11c4f84d1a54046fb2c7f683d0429": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.375,
+      "PARENT_CHILD": 0.625,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 5,
+      "PARTIAL_OVERLAP": 3
+    }
+  },
+  "f57356d8c641c35f272f9d164f95a612ce1686448c7925b00f335b94ea9c4a69": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "6037944522a6617e6195d54b3f3f455af841e8327f74697043493d59563b8183": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "bd7ef9b4c188ed95574e27284c063ec2546a446f7645036cae0245ac90de8bf3": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  },
+  "4c6b639b5e0ca55223945a87faf8fa0fc9e98cb9ea900d8454aaddb597b59e5f": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "4feb4c53880e5c9608e20d6a8438394b1cac3ee2d0b24973e80a3f74d8577f87": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.0,
+      "PARENT_CHILD": 1.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 8
+    }
+  },
+  "2d5f4560599c86c0145359ca7d9937121c0353a5a4b558dbe6f80ffb1e9864b8": {
+    "type": "choice",
+    "choice": "PARENT_CHILD",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 0.375,
+      "PARENT_CHILD": 0.625,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 0.625,
+    "samples": 8,
+    "counts": {
+      "PARENT_CHILD": 5,
+      "PARTIAL_OVERLAP": 3
+    }
+  },
+  "479e6649c838dff29279b7732427c5cfd85ff2e61a4c27e64845ccc52f49030b": {
+    "type": "choice",
+    "choice": "PARTIAL_OVERLAP",
+    "probabilities": {
+      "EXACT_DUPLICATE": 0.0,
+      "PARTIAL_OVERLAP": 1.0,
+      "PARENT_CHILD": 0.0,
+      "SUPERSEDED": 0.0,
+      "INDEPENDENT": 0.0
+    },
+    "confidence": 1.0,
+    "samples": 8,
+    "counts": {
+      "PARTIAL_OVERLAP": 8
+    }
+  }
+}
