@@ -16,11 +16,11 @@ D1 — ファイリング可否: RESOLVED (2026-10-21)
   contracts/governance/ へ NOT_ADOPTED ドラフトとして物理 filing した（本フェーズで実行）。
   効果: 追跡可能性の確立のみ。採択効果なし。
 
-D2 — checkpoint 足場（STEP-187/188）: OPEN
+D2 — checkpoint 足場（STEP-187/188）: RESOLVED
   checkpoint 構造は凍結層に不在（Replay.lean checkpoint 0 件）。
   STEP-190 §5.2 / STEP-191 History Precondition の前提。未裁定。
 
-D3 — half-open [a,b) 境界慣習: OPEN
+D3 — half-open [a,b) 境界慣習: RESOLVED
   STEP-190 OI-190-05 / STEP-191 §6.2 期限境界の共通問題。未裁定。
 
 D4 — STEP-192 進行可否: RESOLVED — HOLD (2026-10-21)
