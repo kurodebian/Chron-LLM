@@ -16,12 +16,13 @@ D1 — ファイリング可否: RESOLVED (2026-10-21)
   contracts/governance/ へ NOT_ADOPTED ドラフトとして物理 filing した（本フェーズで実行）。
   効果: 追跡可能性の確立のみ。採択効果なし。
 
-D2 — checkpoint 足場（STEP-187/188）: RESOLVED
-  checkpoint 構造は凍結層に不在（Replay.lean checkpoint 0 件）。
-  STEP-190 §5.2 / STEP-191 History Precondition の前提。未裁定。
+D2 — checkpoint 足場（STEP-187/188）: RESOLVED (2026-10-21)
+  裁定: 凍結 Lean 層（v2.8.0-C）への変更は行わず、高位の契約レベル（STEP-190/191）におけるスキーマ定義としてのみ分離採用する（DEFERRED_TO_CONTRACT_LEVEL）。
+  理由: 凍結層の決定論的意味論を汚染せず、ガバナンス契約の仕様として先行定義するため。
 
-D3 — half-open [a,b) 境界慣習: RESOLVED
-  STEP-190 OI-190-05 / STEP-191 §6.2 期限境界の共通問題。未裁定。
+D3 — half-open [a,b) 境界慣習: RESOLVED (2026-10-21)
+  裁定: 半開区間 [a, b) および gapless 連結モデルを正式に採用する（RESOLVED_ACCEPTED）。
+  理由: 境界値エラーを構造的に防ぎ、凍結層の sequence 意味論と完全に整合するため。
 
 D4 — STEP-192 進行可否: RESOLVED — HOLD (2026-10-21)
   裁定: 進行停止を継続。187..191 系列の filing と D1..D6 裁定確定を最優先。
@@ -48,7 +49,5 @@ D6 — Admission Record / 拒否記録の保存先: RESOLVED (2026-10-21)
 
 ## 未決のまま残るもの
 
-- D2, D3（上記）
 - STEP-187/188/189 の全文確定と filing（全文はセッション DB にのみ存在）
-- 凍結層拡張（AuthorityRegistry.valid の time/expiry 拡張）の採択可否 — D5 は
-  方針裁定であり、凍結層変更そのものの認可ではない。
+- 凍結層拡張（AuthorityRegistry.valid の time/expiry 拡張）の採択可否 — D5 は方針裁定であり、凍結層変更そのものの認可ではない。
