@@ -40,7 +40,14 @@ REPO_BASELINE_AT_FILING: b231635452dd6ccd75f9f4ec9fbb40c5de510afa (backup/home-2
 - STEP-191: ~/audit-191/ (A191-E-REAL, E-191-001..010) + ~/design-step191/
 - STEP-218: ~/audit-218/ (A218-E-REAL, E-218-001..010) + ~/design-step218/
 
-## 未 filing の系列（2026-10-21 時点）
+## 目録追補（2026-10-21 同日）
 
-- STEP-187/188/189: 全文は ~/.hermes/state.db（セッション）にのみ存在。リポジトリ・paste に全文なし。Filing には全文の確定が前提条件。
-- STEP-192: ドラフト本体なし（STEP-191 §21 の予定範囲プレビューのみ）。D4 裁定により HOLD。
+- step-187/188/189: commit a01b4db で filing 済み（NOT_ADOPTED）。digest manifest は該当 filing header 参照。
+- step-192: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md — D4 HOLD 解除（同日）により
+  ドラフト v0.1.0 を着手・filing。STATUS: DRAFT / NOT_ADOPTED。
+
+## 未解決として残るもの（2026-10-21 時点）
+
+- E-218-008: organizer 乖離 UNRESOLVED_DIVERGENCE（本番ゲート再実行 NOT_EXECUTED。
+  ゲートコンポーネント単体テストのみ EXECUTED_PASS — E-218-011）。
+- 凍結層拡張（AuthorityRegistry.valid の time/expiry 拡張）の採択可否（D5 は方針裁定）。

@@ -24,9 +24,15 @@ D3 — half-open [a,b) 境界慣習: RESOLVED (2026-10-21)
   裁定: 半開区間 [a, b) および gapless 連結モデルを正式に採用する（RESOLVED_ACCEPTED）。
   理由: 境界値エラーを構造的に防ぎ、凍結層の sequence 意味論と完全に整合するため。
 
-D4 — STEP-192 進行可否: RESOLVED — HOLD (2026-10-21)
-  裁定: 進行停止を継続。187..191 系列の filing と D1..D6 裁定確定を最優先。
-  STEP-192 ドラフト着手は、基礎契約群の filing 完了と D2/D3 裁定まで保留。
+D4 — STEP-192 進行可否: RESOLVED — HOLD → HOLD LIFTED (2026-10-21 同日更新)
+  原裁定: 進行停止。保留条件 = 187..191 系列の filing 完了と D1..D6 裁定確定。
+  条件充足の確認 (2026-10-21): filing 完了（commits 4d42a10, a01b4db: STEP-187..191,
+  NCCI-218 filing 済み）、D1..D6 すべて RESOLVED（D2/D3 は commit 786b407 で解決記録）。
+  ユーザーが STEP-192 ドラフト着手フェーズへの移行を宣言（2026-10-21、セッション内メッセージ）。
+  留保: E-218-008（organizer 乖離）は D4 の保留条件ではなく、UNRESOLVED のまま残る。
+  STEP-192 ドラフトを妨げないが、クリア済みとして記録してはならない
+  （ゲートコンポーネント単体テストは EXECUTED_PASS / 本番ゲート再実行は NOT_EXECUTED、
+  evidence_ledger_218.json E-218-011 参照）。
 
 D5 — 失効建模の方針: RESOLVED (2026-10-21)
   裁定: 候補A 採用 — 正準 governance event（凍結親和）。
