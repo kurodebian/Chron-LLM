@@ -53,7 +53,40 @@ D6 — Admission Record / 拒否記録の保存先: RESOLVED (2026-10-21)
   正準 Commit Authority を経て Canonical History に commit される
   （拒否「試行」記録 ≠ 認可された governance イベント。両者は区別される）。
 
+D7 — OI-192-03 裁定（INDETERMINATE 末尾区間 [k, N) の扱い）: RESOLVED (2026-10-22)
+  裁定: 候補C 採用 — 検証後決定ハイブリッド（verify-then-decide）。
+    R1 決定論的分類: [k, N) の各レコードを VERIFIED_COMPLETE（フレーミング完全・
+       先行レコードとのハッシュ連結 intact・OperationID 一意性と Idempotency Record
+       突合一致・§11 監査対応あり）か UNVERIFIED に分類する。
+    R2 修復前缀: k から始まる VERIFIED_COMPLETE の連続最長前缀 [k, m) を保持し
+       gapless 連鎖へ再接続する。照合イベント自体は D6 に従い監査ログ側
+       （Canonical History 外）に記録する。
+    R3 以降切り捨て: 最初の UNVERIFIED 以降 [m, N) を切り捨てる。該当操作は
+       NOT_COMMITTED とし §9 により同一 OperationID で再試行可。孤児 Intent の
+       処理は OI-192-01 に委ねる。
+    R4 Receipt 錨: 有効な永続化 Receipt を持つレコードは絶対に切り捨てない
+       （Receipt ⇒ COMMITTED 錨）。
+    R5 保守フォールバック: 分類が決定論的に不能な場合（監査ログ欠落等）は
+       k まで全切り捨てとし、破棄区間のバイト列は外部監査ストレージ（D6）へ
+       退避し、無断破棄としない。
+    R6 合成禁止: 修復は新規正準レコードを書かない。検証済み既存バイトの
+       保持のみ（単一追記経路の前提 T-191-D を維持）。
+    連続性規則: UNVERIFIED の後ろに VERIFIED_COMPLETE が続く場合、後者も
+       切り捨てる（隙間禁止・D3 gapless）。
+  理由（記録）: R1〜R6 はディスク状態 + Idempotency Record + 監査ログの純関数であり
+    §10 の決定論保証を満たす。A（全切り捨て）は検証済み完全レコードの破棄と
+    Receipt 矛盾のリスクを、B（全区間保持）は §2 公理（INDETERMINATE != COMMITTED）
+    違反と履歴純度（D6）侵害のリスクをそれぞれ抱える。C は両者の失敗モードを
+    排除する最小の規則集合である。
+  適用条件: STEP-192 契約本文への反映は採択裁定（ADOPTION）時に実施する。
+    本裁定はドラフト §9 の「採択時に別途裁定する」の該当裁定であり、
+    ドラフト本文そのものは変更しない（filing discipline）。
+  依存: R1 の検証可能性の範囲は OI-192-02（Receipt 決定論的再生成に必要な
+    永続化情報の最小集合）の確定に依存する。OI-192-02 の早期確定を事実上要求する。
+  対象: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md §9 L128-131 / §13 OI-192-03。
+
 ## 未決のまま残るもの
 
 - STEP-187/188/189 の全文確定と filing（全文はセッション DB にのみ存在）
 - 凍結層拡張（AuthorityRegistry.valid の time/expiry 拡張）の採択可否 — D5 は方針裁定であり、凍結層変更そのものの認可ではない。
+- STEP-192 OI-192-01（Intent 先行時の孤児 Intent 処理）/ OI-192-02（Receipt 決定論的再生成に必要な永続化情報の最小集合）/ OI-192-04（Receipt 再発行の Idempotency 境界）— OI-192-03 は D7 で解決済み。OI-192-02 は D7 の R1 検証可能性の前提として早期確定が望ましい。
