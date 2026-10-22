@@ -216,8 +216,69 @@ D10 — OI-192-04 裁定（監査ログ スキーマ・保持・完全性契約 
   対象: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md §11 / §13 OI-192-04 /
     STEP191_DECISION_ENFORCEMENT_v0.1.0-draft.md OI-191-15 / OI-191-16。
 
+D11 — OI-192-05 裁定（直列化可能性の検証方法）: RESOLVED (2026-10-22)
+  裁定: 案1a / 案2a / 案3a / 案4a の組合せ採用。
+  V1 検証対象の定義（発明ではなく §10 + 上流裁定からの導出）: 単一正準追記経路
+    （T-191-D）により正準書込み自体は直列化済みであり、並行性は [admission, commit_point)
+    領域にのみ存在する。検証は 4 命題として閉じる — S1 順序整合（正準列の gapless 順序は
+    永続化確認点の happens-before を保存、§10 線形化点）、S2 復旧不変性（復旧状態は
+    ディスク状態の純関数で再起動回数・時刻に依存しない、§10 決定論保証）、S3 一意性
+    （同一 OperationID の committed レコード高々 1・Receipt 高々 1、§4・§6・D8 M5・D9 G4）、
+    S4 監査非干渉（監査障害・欠落は復旧分類と正準順序を変えない、§11・D10 I5。唯一の例外は
+    D7 R5 分類不能フォールバックで、DISCARDED_INTERVAL として明示記録される経路のみ）。
+  V2 中核手法（案1a）: 二層構造。層 1 = 網羅モデルチェック（小ケース空間の完全証明:
+    Operation 数 ≤3 × Idempotency 状態 {INTENT_FIXED, WRITE_STARTED, PERSISTENCE_CONFIRMED,
+    RECEIPT_ISSUED, ORPHAN_RESOLVED} × クラッシュ点 CP1〜CP6 × 再起動 0〜2 × 監査書込み
+    成功/失敗 を全 interleaving で網羅）。層 2 = プロパティベース fuzz（Operation 5〜10・
+    複合監査障害等大ケース空間の網外探索）。反例はガバナンス裁定へ回付し、モデル側で
+    勝手に修正しない。
+  V3 不変条件スイート INV-01..08: INV-01 保持済み committed prefix の gapless 性（S1・D3・
+    SequenceProof 方向）。INV-02 Receipt 一意性 + 再生成バイト同一（S3・D8 M5）。
+    INV-03 復旧の再起動回数・時刻非依存（S2・§10）。INV-04 孤児 Intent パイプライン
+    （分類→保持→遷移→転送→再試行、D9 G1〜G4）と転送冪等性（G3）。INV-05 NO_SILENT_DISCARD
+    （正準末尾から失われたバイトと DISCARDED_INTERVAL の 1:1 対応、D10 I4）。
+    INV-06 永続化確認 happens-before の正準順序保存（S1）。INV-07 監査障害は復旧分類を
+    変えない（S4・§11）。INV-08 監査書込み失敗 → 新規 Admission HOLD・committed finality
+    無影響（D10 I5）。
+  V4 検証対象（案2a）: 契約レベル実行可能参照モデル L1（§3〜§9 + D7/D8/D9/D10 規則の純関数
+    実装: commit_attempt / crash(CP1..CP6) / recover(disk_state)）を正本とする。L1 は本番
+    実装ではなく、スイートは将来の本番実装に対してそのまま再実行可能に設計する（実装検証は
+    独立ゲート。IMPLEMENTATION_STATUS / LINEARIZATION_VALIDATION は NOT_EXECUTED のまま）。
+    tests/test_commit_kernel.py（STEP-192 意味論を実装していない mock）は検証対象外
+    （差し替えず別資産として残す）。凍結層 grounding: SequenceProof（Replay.lean）と
+    fold_determinism / fold_index_correspondence（HistoryFold.lean）は借用 — OI-192-05 が
+    検証するのは「復旧照合が fold 入力として同一の正準 prefix を産すこと」。凍結層変更不要。
+  V5 Lean 定式化（案3a）: recover の well-definedness 証明（凍結層不変更・新ファイル限定）は
+    強化オプションとして留保（D10 の A2/A3 留保と同型。プロファイル承認制）。
+  V6 ハープ規律（案4a）: INV-H1 — 検証ハープ自身は PYTHONHASHSEED 非依存（全反復 sorted()
+    走査、set/dict 反復順序に依存しない。同一テストを複数 seed で実行し結果のバイト同一を
+    確認。乱数系列は明示 seed。回帰コーパスは固定 seed で常時再実行）。stdlib-only を既定と
+    し、hypothesis 等の依存追加は独立の工具裁定。organizer.py の決定論（32bbe9d）と
+    E-218-008 は証拠トラック分離 — OI-192-05 の受理証拠に合算しない（E-218-008 は
+    UNRESOLVED のまま別トラックで追跡。工具決定論と commit 経路の直列化可能性の合算は
+    証拠のカテゴリ混同）。
+  受理ゲート方向（採択時の持ち越し案）: AG-192-05a 小ケース空間網羅完了と INV-01..08 全保持
+    （または反例の裁定済み処理）。AG-192-05b fuzz スイートの INV-H1 証明完了。
+    AG-192-05c 回帰コーパス固定 seed 再実行の証跡保存。宣言規律: PASS は
+    LINEARIZATION_VALIDATION: EXECUTED の根拠となるが ACCEPTANCE != GLOBAL_ACCEPTANCE・
+    TEST_PASS != ACCEPTANCE（モデル検証 PASS は実装検証ではない）をゲート文言に明記。
+  理由（記録）: 1b は大ケース空間の証拠空白、1c は決定論保証の全ケース証明の欠落。2b は
+    検証対象の取り違え（TEST_PASS != ACCEPTANCE の対象誤り）。3b はクラッシュ・部分書込み・
+    framing の Lean 建模コストを契約採択前に前倒しする。4b は工具決定論と commit 経路
+    直列化可能性の合算による証拠のカテゴリ混同。
+  適用条件: STEP-192 §10 / OI-192-05 への語義反映（検証手法・INV 一覧・受理ゲート）は
+    採択裁定（ADOPTION）時にドラフト本文へ反映する。本裁定時点ではドラフト本文を変更しない
+    （filing discipline）。凍結層（v2.8.0-C / v2.9.4）は変更不要（D2 維持）。
+  帰結: STEP-192 の OI は OI-192-06（intent_expiry と D5 凍結層拡張の接続）のみが残存 —
+    これは凍結層拡張の独立採択裁定を内包するため、凍結層変更不要で閉じる OI-192-05 より
+    後に順序する。検証スイート（L1 参照モデル + INV-01..08 + INV-H1）の実装は採択後の
+    実工作業であり、本裁定は手法と受理基準のみを確定する。
+  裁定表明: 2026-10-22、セッション内裁定フォーム（4 項目すべて推奨案で採択）。
+    検討文書（repo 外）: ~/design-192/STEP192_OI192-05_ANALYSIS.md。
+  対象: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md §10 / §13 OI-192-05。
+
 ## 未決のまま残るもの
 
 - STEP-187/188/189 の全文確定と filing（全文はセッション DB にのみ存在）
 - 凍結層拡張（AuthorityRegistry.valid の time/expiry 拡張）の採択可否 — D5 は方針裁定であり、凍結層変更そのものの認可ではない。
-- STEP-192 OI-192-05（直列化可能性の検証方法）/ OI-192-06（intent_expiry と D5 凍結層拡張の接続）。OI-192-01 は D9、OI-192-02 は D8、OI-192-03 は D7、OI-192-04 は D10（OI-191-15/16 統合）で解決済み。
+- STEP-192 OI-192-06（intent_expiry と D5 凍結層拡張の接続 — 凍結層拡張の独立採択裁定を内包）。OI-192-01 は D9、OI-192-02 は D8、OI-192-03 は D7、OI-192-04 は D10（OI-191-15/16 統合）、OI-192-05 は D11 で解決済み。
