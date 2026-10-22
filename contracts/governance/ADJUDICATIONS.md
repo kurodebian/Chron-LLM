@@ -85,8 +85,45 @@ D7 — OI-192-03 裁定（INDETERMINATE 末尾区間 [k, N) の扱い）: RESOLV
     永続化情報の最小集合）の確定に依存する。OI-192-02 の早期確定を事実上要求する。
   対象: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md §9 L128-131 / §13 OI-192-03。
 
+D8 — OI-192-02 裁定（Receipt 決定論的再生成に必要な永続化情報の最小集合）: RESOLVED (2026-10-22)
+  裁定: 案A 採用 — 時刻なし Receipt 同一性。
+    M1 Receipt 同一性は永続化状態の純関数:
+       Receipt = H(OperationID, 正準イベント識別子, 位置 n, prev-hash 連鎖状態,
+                   AuthorityRef/CausalID)。wall-clock 時刻は Receipt 同一性に参加しない。
+    M2 §6 の「発行時刻」は論理的 commit 点 (n, 正準イベントハッシュ) と再定義する
+       （§10 の線形化点=永続化確認点と整合）。観測 wall-clock 時刻は D6 に従い
+       監査ログ側のみに記録され、Receipt 検証に入力されない。
+    M3 永続化証明は構造的: フレーミング intact + prev-hash 連鎖 intact + [0,n) gapless。
+       個別の fsync 証明書は要求しない（CP4/CP5 を生き残れないため証明として無意味）。
+    M4 最小永続化集合 P_min:
+       P1 Intent レコード（正準書込み前に永続化・§5 WAL）: OperationID、対象操作の
+          正準表現ハッシュ、AuthorityRef/CausalID、意図の時刻境界（宣言レベル・
+          §12 により D5 凍結層拡張まで実行時強制なし）。
+       P2 正準イベント レコード: 位置 n、内容、prev-hash バインド。
+       P3 Idempotency Record（正準書込み前に永続化）: OperationID → 試行状態
+          {INTENT_FIXED / WRITE_STARTED / PERSISTENCE_CONFIRMED / RECEIPT_ISSUED}、
+          Intent へのポインタ。
+       P4 AuthorityRef が正準チェーン内で解決可能であること（D5）。
+    M5 再生成と再発行の境界: 再生成（バイト同一の再計算）は再構築であり発行では
+       ないため許可（CP5・§9「Receipt 再生成」）。再発行（内容の異なる Receipt）は
+       禁止であり §6 の障害イベントとして照合（§9）へ回付し監査記録する。
+       これにより OI-192-04 の境界が導出される。
+    M6 署名を使用する場合、Receipt 内容ハッシュに対する決定論的署名
+       （RFC 6979 型）でなければならない。無署名（検証=再生成一致）も可。
+  理由（記録）: §6 L88「発行時刻」の wall-clock 解釈は CP6 での再生成と両立せず、
+    同一 OperationID に異なる Receipt 2つという §6 障害を構造的に誘発する。
+    M1〜M6 は Receipt 検証をディスク状態の純関数とし、§6 一意性・§6 検証決定論・
+    §10 決定論保証（再起動回数・時刻非依存）を運用規律ではなく構造で保証する。
+  適用条件: §6 L88「発行時刻」の語義改訂は採択裁定（ADOPTION）時にドラフト本文へ
+    反映する。本裁定時点ではドラフト本文を変更しない（filing discipline）。
+  帰結: D7 R1 の VERIFIED_COMPLETE 判定は P1+P2+P3 の intact 性 + §11 監査対応として
+    決定可能。D7 R4 の錨検証は「保存済み Receipt == 再計算 Receipt」の一致判定。
+    OI-192-01 は分類側が導出可能（P1 のみ・P2 なし・OperationID 正準列に皆無 →
+    孤児 Intent = NOT_COMMITTED・§9）。孤児 Intent の保持期間と除去規則は未決のまま。
+  対象: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md §6 / §7 CP5 / §9 / §13 OI-192-02。
+
 ## 未決のまま残るもの
 
 - STEP-187/188/189 の全文確定と filing（全文はセッション DB にのみ存在）
 - 凍結層拡張（AuthorityRegistry.valid の time/expiry 拡張）の採択可否 — D5 は方針裁定であり、凍結層変更そのものの認可ではない。
-- STEP-192 OI-192-01（Intent 先行時の孤児 Intent 処理）/ OI-192-02（Receipt 決定論的再生成に必要な永続化情報の最小集合）/ OI-192-04（Receipt 再発行の Idempotency 境界）— OI-192-03 は D7 で解決済み。OI-192-02 は D7 の R1 検証可能性の前提として早期確定が望ましい。
+- STEP-192 OI-192-01（孤児 Intent の保持期間と除去規則 — 分類側は D8 により導出済み）/ OI-192-04（監査ログ スキーマ・保持・完全性契約 — 再生成/再発行の境界は D8 M5 により導出済み、STEP-191 OI-191-15/16 と統合）/ OI-192-05（直列化可能性の検証方法）/ OI-192-06（intent_expiry と D5 凍結層拡張の接続）。OI-192-02 は D8、OI-192-03 は D7 で解決済み。
