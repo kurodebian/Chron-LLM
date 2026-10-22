@@ -702,14 +702,14 @@ class SpecOrganizer:
         # Producer-Consumer relationships
         for spec in self.specs:
             if "producer_consumer" in spec.tags:
-                for producer in spec.tags:
+                for producer in sorted(spec.tags):
                     if producer.startswith("producer:"):
-                        for consumer in spec.tags:
+                        for consumer in sorted(spec.tags):
                             if consumer.startswith("consumer:"):
                                 # Find the consumer spec file
                                 consumer_filename = None
                                 for other_spec in self.specs:
-                                    for tag in other_spec.tags:
+                                    for tag in sorted(other_spec.tags):
                                         if tag.startswith("consumer:") and tag[9:] == consumer[9:]:
                                             consumer_filename = other_spec.filename
                                             break
@@ -842,7 +842,7 @@ class SpecOrganizer:
                 "ops": {},
                 "invariants": {}
             },
-            "tags": list(set(tag for spec in self.specs for tag in spec.tags))
+            "tags": sorted(set(tag for spec in self.specs for tag in spec.tags))
         }
         
         # Build entity registry
@@ -903,7 +903,7 @@ class SpecOrganizer:
             node = {
                 "id": spec.filename,
                 "format": spec.format_type,
-                "tags": list(spec.tags),
+                "tags": sorted(spec.tags),
                 "metrics": {
                     "lines": spec.lines,
                     "types": len(spec.types),
@@ -927,10 +927,10 @@ class SpecOrganizer:
         # Detect clusters (simply by shared tags)
         tag_groups: Dict[str, List[str]] = defaultdict(list)
         for spec in self.specs:
-            for tag in spec.tags:
+            for tag in sorted(spec.tags):
                 tag_groups[tag].append(spec.filename)
         
-        for tag, files in tag_groups.items():
+        for tag, files in sorted(tag_groups.items()):
             if len(files) > 1:
                 cluster = {
                     "tag": tag,

@@ -80,8 +80,8 @@
       "id": "contracts__base-types.spec",
       "format": "common_lisp",
       "tags": [
-        "section:\u5065\u5168\u6027\u5b9a\u7406",
-        "has_theorems"
+        "has_theorems",
+        "section:\u5065\u5168\u6027\u5b9a\u7406"
       ],
       "metrics": {
         "lines": 95,
@@ -204,8 +204,8 @@
       "id": "docs__ir__01-domain-model.spec",
       "format": "common_lisp",
       "tags": [
-        "has_producer_consumer",
-        "has_ownership"
+        "has_ownership",
+        "has_producer_consumer"
       ],
       "metrics": {
         "lines": 59,
