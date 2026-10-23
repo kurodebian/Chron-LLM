@@ -277,8 +277,70 @@ D11 — OI-192-05 裁定（直列化可能性の検証方法）: RESOLVED (2026-
     検討文書（repo 外）: ~/design-192/STEP192_OI192-05_ANALYSIS.md。
   対象: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md §10 / §13 OI-192-05。
 
+D12 — OI-192-06 裁定（intent_expiry と D5 凍結層拡張の接続）: RESOLVED (2026-10-23)
+  裁定: 案E2 / 案G1 / 分離採択 / 案4a の組合せ採用。
+  X1 拡張形態（案E2）: 凍結 Authority.lean / WAL.lean を一切変更しない。付加的拡張契約
+    （新ファイル、例 AuthorityExpiry.lean — D5 適用条件の「拡張契約の採択」経路。凍結解除
+    ではない）として validAt : ガバナンス prefix（またはその畳み込み状態）→ CausalContext →
+    AuthorityRef → Prop を frozen valid と Composition で定義する。AuthorityProof
+    （Replay.lean）は frozen valid のまま無変更で歴史的有効性を証明し続ける。
+    E1（凍結 SignedAuthorityPayload への expiry フィールド追加 / valid の時刻再パラメータ化）は
+    却下 — 凍結解除必須（D5 適用条件）、F3 により全既存署名証拠の再署名を要し、F5 により
+    AuthorityProof / ValidatedEventStream / replay 全消費側の再定義を招き、歴史的有効性が
+    時刻依存となり §10 決定論保証と衝突。E3（契約レベル宣言のみ）は E2 の前段として包含。
+  X2 失効セマンティクス（案G1・位置ベース）: 失効・revocation は正準 governance event
+    （D5 候補A）として正準列にコミットされ、「位置 e のガバナンス event 以降、その
+    AuthorityRef への新規 commit を受け付けない」として建模。強制は現在有効性のみ
+    （[admission, commit_point) 領域）。intent_expiry の時刻境界 [intent_begin, intent_expiry)
+    （§4）は event payload の宣言時刻（契約レベル）で表現され、有効性判定そのものは位置照合。
+    wall clock は判定に入らない（§10 時刻非依存・D9 G2 / D10 wall-clock 禁止と整合）。
+    G2（wall-clock 引数失効）は却下。G3（監査側タイムスタンプ MAY）は本裁定では採用せず、
+    D10 I1 の A2 留保と同型の強化オプションとして留保。
+  X3 有効性の二面性分離 + NO_RETROACTIVE_INVALIDATION: 歴史的有効性（事象の正準位置時点の
+    ガバナンス状態に対する述語。履歴 prefix のみから決定論的に評価可能・再生成不変。
+    AuthorityProof はこれに対して無変更）と、現在有効性（admission 領域での実行時強制。
+    §3 STALE_DECISION != CURRENT_PERMISSION の実行時版。監査ストアではなく正準ガバナンス
+    prefix の最新位置から評価）を分離する。不変条件 NO_RETROACTIVE_INVALIDATION: 失効・
+    revocation は発効位置より後の admission にのみ作用し、それ以前の committed レコード・
+    Receipt・AuthorityProof を変更しない（変更すれば D8 M5・INV-03 の再生成決定論が崩れる）。
+    単一の「現在有効性」への統一は却下（遡及無効化と再生成時刻依存のリスク）。
+  X4 前提証拠ギャップ（案4a）: CausalContext の SSOT 定義の入手・監査（職場ホストまたは
+    凍結ソースの提示）を採択（ADOPTION）の前提証拠 MUST とする（監査ギャップ G1:
+    CONTRACT_ARTIFACTS_NOT_FOUND_IN_SCOPE — 本ホスト範囲の contracts/**/*.lean 全 12 ファイルに
+    定義を発見せず。「存在しない」ではなく「範囲内未発見」と記録）。それまで拡張設計は
+    CausalContext を不透明パラメータとして扱い、その内部構造に依存する決定を保留する
+    （valid の型は引数としてのみ参照しており、内部構造非依存の E2/G1 設計は成立）。
+    監査ギャップ G2（本ホストに lean / lake / elan 無し・凍結層コンパイル検証不能）は
+    BLOCKED_EXTERNAL_ARTIFACT として継続記録し、検証は工具の揃うホストで実施する。
+  理由（記録）: 監査結果 F1〜F5 が示す現行意味論は「署名証拠が存在すれば無期限に有効」
+    （T-191-B の構造的正義）であり、AuthorityRef は位置・失効データを載せてはならない
+    証明キー（F4・Normative Conflict 確定）。E2/G1 は凍結層の述語・署名証拠・消費側を
+    一切変更せず、歴史的有効性の決定論（D8 M1・INV-03）と現在有効性の実行時強制を
+    構造で分離するため、§10・D9・D10・D5 適用条件のすべてと整合する。
+  適用条件: 本裁定は凍結解除を認可しない（認可されるのは「拡張契約の採択可否とその形」まで —
+    D5 適用条件の範囲内）。AuthorityExpiry.lean 相当の拡張契約の実際の採択・CausalContext
+    SSOT 監査（X4）は独立の採択裁定（ADOPTION）を要する（VERIFICATION_IS_NOT_AUTHORIZATION）。
+    STEP-192 §12/§13 への語義反映は採択裁定時にドラフト本文へ実施し、本裁定時点では
+    ドラフト本文を変更しない（filing discipline）。
+  帰結: STEP-192 の OI-192-01..06 はすべて解決済み（D9 / D8 / D7 / D10 / D11 / D12）。
+    OI-192-06 が内包していた「凍結層拡張の採択可否」は方針として確定し、残るは拡張契約
+    本体の採択（ADOPTION）と X4 前提証拠の充足のみ。ADOPTION フェーズ（参照モデル L1
+    検証ハーネス — D11 V4、ドラフト本文への D7〜D12 語義反映）への移行条件が揃う。
+  裁定表明: 2026-10-23、セッション内裁定フォーム（4 項目すべて推奨案で採択）。
+    検討文書（repo 外）: ~/design-192/STEP192_OI192-06_ANALYSIS.md。
+  対象: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md §3 / §4 / §12 / §13 OI-192-06 /
+    D5 適用条件（contracts/governance/ADJUDICATIONS.md D5）。
+
 ## 未決のまま残るもの
 
 - STEP-187/188/189 の全文確定と filing（全文はセッション DB にのみ存在）
-- 凍結層拡張（AuthorityRegistry.valid の time/expiry 拡張）の採択可否 — D5 は方針裁定であり、凍結層変更そのものの認可ではない。
-- STEP-192 OI-192-06（intent_expiry と D5 凍結層拡張の接続 — 凍結層拡張の独立採択裁定を内包）。OI-192-01 は D9、OI-192-02 は D8、OI-192-03 は D7、OI-192-04 は D10（OI-191-15/16 統合）、OI-192-05 は D11 で解決済み。
+- 凍結層拡張契約（AuthorityExpiry.lean 相当・validAt）の採択（ADOPTION）そのもの — D12 は
+  拡張形態（E2）と失効セマンティクス（G1）の方針を確定したが、拡張契約本体の採択は
+  独立の採択裁定を要する（D5 適用条件 / VERIFICATION_IS_NOT_AUTHORIZATION）。
+- CausalContext SSOT 定義の入手・監査（D12 X4 採択前提証拠 MUST・G1
+  CONTRACT_ARTIFACTS_NOT_FOUND_IN_SCOPE）と、lean / lake / elan の揃うホストでの凍結層
+  コンパイル検証（G2 BLOCKED_EXTERNAL_ARTIFACT）。
+- E-218-008（organizer 乖離）: UNRESOLVED のまま別証拠トラックで継続（D4 留保・D11 V6 分離維持）。
+- STEP-192 OI は OI-192-01..06 すべて解決済み（OI-192-01 D9 / 02 D8 / 03 D7 / 04 D10 /
+  05 D11 / 06 D12）。次フェーズは ADOPTION（ドラフト本文への D7〜D12 語義反映・
+  参照モデル L1 検証ハーネス実装 — D11 V4/受理ゲート AG-192-05a..c）。
