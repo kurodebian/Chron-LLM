@@ -378,6 +378,38 @@ D13 — STEP-192 採択裁定（ADOPTION — 契約レベル採択と LINEARIZAT
     ヘッダ / 状態フィールド / §10.1 / §11 / §12 / §13 / §14 / §15、
     contracts/governance/step-192/validation/（evidence artifacts）。
 
+D14 — STEP-192 閉鎖後のメイン・トラック選定: RESOLVED (2026-10-23)
+  裁定（逐語）: 「CausalContext SSOT 監査トラック（推奨: D12 X4 MUST・凍結層拡張採択の
+    唯一のブロッカー・本ホストで read-only 即着手可）」
+    — 提示選択肢: (1) CausalContext SSOT 監査トラック（推奨）
+    (2) 実装検証ゲート トラック（独立ゲートだが /opt/chron-loop 不在・
+    BLOCKED_EXTERNAL_ARTIFACT リスク）(3) Lean 4 形式化トラック（D11 V5 強化留保・
+    工具導入の先行裁定が必要）。ユーザーが選択肢 (1) を採択。
+  理由（記録）:
+    - CausalContext SSOT 監査は凍結層拡張契約採択の唯一の MUST 前提証拠（D12 X4）であり、
+      ガバナンス臨界経路に残る唯一の採択ブロッカー。
+    - G1（CONTRACT_ARTIFACTS_NOT_FOUND_IN_SCOPE）は contracts/**/*.lean（12 ファイル）限定
+      走査の結果。監査範囲外に本ホスト候補資産を発見済み:
+      graph-runtime/ir/chron-llm-r2-graph-runtime-causal-context-spec-v1.0.spec（冒頭で
+      "Single Source of Truth (SSOT)" を自己宣言、chron-llm-causal/
+      CAUSAL_SPECIFICATION_MATRIX.md に EVID-055 として登録）。自己宣言は正準適格と
+      同一ではない（ARTIFACT_EXISTENCE != NORMATIVE_ADOPTION）。適格性判定が監査本体。
+    - 実装検証ゲート トラックは権威ゲート資産不在により本ホストでブロック
+      （/opt/chron-loop 本ホストに存在せず — BLOCKED_EXTERNAL_ARTIFACT 相当。
+      ゲート再構成禁止・再現可能構成要素のみ PARTIAL_ON_THIS_HOST 可）。
+    - Lean 4 形式化トラックは強化オプション留保（D11 V5）であり、かつ本ホストに
+      lean / lake / elan 無し（G2 継続）。着手には工具導入の先行裁定を要する。
+  実施規律: 監査は read-only（repo・凍結層無変更、git status 前後記録）。監査 artifacts は
+    repo 外（~/audit-causalcontext/）に作成。監査はどの契約も採択しない — 凍結層拡張契約の
+    採択は独立の採択裁定のまま（D5 適用条件 / VERIFICATION_IS_NOT_AUTHORIZATION）。
+    職場ホストは未検査のまま（範囲内未発見 ≠ 非存在）。
+  帰結: CausalContext SSOT 監査トラックをメイン・トラックとして着手（D14）。監査結果
+    （候補インベントリ・凍結層整合性評価・適格性 verdict）は凍結層拡張契約採択裁定の
+    前提証拠として提出される。監査 verdict 後、採択可否はユーザー裁定点に残る。
+  裁定表明: 2026-10-23、セッション内裁定フォーム（単一選択・推奨案採択）。
+  対象: contracts/governance/ADJUDICATIONS.md（本項目・未決リスト）、D12 X4（G1/G2）、
+    STEP192 ドラフト §12/§13 留保項目。
+
 ## 未決のまま残るもの
 
 - STEP-187/188/189 の全文確定と filing（全文はセッション DB にのみ存在）
@@ -386,7 +418,8 @@ D13 — STEP-192 採択裁定（ADOPTION — 契約レベル採択と LINEARIZAT
   独立の採択裁定を要する（D5 適用条件 / VERIFICATION_IS_NOT_AUTHORIZATION）。
 - CausalContext SSOT 定義の入手・監査（D12 X4 採択前提証拠 MUST・G1
   CONTRACT_ARTIFACTS_NOT_FOUND_IN_SCOPE）と、lean / lake / elan の揃うホストでの凍結層
-  コンパイル検証（G2 BLOCKED_EXTERNAL_ARTIFACT）。
+  コンパイル検証（G2 BLOCKED_EXTERNAL_ARTIFACT）。メイン・トラックとして着手済み（D14
+  裁定 2026-10-23）。
 - E-218-008（organizer 乖離）: UNRESOLVED のまま別証拠トラックで継続（D4 留保・D11 V6 分離維持）。
 - STEP-192 OI は OI-192-01..06 すべて解決済み（OI-192-01 D9 / 02 D8 / 03 D7 / 04 D10 /
   05 D11 / 06 D12）。ADOPTION フェーズは D13 採択裁定により完了（ドラフト本文への
