@@ -410,16 +410,64 @@ D14 — STEP-192 閉鎖後のメイン・トラック選定: RESOLVED (2026-10-2
   対象: contracts/governance/ADJUDICATIONS.md（本項目・未決リスト）、D12 X4（G1/G2）、
     STEP192 ドラフト §12/§13 留保項目。
 
+D15 — CausalContext SSOT 監査（AUDIT-CAUSALCONTEXT-SSOT-01）verdict と裁定: RESOLVED (2026-10-23)
+  監査 verdict（記録）:
+    前提証拠（D12 X4 MUST）は本ホストの検索範囲で充足されない（MISSING_EVIDENCE != PASS）。
+    CausalContext の定義は repo 全範囲（.lean 12 本・spec 全部）・home・Windows ホスト
+    （/mnt/c/Users）走査で 0 件。凍結層は CausalContext を 11 箇所（Authority.lean:15/26/29、
+    Replay.lean:18/46/49/90/95、Crypto.lean:49/61/71）で不透明パラメータとしてのみ使用し、
+    唯一の構造的操作は equality（位置・順序・identity へのアクセス無し — E2/G1 の構造非依存
+    設計と整合）。AuthorityRef は WAL.lean:27 で定義済み。G1 は再確認・精緻化。G2 継続
+    （lean / lake / elan 本ホスト不在）。最有力候補 graph-runtime causal-context spec v1.0
+    （EVID-055・canonical・自己 SSOT 宣言・sha256 8682c7ec…）は TYPE CausalContext を
+    定義しない。定義内容（PrefillState / ContextNode / Graph）のドメインは R2.0 Graph
+    Runtime の prompt 材料化であり、カーネルの妥当性基盤型とは別ドメインの同名候補
+    （NAMESPACE_COLLISION_CANDIDATE。ARTIFACT_EXISTENCE != NORMATIVE_ADOPTION）。
+  裁定 P1（逐語）: 「職場ホスト/凍結ソースからの権威定義提示を待つ（推奨: v2.9.4 時代の
+    Causal.lean 本体または正準定義。監査が本ホストで到達可能な範囲は走査済み・0 件）」
+    — 前提証拠の充足経路は提示待ち。凍結層拡張契約の採択裁定は提示まで保留。
+  裁定 P2（逐語）: 「UNRESOLVED_DIVERGENCE（推奨: 証拠完全性のギャップ。凍結層拡張契約の
+    conformance 判定をブロックするが Normative Conflict ではない）」
+    — D-CCX-01（凍結層内部参照ギャップ: Authority.lean v2.9.4 / Replay.lean:18 が
+      ChronLLM.Causal 由来を宣言するが、Causal.lean v2.8.0-B Final Frozen Edition は
+      CausalContext を定義しない。v2.9.4 Compile Closure ラベルは本ツリーの凍結ファイル組に
+      対して本ホストで検証不能）の分類は UNRESOLVED_DIVERGENCE。凍結層拡張契約の conformance
+      判定をブロック。Normative Conflict ではない。
+  裁定 P3（逐語）: 「別ドメイン資産として記録し namespace 分離（推奨: カーネル層との同名衝突を
+    解消するため改名または修飾を後続契約で裁定）」
+    — graph-runtime causal-context spec v1.0 は別ドメイン資産として記録。カーネル
+      CausalContext の SSOT としては採択しない。namespace 分離（改名または修飾）は後続契約で
+      裁定。
+  実施規律: 監査は read-only（HEAD 3c2088e 前後不変・git status clean 前後記録）。監査
+    artifacts は repo 外（~/audit-causalcontext/CLOSURE_REPORT_CAUSALCONTEXT.md、
+    evidence_ledger_causalcontext.json）。監査はどの契約も採択しない
+    （VERIFICATION_IS_NOT_AUTHORIZATION）。職場ホストは未検査のまま（範囲内未発見 ≠ 非存在）。
+  帰結:
+    - 凍結層拡張契約の採択裁定: CausalContext 権威定義の提示（P1）まで保留。
+    - D-CCX-01 を UNRESOLVED_DIVERGENCE として未決リストに追加。定義提示と工具ホストでの
+      コンパイル検証により解消。
+    - graph-runtime 同名候補の namespace 分離契約を後続契約項目として未決リストに追加。
+  裁定表明: 2026-10-23、セッション内裁定フォーム（3 問単一選択・推奨案採択）。
+  対象: contracts/governance/ADJUDICATIONS.md（本項目・未決リスト）、D12 X4（G1/G2）、D14、
+    ~/audit-causalcontext/（監査 artifacts）。
+
 ## 未決のまま残るもの
 
 - STEP-187/188/189 の全文確定と filing（全文はセッション DB にのみ存在）
 - 凍結層拡張契約（AuthorityExpiry.lean 相当・validAt）の採択（ADOPTION）そのもの — D12 は
   拡張形態（E2）と失効セマンティクス（G1）の方針を確定したが、拡張契約本体の採択は
   独立の採択裁定を要する（D5 適用条件 / VERIFICATION_IS_NOT_AUTHORIZATION）。
-- CausalContext SSOT 定義の入手・監査（D12 X4 採択前提証拠 MUST・G1
-  CONTRACT_ARTIFACTS_NOT_FOUND_IN_SCOPE）と、lean / lake / elan の揃うホストでの凍結層
-  コンパイル検証（G2 BLOCKED_EXTERNAL_ARTIFACT）。メイン・トラックとして着手済み（D14
-  裁定 2026-10-23）。
+- CausalContext SSOT 定義の入手（D12 X4 採択前提証拠 MUST）。監査は完了済み
+  （AUDIT-CAUSALCONTEXT-SSOT-01・D15・D14）: 本ホストの検索範囲（repo 全範囲・home・
+  Windows ホスト）で定義 0 件。職場ホスト / 凍結ソースからの権威定義提示待ち（D15 P1）。
+  提示まで凍結層拡張契約の採択裁定は保留。
+- D-CCX-01（UNRESOLVED_DIVERGENCE・D15 P2）: 凍結層内部参照ギャップ — Authority.lean
+  v2.9.4 / Replay.lean / Crypto.lean が参照する CausalContext が Causal.lean v2.8.0-B
+  Final Frozen Edition に未定義。凍結層拡張契約の conformance 判定をブロック。定義提示と
+  lean / lake / elan の揃う工具ホストでのコンパイル検証（G2 BLOCKED_EXTERNAL_ARTIFACT）
+  により解消。
+- graph-runtime causal-context spec v1.0 の namespace 分離（D15 P3・後続契約項目）:
+  カーネル層との同名衝突解消のための改名または修飾を後続契約で裁定。
 - E-218-008（organizer 乖離）: UNRESOLVED のまま別証拠トラックで継続（D4 留保・D11 V6 分離維持）。
 - STEP-192 OI は OI-192-01..06 すべて解決済み（OI-192-01 D9 / 02 D8 / 03 D7 / 04 D10 /
   05 D11 / 06 D12）。ADOPTION フェーズは D13 採択裁定により完了（ドラフト本文への
