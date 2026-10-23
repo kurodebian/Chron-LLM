@@ -331,6 +331,53 @@ D12 — OI-192-06 裁定（intent_expiry と D5 凍結層拡張の接続）: RES
   対象: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md §3 / §4 / §12 / §13 OI-192-06 /
     D5 適用条件（contracts/governance/ADJUDICATIONS.md D5）。
 
+D13 — STEP-192 採択裁定（ADOPTION — 契約レベル採択と LINEARIZATION_VALIDATION
+  ステータス更新）: RESOLVED — ADOPTED_CONTRACT_LEVEL (2026-10-23)
+  裁定: 選択肢 B1 / S1 / R1 / E1 / P1（5 項目すべて推奨案で採択）。
+  B1 採択範囲: STEP-192 契約そのものを契約レベル採択する
+    （NORMATIVE_STATUS: ADOPTED_CONTRACT_LEVEL / ADOPTION_STATUS:
+    ADOPTED_CONTRACT_LEVEL）。明示的留保: 凍結層拡張契約（AuthorityExpiry.lean
+    相当・validAt）は未採択のまま（CausalContext SSOT 監査 MUST — D12 X4 継続）、
+    実装ゲートは独立のまま、凍結層 read-only 維持。
+  S1 検証ステータス更新（ハーネス成功結果に基づく）:
+    LINEARIZATION_VALIDATION: NOT_EXECUTED → EXECUTED_MODEL_LEVEL（証拠:
+    results_digest 94ab2a5a66cd1ba3e332ddc4ed494379829b4eb027bac0e34c342fbee6003fd1、
+    受理ゲート AG-192-05a/b/c 充足）。COMMIT_ATOMICITY / COMMIT_RECEIPT /
+    CRASH_RECOVERY / IDEMPOTENCY_RECONCILIATION の 4 フィールドも
+    EXECUTED_MODEL_LEVEL へ更新。IMPLEMENTATION_STATUS: NOT_VERIFIED 維持
+    （モデル検証 PASS は実装検証ではない — VERIFICATION_IS_NOT_AUTHORIZATION）。
+    TEST_STATUS: EXECUTED_MODEL_LEVEL（本番実装ゲートは未実施）。
+  R1 ドラフト本文への語義反映（D7〜D12 適用条件の本文反映）: 実施。
+    §10.1 検証手法と受理ゲート（D11 V1..V6・INV-01..08・INV-H1・AG-192-05a/b/c）、
+    §11 監査ストア契約（D10 I1..I5）、§12 位置ベース revocation と
+    NO_RETROACTIVE_INVALIDATION（D12 X1/X2）、§13 OI-192-01..06 全クローズ確認、
+    §14/§15 状態結論更新。ドラフトは v0.2.0-draft へ正式改訂（v0.1.0 の filing
+    履歴は FILING_RECORD / REVISION_RECORD で保持）。
+  E1 証拠 artifacts: contracts/governance/step-192/validation/ にコミット済み
+    （l1_reference_model.py / test_l1_validation_harness.py / run_sweep.py /
+    README.md — 実装 commit 36c3ccb。evidence/sweep_seed19205.json・
+    evidence/sweep_seed19205_hashseed7.json — 本裁定時に再生成・コミット）。
+  P1 同期順序: D13 裁定の公式記録とドラフト改訂をコミットした後、origin へ push
+    してローカル成果を安全にリモートへ同期する（本裁定コミット後に実行）。
+  理由（記録）: D11 受理ゲートがすべて充足された — AG-192-05a Tier1 網羅 1602
+    ケース INV-01..08 全保持 violations_total=0、AG-192-05b Tier2 fuzz 300 ケース +
+    INV-H1（PYTHONHASHSEED 0/1/12345 subprocess 再実行で results_digest 一致）、
+    AG-192-05c 回帰コーパス seed 0/1/12345/19205 再実行 violations_total=0。
+    pytest 139 passed。凍結層（Authority.lean / WAL.lean）は無変更（git status で
+    確認）。契約レベルの採択は検証済み意味論の正式化であり、実装認可ではない。
+  適用条件: 本裁定は凍結解除を認可しない（D5 適用条件）。モデルレベル検証の PASS は
+    実装検証の PASS でも受理でもない（TEST_PASS != ACCEPTANCE /
+    ACCEPTANCE != GLOBAL_ACCEPTANCE）。実装・受理・Freeze は独立ゲートとして未確立の
+    まま残る。Lean 形式化は強化オプションとして留保（D11）。
+  帰結: STEP-192 の全サイクル（filing → 裁定 D1..D12 → OI-192-01..06 全解決 →
+    ADOPTION 実装（L1 参照モデル + 二層検証ハーネス）→ D13 採択裁定 → 本文反映 →
+    証拠コミット → origin 同期）が閉じる。STEP-192 status:
+    ADOPTED_CONTRACT_LEVEL / IMPLEMENTATION_STATUS: NOT_VERIFIED。
+  裁定表明: 2026-10-23、セッション内裁定フォーム（5 項目すべて推奨案で採択）。
+  対象: STEP192_COMMIT_ADMISSION_ATOMICITY_v0.1.0-draft.md（v0.2.0-draft へ改訂）
+    ヘッダ / 状態フィールド / §10.1 / §11 / §12 / §13 / §14 / §15、
+    contracts/governance/step-192/validation/（evidence artifacts）。
+
 ## 未決のまま残るもの
 
 - STEP-187/188/189 の全文確定と filing（全文はセッション DB にのみ存在）
@@ -342,5 +389,8 @@ D12 — OI-192-06 裁定（intent_expiry と D5 凍結層拡張の接続）: RES
   コンパイル検証（G2 BLOCKED_EXTERNAL_ARTIFACT）。
 - E-218-008（organizer 乖離）: UNRESOLVED のまま別証拠トラックで継続（D4 留保・D11 V6 分離維持）。
 - STEP-192 OI は OI-192-01..06 すべて解決済み（OI-192-01 D9 / 02 D8 / 03 D7 / 04 D10 /
-  05 D11 / 06 D12）。次フェーズは ADOPTION（ドラフト本文への D7〜D12 語義反映・
-  参照モデル L1 検証ハーネス実装 — D11 V4/受理ゲート AG-192-05a..c）。
+  05 D11 / 06 D12）。ADOPTION フェーズは D13 採択裁定により完了（ドラフト本文への
+  D7〜D12 語義反映・参照モデル L1 検証ハーネス実装と受理ゲート AG-192-05a..c 充足 —
+  D11 V4）。STEP-192 全サイクル閉鎖。残る独立ゲート: 実装（IMPLEMENTATION_STATUS:
+  NOT_VERIFIED）、受理（acceptance）、Freeze、凍結層拡張契約の採択、Lean 形式化
+  （強化オプション）。

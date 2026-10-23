@@ -366,18 +366,35 @@ def test_inv_h1_order_independence():
 
 
 def test_inv_h1_seed_independence_subprocess():
-    """INV-H1: identical sweep output under different PYTHONHASHSEED."""
-    script = os.path.join(_HERE, "l1_reference_model.py")
+    """INV-H1: identical sweep output under different PYTHONHASHSEED.
+
+    Corpus seed is FIXED (19205) here — INV-H1 is about hash-seed /
+    iteration-order independence, not corpus-seed variation (that is
+    test_corpus_seed_sweeps).
+    """
     digests = set()
-    for seed in ("0", "1", "12345"):
-        env = dict(os.environ, PYTHONHASHSEED=seed)
+    for hashseed in ("0", "1", "12345"):
+        env = dict(os.environ, PYTHONHASHSEED=hashseed)
         out = subprocess.run(
-            [sys.executable, os.path.join(_HERE, "run_sweep.py"), "--seed", seed],
+            [sys.executable, os.path.join(_HERE, "run_sweep.py"), "--seed", "19205"],
             capture_output=True, text=True, env=env, cwd=_REPO, timeout=600)
         assert out.returncode == 0, out.stderr[-2000:]
         payload = json.loads(out.stdout)
         digests.add(payload["results_digest"])
     assert len(digests) == 1, f"PYTHONHASHSEED-dependent sweep output: {digests}"
+
+
+def test_corpus_seed_sweeps():
+    """AG-192-05c: regression corpus re-run under multiple corpus seeds —
+    every sweep must report violations_total == 0 (INV-H1 digest is
+    seed-deterministic, so digests may differ across corpus seeds)."""
+    for seed in (0, 1, 12345, 19205):
+        out = subprocess.run(
+            [sys.executable, os.path.join(_HERE, "run_sweep.py"), "--seed", str(seed)],
+            capture_output=True, text=True, cwd=_REPO, timeout=600)
+        assert out.returncode == 0, out.stderr[-2000:]
+        payload = json.loads(out.stdout)
+        assert payload["violations_total"] == 0, (seed, payload)
 
 
 def test_no_retroactive_invalidation():
