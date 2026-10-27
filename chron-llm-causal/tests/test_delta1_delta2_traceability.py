@@ -291,23 +291,28 @@ def test_t8_no_dangling_delta2_target(traceability_data: Dict[str, Any]) -> None
     }
 
     # Every resolved Node mapping must have a non-empty Delta-2 target.
+    # Phase 2 contract (per artifact mapping_reason): target identity is
+    # sourced from the MasterGraph for PRESERVED records only.
     for mapping in traceability_data["node_mappings"]:
-        if mapping["classification"] in {"PRESERVED", "AGGREGATED"}:
+        if mapping["classification"] == "PRESERVED":
             target = mapping.get("target_delta2_id")
             assert isinstance(target, str)
             assert target.strip()
+        else:
+            assert mapping.get("target_delta2_id") is None
 
     # Every resolved Edge mapping must have a non-empty Delta-2 target.
     for mapping in traceability_data["edge_mappings"]:
-        if mapping["classification"] in {"PRESERVED", "COLLAPSED"}:
+        if mapping["classification"] == "PRESERVED":
             target = mapping.get("target_delta2_id")
             assert isinstance(target, str)
             assert target.strip()
+        else:
+            assert mapping.get("target_delta2_id") is None
 
     # The reconstructed target populations must be non-empty.
     assert node_targets
     assert edge_targets
->>>>>>> a755748 (Workplace backup before transfer (2026-09-02))
 
 
 # ==========================================================
@@ -358,43 +363,35 @@ def test_t10_e0_cannot_be_verified(
 # ==========================================================
 
 def test_t11_unresolved_elements_explicitly_preserved(
-<<<<<<< HEAD
     traceability_data: Dict[str, Any],
-=======
-    traceability_data: Dict[str, Any]
->>>>>>> a755748 (Workplace backup before transfer (2026-09-02))
 ) -> None:
     """
     T11: unresolved Node and Edge records are explicitly
     preserved.
 
-<<<<<<< HEAD
     Canonical contract:
         unresolved = {
             "nodes": [...],
             "edges": [...]
         }
-=======
-    Current Phase 2 contract:
-        unresolved = [
-            <source_delta1_id>,
-            ...
-        ]
->>>>>>> a755748 (Workplace backup before transfer (2026-09-02))
 
     Node and Edge identity spaces remain separated in their respective
-    mapping spaces. The top-level unresolved list is the union of both.
+    mapping spaces. The top-level unresolved container keeps them
+    separated per space.
     """
     unresolved = traceability_data["unresolved"]
 
-    assert isinstance(unresolved, list)
-    assert len(unresolved) == len(set(unresolved))
+    assert isinstance(unresolved, dict)
+    unresolved_nodes = unresolved["nodes"]
+    unresolved_edges = unresolved["edges"]
 
-<<<<<<< HEAD
-=======
+    assert isinstance(unresolved_nodes, list)
+    assert isinstance(unresolved_edges, list)
+    assert len(unresolved_nodes) == len(set(unresolved_nodes))
+    assert len(unresolved_edges) == len(set(unresolved_edges))
+
     # Every unresolved Node identity must correspond to an actual
     # source_delta1_id in the Node mapping space.
->>>>>>> a755748 (Workplace backup before transfer (2026-09-02))
     node_ids = {
         mapping["source_delta1_id"]
         for mapping in traceability_data["node_mappings"]
@@ -409,16 +406,14 @@ def test_t11_unresolved_elements_explicitly_preserved(
         if mapping["classification"] == "UNRESOLVED"
     }
 
-    expected_unresolved = node_ids | edge_ids
-
-    assert set(unresolved) == expected_unresolved
+    assert set(unresolved_nodes) == node_ids
+    assert set(unresolved_edges) == edge_ids
 
 
 # ==========================================================
 # T12
 # ==========================================================
 
-<<<<<<< HEAD
 def test_t12_phase2_structural_mapping_contract(
     traceability_data: Dict[str, Any],
 ) -> None:
@@ -599,52 +594,6 @@ def test_t12_phase2_structural_mapping_contract(
 
     assert len(unresolved["nodes"]) == 2
     assert len(unresolved["edges"]) == 6
-=======
-def test_t12_delta2_target_population_reconstructible(
-    traceability_data: Dict[str, Any]
-) -> None:
-    """
-    T12: Delta-2 target populations are reconstructible from
-    Phase 2 mapping records.
-
-    Note:
-        delta2_totals describes the canonical Delta-2 population
-        (14 nodes / 11 edges), while Phase 2 mapping targets may
-        additionally contain aggregation/collapse buckets such as
-        N_AGGREGATED_CORE and E_COLLAPSED_TRANSITION.
-    """
-    node_targets = {
-        mapping["target_delta2_id"]
-        for mapping in traceability_data["node_mappings"]
-        if mapping.get("target_delta2_id") is not None
-    }
-
-    edge_targets = {
-        mapping["target_delta2_id"]
-        for mapping in traceability_data["edge_mappings"]
-        if mapping.get("target_delta2_id") is not None
-    }
-
-    # Target populations must be reconstructible from mappings.
-    assert node_targets
-    assert edge_targets
-
-    # Canonical Delta-2 population must not exceed the number of
-    # distinct Phase 2 mapping targets.
-    assert len(node_targets) >= traceability_data["delta2_totals"]["nodes"]
-    assert len(edge_targets) >= traceability_data["delta2_totals"]["edges"]
-
-    # Every non-null target must belong to the reconstructed target set.
-    for mapping in traceability_data["node_mappings"]:
-        target = mapping.get("target_delta2_id")
-        if target is not None:
-            assert target in node_targets
-
-    for mapping in traceability_data["edge_mappings"]:
-        target = mapping.get("target_delta2_id")
-        if target is not None:
-            assert target in edge_targets
->>>>>>> a755748 (Workplace backup before transfer (2026-09-02))
 
 
 # ==========================================================

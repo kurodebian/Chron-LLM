@@ -1,0 +1,1 @@
+ARCHIVED 2026-10-27: attempts made under max_tokens=2048 (server-side finish=length truncation) before adjudicated identity-stamping + per-unit max_tokens policy. Kept for provenance; superseded by results/mdsheets-dm2.

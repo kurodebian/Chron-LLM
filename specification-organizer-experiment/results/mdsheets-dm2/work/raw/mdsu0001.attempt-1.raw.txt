@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0001",
+  "line_start": 34,
+  "line_end": 98,
+  "source_text": "# **Step 1 — 既存資産の所在と変更状態の確認**\n\nChron-LLM の WSL 環境で、次のコマンドを実行してください。\n\ncd \\~/Chron-LLM/specification-organizer-experiment || exit 1\n\nprintf '%s\\\\n' '===== WORKTREE STATUS \\====='\n\ngit status \\--short\n\nprintf '%s\\\\n' '===== SCA CONTRACT \\====='\n\nif test \\-f a1a\\_semantic\\_coverage\\_audit\\_contract.md; then\n\n    wc \\-l a1a\\_semantic\\_coverage\\_audit\\_contract.md\n\n    sha256sum a1a\\_semantic\\_coverage\\_audit\\_contract.md\n\nelse\n\n    echo 'MISSING: a1a\\_semantic\\_coverage\\_audit\\_contract.md'\n\nfi\n\nprintf '%s\\\\n' '===== SCA SCHEMA \\====='\n\nif test \\-f a1a\\_semantic\\_coverage\\_audit.schema.json; then\n\n    wc \\-l a1a\\_semantic\\_coverage\\_audit.schema.json\n\n    sha256sum a1a\\_semantic\\_coverage\\_audit.schema.json\n\nelse\n\n    echo 'MISSING: a1a\\_semantic\\_coverage\\_audit.schema.json'\n\nfi\n\nprintf '%s\\\\n' '===== SCA TEST \\====='\n\nif test \\-f tests/test\\_a1a\\_semantic\\_coverage\\_audit.py; then\n\n    wc \\-l tests/test\\_a1a\\_semantic\\_coverage\\_audit.py\n\n    sha256sum tests/test\\_a1a\\_semantic\\_coverage\\_audit.py\n\nelse\n\n    echo 'MISSING: tests/test\\_a1a\\_semantic\\_coverage\\_audit.py'\n\nfi\n\nこの手順はファイルの所在、行数、ハッシュ、Git の変更状態を確認するだけです。テストは実行せず、ファイルも変更しません。\n\n出力をそのまま貼り付けてください。結果を確認した後、Contract・Schema・テストを個別に照合し、各記述を次の4区分に分類します。\n\n* `AGREED` — DG-01〜DG-05 などで合意済み  \n* `VERIFIED` — 既存資産との照合で確認済み  \n* `UNRESOLVED` — 未決定、または追加確認が必要  \n* `OUT_OF_SCOPE` — A1A-SCA の対象外\n\n既存資産の内容を確認する前に、推測で `VERIFIED` と判定することはありません。\n\n確認しました。今回の出力から、A1A-SCA の既存資産について、次の事実を記録できます。\n\n",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "# **Step 1 — 既存資産の所在と変更状態の確認**",
+      "次のコマンドを実行してください",
+      "この手順はファイルの所在、行数、ハッシュ、Git の変更状態を確認するだけです",
+      "出力をそのまま貼り付けてください"
+    ],
+    "lines": [
+      34,
+      98
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "should",
+    "structural_form": "procedure-block",
+    "semantic_strength": "weak",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}
