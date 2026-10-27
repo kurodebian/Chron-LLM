@@ -1,0 +1,3700 @@
+{
+ "meta": {
+  "generated_utc": "2026-10-27",
+  "source": "md_sheets/chapters_index.md (build_chapters_index.py output; H1-slice verified)",
+  "corpus": {
+   "files": [
+    "1-74.md",
+    "75-99.md",
+    "100-124.md"
+   ],
+   "n_chapters": 127,
+   "total_chars": 1965862
+  },
+  "discipline": [
+   "ARTIFACT_EXISTENCE != NORMATIVE_ADOPTION",
+   "MISSING_EVIDENCE != PASS",
+   "VERIFICATION_IS_NOT_AUTHORIZATION"
+  ],
+  "evidence_scan": "rg word-boundary STEP tokens over repo excluding md_sheets/.venv/.git: 0 chapter-ID references in code (only substring collisions in step-187..218 governance names)",
+  "status_vocabulary": "all chapters: SPEC_ONLY / IMPLEMENTATION_STATUS NOT_VERIFIED unless lineage cited",
+  "cluster_counts": {
+   "GOVERNANCE-AUDIT-RECORD": 9,
+   "DESIGN-REVIEW-LOOP": 13,
+   "FORMAL-MODEL": 9,
+   "COMMIT-WAL-HISTORY": 17,
+   "EVIDENCE-RETENTION": 10,
+   "CAUSAL-CONTRACT": 1,
+   "SECURITY": 4,
+   "NORMATIVE-GOVERNANCE": 4,
+   "SEMANTIC-CLASSIFICATION-CORE": 7,
+   "AUDIT-RUNBOOK-COVERAGE": 20,
+   "POLICY-AUTHZ": 18,
+   "OPERATIONAL-READINESS": 4,
+   "RECOVERY-LIFECYCLE": 8,
+   "DISTRIBUTED": 8,
+   "DECISION-LIFECYCLE": 12,
+   "COMPLIANCE-BASELINE": 9
+  }
+ },
+ "chapters": [
+  {
+   "seq": 1,
+   "step": "STEP-1a",
+   "title": "Step 1a — 既存資産の所在と変更状態の確認",
+   "file": "1-74.md",
+   "line_start": 34,
+   "line_end": 98,
+   "n_lines": 65,
+   "n_chars": 1448,
+   "n_h2": 0,
+   "h2": [],
+   "clusters": [
+    "GOVERNANCE-AUDIT-RECORD"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 2,
+   "step": "STEP-1b",
+   "title": "Step 1b — 現状確認結果",
+   "file": "1-74.md",
+   "line_start": 99,
+   "line_end": 120,
+   "n_lines": 22,
+   "n_chars": 633,
+   "n_h2": 0,
+   "h2": [],
+   "clusters": [
+    "GOVERNANCE-AUDIT-RECORD"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 3,
+   "step": "STEP-2a",
+   "title": "Step 2a — Contract の読み取り専用照合",
+   "file": "1-74.md",
+   "line_start": 121,
+   "line_end": 142,
+   "n_lines": 22,
+   "n_chars": 855,
+   "n_h2": 0,
+   "h2": [],
+   "clusters": [
+    "GOVERNANCE-AUDIT-RECORD"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 4,
+   "step": "STEP-2b",
+   "title": "Step 2b — Contract 照合の暫定裁定",
+   "file": "1-74.md",
+   "line_start": 143,
+   "line_end": 161,
+   "n_lines": 19,
+   "n_chars": 748,
+   "n_h2": 0,
+   "h2": [],
+   "clusters": [
+    "GOVERNANCE-AUDIT-RECORD"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 5,
+   "step": "STEP-3a",
+   "title": "Step 3a — Schema の読み取り専用照合",
+   "file": "1-74.md",
+   "line_start": 162,
+   "line_end": 183,
+   "n_lines": 22,
+   "n_chars": 774,
+   "n_h2": 0,
+   "h2": [],
+   "clusters": [
+    "GOVERNANCE-AUDIT-RECORD"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 6,
+   "step": "STEP-3b",
+   "title": "Step 3b — Contract / Schema 差分裁定",
+   "file": "1-74.md",
+   "line_start": 184,
+   "line_end": 235,
+   "n_lines": 52,
+   "n_chars": 2309,
+   "n_h2": 0,
+   "h2": [],
+   "clusters": [
+    "GOVERNANCE-AUDIT-RECORD"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 7,
+   "step": "STEP-4",
+   "title": "Step 4 — テスト保証範囲の裁定",
+   "file": "1-74.md",
+   "line_start": 236,
+   "line_end": 862,
+   "n_lines": 627,
+   "n_chars": 22320,
+   "n_h2": 15,
+   "h2": [
+    "**3\\. 現時点の統合判定**",
+    "**Step 5.1 — `audit_rules_version` の記録契約**",
+    "**Step 5.2 — 失敗レポートの識別情報ポリシー**",
+    "**Step 5.3 — 入力同一性の検証契約（digest／Manifest／TOCTOU）**",
+    "**Step 5.3 — 確認したい規範決定**",
+    "**Step 5.3 — 裁定記録**",
+    "**Step 5.4 — Validator 呼び出し契約（規範決定候補）**",
+    "**Step 5.4 — 裁定が必要な残点**",
+    "**Step 5.4 — 裁定記録**",
+    "**Step 5.5 — エラー分類の厳密化**",
+    "**Step 5.5 — 裁定依頼**",
+    "**Step 5.6 — 分類表・コード体系の統合整合性チェック**"
+   ],
+   "clusters": [
+    "GOVERNANCE-AUDIT-RECORD"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 8,
+   "step": "STEP-5.8",
+   "title": "Step 5.8 — Schema 許容値ギャップ一覧",
+   "file": "1-74.md",
+   "line_start": 863,
+   "line_end": 998,
+   "n_lines": 136,
+   "n_chars": 5433,
+   "n_h2": 7,
+   "h2": [
+    "**1\\. 許容値・構造制約のギャップ**",
+    "**2\\. `error.code` の候補体系**",
+    "**3\\. Schema の最小変更候補**",
+    "**4\\. JSON Schema と決定論的 Validator の責務分離**",
+    "**5\\. Step 5.8 の終了条件**",
+    "**Step 5.9 の監査結果**",
+    "**Step 6 に進む際の条件**"
+   ],
+   "clusters": [
+    "GOVERNANCE-AUDIT-RECORD"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 9,
+   "step": "STEP-6",
+   "title": "Step 6 — Design Note v0.2 構造化ドラフト案",
+   "file": "1-74.md",
+   "line_start": 999,
+   "line_end": 1317,
+   "n_lines": 319,
+   "n_chars": 10835,
+   "n_h2": 14,
+   "h2": [
+    "**最初に行う Step 7D**",
+    "**Step 7C — Validator 実装照合計画（設計のみ）**",
+    "**次：Step 7B — Contract 文言差分分析計画**",
+    "**Step 7B — 監査結果**",
+    "**必須補正**",
+    "**Step 7B の確定可能な状態**",
+    "**次段階：Step 7A — Schema SC-CH 系列の採否評価**",
+    "**Step 7A — 監査結果**",
+    "**Step 7A の状態**",
+    "**次段階：Step 7 — 変更候補の優先順位表**",
+    "**推奨構成：Step 7 をローカル LLM の検討ループへ移す**",
+    "**各ステップを何に使うか**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 10,
+   "step": "STEP-7",
+   "title": "Step 7 — 変更候補の優先順位表（Design-Only）",
+   "file": "1-74.md",
+   "line_start": 1318,
+   "line_end": 1390,
+   "n_lines": 73,
+   "n_chars": 2521,
+   "n_h2": 4,
+   "h2": [
+    "**1\\. 暫定優先順位表**",
+    "**2\\. 候補別の管理レコード**",
+    "**3\\. 優先順位の決定規則**",
+    "**4\\. Step 7 の判定**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 11,
+   "step": "STEP-8",
+   "title": "Step 8 — Local LLM Review Loop Specification",
+   "file": "1-74.md",
+   "line_start": 1391,
+   "line_end": 1531,
+   "n_lines": 141,
+   "n_chars": 3533,
+   "n_h2": 8,
+   "h2": [
+    "**0\\. 実行状態**",
+    "**1\\. 基本アーキテクチャ**",
+    "**2\\. ループの入出力契約**",
+    "**3\\. 反復プロトコル**",
+    "**4\\. 停止条件**",
+    "**5\\. Step 7 の候補を使った検討順序**",
+    "**6\\. 権限境界**",
+    "**7\\. Step 8 の判定**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": [
+    "jev_local.py (local LLM classification loop, ~0.13s/label)"
+   ]
+  },
+  {
+   "seq": 12,
+   "step": "STEP-9",
+   "title": "Step 9 — Local LLM Review Loop の失敗モード分析（Design-Only）",
+   "file": "1-74.md",
+   "line_start": 1532,
+   "line_end": 1647,
+   "n_lines": 116,
+   "n_chars": 11688,
+   "n_h2": 6,
+   "h2": [
+    "**1\\. 失敗モードと防止条件**",
+    "**2\\. 特に危険な失敗モードへの追加制約**",
+    "**3\\. 失敗時の状態遷移**",
+    "**4\\. 失敗モードの優先順位**",
+    "**5\\. Step 9 の判定**",
+    "**次段階：Step 10 — 決定的検証契約の設計**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 13,
+   "step": "STEP-10",
+   "title": "Step 10 — 決定的検証契約の設計（Design-Only）",
+   "file": "1-74.md",
+   "line_start": 1648,
+   "line_end": 1808,
+   "n_lines": 161,
+   "n_chars": 3307,
+   "n_h2": 6,
+   "h2": [
+    "**1\\. 検証アーキテクチャ**",
+    "**2\\. 決定的検証ルール**",
+    "**3\\. 検証結果の契約**",
+    "**4\\. 検証責務の分離**",
+    "**5\\. Step 10 の判定**",
+    "**次段階：Step 11 — ループの受入基準と設計完了条件**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 14,
+   "step": "STEP-11",
+   "title": "Step 11 — ループの受入基準と設計完了条件（Design-Only）",
+   "file": "1-74.md",
+   "line_start": 1809,
+   "line_end": 1913,
+   "n_lines": 105,
+   "n_chars": 2678,
+   "n_h2": 5,
+   "h2": [
+    "**1\\. 受入基準**",
+    "**2\\. 安全性の必須条件**",
+    "**3\\. 再現性の契約**",
+    "**4\\. 設計完了条件**",
+    "**5\\. Step 11 の判定**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 15,
+   "step": "STEP-12",
+   "title": "Step 12 — 統合設計レビュー（Design-Only）",
+   "file": "1-74.md",
+   "line_start": 1914,
+   "line_end": 2020,
+   "n_lines": 107,
+   "n_chars": 11394,
+   "n_h2": 6,
+   "h2": [
+    "**1\\. 統合レビュー結果**",
+    "**2\\. 統合レビューで見つかった重要な設計欠落**",
+    "**3\\. 依存関係と完了条件の監査**",
+    "**4\\. 統合レビューで採用すべき補正**",
+    "**5\\. Step 12 の判定**",
+    "**次段階：Step 13 — 統合補正の規範化**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 16,
+   "step": "STEP-13",
+   "title": "Step 13 — 統合補正の規範化（Design-Only）",
+   "file": "1-74.md",
+   "line_start": 2021,
+   "line_end": 2124,
+   "n_lines": 104,
+   "n_chars": 11309,
+   "n_h2": 5,
+   "h2": [
+    "**1\\. 統合規則候補**",
+    "**2\\. 判定規則の詳細**",
+    "**3\\. 統合依存グラフ**",
+    "**4\\. 現在の裁定状態**",
+    "**次段階：Step 14 — 規範候補の競合・閉包検査**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 17,
+   "step": "STEP-14",
+   "title": "Step 14 — 規範候補の競合・閉包検査（Design-Only）",
+   "file": "1-74.md",
+   "line_start": 2125,
+   "line_end": 2282,
+   "n_lines": 158,
+   "n_chars": 3285,
+   "n_h2": 7,
+   "h2": [
+    "**1\\. 競合・閉包検査表**",
+    "**2\\. 最優先の補正：結果判定の一意性**",
+    "**3\\. 状態遷移の閉包**",
+    "**4\\. 依存循環と完了判定**",
+    "**5\\. 次段階に渡す補正候補**",
+    "**6\\. Step 14 判定**",
+    "**次段階：Step 15 — 補正候補の依存順序と裁定契約**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 18,
+   "step": "STEP-15",
+   "title": "Step 15 — 補正候補の依存順序と裁定契約",
+   "file": "1-74.md",
+   "line_start": 2283,
+   "line_end": 2430,
+   "n_lines": 148,
+   "n_chars": 3576,
+   "n_h2": 7,
+   "h2": [
+    "**1\\. 依存順序**",
+    "**2\\. 補正ごとの裁定契約**",
+    "**3\\. 判定規則の暫定仕様**",
+    "**4\\. 依存グラフの検証契約**",
+    "**5\\. 受入テストの最小セット**",
+    "**6\\. Step 15 の状態**",
+    "**次段階：Step 16 — 状態遷移表と失敗分類の形式化**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP",
+    "FORMAL-MODEL"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 19,
+   "step": "STEP-16",
+   "title": "Step 16 — 状態遷移表と失敗分類の形式化",
+   "file": "1-74.md",
+   "line_start": 2431,
+   "line_end": 2553,
+   "n_lines": 123,
+   "n_chars": 3822,
+   "n_h2": 7,
+   "h2": [
+    "**1\\. 状態空間**",
+    "**2\\. 状態遷移表**",
+    "**3\\. 失敗分類**",
+    "**4\\. 無限反復を防ぐ契約**",
+    "**5\\. 権限境界**",
+    "**6\\. Step 16 の判定**",
+    "**次段階：Step 17 — 状態遷移の網羅性と到達可能性の検査**"
+   ],
+   "clusters": [
+    "FORMAL-MODEL"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 20,
+   "step": "STEP-17",
+   "title": "Step 17 — 状態遷移の網羅性・到達可能性検査",
+   "file": "1-74.md",
+   "line_start": 2554,
+   "line_end": 2701,
+   "n_lines": 148,
+   "n_chars": 3662,
+   "n_h2": 7,
+   "h2": [
+    "**1\\. 状態遷移の網羅性**",
+    "**2\\. 状態軸間の不正な組合せ**",
+    "**3\\. 回復・再開契約**",
+    "**4\\. エラー分類の排他性**",
+    "**5\\. 到達可能性検査の受入基準**",
+    "**6\\. Step 17 の判定**",
+    "**次段階：Step 18 — 状態機械の正規モデルと機械検証契約**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP",
+    "FORMAL-MODEL"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 21,
+   "step": "STEP-18",
+   "title": "Step 18 — 状態機械の正規モデルと機械検証契約",
+   "file": "1-74.md",
+   "line_start": 2702,
+   "line_end": 2872,
+   "n_lines": 171,
+   "n_chars": 4096,
+   "n_h2": 7,
+   "h2": [
+    "**1\\. 正規モデルの構造**",
+    "**2\\. 遷移の正規表現**",
+    "**3\\. 不変条件**",
+    "**4\\. 決定的検証器の契約**",
+    "**5\\. 機械検証の受入基準**",
+    "**6\\. Step 18 の判定**",
+    "**次段階：Step 19 — 正規モデルのシリアライズ契約とエラー体系の確定**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP",
+    "FORMAL-MODEL"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 22,
+   "step": "STEP-19",
+   "title": "Step 19 — 正規モデルのシリアライズ契約とエラー体系",
+   "file": "1-74.md",
+   "line_start": 2873,
+   "line_end": 3052,
+   "n_lines": 180,
+   "n_chars": 4451,
+   "n_h2": 9,
+   "h2": [
+    "**1\\. 正規モデルのトップレベル契約**",
+    "**2\\. フィールド契約**",
+    "**3\\. 遷移のシリアライズ契約**",
+    "**4\\. エラー体系**",
+    "**5\\. 競合遷移の判定**",
+    "**6\\. バージョニングと互換性**",
+    "**7\\. 機械検証の受入基準**",
+    "**8\\. Step 19 の判定**",
+    "**次段階：Step 20 — 正規モデルの意味論と競合解決規則**"
+   ],
+   "clusters": [
+    "DESIGN-REVIEW-LOOP",
+    "FORMAL-MODEL"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": [
+    "contracts/governance/step-192/validation L1 reference model (contract-level adoption only)"
+   ]
+  },
+  {
+   "seq": 23,
+   "step": "STEP-20",
+   "title": "Step 20 — 正規モデルの意味論と競合解決規則",
+   "file": "1-74.md",
+   "line_start": 3053,
+   "line_end": 3258,
+   "n_lines": 206,
+   "n_chars": 4531,
+   "n_h2": 9,
+   "h2": [
+    "**1\\. ガード評価契約**",
+    "**2\\. 遷移選択規則**",
+    "**3\\. 遷移競合の分類**",
+    "**4\\. 状態軸間の整合性**",
+    "**5\\. エラー集約契約**",
+    "**6\\. 決定論性の要件**",
+    "**7\\. 受入試験候補**",
+    "**8\\. Step 20 判定**",
+    "**次段階：Step 21 — 不変条件の形式化と検証可能性**"
+   ],
+   "clusters": [
+    "FORMAL-MODEL"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 24,
+   "step": "STEP-21",
+   "title": "Step 21 — 不変条件の形式化と検証可能性",
+   "file": "1-74.md",
+   "line_start": 3259,
+   "line_end": 3479,
+   "n_lines": 221,
+   "n_chars": 5438,
+   "n_h2": 8,
+   "h2": [
+    "**1\\. 不変条件の共通スキーマ**",
+    "**2\\. 不変条件の形式化候補**",
+    "**3\\. 検証方式の区分**",
+    "**4\\. 検証結果の判定契約**",
+    "**5\\. 不変条件ごとの証拠記録**",
+    "**6\\. 受入試験候補**",
+    "**7\\. Step 21 判定**",
+    "**次段階：Step 22 — 時間的性質・履歴整合性・試行間不変条件**"
+   ],
+   "clusters": [
+    "FORMAL-MODEL"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 25,
+   "step": "STEP-22",
+   "title": "Step 22 — 時間的性質・履歴整合性・試行間不変条件",
+   "file": "1-74.md",
+   "line_start": 3480,
+   "line_end": 3680,
+   "n_lines": 201,
+   "n_chars": 4949,
+   "n_h2": 7,
+   "h2": [
+    "**1\\. 時間的性質の形式**",
+    "**2\\. 時間的安全性の不変条件**",
+    "**3\\. 安全性と進行性の分離**",
+    "**4\\. Canonical History と Projection の境界**",
+    "**5\\. 受入試験候補**",
+    "**6\\. Step 22 判定**",
+    "**次段階：Step 23 — Commit・履歴追記の原子性と障害回復契約**"
+   ],
+   "clusters": [
+    "FORMAL-MODEL",
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 26,
+   "step": "STEP-23",
+   "title": "Step 23 — Commit・履歴追記の原子性と障害回復契約",
+   "file": "1-74.md",
+   "line_start": 3681,
+   "line_end": 3872,
+   "n_lines": 192,
+   "n_chars": 5006,
+   "n_h2": 9,
+   "h2": [
+    "**1\\. トランザクション状態**",
+    "**2\\. Commit の確定点**",
+    "**3\\. 障害発生位置と回復規則**",
+    "**4\\. WAL と耐久性契約**",
+    "**5\\. 冪等性と重複 Commit の排除**",
+    "**6\\. Commit 結果不明時の照合手順**",
+    "**7\\. 受入試験候補**",
+    "**8\\. Step 23 判定**",
+    "**次段階：Step 24 — WAL レコード形式・回復アルゴリズム・整合性証明**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 27,
+   "step": "STEP-24",
+   "title": "Step 24 — WAL レコード形式・回復アルゴリズム・整合性証明",
+   "file": "1-74.md",
+   "line_start": 3873,
+   "line_end": 4105,
+   "n_lines": 233,
+   "n_chars": 6242,
+   "n_h2": 10,
+   "h2": [
+    "**1\\. WAL レコード形式の候補**",
+    "**2\\. レコード種別**",
+    "**3\\. 起動時の回復アルゴリズム**",
+    "**4\\. レコード異常の分類**",
+    "**5\\. `IN_DOUBT` の確定・中止条件**",
+    "**6\\. 回復処理の冪等性**",
+    "**7\\. 整合性の受入条件**",
+    "**8\\. 受入試験候補**",
+    "**9\\. Step 24 判定**",
+    "**次段階：Step 25 — Canonical History のイベント契約と履歴再生意味論**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 28,
+   "step": "STEP-25",
+   "title": "Step 25 — Canonical History のイベント契約と履歴再生意味論",
+   "file": "1-74.md",
+   "line_start": 4106,
+   "line_end": 4314,
+   "n_lines": 209,
+   "n_chars": 5029,
+   "n_h2": 10,
+   "h2": [
+    "**1\\. Canonical Event の共通スキーマ**",
+    "**2\\. イベント種別の区分**",
+    "**3\\. 順序と因果関係**",
+    "**4\\. `fold(History)` の意味論**",
+    "**5\\. 決定論的 Replay**",
+    "**6\\. 履歴だけでは復元できない依存関係**",
+    "**7\\. 履歴バージョン移行**",
+    "**8\\. 受入試験候補**",
+    "**9\\. Step 25 判定**",
+    "**次段階：Step 26 — イベント型レジストリ・状態遷移表・規範バージョン互換性**"
+   ],
+   "clusters": [
+    "FORMAL-MODEL",
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 29,
+   "step": "STEP-26",
+   "title": "Step 26 — Event Type Registry / State Transition Matrix / Normative Compatibility",
+   "file": "1-74.md",
+   "line_start": 4315,
+   "line_end": 4552,
+   "n_lines": 238,
+   "n_chars": 5033,
+   "n_h2": 8,
+   "h2": [
+    "**26.1 Event Type Registry**",
+    "**26.2 Authority Contract**",
+    "**26.3 State Transition Matrix**",
+    "**26.4 Normative Version Compatibility**",
+    "**26.5 Registry Closure Validation**",
+    "**26.6 Failure Taxonomy**",
+    "**26.7 Step 26 判定**",
+    "**Step 27 — Canonical Event の正規化・ダイジェスト・同一性契約**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 30,
+   "step": "STEP-27",
+   "title": "Step 27 — Canonical Serialization / Digest / Identity Contract",
+   "file": "1-74.md",
+   "line_start": 4553,
+   "line_end": 4774,
+   "n_lines": 222,
+   "n_chars": 5302,
+   "n_h2": 10,
+   "h2": [
+    "**27.1 同一性モデル**",
+    "**27.2 Canonical Serialization**",
+    "**27.3 Digest Contract**",
+    "**27.4 Identifier / Idempotency Contract**",
+    "**27.5 Hash Chain と信頼境界**",
+    "**27.6 Cross-Layer Integrity**",
+    "**27.7 Failure Taxonomy**",
+    "**27.8 Acceptance Tests**",
+    "**27.9 Step 27 判定**",
+    "**Step 28 — Commit Authority と認可ポリシーの形式化**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 31,
+   "step": "STEP-28",
+   "title": "Step 28 — Commit Authority / Authorization Policy Formalization",
+   "file": "1-74.md",
+   "line_start": 4775,
+   "line_end": 5064,
+   "n_lines": 290,
+   "n_chars": 5959,
+   "n_h2": 11,
+   "h2": [
+    "**28.1 Authority Model**",
+    "**28.2 Authorization Contract**",
+    "**28.3 Authorization Result**",
+    "**28.4 Commit State Machine**",
+    "**28.5 GATED → AUTHORIZED の境界**",
+    "**28.6 Authorization Binding**",
+    "**28.7 Failure Taxonomy**",
+    "**28.8 Invariants**",
+    "**28.9 Acceptance Tests**",
+    "**28.10 Step 28 判定**",
+    "**Step 29 — Policy Versioning / Revocation / Time-of-Check-to-Time-of-Use**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 32,
+   "step": "STEP-29",
+   "title": "Step 29 — Policy Versioning / Revocation / TOCTOU Contract",
+   "file": "1-74.md",
+   "line_start": 5065,
+   "line_end": 5313,
+   "n_lines": 249,
+   "n_chars": 5781,
+   "n_h2": 11,
+   "h2": [
+    "**29.1 Policy Version Identity**",
+    "**29.2 Authorization Record**",
+    "**29.3 TOCTOU — Authorization と Commit の間の競合**",
+    "**29.4 Revocation Semantics**",
+    "**29.5 Commit-Time Decision Contract**",
+    "**29.6 Retry / Recovery Contract**",
+    "**29.7 Failure Taxonomy**",
+    "**29.8 Invariants**",
+    "**29.9 Acceptance Tests**",
+    "**29.10 Step 29 判定**",
+    "**Step 30 — Kernel Commit Linearization / Concurrency Control**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 33,
+   "step": "STEP-30",
+   "title": "Step 30 — Kernel Commit Linearization / Concurrency Control",
+   "file": "1-74.md",
+   "line_start": 5314,
+   "line_end": 5542,
+   "n_lines": 229,
+   "n_chars": 5057,
+   "n_h2": 11,
+   "h2": [
+    "**30.1 Linearization Point**",
+    "**30.2 Single-Writer Commit Contract**",
+    "**30.3 Sequence Assignment**",
+    "**30.4 Concurrency Conflict Model**",
+    "**30.5 Authorization / Revocation Ordering**",
+    "**30.6 `IN_DOUBT` Recovery**",
+    "**30.7 Concurrency Invariants**",
+    "**30.8 Acceptance Tests**",
+    "**30.9 未解決事項**",
+    "**30.10 Step 30 判定**",
+    "**Step 31 — Failure Atomicity / Crash Consistency / Recovery Matrix**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 34,
+   "step": "STEP-31",
+   "title": "Step 31 — Failure Atomicity / Crash Consistency / Recovery Matrix",
+   "file": "1-74.md",
+   "line_start": 5543,
+   "line_end": 5771,
+   "n_lines": 229,
+   "n_chars": 7598,
+   "n_h2": 9,
+   "h2": [
+    "**31.1 目的**",
+    "**31.2 クラッシュポイント別の保証候補**",
+    "**31.3 Recovery 判定マトリクス**",
+    "**31.5 Retry / Idempotency Contract**",
+    "**31.6 Canonical History / Transaction Index の整合性**",
+    "**31.7 Fault Injection Tests**",
+    "**31.8 Failure Atomicity Invariants**",
+    "**31.9 未確定事項 — 次の規範化対象**",
+    "**Step 31 判定**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": [
+    "build_chapters_index.py / chapters_index.md (chapter map)"
+   ]
+  },
+  {
+   "seq": 35,
+   "step": "STEP-32",
+   "title": "Step 32 — Checkpoint / Snapshot / WAL Compaction Contract",
+   "file": "1-74.md",
+   "line_start": 5772,
+   "line_end": 6031,
+   "n_lines": 260,
+   "n_chars": 7077,
+   "n_h2": 10,
+   "h2": [
+    "**32.1 目的**",
+    "**32.2 用語と責務**",
+    "**32.3 Checkpoint Contract**",
+    "**32.4 Snapshot Contract**",
+    "**32.5 WAL Compaction Contract**",
+    "**32.6 復旧判定マトリクス**",
+    "**32.7 Fault Injection Tests**",
+    "**32.8 Invariants**",
+    "**32.9 未確定事項**",
+    "**Step 32 判定**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 36,
+   "step": "STEP-33",
+   "title": "Step 33 — Retention / Auditability / Evidence Preservation Contract",
+   "file": "1-74.md",
+   "line_start": 6032,
+   "line_end": 6340,
+   "n_lines": 309,
+   "n_chars": 7405,
+   "n_h2": 12,
+   "h2": [
+    "**33.1 目的**",
+    "**33.2 Evidence Classification**",
+    "**33.3 Retention Policy Contract**",
+    "**33.4 Deletion Authority and Lifecycle**",
+    "**33.5 Canonical History の削除境界**",
+    "**33.6 Evidence Dependency Graph**",
+    "**33.7 Archive / Access / Integrity**",
+    "**33.8 Failure Matrix**",
+    "**33.9 Fault Injection Tests**",
+    "**33.10 Invariants**",
+    "**33.11 未確定事項**",
+    "**Step 33 判定**"
+   ],
+   "clusters": [
+    "EVIDENCE-RETENTION"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 37,
+   "step": "STEP-34",
+   "title": "Step 34 — Backup / Restore / Disaster Recovery Contract",
+   "file": "1-74.md",
+   "line_start": 6341,
+   "line_end": 6673,
+   "n_lines": 333,
+   "n_chars": 8750,
+   "n_h2": 12,
+   "h2": [
+    "**34.1 目的**",
+    "**34.2 Backup Scope Contract**",
+    "**34.3 Backup Consistency Contract**",
+    "**34.4 Recovery Point と RPO / RTO**",
+    "**34.5 Restore State Machine**",
+    "**34.6 Transaction Reconciliation Contract**",
+    "**34.7 Disaster Recovery と Commit 再開**",
+    "**34.8 Failure Matrix**",
+    "**34.9 Fault Injection Tests**",
+    "**34.10 Invariants**",
+    "**34.11 未確定事項**",
+    "**Step 34 判定**"
+   ],
+   "clusters": [
+    "EVIDENCE-RETENTION"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 38,
+   "step": "STEP-35",
+   "title": "Step 35 — Observability / Audit Logging / Operational Telemetry Contract",
+   "file": "1-74.md",
+   "line_start": 6674,
+   "line_end": 6992,
+   "n_lines": 319,
+   "n_chars": 8141,
+   "n_h2": 12,
+   "h2": [
+    "**35.1 目的**",
+    "**35.2 観測データの分類**",
+    "**35.3 Event Correlation Contract**",
+    "**35.4 Commit Lifecycle Observability**",
+    "**35.5 Audit Record Contract**",
+    "**35.6 Telemetry Failure Policy**",
+    "**35.7 Metrics Contract**",
+    "**35.8 Security / Privacy Contract**",
+    "**35.9 Fault Injection Tests**",
+    "**35.10 Invariants**",
+    "**35.11 未確定事項**",
+    "**Step 35 判定**"
+   ],
+   "clusters": [
+    "EVIDENCE-RETENTION"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 39,
+   "step": "STEP-36",
+   "title": "Step 36 — Health / Liveness / Readiness / Safe Degradation Contract",
+   "file": "1-74.md",
+   "line_start": 6993,
+   "line_end": 7263,
+   "n_lines": 271,
+   "n_chars": 7096,
+   "n_h2": 11,
+   "h2": [
+    "**36.1 目的**",
+    "**36.2 コンポーネント別のヘルス境界**",
+    "**36.3 Liveness / Readiness / Capability**",
+    "**36.4 Capability Contract**",
+    "**36.5 Safe Degradation Contract**",
+    "**36.6 状態優先順位と競合解決**",
+    "**36.7 Failure Matrix**",
+    "**36.8 Fault Injection Tests**",
+    "**36.9 Invariants**",
+    "**36.10 未確定事項**",
+    "**Step 36 判定**"
+   ],
+   "clusters": [
+    "EVIDENCE-RETENTION"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 40,
+   "step": "STEP-37",
+   "title": "Step 37 — Configuration / Environment / Startup Validation Contract",
+   "file": "1-74.md",
+   "line_start": 7264,
+   "line_end": 7747,
+   "n_lines": 484,
+   "n_chars": 11872,
+   "n_h2": 14,
+   "h2": [
+    "**37.1. 目的と適用範囲**",
+    "**37.2. 不変原則**",
+    "**37.3. 構成分類**",
+    "**37.4. 構成解決と優先順位**",
+    "**37.5. Startup State Machine**",
+    "**37.6. 起動受理条件**",
+    "**37.7. 部分起動と Safe Degradation**",
+    "**37.8. 構成変更と実行中トランザクション**",
+    "**37.9. エラー分類と停止条件**",
+    "**37.10. テスト仕様候補**",
+    "**37.11. 不変条件候補**",
+    "**37.12. 未解決事項**"
+   ],
+   "clusters": [
+    "EVIDENCE-RETENTION"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 41,
+   "step": "STEP-38",
+   "title": "Step 38 — Shutdown / Restart / Graceful Termination Contract",
+   "file": "1-74.md",
+   "line_start": 7748,
+   "line_end": 8338,
+   "n_lines": 591,
+   "n_chars": 15282,
+   "n_h2": 16,
+   "h2": [
+    "**38.1. 目的と適用範囲**",
+    "**38.2. 不変原則**",
+    "**38.3. 停止要求の分類**",
+    "**38.4. Graceful Shutdown State Machine**",
+    "**38.5. 新規要求と進行中処理の境界**",
+    "**38.6. Transaction Drain とタイムアウト**",
+    "**38.7. Canonical Storage と停止完了条件**",
+    "**38.8. コンポーネント停止順序**",
+    "**38.9. 強制終了・クラッシュ・ホスト停止**",
+    "**38.10. Restart / Recovery Contract との接続**",
+    "**38.11. エラー分類**",
+    "**38.12. テスト仕様候補**"
+   ],
+   "clusters": [
+    "EVIDENCE-RETENTION"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 42,
+   "step": "STEP-39",
+   "title": "Step 39 — Concurrency / Serialization / Transaction Isolation Contract",
+   "file": "1-74.md",
+   "line_start": 8339,
+   "line_end": 8893,
+   "n_lines": 555,
+   "n_chars": 15436,
+   "n_h2": 15,
+   "h2": [
+    "**39.1. 目的と適用範囲**",
+    "**39.2. 不変原則**",
+    "**39.3. 実行順序と Canonical 順序の分離**",
+    "**39.4. トランザクション識別と重複排除**",
+    "**39.5. Transaction Isolation と競合制御**",
+    "**39.6. Validation / Authorization と TOCTOU**",
+    "**39.7. Canonical Commit の直列化規則**",
+    "**39.8. Deadlock / Cancellation / Retry**",
+    "**39.9. Replay と Projection の一貫性**",
+    "**39.10. エラー分類**",
+    "**39.11. テスト仕様候補**",
+    "**39.12. 不変条件候補**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 43,
+   "step": "STEP-40",
+   "title": "Step 40 — Event Ordering / Causality / Deterministic Replay Contract",
+   "file": "1-74.md",
+   "line_start": 8894,
+   "line_end": 9458,
+   "n_lines": 565,
+   "n_chars": 13762,
+   "n_h2": 15,
+   "h2": [
+    "**40.1. 目的と適用範囲**",
+    "**40.2. 不変原則**",
+    "**40.3. Event Identity と識別子の意味**",
+    "**40.4. 時刻・因果・順序の分離**",
+    "**40.5. Canonical History の順序規則**",
+    "**40.6. Causation Graph の検証**",
+    "**40.7. Deterministic Replay Contract**",
+    "**40.8. Replay Versioning と互換性**",
+    "**40.9. Replay 結果の検証と Projection 公開**",
+    "**40.10. エラー分類**",
+    "**40.11. テスト仕様候補**",
+    "**40.12. 不変条件候補**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY",
+    "CAUSAL-CONTRACT"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 44,
+   "step": "STEP-41",
+   "title": "Step 41 — Schema Evolution / Version Compatibility / Migration Contract",
+   "file": "1-74.md",
+   "line_start": 9459,
+   "line_end": 9984,
+   "n_lines": 526,
+   "n_chars": 13168,
+   "n_h2": 14,
+   "h2": [
+    "**41.1. 目的と適用範囲**",
+    "**41.2. 不変原則**",
+    "**41.3. バージョン領域の分離**",
+    "**41.4. 互換性分類**",
+    "**41.5. Raw Evidence と変換後データ**",
+    "**41.6. Migration Lifecycle**",
+    "**41.7. 部分 Migration・失敗・再試行**",
+    "**41.8. Replay / Checkpoint / Policy との整合性**",
+    "**41.9. エラー分類**",
+    "**41.10. テスト仕様候補**",
+    "**41.11. 不変条件候補**",
+    "**41.12. 未解決事項**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 45,
+   "step": "STEP-42",
+   "title": "Step 42 — Security Boundary / Trust Model / Capability Authorization Contract",
+   "file": "1-74.md",
+   "line_start": 9985,
+   "line_end": 10670,
+   "n_lines": 686,
+   "n_chars": 14329,
+   "n_h2": 17,
+   "h2": [
+    "**42.1. 目的と適用範囲**",
+    "**42.2. 不変原則**",
+    "**42.3. Trust Boundary**",
+    "**42.4. Trust の分類**",
+    "**42.5. Identity と Authority**",
+    "**42.6. Capability Contract**",
+    "**42.7. Proposal → Commit の Security Gate**",
+    "**42.8. Delegation / Revocation / Expiration**",
+    "**42.9. Confused Deputy / Privilege Escalation / Replay Attack**",
+    "**42.10. Cryptographic Integrity / Key Management**",
+    "**42.11. Secrets / Sensitive Data Boundary**",
+    "**42.12. Security Failure State**"
+   ],
+   "clusters": [
+    "SECURITY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 46,
+   "step": "STEP-43",
+   "title": "Step 43 — Threat Modeling / Attack Surface / Security Invariant Verification Contract",
+   "file": "1-74.md",
+   "line_start": 10671,
+   "line_end": 11198,
+   "n_lines": 528,
+   "n_chars": 13661,
+   "n_h2": 14,
+   "h2": [
+    "**43.1. 目的と適用範囲**",
+    "**43.2. 不変原則**",
+    "**43.3. 脅威モデルの基本構造**",
+    "**43.4. 保護資産（Assets）**",
+    "**43.5. 攻撃者モデル**",
+    "**43.6. Attack Surface Inventory**",
+    "**43.7. Threat Register**",
+    "**43.8. LLM 固有の脅威**",
+    "**43.9. Security Invariant Verification**",
+    "**43.10. テスト仕様候補**",
+    "**43.11. 不変条件候補**",
+    "**43.12. 未解決事項**"
+   ],
+   "clusters": [
+    "SECURITY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 47,
+   "step": "STEP-44",
+   "title": "Step 44 — Security Incident / Detection / Containment / Evidence Preservation / Recovery…",
+   "file": "1-74.md",
+   "line_start": 11199,
+   "line_end": 11854,
+   "n_lines": 656,
+   "n_chars": 13939,
+   "n_h2": 16,
+   "h2": [
+    "**44.1. 目的と適用範囲**",
+    "**44.2. 不変原則**",
+    "**44.3. Incident 分類**",
+    "**44.4. Incident Lifecycle**",
+    "**44.5. 検知とトリアージ**",
+    "**44.6. Containment Contract**",
+    "**44.7. Canonical Commit と Incident の関係**",
+    "**44.8. Evidence Preservation Contract**",
+    "**44.9. Root Cause Analysis / Remediation**",
+    "**44.10. Recovery と Service Resume**",
+    "**44.11. Incident Severity / Escalation**",
+    "**44.12. テスト仕様候補**"
+   ],
+   "clusters": [
+    "SECURITY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 48,
+   "step": "STEP-45",
+   "title": "Step 45 — Security Governance / Risk Acceptance / Change Approval / Compliance Evidence C…",
+   "file": "1-74.md",
+   "line_start": 11855,
+   "line_end": 12449,
+   "n_lines": 595,
+   "n_chars": 12274,
+   "n_h2": 16,
+   "h2": [
+    "**45.1. 目的と適用範囲**",
+    "**45.2. 不変原則**",
+    "**45.3. Governance の決定領域**",
+    "**45.4. Authority と職務分離**",
+    "**45.5. Change Approval Contract**",
+    "**45.6. Risk Acceptance Contract**",
+    "**45.7. Evidence Acceptance / Compliance Evidence**",
+    "**45.8. Governance Decision Lifecycle**",
+    "**45.9. Approval Integrity / Revocation**",
+    "**45.10. Freeze / NO-GO / BLOCKED Contract**",
+    "**45.11. Governance と Canonical History**",
+    "**45.12. テスト仕様候補**"
+   ],
+   "clusters": [
+    "SECURITY"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 49,
+   "step": "STEP-46",
+   "title": "Step 46 — Formal Contract Registry / Invariant Traceability / Cross-Contract Consistency…",
+   "file": "1-74.md",
+   "line_start": 12450,
+   "line_end": 13079,
+   "n_lines": 630,
+   "n_chars": 12992,
+   "n_h2": 15,
+   "h2": [
+    "**46.1. 目的**",
+    "**46.2. 不変原則**",
+    "**46.3. Registry データモデル**",
+    "**46.4. 規範的状態の分離**",
+    "**46.5. Contract 間の関係モデル**",
+    "**46.6. Cross-Contract Consistency Audit**",
+    "**46.7. Contradiction / Ambiguity Classification**",
+    "**46.8. Dependency Graph と Closure**",
+    "**46.9. Audit Result Contract**",
+    "**46.10. Step 31–45 の暫定トレーサビリティ**",
+    "**46.11. テスト仕様候補**",
+    "**46.12. 不変条件候補**"
+   ],
+   "clusters": [
+    "NORMATIVE-GOVERNANCE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 50,
+   "step": "STEP-47",
+   "title": "Step 47 — Normative Source of Truth / Contract Precedence / Conflict Adjudication Contract",
+   "file": "1-74.md",
+   "line_start": 13080,
+   "line_end": 13618,
+   "n_lines": 539,
+   "n_chars": 10812,
+   "n_h2": 15,
+   "h2": [
+    "**47.1. 目的**",
+    "**47.2. 不変原則**",
+    "**47.3. 規範ソースの分類**",
+    "**47.4. Normative Source Identity**",
+    "**47.5. Precedence Policy**",
+    "**47.6. Conflict Classification**",
+    "**47.7. Conflict Adjudication Lifecycle**",
+    "**47.8. Blocked Operation Policy**",
+    "**47.9. Canonical History との関係**",
+    "**47.10. Version / Supersession Rules**",
+    "**47.11. テスト仕様候補**",
+    "**47.12. 不変条件候補**"
+   ],
+   "clusters": [
+    "NORMATIVE-GOVERNANCE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 51,
+   "step": "STEP-48",
+   "title": "Step 48 — Normative Amendment / Deprecation / Supersession / Effective-Version Lifecycle…",
+   "file": "1-74.md",
+   "line_start": 13619,
+   "line_end": 14213,
+   "n_lines": 595,
+   "n_chars": 12105,
+   "n_h2": 16,
+   "h2": [
+    "**48.1. 目的**",
+    "**48.2. 不変原則**",
+    "**48.3. Normative Lifecycle の分類**",
+    "**48.4. Normative Version Identity**",
+    "**48.5. Amendment Lifecycle**",
+    "**48.6. Deprecation Contract**",
+    "**48.7. Supersession Contract**",
+    "**48.8. Effective-Version Contract**",
+    "**48.9. Existing Artifacts / Historical Evidence**",
+    "**48.10. Migration / Replay / Recovery との接続**",
+    "**48.11. Failure / Recovery Matrix**",
+    "**48.12. テスト仕様候補**"
+   ],
+   "clusters": [
+    "NORMATIVE-GOVERNANCE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 52,
+   "step": "STEP-49",
+   "title": "Step 49 — Normative Change Impact Analysis / Dependency Revalidation / Regression Evidenc…",
+   "file": "1-74.md",
+   "line_start": 14214,
+   "line_end": 14830,
+   "n_lines": 617,
+   "n_chars": 12162,
+   "n_h2": 15,
+   "h2": [
+    "**49.1. 目的**",
+    "**49.2. 不変原則**",
+    "**49.3. Impact Analysis 対象モデル**",
+    "**49.4. Change Impact Graph**",
+    "**49.5. Impact Classification**",
+    "**49.6. Revalidation Policy**",
+    "**49.7. Regression Evidence Contract**",
+    "**49.8. Change Impact Report**",
+    "**49.9. Impact Analysis と Freeze**",
+    "**49.10. Failure / Recovery Matrix**",
+    "**49.11. テスト仕様候補**",
+    "**49.12. 不変条件候補**"
+   ],
+   "clusters": [
+    "NORMATIVE-GOVERNANCE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 53,
+   "step": "STEP-50",
+   "title": "Step 50 — Contract Corpus Inventory / Baseline Manifest / Evidence-Bound Coverage Audit C…",
+   "file": "1-74.md",
+   "line_start": 14831,
+   "line_end": 15498,
+   "n_lines": 668,
+   "n_chars": 13010,
+   "n_h2": 15,
+   "h2": [
+    "**50.1. 目的**",
+    "**50.2. 不変原則**",
+    "**50.3. Corpus Scope Contract**",
+    "**50.4. Corpus Inventory Contract**",
+    "**50.5. Baseline Manifest Contract**",
+    "**50.6. Corpus Completeness Verification**",
+    "**50.7. Provenance Contract**",
+    "**50.8. Baseline Drift Detection**",
+    "**50.9. Inventory と後続監査の分離**",
+    "**50.10. Failure / Blocking Matrix**",
+    "**50.11. テスト仕様候補**",
+    "**50.12. 不変条件候補**"
+   ],
+   "clusters": [
+    "SEMANTIC-CLASSIFICATION-CORE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": [
+    "build_chapters_index.py (chapter-level inventory only)",
+    "specification-organizer-experiment A-0d (49-file corpus freeze, different corpus)"
+   ]
+  },
+  {
+   "seq": 54,
+   "step": "STEP-51",
+   "title": "Step 51 — Semantic Corpus Classification / Normative Role Assignment / Evidence-Bound Cla…",
+   "file": "1-74.md",
+   "line_start": 15499,
+   "line_end": 16229,
+   "n_lines": 731,
+   "n_chars": 12768,
+   "n_h2": 16,
+   "h2": [
+    "**51.1. 目的**",
+    "**51.2. 不変原則**",
+    "**51.3. 入力契約**",
+    "**51.4. 分類単位と粒度**",
+    "**51.5. Semantic Classification**",
+    "**51.6. Normative Role Assignment**",
+    "**51.7. Evidence-Bound Classification Record**",
+    "**51.8. Unknown / Ambiguous / Unclassified**",
+    "**51.9. LLM Proposal / Deterministic Validation Boundary**",
+    "**51.10. Classification Lifecycle**",
+    "**51.11. Failure / Blocking Matrix**",
+    "**51.12. テスト仕様候補**"
+   ],
+   "clusters": [
+    "SEMANTIC-CLASSIFICATION-CORE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": [
+    "specification-organizer-experiment DM-2 (semantic extraction, 259 tests) — role assignment partial"
+   ]
+  },
+  {
+   "seq": 55,
+   "step": "STEP-52",
+   "title": "Step 52 — Semantic Claim Extraction / Claim-Evidence Separation / Unknown-Preserving Extr…",
+   "file": "1-74.md",
+   "line_start": 16230,
+   "line_end": 17197,
+   "n_lines": 968,
+   "n_chars": 15622,
+   "n_h2": 19,
+   "h2": [
+    "**52.1. 目的**",
+    "**52.2. 不変原則**",
+    "**52.3. 入力契約**",
+    "**52.4. Claim の定義と抽出境界**",
+    "**52.5. Claim と Evidence の分離**",
+    "**52.6. Source Span と原文忠実性**",
+    "**52.7. 意味的構造の保持**",
+    "**52.8. 複数 Claim と Claim の分割**",
+    "**52.9. Claim Identity と重複管理**",
+    "**52.10. Unknown / Ambiguous / Contradiction Preservation**",
+    "**52.11. Claim Extraction Record**",
+    "**52.12. Extraction Lifecycle**"
+   ],
+   "clusters": [
+    "SEMANTIC-CLASSIFICATION-CORE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": [
+    "specification-organizer-experiment DM-2 extraction pipeline (dm2_extraction.py, validate_dm2.py)"
+   ]
+  },
+  {
+   "seq": 56,
+   "step": "STEP-53",
+   "title": "Step 53 — Claim Relationship / Dependency / Causal Edge Proposal Contract",
+   "file": "1-74.md",
+   "line_start": 17198,
+   "line_end": 17962,
+   "n_lines": 765,
+   "n_chars": 14897,
+   "n_h2": 17,
+   "h2": [
+    "**53.1. 目的**",
+    "**53.2. 不変原則**",
+    "**53.3. 入力契約**",
+    "**53.4. Relationship Taxonomy**",
+    "**53.5. Edge Proposal Record**",
+    "**53.6. Relationship Evidence Contract**",
+    "**53.7. Dependency と Causality の分離**",
+    "**53.8. Contradiction Edge Contract**",
+    "**53.9. Cycle Detection / Graph Validation**",
+    "**53.10. Relationship Graph Versioning**",
+    "**53.11. Edge Lifecycle**",
+    "**53.12. Failure / Blocking Matrix**"
+   ],
+   "clusters": [
+    "SEMANTIC-CLASSIFICATION-CORE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": [
+    "chron-llm-causal Δ1/Δ2 causal extraction + traceability (166 tests) — corpus differs"
+   ]
+  },
+  {
+   "seq": 57,
+   "step": "STEP-54",
+   "title": "Step 54 — Semantic Graph Validation / Invariant Checking / Contradiction and Closure Audi…",
+   "file": "1-74.md",
+   "line_start": 17963,
+   "line_end": 18939,
+   "n_lines": 977,
+   "n_chars": 19008,
+   "n_h2": 22,
+   "h2": [
+    "**54.1. 目的**",
+    "**54.2. 適用対象**",
+    "**54.3. 不変原則**",
+    "**54.4. 入力契約と監査開始 Gate**",
+    "**54.5. 監査レイヤー**",
+    "**54.6. Structural Integrity Audit**",
+    "**54.7. Evidence Integrity Audit**",
+    "**54.8. Semantic Consistency Audit**",
+    "**54.9. Invariant Compliance Audit**",
+    "**54.10. Contradiction Audit**",
+    "**54.11. Dependency Closure Audit**",
+    "**54.12. Coverage / Completeness Audit**"
+   ],
+   "clusters": [
+    "SEMANTIC-CLASSIFICATION-CORE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": [
+    "chron-llm-causal master graph integration (causal_master_graph.json) — validation partial"
+   ]
+  },
+  {
+   "seq": 58,
+   "step": "STEP-55",
+   "title": "Step 55 — Audit Finding Lifecycle / Remediation Proposal / Revalidation and Closure Contr…",
+   "file": "1-74.md",
+   "line_start": 18940,
+   "line_end": 19814,
+   "n_lines": 875,
+   "n_chars": 15583,
+   "n_h2": 18,
+   "h2": [
+    "**55.1. 目的**",
+    "**55.2. 不変原則**",
+    "**55.3. Finding Identity Contract**",
+    "**55.4. Finding Lifecycle**",
+    "**55.5. Triage / Classification Contract**",
+    "**55.6. Remediation Proposal Contract**",
+    "**55.7. Authorization Contract**",
+    "**55.8. Change Execution Contract**",
+    "**55.9. Revalidation Contract**",
+    "**55.10. Finding Closure Contract**",
+    "**55.11. Duplicate / Split / Supersession Contract**",
+    "**55.12. Audit Reassessment Contract**"
+   ],
+   "clusters": [
+    "GOVERNANCE-AUDIT-RECORD",
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 59,
+   "step": "STEP-56",
+   "title": "Step 56 — Audit Evidence Provenance / Reproducibility / Independent Verification Contract",
+   "file": "1-74.md",
+   "line_start": 19815,
+   "line_end": 20409,
+   "n_lines": 595,
+   "n_chars": 13478,
+   "n_h2": 17,
+   "h2": [
+    "**56.1 目的**",
+    "**56.2 基本不変条件**",
+    "**56.3 Evidence 分類**",
+    "**56.4 Provenance Record Contract**",
+    "**56.5 Provenance Chain と完全性**",
+    "**56.6 Reproducibility Contract**",
+    "**56.7 Independent Verification Contract**",
+    "**56.8 Evidence Lifecycle**",
+    "**56.9 Evidence Reuse / Freshness / Invalidation**",
+    "**56.10 Integrity Failure / Evidence Loss / Mismatch**",
+    "**56.11 Audit Finding / Audit Report Binding**",
+    "**56.12 Deterministic Validator Boundary**"
+   ],
+   "clusters": [
+    "EVIDENCE-RETENTION"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 60,
+   "step": "STEP-57",
+   "title": "Step 57 — Evidence Trust / Authority Validation / Source Authenticity and Acceptance Cont…",
+   "file": "1-74.md",
+   "line_start": 20410,
+   "line_end": 21074,
+   "n_lines": 665,
+   "n_chars": 14102,
+   "n_h2": 16,
+   "h2": [
+    "**57.1 目的**",
+    "**57.2 基本不変条件**",
+    "**57.3 Trust Assessment の対象範囲**",
+    "**57.4 Source Authenticity Contract**",
+    "**57.5 Identity / Signer Authentication Contract**",
+    "**57.6 Authority Validation Contract**",
+    "**57.7 Trust Anchor / Trust Chain Contract**",
+    "**57.8 Evidence Acceptance Contract**",
+    "**57.9 Trust Policy Evaluation / Conflicting Trust Signals**",
+    "**57.10 Trust Revocation / Reassessment**",
+    "**57.11 Deterministic Validator Boundary**",
+    "**57.12 Test Contract — Draft Only**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 61,
+   "step": "STEP-58",
+   "title": "Step 58 — Evidence Registry / Trust Policy Versioning / Acceptance Decision Ledger Contra…",
+   "file": "1-74.md",
+   "line_start": 21075,
+   "line_end": 21815,
+   "n_lines": 741,
+   "n_chars": 15962,
+   "n_h2": 17,
+   "h2": [
+    "**58.1 目的**",
+    "**58.2 基本不変条件**",
+    "**58.3 Registry の責務境界**",
+    "**58.4 Evidence Registry Record Contract**",
+    "**58.5 Registry Identity / Version / Digest**",
+    "**58.6 Trust Registry Contract**",
+    "**58.7 Trust Policy Versioning / Lifecycle**",
+    "**58.8 Acceptance Decision Ledger Contract**",
+    "**58.9 Decision State / Event Ordering / Idempotency**",
+    "**58.10 Registry Cross-Reference Integrity**",
+    "**58.11 Registry Recovery / Migration / Rebuild**",
+    "**58.12 Deterministic Validator Boundary**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY",
+    "OPERATIONAL-READINESS"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 62,
+   "step": "STEP-59",
+   "title": "Step 59 — Registry Integrity / Append-Only Guarantees / Tamper Evidence / Recovery Verifi…",
+   "file": "1-74.md",
+   "line_start": 21816,
+   "line_end": 22614,
+   "n_lines": 799,
+   "n_chars": 17417,
+   "n_h2": 18,
+   "h2": [
+    "**59.1 目的**",
+    "**59.2 適用対象と責務境界**",
+    "**59.3 基本不変条件**",
+    "**59.4 Append-Only Contract**",
+    "**59.5 Integrity Manifest / Hash Chain Contract**",
+    "**59.6 Tamper Detection Contract**",
+    "**59.7 History Completeness / Gap Detection**",
+    "**59.8 Branch Conflict / Concurrent History Contract**",
+    "**59.9 Checkpoint / Snapshot / Backup Integrity**",
+    "**59.10 Recovery Verification Contract**",
+    "**59.11 Failure / Crash / Interrupted Verification**",
+    "**59.12 Tamper Response / Evidence Preservation**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY",
+    "EVIDENCE-RETENTION"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 63,
+   "step": "STEP-60",
+   "title": "STEP-60 — Registry Recovery Acceptance / Operational Readiness / Service Resume Authoriza…",
+   "file": "1-74.md",
+   "line_start": 22615,
+   "line_end": 23315,
+   "n_lines": 701,
+   "n_chars": 15528,
+   "n_h2": 14,
+   "h2": [
+    "**60.1. 目的と適用範囲**",
+    "**60.2. 基本的不変条件**",
+    "**60.3. 判定対象の分離**",
+    "**60.4. Recovery Acceptance Contract**",
+    "**60.5. Operational Readiness Contract**",
+    "**60.6. Service Resume Authorization Contract**",
+    "**60.7. 再開後の監視・停止・再評価**",
+    "**60.8. Validator Boundary**",
+    "**60.9. Failure / Unknown Handling**",
+    "**60.10. Test Specification（設計のみ）**",
+    "**60.11. Invariant Specification（提案）**",
+    "**60.12. 未解決事項**"
+   ],
+   "clusters": [
+    "OPERATIONAL-READINESS"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 64,
+   "step": "STEP-61",
+   "title": "STEP-61 — Operational Capability Matrix / Degraded Mode / Capability-Specific Authorizati…",
+   "file": "1-74.md",
+   "line_start": 23316,
+   "line_end": 24005,
+   "n_lines": 690,
+   "n_chars": 15200,
+   "n_h2": 15,
+   "h2": [
+    "**61.1. 目的**",
+    "**61.2. 基本原則**",
+    "**61.3. 用語と識別子**",
+    "**61.4. Capability 分類モデル**",
+    "**61.5. Operational Mode Model**",
+    "**61.6. Capability × Mode Matrix**",
+    "**61.7. Dependency Readiness と障害伝播**",
+    "**61.8. Mode Transition Contract**",
+    "**61.9. Authorization Decision Contract**",
+    "**61.10. Enforcement Boundary**",
+    "**61.11. Test Specification（設計のみ）**",
+    "**61.12. Invariant Specification（提案）**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ",
+    "OPERATIONAL-READINESS"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 65,
+   "step": "STEP-62",
+   "title": "STEP-62 — Capability Registry / Operation Catalog / Policy Binding and Version Lifecycle…",
+   "file": "1-74.md",
+   "line_start": 24006,
+   "line_end": 24774,
+   "n_lines": 769,
+   "n_chars": 16022,
+   "n_h2": 15,
+   "h2": [
+    "**62.1. 目的**",
+    "**62.2. 基本的不変条件**",
+    "**62.3. Registry / Catalog の論理分離**",
+    "**62.4. Capability Definition Contract**",
+    "**62.5. Operation Definition Contract**",
+    "**62.6. Definition Lifecycle Contract**",
+    "**62.7. Versioning / Supersession / Compatibility**",
+    "**62.8. Policy Binding Contract**",
+    "**62.9. Registry Consistency Audit**",
+    "**62.10. Change Impact / Revalidation**",
+    "**62.11. Test Specification（設計のみ）**",
+    "**62.12. Invariant Specification（提案）**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 66,
+   "step": "STEP-63",
+   "title": "STEP-63 — Policy Conflict Resolution / Rule Precedence / Authorization Decision Determini…",
+   "file": "1-74.md",
+   "line_start": 24775,
+   "line_end": 25505,
+   "n_lines": 731,
+   "n_chars": 14991,
+   "n_h2": 15,
+   "h2": [
+    "**63.1. 目的**",
+    "**63.2. 基本的不変条件**",
+    "**63.3. 競合の分類**",
+    "**63.4. Policy Applicability Contract**",
+    "**63.5. Rule Precedence Contract**",
+    "**63.6. Conflict Resolution Contract**",
+    "**63.7. Authorization Decision Aggregation**",
+    "**63.8. Deterministic Decision Contract**",
+    "**63.9. Decision Ledger / Audit Evidence**",
+    "**63.10. Validator Boundary**",
+    "**63.11. Test Specification（設計のみ）**",
+    "**63.12. Invariant Specification（提案）**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 67,
+   "step": "STEP-64",
+   "title": "STEP-64 — Policy Evaluation Engine / Deterministic Decision Trace / Decision Replay Contr…",
+   "file": "1-74.md",
+   "line_start": 25506,
+   "line_end": 26126,
+   "n_lines": 621,
+   "n_chars": 13119,
+   "n_h2": 13,
+   "h2": [
+    "**0\\. 目的と適用範囲**",
+    "**1\\. 規範上の基本原則**",
+    "**2\\. 評価入力契約**",
+    "**3\\. 決定的評価契約**",
+    "**4\\. Decision Trace 契約**",
+    "**5\\. Decision Replay 契約**",
+    "**6\\. 評価失敗と安全な停止**",
+    "**7\\. Validator と評価エンジンの責務分離**",
+    "**8\\. 履歴・監査・再生の関係**",
+    "**9\\. ドラフト検証ケース**",
+    "**10\\. ドラフト不変条件**",
+    "**11\\. 未解決事項**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 68,
+   "step": "STEP-65",
+   "title": "STEP-65 — Authorization Decision Lifecycle / Revocation / Revalidation / In-Flight Operat…",
+   "file": "1-74.md",
+   "line_start": 26127,
+   "line_end": 26717,
+   "n_lines": 591,
+   "n_chars": 12204,
+   "n_h2": 15,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 規範的な基本区別**",
+    "**2\\. 認可決定のライフサイクル**",
+    "**3\\. 認可決定レコード**",
+    "**4\\. 失効契約**",
+    "**5\\. 再検証契約**",
+    "**6\\. 進行中操作の制御**",
+    "**7\\. 有効時点と並行性**",
+    "**8\\. 決定トレースと正規履歴**",
+    "**9\\. Validator の境界**",
+    "**10\\. ドラフト検証ケース**",
+    "**11\\. ドラフト不変条件**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 69,
+   "step": "STEP-66",
+   "title": "STEP-66 — Authorization Enforcement / Policy Decision Point / Policy Enforcement Point /…",
+   "file": "1-74.md",
+   "line_start": 26718,
+   "line_end": 27320,
+   "n_lines": 603,
+   "n_chars": 12757,
+   "n_h2": 15,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 基本概念と責務境界**",
+    "**2\\. Policy Decision Point（PDP）契約**",
+    "**3\\. Policy Enforcement Point（PEP）契約**",
+    "**4\\. PDP–PEP 間の判断伝達契約**",
+    "**5\\. Fail-Safe / Fail-Closed 契約**",
+    "**6\\. 操作境界と Commit 境界**",
+    "**7\\. 分散処理・並行処理**",
+    "**8\\. 強制結果の証拠と監査**",
+    "**9\\. Validator と実行制御の責務分離**",
+    "**10\\. ドラフト検証ケース**",
+    "**11\\. ドラフト不変条件**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 70,
+   "step": "STEP-67",
+   "title": "STEP-67 — Enforcement Failure Recovery / Partial Execution / Side-Effect Reconciliation C…",
+   "file": "1-74.md",
+   "line_start": 27321,
+   "line_end": 27973,
+   "n_lines": 653,
+   "n_chars": 12317,
+   "n_h2": 16,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 基本的な区別**",
+    "**2\\. 回復対象の状態モデル**",
+    "**3\\. 失敗分類契約**",
+    "**4\\. 回復ライフサイクル**",
+    "**5\\. Retry 契約**",
+    "**6\\. Rollback と Compensation の分離**",
+    "**7\\. Side-Effect Reconciliation 契約**",
+    "**8\\. Commit と回復の境界**",
+    "**9\\. 回復権限とサービス再開**",
+    "**10\\. Validator と回復制御の責務分離**",
+    "**11\\. ドラフト検証ケース**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 71,
+   "step": "STEP-68",
+   "title": "STEP-68 — Recovery Evidence Closure / Residual Risk Acceptance / Operational Resume Gate…",
+   "file": "1-74.md",
+   "line_start": 27974,
+   "line_end": 28660,
+   "n_lines": 687,
+   "n_chars": 15208,
+   "n_h2": 14,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 非目的**",
+    "**2\\. 基本的な規範分離**",
+    "**3\\. Recovery Evidence Closure Contract**",
+    "**4\\. Residual Risk Acceptance Contract**",
+    "**5\\. Operational Resume Gate Contract**",
+    "**6\\. 再開判定記録と監査証跡**",
+    "**7\\. Validator・Semantic Audit・Authority の境界**",
+    "**8\\. テスト候補**",
+    "**9\\. 不変条件候補**",
+    "**10\\. 未解決事項**",
+    "**11\\. STEP-68 の終了条件**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ",
+    "OPERATIONAL-READINESS",
+    "RECOVERY-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 72,
+   "step": "STEP-69",
+   "title": "STEP-69 — Post-Recovery Monitoring / Stability Window / Automatic Degradation and Re-Entr…",
+   "file": "1-74.md",
+   "line_start": 28661,
+   "line_end": 29422,
+   "n_lines": 762,
+   "n_chars": 16150,
+   "n_h2": 14,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 基本的な規範分離**",
+    "**2\\. 監視対象とスコープ契約**",
+    "**3\\. Health Assessment Contract**",
+    "**4\\. Stability Window Contract**",
+    "**5\\. Degradation Detection Contract**",
+    "**6\\. Automatic Degradation and Control Contract**",
+    "**7\\. Re-Entry Gate Contract**",
+    "**8\\. 監視記録・判定証拠・履歴契約**",
+    "**9\\. テスト候補**",
+    "**10\\. 不変条件候補**",
+    "**11\\. 未解決事項**"
+   ],
+   "clusters": [
+    "EVIDENCE-RETENTION",
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 73,
+   "step": "STEP-70",
+   "title": "STEP-70 — Operational Stability Certification / Post-Recovery Audit Closure / Lifecycle T…",
+   "file": "1-74.md",
+   "line_start": 29423,
+   "line_end": 29971,
+   "n_lines": 549,
+   "n_chars": 15993,
+   "n_h2": 13,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 基本的な規範分離**",
+    "**2\\. Stability Certification Contract**",
+    "**3\\. Post-Recovery Audit Closure Contract**",
+    "**4\\. Lifecycle Transition Authorization Contract**",
+    "**5\\. Certification・Audit・Lifecycle の相互依存**",
+    "**6\\. Validator・Audit・Authority の境界**",
+    "**7\\. テスト候補**",
+    "**8\\. 不変条件候補**",
+    "**9\\. 未解決事項**",
+    "**10\\. STEP-70 の終了条件候補**",
+    "**11\\. 状態裁定**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 74,
+   "step": "STEP-71",
+   "title": "STEP-71 — Lifecycle State Registry / Transition Graph Integrity / Reachability and Dead-E…",
+   "file": "1-74.md",
+   "line_start": 29972,
+   "line_end": 30745,
+   "n_lines": 774,
+   "n_chars": 19860,
+   "n_h2": 20,
+   "h2": [
+    "**0\\. 目的と適用範囲**",
+    "**1\\. 基本裁定**",
+    "**2\\. 規範語と判定規則**",
+    "**3\\. Lifecycle State Registry 契約**",
+    "**4\\. Lifecycle Transition Registry 契約**",
+    "**5\\. Transition Graph Integrity 契約**",
+    "**6\\. Reachability 契約**",
+    "**7\\. Dead-End / Terminal-State 契約**",
+    "**8\\. 循環・再入場・デッドロック候補の監査**",
+    "**9\\. グラフ検証の入力・出力契約**",
+    "**10\\. Validator / Auditor / Authority の境界**",
+    "**11\\. 検証テスト候補 — LSR-T-01..20**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 75,
+   "step": "STEP-72",
+   "title": "STEP-72 — Lifecycle Transition Concurrency / Competing Requests / Stale-State and Atomic…",
+   "file": "1-74.md",
+   "line_start": 30746,
+   "line_end": 31524,
+   "n_lines": 779,
+   "n_chars": 22103,
+   "n_h2": 19,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 基本原則と必須の区別**",
+    "**2\\. 用語とデータモデル**",
+    "**3\\. 競合要求の分類契約**",
+    "**4\\. State Version / Stale-State 契約**",
+    "**5\\. 直列化と競合解決契約**",
+    "**6\\. Atomic Commit 契約**",
+    "**7\\. Commit 結果不明・ACK 欠落・再試行契約**",
+    "**8\\. Idempotency 契約**",
+    "**9\\. 外部副作用と Canonical History の整合性**",
+    "**10\\. 競合・Commit の監査証拠契約**",
+    "**11\\. Deterministic Replay 契約**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 76,
+   "step": "STEP-73",
+   "title": "STEP-73 — Distributed Commit Protocol / Transaction Boundary / Outbox-Inbox and Reconcili…",
+   "file": "1-74.md",
+   "line_start": 31525,
+   "line_end": 32193,
+   "n_lines": 669,
+   "n_chars": 19300,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 基本原則と判定上の区別**",
+    "**2\\. トランザクション境界の分類**",
+    "**3\\. Local Commit と Outbox の原子性契約**",
+    "**4\\. Outbox 契約**",
+    "**5\\. Inbox / Consumer 契約**",
+    "**6\\. 配送保証・処理保証・効果保証**",
+    "**7\\. 分散トランザクションと Saga 型回復**",
+    "**8\\. 分散結果の照合契約**",
+    "**9\\. タイムアウト・障害・回復契約**",
+    "**10\\. セキュリティ・データ完全性契約**",
+    "**11\\. 検証テスト候補 — DTC-T-01..20**"
+   ],
+   "clusters": [
+    "DISTRIBUTED"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 77,
+   "step": "STEP-74",
+   "title": "STEP-74 — Distributed Ordering / Causal Consistency / Partition Recovery and Reconciliati…",
+   "file": "1-74.md",
+   "line_start": 32194,
+   "line_end": 32937,
+   "n_lines": 744,
+   "n_chars": 21811,
+   "n_h2": 16,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範的区別**",
+    "**2\\. 順序モデル**",
+    "**3\\. Canonical History と分散イベントの関係**",
+    "**4\\. 順序異常の検出と分類**",
+    "**5\\. Network Partition 契約**",
+    "**6\\. 再接続後の Reconciliation 契約**",
+    "**7\\. Causal Recovery と履歴の欠落**",
+    "**8\\. 分散 Replay 契約**",
+    "**9\\. 責務分離**",
+    "**10\\. テスト候補**",
+    "**11\\. 不変条件候補**"
+   ],
+   "clusters": [
+    "DISTRIBUTED"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 78,
+   "step": "STEP-75",
+   "title": "STEP-75 — Distributed Membership / Failure Detection / Quorum / Fencing and Split-Brain P…",
+   "file": "75-99.md",
+   "line_start": 1,
+   "line_end": 1003,
+   "n_lines": 1003,
+   "n_chars": 20351,
+   "n_h2": 16,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範的区別**",
+    "**2\\. メンバーシップモデル**",
+    "**3\\. Failure Detection 契約**",
+    "**4\\. Quorum と権限所有**",
+    "**5\\. Epoch と Fencing 契約**",
+    "**6\\. Split-Brain 防止と封じ込め**",
+    "**7\\. 権限移譲と構成変更のライフサイクル**",
+    "**8\\. 権限・証拠・監査の契約**",
+    "**9\\. テスト候補**",
+    "**10\\. 不変条件候補**",
+    "**11\\. 未解決事項**"
+   ],
+   "clusters": [
+    "DISTRIBUTED"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 79,
+   "step": "STEP-76",
+   "title": "STEP-76 — Distributed Durability / Replication / Commit Acknowledgment and Recovery Consi…",
+   "file": "75-99.md",
+   "line_start": 1004,
+   "line_end": 1969,
+   "n_lines": 966,
+   "n_chars": 21600,
+   "n_h2": 17,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範的区別**",
+    "**2\\. 耐久性モデル**",
+    "**3\\. 正準 Commit と永続化の境界**",
+    "**4\\. 複製プロトコルと ACK 契約**",
+    "**5\\. 複製整合性とレプリカ状態**",
+    "**6\\. クラッシュ整合性と Commit 結果不明**",
+    "**7\\. 復旧と耐久性の受入れ**",
+    "**8\\. 複製構成・バックアップ・履歴圧縮との関係**",
+    "**9\\. 責務分離**",
+    "**10\\. テスト候補**",
+    "**11\\. 不変条件候補**"
+   ],
+   "clusters": [
+    "DISTRIBUTED"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 80,
+   "step": "STEP-77",
+   "title": "STEP-77 — Distributed Read Consistency / Snapshot Isolation / Stale Read Detection and Re…",
+   "file": "75-99.md",
+   "line_start": 1970,
+   "line_end": 2752,
+   "n_lines": 783,
+   "n_chars": 22101,
+   "n_h2": 17,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範的区別**",
+    "**2\\. 読み取り権限と Read Authority**",
+    "**3\\. 整合性保証モデル**",
+    "**4\\. Read-your-writes と Commit 後の読み取り**",
+    "**5\\. スナップショット契約**",
+    "**6\\. レプリカ選択と古い読み取りの検出**",
+    "**7\\. キャッシュと Projection の鮮度**",
+    "**8\\. ネットワーク分断時の読み取り**",
+    "**9\\. 読み取り結果の来歴・監査・情報漏えい防止**",
+    "**10\\. テスト候補**",
+    "**11\\. 不変条件候補**"
+   ],
+   "clusters": [
+    "DISTRIBUTED"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 81,
+   "step": "STEP-78",
+   "title": "STEP-78 — Distributed Query / Multi-Source Read Composition / Cross-Source Consistency an…",
+   "file": "75-99.md",
+   "line_start": 2753,
+   "line_end": 3761,
+   "n_lines": 1009,
+   "n_chars": 21389,
+   "n_h2": 17,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範的区別**",
+    "**2\\. クエリモデルとソース識別**",
+    "**3\\. クロスソース整合性モデル**",
+    "**4\\. Join・Merge・Aggregation の意味論**",
+    "**5\\. 重複・欠落・矛盾・競合の管理**",
+    "**6\\. 部分結果・完全性・タイムアウト**",
+    "**7\\. クエリ計画の決定性と再現性**",
+    "**8\\. 複合クエリの認可と情報漏えい防止**",
+    "**9\\. 来歴の伝播と統合結果の証拠**",
+    "**10\\. テスト候補**",
+    "**11\\. 不変条件候補**"
+   ],
+   "clusters": [
+    "DISTRIBUTED"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 82,
+   "step": "STEP-79",
+   "title": "STEP-79 — Distributed Result Validation / Semantic Integrity / Contradiction Detection an…",
+   "file": "75-99.md",
+   "line_start": 3762,
+   "line_end": 4932,
+   "n_lines": 1171,
+   "n_chars": 22730,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範的区別**",
+    "**2\\. 検証対象と入力契約**",
+    "**3\\. 検証パイプラインと判定境界**",
+    "**4\\. 構造検証と意味検証**",
+    "**5\\. 不変条件の検証**",
+    "**6\\. 矛盾・曖昧性・未知状態の管理**",
+    "**7\\. 証拠の十分性と主張の評価**",
+    "**8\\. 受入れゲートと結果の公開**",
+    "**9\\. 検証バージョンと再検証**",
+    "**10\\. 拒否・隔離・修復提案**",
+    "**11\\. テスト候補**"
+   ],
+   "clusters": [
+    "DISTRIBUTED"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 83,
+   "step": "STEP-80",
+   "title": "STEP-80 — Validation Decision Ledger / Acceptance Evidence / Decision Replay and Auditabi…",
+   "file": "75-99.md",
+   "line_start": 4933,
+   "line_end": 6041,
+   "n_lines": 1109,
+   "n_chars": 22802,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範的区別**",
+    "**2\\. Decision Ledger の構造**",
+    "**3\\. 規則・ポリシー・検証器のバージョン結合**",
+    "**4\\. 証拠マニフェストと判定来歴**",
+    "**5\\. 判定権限・承認・Commit の分離**",
+    "**6\\. 追記型 Decision Ledger と訂正モデル**",
+    "**7\\. 判定状態とライフサイクル**",
+    "**8\\. 判定の再構築・再生・再評価**",
+    "**9\\. 独立監査と判定証拠の完全性**",
+    "**10\\. 保持・アクセス制御・証拠のライフサイクル**",
+    "**11\\. テスト候補**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 84,
+   "step": "STEP-81",
+   "title": "STEP-81 — Decision Lifecycle Governance / Revocation Propagation / Downstream Invalidatio…",
+   "file": "75-99.md",
+   "line_start": 6042,
+   "line_end": 7290,
+   "n_lines": 1249,
+   "n_chars": 25985,
+   "n_h2": 17,
+   "h2": [
+    "**1\\. 目的・適用範囲**",
+    "**2\\. 規範的前提・不変条件**",
+    "**3\\. 用語と決定ライフサイクル**",
+    "**4\\. Decision Dependency Graph Contract**",
+    "**5\\. Revocation Event Identity / Authority Contract**",
+    "**6\\. Impact Analysis / Downstream Invalidation Contract**",
+    "**7\\. Authorization Revocation / In-Flight Operation Contract**",
+    "**8\\. Cache / Projection Invalidation Contract**",
+    "**9\\. Partial Propagation / Acknowledgment / Reconciliation**",
+    "**10\\. Revalidation / Reauthorization Contract**",
+    "**11\\. Canonical Commit Boundary / Audit Contract**",
+    "**12\\. Failure Model / Fail-Safe Requirements**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 85,
+   "step": "STEP-82",
+   "title": "STEP-82 — Decision Dependency Registry / Versioned Dependency Evidence / Completeness Cer…",
+   "file": "75-99.md",
+   "line_start": 7291,
+   "line_end": 8230,
+   "n_lines": 940,
+   "n_chars": 18724,
+   "n_h2": 15,
+   "h2": [
+    "**1\\. 目的**",
+    "**2\\. 適用範囲と非目的**",
+    "**3\\. Registry と Evidence の責務境界**",
+    "**4\\. Dependency Registry Contract**",
+    "**5\\. Dependency Evidence Contract**",
+    "**6\\. Versioned Snapshot / Reproducibility Contract**",
+    "**7\\. Completeness Assessment Contract**",
+    "**8\\. Completeness Certification Lifecycle**",
+    "**9\\. Independent Verification / Audit**",
+    "**10\\. Failure Handling / Recovery**",
+    "**11\\. Test Candidates — `DDC-T-01..20`**",
+    "**12\\. Invariant Candidates — `DDC-INV-01..20`**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 86,
+   "step": "STEP-83",
+   "title": "STEP-83 — Dependency Change Impact Analysis / Transitive Revalidation / Certification Rev…",
+   "file": "75-99.md",
+   "line_start": 8231,
+   "line_end": 9368,
+   "n_lines": 1138,
+   "n_chars": 22836,
+   "n_h2": 16,
+   "h2": [
+    "**1\\. 目的**",
+    "**2\\. 規範的前提**",
+    "**3\\. Dependency Change Event Contract**",
+    "**4\\. Change Impact Analysis Contract**",
+    "**5\\. Direct / Transitive Impact Contract**",
+    "**6\\. Revalidation Requirement Contract**",
+    "**7\\. Certification Reassessment / Revocation Contract**",
+    "**8\\. Downstream Decision Invalidation Contract**",
+    "**9\\. In-Flight Operations / External Effects**",
+    "**10\\. Propagation / Partial Failure / Reconciliation**",
+    "**11\\. Audit / Observability / Traceability**",
+    "**12\\. Test Candidates — `DCR-T-01..20`**"
+   ],
+   "clusters": [
+    "EVIDENCE-RETENTION",
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 87,
+   "step": "STEP-84",
+   "title": "STEP-84 — Dependency Impact Policy Registry / Risk-Based Revalidation Priority / Mandator…",
+   "file": "75-99.md",
+   "line_start": 9369,
+   "line_end": 10400,
+   "n_lines": 1032,
+   "n_chars": 20625,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 裁定境界・実施状態**",
+    "**1\\. 目的・適用範囲**",
+    "**2\\. 用語・主体**",
+    "**3\\. ポリシーレジストリ契約**",
+    "**4\\. 影響重大度・優先度契約**",
+    "**5\\. 必須再検証・必須無効化規則**",
+    "**6\\. 期限・SLA・延期制御**",
+    "**7\\. 例外承認・残留リスク受容**",
+    "**8\\. 決定論的ポリシー評価**",
+    "**9\\. STEP-83 との接続契約**",
+    "**10\\. 履歴・監査・再生**",
+    "**11\\. 受入ゲート**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 88,
+   "step": "STEP-85",
+   "title": "STEP-85 — Policy Decision Enforcement / Mandatory Action Completion / Enforcement Evidenc…",
+   "file": "75-99.md",
+   "line_start": 10401,
+   "line_end": 11247,
+   "n_lines": 847,
+   "n_chars": 17190,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 裁定境界**",
+    "**1\\. 目的・適用範囲**",
+    "**2\\. 制御主体と責務**",
+    "**3\\. Enforcement Request 契約**",
+    "**4\\. 実行許可ゲート**",
+    "**5\\. アクション・ライフサイクル**",
+    "**6\\. 配送・重複排除・冪等性**",
+    "**7\\. 実効性検証契約**",
+    "**8\\. 部分失敗・結果不明・照合**",
+    "**9\\. 正規履歴へのコミット契約**",
+    "**10\\. 障害・復旧・サービス再開**",
+    "**11\\. STEP-84・STEP-83・STEP-80 との接続**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 89,
+   "step": "STEP-86",
+   "title": "STEP-86 — Enforcement Completion Ledger / Cross-Target Consistency / Residual Action Clos…",
+   "file": "75-99.md",
+   "line_start": 11248,
+   "line_end": 12188,
+   "n_lines": 941,
+   "n_chars": 18114,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 裁定境界**",
+    "**1\\. 目的・適用範囲**",
+    "**2\\. 基本概念と責務**",
+    "**3\\. Completion Plan 契約**",
+    "**4\\. 完了台帳のデータ契約**",
+    "**5\\. アクション依存グラフ・実行順序**",
+    "**6\\. 完了状態と集約規則**",
+    "**7\\. Residual Action Registry**",
+    "**8\\. 競合・重複・相互排他アクション**",
+    "**9\\. Completion Certificate 契約**",
+    "**10\\. 台帳の正規性・更新・再生**",
+    "**11\\. 運用ゲートとの接続**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 90,
+   "step": "STEP-87",
+   "title": "STEP-87 — Completion Certification Validity / Post-Completion Change Detection / Automati…",
+   "file": "75-99.md",
+   "line_start": 12189,
+   "line_end": 12550,
+   "n_lines": 362,
+   "n_chars": 6755,
+   "n_h2": 6,
+   "h2": [
+    "**0\\. 裁定境界**",
+    "**1\\. 目的・適用範囲**",
+    "**2\\. 基本概念**",
+    "**3\\. 証明書の有効性契約**",
+    "**4\\. 変更イベント契約**",
+    "**5\\. 変更検出・認証・影響分析の分離**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 91,
+   "step": "STEP-88",
+   "title": "STEP-88 — Certificate Revocation Propagation / Dependent Authorization Revalidation / Ope…",
+   "file": "75-99.md",
+   "line_start": 12551,
+   "line_end": 13595,
+   "n_lines": 1045,
+   "n_chars": 22502,
+   "n_h2": 19,
+   "h2": [
+    "**0\\. 裁定境界**",
+    "**1\\. 目的・適用範囲・非目的**",
+    "**2\\. 規範的区別と基本公理**",
+    "**3\\. 失効伝播計画**",
+    "**4\\. 依存関係の伝播モデル**",
+    "**5\\. 下流対象ごとの処理契約**",
+    "**6\\. 伝播アクションと実効性証拠**",
+    "**7\\. 失効伝播の状態機械**",
+    "**8\\. 順序制御・並行変更・重複イベント**",
+    "**9\\. 失効伝播と認可再評価の統合**",
+    "**10\\. 障害・部分伝播・復旧**",
+    "**11\\. 正規履歴・イベント・リプレイ**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 92,
+   "step": "STEP-89",
+   "title": "STEP-89 — Distributed Revocation Convergence / Stale Authority Detection / Global Consist…",
+   "file": "75-99.md",
+   "line_start": 13596,
+   "line_end": 14546,
+   "n_lines": 951,
+   "n_chars": 17635,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 裁定境界**",
+    "**1\\. 目的・適用範囲・非目的**",
+    "**2\\. 基本公理と用語の分離**",
+    "**3\\. 収束評価スコープ**",
+    "**4\\. ノード状態観測契約**",
+    "**5\\. 鮮度・遅延・時計の不確実性**",
+    "**6\\. 収束判定モデル**",
+    "**7\\. 収束証明書**",
+    "**8\\. 収束証明の無効化・再評価**",
+    "**9\\. 伝播・収束・再開ゲートの統合**",
+    "**10\\. 障害・分断・復旧**",
+    "**11\\. 正規履歴・リプレイ・監査**"
+   ],
+   "clusters": [
+    "DISTRIBUTED",
+    "DECISION-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 93,
+   "step": "STEP-90",
+   "title": "STEP-90 — Operational Resume Authorization / Convergence Evidence Validation / Safe Re-En…",
+   "file": "75-99.md",
+   "line_start": 14547,
+   "line_end": 15573,
+   "n_lines": 1027,
+   "n_chars": 18337,
+   "n_h2": 20,
+   "h2": [
+    "**0\\. 裁定境界**",
+    "**1\\. 目的・適用範囲・非目的**",
+    "**2\\. 基本公理・規範的区別**",
+    "**3\\. 再開要求レコード**",
+    "**4\\. 再開ゲートの入力証拠**",
+    "**5\\. 再開条件モデル**",
+    "**6\\. 再開適格性評価**",
+    "**7\\. 残留リスク・例外・制限付き再開**",
+    "**8\\. 再開認可レコード**",
+    "**9\\. 再開直前の再検証**",
+    "**10\\. 再開実行と実効性検証**",
+    "**11\\. 再開後の安定性監視と自動再停止**"
+   ],
+   "clusters": [
+    "RECOVERY-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 94,
+   "step": "STEP-91",
+   "title": "STEP-91 — Post-Resume Stability Certification / Runtime Drift Detection / Automatic Safe-…",
+   "file": "75-99.md",
+   "line_start": 15574,
+   "line_end": 16971,
+   "n_lines": 1398,
+   "n_chars": 29793,
+   "n_h2": 19,
+   "h2": [
+    "**0\\. 文書メタデータと状態境界**",
+    "**1\\. 目的・適用範囲・非目標**",
+    "**2\\. 規範上の基本区別**",
+    "**3\\. Post-Resume Monitoring Model**",
+    "**4\\. Runtime Drift の定義と分類**",
+    "**5\\. Drift Evidence と判定責任**",
+    "**6\\. Stability Assessment Window**",
+    "**7\\. Stability Certificate**",
+    "**8\\. Automatic Safe-State Reversion Policy**",
+    "**9\\. Monitoring Degradation / Monitoring Failure**",
+    "**10\\. 依存関係・認可・証明書の継続再評価**",
+    "**11\\. Canonical History / Commit / Replay / Audit**"
+   ],
+   "clusters": [
+    "RECOVERY-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 95,
+   "step": "STEP-92",
+   "title": "STEP-92 — Safe-State Reversion Completion Ledger / Residual Risk Reconciliation / Post-Re…",
+   "file": "75-99.md",
+   "line_start": 16972,
+   "line_end": 18401,
+   "n_lines": 1430,
+   "n_chars": 27035,
+   "n_h2": 19,
+   "h2": [
+    "**0\\. 文書メタデータと状態境界**",
+    "**1\\. 目的・適用範囲・非目標**",
+    "**2\\. 規範的基本区別**",
+    "**3\\. Reversion Completion Plan**",
+    "**4\\. Reversion Completion Ledger**",
+    "**5\\. 効果検証と外部状態の照合**",
+    "**6\\. Residual Risk Registry**",
+    "**7\\. Exception Governance**",
+    "**8\\. 補償操作と再試行**",
+    "**9\\. Completion Closure Assessment**",
+    "**10\\. Reversion Completion Certificate**",
+    "**11\\. Post-Reversion Recovery Assessment**"
+   ],
+   "clusters": [
+    "RECOVERY-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 96,
+   "step": "STEP-93",
+   "title": "STEP-93 — Recovery Readiness Certification / Resume Authorization Revalidation / Controll…",
+   "file": "75-99.md",
+   "line_start": 18402,
+   "line_end": 19684,
+   "n_lines": 1283,
+   "n_chars": 26223,
+   "n_h2": 19,
+   "h2": [
+    "**0\\. 文書メタデータと状態境界**",
+    "**1\\. 目的・適用範囲・非目標**",
+    "**2\\. 規範的基本区別**",
+    "**3\\. Recovery Readiness Certification**",
+    "**4\\. Readiness Certificate**",
+    "**5\\. Resume Authorization の再検証**",
+    "**6\\. Controlled Re-Entry Policy**",
+    "**7\\. 再開直前の TOCTOU 対策**",
+    "**8\\. Resume Execution Lifecycle**",
+    "**9\\. 再開後の監視・安定性評価**",
+    "**10\\. 再開失敗と安全状態への復帰**",
+    "**11\\. 証明書・依存関係・認可の無効化伝播**"
+   ],
+   "clusters": [
+    "RECOVERY-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 97,
+   "step": "STEP-94",
+   "title": "STEP-94 — Controlled Re-Entry Execution Ledger / Stage Transition Verification / Post-Res…",
+   "file": "75-99.md",
+   "line_start": 19685,
+   "line_end": 21222,
+   "n_lines": 1538,
+   "n_chars": 28066,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 文書メタデータ**",
+    "**1\\. 目的・適用範囲・非目標**",
+    "**2\\. 規範的区別と不変の基盤**",
+    "**3\\. Controlled Re-Entry Plan**",
+    "**4\\. ステージ・モデル**",
+    "**5\\. Re-Entry Execution Ledger**",
+    "**6\\. Stage Transition Verification**",
+    "**7\\. Post-Resume Monitoring Gate**",
+    "**8\\. Stability Gate Assessment**",
+    "**9\\. 部分成功・外部副作用・結果不明の照合**",
+    "**10\\. 停止・制限・安全状態復帰**",
+    "**11\\. Re-Entry Completion Assessment**"
+   ],
+   "clusters": [
+    "RECOVERY-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 98,
+   "step": "STEP-95",
+   "title": "STEP-95 — Re-Entry Completion Certification / Stability Evidence Closure / Operational Li…",
+   "file": "75-99.md",
+   "line_start": 21223,
+   "line_end": 22538,
+   "n_lines": 1316,
+   "n_chars": 26594,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 文書メタデータ**",
+    "**1\\. 目的・適用範囲・非目標**",
+    "**2\\. 規範的区別と基本不変条件**",
+    "**3\\. Re-Entry Completion Closure**",
+    "**4\\. Stability Evidence Closure**",
+    "**5\\. Re-Entry Completion Certificate**",
+    "**6\\. Operational Lifecycle Handoff Assessment**",
+    "**7\\. Operational Handoff Authorization**",
+    "**8\\. Operational Lifecycle Handoff Execution**",
+    "**9\\. 引き渡し後の有効性監視と再評価**",
+    "**10\\. 失敗時の照合と安全状態への復帰**",
+    "**11\\. Canonical History・イベント・Replay**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE",
+    "RECOVERY-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 99,
+   "step": "STEP-96",
+   "title": "STEP-96 — Operational Lifecycle State Certification / Post-Handoff Invalidation Propagati…",
+   "file": "75-99.md",
+   "line_start": 22539,
+   "line_end": 23528,
+   "n_lines": 990,
+   "n_chars": 18799,
+   "n_h2": 14,
+   "h2": [
+    "**9\\. 証明書の継続的有効性管理**",
+    "**10\\. Runtime Drift と監視の継続性**",
+    "**11\\. 失効伝播と運用状態遷移の整合性**",
+    "**12\\. 安全状態への復帰と運用制限**",
+    "**13\\. Canonical History と Projection の整合性**",
+    "**14\\. 監査・再現性・証拠保存**",
+    "**15\\. 正規イベント候補**",
+    "**16\\. 受入テスト候補**",
+    "**17\\. 不変条件候補**",
+    "**18\\. 未決事項**",
+    "**19\\. STEP-31–95 横断整合性監査**",
+    "**20\\. 正式採用・Freeze の受入ゲート**"
+   ],
+   "clusters": [
+    "RECOVERY-LIFECYCLE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 100,
+   "step": "STEP-97",
+   "title": "STEP-97 — Continuous Compliance Evaluation / Policy Drift Revalidation / Operational Conf…",
+   "file": "75-99.md",
+   "line_start": 23529,
+   "line_end": 24854,
+   "n_lines": 1326,
+   "n_chars": 31920,
+   "n_h2": 23,
+   "h2": [
+    "**0\\. 文書メタデータ**",
+    "**1\\. 目的・適用範囲・非目標**",
+    "**2\\. 基本原則と規範的区別**",
+    "**3\\. Normative Requirement Registry**",
+    "**4\\. Compliance Scope Manifest**",
+    "**5\\. Requirement-to-Target Mapping**",
+    "**6\\. Continuous Evaluation Plan**",
+    "**7\\. 継続適合性評価パイプライン**",
+    "**8\\. Policy Drift と規範変更の再評価**",
+    "**9\\. Conformance Evidence Manifest**",
+    "**10\\. 適合性の判定と集約**",
+    "**10.6 Nonconformance Registry**"
+   ],
+   "clusters": [
+    "COMPLIANCE-BASELINE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 101,
+   "step": "STEP-98",
+   "title": "STEP-98 — Compliance Decision Governance / Nonconformance Risk Acceptance / Corrective Ac…",
+   "file": "75-99.md",
+   "line_start": 24855,
+   "line_end": 26622,
+   "n_lines": 1768,
+   "n_chars": 30339,
+   "n_h2": 20,
+   "h2": [
+    "**0\\. 文書メタデータ**",
+    "**1\\. 目的・適用範囲・非目標**",
+    "**2\\. Canonical Truth と規範的区別**",
+    "**3\\. Compliance Decision Governance**",
+    "**4\\. Nonconformance Risk Assessment**",
+    "**5\\. Risk Acceptance Governance**",
+    "**6\\. Corrective Action Plan**",
+    "**7\\. Corrective Action Execution and Verification**",
+    "**8\\. Nonconformance Closure Assessment**",
+    "**9\\. Closure Certificate**",
+    "**10\\. 閉鎖後の再開と証拠訂正**",
+    "**11\\. 下流影響と伝播**"
+   ],
+   "clusters": [
+    "COMPLIANCE-BASELINE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 102,
+   "step": "STEP-99",
+   "title": "STEP-99 — Normative Compliance Assurance / Cross-Contract Conformance Audit / Adoption Re…",
+   "file": "75-99.md",
+   "line_start": 26623,
+   "line_end": 28297,
+   "n_lines": 1675,
+   "n_chars": 34319,
+   "n_h2": 26,
+   "h2": [
+    "**0\\. Contract Identity**",
+    "**1\\. Normative Language**",
+    "**2\\. Scope and Non-Goals**",
+    "**3\\. Canonical Authority and State Separation**",
+    "**4\\. Cross-Contract Audit Model**",
+    "**5\\. Contract Corpus Manifest**",
+    "**6\\. Requirement Coverage Matrix**",
+    "**7\\. Normative Conflict Register**",
+    "**8\\. Dependency Graph and Semantic Closure**",
+    "**9\\. Canonical Authority and Cross-Contract Invariant Audit**",
+    "**10\\. Verification Evidence Manifest**",
+    "**11\\. Independent Audit and Reviewer Separation**"
+   ],
+   "clusters": [
+    "COMPLIANCE-BASELINE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 103,
+   "step": "STEP-100",
+   "title": "STEP-100 — Normative Adoption Execution / Canonical Baseline Establishment / Post-Adoptio…",
+   "file": "100-124.md",
+   "line_start": 1,
+   "line_end": 1099,
+   "n_lines": 1099,
+   "n_chars": 31208,
+   "n_h2": 22,
+   "h2": [
+    "**0\\. Contract Identity**",
+    "**1\\. Normative Language**",
+    "**2\\. Scope and Non-Goals**",
+    "**3\\. Canonical Authority Model**",
+    "**4\\. Adoption Input Contract**",
+    "**5\\. Adoption Target Snapshot**",
+    "**6\\. Adoption Execution Plan**",
+    "**7\\. Adoption Authorization**",
+    "**8\\. Pre-Commit Gate and Atomicity**",
+    "**9\\. Canonical Baseline Manifest**",
+    "**10\\. Post-Adoption Integrity Verification**",
+    "**11\\. Adoption Effect Verification and Downstream Propagation**"
+   ],
+   "clusters": [
+    "COMPLIANCE-BASELINE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 104,
+   "step": "STEP-101",
+   "title": "STEP-101 — Canonical Baseline Governance / Normative Change Control / Version Transition…",
+   "file": "100-124.md",
+   "line_start": 1100,
+   "line_end": 2371,
+   "n_lines": 1272,
+   "n_chars": 31601,
+   "n_h2": 27,
+   "h2": [
+    "**0\\. Contract Identity**",
+    "**1\\. Purpose**",
+    "**2\\. 規範用語**",
+    "**3\\. 適用範囲と非目標**",
+    "**4\\. Canonical Authority Model**",
+    "**5\\. Canonical Baseline Governance**",
+    "**6\\. Normative Change Request Contract**",
+    "**7\\. Version Transition and Compatibility**",
+    "**8\\. Deprecation / Replacement / Retirement**",
+    "**9\\. Change Impact Analysis**",
+    "**10\\. Evidence, Certificate, and Authorization Revalidation**",
+    "**11\\. Approval and Authorization**"
+   ],
+   "clusters": [
+    "COMPLIANCE-BASELINE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 105,
+   "step": "STEP-102",
+   "title": "STEP-102 — Normative Change Deployment / Migration Execution / Cross-Version Runtime Conf…",
+   "file": "100-124.md",
+   "line_start": 2372,
+   "line_end": 3297,
+   "n_lines": 926,
+   "n_chars": 23528,
+   "n_h2": 20,
+   "h2": [
+    "**0\\. Contract Identity**",
+    "**1\\. Purpose**",
+    "**2\\. Canonical Authority and Fundamental Distinctions**",
+    "**3\\. Scope and Non-Goals**",
+    "**4\\. Migration Plan Contract**",
+    "**5\\. Migration Preflight and Dry Run**",
+    "**6\\. Cross-Version Runtime Conformance**",
+    "**7\\. Staged Migration and Checkpointing**",
+    "**8\\. Data Transformation and Provenance**",
+    "**9\\. Migration Execution Authorization**",
+    "**10\\. Failure, Partial Migration, and Reconciliation**",
+    "**11\\. Rollback / Compensation / Forward Fix**"
+   ],
+   "clusters": [
+    "COMMIT-WAL-HISTORY",
+    "COMPLIANCE-BASELINE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 106,
+   "step": "STEP-103",
+   "title": "STEP-103 — Migration Outcome Reconciliation / Canonical State Recovery / Post-Migration I…",
+   "file": "100-124.md",
+   "line_start": 3298,
+   "line_end": 4318,
+   "n_lines": 1021,
+   "n_chars": 28167,
+   "n_h2": 22,
+   "h2": [
+    "**0\\. Contract Identity**",
+    "**1\\. Purpose**",
+    "**2\\. Canonical Authority Model**",
+    "**3\\. Scope and Non-Goals**",
+    "**4\\. Reconciliation Input Contract**",
+    "**5\\. Reconciliation Classification**",
+    "**6\\. Reconciliation Procedure**",
+    "**7\\. Recovery Plan Contract**",
+    "**8\\. Recovery Authorization and Execution**",
+    "**9\\. Canonical Repair vs. Derived Repair**",
+    "**10\\. Idempotency, Retry, and Concurrency**",
+    "**11\\. Recovery Outcome and Reconciliation Closure**"
+   ],
+   "clusters": [
+    "COMPLIANCE-BASELINE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 107,
+   "step": "STEP-104",
+   "title": "STEP-104 — Operational Re-Entry Execution / Runtime Capability Revalidation / Stability M…",
+   "file": "100-124.md",
+   "line_start": 4319,
+   "line_end": 5079,
+   "n_lines": 761,
+   "n_chars": 16676,
+   "n_h2": 17,
+   "h2": [
+    "**0\\. Contract Identity**",
+    "**1\\. Purpose**",
+    "**2\\. Canonical Authority and State Distinctions**",
+    "**3\\. Scope and Non-Goals**",
+    "**4\\. Re-Entry Authorization Binding**",
+    "**5\\. Runtime Capability Revalidation**",
+    "**6\\. Staged Operational Re-Entry**",
+    "**7\\. Runtime Drift Detection**",
+    "**8\\. Stability Window and Certification**",
+    "**9\\. Automatic Safe-State Transition**",
+    "**10\\. Canonical Commit During Re-Entry**",
+    "**11\\. Stability, Baseline, and Freeze Gates**"
+   ],
+   "clusters": [
+    "COMPLIANCE-BASELINE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 108,
+   "step": "STEP-105",
+   "title": "STEP-105 — Operational Stability Certification / Lifecycle Closure / Cross-Contract Final…",
+   "file": "100-124.md",
+   "line_start": 5080,
+   "line_end": 5775,
+   "n_lines": 696,
+   "n_chars": 19616,
+   "n_h2": 17,
+   "h2": [
+    "**0\\. Contract Identity**",
+    "**1\\. Purpose**",
+    "**2\\. Canonical Authority and Governing Distinctions**",
+    "**3\\. Scope and Non-Goals**",
+    "**4\\. Contract Corpus Inventory and Canonical Registry**",
+    "**5\\. Cross-Contract Consistency Audit**",
+    "**6\\. Normative Coverage and Traceability Closure**",
+    "**7\\. Audit Finding and Adjudication**",
+    "**8\\. Operational Lifecycle Closure**",
+    "**9\\. Freeze Readiness Assessment**",
+    "**10\\. Independent Freeze Authorization**",
+    "**11\\. Finalization Policy: Add, Merge, Amend, or Reject**"
+   ],
+   "clusters": [
+    "SEMANTIC-CLASSIFICATION-CORE",
+    "POLICY-AUTHZ",
+    "COMPLIANCE-BASELINE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 109,
+   "step": "STEP-106",
+   "title": "STEP-106 — Normative Corpus Inventory Execution / Contract Identity Resolution / Cross-Co…",
+   "file": "100-124.md",
+   "line_start": 5776,
+   "line_end": 6524,
+   "n_lines": 749,
+   "n_chars": 19855,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 目的と位置付け**",
+    "**1\\. 規範的な権限境界**",
+    "**2\\. Corpus Baseline と監査スコープの固定**",
+    "**3\\. Contract Identity Resolution**",
+    "**4\\. Registry Reconciliation**",
+    "**5\\. Dependency / Relationship Graph**",
+    "**6\\. 監査オーケストレーション**",
+    "**7\\. 生成物と出力契約**",
+    "**8\\. Coverage / Traceability Audit**",
+    "**9\\. Finding Ledger と裁定境界**",
+    "**10\\. LLM と決定的検証の分離**",
+    "**11\\. 監査実行状態と完了条件**"
+   ],
+   "clusters": [
+    "SEMANTIC-CLASSIFICATION-CORE",
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 110,
+   "step": "STEP-107",
+   "title": "STEP-107 — Cross-Contract Finding Adjudication / Remediation Prioritization / Audit Closu…",
+   "file": "100-124.md",
+   "line_start": 6525,
+   "line_end": 7155,
+   "n_lines": 631,
+   "n_chars": 17080,
+   "n_h2": 17,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 必須の状態区別**",
+    "**2\\. 入力契約**",
+    "**3\\. Finding の裁定モデル**",
+    "**4\\. 修正優先順位（Remediation Prioritization）**",
+    "**5\\. Remediation Plan 契約**",
+    "**6\\. リスク例外と残留リスク**",
+    "**7\\. 再検証契約**",
+    "**8\\. Finding Closure Decision**",
+    "**9\\. 監査全体の Closure**",
+    "**10\\. 監査証跡と Canonical History**",
+    "**11\\. テスト候補（NFA-T-01〜20）**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 111,
+   "step": "STEP-108",
+   "title": "STEP-108 — Audit Contract Consolidation / Normative Gap Review / Execution Readiness Gate",
+   "file": "100-124.md",
+   "line_start": 7156,
+   "line_end": 7658,
+   "n_lines": 503,
+   "n_chars": 13801,
+   "n_h2": 13,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 権限境界と必須の区別**",
+    "**2\\. Contract Consolidation Model**",
+    "**3\\. 規範的整合性レビュー**",
+    "**4\\. 統合レビューの実行段階**",
+    "**5\\. Normative Gap の評価**",
+    "**6\\. Minimum Execution Readiness Gate**",
+    "**7\\. 統合レビューの生成物**",
+    "**8\\. テスト候補（NAC-T-01〜20）**",
+    "**9\\. 不変条件（NAC-INV-01〜20）**",
+    "**10\\. 未解決事項（NAC-OPEN-01〜20）**",
+    "**11\\. STEP-108 裁定**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 112,
+   "step": "STEP-109",
+   "title": "STEP-109 — Read-Only Corpus Audit Runbook / Deterministic Inventory Execution / Audit Evi…",
+   "file": "100-124.md",
+   "line_start": 7659,
+   "line_end": 8436,
+   "n_lines": 778,
+   "n_chars": 22915,
+   "n_h2": 19,
+   "h2": [
+    "**0\\. 目的・適用範囲**",
+    "**1\\. 規範上の基本原則**",
+    "**2\\. 監査実行前提条件**",
+    "**3\\. 実行スコープの固定**",
+    "**4\\. 決定論的インベントリ生成**",
+    "**5\\. Registry・Schema・Validator・Test の発見と照合**",
+    "**6\\. 重複候補・参照不整合・欠落候補の検出**",
+    "**7\\. 監査実行フェーズ**",
+    "**8\\. 実行状態と判定モデル**",
+    "**9\\. 監査証拠と成果物契約**",
+    "**10\\. 再実行・再開・失敗処理**",
+    "**11\\. 読み取り専用保証と副作用境界**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 113,
+   "step": "STEP-110",
+   "title": "STEP-110 — Audit Output Schema / Manifest Validation / Cross-Artifact Integrity Contract",
+   "file": "100-124.md",
+   "line_start": 8437,
+   "line_end": 9279,
+   "n_lines": 843,
+   "n_chars": 21854,
+   "n_h2": 17,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 規範上の基本不変条件**",
+    "**2\\. 検証アーキテクチャ**",
+    "**3\\. 共通データモデル**",
+    "**4\\. Schema と Validator の責務分離**",
+    "**5\\. 成果物別 Schema 契約**",
+    "**6\\. ダイジェストと正規化契約**",
+    "**7\\. 状態モデルと結果伝播**",
+    "**8\\. クロスアーティファクト整合性検証**",
+    "**9\\. JSON Schema の実装契約**",
+    "**10\\. Validator の実行契約**",
+    "**11\\. 受け入れゲート**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 114,
+   "step": "STEP-111",
+   "title": "STEP-111 — Validator Conformance / Negative-Test Coverage / Deterministic Failure Classif…",
+   "file": "100-124.md",
+   "line_start": 9280,
+   "line_end": 9935,
+   "n_lines": 656,
+   "n_chars": 17983,
+   "n_h2": 15,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 基本原則と状態分離**",
+    "**2\\. Validator の適合性対象**",
+    "**3\\. 実行状態と失敗分類の直交モデル**",
+    "**4\\. 正例・負例・境界値テストの設計**",
+    "**5\\. テストカバレッジ契約**",
+    "**6\\. 決定論性と再現性**",
+    "**7\\. 障害注入と異常系検証**",
+    "**8\\. Validator Conformance Report**",
+    "**9\\. 受け入れゲート**",
+    "**10\\. テスト候補（VCC-T-01〜20）**",
+    "**11\\. 不変条件（VCC-INV-01〜20）**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 115,
+   "step": "STEP-112",
+   "title": "STEP-112 — Audit Test Fixture Registry / Golden Oracle Governance / Regression Evidence C…",
+   "file": "100-124.md",
+   "line_start": 9936,
+   "line_end": 10703,
+   "n_lines": 768,
+   "n_chars": 23058,
+   "n_h2": 16,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範上の区別**",
+    "**2\\. 用語と責務**",
+    "**3\\. Fixture Registry 契約**",
+    "**4\\. Golden Oracle Governance**",
+    "**5\\. Test Case と Fixture / Oracle の結合契約**",
+    "**6\\. Regression Evidence 契約**",
+    "**7\\. Regression Baseline と比較可能性**",
+    "**8\\. 変更管理と失効伝播**",
+    "**9\\. 証拠保全、完全性、再現性**",
+    "**10\\. Fixture / Oracle / Regression の受入ゲート**",
+    "**11\\. テスト候補**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 116,
+   "step": "STEP-113",
+   "title": "STEP-113 — Test Coverage Traceability / Requirement-to-Test Closure / Coverage Claim Cert…",
+   "file": "100-124.md",
+   "line_start": 10704,
+   "line_end": 11499,
+   "n_lines": 796,
+   "n_chars": 23533,
+   "n_h2": 16,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範上の区別**",
+    "**2\\. 用語と対象単位**",
+    "**3\\. 追跡可能性モデル**",
+    "**4\\. Coverage Universe と分母の確定**",
+    "**5\\. Coverage の種類と算出規則**",
+    "**6\\. 直接 Coverage と推移的 Coverage**",
+    "**7\\. Coverage Claim レコード**",
+    "**8\\. Coverage Certificate と認定境界**",
+    "**9\\. Coverage の変更影響と失効伝播**",
+    "**10\\. 受入ゲート**",
+    "**11\\. テスト候補**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 117,
+   "step": "STEP-114",
+   "title": "STEP-114 — Coverage Policy Registry / Threshold Governance / Exception Authorization Cont…",
+   "file": "100-124.md",
+   "line_start": 11500,
+   "line_end": 12259,
+   "n_lines": 760,
+   "n_chars": 22678,
+   "n_h2": 16,
+   "h2": [
+    "**0\\. 目的と適用境界**",
+    "**1\\. 規範上の区別**",
+    "**2\\. 用語と責務**",
+    "**3\\. Coverage Policy Registry 契約**",
+    "**4\\. Threshold と Mandatory Gate の分離**",
+    "**5\\. Policy Evaluation 契約**",
+    "**6\\. Policy Conflict と権威解決**",
+    "**7\\. Policy Exception Authorization 契約**",
+    "**8\\. Policy 変更管理と失効伝播**",
+    "**9\\. Policy Evaluation の決定性と証拠**",
+    "**10\\. Policy 受入ゲート**",
+    "**11\\. テスト候補**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ",
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 118,
+   "step": "STEP-115",
+   "title": "STEP-115 — Coverage Certification Lifecycle / Certificate Revocation / Downstream Accepta…",
+   "file": "100-124.md",
+   "line_start": 12260,
+   "line_end": 13181,
+   "n_lines": 922,
+   "n_chars": 31052,
+   "n_h2": 18,
+   "h2": [
+    "**0\\. 目的・適用範囲**",
+    "**1\\. 規範的区別**",
+    "**2\\. 用語**",
+    "**3\\. 権限境界と不変条件**",
+    "**4\\. Certificate データ契約**",
+    "**5\\. Certificate ライフサイクル**",
+    "**6\\. 無効化トリガーと影響評価**",
+    "**7\\. 無効化伝播プロトコル**",
+    "**8\\. 下流判断の無効化と再評価**",
+    "**9\\. 再評価・再認証プロトコル**",
+    "**10\\. 障害処理・再試行・回復**",
+    "**11\\. 証拠・監査・履歴の要件**"
+   ],
+   "clusters": [
+    "DECISION-LIFECYCLE",
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 119,
+   "step": "STEP-116",
+   "title": "STEP-116 — Certificate Registry Integrity / Revocation Ledger / Consumer Acknowledgment R…",
+   "file": "100-124.md",
+   "line_start": 13182,
+   "line_end": 13931,
+   "n_lines": 750,
+   "n_chars": 22566,
+   "n_h2": 17,
+   "h2": [
+    "**0\\. 目的**",
+    "**1\\. 適用範囲**",
+    "**2\\. 規範的区別**",
+    "**3\\. 権威モデル**",
+    "**4\\. Registry データ契約**",
+    "**5\\. Revocation Ledger 契約**",
+    "**6\\. Consumer Acknowledgment 契約**",
+    "**7\\. Consumer 集合の完全性**",
+    "**8\\. Reconciliation 契約**",
+    "**9\\. 障害・順序逆転・競合**",
+    "**10\\. 障害回復と再開**",
+    "**11\\. 出力・集約契約**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 120,
+   "step": "STEP-117",
+   "title": "STEP-117 — Revocation Propagation Certification / Consumer Convergence / Residual Inconsi…",
+   "file": "100-124.md",
+   "line_start": 13932,
+   "line_end": 14951,
+   "n_lines": 1020,
+   "n_chars": 29244,
+   "n_h2": 26,
+   "h2": [
+    "**0\\. 文書管理・状態**",
+    "**1\\. 目的**",
+    "**2\\. 非目的**",
+    "**3\\. 規範上の基本区別**",
+    "**4\\. 用語**",
+    "**5\\. 入力契約**",
+    "**6\\. 期待状態の導出**",
+    "**7\\. Consumer 集合の完全性と閉包**",
+    "**8\\. 伝播進捗の段階モデル**",
+    "**9\\. 残留不整合の分類**",
+    "**10\\. 再試行・再照合・収束再評価**",
+    "**11\\. 収束証明のデータ契約**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 121,
+   "step": "STEP-118",
+   "title": "STEP-118 — Convergence Certificate Registry / Consumer Acceptance Ledger / Post-Certifica…",
+   "file": "100-124.md",
+   "line_start": 14952,
+   "line_end": 15844,
+   "n_lines": 893,
+   "n_chars": 27009,
+   "n_h2": 21,
+   "h2": [
+    "**0\\. 文書管理・状態**",
+    "**1\\. 目的**",
+    "**2\\. 非目的**",
+    "**3\\. 基本区別**",
+    "**4\\. 権威モデルと記録の役割**",
+    "**5\\. Convergence Certificate Registry**",
+    "**6\\. Consumer Acceptance Ledger**",
+    "**7\\. 発行後ドリフトの検出契約**",
+    "**8\\. ドリフトの影響評価と受理状態の制御**",
+    "**9\\. 無効化・再評価・受理回復のライフサイクル**",
+    "**10\\. 無効化伝播と Consumer 状態の照合**",
+    "**11\\. Registry・Acceptance Ledger・Drift Ledger・History の横断整合性**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 122,
+   "step": "STEP-119",
+   "title": "STEP-119 — Certificate Trust Continuity / Consumer Authorization Revalidation / Post-Revo…",
+   "file": "100-124.md",
+   "line_start": 15845,
+   "line_end": 16709,
+   "n_lines": 865,
+   "n_chars": 24531,
+   "n_h2": 22,
+   "h2": [
+    "**0\\. 文書管理・状態**",
+    "**1\\. 目的**",
+    "**2\\. 非目的**",
+    "**3\\. 規範上の基本区別**",
+    "**4\\. 信頼・認可・実行の権威境界**",
+    "**5\\. 証明の信頼状態モデル**",
+    "**6\\. 操作認可契約**",
+    "**7\\. 認可判断の鮮度と有効範囲**",
+    "**8\\. 認可と実操作の競合制御**",
+    "**9\\. 失効後の操作防止**",
+    "**10\\. 進行中操作・副作用・停止確認**",
+    "**11\\. オフライン・分断・状態不明時の認可**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 123,
+   "step": "STEP-120",
+   "title": "STEP-120 — Authorization Enforcement Coverage / Revocation-to-Operation Traceability / Pr…",
+   "file": "100-124.md",
+   "line_start": 16710,
+   "line_end": 18290,
+   "n_lines": 1581,
+   "n_chars": 42416,
+   "n_h2": 24,
+   "h2": [
+    "**0\\. Contract Metadata**",
+    "**1\\. Purpose**",
+    "**2\\. Normative Language**",
+    "**3\\. Normative Distinctions**",
+    "**4\\. Authority and Data Ownership**",
+    "**5\\. Scope and Assessment Universe**",
+    "**6\\. Enforcement Point and Operation Route Inventory**",
+    "**7\\. Revocation-to-Operation Traceability Contract**",
+    "**8\\. Enforcement Coverage Model**",
+    "**9\\. Revocation Enforcement Verification**",
+    "**10\\. Side-Effect Assurance and Operation Closure**",
+    "**11\\. Evidence Contract**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ",
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 124,
+   "step": "STEP-121",
+   "title": "STEP-121 — Prevention Assurance Consumption / Downstream Authorization Binding / Certific…",
+   "file": "100-124.md",
+   "line_start": 18291,
+   "line_end": 19266,
+   "n_lines": 976,
+   "n_chars": 26970,
+   "n_h2": 20,
+   "h2": [
+    "**0\\. Contract Metadata**",
+    "**1\\. Purpose**",
+    "**2\\. Non-Goals**",
+    "**3\\. Normative Language and Core Distinctions**",
+    "**4\\. Authority Model and Responsibility Separation**",
+    "**5\\. Assurance Certification Consumption Contract**",
+    "**6\\. Scope Binding**",
+    "**7\\. Consumer Acceptance Contract**",
+    "**8\\. Authorization Request and Decision Binding**",
+    "**9\\. Freshness, Cache, and TOCTOU Control**",
+    "**10\\. Invalidation Propagation and Downstream Revalidation**",
+    "**11\\. Enforcement at the Execution Boundary**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 125,
+   "step": "STEP-122",
+   "title": "STEP-122 — Authorization Decision Lifecycle / Permit Lease / Execution-Boundary Revalidat…",
+   "file": "100-124.md",
+   "line_start": 19267,
+   "line_end": 20164,
+   "n_lines": 898,
+   "n_chars": 26556,
+   "n_h2": 26,
+   "h2": [
+    "**0\\. 文書メタデータ・規範状態**",
+    "**1\\. 目的**",
+    "**2\\. 適用範囲と非目標**",
+    "**3\\. 規範語と意味上の分離**",
+    "**4\\. 権限主体と責任分離**",
+    "**5\\. 識別子と認可要求の拘束**",
+    "**6\\. Authorization Decision Lifecycle**",
+    "**7\\. Permit Lease Contract**",
+    "**8\\. Execution-Boundary Revalidation**",
+    "**9\\. Revocation Race Control / 線形化点**",
+    "**10\\. Operation Lifecycle / 実行状態の管理**",
+    "**11\\. Cancellation / Stop / In-Flight Revocation**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ",
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 126,
+   "step": "STEP-123",
+   "title": "STEP-123 — Authorization Lifecycle Recovery / Lease Consumption Reconciliation / Duplicat…",
+   "file": "100-124.md",
+   "line_start": 20165,
+   "line_end": 20853,
+   "n_lines": 689,
+   "n_chars": 21056,
+   "n_h2": 21,
+   "h2": [
+    "**0\\. 文書メタデータ・規範状態**",
+    "**1\\. 目的・適用範囲**",
+    "**2\\. 基本原則と非同値条件**",
+    "**3\\. 責任主体と権限境界**",
+    "**4\\. Recovery Request Contract**",
+    "**5\\. Recovery Plan と Action Classification**",
+    "**6\\. Lease Consumption Reconciliation**",
+    "**7\\. Operation Execution Reconciliation**",
+    "**8\\. Idempotency Contract / 重複実行防止**",
+    "**9\\. Recovery と Authorization の分離**",
+    "**10\\. Canonical History と Recovery**",
+    "**11\\. Failure Matrix**"
+   ],
+   "clusters": [
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  },
+  {
+   "seq": 127,
+   "step": "STEP-124",
+   "title": "STEP-124 — Recovery Evidence Trust / External Execution Attestation / Reconciliation Auth…",
+   "file": "100-124.md",
+   "line_start": 20854,
+   "line_end": 21671,
+   "n_lines": 818,
+   "n_chars": 22870,
+   "n_h2": 23,
+   "h2": [
+    "**0\\. 文書メタデータ・規範状態**",
+    "**1\\. 目的**",
+    "**2\\. 適用範囲と非目標**",
+    "**3\\. 規範的基本原則**",
+    "**4\\. Evidence Trust Model**",
+    "**5\\. Evidence Record Contract**",
+    "**6\\. Evidence Producer / Authority Registry**",
+    "**7\\. Authenticity / Integrity Verification**",
+    "**8\\. Freshness / Temporal Validity**",
+    "**9\\. Completeness / Scope / Semantic Sufficiency**",
+    "**10\\. External Execution Attestation Contract**",
+    "**11\\. Reconciliation Authority Contract**"
+   ],
+   "clusters": [
+    "POLICY-AUTHZ",
+    "AUDIT-RUNBOOK-COVERAGE"
+   ],
+   "status": "SPEC_ONLY / IMPLEMENTATION_STATUS: NOT_VERIFIED (no chapter-ID reference in code)",
+   "candidate_lineage": []
+  }
+ ]
+}

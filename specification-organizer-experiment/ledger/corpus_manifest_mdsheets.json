@@ -1,0 +1,34 @@
+{
+ "manifest_id": "CORPUS-FREEZE-MDSHEETS-01",
+ "status": "RECORDED (record of freeze; not adoption)",
+ "generated_utc": "2026-10-27T04:39:43+00:00",
+ "generator": "sha256sum equivalent, see file hashes; re-hash to verify",
+ "files": [
+  {
+   "path": "md_sheets/1-74.md",
+   "sha256": "7205b6469b11800848f77e813f6a345549472fe32abff5c125959f1a461303df",
+   "bytes": 1285384
+  },
+  {
+   "path": "md_sheets/75-99.md",
+   "sha256": "e5f87195d3368c37a586b1d77691c4aa1e38bd36b28947caec18bc668a1149ea",
+   "bytes": 925780
+  },
+  {
+   "path": "md_sheets/100-124.md",
+   "sha256": "a51afdd7c5656b9e41c0b4220b77b5313aa25493615262f2b288f425c06d25b2",
+   "bytes": 1009515
+  },
+  {
+   "path": "md_sheets/chapters_index.md",
+   "sha256": "ea49ceccd6f4a8eae0e62d5c9f2afc722a3632feda52990c5b8ab1f343b38742",
+   "bytes": 37088
+  },
+  {
+   "path": "specification-organizer-experiment/ledger/mdsheets_chapter_ledger.json",
+   "sha256": "41fc44b76394d00ad49d604b2df9adf3260468a7403f99f2e9c0200f0e68c152",
+   "bytes": 120464
+  }
+ ],
+ "n_chapters": 127
+}
