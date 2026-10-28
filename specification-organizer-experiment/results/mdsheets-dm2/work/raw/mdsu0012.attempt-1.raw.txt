@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0012",
+  "line_start": 1532,
+  "line_end": 1647,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "必須の防止条件",
+      "追加制約",
+      "混同してはなりません",
+      "自由生成させてはいけません",
+      "GATED を維持"
+    ],
+    "lines": [
+      1540,
+      1555,
+      1559,
+      1585,
+      1629
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

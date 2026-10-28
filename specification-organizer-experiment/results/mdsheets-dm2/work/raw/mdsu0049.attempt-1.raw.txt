@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0049",
+  "line_start": 12450,
+  "line_end": 13079,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "契約を定義する。",
+      "禁止する。",
+      "使用してはならない。",
+      "最低限、次を要求する。",
+      "監査で検出された問題の修正は、独立した Change Approval 手続に移す。"
+    ],
+    "lines": [
+      12468,
+      12483,
+      12682,
+      12684,
+      12911
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

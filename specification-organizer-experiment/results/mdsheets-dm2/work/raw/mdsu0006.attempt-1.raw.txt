@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0006",
+  "line_start": 184,
+  "line_end": 235,
+  "source_text": "",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "# **Step 3 — Contract / Schema 差分裁定**",
+      "次に、10件のテストが上記の構造的制約をどこまで検証しているかを確認します。",
+      "以下は読み取り専用です。"
+    ],
+    "lines": [184, 220]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "procedure-block",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

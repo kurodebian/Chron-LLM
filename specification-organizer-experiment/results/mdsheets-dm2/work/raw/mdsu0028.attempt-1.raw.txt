@@ -1,0 +1,35 @@
+{
+  "unit_id": "mdsu0028",
+  "line_start": 4106,
+  "line_end": 4314,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "目的：Step 24 の WAL 回復契約と、Chron-LLM の正規状態モデルを接続します。",
+      "基本原則：",
+      "形式例であり、確定済みスキーマや実際のダイジェストではありません。",
+      "これらは設計上の試験候補であり、実行済みではありません。",
+      "STEP 25",
+      "EVENT CONTRACT DRAFTED"
+    ],
+    "lines": [
+      4110,
+      4112,
+      4146,
+      4287,
+      4291,
+      4293
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

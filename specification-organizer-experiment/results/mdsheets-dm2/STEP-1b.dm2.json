@@ -1,0 +1,35 @@
+{
+  "unit_id": "mdsu0002",
+  "line_start": 99,
+  "line_end": 120,
+  "source_text": "# **Step 1 — 現状確認結果**\n\n### **1\\. 作業ツリーの状態**\n\nGit 変更あり\n\n確認済み\n\n変更済み 5 ファイル、未追跡 6 項目。提示された `git status --short` の出力に基づく集計です。\n\n今回の照合対象である Contract・Schema・テストは未追跡ファイルとして表示されています。既存の変更を上書き・破棄せず、そのまま保持する必要があります。\n\n### **2\\. A1A-SCA 対象ファイルの識別**\n\n| 対象 | 行数 | SHA-256 |\n| ----- | ----- | ----- |\n| Contract | 281 | `48529443ff7c7339815f9e8ed32a378208c95247aa2b6c6504e497ee3a4a6aad` |\n| Schema | 233 | `f2421620266ed0f8135027c4931e2425547735043aba3c9c92edd68086fa3978` |\n| テスト | 143 | `d9d926a2480163d4ef318faca99cd9b6adceda814948044efef2cc7e8f19ece6` |\n\nこれらのハッシュは、今回の照合対象ファイルを識別するための基準値です。内容をまだ読み取っていないため、規範上の整合性や DG-01〜DG-05 との一致は、現時点では未判定です。\n\n",
+  "semantic_kind": "State",
+  "semantic_evidence": {
+    "phrases": [
+      "作業ツリーの状態",
+      "Git 変更あり",
+      "確認済み",
+      "変更済み 5 ファイル、未追跡 6 項目。提示された `git status --short` の出力に基づく集計です。",
+      "今回の照合対象である Contract・Schema・テストは未追跡ファイルとして表示されています。",
+      "現時点では未判定です。"
+    ],
+    "lines": [
+      101,
+      103,
+      105,
+      107,
+      109,
+      119
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

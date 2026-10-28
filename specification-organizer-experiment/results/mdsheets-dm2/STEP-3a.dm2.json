@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0005",
+  "line_start": 162,
+  "line_end": 183,
+  "source_text": "# **Step 3 — Schema の読み取り専用照合**\n\n次に、Contract との不一致が疑われるバージョン識別、状態別必須項目、入力ダイジェスト、レポート構造を確認します。\n\n以下を実行してください。\n\ncd \\~/Chron-LLM/specification-organizer-experiment || exit 1\n\nprintf '%s\\\\n' '===== SCHEMA DEFINITIONS \\====='\n\ngrep \\-nE '\"\\\\\\\\\\$schema\"|\"\\\\\\\\\\$id\"|\"audit\\_version\"|\"audit\\_rules\\_version\"|\"document\\_id\"|\"source\\_digest\"|\"artifact\\_digest\"|\"status\"|\"required\"|\"COMPLETED\"|\"INPUT\\_INVALID\"|\"AUDIT\\_FAILED\"|\"findings\"|\"summary\"|\"additionalProperties\"|\"unevaluatedProperties\"' \\\\\n\n  a1a\\_semantic\\_coverage\\_audit.schema.json\n\nprintf '%s\\\\n' '===== SCHEMA FULL CONTENT \\====='\n\ncat a1a\\_semantic\\_coverage\\_audit.schema.json\n\nこれはファイルを表示するだけです。テストや Validator は実行しません。\n\n出力を確認した後、Contract と Schema の規範差分を整理し、続いて既存テストが実際に検証している範囲を照合します。現段階では、Schema の変更・Freeze・実装には進みません。\n\n",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 3 — Schema の読み取り専用照合",
+      "次に、Contract との不一致が疑われるバージョン識別、状態別必須項目、入力ダイジェスト、レポート構造を確認します。",
+      "以下を実行してください。",
+      "これはファイルを表示するだけです。テストや Validator は実行しません。",
+      "Schema の変更・Freeze・実装には進みません。"
+    ],
+    "lines": [
+      162,
+      164,
+      166,
+      180,
+      182
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "procedure-block",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

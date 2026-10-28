@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0004",
+  "line_start": 143,
+  "line_end": 161,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "提示された内容から、Contract の規範を以下のように分類します。",
+      "ここでの `VERIFIED` は、提示された Contract にその規範が記述されていることを確認したという意味です。",
+      "したがって、候補ラベルを確定した監査結果として扱いません。"
+    ],
+    "lines": [145, 158, 160]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "unspecified"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "unit_id": "mdsu0019",
+  "line_start": 2431,
+  "line_end": 2553,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "成功扱いしない",
+      "`GATED` を自動解除しない",
+      "禁止します",
+      "自動遷移は禁止",
+      "明示的な許可手続きが必要",
+      "GATED を維持"
+    ],
+    "lines": [
+      2459,
+      2466,
+      2467,
+      2486,
+      2492,
+      2521,
+      2522,
+      2523,
+      2539
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

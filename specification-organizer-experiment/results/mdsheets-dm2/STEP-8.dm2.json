@@ -1,0 +1,41 @@
+{
+  "unit_id": "mdsu0011",
+  "line_start": 1391,
+  "line_end": 1531,
+  "source_text": "# **Step 8 — Local LLM Review Loop Specification**\n\n## **0\\. 実行状態**\n\nStep 8\n\nDESIGN ONLY\n\n実行ゲート：GATED\n\nファイル読み取り・編集、Validator 実行、テスト、Freeze は許可しない。\n\n入力：Step 7 の SC-CH-01〜05 優先順位表。出力：検討提案、反証、未解決事項、検証要求。\n\n## **1\\. 基本アーキテクチャ**\n\nA. Frozen Review Input\n\n候補 ID・規範 ID・設計状態・証拠状態・実行権限\n\nB. Proposal Generator\n\n候補評価・依存関係・矛盾・必要証拠を提案\n\nC. Independent Critic\n\n反例・前提誤り・過剰制約・分類漏れを探索\n\nD. Deterministic Gate\n\n出力構造・ID 参照・依存関係・状態遷移・証拠参照を検査\n\nE. Review Record\n\n提案・反証・判定根拠・未解決事項・次の検討対象を記録\n\n重要なのは、LLM が自身の提案を正しいと確定しないことです。Critic が提案に同意しても、それは規範的正当性の証明にはなりません。\n\n## **2\\. ループの入出力契約**\n\n### **2.1 入力契約 `INPUT_CONTRACT`**\n\n入力は明示的なスナップショットとして固定します。\n\n| フィールド | 要件 |\n| ----- | ----- |\n| `review_id` | レビュー単位の一意 ID |\n| `input_version` | 固定入力のバージョン |\n| `candidate_ids` | SC-CH-01〜05 の既知 ID のみ |\n| `adopted_rule_ids` | 参照可能な採択済み規範 ID |\n| `candidate_status` | `UNVERIFIED` 等の現在の状態 |\n| `evidence_status` | `AVAILABLE`／`MISSING`／`UNVERIFIED` |\n| `execution_gate` | `GATED` |\n| `iteration_limit` | 正の整数。未指定なら入力不備として扱う |\n| `output_contract_version` | 出力形式のバージョン |\n\n入力には、確認済みの事実、採択済み規範、未確認の仮説を混在させず、それぞれの証拠状態を明示します。\n\n入力が不足している場合、LLM は不足を推測で補わず、必要な情報を要求します。\n\n### **2.2 提案契約 `PROPOSAL_SCHEMA`**\n\n各候補の検討結果は、概念上、次のフィールドで表現します。\n\n| フィールド | 内容 |\n| ----- | ----- |\n| `candidate_id` | 対象候補 |\n| `claim_type` | `FACT`／`INFERENCE`／`HYPOTHESIS`／`QUESTION` |\n| `normative_impact` | 規範的閉包への影響と根拠 |\n| `determinism_impact` | 決定的検証への影響と根拠 |\n| `dependencies` | 先行して確定すべき規範・判断 |\n| `counterexamples` | 提案を否定し得る反例 |\n| `required_evidence` | 判断の確定に必要な証拠 |\n| `severity_proposal` | `BLOCKING`／`NON_BLOCKING`／`UNDETERMINED` |\n| `disposition_proposal` | `ADOPT`／`REJECT`／`DEFER` |\n| `unresolved_items` | 未解決事項 |\n| `rationale_refs` | 根拠となる規範・証拠の参照 ID |\n\nこれらは設計上の出力契約です。実際の JSON Schema や Validator は、まだ作成・検証しません。\n\n特に、`severity_proposal` と `disposition_proposal` は独立しています。`DEFER` であっても、設計完了を妨げる未解決問題なら `BLOCKING` になり得ます。\n\n## **3\\. 反復プロトコル**\n\n1. Generate — 固定入力に基づき、各候補の依存関係・影響・必要証拠を提案する。  \n2. Critique — 別の分析パスで反例、根拠の欠落、過剰な制約、候補間の矛盾を探す。  \n3. Reconcile — 提案と反証を対応付け、合意・不一致・未解決を明示する。多数決で規範を決定しない。  \n4. Validate — 決定的な検査で、参照 ID、必須フィールド、許可値、依存関係の整合性を検査する。  \n5. Record — 入力バージョン、反復番号、モデル識別情報、提案、反証、検証結果を記録する。  \n6. Continue or Stop — 停止条件を満たせば終了し、そうでなければ次の反復へ進む。\n\nこの段階では、実際のループを実行せず、プロトコルのみを定義します。\n\n## **4\\. 停止条件**\n\n| 条件 | 結果 |\n| ----- | ----- |\n| 未解決の BLOCKING が残る | `NEEDS_REVIEW` |\n| 必須証拠が不足している | `EVIDENCE_REQUIRED` |\n| 提案間の矛盾が解消しない | `CONFLICT_UNRESOLVED` |\n| 決定的検証に失敗する | `VALIDATION_FAILED` |\n| 規定の反復上限に達する | `ITERATION_LIMIT_REACHED` |\n| 設計上の終了条件を満たす | `REVIEW_COMPLETE` |\n\n`REVIEW_COMPLETE` はレビュー手続きが完了したことだけを意味します。設計完了、実装適合、Freeze 完了を意味しません。\n\nまた、反復上限への到達を成功扱いにしたり、証拠不足を LLM の確信度で補ったりしてはいけません。\n\n## **5\\. Step 7 の候補を使った検討順序**\n\n初期入力には、前段で作成した SC-CH-01〜05 の優先順位表を使用します。ただし、順位そのものも反証対象です。\n\n* SC-CH-05：エラー分類の規範を先に確定する必要があるという前提を検証する。  \n* SC-CH-03：ルールセット識別の必須性と、成功・失敗レポートにおける条件の違いを検討する。  \n* SC-CH-01：エラーコード体系を閉集合にする必要性と拡張性を比較する。  \n* SC-CH-02：状態とコードの許可組み合わせが規範から一意に導けるか検討する。  \n* SC-CH-04：失敗レポートの構造制約が設計完了に必須か、別の保証手段が成立するか検討する。\n\nこの順序は初期仮説であり、依存関係の反証によって変更可能です。実ファイル未照合の現状では、差分の存在も候補の採否も確定しません。\n\n## **6\\. 権限境界**\n\nループが出力できるのは、あくまでレビュー記録と変更提案です。\n\n* Contract／Schema の編集：禁止  \n* Validator／テストの実行：禁止  \n* 実ファイルの照合：禁止  \n* Freeze：禁止  \n* `UNVERIFIED` の事実への昇格：禁止  \n* 明示的な承認なしの実行ゲート解除：禁止\n\nこの境界はプロンプト上の指示だけに依存させず、将来実装する場合は、ツール権限と実行経路でも強制する必要があります。\n\n## **7\\. Step 8 の判定**\n\n`STEP 8 = LOCAL LLM REVIEW LOOP DESIGN DRAFTED`\n\n現時点で定義したものは、入力契約、提案形式、反証プロトコル、決定的検証の責務、停止条件、権限境界です。実装・テスト・Freeze は未実施です。\n\n次に進む際の適切な作業は、このループ設計に対する失敗モード分析です。たとえば、同じ誤前提を複数モデルが共有するケース、反復による規範の意味変化、証拠のない提案が確定事項へ混入するケース、停止条件の誤判定を洗い出し、それぞれを決定的な防止条件へ落とし込みます。\n\n",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 8 — Local LLM Review Loop Specification",
+      "DESIGN ONLY",
+      "基本アーキテクチャ",
+      "ループの入出力契約",
+      "反復プロトコル",
+      "停止条件",
+      "権限境界",
+      "LOCAL LLM REVIEW LOOP DESIGN DRAFTED",
+      "現時点で定義したものは、入力契約、提案形式、反証プロトコル、決定的検証の責務、停止条件、権限境界です。実装・テスト・Freeze は未実施です。"
+    ],
+    "lines": [
+      1391,
+      1397,
+      1405,
+      1429,
+      1473,
+      1484,
+      1511,
+      1526,
+      1528
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

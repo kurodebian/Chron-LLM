@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0047",
+  "line_start": 11199,
+  "line_end": 11854,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、Chron-LLM において Security Incident が検出された場合、または侵害の疑いが発生した場合の検知・分類・封じ込め・証拠保全・調査・復旧・再開許可の規範を定義する。",
+      "Incident 対応を理由に、Canonical History を無断で削除・修復・巻き戻してはならない。",
+      "Containment 操作は、明示的な権限と対象範囲を持たなければならない。",
+      "いずれかの必須条件が不明または失敗している場合、再開を許可してはならない。"
+    ],
+    "lines": [
+      11219,
+      11267,
+      11486,
+      11691
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

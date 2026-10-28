@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0052",
+  "line_start": 14214,
+  "line_end": 14830,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約の目的は、変更後に既存の検証結果を無条件に再利用することを防ぎ、再検証の対象・理由・証拠・受入状態を追跡可能にすることである。",
+      "影響なしの判定にも、対象範囲と根拠を要求する。",
+      "必須の影響分析・再検証が未完了の場合、該当する変更受入を BLOCK する。"
+    ],
+    "lines": [
+      14238,
+      14275,
+      14281
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

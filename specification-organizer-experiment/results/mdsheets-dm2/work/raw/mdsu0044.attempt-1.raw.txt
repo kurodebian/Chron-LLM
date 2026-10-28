@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0044",
+  "line_start": 9459,
+  "line_end": 9984,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、Chron-LLM の Schema、Canonical Event、History、Policy、Configuration、Replay Rule、Checkpoint がバージョン変更される場合の互換性判定と Migration の規範を定義する。",
+      "Migration は、明示的な権限・対象範囲・入力バージョン・出力バージョンを持つ操作として扱う。",
+      "LLM の生成結果だけで Canonical Migration を確定してはならない。",
+      "Migration の失敗時に、変換の一部だけが反映された状態を正常状態として扱ってはならない。"
+    ],
+    "lines": [
+      9479,
+      9524,
+      9775,
+      9779
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

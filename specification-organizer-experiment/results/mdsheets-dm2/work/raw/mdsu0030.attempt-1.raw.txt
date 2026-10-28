@@ -1,0 +1,35 @@
+{
+  "unit_id": "mdsu0030",
+  "line_start": 4553,
+  "line_end": 4774,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "次の含意は禁止する。",
+      "暗黙の型変換や Validator による自動修復を禁止する。",
+      "`event_digest` 自体をその計算対象に含める循環定義は禁止する。",
+      "同じ ID を同じ意味のものと自動的に扱ってはならない。",
+      "曖昧な文字列連結は禁止する。",
+      "各層の妥当性検証を省略してはならない。"
+    ],
+    "lines": [
+      4575,
+      4598,
+      4637,
+      4651,
+      4674,
+      4698
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

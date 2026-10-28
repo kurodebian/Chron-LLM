@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0003",
+  "line_start": 121,
+  "line_end": 142,
+  "source_text": "# **Step 2 — Contract の読み取り専用照合**\n\n次に、Contract の規範と DG-01〜DG-05 の合意事項を照合します。以下は表示のみで、ファイルへの書き込みはありません。\n\ncd \\~/Chron-LLM/specification-organizer-experiment || exit 1\n\nprintf '%s\\\\n' '===== CONTRACT HEADINGS \\====='\n\ngrep \\-nE '^\\#{1,4} ' a1a\\_semantic\\_coverage\\_audit\\_contract.md\n\nprintf '%s\\\\n' '===== CONTRACT: IDENTITY / INPUT / STATUS / VALIDATION / VERSION \\====='\n\ngrep \\-n \\-i \\-C 3 \\\\\n\n  \\-E 'document\\_id|manifest|digest|sha-?256|TOCTOU|INPUT\\_INVALID|AUDIT\\_FAILED|COMPLETED|validator|audit\\_version|audit\\_rules\\_version|schema|freeze|read.only|repair|reproduc|determin|classification|coverage|candidate|model|LLM' \\\\\n\n  a1a\\_semantic\\_coverage\\_audit\\_contract.md\n\nこの出力を確認した後、必要な節を行番号で指定して読み、規範の文脈を確かめます。その後に Schema、テストの順で照合します。\n\n照合中の制約： テスト実行、コード変更、Schema変更、A-1a 再生成は行いません。また、Contract に書かれているという理由だけで、DG-01〜DG-05 の合意済み事項や実装済みの機能と見なすこともしません。\n\n",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 2 — Contract の読み取り専用照合",
+      "次に、Contract の規範と DG-01〜DG-05 の合意事項を照合します。",
+      "この出力を確認した後、必要な節を行番号で指定して読み、規範の文脈を確かめます。その後に Schema、テストの順で照合します。",
+      "照合中の制約： テスト実行、コード変更、Schema変更、A-1a 再生成は行いません。"
+    ],
+    "lines": [
+      121,
+      123,
+      139,
+      141
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "procedure-block",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

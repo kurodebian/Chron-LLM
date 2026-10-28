@@ -1,0 +1,39 @@
+{
+  "unit_id": "mdsu0027",
+  "line_start": 3873,
+  "line_end": 4105,
+  "source_text": "",
+  "semantic_kind": "Unclassified",
+  "semantic_evidence": {
+    "phrases": [
+      "回復処理は、欠落・破損・競合を推測で修復しない。",
+      "確定結果を一意に判定できない場合は、推測による Commit、Abort、再追記を禁止します。",
+      "回復処理は、通常の提案処理・Commit 処理から分離します。",
+      "これは設計例であり、実際の WAL 形式・ダイジェスト・完全性値ではありません。",
+      "これらはエラーコード候補です。最終的なコード体系と分類は未確定です。"
+    ],
+    "lines": [
+      3883,
+      4034,
+      3956,
+      3921,
+      4015
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "none",
+    "semantic_scope": "unspecified"
+  },
+  "resolution": {
+    "status": "ambiguous",
+    "reason": "multiple_plausible_interpretations",
+    "candidate_kinds": [
+      "Requirement",
+      "Constraint",
+      "Procedure",
+      "Description"
+    ]
+  }
+}

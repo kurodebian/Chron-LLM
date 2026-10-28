@@ -1,0 +1,35 @@
+{
+  "unit_id": "mdsu0031",
+  "line_start": 4775,
+  "line_end": 5064,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Commit 権限は Kernel に限定し、LLM・Validator・Projection・Replay に暗黙の Commit 権限を与えない。",
+      "認可エラーを `ALLOW` に変換するフォールバックは禁止する。",
+      "`GATED` を解除する操作には、別途定義された認可権限と承認証跡を要求する。",
+      "`GATED` の操作は、有効な明示的認可なしに実行できない。",
+      "認可対象と実行対象の識別情報は一致しなければならない。",
+      "認可後にペイロード、操作、対象範囲、適用ポリシーが変化した場合は、認可を再評価する。認可結果を別の対象へ転用しない。"
+    ],
+    "lines": [
+      4783,
+      4851,
+      4940,
+      5011,
+      5012,
+      4971
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

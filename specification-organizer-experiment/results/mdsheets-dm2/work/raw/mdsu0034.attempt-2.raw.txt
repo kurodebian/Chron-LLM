@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0034",
+  "line_start": 5543,
+  "line_end": 5771,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Failure Atomicity / Crash Consistency / Recovery Matrix",
+      "規範候補を定義する",
+      "二重 Commit を禁止",
+      "MUST NOT BE GUESSED",
+      "MUST BE REJECTED"
+    ],
+    "lines": [
+      5543,
+      5561,
+      5596,
+      5720,
+      5724
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "heading",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

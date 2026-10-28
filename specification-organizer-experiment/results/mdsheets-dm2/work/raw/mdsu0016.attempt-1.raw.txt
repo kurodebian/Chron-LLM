@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0016",
+  "line_start": 2021,
+  "line_end": 2124,
+  "source_text": "",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 13 — 統合補正の規範化（Design-Only）",
+      "目的：Step 12 の `IR-FIX-01..07` を、相互依存を明示した規範候補へ変換する。",
+      "ここでは設計案を整理するだけで、規範への正式採択、ファイル変更、テスト、Freeze は実行しない。"
+    ],
+    "lines": [2021, 2023]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "procedure-block",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

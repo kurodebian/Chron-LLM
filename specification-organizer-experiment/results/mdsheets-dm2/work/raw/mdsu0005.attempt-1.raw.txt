@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0005",
+  "line_start": 162,
+  "line_end": 183,
+  "source_text": "",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 3 — Schema の読み取り専用照合",
+      "次に、Contract との不一致が疑われるバージョン識別、状態別必須項目、入力ダイジェスト、レポート構造を確認します。",
+      "以下を実行してください。",
+      "これはファイルを表示するだけです。テストや Validator は実行しません。",
+      "Schema の変更・Freeze・実装には進みません。"
+    ],
+    "lines": [162, 164, 166, 180, 182]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "procedure-block",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

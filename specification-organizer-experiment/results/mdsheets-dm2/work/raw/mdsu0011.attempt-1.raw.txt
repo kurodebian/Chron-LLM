@@ -1,0 +1,41 @@
+{
+  "unit_id": "mdsu0011",
+  "line_start": 1391,
+  "line_end": 1531,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 8 — Local LLM Review Loop Specification",
+      "DESIGN ONLY",
+      "基本アーキテクチャ",
+      "ループの入出力契約",
+      "反復プロトコル",
+      "停止条件",
+      "権限境界",
+      "LOCAL LLM REVIEW LOOP DESIGN DRAFTED",
+      "現時点で定義したものは、入力契約、提案形式、反証プロトコル、決定的検証の責務、停止条件、権限境界です。実装・テスト・Freeze は未実施です。"
+    ],
+    "lines": [
+      1391,
+      1397,
+      1405,
+      1429,
+      1473,
+      1484,
+      1511,
+      1526,
+      1528
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

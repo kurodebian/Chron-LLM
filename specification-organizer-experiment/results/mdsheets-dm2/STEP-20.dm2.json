@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0023",
+  "line_start": 3053,
+  "line_end": 3258,
+  "source_text": "# **Step 20 — 正規モデルの意味論と競合解決規則**\n\nMODE \\= DESIGN-ONLY / EXECUTION\\_GATE \\= GATED\n\n目的：Step 19 のシリアライズ契約に、決定論的な評価意味論を与える。モデルが構文的に有効でも、遷移の選択やエラー処理が一意に決まらない場合は、検証成功として扱わない。\n\n## **1\\. ガード評価契約**\n\nガード評価は、真偽値だけではなく、評価不能を独立した結果として扱う。\n\n| 結果 | 意味 | 遷移選択 |\n| ----- | ----- | ----- |\n| `TRUE` | ガード条件成立 | 選択候補 |\n| `FALSE` | ガード条件不成立 | 候補外 |\n| `UNKNOWN` | 必要な証拠・値が不足 | `HOLD` |\n| `ERROR` | 評価器の実行・内部障害 | `VALIDATION_FAILED` |\n\n規範候補：\n\n* `UNKNOWN` を `TRUE` または `FALSE` に暗黙変換しない。  \n* `ERROR` を通常のガード不成立として処理しない。  \n* 未登録ガード、未定義演算子、型不一致を暗黙補完しない。  \n* ガード評価の入力・規則バージョン・結果を監査記録に残す。\n\n## **2\\. 遷移選択規則**\n\n各評価ステップでは、現在状態と入力を固定し、適用可能な遷移集合を決定する。\n\nC := transitions matching current state\n\nfor each t in C:\n\n    evaluate guard(t)\n\nif any evaluation \\== ERROR:\n\n    VALIDATION\\_FAILED\n\nelse if any evaluation \\== UNKNOWN:\n\n    HOLD\n\nelse:\n\n    E := { t | guard(t) \\== TRUE }\n\n    if |E| \\== 0:\n\n        NO\\_TRANSITION\n\n    else if |E| \\== 1:\n\n        SELECT(E\\[0\\])\n\n    else:\n\n        resolve by explicit normative priority\n\n        if priority does not yield exactly one winner:\n\n            MODEL\\_TRANSITION\\_CONFLICT\n\n重要： 上記は保守的な候補規則です。`UNKNOWN` が存在すると常に `HOLD` にする仕様は、安全側ですが、実行可能な別遷移を不必要に止める可能性があります。この方針を正式採択する前に、ガードの評価順序と副作用禁止を含めて確定する必要があります。\n\n`NO_TRANSITION` は、モデル不正と同義ではありません。状態機械の仕様上、遷移不能が許容されるかどうかを別途定義します。\n\n## **3\\. 遷移競合の分類**\n\n| 分類 | 条件 | 判定 |\n| ----- | ----- | ----- |\n| `DUPLICATE` | 遷移定義が正規化後に同一 | 重複定義エラー候補 |\n| `OVERLAP` | 複数遷移のガードが同時成立可能 | 競合候補 |\n| `PRIORITY_RESOLVABLE` | 明示的優先順位で一意に選択可能 | 優先順位契約に従う |\n| `PRIORITY_TIE` | 最高優先順位が複数遷移で同じ | `MODEL_TRANSITION_CONFLICT` |\n| `OVERLAP_UNKNOWN` | ガード間の排他性を判定できない | `MODEL_CONFLICT` または `HOLD` |\n\n静的検証と実行時検証は区別します。\n\n* 静的検証： ガード式の構造、参照、型、既知の排他性を検査する。  \n* 実行時検証： 固定された入力と状態に対してガードを評価する。  \n* 未解決の静的重複可能性： 排他性が証明できないことだけで、必ず実行時競合が起きるとは断定しない。ただし、競合を許容する契約がなければ Freeze を許可しない。\n\n## **4\\. 状態軸間の整合性**\n\n独立した状態軸は、直積状態として扱います。ただし、すべての組合せが有効とは限りません。\n\n例：\n\n| 条件 | 整合性規則候補 |\n| ----- | ----- |\n| `VALIDATION_STATUS=VALIDATION_FAILED` | 同一試行を成功扱いにしない |\n| 必須証拠が `MISSING` | その証拠を必須とする候補を `DESIGN_RESOLVED` にしない |\n| 未解決競合あり | 競合に依存する候補の設計解決を認めない |\n| `EXECUTION_GATE=GATED` | 実行権限を要する操作を実行しない |\n| `REVIEW_STATUS=REVIEW_COMPLETE` | 採択・実装検証・Freeze を自動成立させない |\n| `CANDIDATE_STATUS=FROZEN` 相当の状態 | 実装検証済みの対象バージョンと Freeze 記録を要求する |\n\n最後の条件について、Step 16 では `CANDIDATE_STATUS` に `FROZEN` が含まれていません。したがって、Freeze は候補状態軸へ追加せず、独立したライフサイクル記録として管理する方針を維持します。\n\n### **評価順序**\n\n1. モデル構造・参照の検証  \n2. 入力と証拠の妥当性確認  \n3. ガード評価  \n4. 遷移候補の確定  \n5. 遷移競合の解決  \n6. 遷移後状態の不変条件検証  \n7. 結果・証拠の記録\n\nいずれかの段階で必須条件を満たせなければ、後続段階へ成功として進めません。\n\n## **5\\. エラー集約契約**\n\n複数エラーが検出されても、後から検出されたエラーで先行する障害を上書きしません。\n\n推奨記録形式：\n\n{\n\n  \"validation\\_run\\_id\": \"VR-EXAMPLE\",\n\n  \"overall\\_result\": \"VALIDATION\\_FAILED\",\n\n  \"primary\\_failure\": {\n\n    \"code\": \"VALIDATOR\\_EXECUTION\\_FAILED\",\n\n    \"stage\": \"GUARD\\_EVALUATION\"\n\n  },\n\n  \"secondary\\_failures\": \\[\\],\n\n  \"unresolved\\_conditions\": \\[\\],\n\n  \"model\\_version\": \"0.1.0\",\n\n  \"contract\\_version\": \"SMC-0.1\"\n\n}\n\nこれは形式例です。`overall_result` と各エラーコードの完全な対応表は未確定です。\n\n### **優先順位候補**\n\n1. 検証器・証拠記録の内部障害： `VALIDATION_FAILED`  \n2. 確定したモデル契約違反： `REJECT`  \n3. 必須証拠・判定条件の不足： `HOLD`  \n4. 未解決の意味的競合： `HOLD` またはモデル審査エラー  \n5. すべての機械的条件を満たす： `ACCEPT_FOR_REVIEW`\n\n複数分類が併存する場合は、主障害と副障害を別々に保存します。上記の優先順位は候補であり、エラーの存在だけから自動的に規範的な採否を決めてはなりません。\n\n## **6\\. 決定論性の要件**\n\n同じ入力・同じモデル・同じ契約・同じ検証器バージョンであれば、同じ検証結果を生成する必要があります。\n\n* 配列順序やハッシュマップ列挙順に依存しない。  \n* 時刻、乱数、LLM の自由生成結果を判定根拠にしない。  \n* 外部証拠は内容識別子とバージョンを固定する。  \n* 優先順位が明示されていない場合、暗黙の順序で勝者を選ばない。  \n* 再試行は新しい試行記録として追跡し、過去の失敗記録を変更しない。  \n* 検証器の内部障害時に、部分的な検証結果を成功扱いしない。\n\n## **7\\. 受入試験候補**\n\n| TEST\\_ID | 条件 | 期待結果 |\n| ----- | ----- | ----- |\n| SMM-T-01 | ガードが `TRUE` 1件 | 一意に選択 |\n| SMM-T-02 | ガードがすべて `FALSE` | `NO_TRANSITION` |\n| SMM-T-03 | 必須ガードが `UNKNOWN` | 定義済みの保留規則を適用 |\n| SMM-T-04 | ガード評価器が `ERROR` | `VALIDATION_FAILED` |\n| SMM-T-05 | 複数ガード成立、優先順位なし | 競合として停止 |\n| SMM-T-06 | 最高優先順位が同順位 | `MODEL_TRANSITION_CONFLICT` |\n| SMM-T-07 | 遷移後の不変条件違反 | 遷移を成功として確定しない |\n| SMM-T-08 | `GATED` 中の権限必須操作 | 操作を拒否 |\n| SMM-T-09 | 複数エラーの同時発生 | 主障害・副障害を保持 |\n| SMM-T-10 | 同一入力で再実行 | 同一の判定結果 |\n\nこれらは試験設計であり、実行結果ではありません。\n\n## **8\\. Step 20 判定**\n\nSTEP 20\n\nSEMANTICS DRAFTED\n\n定義済み：ガード評価結果、遷移選択の基本規則、競合分類、状態軸の整合性、エラー集約、決定論性要件。\n\n未確定：`UNKNOWN` の全体停止方針、静的ガード重複判定の完全性、`NO_TRANSITION` の許容条件、エラー優先順位の規範化。\n\n実ファイル照合・編集・テスト・Freeze は未実施。EXECUTION\\_GATE \\= GATED。\n\n## **次段階：Step 21 — 不変条件の形式化と検証可能性**\n\n次に、Step 17〜20 で提案した不変条件を形式化し、各条件について次を確定します。\n\n1. 対象状態軸・遷移・ライフサイクル記録  \n2. 判定式と必要な入力  \n3. 静的検証か実行時検証か  \n4. 違反・評価不能・検証器障害の区別  \n5. 反例生成条件と受入試験  \n6. 未証明の条件が残る場合の `DESIGN_RESOLVED`／Freeze 制限\n\nこれにより、単に「不変条件が列挙されている」状態から、「どの証拠で検証可能性を判定するかが定義されている」状態へ進めます。\n\n",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "`UNKNOWN` を `TRUE` または `FALSE` に暗黙変換しない。",
+      "`ERROR` を通常のガード不成立として処理しない。",
+      "いずれかの段階で必須条件を満たせなければ、後続段階へ成功として進めません。",
+      "複数エラーが検出されても、後から検出されたエラーで先行する障害を上書きしません。",
+      "同じ入力・同じモデル・同じ契約・同じ検証器バージョンであれば、同じ検証結果を生成する必要があります。"
+    ],
+    "lines": [
+      3072,
+      3073,
+      3162,
+      3166,
+      3208
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

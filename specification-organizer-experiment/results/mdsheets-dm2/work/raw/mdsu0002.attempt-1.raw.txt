@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0002",
+  "line_start": 99,
+  "line_end": 120,
+  "source_text": "",
+  "semantic_kind": "State",
+  "semantic_evidence": {
+    "phrases": [
+      "作業ツリーの状態",
+      "Git 変更あり",
+      "確認済み",
+      "変更済み 5 ファイル、未追跡 6 項目。提示された `git status --short` の出力に基づく集計です。",
+      "今回の照合対象である Contract・Schema・テストは未追跡ファイルとして表示されています。",
+      "現時点では未判定です。"
+    ],
+    "lines": [101, 103, 105, 107, 109, 119]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

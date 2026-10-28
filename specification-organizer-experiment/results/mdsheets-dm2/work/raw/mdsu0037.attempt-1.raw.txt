@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0037",
+  "line_start": 6341,
+  "line_end": 6673,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Backup・Restore・Disaster Recovery（DR）において、Canonical History の完全性、Commit の一意性、認可証拠の整合性、復旧結果の決定性を維持する。",
+      "整合性境界を確定できない Backup は、復旧可能な正本として採用しない。",
+      "DR 復旧中は、通常の Commit 処理を停止または制限する必要がある。",
+      "復旧対象と通常処理が競合して二重 Commit を生まないことを保証しなければならない。",
+      "Commit 再開を禁止"
+    ],
+    "lines": [
+      6359,
+      6465,
+      6562,
+      6562,
+      6587
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

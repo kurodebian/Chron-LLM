@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0046",
+  "line_start": 10671,
+  "line_end": 11198,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "各要素は独立して追跡可能でなければならない。",
+      "実装参照や検証証拠が存在しない場合、設計上の記述だけで `IMPLEMENTED` や `VERIFIED_WITHIN_SCOPE` に昇格させてはならない。",
+      "未解決の Critical 相当リスクについて、承認権限者・受容条件・証拠が定義されていない場合、Security Gate の通過を宣言してはならない。"
+    ],
+    "lines": [
+      10766,
+      11030,
+      11066
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

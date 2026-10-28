@@ -1,0 +1,37 @@
+{
+  "unit_id": "mdsu0027",
+  "line_start": 3873,
+  "line_end": 4105,
+  "source_text": "",
+  "semantic_kind": "Unclassified",
+  "semantic_evidence": {
+    "phrases": [
+      "WAL レコード形式の候補",
+      "起動時の回復アルゴリズム",
+      "回復処理は、同じ永続状態に対して複数回実行しても、Canonical History の結果が変化しない必要があります。",
+      "推測による Commit、Abort、再追記を禁止します。",
+      "これは設計例であり、実際の WAL 形式・ダイジェスト・完全性値ではありません。"
+    ],
+    "lines": [
+      3873,
+      4105
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "none",
+    "semantic_scope": "unspecified"
+  },
+  "resolution": {
+    "status": "ambiguous",
+    "reason": "multiple_plausible_interpretations",
+    "candidate_kinds": [
+      "Requirement",
+      "Constraint",
+      "Procedure",
+      "Definition",
+      "Description"
+    ]
+  }
+}

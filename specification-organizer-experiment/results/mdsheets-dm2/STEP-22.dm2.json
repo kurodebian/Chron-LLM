@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0025",
+  "line_start": 3480,
+  "line_end": 3680,
+  "source_text": "# **Step 22 — 時間的性質・履歴整合性・試行間不変条件**\n\nMODE \\= DESIGN-ONLY EXECUTION\\_GATE \\= GATED SCOPE \\= TEMPORAL SAFETY \\+ HISTORY INTEGRITY \\+ RETRY/REPLAY\n\n目的：Step 21 の状態単位の不変条件を拡張し、複数イベント・複数試行にまたがる安全性を定義します。Chron-LLM の `History = Canonical Truth`、`Projection = Derived`、`PROPOSE → VALIDATE → COMMIT` を基礎契約とします。\n\n## **1\\. 時間的性質の形式**\n\n線形時相論理（LTL）の記法を候補として採用します。\n\n| 記号 | 意味 |\n| ----- | ----- |\n| `G(p)` | 常に `p` が成立 |\n| `F(p)` | 将来いつか `p` が成立 |\n| `X(p)` | 次の状態で `p` が成立 |\n| `p U q` | `q` が成立するまで `p` が成立 |\n\nこれらは実行トレース上の性質を記述するための記法です。実際の検証器が LTL を実装していることを意味しません。\n\n## **2\\. 時間的安全性の不変条件**\n\n### **INV-22-01 — GATED 中の禁止操作不存在**\n\n$G(Gate=GATED\\Rightarrow \\neg AuthorizedAction)$\n\n* 対象：実行要求、実行境界、外部副作用  \n* 検証：静的経路検査＋実行トレース監査  \n* 反例：`GATED` 中にファイル変更、実行、Commit、Freeze が発生する。  \n* 失敗：`BLOCK`。操作の実行記録が確認された場合は重大な契約違反として扱う。\n\n限定： 権限必須操作に限る。状態参照や許可された読み取りまで禁止する規則ではありません。\n\n### **INV-22-02 — 拒否による Canonical History の不変性**\n\n$Reject(p)\\Rightarrow Histor{y}_{after}=Histor{y}_{before}$\n\n同一の拒否処理において、拒否対象の提案による Canonical History の変更を禁止します。\n\n* 対象：提案審査、拒否処理、履歴ストレージ  \n* 検証：前後の履歴バージョン・イベント列・ダイジェストの比較  \n* 反例：拒否された提案の内容が Canonical History に追加される。  \n* 失敗：`BLOCK`\n\n監査ログに拒否イベントを追記することは許容します。ただし、それが提案の内容を正規状態へ Commit することとは明確に区別されなければなりません。\n\n### **INV-22-03 — Commit と履歴の整合性**\n\n$Committed(p)\\Rightarrow \\exists !e\\in History:Represents(e,p)$\n\nここで `∃!` は一意に存在することを意味します。\n\n* 対象：Commit 処理、履歴書込み、再生処理  \n* 検証：Commit 記録と履歴イベントの対応検証  \n* 反例：Commit が成功扱いなのに対応する履歴イベントがない、または同一 Commit が重複記録される。  \n* 失敗：`BLOCK`\n\nこの規則には、イベント識別子、Commit ID、重複排除規則、書込み失敗時の回復プロトコルが必要です。これらが未定義なら、整合性はまだ証明できません。\n\n### **INV-22-04 — Replay による Canonical History の改変禁止**\n\n$Replay(H)=Projection(H)$\n\n$G(Replay\\Rightarrow {H}_{after}={H}_{before})$\n\nReplay は履歴から派生状態・投影を再構築する処理であり、履歴自体を変更してはいけません。\n\n* 対象：Replay、Projection、Canonical History  \n* 検証：Replay 前後の履歴同一性と再構築結果の比較  \n* 反例：Replay により過去イベントが修正・削除される。  \n* 失敗：`BLOCK`\n\n同一の履歴・規則・再生設定から同一 Projection が得られることも、別の決定論性要件として検証します。\n\n### **INV-22-05 — 未解決試行の成功終端到達禁止**\n\n$G(UnresolvedBlocking\\Rightarrow \\neg SuccessfulTerminal)$\n\n* 対象：レビュー完了条件、証拠状態、候補状態  \n* 検証：状態遷移グラフ＋実行トレース  \n* 反例：未解決の必須証拠や Blocking 競合が残る状態で成功終端へ遷移する。  \n* 失敗：`BLOCK`\n\n`REVIEW_COMPLETE` はレビュー手続きの終了を意味するだけであり、未解決条件を自動的に解消するものではありません。\n\n### **INV-22-06 — 再試行による過去試行の不変性**\n\n$Retry({r}_{2},{r}_{1})\\Rightarrow Immutable({r}_{1})$\n\n* 対象：試行 ID、入力、検証結果、失敗記録  \n* 検証：履歴追記性・参照整合性・記録ダイジェスト  \n* 反例：再試行によって旧試行の入力や失敗結果が上書きされる。  \n* 失敗：`BLOCK`\n\n再試行には新しい試行 ID を割り当て、`parent_attempt_id` 等の参照で因果関係を保持します。過去の試行を編集して成功扱いにすることは禁止します。\n\n## **3\\. 安全性と進行性の分離**\n\n安全性が成立しても、処理が必ず完了するとは限りません。\n\n| 性質 | 例 | 検証上の意味 |\n| ----- | ----- | ----- |\n| Safety | 禁止操作が発生しない | 反例となる不正トレースを排除 |\n| Liveness | 条件を満たせば処理が進行する | 進行し続ける可能性を評価 |\n| Termination | 処理が有限ステップで停止する | 無限ループ・無限再試行を排除 |\n| Recoverability | 失敗後に許可された再開が可能 | 回復条件と記録を検証 |\n\n### **INV-22-07 — 再試行回数の有限性**\n\n$RetryCount(r)\\leq MaxRetries(r)$\n\n再試行回数の上限は試行開始時に固定し、処理中に暗黙に引き上げません。上限到達は成功ではなく、`ITERATION_LIMIT_REACHED` 等の終端結果として記録します。\n\n### **INV-22-08 — 条件付き進行性**\n\n進行性は、外部サービスの応答や必要証拠の到着などの仮定なしには一般に保証できません。\n\n例：\n\n$G(Ready\\wedge FairScheduling\\Rightarrow F(Resolved\\vee Failed))$\n\nこの式を採用する場合、`Ready` と `FairScheduling` の定義、および公平性の仮定を明示する必要があります。仮定が未証明なら、進行性を保証済みと報告してはいけません。\n\n## **4\\. Canonical History と Projection の境界**\n\nProposal\n\n  \\-\\> Validate\n\n  \\-\\> Commit Decision\n\n  \\-\\> Canonical History Append\n\n  \\-\\> Projection Rebuild\n\nReject\n\n  \\-\\> Rejection Audit Event (if permitted)\n\n  \\-\\> No proposal-derived canonical mutation\n\nReplay\n\n  \\-\\> Read Canonical History\n\n  \\-\\> Rebuild Projection\n\n  \\-\\> Verify deterministic equivalence\n\n  \\-\\> No Canonical History mutation\n\n以下の条件を追加します。\n\n* Projection から Canonical History への逆流を禁止する。  \n* Projection の破損を理由に、履歴の暗黙修正を許可しない。  \n* 履歴の修復が必要な場合は、別の明示的な修復契約と監査記録を要求する。  \n* 履歴追記と Commit 成功通知の原子性・障害回復方式を別途定義する。\n\n特に、`Commit Decision` と `Canonical History Append` の間で障害が起きた場合の状態は、現在の設計だけでは一意に決まりません。Step 23 でトランザクション境界を形式化する必要があります。\n\n## **5\\. 受入試験候補**\n\n| TEST\\_ID | 試験条件 | 期待結果 |\n| ----- | ----- | ----- |\n| TMP-T-01 | GATED 中に権限必須操作を要求 | 操作拒否 |\n| TMP-T-02 | 拒否処理の前後で履歴を比較 | 提案由来の変更なし |\n| TMP-T-03 | Commit 成功後に対応イベントを検索 | 一意な対応イベント |\n| TMP-T-04 | Replay 前後の履歴を比較 | Canonical History 不変 |\n| TMP-T-05 | 未解決 Blocking を残して成功終端を要求 | 拒否 |\n| TMP-T-06 | 旧試行を変更して再試行 | 変更拒否 |\n| TMP-T-07 | 再試行上限に到達 | 成功扱いせず終端記録 |\n| TMP-T-08 | Projection 再構築を同一条件で反復 | 同一結果 |\n| TMP-T-09 | Commit と履歴書込みの間で障害を注入 | 明示的な回復規則に従う |\n| TMP-T-10 | 進行性の仮定を満たさない | 進行性保証を主張しない |\n\nこれらは設計候補であり、実行済みテストではありません。\n\n## **6\\. Step 22 判定**\n\nSTEP 22\n\nTEMPORAL CONTRACT DRAFTED\n\n定義済み：禁止操作、拒否時の履歴不変性、Commit と履歴の対応、Replay の非変更性、未解決試行の成功禁止、再試行不変性、有限再試行、条件付き進行性。\n\n未確定：Commit と履歴追記の原子性、障害時の回復プロトコル、イベントの一意性規則、進行性の環境仮定、時間的性質を検証する具体的な検証器。\n\n実ファイル照合・編集・テスト・Freeze は未実施。EXECUTION\\_GATE \\= GATED。\n\n## **次段階：Step 23 — Commit・履歴追記の原子性と障害回復契約**\n\n次に確定する対象：\n\n1. Commit の論理的確定点と履歴追記の順序  \n2. 書込み前・書込み中・書込み後の障害状態  \n3. 重複 Commit と再送の識別・排除  \n4. WAL の耐久性と復旧時の正規判定  \n5. Commit 結果不明時の照合手順  \n6. `COMMITTED`、`REJECTED`、`ABORTED`、`IN_DOUBT` の区別\n\nここでは、障害後に「成功したはず」と推測する設計を避け、Canonical History と明示的なトランザクション記録を唯一の確定根拠とする契約を目指します。\n\n",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "不変条件",
+      "禁止操作不存在",
+      "失敗：`BLOCK`",
+      "禁止します。",
+      "禁止する。"
+    ],
+    "lines": [
+      3480,
+      3501,
+      3508,
+      3516,
+      3632
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

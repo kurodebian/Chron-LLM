@@ -1,0 +1,38 @@
+{
+  "unit_id": "mdsu0019",
+  "line_start": 2431,
+  "line_end": 2553,
+  "source_text": "# **Step 16 — 状態遷移表と失敗分類の形式化**\n\n実施モード：DESIGN-ONLY\n\nStep 15 の裁定契約を、状態機械として定義します。主目的は、無限反復、障害の成功扱い、未解決事項の誤解消、`GATED` の誤解除を防ぐことです。\n\n## **1\\. 状態空間**\n\n最初に、異なる意味を持つ状態を単一の列挙型へ混在させないようにします。\n\n| 状態軸 | 許可値の候補 | 意味 |\n| ----- | ----- | ----- |\n| `REVIEW_STATUS` | `PENDING`, `PROPOSAL_READY`, `CRITIQUE_READY`, `RECONCILED`, `REVIEW_COMPLETE` | レビュー処理の進行 |\n| `VALIDATION_STATUS` | `NOT_RUN`, `ACCEPT_FOR_REVIEW`, `REJECT`, `HOLD`, `VALIDATION_FAILED` | 決定的検証の結果 |\n| `CANDIDATE_STATUS` | `UNVERIFIED`, `UNDER_REVIEW`, `DESIGN_RESOLVED`, `DEFERRED`, `REJECTED` | 規範候補の裁定状態 |\n| `EVIDENCE_STATUS` | `UNKNOWN`, `MISSING`, `AVAILABLE`, `VERIFIED`, `CONTRADICTORY` | 証拠の充足・評価状態 |\n| `EXECUTION_GATE` | `GATED`, `AUTHORIZED` | 操作実行の許可状態 |\n\nこの表は候補モデルです。各軸の値と遷移を正式採択する前に、既存契約との整合性を確認する必要があります。\n\n重要な区別： `REVIEW_COMPLETE` はレビュー処理が完了したことを示すだけです。候補の採択、実装検証、Freeze、実行許可を意味しません。\n\n## **2\\. 状態遷移表**\n\n| 遷移 ID | 遷移元 | 条件 | 遷移先 | 禁止事項 |\n| ----- | ----- | ----- | ----- | ----- |\n| TR-01 | `PENDING` | 固定入力と設定が有効 | `PROPOSAL_READY` | 入力不足のまま生成を開始しない |\n| TR-02 | `PROPOSAL_READY` | 提案が生成された | `CRITIQUE_READY` | 提案を規範として採択しない |\n| TR-03 | `CRITIQUE_READY` | 批判結果が記録された | `RECONCILED` | 批判未実施を成功扱いしない |\n| TR-04 | `RECONCILED` | 出力契約の検証が必要 | 検証実行 | 検証器障害を適合扱いしない |\n| TR-05 | 検証実行 | 契約適合 | `ACCEPT_FOR_REVIEW` | 意味的正当性まで保証しない |\n| TR-06 | 検証実行 | 契約違反を確認 | `REJECT` | 違反を自動修復して受理しない |\n| TR-07 | 検証実行 | 必要証拠・規範が不足 | `HOLD` | 不足を推測で埋めない |\n| TR-08 | 検証実行 | 検証器の内部障害 | `VALIDATION_FAILED` | 成功・不適合のいずれにも偽装しない |\n| TR-09 | `HOLD` | 必要情報が追加された | 新しい検証試行 | 以前の結果を黙って上書きしない |\n| TR-10 | 検証済み | 完了条件がすべて充足 | `REVIEW_COMPLETE` | `GATED` を自動解除しない |\n| TR-11 | 任意のレビュー状態 | 反復上限到達 | `ITERATION_LIMIT_REACHED` | 上限到達を成功扱いしない |\n| TR-12 | 任意のレビュー状態 | 解消不能な競合が残存 | `CONFLICT_UNRESOLVED` | 競合を黙って削除しない |\n\n`REVIEW_COMPLETE`、`ITERATION_LIMIT_REACHED`、`CONFLICT_UNRESOLVED` は、レビュー進行状態の終端候補です。これらを候補の裁定状態や実行ゲートの値として代用してはいけません。\n\n## **3\\. 失敗分類**\n\n失敗の分類は、検出した現象と、その原因について確認できた事実を分けます。\n\n| エラー ID | 条件 | 結果 | 再試行 |\n| ----- | ----- | ----- | ----- |\n| ERR-16-01 | 提案の構造が不正 | `REJECT` | 修正後、新しい試行として可能 |\n| ERR-16-02 | 未登録 ID・禁止依存を検出 | `REJECT` | 参照・依存の修正後に可能 |\n| ERR-16-03 | 証拠が不足 | `HOLD` | 不足証拠の取得後に可能 |\n| ERR-16-04 | 検証器の起動・内部処理が失敗 | `VALIDATION_FAILED` | 原因解消後に可能 |\n| ERR-16-05 | LLM が出力契約を満たす提案を生成できない | `HOLD` または専用失敗状態 | 固定上限内でのみ可能 |\n| ERR-16-06 | 依存グラフに循環が存在 | `CONFLICT_UNRESOLVED` | グラフ変更後に再検証 |\n| ERR-16-07 | 必須証拠の記録に失敗 | 監査処理失敗 | 証拠の完全性を確認するまで完了不可 |\n| ERR-16-08 | 反復上限到達 | `ITERATION_LIMIT_REACHED` | 明示的な新規試行のみ |\n| ERR-16-09 | GATED 操作を実行しようとした | 実行拒否・監査記録 | 明示的な許可手続きが必要 |\n\nERR-16-05 は、モデルの出力不良とモデル実行基盤の障害が異なるため、実装契約では細分化が必要です。また、証拠記録の失敗は、通常の提案拒否とは異なる監査上の失敗として扱います。\n\n## **4\\. 無限反復を防ぐ契約**\n\n`HOLD` を単純にループへ戻す設計は禁止します。再試行は、次の条件をすべて満たす場合に限ります。\n\n1. 未解決理由が特定されている。  \n2. 次回試行で変化する入力・証拠・設定が明示されている。  \n3. 試行回数が固定上限内である。  \n4. 各試行が独立した記録を持つ。  \n5. 同一条件の反復だけでは未解決状態を解消しない。  \n6. 上限到達時は `ITERATION_LIMIT_REACHED` とし、成功に変換しない。\n\n概念的な停止条件は次のとおりです。\n\nSTOP :=\n\n    REVIEW\\_COMPLETE\n\n OR CONFLICT\\_UNRESOLVED\n\n OR VALIDATION\\_FAILED\n\n OR ITERATION\\_LIMIT\\_REACHED\n\n OR explicit external cancellation\n\n実装時には、検証器の障害とレビュー上の競合を同じ終端状態にまとめず、原因・回復可能性・再試行条件を別々に記録します。\n\n## **5\\. 権限境界**\n\n`EXECUTION_GATE` はレビュー状態とは独立して管理します。\n\n* `REVIEW_COMPLETE` → `AUTHORIZED` の自動遷移は禁止。  \n* `DESIGN_RESOLVED` → `IMPLEMENTATION_VERIFIED` の自動遷移は禁止。  \n* `IMPLEMENTATION_VERIFIED` → `FROZEN` の自動遷移は禁止。  \n* LLM の提案・批判・裁定案による権限付与は禁止。  \n* 許可された操作は、許可主体・対象・範囲・有効条件を別途記録する。\n\nつまり、レビューの終端はレビューの終端であり、操作許可の終端ではありません。\n\n## **6\\. Step 16 の判定**\n\nSTEP 16\n\nDRAFTED\n\n状態軸、遷移表、失敗分類、再試行・停止条件、権限境界を設計候補として定義しました。\n\n未解決： 状態値の最終採択、`ERR-16-05` の細分化、遷移の網羅性、既存契約との整合性。\n\n実ファイル照合・編集・テスト・Freeze は未実施。GATED を維持。\n\n## **次段階：Step 17 — 状態遷移の網羅性と到達可能性の検査**\n\n次は、定義した状態機械に対して以下を検査します。\n\n* 到達不能状態と遷移先の欠落  \n* 終端状態からの不正な再開  \n* `HOLD` からの回復条件の欠落  \n* エラー分類の重複・未分類領域  \n* `REVIEW_COMPLETE` と `EXECUTION_GATE` の不正な結合  \n* 状態軸間で矛盾する組合せ\n\nここでも、検査対象は現在の設計案です。実装やテストの結果を推測して合格扱いにはしません。\n\n",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "成功扱いしない",
+      "`GATED` を自動解除しない",
+      "禁止します",
+      "自動遷移は禁止",
+      "明示的な許可手続きが必要",
+      "GATED を維持"
+    ],
+    "lines": [
+      2459,
+      2466,
+      2467,
+      2486,
+      2492,
+      2521,
+      2522,
+      2523,
+      2539
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

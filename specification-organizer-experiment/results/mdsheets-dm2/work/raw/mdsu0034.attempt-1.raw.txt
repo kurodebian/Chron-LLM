@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0034",
+  "line_start": 5543,
+  "line_end": 5771,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Canonical History の状態を推測で確定しないための規範候補を定義する",
+      "IN_DOUBT MUST NOT BE GUESSED",
+      "COMMITTED_TXID MUST NOT BE COMMITTED_AGAIN",
+      "CANONICAL_HISTORY MUST NOT BE SILENTLY_REPAIRED"
+    ],
+    "lines": [
+      5543,
+      5771
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0053",
+  "line_start": 14831,
+  "line_end": 15498,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Contract Corpus Inventory / Baseline Manifest / Evidence-Bound Coverage Audit Contract",
+      "Inventory は、定義された Scope に対して発見・観測できたファイルを記録する読み取り専用処理である。",
+      "未定義の項目は、推測で補わず `UNRESOLVED` とする。",
+      "既存 Manifest を上書きして履歴を失わせてはならない。",
+      "いずれの失敗状態でも、欠落ファイルを自動生成したり、内容を自動修復したり、除外対象を黙って削除したりしてはならない。"
+    ],
+    "lines": [
+      14831,
+      14974,
+      14928,
+      15273,
+      15333
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

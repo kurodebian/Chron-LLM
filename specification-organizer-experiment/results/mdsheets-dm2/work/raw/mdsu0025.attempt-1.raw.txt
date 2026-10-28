@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0025",
+  "line_start": 3480,
+  "line_end": 3680,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "不変条件",
+      "禁止操作不存在",
+      "失敗：`BLOCK`",
+      "禁止します。",
+      "禁止する。"
+    ],
+    "lines": [
+      3480,
+      3501,
+      3508,
+      3516,
+      3632
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0048",
+  "line_start": 11855,
+  "line_end": 12449,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、Chron-LLM における Security Governance、Risk Acceptance、Change Approval、Compliance Evidence、Freeze 判定の権限・証拠・状態遷移を規定する。",
+      "すべての規範的変更は、変更対象と影響範囲を特定できなければならない。",
+      "承認後に変更ダイジェストや対象範囲が変わった場合、既存承認を自動的に引き継いではならない。",
+      "承認証拠が存在するだけで Canonical Mutation を実行してはならない。"
+    ],
+    "lines": [
+      11875,
+      11985,
+      12035,
+      12315
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

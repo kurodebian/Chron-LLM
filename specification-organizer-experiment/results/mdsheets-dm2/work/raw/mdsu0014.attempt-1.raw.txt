@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0014",
+  "line_start": 1809,
+  "line_end": 1913,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "ループの受入基準と設計完了条件",
+      "必須フィールド欠落・型違反を拒否する",
+      "以下は、他の品質基準より優先される安全性の条件です。",
+      "Step 11 の設計完了は、次の条件をすべて満たすこととします。"
+    ],
+    "lines": [
+      1809,
+      1819,
+      1834,
+      1861
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

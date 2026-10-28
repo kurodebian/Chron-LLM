@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0050",
+  "line_start": 13080,
+  "line_end": 13618,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "扱ってはならない",
+      "禁止する",
+      "採用してはならない",
+      "書き換えてはならない",
+      "許可してはならない"
+    ],
+    "lines": [
+      13110,
+      13131,
+      13209,
+      13408,
+      13412
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0009",
+  "line_start": 999,
+  "line_end": 1317,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 6 の成果物は、上記の章構成、各規範の配置、参照関係、未決定事項、実装許可境界を定義した構造化ドラフトです。",
+      "次に進む順序は、Step 7D → Step 7C → Step 7B → Step 7A → Step 7 を推奨します。",
+      "このループは、設計案の改善を目的とするものであり、Schema や Contract の編集を自動的に許可するものではありません。"
+    ],
+    "lines": [1029, 1033, 1278]
+  },
+  "semantic_attributes": {
+    "modality": "should",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

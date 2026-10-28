@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0006",
+  "line_start": 184,
+  "line_end": 235,
+  "source_text": "# **Step 3 — Contract / Schema 差分裁定**\n\n提示された Schema 全文に基づく静的照合結果です。これは Schema の記述内容の確認であり、JSON Schema Validator による実行検証ではありません。\n\n### **1\\. 規範差分**\n\n| ID | 対象 | 判定 | 確認結果 |\n| ----- | ----- | ----- | ----- |\n| SCA-S01 | `audit_version` | `VERIFIED` | Schema は `\"A1A-SCA.0.1\"` に固定。Contract の `0.1.0-draft` は文書バージョンなので、別の識別子として扱う方針と整合 |\n| SCA-S02 | `audit_rules_version` | `UNRESOLVED` | Contract §4、§13 では必要だが、Schema のレポート `identity` に存在せず、`COMPLETED` の必須項目にもない |\n| SCA-S03 | `INPUT_INVALID` の識別情報 | `UNRESOLVED` | `failedReport` は `document_id`、ダイジェスト、`audit_version` を必須にしていない。Contract は入力情報の捏造・補完を禁じるが、失敗レポートで何を省略可能とするかの詳細契約は未確定 |\n| SCA-S04 | `AUDIT_FAILED` と `INPUT_INVALID` | `VERIFIED`（構造上のみ） | Schema は両状態を許容。ただし、どのエラーをどちらへ分類するかは Schema では保証されない |\n| SCA-S05 | `finding_id` | `UNRESOLVED` | 形式 `F[0-9]{4,}` は定義済み。重複禁止と決定的採番は Contract の要件であり、Schema 単独では検証されない |\n| SCA-S06 | 行範囲 | `UNRESOLVED` | 各行番号の下限は検証するが、`source_line_start <= source_line_end` は Schema で保証されない |\n| SCA-S07 | `summary` | `UNRESOLVED` | 必須キーと型は定義済みだが、件数と `findings` の一致は保証されない |\n| SCA-S08 | `covered_by_units` | `UNRESOLVED` | 配列・要素型・重複禁止は定義済みだが、参照 ID が実際の入力 artifact に存在するかは保証されない |\n| SCA-S09 | 入力ダイジェスト照合 | `UNRESOLVED` | SHA-256 の形式は検証するが、実際の入力バイト列との一致は Schema では検証できない |\n| SCA-S10 | 未知プロパティ | `VERIFIED` | レポートの余分なプロパティを `unevaluatedProperties: false` で制限する構造 |\n| SCA-S11 | 意味的正確性 | `VERIFIED`（非保証） | Schema の説明自体が、構造検証と意味的正確性を区別している |\n\n### **2\\. 重要な設計上の問題**\n\nSCA-S02 が最優先の未解決項目です。\n\nContract §13 は、同一の `audit_rules_version` を再現性の条件に含めています。しかし、Schema の出力にその値がなければ、完成したレポートだけから実際に適用したルールセットを識別できません。\n\nしたがって、現時点では次の事項を確定できません。\n\n* ルールセットの識別子をレポートへ必須記録するか。  \n* `audit_rules_version` と `audit_version` の対応関係をどう規定するか。  \n* 失敗レポートで、未取得の識別情報を省略する条件をどう定義するか。\n\nこれは修正指示ではなく、Freeze 前に解決すべき設計課題です。現行 Schema の変更は行いません。\n\n### **3\\. 次の照合 — 既存テストの実際の保証範囲**\n\n次に、10件のテストが上記の構造的制約をどこまで検証しているかを確認します。以下は読み取り専用です。\n\ncd \\~/Chron-LLM/specification-organizer-experiment || exit 1\n\nprintf '%s\\\\n' '===== TEST NAMES \\====='\n\ngrep \\-nE '^\\[\\[:space:\\]\\]\\*def test\\_|^\\[\\[:space:\\]\\]\\*class Test' \\\\\n\n  tests/test\\_a1a\\_semantic\\_coverage\\_audit.py\n\nprintf '%s\\\\n' '===== TEST FILE \\====='\n\ncat tests/test\\_a1a\\_semantic\\_coverage\\_audit.py\n\n出力後、テストごとに `VERIFIED`（テストコードで確認可能）、`UNRESOLVED`（未検証または保証不足）、`OUT_OF_SCOPE`（今回の監査設計外）を割り当てます。テスト実行、実装変更、Schema Freeze には進みません。\n\n",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "# **Step 3 — Contract / Schema 差分裁定**",
+      "次に、10件のテストが上記の構造的制約をどこまで検証しているかを確認します。",
+      "以下は読み取り専用です。"
+    ],
+    "lines": [
+      184,
+      220
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "procedure-block",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

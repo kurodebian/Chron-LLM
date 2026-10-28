@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0026",
+  "line_start": 3681,
+  "line_end": 3872,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Commit 成功を確定しない",
+      "永続記録から確定結果を再構成できることが必要です",
+      "WAL の末尾が不完全な場合、その領域を自動的に正常イベントへ補完してはいけません",
+      "各 Commit 要求には、一意な `txid` を割り当てます",
+      "WAL を唯一の真実とするには、少なくとも次の条件を明示する必要があります"
+    ],
+    "lines": [
+      3687,
+      3748,
+      3754,
+      3764,
+      3770
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

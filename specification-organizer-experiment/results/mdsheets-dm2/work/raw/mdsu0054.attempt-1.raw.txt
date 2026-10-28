@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0054",
+  "line_start": 15499,
+  "line_end": 16229,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Semantic Corpus Classification / Normative Role Assignment / Evidence-Bound Classification Contract",
+      "分類処理は、次の入力を要求する。",
+      "次の場合、分類処理を開始してはならない。",
+      "分類結果は、原文とその位置に追跡可能な形で記録する。",
+      "LLM は分類候補を生成する観測・提案コンポーネントとしてのみ使用できる。"
+    ],
+    "lines": [
+      15499,
+      16229
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

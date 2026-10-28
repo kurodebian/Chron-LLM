@@ -1,0 +1,43 @@
+{
+  "unit_id": "mdsu0029",
+  "line_start": 4315,
+  "line_end": 4552,
+  "source_text": "# **Step 26 — Event Type Registry / State Transition Matrix / Normative Compatibility**\n\nMODE \\= DESIGN-ONLY EXECUTION\\_GATE \\= GATED STATUS \\= CONTRACT DRAFT\n\nOBJECTIVE: `EVENT_TYPE → SCHEMA → AUTHORITY → PRECONDITIONS → APPLY → POSTCONDITIONS → COMPATIBILITY`\n\n## **26.1 Event Type Registry**\n\nイベント型レジストリを、Replay と Commit の双方が参照する規範的な契約として定義する。\n\n{\n\n  \"registry\\_id\": \"CANONICAL\\_EVENT\\_TYPE\\_REGISTRY\",\n\n  \"registry\\_version\": \"0.1\",\n\n  \"normative\\_version\": \"0.1\",\n\n  \"event\\_types\": \\[\n\n    {\n\n      \"event\\_type\": \"STATE\\_COMMIT\",\n\n      \"schema\\_ref\": \"EVENT\\_SCHEMA\\_STATE\\_COMMIT\",\n\n      \"authority\\_ref\": \"AUTHORITY\\_KERNEL\\_COMMIT\",\n\n      \"apply\\_contract\\_ref\": \"APPLY\\_STATE\\_COMMIT\",\n\n      \"replay\\_policy\": \"DETERMINISTIC\",\n\n      \"status\": \"PROPOSED\"\n\n    },\n\n    {\n\n      \"event\\_type\": \"AUDIT\\_RECORDED\",\n\n      \"schema\\_ref\": \"EVENT\\_SCHEMA\\_AUDIT\\_RECORDED\",\n\n      \"authority\\_ref\": \"AUTHORITY\\_AUDIT\\_WRITER\",\n\n      \"apply\\_contract\\_ref\": \"APPLY\\_AUDIT\\_RECORDED\",\n\n      \"replay\\_policy\": \"DETERMINISTIC\",\n\n      \"status\": \"PROPOSED\"\n\n    }\n\n  \\]\n\n}\n\nこれは構造例であり、イベント型・権限名・バージョンは未承認の候補である。\n\n各登録エントリに要求するフィールド：\n\n| Field | Contract |\n| ----- | ----- |\n| `event_type` | 一意の型識別子 |\n| `schema_ref` | ペイロードおよび共通フィールドのスキーマ |\n| `authority_ref` | 発行を許可された主体・権限契約 |\n| `apply_contract_ref` | 適用前提・状態変更・事後条件 |\n| `replay_policy` | 再生時の解釈規則 |\n| `status` | `PROPOSED / ACTIVE / DEPRECATED / RETIRED` |\n| `compatibility_ref` | 対応する規範・スキーマの互換性契約 |\n\nInvariant: `UNREGISTERED_EVENT_TYPE → APPLY_PROHIBITED`。\n\n未登録イベントを無視する、推測で解釈する、または既知イベントへ自動変換することは禁止する。\n\n## **26.2 Authority Contract**\n\nイベントの形式的妥当性は、そのイベントを発行する権限を意味しない。\n\nVALID\\_SCHEMA ≠ AUTHORIZED\\_EMISSION\n\nAUTHORIZED\\_EMISSION ≠ VALID\\_STATE\\_TRANSITION\n\nVALID\\_STATE\\_TRANSITION ≠ DURABLE\\_COMMIT\n\nDURABLE\\_COMMIT ≠ PROJECTION\\_SUCCESS\n\n処理段階を分離する。\n\n1. `SCHEMA_VALIDATION`  \n2. `AUTHORITY_VALIDATION`  \n3. `PRECONDITION_VALIDATION`  \n4. `TRANSITION_VALIDATION`  \n5. `DURABLE_COMMIT`  \n6. `PROJECTION_UPDATE`\n\n各段階の失敗は、独立した結果として記録する。後段の失敗で既に確定した Canonical History を暗黙に取り消してはならない。\n\n## **26.3 State Transition Matrix**\n\n状態遷移契約の候補：\n\n| Field | 意味 |\n| ----- | ----- |\n| `transition_id` | 遷移の一意識別子 |\n| `event_type` | 適用対象のイベント型 |\n| `source_state_predicate` | 適用前の状態条件 |\n| `preconditions` | 必須の前提条件 |\n| `apply_rule_ref` | 決定論的な適用規則 |\n| `postconditions` | 適用後に成立すべき条件 |\n| `failure_disposition` | 失敗時の処理 |\n| `evidence_requirements` | 判定に必要な証拠 |\n\n適用モデル：\n\n$S'=apply(S,e,R)$\n\nただし、次の条件をすべて満たす場合に限る。\n\n* イベント型が登録済みである。  \n* イベントスキーマが有効である。  \n* 発行権限が確認できる。  \n* 適用前提が満たされている。  \n* 適用規則が一意に決定できる。  \n* 事後条件を検証できる。\n\nどれかを判定できない場合、成功として扱わない。特に、証拠不足と確定した契約違反は異なる結果として保持する。\n\n## **26.4 Normative Version Compatibility**\n\nイベントの `normative_version` と `event_schema_version` を分離する。\n\nevent\\_schema\\_version \\= serialization / structural contract\n\nnormative\\_version     \\= event interpretation / transition contract\n\nregistry\\_version      \\= registered event-type contract\n\n互換性判定結果の候補：\n\n* `COMPATIBLE` — 既存契約の下で解釈可能  \n* `COMPATIBLE_WITH_ADAPTER` — 登録済み・検証済みアダプターが必要  \n* `INCOMPATIBLE` — 意味を保存した解釈ができない  \n* `UNKNOWN` — 必要な規範または互換性情報が不足\n\n規則：\n\n1. バージョン番号の大小だけで互換性を推測しない。  \n2. スキーマ互換性と意味論的互換性を別々に判定する。  \n3. アダプターは明示的なバージョン付き契約として登録する。  \n4. `UNKNOWN` を `COMPATIBLE` に昇格させない。  \n5. `INCOMPATIBLE` または `UNKNOWN` のイベントで Replay の成功を宣言しない。  \n6. 移行が必要な場合、元の履歴を保持し、移行結果と根拠を記録する。\n\n## **26.5 Registry Closure Validation**\n\n閉包検証では、レジストリに記載された参照が実在するだけでなく、相互に矛盾していないことを検証する。\n\n| Test ID | 検証内容 | 失敗条件 |\n| ----- | ----- | ----- |\n| REG-T-01 | `event_type` の一意性 | 重複 |\n| REG-T-02 | スキーマ参照 | 未解決参照 |\n| REG-T-03 | 権限契約参照 | 未解決参照 |\n| REG-T-04 | 適用規則参照 | 未解決参照 |\n| REG-T-05 | 状態遷移の網羅性 | ACTIVE 型に適用契約がない |\n| REG-T-06 | 遷移競合 | 同条件で複数の適用規則が競合 |\n| REG-T-07 | バージョン互換性 | 判定不能なのに成功扱い |\n| REG-T-08 | 非推奨・廃止型 | 禁止された新規発行 |\n| REG-T-09 | Replay 閉包 | 必要な規範・証拠が不足 |\n| REG-T-10 | 参照グラフ | 未解決参照または許可されない循環 |\n\nこれらは試験設計であり、実行済みのテスト結果ではない。\n\n## **26.6 Failure Taxonomy**\n\n失敗の分類候補：\n\nEVENT\\_SCHEMA\\_INVALID\n\nEVENT\\_TYPE\\_UNREGISTERED\n\nEVENT\\_AUTHORITY\\_DENIED\n\nEVENT\\_PRECONDITION\\_UNSATISFIED\n\nEVENT\\_PRECONDITION\\_UNKNOWN\n\nEVENT\\_TRANSITION\\_CONFLICT\n\nEVENT\\_POSTCONDITION\\_FAILED\n\nEVENT\\_NORMATIVE\\_VERSION\\_UNKNOWN\n\nEVENT\\_VERSION\\_INCOMPATIBLE\n\nEVENT\\_ADAPTER\\_INVALID\n\nREGISTRY\\_REFERENCE\\_INVALID\n\nREGISTRY\\_CONFLICT\n\nREGISTRY\\_INCOMPLETE\n\n分類原則：\n\n* `INVALID`：契約違反を確認した。  \n* `DENIED`：権限がない、または許可されていない。  \n* `UNKNOWN`：判断に必要な情報が不足している。  \n* `CONFLICT`：規則を一意に決定できない。  \n* `FAILED`：検証・実行が失敗した。対象の不正を必ずしも意味しない。\n\nValidator 自体の障害と、検証対象の契約違反は別のエラーとして保持する。\n\n## **26.7 Step 26 判定**\n\nSTEP 26\n\nDRAFTED\n\n定義候補：イベント型レジストリ、権限分離、状態遷移契約、規範バージョン互換性、閉包検証、失敗分類。\n\n未解決：正式なイベント型一覧、権限主体のモデル、状態述語の形式言語、互換性判定の完全な規則、アダプターの信頼境界。\n\n設計案のみ。ファイル変更・テスト実行・正式採用・Freeze は未実施。EXECUTION\\_GATE \\= GATED。\n\n## **Step 27 — Canonical Event の正規化・ダイジェスト・同一性契約**\n\n次段階では、イベントの意味が同じかどうかと、バイト列・ダイジェストが同じかどうかを区別する。\n\n1. Canonical Serialization の定義  \n2. `payload_digest` とイベント全体のダイジェストの区別  \n3. `event_id`、`txid`、冪等性キーの同一性契約  \n4. 同一 ID・異なるペイロードの拒否規則  \n5. ハッシュ連鎖と信頼できるチェックポイントの境界  \n6. 正規化のバージョン移行  \n7. Replay・WAL・監査記録間のダイジェスト整合性検証\n\n中心課題： 同一性の判定を曖昧な JSON 比較や LLM の意味解釈に委ねず、明示的な正規化・ハッシュ・識別子の契約として定義する。\n\n",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "各登録エントリに要求するフィールド：",
+      "Invariant: `UNREGISTERED_EVENT_TYPE → APPLY_PROHIBITED`。",
+      "未登録イベントを無視する、推測で解釈する、または既知イベントへ自動変換することは禁止する。",
+      "後段の失敗で既に確定した Canonical History を暗黙に取り消してはならない。",
+      "ただし、次の条件をすべて満たす場合に限る。",
+      "どれかを判定できない場合、成功として扱わない。",
+      "規則：",
+      "6. 移行が必要な場合、元の履歴を保持し、移行結果と根拠を記録する。",
+      "閉包検証では、レジストリに記載された参照が実在するだけでなく、相互に矛盾していないことを検証する。",
+      "Validator 自体の障害と、検証対象の契約違反は別のエラーとして保持する。"
+    ],
+    "lines": [
+      4373,
+      4385,
+      4387,
+      4410,
+      4431,
+      4440,
+      4459,
+      4466,
+      4470,
+      4525
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

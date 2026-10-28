@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0039",
+  "line_start": 6993,
+  "line_end": 7263,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Commit 権限は Kernel に限定",
+      "検証不能を検証成功として扱わない",
+      "LLM は Commit Authority ではない",
+      "`UNKNOWN` は `AVAILABLE` と同等ではない",
+      "必須条件の状態を確認できない場合、その条件に依存する操作を許可しない。",
+      "より制限的な条件を無視してはならない。"
+    ],
+    "lines": [
+      6993,
+      7263
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

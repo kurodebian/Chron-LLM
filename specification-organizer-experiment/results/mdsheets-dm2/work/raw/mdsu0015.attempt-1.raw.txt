@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0015",
+  "line_start": 1914,
+  "line_end": 2020,
+  "source_text": "",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 12 — 統合設計レビュー（Design-Only）",
+      "Step 7〜11 の設計案を横断して",
+      "点検します",
+      "このレビューでは、これまでの会話に記録された設計案だけを対象にします。"
+    ],
+    "lines": [
+      1914,
+      1916,
+      1918
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "procedure-block",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "local"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

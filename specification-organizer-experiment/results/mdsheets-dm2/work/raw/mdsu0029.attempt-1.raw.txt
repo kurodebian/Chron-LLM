@@ -1,0 +1,43 @@
+{
+  "unit_id": "mdsu0029",
+  "line_start": 4315,
+  "line_end": 4552,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "各登録エントリに要求するフィールド：",
+      "Invariant: `UNREGISTERED_EVENT_TYPE → APPLY_PROHIBITED`。",
+      "未登録イベントを無視する、推測で解釈する、または既知イベントへ自動変換することは禁止する。",
+      "後段の失敗で既に確定した Canonical History を暗黙に取り消してはならない。",
+      "ただし、次の条件をすべて満たす場合に限る。",
+      "どれかを判定できない場合、成功として扱わない。",
+      "規則：",
+      "6. 移行が必要な場合、元の履歴を保持し、移行結果と根拠を記録する。",
+      "閉包検証では、レジストリに記載された参照が実在するだけでなく、相互に矛盾していないことを検証する。",
+      "Validator 自体の障害と、検証対象の契約違反は別のエラーとして保持する。"
+    ],
+    "lines": [
+      4373,
+      4385,
+      4387,
+      4410,
+      4431,
+      4440,
+      4459,
+      4466,
+      4470,
+      4525
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

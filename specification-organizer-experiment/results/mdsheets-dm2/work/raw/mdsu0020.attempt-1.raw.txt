@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0020",
+  "line_start": 2554,
+  "line_end": 2701,
+  "source_text": "",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 17 — 状態遷移の網羅性・到達可能性検査"
+    ],
+    "lines": [
+      2554
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "procedure-block",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

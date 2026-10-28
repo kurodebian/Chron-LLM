@@ -1,0 +1,52 @@
+{
+  "unit_id": "mdsu0021",
+  "line_start": 2702,
+  "line_end": 2872,
+  "source_text": "# **Step 18 — 状態機械の正規モデルと機械検証契約**\n\n実施モード：DESIGN-ONLY\n\nStep 17 の状態遷移案を、機械検証可能な正規モデルへ変換します。LLM はモデル候補の生成・批判に限定し、モデルの妥当性判定は決定的検証器が行う設計です。\n\nこの段階では、モデル形式と検証契約を定義します。実ファイルの作成・変更、Validator の実行、テスト、Freeze は行いません。\n\n## **1\\. 正規モデルの構造**\n\n状態機械は、次の要素から構成します。\n\n| 要素 | フィールド | 規範上の役割 |\n| ----- | ----- | ----- |\n| モデル識別 | `model_id`, `model_version` | 対象モデルを一意に識別 |\n| 状態軸 | `state_axes` | 独立した状態分類を定義 |\n| 状態値 | `states` | 各軸の許可値を定義 |\n| 遷移 | `transitions` | 許可される状態変化を定義 |\n| ガード条件 | `guards` | 遷移の前提条件を定義 |\n| 不変条件 | `invariants` | 常に満たすべき制約を定義 |\n| 終端条件 | `terminal_conditions` | 試行の終了条件を定義 |\n| 再開条件 | `resume_conditions` | 新しい試行を開始できる条件を定義 |\n| 検証契約 | `validation_contract` | 検証器の入力・出力・失敗分類を定義 |\n\n### **1.1 状態軸の分離**\n\n少なくとも以下の軸を独立させます。\n\n* `REVIEW_STATUS`：レビューの進行状態  \n* `VALIDATION_STATUS`：決定的検証結果  \n* `CANDIDATE_STATUS`：規範候補の裁定状態  \n* `EVIDENCE_STATUS`：証拠の充足・評価状態  \n* `EXECUTION_GATE`：操作権限\n\n実装検証と Freeze は、候補の裁定状態とは別のライフサイクルとして管理します。これらを一つの列挙型にまとめることは避けます。\n\n## **2\\. 遷移の正規表現**\n\n各遷移は `FROM`、`GUARD`、`ACTION`、`TO` の組として定義します。\n\n| フィールド | 意味 | 制約 |\n| ----- | ----- | ----- |\n| `transition_id` | 遷移の一意識別子 | 重複禁止 |\n| `from_state` | 遷移元 | 登録済み状態のみ |\n| `guard` | 前提条件 | 未定義条件を禁止 |\n| `action` | 許可された処理 | 権限境界を越えない |\n| `to_state` | 遷移先 | 登録済み状態のみ |\n| `evidence_requirements` | 必須証拠 | 識別可能な証拠契約を参照 |\n| `failure_transition` | 失敗時の遷移 | 未分類失敗を成功扱いしない |\n\n例として、検証器の正常終了を確認してから提案を評価する遷移を示します。\n\nTRANSITION\\_ID \\= TR-18-VALIDATE-01\n\nFROM:\n\n  REVIEW\\_STATUS \\= RECONCILED\n\nGUARD:\n\n  input\\_snapshot\\_valid \\= true\n\n  validator\\_operational \\= true\n\n  output\\_contract\\_identified \\= true\n\nACTION:\n\n  execute\\_deterministic\\_validation\n\n  record\\_input\\_identity\n\n  record\\_validator\\_identity\n\n  record\\_validation\\_result\n\nTO:\n\n  VALIDATION\\_STATUS \\=\n\n    ACCEPT\\_FOR\\_REVIEW | REJECT | HOLD\n\nFAILURE:\n\n  validator\\_internal\\_failure\n\n    \\-\\> VALIDATION\\_FAILED\n\nこの例は契約の構造を示すものです。具体的なガード式、実行 API、エラーコードは正式採択前に確定する必要があります。\n\n## **3\\. 不変条件**\n\n以下を正規モデルの検証対象とします。\n\n| ID | 不変条件 |\n| ----- | ----- |\n| INV-18-01 | 未登録の状態値を受理しない |\n| INV-18-02 | 未登録の遷移元・遷移先を受理しない |\n| INV-18-03 | `VALIDATION_FAILED` を成功として扱わない |\n| INV-18-04 | 必須証拠の欠落を暗黙に充足済みとしない |\n| INV-18-05 | `REVIEW_COMPLETE` から `AUTHORIZED` への暗黙の遷移を禁止 |\n| INV-18-06 | `DESIGN_RESOLVED` から `IMPLEMENTATION_VERIFIED` への暗黙の遷移を禁止 |\n| INV-18-07 | `IMPLEMENTATION_VERIFIED` から `FROZEN` への暗黙の遷移を禁止 |\n| INV-18-08 | `ITERATION_LIMIT_REACHED` から同一試行への自動復帰を禁止 |\n| INV-18-09 | 未解決の循環依存がある場合、依存順位を確定済みとしない |\n| INV-18-10 | 検証記録の必須項目が欠落した場合、完了を認めない |\n\n不変条件の検査に失敗した場合、モデルを有効なものとして採用してはいけません。\n\n## **4\\. 決定的検証器の契約**\n\n検証器の責務は、モデルが規定された構造・制約・遷移規則に適合するかを判定することです。\n\n| 検証段階 | 検証内容 | 失敗時 |\n| ----- | ----- | ----- |\n| V-01 | モデル構造・必須フィールド | `MODEL_INVALID` |\n| V-02 | 状態軸・状態値の参照整合性 | `MODEL_INVALID` |\n| V-03 | 遷移元・遷移先・ガードの参照整合性 | `MODEL_INVALID` |\n| V-04 | 遷移の重複・競合 | `MODEL_CONFLICT` |\n| V-05 | 不変条件の適用可能性 | `MODEL_INVALID` または `MODEL_CONFLICT` |\n| V-06 | 初期状態からの到達可能性 | 到達不能状態を報告 |\n| V-07 | 終端状態・再開条件の完全性 | `MODEL_INCOMPLETE` |\n| V-08 | 実行権限とレビュー状態の分離 | 不変条件違反 |\n| V-09 | 検証記録の必須フィールド | `VALIDATION_FAILED` または記録失敗状態 |\n\nここで `MODEL_INVALID` などは、状態機械モデル自体の検証結果を表す候補です。レビュー提案の `REJECT` や SCA の `INPUT_INVALID` と同じエラー体系に混在させません。\n\nまた、静的なモデル検査だけで、すべての実行経路の正しさや実装の安全性を証明したと主張してはいけません。\n\n## **5\\. 機械検証の受入基準**\n\n| TEST\\_ID | 検査条件 | 期待結果 |\n| ----- | ----- | ----- |\n| MVT-01 | 状態値が未登録 | モデル拒否 |\n| MVT-02 | 遷移先が未登録 | モデル拒否 |\n| MVT-03 | 同一条件で競合する遷移が存在 | 競合検出 |\n| MVT-04 | 初期状態から到達不能な非任意状態が存在 | 到達不能として報告 |\n| MVT-05 | 終端状態に不正な自動遷移が存在 | 不変条件違反 |\n| MVT-06 | 必須証拠が未定義 | モデル不完全 |\n| MVT-07 | `REVIEW_COMPLETE` が権限を自動付与 | モデル拒否 |\n| MVT-08 | モデルが未分類の失敗を成功扱い | モデル拒否 |\n| MVT-09 | 同一モデル・同一検証器で再検証 | 同一の決定的検証結果 |\n| MVT-10 | 検証器自体が異常終了 | 検証成功として記録しない |\n\nこれは受入テストの設計であり、テスト実行結果ではありません。\n\n## **6\\. Step 18 の判定**\n\nSTEP 18\n\nMODEL CONTRACT DRAFTED\n\n状態軸、遷移契約、不変条件、検証器の責務、機械検証の受入基準を定義しました。\n\n未確定： 正規モデルの具体的なシリアライズ形式、遷移ガードの完全性、競合遷移の判定規則、検証結果の正式なエラー体系。\n\n実ファイル照合・編集・テスト・Freeze は未実施。実行ゲートは GATED を維持。\n\n## **次段階：Step 19 — 正規モデルのシリアライズ契約とエラー体系の確定**\n\n次は、状態機械を JSON などの機械可読形式に落とすため、以下を定義します。\n\n1. 正規モデルの必須フィールドと型  \n2. 状態軸・遷移・ガードの ID 規則  \n3. エラーコードと検証結果の対応  \n4. 同一条件で競合する遷移の扱い  \n5. モデルバージョンと後方互換性  \n6. モデル自体の不正と検証器障害の分離\n\nこの段階でも、形式の設計と実ファイルへの実装は分離します。\n\n",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "モデル形式と検証契約を定義します",
+      "状態機械は、次の要素から構成します。",
+      "少なくとも以下の軸を独立させます。",
+      "実装検証と Freeze は、候補の裁定状態とは別のライフサイクルとして管理します。",
+      "これらを一つの列挙型にまとめることは避けます。",
+      "各遷移は `FROM`、`GUARD`、`ACTION`、`TO` の組として定義します。",
+      "具体的なガード式、実行 API、エラーコードは正式採択前に確定する必要があります。",
+      "以下を正規モデルの検証対象とします。",
+      "不変条件の検査に失敗した場合、モデルを有効なものとして採用してはいけません。",
+      "検証器の責務は、モデルが規定された構造・制約・遷移規則に適合するかを判定することです。",
+      "静的なモデル検査だけで、すべての実行経路の正しさや実装の安全性を証明したと主張してはいけません。",
+      "これは受入テストの設計であり、テスト実行結果ではありません。",
+      "状態軸、遷移契約、不変条件、検証器の責務、機械検証の受入基準を定義しました。",
+      "実ファイル照合・編集・テスト・Freeze は未実施。実行ゲートは GATED を維持。",
+      "この段階でも、形式の設計と実ファイルへの実装は分離します。"
+    ],
+    "lines": [
+      2708,
+      2712,
+      2728,
+      2736,
+      2740,
+      2790,
+      2794,
+      2809,
+      2813,
+      2829,
+      2846,
+      2854,
+      2858,
+      2871
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

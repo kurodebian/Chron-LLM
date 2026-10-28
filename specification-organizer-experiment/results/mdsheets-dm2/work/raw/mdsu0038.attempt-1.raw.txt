@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0038",
+  "line_start": 6674,
+  "line_end": 6992,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 35 — Observability / Audit Logging / Operational Telemetry Contract",
+      "Telemetry の失敗を、Commit の成功・失敗とは独立して扱う。",
+      "観測データは機密情報の複製経路になり得るため、出力内容とアクセス範囲を制御する。",
+      "Audit Record は、監査対象となる操作と、その判断根拠を追跡できる構造を持つ。"
+    ],
+    "lines": [
+      6674,
+      6992
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "unit_id": "mdsu0022",
+  "line_start": 2873,
+  "line_end": 3052,
+  "source_text": "# **Step 19 — 正規モデルのシリアライズ契約とエラー体系**\n\n実施モード：DESIGN-ONLY\n\nStep 18 の状態機械を、機械可読な正規モデルとして表現するための契約を定義します。JSON を採用候補とし、モデルの不正・遷移の競合・検証器自身の障害を区別します。\n\n## **1\\. 正規モデルのトップレベル契約**\n\nモデル形式の候補は次のとおりです。\n\n{\n\n  \"model\\_id\": \"review-loop-state-machine\",\n\n  \"model\\_version\": \"0.1.0\",\n\n  \"contract\\_version\": \"SMC-0.1\",\n\n  \"initial\\_state\": {\n\n    \"REVIEW\\_STATUS\": \"PENDING\",\n\n    \"VALIDATION\\_STATUS\": \"NOT\\_RUN\",\n\n    \"CANDIDATE\\_STATUS\": \"UNVERIFIED\",\n\n    \"EVIDENCE\\_STATUS\": \"UNKNOWN\",\n\n    \"EXECUTION\\_GATE\": \"GATED\"\n\n  },\n\n  \"state\\_axes\": \\[\\],\n\n  \"transitions\": \\[\\],\n\n  \"invariants\": \\[\\],\n\n  \"terminal\\_conditions\": \\[\\],\n\n  \"resume\\_conditions\": \\[\\],\n\n  \"error\\_catalog\\_version\": \"SME-0.1\"\n\n}\n\nこれは構造例であり、正式な JSON Schema や完成済みモデルではありません。空配列のままでは遷移や不変条件を検証できないため、実際のモデルには各要素の定義が必要です。\n\n## **2\\. フィールド契約**\n\n| フィールド | 型 | 制約 |\n| ----- | ----- | ----- |\n| `model_id` | string | モデルの不変識別子 |\n| `model_version` | string | モデル定義のバージョン |\n| `contract_version` | string | シリアライズ契約のバージョン |\n| `initial_state` | object | 各必須状態軸に対する初期値 |\n| `state_axes` | array | 状態軸と許可値の定義 |\n| `transitions` | array | 遷移の定義 |\n| `invariants` | array | 状態・遷移に適用する制約 |\n| `terminal_conditions` | array | 試行の終端条件 |\n| `resume_conditions` | array | 新しい試行の開始条件 |\n| `error_catalog_version` | string | エラー分類体系のバージョン |\n\n### **2.1 ID 規則**\n\nすべての ID はモデル内で一意でなければなりません。\n\n* `axis_id`  \n* `state_id`  \n* `transition_id`  \n* `guard_id`  \n* `invariant_id`  \n* `terminal_condition_id`  \n* `resume_condition_id`  \n* `error_code`\n\n参照 ID の不存在、重複、型違反は、モデル検証で検出します。検証器が未登録 ID を推測で補完したり、自動的に別 ID へ置換したりすることは禁止します。\n\n## **3\\. 遷移のシリアライズ契約**\n\n各遷移は、少なくとも以下を保持します。\n\n| フィールド | 意味 |\n| ----- | ----- |\n| `transition_id` | 一意な遷移 ID |\n| `from` | 遷移元の状態条件 |\n| `guard_refs` | 遷移に必要なガードの参照 |\n| `action_refs` | 許可された処理の参照 |\n| `to` | 遷移先の状態条件 |\n| `evidence_refs` | 遷移を許可するために必要な証拠 |\n| `failure_refs` | 失敗時に適用する処理・分類の参照 |\n\n`guard_refs` が空であることを、無条件遷移の意味として許可するかどうかは、モデル契約で明示する必要があります。未定義のガードは、常に真と解釈してはいけません。\n\n## **4\\. エラー体系**\n\nモデル自体の問題と、モデル検証器の実行障害を分離します。\n\n| エラーコード候補 | 意味 | 分類 |\n| ----- | ----- | ----- |\n| `MODEL_SCHEMA_INVALID` | JSON 構造・型・必須フィールド違反 | モデル不正 |\n| `MODEL_REFERENCE_INVALID` | 未登録・不正な参照 ID | モデル不正 |\n| `MODEL_TRANSITION_CONFLICT` | 同一条件で競合する遷移 | モデル競合 |\n| `MODEL_INVARIANT_VIOLATION` | 状態・遷移の不変条件違反 | モデル不正 |\n| `MODEL_UNREACHABLE_STATE` | 必須状態に到達できない | モデル不完全 |\n| `MODEL_TERMINATION_INCOMPLETE` | 終端条件・再開条件の不足 | モデル不完全 |\n| `MODEL_VERSION_UNSUPPORTED` | 検証器がモデル形式をサポートしない | 互換性エラー |\n| `VALIDATOR_START_FAILED` | 検証器の起動失敗 | 検証器障害 |\n| `VALIDATOR_EXECUTION_FAILED` | 検証器の実行・内部処理失敗 | 検証器障害 |\n| `VALIDATOR_OUTPUT_INVALID` | 検証結果が契約に適合しない | 検証器障害 |\n| `VALIDATION_EVIDENCE_WRITE_FAILED` | 必須検証記録を書き込めない | 証拠記録障害 |\n\nこれらは候補コードであり、正式採択済みのエラー体系ではありません。\n\n分類上の原則： モデルが不正であることと、検証器がモデルの妥当性を判定できなかったことを混同しません。後者を前者の証拠として扱うことも禁止します。\n\n## **5\\. 競合遷移の判定**\n\n同じ状態から複数の遷移が成立する場合、次の順序で評価します。\n\n1. 遷移元とガード参照が妥当であることを確認する。  \n2. 各ガードの評価結果を取得する。  \n3. 同時に成立する遷移が複数存在するかを確認する。  \n4. 明示的な優先順位規則がなければ、競合として報告する。  \n5. 競合を暗黙の配列順序や生成順序で解決しない。\n\n優先順位による解決を採用する場合は、優先順位そのものがモデルに記録され、同順位の競合も検出できなければなりません。\n\n## **6\\. バージョニングと互換性**\n\n`model_version` と `contract_version` は別々に管理します。\n\n* モデルバージョン：状態・遷移・不変条件など、モデル定義の変更を識別する。  \n* 契約バージョン：シリアライズ形式やフィールドの意味の変更を識別する。  \n* エラー体系バージョン：エラーコードとその分類・意味の変更を識別する。\n\n未知の必須フィールド、未対応の契約バージョン、意味が変化したエラーコードを、検証器が黙って読み替えてはいけません。互換性が確認できない場合は、専用の互換性エラーとして停止します。\n\n## **7\\. 機械検証の受入基準**\n\n| TEST\\_ID | 試験条件 | 期待結果 |\n| ----- | ----- | ----- |\n| SMC-T-01 | 必須フィールド欠落 | `MODEL_SCHEMA_INVALID` |\n| SMC-T-02 | 未登録の状態・遷移 ID | `MODEL_REFERENCE_INVALID` |\n| SMC-T-03 | 同一条件で競合する遷移 | `MODEL_TRANSITION_CONFLICT` |\n| SMC-T-04 | 不変条件に違反する遷移 | `MODEL_INVARIANT_VIOLATION` |\n| SMC-T-05 | 必須状態への経路がない | `MODEL_UNREACHABLE_STATE` |\n| SMC-T-06 | 終端条件が欠落 | `MODEL_TERMINATION_INCOMPLETE` |\n| SMC-T-07 | 未対応の契約バージョン | `MODEL_VERSION_UNSUPPORTED` |\n| SMC-T-08 | 検証器が起動できない | `VALIDATOR_START_FAILED` |\n| SMC-T-09 | 検証器が不正な結果を返す | `VALIDATOR_OUTPUT_INVALID` |\n| SMC-T-10 | 必須証拠の書込みに失敗 | `VALIDATION_EVIDENCE_WRITE_FAILED` |\n\n検証結果が複数存在する場合の集約規則、エラーの優先順位、警告と致命的エラーの境界は、正式な検証契約で追加定義する必要があります。\n\n## **8\\. Step 19 の判定**\n\nSTEP 19\n\nCONTRACT DRAFTED\n\n正規モデルのトップレベル構造、フィールド契約、遷移表現、エラー体系、競合判定、バージョニングを定義しました。\n\n未確定： 完全な JSON Schema、ガード式の評価意味論、エラー集約規則、互換性ポリシー、既存仕様との整合性。\n\n実ファイル照合・編集・テスト・Freeze は未実施。GATED を維持。\n\n## **次段階：Step 20 — 正規モデルの意味論と競合解決規則**\n\n次は、シリアライズ形式の定義だけでは保証できない意味論を固定します。\n\n1. ガード式の評価結果と評価失敗の区別  \n2. 複数ガードが成立した場合の遷移選択規則  \n3. 同一遷移の重複と意味的に競合する遷移の区別  \n4. 状態軸間の整合性制約の評価順序  \n5. エラー集約・優先順位・致命度の規則  \n6. 検証結果が不確定な場合の停止条件\n\nこの段階でも、設計上の定義と、実際の検証器による適合証明は分離して扱います。\n\n",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "すべての ID はモデル内で一意でなければなりません。",
+      "検証器が未登録 ID を推測で補完したり、自動的に別 ID へ置換したりすることは禁止します。",
+      "モデル契約で明示する必要があります。",
+      "未定義のガードは、常に真と解釈してはいけません。",
+      "優先順位そのものがモデルに記録され、同順位の競合も検出できなければなりません。",
+      "未知の必須フィールド、未対応の契約バージョン、意味が変化したエラーコードを、検証器が黙って読み替えてはいけません。",
+      "正式な検証契約で追加定義する必要があります。"
+    ],
+    "lines": [
+      2938,
+      2949,
+      2965,
+      2999,
+      3009,
+      3026
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

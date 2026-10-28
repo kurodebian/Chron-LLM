@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0057",
+  "line_start": 17963,
+  "line_end": 18939,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "契約候補を定義する",
+      "監査は読み取り専用とし",
+      "禁止する",
+      "してはならない"
+    ],
+    "lines": [
+      17963,
+      18939
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

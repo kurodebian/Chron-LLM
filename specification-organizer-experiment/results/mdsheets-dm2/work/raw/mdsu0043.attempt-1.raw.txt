@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0043",
+  "line_start": 8894,
+  "line_end": 9458,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Canonical History の全順序を定義する場合、各 Event の順序位置は明示的であり、履歴内で一意に解釈可能でなければならない。",
+      "同一の Canonical History、同一の順序規則、同一の Replay 規範バージョン、同一の必要入力に対し、Replay は規範上同一の Derived State を生成しなければならない。",
+      "Replay 結果は、適用された規範・スキーマ・Reducer のバージョンと関連づけて識別できなければならない。"
+    ],
+    "lines": [8894, 9458]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

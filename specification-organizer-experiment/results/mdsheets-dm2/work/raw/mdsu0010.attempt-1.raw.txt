@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0010",
+  "line_start": 1318,
+  "line_end": 1390,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "Design-Only",
+      "この段階では、SC-CH-01〜05 の優先順位を、規範上の依存関係と未解決時の影響に基づいて整理します。",
+      "設計成果物",
+      "STEP 7",
+      "DRAFTED"
+    ],
+    "lines": [
+      1318,
+      1390
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "local"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

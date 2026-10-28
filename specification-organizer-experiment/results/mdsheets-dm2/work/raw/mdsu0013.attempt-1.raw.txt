@@ -1,0 +1,39 @@
+{
+  "unit_id": "mdsu0013",
+  "line_start": 1648,
+  "line_end": 1808,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "DESIGN ONLY",
+      "禁止：実ファイル照合・編集、Validator 実行、テスト、Freeze。",
+      "すべての実作業は引き続き GATED。",
+      "権限は LLM の出力から導出しません。",
+      "GATED を解除できるのは、別途定義された明示的な許可手続きだけとする。",
+      "検証器の内部障害は、これらの結果に偽装してはいけません。",
+      "Schema に合格したことだけで、意味的な正当性や証拠の真正性まで保証したと判断してはいけません。",
+      "実ファイル照合・編集、テスト、Validator 実行、Freeze は GATED。"
+    ],
+    "lines": [
+      1656,
+      1660,
+      1662,
+      1741,
+      1746,
+      1759,
+      1776,
+      1794
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

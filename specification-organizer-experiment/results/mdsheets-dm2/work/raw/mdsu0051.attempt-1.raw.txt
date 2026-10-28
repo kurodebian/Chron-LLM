@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0051",
+  "line_start": 13619,
+  "line_end": 14213,
+  "source_text": "",
+  "semantic_kind": "Definition",
+  "semantic_evidence": {
+    "phrases": [
+      "Normative Source の新規制定、改訂、非推奨化、廃止、置換、有効化、適用終了を、承認・検証・履歴・Migration・Replay の各契約と整合させるためのライフサイクルを定義する。",
+      "次の概念を分離する。",
+      "規範の識別情報は、単なるファイル名や表示上のバージョン番号に依存させない。",
+      "規範のバージョンが、どの時点・操作・成果物に適用されるかを明示する。",
+      "本契約は変更手続の設計候補であり、既存の規範ソースや実ファイルに対する変更を実施するものではない。"
+    ],
+    "lines": [
+      13619,
+      14213
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "definitional",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0018",
+  "line_start": 2283,
+  "line_end": 2430,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "実施モード：DESIGN-ONLY",
+      "設計案の整理であり、正式採択・ファイル変更・テスト実行・Freeze は行いません。",
+      "これはレビュー順序の提案です。",
+      "これらは計画された試験ケースであり、実行済みテストではありません。",
+      "STEP 15",
+      "DRAFTED"
+    ],
+    "lines": [2283, 2430]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

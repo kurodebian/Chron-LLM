@@ -1,0 +1,43 @@
+{
+  "unit_id": "mdsu0041",
+  "line_start": 7748,
+  "line_end": 8338,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、Chron-LLM Kernel の正常停止、強制停止、再起動、および停止途中の障害における状態遷移と Canonical History の保全条件を定義する。",
+      "Canonical History は、停止処理のために削除・改変・再生成してはならない。",
+      "再起動後の Commit は、必要な Recovery・Policy・Storage 検証が完了するまで禁止する。",
+      "停止要求が受理された時点で、新規要求の受付を停止する。",
+      "Graceful Shutdown は、進行中処理を無期限に待機する仕組みであってはならない。",
+      "`SHUTDOWN_COMPLETE` は、プロセスが終了したという事実だけで判定してはならない。",
+      "以下は、独立した規範的権限と検証手順が定義されない限り禁止する。",
+      "Recovery が必要な証拠を検証できない場合は、`RECOVERY_BLOCKED` または同等の状態に移行し、Canonical Mutation を禁止する。",
+      "秘密情報を含む構成値や機密データを、エラー出力へ無条件に含めてはならない。",
+      "未解決事項は、コードによる暗黙の補完対象ではない。"
+    ],
+    "lines": [
+      7768,
+      7807,
+      7811,
+      7944,
+      7983,
+      8024,
+      8082,
+      8092,
+      8188,
+      8282
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

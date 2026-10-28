@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0013",
+  "line_start": 1648,
+  "line_end": 1808,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "すべての実作業は引き続き GATED。",
+      "検証器は、提案が固定された出力契約に適合するかを判定します。",
+      "`GATED` を解除できるのは、別途定義された明示的な許可手続きだけとする。"
+    ],
+    "lines": [1662, 1692, 1746]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

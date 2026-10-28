@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0055",
+  "line_start": 16230,
+  "line_end": 17197,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "すべての抽出主張は、ソース上の根拠へ追跡可能でなければならない。",
+      "原文に明示されていない因果関係・前提・意図・権威を追加してはならない。",
+      "抽出処理は原文や Canonical History を変更しない。",
+      "抽出結果を、根拠なしに承認済み規範・確定事実・因果辺へ昇格させない。"
+    ],
+    "lines": [16230, 17197]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

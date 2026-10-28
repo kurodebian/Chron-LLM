@@ -1,0 +1,36 @@
+{
+  "unit_id": "mdsu0032",
+  "line_start": 5065,
+  "line_end": 5313,
+  "source_text": "",
+  "semantic_kind": "Unclassified",
+  "semantic_evidence": {
+    "phrases": [
+      "# **Step 29 — Policy Versioning / Revocation / TOCTOU Contract**",
+      "ポリシーは変更可能な名前だけで参照せず、不変のバージョン識別子と内容ダイジェストで特定する。",
+      "過去のイベントを新しいポリシーで再判定して履歴を改変することは禁止する。",
+      "Commit 時の処理候補：",
+      "TOCTOU（Time-of-Check to Time-of-Use）とは、検査時と実行時の間に対象や権限条件が変化する問題である。",
+      "設計案のみ。実装・テスト・正式採用・Freeze は未実施。"
+    ],
+    "lines": [5065, 5313]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "none",
+    "semantic_scope": "unspecified"
+  },
+  "resolution": {
+    "status": "ambiguous",
+    "reason": "multiple_plausible_interpretations",
+    "candidate_kinds": [
+      "Heading",
+      "Requirement",
+      "Constraint",
+      "Definition",
+      "Procedure",
+      "Exception"
+    ]
+  }
+}

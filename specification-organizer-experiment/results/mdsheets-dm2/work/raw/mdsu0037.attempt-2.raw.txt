@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0037",
+  "line_start": 6341,
+  "line_end": 6673,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Backup / Restore / Disaster Recovery Contract",
+      "必須条件候補",
+      "Commit を再開しない",
+      "自動選択を禁止",
+      "Commit 再開を禁止"
+    ],
+    "lines": [
+      6341,
+      6387,
+      6457,
+      6554,
+      6587
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0033",
+  "line_start": 5314,
+  "line_end": 5542,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "中心原則：Commit の論理的な確定順序と、耐久性が保証される時点を明示し、並行要求から一意の Canonical History を再構築できるようにする。",
+      "この順序は設計候補であり、実際のロック方式や永続化順序は未確定。",
+      "試験設計のみ。実行結果は存在しない。",
+      "設計案のみ。ファイル変更・テスト実行・正式採用・Freeze は未実施。"
+    ],
+    "lines": [
+      5322,
+      5404,
+      5502,
+      5527
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

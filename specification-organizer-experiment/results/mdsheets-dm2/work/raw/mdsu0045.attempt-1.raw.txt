@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0045",
+  "line_start": 9985,
+  "line_end": 10670,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "信頼された主体であっても、許可されていない操作を実行できない。",
+      "LLM は提案生成主体であり、それ自体に Canonical Commit 権限を与えない。",
+      "Canonical Mutation は、単一の決定権を持つ Kernel の Commit 経路を通す。",
+      "以下のいずれかが成立する場合、保護対象操作を許可してはならない。",
+      "委任先に元の主体より広い権限を付与してはならない。",
+      "Security Failure を検出した場合でも、既に確定した Canonical History を自動的に消去・巻き戻してはならない。"
+    ],
+    "lines": [
+      9985,
+      10670
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0024",
+  "line_start": 3259,
+  "line_end": 3479,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "# **Step 21 — 不変条件の形式化と検証可能性**",
+      "不変条件を単なる文章上の規則から、機械検証可能な契約へ変換します。",
+      "これは形式例であり、確定済みの JSON Schema ではありません。",
+      "試験は設計候補であり、実行済みではありません。",
+      "STEP 21",
+      "FORMALIZATION DRAFTED"
+    ],
+    "lines": [
+      3259,
+      3479
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

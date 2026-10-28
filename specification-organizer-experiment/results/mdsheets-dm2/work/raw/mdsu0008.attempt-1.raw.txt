@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0008",
+  "line_start": 863,
+  "line_end": 998,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "Schema 許容値ギャップ一覧",
+      "GAP LIST を確定候補として整理",
+      "Schema の変更・Freeze は未実施"
+    ],
+    "lines": [
+      863,
+      865
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

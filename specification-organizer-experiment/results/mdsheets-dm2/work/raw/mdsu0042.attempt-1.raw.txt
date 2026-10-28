@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0042",
+  "line_start": 8339,
+  "line_end": 8893,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、Chron-LLM Kernel における複数要求・複数トランザクションの並行実行について、Canonical History の一貫性、Commit 順序、競合解決、認可の有効性、および決定的 Replay のための規範を定義する。",
+      "同じ Canonical 状態を変更する操作は、競合制御と直列化規則に従わなければならない。",
+      "Commit の確定権限は Kernel の規範に従う単一の論理的権威に属する。"
+    ],
+    "lines": [
+      8359,
+      8400,
+      8402
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

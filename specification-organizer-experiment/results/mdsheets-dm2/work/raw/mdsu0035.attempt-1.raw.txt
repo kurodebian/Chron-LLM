@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0035",
+  "line_start": 5772,
+  "line_end": 6031,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Canonical History を唯一の正本として維持しながら、Checkpoint・Snapshot・WAL Compaction による復旧時間とストレージ使用量の削減を規定する。",
+      "Snapshot の存在だけを根拠に、過去の Event が有効だったと推定してはならない。",
+      "Compaction を禁止する条件",
+      "単に Checkpoint があるという理由だけで WAL を削除してはならない。"
+    ],
+    "lines": [
+      5790,
+      5894,
+      5928,
+      5937
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

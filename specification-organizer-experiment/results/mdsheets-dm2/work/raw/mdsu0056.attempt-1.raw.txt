@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0056",
+  "line_start": 17198,
+  "line_end": 17962,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "Claim Relationship / Dependency / Causal Edge Proposal Contract",
+      "監査結果は導出物であり、それ自体が Canonical Source や規範的権威を変更することはありません。"
+    ],
+    "lines": [
+      17198,
+      17962
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

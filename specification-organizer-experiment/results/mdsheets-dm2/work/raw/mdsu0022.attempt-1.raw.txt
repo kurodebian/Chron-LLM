@@ -1,0 +1,36 @@
+{
+  "unit_id": "mdsu0022",
+  "line_start": 2873,
+  "line_end": 3052,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "すべての ID はモデル内で一意でなければなりません。",
+      "検証器が未登録 ID を推測で補完したり、自動的に別 ID へ置換したりすることは禁止します。",
+      "モデル契約で明示する必要があります。",
+      "未定義のガードは、常に真と解釈してはいけません。",
+      "優先順位そのものがモデルに記録され、同順位の競合も検出できなければなりません。",
+      "未知の必須フィールド、未対応の契約バージョン、意味が変化したエラーコードを、検証器が黙って読み替えてはいけません。",
+      "正式な検証契約で追加定義する必要があります。"
+    ],
+    "lines": [
+      2938,
+      2949,
+      2965,
+      2999,
+      3009,
+      3026
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

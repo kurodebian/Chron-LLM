@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0007",
+  "line_start": 236,
+  "line_end": 862,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "決定案 SCA-RV-01：`audit_rules_version` は必須入力とし、`COMPLETED` レポートでは必須の識別情報として記録する。",
+      "SCA-ID-01 — 実際に監査したバイト列と、検証したバイト列は同一でなければならない。",
+      "監査終了時に元ファイルの変更を検出したら `AUDIT_FAILED`。`COMPLETED` 禁止。"
+    ],
+    "lines": [
+      236,
+      862
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}
