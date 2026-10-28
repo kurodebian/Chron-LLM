@@ -62,6 +62,12 @@ class OpenAIChatConfig:
             "api_key": os.environ.get("MDSHEETS_DM2_API_KEY") or None,
             "grammar_path": os.environ.get("MDSHEETS_DM2_GRAMMAR") or None,
         }
+        _timeout = os.environ.get("MDSHEETS_DM2_TIMEOUT")
+        if _timeout and _timeout.strip():
+            # transport-only knob (read timeout); validation authority
+            # untouched. Large units at measured ~110 tok/s decode can
+            # exceed the 180s default inside one completion.
+            values["timeout"] = float(_timeout)
         values.update({k: v for k, v in overrides.items() if v is not None})
         return OpenAIChatConfig(**values)
 

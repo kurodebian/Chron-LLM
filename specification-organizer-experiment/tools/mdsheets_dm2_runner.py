@@ -264,7 +264,9 @@ def extract_one_unit(
     """
     log_path = root / "extraction_log.jsonl"
     canonical = canonical_from_unit(unit, source_text)
-    prompt = build_dm2_prompt(canonical)
+    # mdsheets profile: echo-waived protocol (see build_dm2_prompt note);
+    # source_text is stamped from the canonical unit before validation.
+    prompt = build_dm2_prompt(canonical, echo_source_text=False)
 
     raw_output, request_payload, metadata = llm_call(prompt)
 
@@ -340,7 +342,13 @@ def extract_one_unit(
             "identity_policy": (
                 "adjudicated 2026-10-27: canonical identity stamping "
                 "(four identity fields replaced deterministically; raw "
-                "model bytes preserved; semantics untouched)"
+                "model bytes preserved; semantics untouched); "
+                "2026-10-28 amendment: verbatim source_text echo waived "
+                "in the mdsheets prompt protocol (model emits \"\"), "
+                "justified by STEP-120 budget-exhaustion evidence "
+                "(finish=length twice, byte-identical retries, semantics "
+                "never reached) and by identity binding resting on "
+                "provenance pairing + stamping, not echo fidelity"
             ),
             "identity_stamped": identity_stamped,
             "model_identity_sha256": model_identity_sha256,
@@ -365,6 +373,33 @@ def extract_one_unit(
     entry["record_sha256"] = sha256_text(record_bytes.decode("utf-8"))
     append_log(log_path, entry)
     return entry
+
+
+def transport_fail_entry(
+    unit: dict[str, Any],
+    attempt: int,
+    max_attempts: int,
+    exc: OpenAIBackendError,
+) -> dict[str, Any]:
+    """
+    Log entry for an attempt where the client itself failed (network /
+    read timeout): no request/response pair completed, so no provenance
+    files exist for this attempt. Logging the failure keeps the
+    "exactly one entry per attempt" discipline and
+    MISSING_EVIDENCE != PASS (the unit is FAIL, never optimistic).
+    """
+    return {
+        "unit_id": unit["unit_id"],
+        "step": unit["step"],
+        "seq": unit["seq"],
+        "attempt": attempt,
+        "max_attempts": max_attempts,
+        "timestamp": utc_now(),
+        "status": "FAIL",
+        "error": f"transport_error: {exc}",
+        "provenance": "none (client failed before request/response completed)",
+        "attempts_exhausted": attempt >= max_attempts,
+    }
 
 
 def plan_units(
@@ -498,14 +533,21 @@ def run(
         entry: dict[str, Any] = {}
         while attempt < max_attempts:
             attempt += 1
-            entry = extract_one_unit(
-                unit,
-                source_text,
-                effective_llm,
-                root=root,
-                attempt=attempt,
-                max_attempts=max_attempts,
-            )
+            try:
+                entry = extract_one_unit(
+                    unit,
+                    source_text,
+                    effective_llm,
+                    root=root,
+                    attempt=attempt,
+                    max_attempts=max_attempts,
+                )
+            except OpenAIBackendError as exc:
+                # transport failure is logged as FAIL for this unit and
+                # the run continues: one dead unit must not orphan the
+                # remaining units' attempts (resume re-plans FAILs).
+                entry = transport_fail_entry(unit, attempt, max_attempts, exc)
+                append_log(log_path, entry)
             if entry["status"] == "OK":
                 break
         (results["ok"] if entry["status"] == "OK" else results["fail"]).append(

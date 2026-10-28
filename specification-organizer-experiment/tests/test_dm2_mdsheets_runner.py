@@ -17,12 +17,14 @@ from pathlib import Path
 import pytest
 
 from tools import validate_dm2
+from tools.dm2_extraction import build_dm2_prompt
 from tools.mdsheets_dm2_client import sha256_text
 from tools.mdsheets_dm2_runner import (
     DEFAULT_CORPUS_DIR,
     DEFAULT_UNITS_PATH,
     PROFILE_SCHEMA_PATH,
     UnitReconstructionError,
+    canonical_from_unit,
     extract_one_unit,
     gate_block,
     load_corpus,
@@ -156,6 +158,33 @@ def test_prompt_sha256_in_log(tmp_path):
     parsed = json.loads(section[section.index("{") : section.rindex("}") + 1])
     assert parsed["source_text"] == source
     assert parsed["unit_id"] == unit["unit_id"]
+
+
+def test_waived_protocol_in_prompt(tmp_path):
+    # mdsheets runner uses the echo-waived protocol (2026-10-28 amendment).
+    unit = BY_STEP["STEP-1a"]
+    source = reconstruct_unit(unit, CORPUS)
+    waived = build_dm2_prompt(canonical_from_unit(unit, source),
+                              echo_source_text=False)
+    default = build_dm2_prompt(canonical_from_unit(unit, source))
+    assert "MUST NOT modify source_text." not in waived
+    assert 'MUST be the empty string ""' in waived
+    assert '  "source_text": "",' in waived
+    assert "MUST NOT modify source_text." in default  # legacy byte-preserved
+    assert default != waived
+
+
+def test_waived_empty_source_text_ok_via_stamp(tmp_path):
+    unit = BY_STEP["STEP-1a"]
+    source = reconstruct_unit(unit, CORPUS)
+    llm = fake_llm(record_mutator=lambda rec: rec.update({"source_text": ""}))
+    entry = extract_one_unit(
+        unit, source, llm, root=tmp_path, attempt=1, max_attempts=2
+    )
+    assert entry["status"] == "OK"
+    saved = json.loads((tmp_path / f"{unit['step']}.dm2.json").read_text())
+    assert saved["source_text"] == source  # canonical stamped back
+    assert entry["validation"]["identity_stamped"] is True
 
 
 # ---------------------------------------------------------------- schema / semantic
@@ -391,3 +420,58 @@ def test_identity_stamp_does_not_rescue_extra_field(tmp_path):
         max_attempts=1,
     )
     assert entry["status"] == "FAIL"
+
+
+# ------------------------------------------------- transport resilience
+
+
+def test_timeout_env_override(monkeypatch):
+    """MDSHEETS_DM2_TIMEOUT is a transport-only knob (read timeout)."""
+    from tools.mdsheets_dm2_client import DEFAULT_TIMEOUT, OpenAIChatConfig
+
+    monkeypatch.delenv("MDSHEETS_DM2_TIMEOUT", raising=False)
+    assert OpenAIChatConfig.from_env().timeout == DEFAULT_TIMEOUT
+    monkeypatch.setenv("MDSHEETS_DM2_TIMEOUT", "1800")
+    assert OpenAIChatConfig.from_env().timeout == 1800.0
+    monkeypatch.setenv("MDSHEETS_DM2_TIMEOUT", "")
+    assert OpenAIChatConfig.from_env().timeout == DEFAULT_TIMEOUT
+
+
+def test_transport_error_logged_and_run_continues(tmp_path):
+    """An OpenAIBackendError mid-run: FAIL line in log, next unit still
+    attempted, and the FAILed unit is re-planned by resume (never skipped).
+    """
+    from tools.mdsheets_dm2_client import OpenAIBackendError
+
+    steps = ["STEP-1a", "STEP-1b"]
+    ok_call = fake_llm()
+    state = {"calls": 0}
+
+    def flaky(prompt: str):
+        state["calls"] += 1
+        if state["calls"] == 1:
+            raise OpenAIBackendError("simulated read timeout")
+        return ok_call(prompt)
+
+    report = run(root=tmp_path, steps=steps, llm_call=flaky, max_attempts=1)
+    entries = [
+        json.loads(line)
+        for line in (tmp_path / "extraction_log.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+        if line.strip()
+    ]
+    assert len(entries) == 2  # exactly one log entry per attempt
+    assert entries[0]["status"] == "FAIL"
+    assert entries[0]["error"].startswith("transport_error:")
+    assert entries[0]["attempts_exhausted"] is True
+    assert entries[1]["status"] == "OK"
+    assert report["run"]["fail_this_run"] == ["mdsu0001"]
+    assert report["run"]["ok_this_run"] == ["mdsu0002"]
+
+    # resume: FAILed unit re-planned, OK unit skipped
+    report2 = run(
+        root=tmp_path, steps=steps, llm_call=fake_llm(), max_attempts=1
+    )
+    assert report2["run"]["skipped_resume"] == ["mdsu0002"]
+    assert report2["run"]["ok_this_run"] == ["mdsu0001"]

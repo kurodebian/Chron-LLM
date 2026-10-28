@@ -5,7 +5,51 @@ from tools.validate_dm2 import validate_semantic_extraction_json
 
 from tools.llm_backend import call_llm, LLMConfig
 
-def build_dm2_prompt(canonical_unit: dict) -> str:
+def build_dm2_prompt(canonical_unit: dict, echo_source_text: bool = True) -> str:
+    # echo_source_text=False (mdsheets profile, 2026-10-28): the model emits
+    # source_text as "" and the runner stamps the canonical text
+    # deterministically (identity-stamp policy, adjudicated 2026-10-27).
+    # Rationale: STEP-120 proved a full verbatim echo consumes the ENTIRE
+    # completion budget (finish=length, twice, byte-identical retries) before
+    # any semantic field is reached; retries are byte-identical so the
+    # failure is unrecoverable. Identity binding is established by the
+    # 1-unit=1-request provenance pairing + stamping, not by echo fidelity.
+    # Validation authority is untouched: stamping precedes validator/schema,
+    # and the schema imposes no constraint on the model-produced source_text.
+    # Default True keeps every pre-existing DM-2 lineage byte-identical.
+    if echo_source_text:
+        src_rule = "MUST NOT modify source_text."
+        src_copy = (
+            "Copy these fields from the canonical unit EXACTLY:\n"
+            "\n"
+            "- unit_id\n"
+            "- line_start\n"
+            "- line_end\n"
+            "- source_text\n"
+            "\n"
+            "Never infer, rewrite, normalize, truncate, or otherwise modify "
+            "them."
+        )
+        src_example = '"source_text": "The system SHALL preserve canonical evidence.",'
+    else:
+        src_rule = (
+            'Output the source_text field as the empty string "". The runner '
+            "replaces it with the canonical text deterministically; do NOT "
+            "echo the source text."
+        )
+        src_copy = (
+            "Copy these fields from the canonical unit EXACTLY:\n"
+            "\n"
+            "- unit_id\n"
+            "- line_start\n"
+            "- line_end\n"
+            "\n"
+            "Never infer, rewrite, normalize, truncate, or otherwise modify "
+            "them.\n"
+            "\n"
+            'The source_text field MUST be the empty string "" in your output.'
+        )
+        src_example = '"source_text": "",'
     return f"""
 You are a DM-2 semantic extraction engine.
 
@@ -20,7 +64,7 @@ MUST NOT reorder units.
 MUST NOT modify unit_id.
 MUST NOT modify line_start.
 MUST NOT modify line_end.
-MUST NOT modify source_text.
+{src_rule}
 MUST NOT perform causal extraction.
 MUST NOT generate causal relations.
 MUST NOT generate graph structure.
@@ -49,14 +93,7 @@ No other top-level fields are permitted.
 
 ## Canonical identity fields
 
-Copy these fields from the canonical unit EXACTLY:
-
-- unit_id
-- line_start
-- line_end
-- source_text
-
-Never infer, rewrite, normalize, truncate, or otherwise modify them.
+{src_copy}
 
 ## semantic_kind
 
@@ -252,7 +289,7 @@ a valid resolved output is:
   "unit_id": "u0001",
   "line_start": 13,
   "line_end": 15,
-  "source_text": "The system SHALL preserve canonical evidence.",
+  {src_example}
   "semantic_kind": "Requirement",
   "semantic_evidence": {{
     "phrases": ["SHALL preserve canonical evidence"],

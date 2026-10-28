@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0123",
+  "line_start": 16710,
+  "line_end": 18290,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約の目的は、以下を定義することである。",
+      "MUST: 適用対象に対して必須。",
+      "MUST NOT: 禁止。"
+    ],
+    "lines": [
+      16710,
+      18290
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}
