@@ -74,7 +74,7 @@ class CausalRAGInterface:
             lines.append("  (関連するエッジはありません)")
         else:
             for u, v, attrs in subgraph.edges(data=True):
-                rel = attrs.get("relation", "depends_on")
+                rel = attrs.get("relation", "UNCLASSIFIED")
                 evidence = attrs.get("evidence", "")
                 ev_str = f" [根拠: {evidence}]" if evidence else ""
                 lines.append(f"  * [{u}] --({rel})--> [{v}]{ev_str}")

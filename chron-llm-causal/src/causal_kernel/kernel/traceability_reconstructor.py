@@ -42,6 +42,13 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
+try:
+    from causal_kernel.edge_vocab import normalize_relation
+except ImportError:  # direct script execution: reach package root
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from edge_vocab import normalize_relation
+
 
 DATA_DIR = Path("data/delta1_normalized")
 SUMMARY_PATH = Path("data/audit/delta1_structural_summary_v1.json")
@@ -984,11 +991,14 @@ def build_edge_mappings(
                 "source_component_id":
                     component_id,
 
+                # A3: explicit edge vocabulary; NO_IMPLICIT_DEFAULT.
+                # Unknown/missing labels become the UNCLASSIFIED sentinel,
+                # with the raw value retained per-edge for audit (D-2).
                 "source_name_type":
-                    edge.get(
-                        "relation",
-                        "depends_on",
-                    ),
+                    normalize_relation(edge.get("relation")),
+
+                "source_relation_raw":
+                    edge.get("relation"),
 
                 "target_delta2_id":
                     target,

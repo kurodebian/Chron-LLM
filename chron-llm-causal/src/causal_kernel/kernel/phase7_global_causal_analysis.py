@@ -99,7 +99,7 @@ class GlobalSpecificationGraphAnalyzer:
                     "id": eid,
                     "source": src,
                     "target": tgt,
-                    "type": rel.get("type", "depends_on"),
+                    "type": rel.get("type", "UNCLASSIFIED"),
                     "classification": rel.get("classification", "EXPLICIT"),
                     "evidence": rel.get("evidence", ""),
                     "provenance": rel.get("provenance", {})

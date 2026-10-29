@@ -254,7 +254,8 @@ def normalize_component_graph(raw_graph: dict, component_id: str) -> dict:
         normalized_edges.append({
             "from": from_id,
             "to": to_id,
-            "relation": edge.get("relation", "depends_on"),
+            # A3: NO_IMPLICIT_DEFAULT — missing relation => UNCLASSIFIED sentinel.
+            "relation": edge.get("relation", "UNCLASSIFIED"),
         })
 
     existing_node_ids = {n["id"] for n in normalized_nodes}
@@ -330,7 +331,7 @@ def generate_mermaid(graph: dict) -> str:
     for edge in graph.get("edges", []):
         f = edge["from"]
         t = edge["to"]
-        rel = edge.get("relation", "depends_on")
+        rel = edge.get("relation", "UNCLASSIFIED")
         arrow = relation_style.get(rel, "-->")
         lines.append(f"    {f} {arrow} {t}")
 

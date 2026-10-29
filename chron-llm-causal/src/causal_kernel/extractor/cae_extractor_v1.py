@@ -2,7 +2,7 @@
 # cae_extractor.py
 # Phase B extractor with 2PC prepare/commit flow for Phase A (R2.1-D compliant).
 # - prepare_commit_payload(...) -> calls Phase A prepare, returns txid + prepared rec
-# - finalize_commit(txid) -> calls Phase A commit, handles LamportClock update hooks
+# - finalize_commit(txid) -> calls Phase A commit, assigns hdr.sequence (canonical order coordinate)
 # - abort_tx(txid) -> calls Phase A abort
 #
 # Notes:
@@ -100,12 +100,14 @@ class CAENode:
             },
             "scope": {
                 "scope_id": str(self.scope.get("scope_id", "")),
-                "lamport_clock": int(self.scope.get("lamport_clock", 0)),
             },
             "metadata": {k: self.metadata[k] for k in sorted(self.metadata.keys())},
         }
         payload = {
-            "canonical_clock": int(self.scope.get("lamport_clock", 0)),
+            "schema_version": 2,
+            # v2: clock purged; sequence assigned by Phase A at commit only.
+            # v1 payloads (canonical_clock) remain valid lineage, never re-hashed here.
+            "canonical_sequence": None,
             "node": node_obj,
         }
         return payload
@@ -190,7 +192,7 @@ CONFIDENCE_PER_MATCH = 0.2
 
 
 def rule_based_extract(
-    text: str, pos: int, phase: int, score: float, scope_id: str, lamport_clock: int
+    text: str, pos: int, phase: int, score: float, scope_id: str
 ) -> Tuple[Optional[CAENode], float]:
     causes: List[Condition] = []
     effects: List[Condition] = []
@@ -253,7 +255,7 @@ def rule_based_extract(
         effects=effects,
         raw_text=text,
         provenance={"pos": pos, "phase": phase, "token_score": float(score)},
-        scope={"scope_id": scope_id, "lamport_clock": int(lamport_clock)},
+        scope={"scope_id": scope_id},
         metadata={"extraction_method": "rule_based"},
     )
     return node, confidence
@@ -263,7 +265,7 @@ def rule_based_extract(
 # 5. LLM fallback (stub)
 # ---------------------------------------------------------------------
 def llm_fallback_extract(
-    text: str, pos: int, phase: int, score: float, scope_id: str, lamport_clock: int
+    text: str, pos: int, phase: int, score: float, scope_id: str
 ) -> CAENode:
     node = CAENode(
         node_id=f"node-fallback-{phase:02d}-{pos:04d}",
@@ -273,7 +275,7 @@ def llm_fallback_extract(
         effects=[Condition(variable="tx.status", op="EQ", value="COMMITTED")],
         raw_text=text,
         provenance={"pos": pos, "phase": phase, "token_score": float(score)},
-        scope={"scope_id": scope_id, "lamport_clock": int(lamport_clock)},
+        scope={"scope_id": scope_id},
         metadata={"extraction_method": "llm_fallback"},
     )
     return node
@@ -283,14 +285,14 @@ CONFIDENCE_THRESHOLD = 0.75
 
 
 def run_extraction_pipeline(
-    text: str, pos: int, phase: int, score: float, scope_id: str, lamport_clock: int
+    text: str, pos: int, phase: int, score: float, scope_id: str
 ) -> Tuple[CAENode, float]:
     node, confidence = rule_based_extract(
-        text, pos, phase, score, scope_id, lamport_clock
+        text, pos, phase, score, scope_id
     )
     if node and confidence >= CONFIDENCE_THRESHOLD:
         return node, confidence
-    node = llm_fallback_extract(text, pos, phase, score, scope_id, lamport_clock)
+    node = llm_fallback_extract(text, pos, phase, score, scope_id)
     return node, 0.95
 
 
@@ -364,9 +366,9 @@ def finalize_commit(
     phase_a_engine: Any, txid: Any, kernel_apply_hook: Optional[Any] = None
 ) -> Dict[str, Any]:
     """
-    Call Phase A commit(txid). On success, Phase A will apply_sm() and update header.clock.
+    Call Phase A commit(txid). On success, Phase A will apply_sm() and assign hdr.sequence (v2).
     kernel_apply_hook (optional) is a callable invoked after commit to update Phase B's Kernel state:
-      kernel_apply_hook(rec) -> should update Canonical.History and LamportClock locally.
+      kernel_apply_hook(rec) -> should update Canonical.History and mirror hdr.sequence locally.
     Returns commit result dict.
     Raises CommitError on failure.
     """
@@ -410,7 +412,7 @@ def example_kernel_apply_hook(
     """
     Apply the committed record to local kernel state:
     - Append events to Canonical.History
-    - Increment LamportClock to match header.clock if provided
+    - Mirror hdr.sequence (canonical sequence) if assigned at commit
     This is a simple example; real implementation must follow Kernel invariants.
     """
     hdr = rec.get("hdr", {})
@@ -418,10 +420,10 @@ def example_kernel_apply_hook(
     # Append to history if payload contains events (domain-specific)
     events = payload.get("node", {}).get("causes", []) if payload else []
     kernel_state.setdefault("Canonical", {}).setdefault("History", []).extend(events)
-    # Update LamportClock if header.clock present
-    header_clock = hdr.get("clock")
-    if header_clock is not None:
-        kernel_state.setdefault("Canonical", {})["LamportClock"] = int(header_clock)
+    # SequenceGate S-1/S-2: order basis is the committed canonical sequence, never a clock value
+    header_sequence = hdr.get("sequence")
+    if header_sequence is not None:
+        kernel_state.setdefault("Canonical", {})["CanonicalSequence"] = int(header_sequence)
 
 
 # ---------------------------------------------------------------------
@@ -445,7 +447,7 @@ if __name__ == "__main__":
                     "type": "PREPARED",
                     "txid": txid,
                     "payload_len": len(payload_bytes),
-                    "clock": 0,
+                    "sequence": None,
                 },
                 "payload": payload_dict,
                 "crc_status": "OK",
@@ -457,9 +459,11 @@ if __name__ == "__main__":
             rec = self.records.get(txid)
             if not rec:
                 return {"status": "CORRUPT"}
-            # simulate apply_sm and lamport clock increment
+            # simulate apply_sm; allocate sequence ONLY at commit (abort leaves no gap)
             rec["hdr"]["type"] = "COMMITTED"
-            rec["hdr"]["clock"] = rec["hdr"].get("clock", 0) + 1
+            self.next_sequence = getattr(self, "next_sequence", 1)
+            rec["hdr"]["sequence"] = self.next_sequence
+            self.next_sequence += 1
             self.wal.append(rec)
             return {"rec": rec, "status": "OK"}
 
@@ -477,7 +481,7 @@ if __name__ == "__main__":
     # Demo extraction + 2PC
     sample_text = "If session.state == AUTHENTICATED then set tx.status = COMMITTED with commit action"
     node, conf = run_extraction_pipeline(
-        sample_text, pos=1, phase=2, score=0.98, scope_id="session-001", lamport_clock=0
+        sample_text, pos=1, phase=2, score=0.98, scope_id="session-001"
     )
     print("Extracted node id:", node.node_id, "confidence:", conf)
 

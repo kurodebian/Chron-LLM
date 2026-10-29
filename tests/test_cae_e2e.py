@@ -32,6 +32,7 @@ class PhaseAWALEngineMock:
     def __init__(self):
         self.wal_log = []
         self.next_txid = 1001
+        self.next_sequence = 1
         self.active_transactions: Dict[int, Dict[str, Any]] = {}
         self.corrupt_next_prepare_len = False
         self.fail_next_prepare_crc = False
@@ -52,7 +53,7 @@ class PhaseAWALEngineMock:
             "type": "PREPARED",
             "txid": txid,
             "payload_len": hdr_payload_len,
-            "clock": 0,
+            "sequence": None,
             "target_hash_hi": 0x12345678,
             "target_hash_lo": 0x9ABCDEF0,
         }
@@ -79,10 +80,12 @@ class PhaseAWALEngineMock:
             return {"status": "CORRUPT", "message": f"Invalid txid {txid} for commit"}
 
         rec["hdr"]["type"] = "COMMITTED"
-        rec["hdr"]["clock"] += 1  # Lamport Clock increment on commit
+        if rec["hdr"].get("sequence") is None:
+            rec["hdr"]["sequence"] = self.next_sequence
+            self.next_sequence += 1  # SequenceGate S-1: allocate only at commit
 
         del self.active_transactions[txid]
-        return {"rec": rec, "status": "OK", "hdr_clock": rec["hdr"]["clock"]}
+        return {"rec": rec, "status": "OK", "hdr_sequence": rec["hdr"]["sequence"]}
 
     def abort(self, txid: int) -> Dict[str, Any]:
         rec = self.active_transactions.get(txid)
@@ -122,12 +125,12 @@ class PhaseAWALEngineMock:
 # Test Cases
 # ---------------------------------------------------------------------
 def test_2pc_happy_path():
-    """Verify normal extraction -> prepare -> commit -> kernel clock update flow."""
+    """Verify extraction -> prepare -> commit -> canonical sequence assignment flow."""
     engine = PhaseAWALEngineMock()
     text = "If session.state == AUTHENTICATED then set tx.status = COMMITTED"
 
     node, conf = run_extraction_pipeline(
-        text, pos=0, phase=1, score=0.95, scope_id="scope-01", lamport_clock=10
+        text, pos=0, phase=1, score=0.95, scope_id="scope-01"
     )
     assert conf >= 0.75
 
@@ -139,18 +142,18 @@ def test_2pc_happy_path():
     assert len(prep["content_hash"]) == 64
 
     # 2. Commit & Apply Hook
-    kernel_state = {"Canonical": {"LamportClock": 10, "History": []}}
+    kernel_state = {"Canonical": {"CanonicalSequence": None, "History": []}}
 
     def apply_hook(rec):
         hdr = rec["hdr"]
-        kernel_state["Canonical"]["LamportClock"] = hdr["clock"]
+        kernel_state["Canonical"]["CanonicalSequence"] = hdr["sequence"]
         kernel_state["Canonical"]["History"].append(node.node_id)
 
     commit_res = finalize_commit(engine, txid, kernel_apply_hook=apply_hook)
 
     assert commit_res["status"] == "OK"
     assert commit_res["rec"]["hdr"]["type"] == "COMMITTED"
-    assert kernel_state["Canonical"]["LamportClock"] == 1  # Updated by header.clock
+    assert kernel_state["Canonical"]["CanonicalSequence"] == 1  # assigned at commit (S-2 gapless)
     assert node.node_id in kernel_state["Canonical"]["History"]
 
 
@@ -167,7 +170,7 @@ def test_2pc_payload_len_mismatch_triggers_abort():
         effects=[Condition("tx.status", "EQ", "ABORTED")],
         raw_text="raw text",
         provenance={"pos": 0, "phase": 1, "token_score": 0.9},
-        scope={"scope_id": "scope-01", "lamport_clock": 5},
+        scope={"scope_id": "scope-01"},
     )
 
     with pytest.raises(PrepareError, match="Payload length mismatch"):
@@ -190,7 +193,7 @@ def test_2pc_crc_failure_triggers_abort():
         effects=[Condition("memory.state", "EQ", "PERSISTED")],
         raw_text="raw text",
         provenance={"pos": 1, "phase": 1, "token_score": 0.85},
-        scope={"scope_id": "scope-01", "lamport_clock": 2},
+        scope={"scope_id": "scope-01"},
     )
 
     with pytest.raises(PrepareError, match="CRC failure"):
@@ -215,7 +218,7 @@ def test_phase_a_recover_truncates_uncommitted_prepare():
         effects=[Condition("kernel.execution", "EQ", "PAUSED")],
         raw_text="raw text",
         provenance={"pos": 2, "phase": 1, "token_score": 0.99},
-        scope={"scope_id": "scope-01", "lamport_clock": 12},
+        scope={"scope_id": "scope-01"},
     )
 
     # Prepare succeeds
@@ -232,3 +235,36 @@ def test_phase_a_recover_truncates_uncommitted_prepare():
     assert rec_res["truncated_records"] == 1
     assert rec_res["recovered_records"] == 0
     assert len(engine.wal_log) == 0  # Uncommitted PREPARED record removed
+
+
+def test_committed_sequence_gate_gapless():
+    """SequenceGate S-1/S-2: sequence allocated only at commit; abort leaves no gap."""
+    engine = PhaseAWALEngineMock()
+    node = CAENode(
+        node_id="node-test-seqgate",
+        title="Sequence Gate Test",
+        causes=[Condition("session.state", "EQ", "AUTHENTICATED")],
+        action="commit",
+        effects=[Condition("tx.status", "EQ", "COMMITTED")],
+        raw_text="raw text",
+        provenance={"pos": 0, "phase": 1, "token_score": 0.9},
+        scope={"scope_id": "scope-01"},
+    )
+    p1 = prepare_commit_payload(engine, node)
+    finalize_commit(engine, p1["txid"])
+    p2 = prepare_commit_payload(engine, node)
+    abort_tx(engine, p2["txid"])  # prepared but aborted: must allocate no sequence
+    p3 = prepare_commit_payload(engine, node)
+    finalize_commit(engine, p3["txid"])
+    committed = [
+        r["hdr"]["sequence"]
+        for r in engine.wal_log
+        if r["hdr"]["type"] == "COMMITTED"
+    ]
+    assert committed == [1, 2]  # strictly increasing, gapless
+    aborted = [
+        r["hdr"]["sequence"]
+        for r in engine.wal_log
+        if r["hdr"]["type"] == "ABORTED"
+    ]
+    assert aborted == [None]  # MISSING_EVIDENCE != PASS: no phantom sequence
