@@ -1,20 +1,20 @@
 # Chapters Index
 
 - Source directory: `/home/junu/Chron-LLM/md_sheets`
-- Generated: 2026-10-15 16:13:50
-- Parse scope: **chapters = H1 only (`# ` at line start) headings**; chapters parsed: 127 | deeper headings ignored for detection: 4155 (H2..H3: H2: 1830 · H3: 2325)
-- Files scanned: 3 | markdown headings seen: 4282 | H1: 127
-- Step detection (case-insensitive `Step`/`STEP` + number inside a chapter heading, scope=contains): 127 chapter(s) carry a step number, 127 reference(s), 124 unique step number(s), 127 canonical (title-initial) reference(s); 0 chapter(s) carry no step number
-- Branch numbering (chapters only): 3 duplicated step number(s), 3 extra occurrence(s), 6 branch letter(s) applied to 6 chapter heading(s) (mode=all, dup scope=global, gaps=1)
+- Generated: 2026-10-29 22:25:38
+- Parse scope: **chapters = H1 only (`# ` at line start) headings**; chapters parsed: 226 | deeper headings ignored for detection: 10217 (H2..H3: H2: 3944 · H3: 6273)
+- Files scanned: 7 | markdown headings seen: 10443 | H1: 226
+- Step detection (case-insensitive `Step`/`STEP` + number inside a chapter heading, scope=contains): 226 chapter(s) carry a step number, 226 reference(s), 218 unique step number(s), 226 canonical (title-initial) reference(s); 0 chapter(s) carry no step number
+- Branch numbering (chapters only): 8 duplicated step number(s), 8 extra occurrence(s), 16 branch letter(s) applied to 16 chapter heading(s) (mode=all, dup scope=global, gaps=1)
 
 ## Coverage audit report (H1 only (`# ` at line start) chapters · gaps · duplicates · branch numbers)
 
-- Integer STEP range: **STEP-1 – STEP-124** (expected 124, found 123 unique chapter step number(s))
+- Integer STEP range: **STEP-1 – STEP-218** (expected 218, found 217 unique chapter step number(s))
 - Missing numbers: **1** → 5
-- Step references detected in chapter headings: **127** (127 canonical / 0 inline reference style, 0 of them used as a range start such as `STEP-31–96`) in **127** chapter heading(s)
-- Duplicated step numbers: **3** (6 occurrence(s), 3 extra occurrence(s), of which 0 are range-start references) → branch letters assigned
-- Branch-numbered chapter headings: **6** in **6** chapter heading(s) (0 heading(s) carry more than one branch letter) (1×2, 2×2, 3×2)
-- Multiplicity distribution: ×1: 121 number(s) · ×2: 3 number(s)
+- Step references detected in chapter headings: **226** (226 canonical / 0 inline reference style, 0 of them used as a range start such as `STEP-31–96`) in **226** chapter heading(s)
+- Duplicated step numbers: **8** (16 occurrence(s), 8 extra occurrence(s), of which 0 are range-start references) → branch letters assigned
+- Branch-numbered chapter headings: **16** in **16** chapter heading(s) (0 heading(s) carry more than one branch letter) (1×2, 2×2, 3×2, 154×2, 155×2, 161×2, 162×2, 218×2)
+- Multiplicity distribution: ×1: 210 number(s) · ×2: 8 number(s)
 
 ### Gaps (numbering holes)
 
@@ -29,6 +29,11 @@
 | **1** | 2 | `1-74.md`×2 | H1 | 2 | 0 | `STEP-1a` (`1-74.md` L34), `STEP-1b` (`1-74.md` L99) |
 | **2** | 2 | `1-74.md`×2 | H1 | 2 | 0 | `STEP-2a` (`1-74.md` L121), `STEP-2b` (`1-74.md` L143) |
 | **3** | 2 | `1-74.md`×2 | H1 | 2 | 0 | `STEP-3a` (`1-74.md` L162), `STEP-3b` (`1-74.md` L184) |
+| **154** | 2 | `150-174.md`×2 | H1 | 2 | 0 | `STEP-154a` (`150-174.md` L4814), `STEP-154b` (`150-174.md` L4849) |
+| **155** | 2 | `150-174.md`×2 | H1 | 2 | 0 | `STEP-155a` (`150-174.md` L5837), `STEP-155b` (`150-174.md` L5873) |
+| **161** | 2 | `150-174.md`×2 | H1 | 2 | 0 | `STEP-161a` (`150-174.md` L11726), `STEP-161b` (`150-174.md` L11753) |
+| **162** | 2 | `150-174.md`×2 | H1 | 2 | 0 | `STEP-162a` (`150-174.md` L12937), `STEP-162b` (`150-174.md` L12964) |
+| **218** | 2 | `200-218.md`×2 | H1 | 2 | 0 | `STEP-218a` (`200-218.md` L18180), `STEP-218b` (`200-218.md` L19180) |
 
 ### Branch-number registry
 
@@ -40,6 +45,16 @@
 | `STEP-2b` | `1-74.md` | 143 | H1 | canonical | Step 2b — Contract 照合の暫定裁定 |
 | `STEP-3a` | `1-74.md` | 162 | H1 | canonical | Step 3a — Schema の読み取り専用照合 |
 | `STEP-3b` | `1-74.md` | 184 | H1 | canonical | Step 3b — Contract / Schema 差分裁定 |
+| `STEP-154a` | `150-174.md` | 4814 | H1 | canonical | STEP-154a — Continuous Operational Assurance / Readiness Decision Fre… |
+| `STEP-154b` | `150-174.md` | 4849 | H1 | canonical | STEP-154b — Continuous Operational Assurance / Readiness Decision Fre… |
+| `STEP-155a` | `150-174.md` | 5837 | H1 | canonical | STEP-155a — Assurance Control-Plane Integrity / Trigger-to-Decision T… |
+| `STEP-155b` | `150-174.md` | 5873 | H1 | canonical | STEP-155b — Assurance Control-Plane Integrity / Trigger-to-Decision T… |
+| `STEP-161a` | `150-174.md` | 11726 | H1 | canonical | STEP-161a — Recovery Certification Lifecycle / Revocation Propagation… |
+| `STEP-161b` | `150-174.md` | 11753 | H1 | canonical | STEP-161b — Recovery Certification Lifecycle / Revocation Propagation… |
+| `STEP-162a` | `150-174.md` | 12937 | H1 | canonical | STEP-162a — Certification Dependency Graph Completeness / Transitive… |
+| `STEP-162b` | `150-174.md` | 12964 | H1 | canonical | STEP-162b — Certification Dependency Graph Completeness / Transitive… |
+| `STEP-218a` | `200-218.md` | 18180 | H1 | canonical | STEP-218a — 規範契約の閉包・依存関係・競合裁定契約 |
+| `STEP-218b` | `200-218.md` | 19180 | H1 | canonical | STEP-218b — DM-2 v2 Schema Adoption Decision |
 
 ### Chapter headings without a step number (not counted as steps)
 
@@ -51,14 +66,14 @@
 
 | Check | Expected | Actual | Status |
 | --- | ---: | ---: | --- |
-| step detection used H1 only (`# ` at line start) headings only | 127 | 127 | ✅ ok |
-| every duplicated number has one label per occurrence | 6 | 6 | ✅ ok |
-| branch letters inserted into the index body | 6 | 6 | ✅ ok |
-| chapter headings carrying branch letters in the index body | 6 | 6 | ✅ ok |
-| branch labels are unique | 6 | 6 | ✅ ok |
-| branch letters contiguous a, b, c … per duplicated number | 3 | 3 | ✅ ok |
-| duplicated numbers listed in the audit table | 3 | 3 | ✅ ok |
-| chapters listed in the index body | 127 | 127 | ✅ ok |
+| step detection used H1 only (`# ` at line start) headings only | 226 | 226 | ✅ ok |
+| every duplicated number has one label per occurrence | 16 | 16 | ✅ ok |
+| branch letters inserted into the index body | 16 | 16 | ✅ ok |
+| chapter headings carrying branch letters in the index body | 16 | 16 | ✅ ok |
+| branch labels are unique | 16 | 16 | ✅ ok |
+| branch letters contiguous a, b, c … per duplicated number | 8 | 8 | ✅ ok |
+| duplicated numbers listed in the audit table | 8 | 8 | ✅ ok |
+| chapters listed in the index body | 226 | 226 | ✅ ok |
 
 ### Per-file chapter coverage
 
@@ -67,6 +82,10 @@
 | `1-74.md` | 77 | 77 | 77 | 77 | 6 | 6 | 1480 | 1–4, 6–74 |
 | `75-99.md` | 25 | 25 | 25 | 25 | 0 | 0 | 1360 | 75–99 |
 | `100-124.md` | 25 | 25 | 25 | 25 | 0 | 0 | 1315 | 100–124 |
+| `125-149.md` | 25 | 25 | 25 | 25 | 0 | 0 | 1829 | 125–149 |
+| `150-174.md` | 29 | 29 | 29 | 29 | 8 | 8 | 1610 | 150–174 |
+| `175-199.md` | 25 | 25 | 25 | 25 | 0 | 0 | 1445 | 175–199 |
+| `200-218.md` | 20 | 20 | 20 | 20 | 2 | 2 | 1178 | 200–218 |
 
 ## Summary (file → chapter range)
 
@@ -75,6 +94,10 @@
 | `1-74.md` | 77 | 77 | L34: Step 1a — 既存資産の所在と変更状態の確認 | L32194: STEP-74 — Distributed Ordering / Causal Consistency / Partition Recovery and Reconciliati… |
 | `75-99.md` | 25 | 25 | L1: STEP-75 — Distributed Membership / Failure Detection / Quorum / Fencing and Split-Brain P… | L26623: STEP-99 — Normative Compliance Assurance / Cross-Contract Conformance Audit / Adoption Re… |
 | `100-124.md` | 25 | 25 | L1: STEP-100 — Normative Adoption Execution / Canonical Baseline Establishment / Post-Adoptio… | L20854: STEP-124 — Recovery Evidence Trust / External Execution Attestation / Reconciliation Auth… |
+| `125-149.md` | 25 | 25 | L1: STEP-125 — Evidence Acceptance Lifecycle / Trust Decision Revocation / Downstream Revalid… | L27894: STEP-149 — Cross-Consumer Currentness Certificate Lifecycle / Certification Revocation Pr… |
+| `150-174.md` | 29 | 29 | L1: STEP-150 — Currentness Certification Closure / Revocation-Residual Obligation Ledger / Cr… | L25516: STEP-174 — Operational Re-entry Runtime Guard / Continuous Post-Reentry Monitoring / Auto… |
+| `175-199.md` | 25 | 25 | L1: STEP-175 — Operational Stop/Degradation Outcome Reconciliation / In-Flight Commit and Ext… | L21042: STEP-199 — Canonical History Governance Validation Results / Evidence Attestation / Decis… |
+| `200-218.md` | 20 | 20 | L1: STEP-200 — Canonical History Governance End-to-End Assurance / Cross-STEP Invariant Closu… | L19180: STEP-218b — DM-2 v2 Schema Adoption Decision |
 
 ## Master chapter map (H1 only (`# ` at line start))
 
@@ -207,6 +230,105 @@
 | 125 | `STEP-122` | STEP-122 — Authorization Decision Lifecycle / Permit Lease / Execution-Boundary Revalidat… | `100-124.md` | 19267 |
 | 126 | `STEP-123` | STEP-123 — Authorization Lifecycle Recovery / Lease Consumption Reconciliation / Duplicat… | `100-124.md` | 20165 |
 | 127 | `STEP-124` | STEP-124 — Recovery Evidence Trust / External Execution Attestation / Reconciliation Auth… | `100-124.md` | 20854 |
+| 128 | `STEP-125` | STEP-125 — Evidence Acceptance Lifecycle / Trust Decision Revocation / Downstream Revalid… | `125-149.md` | 1 |
+| 129 | `STEP-126` | STEP-126 — Revocation Propagation Closure / Consumer Acknowledgment Verification / Revali… | `125-149.md` | 1191 |
+| 130 | `STEP-127` | STEP-127 — Certification Revocation Propagation / Stale Certificate Consumer Detection /… | `125-149.md` | 2360 |
+| 131 | `STEP-128` | STEP-128 — Invalidation Closure Certification / Residual Execution Reconciliation / Recov… | `125-149.md` | 3643 |
+| 132 | `STEP-129` | STEP-129 — Recovery Re-Entry Execution Control / Stage-Boundary Verification / Post-Entry… | `125-149.md` | 4729 |
+| 133 | `STEP-130` | STEP-130 — Operational Stability Certification / Runtime Drift Detection / Automatic Safe… | `125-149.md` | 5823 |
+| 134 | `STEP-131` | STEP-131 — Safe-State Transition Completion Ledger / Residual Risk Reconciliation / Post-… | `125-149.md` | 7003 |
+| 135 | `STEP-132` | STEP-132 — Operational Resume Execution Ledger / Post-Resume Stability Window / Automatic… | `125-149.md` | 8215 |
+| 136 | `STEP-133` | STEP-133 — Recovery Loop Governance / Repeated Failure Classification / Circuit Breaker R… | `125-149.md` | 9558 |
+| 137 | `STEP-134` | STEP-134 — Recovery Loop Closure Certification / Residual Failure Debt Registry / Cross-L… | `125-149.md` | 10841 |
+| 138 | `STEP-135` | STEP-135 — Global Recovery Certificate Lifecycle / Residual Risk Drift Detection / Cross-… | `125-149.md` | 12220 |
+| 139 | `STEP-136` | STEP-136 — Certificate Consumer Migration / Stale Authorization Quarantine / Post-Recerti… | `125-149.md` | 13533 |
+| 140 | `STEP-137` | STEP-137 — Legacy Dependency Retirement Closure Certification / Orphaned Authorization De… | `125-149.md` | 14913 |
+| 141 | `STEP-138` | STEP-138 — Post-Retirement Integrity Monitoring / Closure Certificate Validity / Orphaned… | `125-149.md` | 16052 |
+| 142 | `STEP-139` | STEP-139 — Post-Reopening Remediation Governance / Recurrence Root-Cause Evidence / Re-Re… | `125-149.md` | 17045 |
+| 143 | `STEP-140` | STEP-140 — Closure Baseline Acceptance / Evidence Freshness and Scope Completeness Verifi… | `125-149.md` | 18122 |
+| 144 | `STEP-141` | STEP-141 — Certificate Publication and Consumer Distribution / Atomic Registry Publicatio… | `125-149.md` | 19326 |
+| 145 | `STEP-142` | STEP-142 — Consumer-Side Certificate Intake / Signature and Scope Validation / Monotonic… | `125-149.md` | 20275 |
+| 146 | `STEP-143` | STEP-143 — Consumer State Reporting / Registry Reconciliation / Cross-Consumer Convergenc… | `125-149.md` | 21193 |
+| 147 | `STEP-144` | STEP-144 — Convergence Certificate Publication / Invalidation Propagation / Operational R… | `125-149.md` | 22097 |
+| 148 | `STEP-145` | STEP-145 — Operational Re-Entry Authorization Gate / Publication and Invalidation Closure… | `125-149.md` | 23115 |
+| 149 | `STEP-146` | STEP-146 — Controlled Re-Entry Execution Ledger / Permit Consumption Atomicity / Partial-… | `125-149.md` | 24219 |
+| 150 | `STEP-147` | STEP-147 — Post-Re-Entry Stability Assessment / Runtime Drift Detection / Stability Windo… | `125-149.md` | 25237 |
+| 151 | `STEP-148` | STEP-148 — Stability Certificate Consumer Acceptance / Cross-Consumer Currentness Reconci… | `125-149.md` | 26448 |
+| 152 | `STEP-149` | STEP-149 — Cross-Consumer Currentness Certificate Lifecycle / Certification Revocation Pr… | `125-149.md` | 27894 |
+| 153 | `STEP-150` | STEP-150 — Currentness Certification Closure / Revocation-Residual Obligation Ledger / Cr… | `150-174.md` | 1 |
+| 154 | `STEP-151` | STEP-151 — Cross-Certificate Closure Monitoring / Residual Obligation Recurrence Detectio… | `150-174.md` | 1203 |
+| 155 | `STEP-152` | STEP-152 — Closure Monitoring Execution Orchestration / Durable Job Lifecycle / Retry-Rec… | `150-174.md` | 2576 |
+| 156 | `STEP-153` | STEP-153 — Cross-Contract Operational Safety Audit / Runtime-Policy-Authority Consistency… | `150-174.md` | 3730 |
+| 157 | `STEP-154a` | STEP-154a — Continuous Operational Assurance / Readiness Decision Freshness / Risk-Based… | `150-174.md` | 4814 |
+| 158 | `STEP-154b` | STEP-154b — Continuous Operational Assurance / Readiness Decision Freshness / Risk-Based… | `150-174.md` | 4849 |
+| 159 | `STEP-155a` | STEP-155a — Assurance Control-Plane Integrity / Trigger-to-Decision Traceability / Schedu… | `150-174.md` | 5837 |
+| 160 | `STEP-155b` | STEP-155b — Assurance Control-Plane Integrity / Trigger-to-Decision Traceability / Schedu… | `150-174.md` | 5873 |
+| 161 | `STEP-156` | STEP-156 — Assurance Control-Plane Failure Injection / Common-Cause Failure Analysis / Re… | `150-174.md` | 6919 |
+| 162 | `STEP-157` | STEP-157 — Assurance Evidence Provenance / Evidence Chain of Custody / Cross-Run Comparab… | `150-174.md` | 7909 |
+| 163 | `STEP-158` | STEP-158 — Assurance Evidence Store Consistency / Metadata-to-Blob Reconciliation / Orpha… | `150-174.md` | 8698 |
+| 164 | `STEP-159` | STEP-159 — Assurance Evidence Store Recovery / Repair Authorization / Transactional Repai… | `150-174.md` | 9656 |
+| 165 | `STEP-160` | STEP-160 — Assurance Repair Outcome Reconciliation / Recovery Certification / Residual Ob… | `150-174.md` | 10626 |
+| 166 | `STEP-161a` | STEP-161a — Recovery Certification Lifecycle / Revocation Propagation / Reassessment Trig… | `150-174.md` | 11726 |
+| 167 | `STEP-161b` | STEP-161b — Recovery Certification Lifecycle / Revocation Propagation / Reassessment Trig… | `150-174.md` | 11753 |
+| 168 | `STEP-162a` | STEP-162a — Certification Dependency Graph Completeness / Transitive Impact Closure / Orp… | `150-174.md` | 12937 |
+| 169 | `STEP-162b` | STEP-162b — Certification Dependency Graph Completeness / Transitive Impact Closure / Orp… | `150-174.md` | 12964 |
+| 170 | `STEP-163` | STEP-163 — Certification Dependency Graph Incremental Reconciliation / Event-Driven Rebui… | `150-174.md` | 14117 |
+| 171 | `STEP-164` | STEP-164 — Projection Publication Consistency / Consumer Snapshot Pinning / Atomic Visibi… | `150-174.md` | 15169 |
+| 172 | `STEP-165` | STEP-165 — Cross-Contract Normative Closure / Contradiction Resolution / Requirement Trac… | `150-174.md` | 16013 |
+| 173 | `STEP-166` | STEP-166 — Global Audit Input Sealing / Corpus Snapshot Integrity / Deterministic Require… | `150-174.md` | 17110 |
+| 174 | `STEP-167` | STEP-167 — Normative Requirement Coverage / Source-to-Extraction Reconciliation / Omissio… | `150-174.md` | 18037 |
+| 175 | `STEP-168` | STEP-168 — Coverage Finding Adjudication / Authorized Remediation Proposal / Re-Extractio… | `150-174.md` | 19292 |
+| 176 | `STEP-169` | STEP-169 — Remediation Evidence Chain / Execution Attestation / Result Integrity / Audit… | `150-174.md` | 20280 |
+| 177 | `STEP-170` | STEP-170 — Canonical Commit Transaction Integrity / History Append Verification / Duplica… | `150-174.md` | 21345 |
+| 178 | `STEP-171` | STEP-171 — Canonical History Integrity / Hash-Chain Verification / Event Ordering Assuran… | `150-174.md` | 22255 |
+| 179 | `STEP-172` | STEP-172 — Canonical History Recovery Protocol / Trusted Source Selection / Divergent Rep… | `150-174.md` | 23224 |
+| 180 | `STEP-173` | STEP-173 — Canonical History Recovery Impact Closure / Dependent Snapshot and Certificati… | `150-174.md` | 24285 |
+| 181 | `STEP-174` | STEP-174 — Operational Re-entry Runtime Guard / Continuous Post-Reentry Monitoring / Auto… | `150-174.md` | 25516 |
+| 182 | `STEP-175` | STEP-175 — Operational Stop/Degradation Outcome Reconciliation / In-Flight Commit and Ext… | `175-199.md` | 1 |
+| 183 | `STEP-176` | STEP-176 — Post-Re-entry Runtime Evidence Consolidation / Operational Assurance Renewal /… | `175-199.md` | 1210 |
+| 184 | `STEP-177` | STEP-177 — Assurance Decision Enforcement / Certification Revocation Propagation / Risk A… | `175-199.md` | 2012 |
+| 185 | `STEP-178` | STEP-178 — Decision Replay and Deterministic State Reconstruction / Revocation Race Resol… | `175-199.md` | 2812 |
+| 186 | `STEP-179` | STEP-179 — Replay Checkpoint Integrity / Incremental Reconstruction / History Compaction… | `175-199.md` | 3536 |
+| 187 | `STEP-180` | STEP-180 — Checkpoint Rotation / Multi-Generation Recovery / Retention and Legal Hold / S… | `175-199.md` | 4525 |
+| 188 | `STEP-181` | STEP-181 — Concurrent Recovery Coordination / Lease and Fencing / Publication Conflict Re… | `175-199.md` | 5374 |
+| 189 | `STEP-182` | STEP-182 — Cross-System Operation Provenance / Tamper-Evident Audit Chain / Evidence Corr… | `175-199.md` | 6276 |
+| 190 | `STEP-183` | STEP-183 — Audit Policy Versioning / Trust Root Governance / Key Rotation and Revocation… | `175-199.md` | 7099 |
+| 191 | `STEP-184` | STEP-184 — Verification Engine Determinism / Reproducible Audit Execution / Policy Evalua… | `175-199.md` | 7977 |
+| 192 | `STEP-185` | STEP-185 — Verification Governance / Validator Qualification / Conformance Certification… | `175-199.md` | 8833 |
+| 193 | `STEP-186` | STEP-186 — Validator Fleet Consistency / Distributed Policy Rollout / Attestation Revocat… | `175-199.md` | 9516 |
+| 194 | `STEP-187` | STEP-187 — Distributed Commit Coordination / Canonical History Replication / Event Orderi… | `175-199.md` | 10338 |
+| 195 | `STEP-188` | STEP-188 — Canonical History Governance / Commit Finality / Authority Transfer / History… | `175-199.md` | 11126 |
+| 196 | `STEP-189` | STEP-189 — Canonical History Verification / Long-Term Proof / Evidence Preservation / Aud… | `175-199.md` | 11976 |
+| 197 | `STEP-190` | STEP-190 — Canonical History Proof Protocol / Checkpoint Finality / Verification Composit… | `175-199.md` | 13070 |
+| 198 | `STEP-191` | STEP-191 — Canonical History Decision Enforcement / Authorization Binding / Commit Admiss… | `175-199.md` | 14244 |
+| 199 | `STEP-192` | STEP-192 — Commit Admission Atomicity / Transaction Binding / Durable Commit Receipt / Re… | `175-199.md` | 14908 |
+| 200 | `STEP-193` | STEP-193 — Canonical History WAL Recovery / Deterministic Replay / Integrity Verification… | `175-199.md` | 15485 |
+| 201 | `STEP-194` | STEP-194 — Canonical History Integrity Anchoring / Hash Chain / Checkpoint Attestation /… | `175-199.md` | 16155 |
+| 202 | `STEP-195` | STEP-195 — Canonical History Integrity Incident Response / Evidence Preservation / Forens… | `175-199.md` | 17093 |
+| 203 | `STEP-196` | STEP-196 — Canonical History Governance / Policy Registry / Normative Contract Resolution… | `175-199.md` | 18265 |
+| 204 | `STEP-197` | STEP-197 — Canonical History Governance Bootstrap / Registry Genesis / Initial Contract I… | `175-199.md` | 19253 |
+| 205 | `STEP-198` | STEP-198 — Canonical History Governance Bootstrap Validation / Inventory Completeness Pro… | `175-199.md` | 20208 |
+| 206 | `STEP-199` | STEP-199 — Canonical History Governance Validation Results / Evidence Attestation / Decis… | `175-199.md` | 21042 |
+| 207 | `STEP-200` | STEP-200 — Canonical History Governance End-to-End Assurance / Cross-STEP Invariant Closu… | `200-218.md` | 1 |
+| 208 | `STEP-201` | STEP-201 — Canonical History Governance Assurance Remediation / Finding Disposition / Evi… | `200-218.md` | 1219 |
+| 209 | `STEP-202` | STEP-202 — Canonical History Governance Assurance Operations / Finding Queue Arbitration… | `200-218.md` | 2320 |
+| 210 | `STEP-203` | STEP-203 — Canonical History Governance Operations Recovery / Queue Crash Consistency / W… | `200-218.md` | 3378 |
+| 211 | `STEP-204` | STEP-204 — Canonical History Governance Operations Recovery Validation / Fault-Injection… | `200-218.md` | 4316 |
+| 212 | `STEP-205` | STEP-205 — Canonical History Governance Disaster-Recovery Operations / Recovery Objective… | `200-218.md` | 5074 |
+| 213 | `STEP-206` | STEP-206 — Canonical History Governance Disaster-Recovery Replication / Replica Consisten… | `200-218.md` | 5835 |
+| 214 | `STEP-207` | STEP-207 — Canonical History Governance Replication Recovery / Divergence Adjudication /… | `200-218.md` | 6632 |
+| 215 | `STEP-208` | STEP-208 — Canonical History Governance Reconciliation Assurance / Independent Verificati… | `200-218.md` | 7355 |
+| 216 | `STEP-209` | STEP-209 — Canonical History Governance Post-Reconciliation Assurance Operations / Eviden… | `200-218.md` | 8718 |
+| 217 | `STEP-210` | STEP-210 — Canonical History Governance Assurance Continuity / Policy Evolution / Histori… | `200-218.md` | 9901 |
+| 218 | `STEP-211` | STEP-211 — Canonical History Governance Normative Change Execution / Controlled Policy Ro… | `200-218.md` | 11094 |
+| 219 | `STEP-212` | STEP-212 — Canonical History Governance Runtime Policy Enforcement / Decision-Time Policy… | `200-218.md` | 12198 |
+| 220 | `STEP-213` | STEP-213 — Canonical History Governance Runtime Enforcement Observability / Decision Trac… | `200-218.md` | 13156 |
+| 221 | `STEP-214` | STEP-214 — Canonical History Governance Observability Incident Triage / Evidence-Based Se… | `200-218.md` | 14381 |
+| 222 | `STEP-215` | STEP-215 — Canonical History Governance Incident Recovery Coordination / Remediation Auth… | `200-218.md` | 15649 |
+| 223 | `STEP-216` | STEP-216 — Canonical History Governance Recovery Assurance / Cross-Domain Consistency Pro… | `200-218.md` | 16639 |
+| 224 | `STEP-217` | STEP-217 — Canonical History Governance Assurance Decision Authorization / Acceptance Gra… | `200-218.md` | 17507 |
+| 225 | `STEP-218a` | STEP-218a — 規範契約の閉包・依存関係・競合裁定契約 | `200-218.md` | 18180 |
+| 226 | `STEP-218b` | STEP-218b — DM-2 v2 Schema Adoption Decision | `200-218.md` | 19180 |
 
 ## Full index (file → chapters)
 
@@ -351,3 +473,122 @@ _H2..H3 headings in this file (1360) are intentionally not listed._
 - L20854 · H1 · STEP-124 — Recovery Evidence Trust / External Execution Attestation / Reconciliation Authority Contract · `STEP-124`
 
 _H2..H3 headings in this file (1315) are intentionally not listed._
+
+### 125-149.md
+
+- L1 · H1 · STEP-125 — Evidence Acceptance Lifecycle / Trust Decision Revocation / Downstream Revalidation and Recovery Reauthorization Contract · `STEP-125`
+- L1191 · H1 · STEP-126 — Revocation Propagation Closure / Consumer Acknowledgment Verification / Revalidation Completeness Certification Contract · `STEP-126`
+- L2360 · H1 · STEP-127 — Certification Revocation Propagation / Stale Certificate Consumer Detection / Recovery Authorization Invalidation Contract · `STEP-127`
+- L3643 · H1 · STEP-128 — Invalidation Closure Certification / Residual Execution Reconciliation / Recovery Re-Entry Safety Gate Contract · `STEP-128`
+- L4729 · H1 · STEP-129 — Recovery Re-Entry Execution Control / Stage-Boundary Verification / Post-Entry Stability Evidence Contract · `STEP-129`
+- L5823 · H1 · STEP-130 — Operational Stability Certification / Runtime Drift Detection / Automatic Safe-State Transition Contract · `STEP-130`
+- L7003 · H1 · STEP-131 — Safe-State Transition Completion Ledger / Residual Risk Reconciliation / Post-Transition Recovery Authorization Contract · `STEP-131`
+- L8215 · H1 · STEP-132 — Operational Resume Execution Ledger / Post-Resume Stability Window / Automatic Re-Degradation and Recovery Loop Contract · `STEP-132`
+- L9558 · H1 · STEP-133 — Recovery Loop Governance / Repeated Failure Classification / Circuit Breaker Reset Authorization and Stability Re-Certification Contract · `STEP-133`
+- L10841 · H1 · STEP-134 — Recovery Loop Closure Certification / Residual Failure Debt Registry / Cross-Loop Risk Aggregation and Operational Re-Entry Authorization Contract · `STEP-134`
+- L12220 · H1 · STEP-135 — Global Recovery Certificate Lifecycle / Residual Risk Drift Detection / Cross-Contract Invalidation Propagation and Re-Certification Contract · `STEP-135`
+- L13533 · H1 · STEP-136 — Certificate Consumer Migration / Stale Authorization Quarantine / Post-Recertification Reference Convergence and Legacy Dependency Retirement Contract · `STEP-136`
+- L14913 · H1 · STEP-137 — Legacy Dependency Retirement Closure Certification / Orphaned Authorization Detection / Residual Reference Sweep and Post-Retirement Integrity Contract · `STEP-137`
+- L16052 · H1 · STEP-138 — Post-Retirement Integrity Monitoring / Closure Certificate Validity / Orphaned Reference Recurrence Detection and Retirement Reopening Authorization Contract · `STEP-138`
+- L17045 · H1 · STEP-139 — Post-Reopening Remediation Governance / Recurrence Root-Cause Evidence / Re-Retirement Authorization and Closure Baseline Reconstruction Contract · `STEP-139`
+- L18122 · H1 · STEP-140 — Closure Baseline Acceptance / Evidence Freshness and Scope Completeness Verification / Reclosure Certification Authorization Contract · `STEP-140`
+- L19326 · H1 · STEP-141 — Certificate Publication and Consumer Distribution / Atomic Registry Publication / Delivery Acknowledgment and Partial-Distribution Reconciliation Contract · `STEP-141`
+- L20275 · H1 · STEP-142 — Consumer-Side Certificate Intake / Signature and Scope Validation / Monotonic Version Acceptance and Stale Publication Rejection Contract · `STEP-142`
+- L21193 · H1 · STEP-143 — Consumer State Reporting / Registry Reconciliation / Cross-Consumer Convergence Evidence and Certification Contract · `STEP-143`
+- L22097 · H1 · STEP-144 — Convergence Certificate Publication / Invalidation Propagation / Operational Re-Entry Authorization Separation Contract · `STEP-144`
+- L23115 · H1 · STEP-145 — Operational Re-Entry Authorization Gate / Publication and Invalidation Closure Evidence Validation / Freshness-Bound Execution Permit Contract · `STEP-145`
+- L24219 · H1 · STEP-146 — Controlled Re-Entry Execution Ledger / Permit Consumption Atomicity / Partial-Execution Reconciliation and Post-Execution Evidence Closure Contract · `STEP-146`
+- L25237 · H1 · STEP-147 — Post-Re-Entry Stability Assessment / Runtime Drift Detection / Stability Window Evidence Validation and Automatic Safe-State Transition Contract · `STEP-147`
+- L26448 · H1 · STEP-148 — Stability Certificate Consumer Acceptance / Cross-Consumer Currentness Reconciliation / Post-Certification Drift Invalidation and Safe-State Enforcement Contract · `STEP-148`
+- L27894 · H1 · STEP-149 — Cross-Consumer Currentness Certificate Lifecycle / Certification Revocation Propagation / Consumer-State Regression Detection / Re-Certification and Operational Gate Reconciliation Contract · `STEP-149`
+
+_H2..H3 headings in this file (1829) are intentionally not listed._
+
+### 150-174.md
+
+- L1 · H1 · STEP-150 — Currentness Certification Closure / Revocation-Residual Obligation Ledger / Cross-Certificate Dependency Reconciliation / Lifecycle Integrity Audit Contract · `STEP-150`
+- L1203 · H1 · STEP-151 — Cross-Certificate Closure Monitoring / Residual Obligation Recurrence Detection / Dependency-Graph Drift Reconciliation / Closure Certificate Revocation Contract · `STEP-151`
+- L2576 · H1 · STEP-152 — Closure Monitoring Execution Orchestration / Durable Job Lifecycle / Retry-Recovery-Idempotency / Commit Outcome Reconciliation / Operational Effect Verification Contract · `STEP-152`
+- L3730 · H1 · STEP-153 — Cross-Contract Operational Safety Audit / Runtime-Policy-Authority Consistency / Residual Risk Reconciliation / End-to-End Evidence Completeness / Operational Readiness Adjudication Contract · `STEP-153`
+- L4814 · H1 · STEP-154a — Continuous Operational Assurance / Readiness Decision Freshness / Risk-Based Reassessment Scheduling / Revocation-Triggered Revalidation / Audit Continuity Contract · `STEP-154a`
+- L4849 · H1 · STEP-154b — Continuous Operational Assurance / Readiness Decision Freshness / Risk-Based Reassessment Scheduling / Revocation-Triggered Revalidation / Audit Continuity Contract · `STEP-154b`
+- L5837 · H1 · STEP-155a — Assurance Control-Plane Integrity / Trigger-to-Decision Traceability / Scheduler Completeness / Monitoring Independence / Fail-Safe Degradation Contract · `STEP-155a`
+- L5873 · H1 · STEP-155b — Assurance Control-Plane Integrity / Trigger-to-Decision Traceability / Scheduler Completeness / Monitoring Independence / Fail-Safe Degradation Contract · `STEP-155b`
+- L6919 · H1 · STEP-156 — Assurance Control-Plane Failure Injection / Common-Cause Failure Analysis / Recovery Proof / Adversarial Completeness Verification Contract · `STEP-156`
+- L7909 · H1 · STEP-157 — Assurance Evidence Provenance / Evidence Chain of Custody / Cross-Run Comparability / Reproducible Adjudication Contract · `STEP-157`
+- L8698 · H1 · STEP-158 — Assurance Evidence Store Consistency / Metadata-to-Blob Reconciliation / Orphan and Dangling Reference Detection / Retention Enforcement Contract · `STEP-158`
+- L9656 · H1 · STEP-159 — Assurance Evidence Store Recovery / Repair Authorization / Transactional Repair Execution / Rollback and Post-Repair Proof Contract · `STEP-159`
+- L10626 · H1 · STEP-160 — Assurance Repair Outcome Reconciliation / Recovery Certification / Residual Obligation Settlement / Cross-Consumer Consistency Contract · `STEP-160`
+- L11726 · H1 · STEP-161a — Recovery Certification Lifecycle / Revocation Propagation / Reassessment Trigger Closure / Re-Certification Integrity Contract · `STEP-161a`
+- L11753 · H1 · STEP-161b — Recovery Certification Lifecycle / Revocation Propagation / Reassessment Trigger Closure / Re-Certification Integrity Contract · `STEP-161b`
+- L12937 · H1 · STEP-162a — Certification Dependency Graph Completeness / Transitive Impact Closure / Orphaned Authorization Detection / Global Assurance Consistency Contract · `STEP-162a`
+- L12964 · H1 · STEP-162b — Certification Dependency Graph Completeness / Transitive Impact Closure / Orphaned Authorization Detection / Global Assurance Consistency Contract · `STEP-162b`
+- L14117 · H1 · STEP-163 — Certification Dependency Graph Incremental Reconciliation / Event-Driven Rebuild / Snapshot Lineage / Deterministic Replay Equivalence Contract · `STEP-163`
+- L15169 · H1 · STEP-164 — Projection Publication Consistency / Consumer Snapshot Pinning / Atomic Visibility / Read-After-Publish Verification Contract · `STEP-164`
+- L16013 · H1 · STEP-165 — Cross-Contract Normative Closure / Contradiction Resolution / Requirement Traceability / Global Acceptance Ledger Contract · `STEP-165`
+- L17110 · H1 · STEP-166 — Global Audit Input Sealing / Corpus Snapshot Integrity / Deterministic Requirement Extraction / Audit Run Provenance Contract · `STEP-166`
+- L18037 · H1 · STEP-167 — Normative Requirement Coverage / Source-to-Extraction Reconciliation / Omission Detection / Ambiguity Closure Contract · `STEP-167`
+- L19292 · H1 · STEP-168 — Coverage Finding Adjudication / Authorized Remediation Proposal / Re-Extraction Control / Post-Remediation Differential Verification Contract · `STEP-168`
+- L20280 · H1 · STEP-169 — Remediation Evidence Chain / Execution Attestation / Result Integrity / Audit Lineage Preservation / Canonical Commit Eligibility Contract · `STEP-169`
+- L21345 · H1 · STEP-170 — Canonical Commit Transaction Integrity / History Append Verification / Duplicate Commit Prevention / Crash Recovery / Commit-Outcome Reconciliation Contract · `STEP-170`
+- L22255 · H1 · STEP-171 — Canonical History Integrity / Hash-Chain Verification / Event Ordering Assurance / Corruption Detection / Trusted Recovery Anchor Contract · `STEP-171`
+- L23224 · H1 · STEP-172 — Canonical History Recovery Protocol / Trusted Source Selection / Divergent Replica Adjudication / Missing-Event Reconstruction / Recovery Certification Contract · `STEP-172`
+- L24285 · H1 · STEP-173 — Canonical History Recovery Impact Closure / Dependent Snapshot and Certification Revalidation / Consumer Reconciliation / Re-entry Authorization Contract · `STEP-173`
+- L25516 · H1 · STEP-174 — Operational Re-entry Runtime Guard / Continuous Post-Reentry Monitoring / Automatic Stop Request / Safe Degradation / Incident Reopening Contract · `STEP-174`
+
+_H2..H3 headings in this file (1610) are intentionally not listed._
+
+### 175-199.md
+
+- L1 · H1 · STEP-175 — Operational Stop/Degradation Outcome Reconciliation / In-Flight Commit and External Effect Settlement / Restart and Re-Entry Reauthorization Contract · `STEP-175`
+- L1210 · H1 · STEP-176 — Post-Re-entry Runtime Evidence Consolidation / Operational Assurance Renewal / Certification Freshness and Expiry / Residual Risk Acceptance / Continuous Closure Contract · `STEP-176`
+- L2012 · H1 · STEP-177 — Assurance Decision Enforcement / Certification Revocation Propagation / Risk Acceptance Expiry Enforcement / Closure State Reconciliation / Global Acceptance Adjudication Contract · `STEP-177`
+- L2812 · H1 · STEP-178 — Decision Replay and Deterministic State Reconstruction / Revocation Race Resolution / Idempotent Propagation Recovery / Temporal Consistency Verification / Acceptance Withdrawal Contract · `STEP-178`
+- L3536 · H1 · STEP-179 — Replay Checkpoint Integrity / Incremental Reconstruction / History Compaction Safety / Projection Rebuild Reconciliation / Recovery Certification Contract · `STEP-179`
+- L4525 · H1 · STEP-180 — Checkpoint Rotation / Multi-Generation Recovery / Retention and Legal Hold / Snapshot Publication Atomicity / Consumer Cutover Contract · `STEP-180`
+- L5374 · H1 · STEP-181 — Concurrent Recovery Coordination / Lease and Fencing / Publication Conflict Resolution / Consumer Epoch Consistency / Crash-Resume Safety Contract · `STEP-181`
+- L6276 · H1 · STEP-182 — Cross-System Operation Provenance / Tamper-Evident Audit Chain / Evidence Correlation / Forensic Reconstruction / Audit Completeness Contract · `STEP-182`
+- L7099 · H1 · STEP-183 — Audit Policy Versioning / Trust Root Governance / Key Rotation and Revocation / Historical Verification / Long-Term Evidence Validity Contract · `STEP-183`
+- L7977 · H1 · STEP-184 — Verification Engine Determinism / Reproducible Audit Execution / Policy Evaluation Trace / Independent Re-Verification / Result Attestation Contract · `STEP-184`
+- L8833 · H1 · STEP-185 — Verification Governance / Validator Qualification / Conformance Certification / Cross-Version Compatibility / Controlled Rollout and Rollback Contract · `STEP-185`
+- L9516 · H1 · STEP-186 — Validator Fleet Consistency / Distributed Policy Rollout / Attestation Revocation / Runtime Drift Detection / Fleet-Wide Audit Assurance Contract · `STEP-186`
+- L10338 · H1 · STEP-187 — Distributed Commit Coordination / Canonical History Replication / Event Ordering / Conflict Resolution / Recovery Consistency Contract · `STEP-187`
+- L11126 · H1 · STEP-188 — Canonical History Governance / Commit Finality / Authority Transfer / History Correction / Retention and Archival Contract · `STEP-188`
+- L11976 · H1 · STEP-189 — Canonical History Verification / Long-Term Proof / Evidence Preservation / Audit Reproducibility Contract · `STEP-189`
+- L13070 · H1 · STEP-190 — Canonical History Proof Protocol / Checkpoint Finality / Verification Composition / Audit Decision Contract · `STEP-190`
+- L14244 · H1 · STEP-191 — Canonical History Decision Enforcement / Authorization Binding / Commit Admission / Policy Execution Contract · `STEP-191`
+- L14908 · H1 · STEP-192 — Commit Admission Atomicity / Transaction Binding / Durable Commit Receipt / Recovery Reconciliation Contract · `STEP-192`
+- L15485 · H1 · STEP-193 — Canonical History WAL Recovery / Deterministic Replay / Integrity Verification / Quarantine Contract · `STEP-193`
+- L16155 · H1 · STEP-194 — Canonical History Integrity Anchoring / Hash Chain / Checkpoint Attestation / Tamper Evidence Contract · `STEP-194`
+- L17093 · H1 · STEP-195 — Canonical History Integrity Incident Response / Evidence Preservation / Forensic Verification / Recovery Authorization Contract · `STEP-195`
+- L18265 · H1 · STEP-196 — Canonical History Governance / Policy Registry / Normative Contract Resolution / Cross-STEP Consistency Enforcement Contract · `STEP-196`
+- L19253 · H1 · STEP-197 — Canonical History Governance Bootstrap / Registry Genesis / Initial Contract Inventory / Adoption Baseline Contract · `STEP-197`
+- L20208 · H1 · STEP-198 — Canonical History Governance Bootstrap Validation / Inventory Completeness Proof / Adoption Evidence Verification / Genesis Reproducibility Contract · `STEP-198`
+- L21042 · H1 · STEP-199 — Canonical History Governance Validation Results / Evidence Attestation / Decision Binding / Acceptance Readiness Contract · `STEP-199`
+
+_H2..H3 headings in this file (1445) are intentionally not listed._
+
+### 200-218.md
+
+- L1 · H1 · STEP-200 — Canonical History Governance End-to-End Assurance / Cross-STEP Invariant Closure / Acceptance Evidence Composition / Freeze Readiness Contract · `STEP-200`
+- L1219 · H1 · STEP-201 — Canonical History Governance Assurance Remediation / Finding Disposition / Evidence Gap Closure / Revalidation Lifecycle Contract · `STEP-201`
+- L2320 · H1 · STEP-202 — Canonical History Governance Assurance Operations / Finding Queue Arbitration / Remediation Scheduling / Concurrency and Escalation Contract · `STEP-202`
+- L3378 · H1 · STEP-203 — Canonical History Governance Operations Recovery / Queue Crash Consistency / Worker Fencing / Execution Reconciliation Contract · `STEP-203`
+- L4316 · H1 · STEP-204 — Canonical History Governance Operations Recovery Validation / Fault-Injection Assurance / Recovery Determinism / Disaster-Recovery Acceptance Contract · `STEP-204`
+- L5074 · H1 · STEP-205 — Canonical History Governance Disaster-Recovery Operations / Recovery Objectives / Recovery Point Integrity / Recovery Time Assurance Contract · `STEP-205`
+- L5835 · H1 · STEP-206 — Canonical History Governance Disaster-Recovery Replication / Replica Consistency / Failover Authority / Split-Brain Prevention Contract · `STEP-206`
+- L6632 · H1 · STEP-207 — Canonical History Governance Replication Recovery / Divergence Adjudication / History Reconciliation / Conflict Resolution Contract · `STEP-207`
+- L7355 · H1 · STEP-208 — Canonical History Governance Reconciliation Assurance / Independent Verification / Post-Reconciliation Integrity Proof / Acceptance Evidence Contract · `STEP-208`
+- L8718 · H1 · STEP-209 — Canonical History Governance Post-Reconciliation Assurance Operations / Evidence Retention / Finding Closure / Long-Term Integrity Monitoring Contract · `STEP-209`
+- L9901 · H1 · STEP-210 — Canonical History Governance Assurance Continuity / Policy Evolution / Historical Decision Reassessment / Governance Change Impact Contract · `STEP-210`
+- L11094 · H1 · STEP-211 — Canonical History Governance Normative Change Execution / Controlled Policy Rollout / Rollback / Post-Change Verification Contract · `STEP-211`
+- L12198 · H1 · STEP-212 — Canonical History Governance Runtime Policy Enforcement / Decision-Time Policy Resolution / Authorization Freshness / Enforcement Conformance Contract · `STEP-212`
+- L13156 · H1 · STEP-213 — Canonical History Governance Runtime Enforcement Observability / Decision Traceability / Enforcement Drift Detection / Audit Evidence Contract · `STEP-213`
+- L14381 · H1 · STEP-214 — Canonical History Governance Observability Incident Triage / Evidence-Based Severity Assessment / Containment Authorization / Escalation Contract · `STEP-214`
+- L15649 · H1 · STEP-215 — Canonical History Governance Incident Recovery Coordination / Remediation Authorization / Recovery Verification / Residual Risk Acceptance Contract · `STEP-215`
+- L16639 · H1 · STEP-216 — Canonical History Governance Recovery Assurance / Cross-Domain Consistency Proof / Recovery Evidence Composition / Post-Recovery Acceptance Readiness Contract · `STEP-216`
+- L17507 · H1 · STEP-217 — Canonical History Governance Assurance Decision Authorization / Acceptance Grant Protocol / Decision Finality / Reassessment and Revocation Contract · `STEP-217`
+- L18180 · H1 · STEP-218a — 規範契約の閉包・依存関係・競合裁定契約 · `STEP-218a`
+- L19180 · H1 · STEP-218b — DM-2 v2 Schema Adoption Decision · `STEP-218b`
+
+_H2..H3 headings in this file (1178) are intentionally not listed._

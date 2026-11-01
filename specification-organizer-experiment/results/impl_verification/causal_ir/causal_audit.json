@@ -1,0 +1,72 @@
+{
+ "claims": 3304,
+ "code_nodes": 49,
+ "graph_edges": 2139,
+ "classification": {
+  "UNRESOLVED": 3106,
+  "VERIFIED": 192,
+  "CONFLICT": 6
+ },
+ "coverage": {
+  "claims_with_code_surface_evidence": 623,
+  "claims_with_zero_evidence": 1982,
+  "semantic_level_joins": 5,
+  "keyword_level_joins": 1224
+ },
+ "gate": {
+  "rule": "every claim node must carry classification+evidence",
+  "records_passing": 96,
+  "not_retroactive_to_records_written_before_this_pass": true
+ },
+ "shape": {
+  "conformant_records": 107,
+  "nonconformant_records": 20
+ },
+ "discrepancy": {
+  "prior AGREED claims reclassified as GAP (no adoption record in repo)": 2
+ },
+ "roots": [
+  {
+   "root": "recovery authority",
+   "why": "two surfaces encode opposite recovery rules (wal.lisp vs wal_triad_bridge.py)",
+   "impact": [
+    "PREPARED/IN_DOUBT classification",
+    "WAL truncation",
+    "durability definition"
+   ],
+   "depends_on": []
+  },
+  {
+   "root": "storage / WAL tail norm",
+   "why": "no adopted storage norm; implementation asserts one",
+   "impact": [
+    "truncation legitimacy",
+    "append-only claim status"
+   ],
+   "depends_on": [
+    "recovery authority"
+   ]
+  },
+  {
+   "root": "event order norm",
+   "why": "causal-evidence ordering not implemented; clock/seq used",
+   "impact": [
+    "STEP-40 claims",
+    "tie-break test"
+   ],
+   "depends_on": [
+    "storage / WAL tail norm"
+   ]
+  },
+  {
+   "root": "retention / tiering norm",
+   "why": "no code-side surface at all",
+   "impact": [
+    "STEP-38/39 claims cannot be classified as GAP→VIOLATION, only GAP"
+   ],
+   "depends_on": [
+    "event order norm"
+   ]
+  }
+ ]
+}

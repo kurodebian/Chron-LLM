@@ -1,0 +1,75 @@
+{
+ "phase": "P2",
+ "date": "2026-10-30",
+ "scope": "127 recorded P1 units (read-only recheck)",
+ "inputs": [
+  "ledger/units/mdsheets_units.json",
+  "md_sheets corpus bytes",
+  "results/impl_verification/chapter_log.jsonl"
+ ],
+ "results": {
+  "units_reconstructed_from_live_bytes": 127,
+  "log_pairing": "exactly one record per ledger unit",
+  "digest_mismatches": [],
+  "unresolved_segments_not_reproduced_from_live_bytes": 0,
+  "evidence_path_check": {
+   "distinct_paths": 23,
+   "missing": []
+  },
+  "corpus_freeze_drift": {
+   "match": [
+    "md_sheets/1-74.md",
+    "md_sheets/75-99.md",
+    "md_sheets/100-124.md"
+   ],
+   "drift": [
+    "md_sheets/chapters_index.md: recorded ea49cecc..., live recomputed 595a41b66c... (uncommitted regen)"
+   ]
+  },
+  "shape_conformance": {
+   "conformant_records": 96,
+   "nonconformant_records": 31,
+   "nonconformant_chapters": [
+    "STEP-1a",
+    "STEP-1b",
+    "STEP-2a",
+    "STEP-2b",
+    "STEP-3a",
+    "STEP-3b",
+    "STEP-4",
+    "STEP-5.8",
+    "STEP-6",
+    "STEP-7",
+    "STEP-8",
+    "STEP-9",
+    "STEP-10",
+    "STEP-11",
+    "STEP-12",
+    "STEP-13",
+    "STEP-14",
+    "STEP-15",
+    "STEP-16",
+    "STEP-17",
+    "STEP-18",
+    "STEP-19",
+    "STEP-20",
+    "STEP-21",
+    "STEP-22",
+    "STEP-23",
+    "STEP-24",
+    "STEP-25",
+    "STEP-26",
+    "STEP-27",
+    "STEP-28"
+   ]
+  },
+  "classification_distribution": {
+   "VERIFIED": 192,
+   "AGREED": 2,
+   "UNRESOLVED": 3067
+  }
+ },
+ "p1_gate": "PASS for the 96 records written in this run (each claim carries classification + evidence); not retroactively applied to the 31 pre-run records, which lack claim-level classification fields",
+ "p3_status": "BLOCKED — no adoption record for this pass in this run; the P0 adjudications taken here (segmentation convention, scope decision, index re-record path) are recorded as decisions awaiting adoption",
+ "note": "MISSING_EVIDENCE != PASS: P2 could not re-run P0/P1 phases for the pre-run records (no P0 artifacts, no P1 execution results in repo); reported as missing, not inferred"
+}

@@ -38,6 +38,7 @@ counts and audit rows are emitted.
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import re
 import string
 import sys
@@ -235,6 +236,9 @@ def main() -> int:
                     help="restrict gap scan to this integer STEP range (default: detected min–max)")
     ap.add_argument("--max-audit-rows", type=int, default=0, metavar="N",
                     help="cap audit table rows (0 = show all, default)")
+    ap.add_argument("--exclude", action="append", default=[], metavar="NAME",
+                    help="skip files by exact name or glob pattern (e.g. a summary doc that "
+                         "lives in the sheet directory but is not a chapter sheet); repeatable")
     args = ap.parse_args()
 
     root = Path(args.dir).expanduser().resolve()
@@ -253,7 +257,10 @@ def main() -> int:
             return False
         return first.strip() == "# Chapters Index"
 
-    files = sorted((p for p in root.glob("*.md") if not is_generated_index(p)),
+    def excluded(p: Path) -> bool:
+        return any(fnmatch.fnmatch(p.name, pat) for pat in args.exclude)
+
+    files = sorted((p for p in root.glob("*.md") if not is_generated_index(p) and not excluded(p)),
                    key=lambda p: natural_key(p.name))
 
     data: dict[str, list[tuple[int, int, str]]] = {}

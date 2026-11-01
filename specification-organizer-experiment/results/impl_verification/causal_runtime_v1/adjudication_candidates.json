@@ -1,0 +1,80 @@
+[
+ {
+  "claim": "mdsu0033#dee9153c1e",
+  "rule_do": null,
+  "rule_require": "CON-INV-07",
+  "code_side": [
+   {
+    "code": "code#05",
+    "edge": "IMPLEMENTS",
+    "artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py",
+    "operation": "retain in in_doubt",
+    "note": "claim requires IN_DOUBT not resolved by assumption; code retains PREPARED in the in_doubt set until an explicit frame resolves it"
+   },
+   {
+    "code": "code#03",
+    "edge": "VIOLATES",
+    "artifact": "runtime/phase-d/wal.lisp",
+    "operation": "resolve",
+    "note": "code resolves PREPARED to ABORT at recovery start with no confirmation step — assumption is the operation itself"
+   }
+  ],
+  "root_cause": "no adjudicated authority for recovery decisions",
+  "root_id": "ROOT-001",
+  "decision_needed": "authority must choose norm, implementation, or a reconciling definition",
+  "status": "REQUIRES_ADJUDICATION",
+  "authority_conflict_frozen": false
+ },
+ {
+  "claim": "mdsu0034#901f414c31",
+  "rule_do": null,
+  "rule_require": null,
+  "code_side": [
+   {
+    "code": "code#02",
+    "edge": "VIOLATES",
+    "artifact": "runtime/phase-d/wal.lisp",
+    "operation": "truncate",
+    "note": "claim forbids truncation without an explicit storage norm and evidence; code truncates on recovery start with no such precondition"
+   },
+   {
+    "code": "code#07",
+    "edge": "CONFLICTS_WITH",
+    "artifact": "tests/test_cae_e2e.py",
+    "operation": "assert truncate",
+    "note": "test asserts exactly the behaviour the claim forbids; test and design norm cannot both hold"
+   }
+  ],
+  "root_cause": "storage norm for partial tail records never adopted",
+  "root_id": "ROOT-002",
+  "decision_needed": "authority must choose norm, implementation, or a reconciling definition",
+  "status": "REQUIRES_ADJUDICATION",
+  "authority_conflict_frozen": false
+ },
+ {
+  "claim": "mdsu0035#81bdafbbc1",
+  "rule_do": null,
+  "rule_require": null,
+  "code_side": [
+   {
+    "code": "code#06",
+    "edge": "IMPLEMENTS",
+    "artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py",
+    "operation": "halt",
+    "note": "claim requires duplicate detection by txid; code implements digest-tombstone duplicate detection (part of the claim only)"
+   },
+   {
+    "code": null,
+    "edge": "VIOLATES",
+    "artifact": null,
+    "operation": null,
+    "note": "structural: precedence semantics require a comparison path with Canonical History; no Canonical History surface exists in the code corpus, so the requirement cannot be satisfied — code resolves status from its local tx table alone"
+   }
+  ],
+  "root_cause": "durability definition left open in the design",
+  "root_id": "ROOT-003",
+  "decision_needed": "authority must choose norm, implementation, or a reconciling definition",
+  "status": "REQUIRES_ADJUDICATION",
+  "authority_conflict_frozen": false
+ }
+]

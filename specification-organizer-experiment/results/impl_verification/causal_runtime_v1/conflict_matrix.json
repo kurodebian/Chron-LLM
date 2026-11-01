@@ -1,0 +1,37 @@
+[
+ {
+  "claim": "mdsu0033#dee9153c1e",
+  "artifact": "code#03",
+  "root": "ROOT-001",
+  "status": "CONFLICT",
+  "why": "code resolves PREPARED to ABORT at recovery start with no confirmation step — assumption is the operation itself"
+ },
+ {
+  "claim": "mdsu0034#901f414c31",
+  "artifact": "code#02",
+  "root": "ROOT-002",
+  "status": "CONFLICT",
+  "why": "claim forbids truncation without an explicit storage norm and evidence; code truncates on recovery start with no such precondition"
+ },
+ {
+  "claim": "mdsu0034#901f414c31",
+  "artifact": "code#07",
+  "root": "ROOT-002",
+  "status": "CONFLICT",
+  "why": "test asserts exactly the behaviour the claim forbids; test and design norm cannot both hold"
+ },
+ {
+  "claim": "mdsu0035#81bdafbbc1",
+  "artifact": "no-join-path",
+  "root": "ROOT-003",
+  "status": "CONFLICT",
+  "why": "structural: precedence semantics require a comparison path with Canonical History; no Canonical History surface exists in the code corpus, so the requirement cannot be satisfied — code resolves status from its local tx table alone"
+ },
+ {
+  "claim": "mdsu0035#7296fb4b84",
+  "artifact": "code#03",
+  "root": "ROOT-004",
+  "status": "CONFLICT",
+  "why": "recovery-evidence precedence is undecided in the design; two surfaces encode opposite rules (wal.lisp resolves at start, bridge is fail-closed)"
+ }
+]

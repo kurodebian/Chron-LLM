@@ -1,0 +1,355 @@
+{
+  "mode": "AUTHORITY_DISCOVERY_V1",
+  "mission": "prove whether a valid authority exists; no winner chosen, no authority assigned",
+  "evidence_sources": [
+    "claim_ir_v2.jsonl",
+    "code_ir_v2.jsonl",
+    "execution_ir.lisp",
+    "conflict_matrix.json",
+    "root_causes.json"
+  ],
+  "inputs_not_counted_as_evidence": [
+    "adjudication_candidates.json (used only for TASK-5 record counts; all 3 entries are candidates, not adjudications)",
+    "causal_graph.json (structural record; edge/status evidence)"
+  ],
+  "authority_catalog": [
+    {
+      "root": "ROOT-001 RECOVERY_AUTHORITY",
+      "currently_acting_authority": null,
+      "currently_acting_decision_maker": "wal.lisp recover-from-wal at recovery start resolves PREPARED->ABORT by assumption (code_ir_v2.jsonl line 3; execution_ir.lisp line 47); bridge refuses to resolve without explicit frame (code_ir_v2.jsonl line 5). Outcome depends on which surface is executed. Implementation behaviour, not adjudicated authority.",
+      "expected_authority": null,
+      "expected_authority_note": "root_causes.json requires 'decision on which norm takes precedence'; no source names a decision owner, so expected authority is null, not inferred.",
+      "adopted_authority_exists": false,
+      "approved_authority_exists": false,
+      "authority_exercisable": false,
+      "authority_exercisable_note": "EXEC record :do nil / :verify cannot run independently; assumption IS the operation (execution_ir.lisp line 47).",
+      "decision_owner": null,
+      "decision_source": null,
+      "decision_precedence": null,
+      "decision_scope": "recovery decisions at recovery start; replay-vs-canonical divergence after crash",
+      "authority_candidates": [
+        "norm candidate A: CON-INV-07 — PREPARED must enter IN_DOUBOT; must not be resolved by assumption (claim_ir_v2.jsonl line 53)",
+        "norm candidate B: wal.lisp behaviour — PREPARED resolved at recovery start (code_ir_v2.jsonl line 3)",
+        "referenced-but-unimplemented precedence source: Step 47 Precedence/Conflict Adjudication rule (claim_ir_v2.jsonl line 759) — UNRESOLVED, 0 implementation evidence"
+      ],
+      "supporting_evidence": [
+        {
+          "source": "claim_ir_v2.jsonl",
+          "ref": "line 53 (mdsu0033#dee9153c1e)",
+          "fact": "status CONFLICT; root_cause 'no adjudicated authority for recovery decisions'"
+        },
+        {
+          "source": "conflict_matrix.json",
+          "ref": "lines 5-8",
+          "fact": "ROOT-001 claim-vs-code#03, status CONFLICT"
+        },
+        {
+          "source": "root_causes.json",
+          "ref": "lines 3-19",
+          "fact": "no adjudicated authority; dependency chain: decision then reclassify then re-verify tests"
+        },
+        {
+          "source": "adjudication_candidates.json",
+          "ref": "line 23 (ROOT-001)",
+          "fact": "REQUIRES_ADJUDICATION; no decision record"
+        },
+        {
+          "source": "execution_ir.lisp",
+          "ref": "line 47",
+          "fact": "adoption NOT_ADOPTED, status NOT_VERIFIABLE"
+        }
+      ],
+      "missing_evidence": [
+        "no decision/adjudication record for recovery decisions",
+        "no record identifying a decision owner",
+        "no adoption record; no approval record",
+        "no precedence rule between CON-INV-07 and wal.lisp behaviour",
+        "no executable check (:do nil)"
+      ],
+      "blocked_nodes": [
+        "mdsu0033#dee9153c1e",
+        "code#03",
+        "code#05",
+        "cross-reclassification with ROOT-004"
+      ],
+      "conflict_type": "MIXED (layers: authority absence at root; implementation disagreement between surfaces; no definitional ambiguity within each surface)",
+      "recommendation": "reclassification of code#03/code#05 is blocked pending a recorded decision. Name the decision owner and decision source, record the decision, then re-run crash-recovery tests against the adopted rule. No winner may be chosen before a recorded adjudication.",
+      "confidence": "HIGH — three independent sources concur on absence of adjudicated authority (claim record, conflict matrix, root_causes, adjudication candidate, execution_ir adoption field)"
+    },
+    {
+      "root": "ROOT-002 WAL_TAIL_POLICY",
+      "currently_acting_authority": null,
+      "currently_acting_decision_maker": "wal.lisp truncates partial tail record at recovery start (code_ir_v2.jsonl line 2); tests affirm it as recovery operation (code_ir_v2.jsonl line 7). Implementation asserts an unadopted decision. Test != authority.",
+      "expected_authority": null,
+      "expected_authority_note": "no adopted storage norm for partial tail records exists; expectation is null because adoption has not occurred, not because an authority is known.",
+      "adopted_authority_exists": false,
+      "approved_authority_exists": false,
+      "authority_exercisable": false,
+      "authority_exercisable_note": "the definition itself is not adopted, so nothing is exercisable; the claim asserts absence ('no adopted rule').",
+      "decision_owner": null,
+      "decision_source": null,
+      "decision_precedence": null,
+      "decision_scope": "storage semantics for partial tail records at recovery",
+      "authority_candidates": [
+        "norm candidate A: claim — storage norm for partial tail records never adopted, no adopted rule (claim_ir_v2.jsonl line 57)",
+        "norm candidate B: code+test behaviour — truncation asserted as recovery operation (code_ir_v2.jsonl lines 2, 7)"
+      ],
+      "supporting_evidence": [
+        {
+          "source": "claim_ir_v2.jsonl",
+          "ref": "line 57 (mdsu0034#901f414c31)",
+          "fact": "status CONFLICT; 'no adopted rule'"
+        },
+        {
+          "source": "conflict_matrix.json",
+          "ref": "lines 9-12",
+          "fact": "claim vs code#02, status VIOLATES; note: whether test violates or encodes depends on norm adoption"
+        },
+        {
+          "source": "root_causes.json",
+          "ref": "lines 21-37",
+          "fact": "norm never adopted; dependency: ROOT-001 decision first, then append-only claims, then tests"
+        },
+        {
+          "source": "adjudication_candidates.json",
+          "ref": "line 49 (ROOT-002)",
+          "fact": "REQUIRES_ADJUDICATION; decision needed on test-corpus interpretation"
+        },
+        {
+          "source": "execution_ir.lisp",
+          "ref": "line 48",
+          "fact": "adoption NOT_ADOPTED, status NOT_VERIFIABLE"
+        }
+      ],
+      "missing_evidence": [
+        "no adoption record for any storage norm",
+        "no approval record",
+        "no decision on whether the test corpus violates or encodes the norm",
+        "no decision owner or decision source named"
+      ],
+      "blocked_nodes": [
+        "mdsu0034#901f414c31",
+        "code#02",
+        "all append-only claims dependent on tail behaviour",
+        "test-corpus interpretation"
+      ],
+      "conflict_type": "MIXED (layers: definition — norm unadopted; implementation — code asserts the unadopted decision; test affirmation carries no authority)",
+      "recommendation": "the norm must be adopted by a recorded decision before any classification resolves; tests cannot be treated as authority. Resolve per root_causes dependency chain (after ROOT-001 decision). No winner chosen.",
+      "confidence": "HIGH — adoption absence directly recorded across all five sources"
+    },
+    {
+      "root": "ROOT-003 CANONICAL_AUTHORITY (named DURABILITY_NORM in root_causes.json and claim evidence — name mismatch preserved as unknown)",
+      "currently_acting_authority": null,
+      "currently_acting_decision_maker": "bridge local transaction table alone determines status (code_ir_v2.jsonl line 5) — implementation-defined durability; code#01 asserts unadopted durability via fdatasync success (code_ir_v2.jsonl line 1).",
+      "expected_authority": null,
+      "expected_authority_note": "the claim demands a Canonical History comparison path as the authority for precedence semantics, but no Canonical History surface exists in the code corpus — expected authority exists only as an unresolved definition-level claim, so exercisable authority is null.",
+      "adopted_authority_exists": false,
+      "approved_authority_exists": false,
+      "authority_exercisable": false,
+      "authority_exercisable_note": "structural absence: join path does not exist, requirement cannot be satisfied (conflict_matrix: 'structural, not observed disagreement').",
+      "decision_owner": null,
+      "decision_source": null,
+      "decision_precedence": null,
+      "decision_precedence_note": "precedence semantics depend on comparison with Canonical History, but no precedence rule is encoded (claim_ir_v2.jsonl line 60); the join path is named but not established.",
+      "decision_scope": "durability definition; status semantics; precedence between local transaction view and canonical history",
+      "authority_candidates": [
+        "norm candidate A: claim — durability left open in design; Canonical History comparison path named but not established (claim_ir_v2.jsonl line 68)",
+        "norm candidate B: implementation — fdatasync success asserted as durability point, local transaction table as sole status source (code_ir_v2.jsonl lines 1, 5)",
+        "keyword-level authority claims only, zero semantic join to code (hard constraint keyword_presence_not_semantic): Kernel Commit Authority (mdsu0079#d145154a6e, line 1307), KERNEL_COMMIT_AUTHORITY (mdsu0088#315e453428, line 1439), Commit Authority (mdsu0042#d8a66af2f3, line 1246), Decision Authority/Approval Authority (mdsu0083#c704971419, line 1387) — all UNRESOLVED, NOT_VERIFIABLE"
+      ],
+      "supporting_evidence": [
+        {
+          "source": "claim_ir_v2.jsonl",
+          "ref": "line 68 (mdsu0035#81bdafbbc1)",
+          "fact": "status CONFLICT; 'decision pending'"
+        },
+        {
+          "source": "conflict_matrix.json",
+          "ref": "lines 13-16",
+          "fact": "structural absence of join path; not observable disagreement"
+        },
+        {
+          "source": "root_causes.json",
+          "ref": "lines 39-56",
+          "fact": "definition open; structural absence; reclassification impossible while open"
+        },
+        {
+          "source": "adjudication_candidates.json",
+          "ref": "line 75 (ROOT-003)",
+          "fact": "REQUIRES_ADJUDICATION; structural blocker, no decision can close it until path exists"
+        },
+        {
+          "source": "execution_ir.lisp",
+          "ref": "line 55",
+          "fact": "adoption NOT_ADOPTED, status NOT_VERIFIABLE"
+        },
+        {
+          "source": "claim_ir_v2.jsonl",
+          "ref": "line 51 (mdsu0033#6ca9741022)",
+          "fact": "the single VERIFIED edge holds ONLY under the unadopted definition — conditional, not authority-backed"
+        },
+        {
+          "source": "code_ir_v2.jsonl",
+          "ref": "lines 1, 5",
+          "fact": "unadopted durability asserted; local transaction table alone determines status"
+        },
+        {
+          "source": "claim_ir_v2.jsonl",
+          "ref": "line 58 (mdsu0034#5a7c255612)",
+          "fact": "Canonical History named; recovery authority not documented"
+        }
+      ],
+      "missing_evidence": [
+        "no adopted durability definition",
+        "no Canonical History join path in the code corpus (structural absence)",
+        "no semantic join between any authority-definition claim and code (keyword presence only)",
+        "no approval or adoption record for any authority concept",
+        "no record naming the decision owner"
+      ],
+      "blocked_nodes": [
+        "mdsu0035#81bdafbbc1",
+        "code#01 (VERIFIED edge valid only under unadopted definition)",
+        "code#05 status semantics",
+        "all precedence-semantics classifications while durability is open"
+      ],
+      "conflict_type": "MIXED (layers: definition — durability open; implementation-structural — required join path absent; keyword-level authority claims carry no verifiable authority)",
+      "recommendation": "adopt the durability definition by recorded decision; establish the Canonical History join path; re-verify code#01 against the adopted definition and mark the existing VERIFIED edge as conditional on the unadopted definition. The existing VERIFIED status cannot serve as authority evidence.",
+      "confidence": "HIGH — structural absence is directly recorded and independently stated in conflict_matrix and root_causes"
+    },
+    {
+      "root": "ROOT-004 SURFACE_DIVERGENCE",
+      "currently_acting_authority": null,
+      "currently_acting_decision_maker": "none — conflict frozen; two surfaces encode opposite rules (wal.lisp resolves PREPARED at recovery start; bridge fail-closed on missing record, requires explicit frame). No precedence rule between them.",
+      "expected_authority": null,
+      "expected_authority_note": "cannot be proven; no adjudication exists for this root and the classification is frozen by stop condition.",
+      "adopted_authority_exists": false,
+      "approved_authority_exists": false,
+      "authority_exercisable": false,
+      "authority_exercisable_note": "stop condition authority_conflict triggered; classification frozen, no winner assignment.",
+      "decision_owner": null,
+      "decision_source": null,
+      "decision_precedence": null,
+      "decision_precedence_note": "explicitly recorded: 'no precedence rule between them, no adoption record' (root_causes.json line 67); precedence rule referenced but not implemented (claim_ir_v2.jsonl lines 60, 759).",
+      "decision_scope": "state-semantics classification between wal.lisp surface and bridge surface; which surface's rule governs recovery evidence",
+      "authority_candidates": [
+        "surface rule A: wal.lisp — PREPARED resolved at recovery start (code_ir_v2.jsonl line 3)",
+        "surface rule B: bridge — no assumption resolution; fail-closed; requires explicit frame (code_ir_v2.jsonl line 5)"
+      ],
+      "supporting_evidence": [
+        {
+          "source": "claim_ir_v2.jsonl",
+          "ref": "line 75 (mdsu0035#7296fb4b84)",
+          "fact": "keyword-only evidence, no semantic join; execution_ir has NO EXEC record for this node (frozen before promotion)"
+        },
+        {
+          "source": "conflict_matrix.json",
+          "ref": "lines 17-20",
+          "fact": "two surfaces, opposite rules, no precedence rule, no adoption record"
+        },
+        {
+          "source": "root_causes.json",
+          "ref": "lines 58-76",
+          "fact": "no precedence rule, no adoption record; frozen per rules; reclassification requires decision"
+        },
+        {
+          "source": "causal_graph.json",
+          "ref": "stop_conditions.authority_conflict",
+          "fact": "rule triggered on mdsu0035#7296fb4b84; classification frozen; no winner assignment"
+        },
+        {
+          "source": "code_ir_v2.jsonl",
+          "ref": "lines 3, 5",
+          "fact": "the two divergent behaviour records"
+        },
+        {
+          "source": "hard_constraints",
+          "ref": "keyword_presence_not_semantic = true",
+          "fact": "keyword-only node cannot itself ground authority"
+        }
+      ],
+      "missing_evidence": [
+        "no precedence rule between the surfaces",
+        "no adoption record (explicitly stated absent)",
+        "no adjudication record; ROOT-004 has NO entry in adjudication_candidates.json (only ROOT-001..003 present)",
+        "no semantic join between the keyword node and any code record",
+        "no decision owner or decision source named"
+      ],
+      "blocked_nodes": [
+        "mdsu0035#7296fb4b84",
+        "DEPENDS_ON edge to code#03 (frozen)",
+        "all classifications affected by the authority_conflict stop condition"
+      ],
+      "conflict_type": "MIXED (layers: authority absence — no precedence rule or adoption record; implementation — two surfaces with opposite rules)",
+      "recommendation": "keep frozen. A precedence rule must be established by recorded decision before any classification changes; the missing adjudication-candidate entry for ROOT-004 is itself a record gap to note. No winner may be assigned.",
+      "confidence": "HIGH — conflict is recorded directly; absence of authority is the recorded root cause itself"
+    }
+  ],
+  "top_level": {
+    "authority_rules": [
+      "no adjudicated authority exists in any evidence source; every authority field is null, not inferred",
+      "implementation != authority (execution_ir header: promotion rules do not treat implementation as adoption; all 1561 EXEC records NOT_ADOPTED)",
+      "test != authority (test corpus 'encodes the unadopted decision', cannot be read as adoption until norm decision)",
+      "keyword != authority (hard constraint keyword_presence_not_semantic; the 14 authority-concept claim records are keyword-only or 0-hit, all UNRESOLVED)",
+      "adoption != authority (no adoption record exists anywhere in evidence sources)"
+    ],
+    "global_findings": [
+      "AUTHORITY EXISTS AS: unresolved definition-level claims and frozen conflict records only — no exercisable, adopted, approved, or adjudicated authority is proven for any root",
+      "all four roots: adopted_authority_exists=false, approved_authority_exists=false, authority_exercisable=false, decision_owner=null",
+      "single VERIFIED edge (claim line 51) holds only under the unadopted definition — cannot ground authority",
+      "only single-source authority claim in evidence: 'authority is not exercised' (mdsu0033#6ca9741022, line 53 keyword list)",
+      "ROOT-004 is the only root with a recorded conflict frozen by an authority_conflict stop condition; ROOT-004 is absent from adjudication_candidates.json",
+      "all authority-classifications rest on the normative layer, which the evidence itself declares 'not normative yet' (adjudication_candidates.json line 2)"
+    ],
+    "authority_absence_proofs": {
+      "ROOT-001": "recorded root cause is 'no adjudicated authority for recovery decisions' (root_causes.json, claim line 53); adoption NOT_ADOPTED; REQUIRES_ADJUDICATION candidate — absence proven within evidence sources",
+      "ROOT-002": "adoption absence directly stated in the claim ('no adopted rule'); no adoption record in execution_ir (all NOT_ADOPTED) — absence proven",
+      "ROOT-003": "structural absence of the required join path; authority concepts exist only as keyword-level UNRESOLVED claims; no semantic join to code — exercisable authority absent",
+      "ROOT-004": "no precedence rule, no adoption record, no adjudication record, no semantic join; classification frozen per rules — authority cannot be proven, therefore null"
+    },
+    "authority_conflicts": [
+      {
+        "roots": [
+          "ROOT-001",
+          "ROOT-004"
+        ],
+        "conflict": "mutual dependency and frozen classification; preserved, not resolved",
+        "status": "PRESERVED"
+      },
+      {
+        "roots": [
+          "ROOT-004"
+        ],
+        "conflict": "wal.lisp rule vs bridge rule, no precedence",
+        "status": "PRESERVED (frozen)"
+      },
+      {
+        "roots": [
+          "ROOT-003"
+        ],
+        "conflict": "code-asserted durability vs open design definition",
+        "status": "PRESERVED"
+      }
+    ],
+    "unknowns_preserved": [
+      "ROOT-003 name mismatch: mission says CANONICAL_AUTHORITY, evidence sources say DURABILITY_NORM",
+      "decision owners and decision sources unknown for all roots — no source names any",
+      "test corpus: violates vs encodes norm, undetermined pending ROOT-002 decision",
+      "adoption definitions themselves not yet adopted",
+      "governance file contracts/governance/ADJUDICATIONS.md exists in repo but is outside the permitted evidence sources; not consulted; potential adjudication records unverified",
+      "claim mdsu0035#7296fb4b84 has no semantic join to code; its authority relevance unproven",
+      "no decision on which norm takes precedence exists for any root"
+    ],
+    "adoption_record_count": 0,
+    "approval_record_count": 0,
+    "adjudication_record_count": 0,
+    "precedence_rule_count": 0,
+    "authority_record_count": 14,
+    "count_notes": {
+      "adoption_record_count": "0 established; 1,561 EXEC records all NOT_ADOPTED; 10 claim records mention adoption (10 negative/unresolved statements, e.g. 'no adoption record exists')",
+      "approval_record_count": "0 established; 1 claim record mentioning Approval Authority, UNRESOLVED, zero implementation evidence",
+      "adjudication_record_count": "0 completed adjudications; 3 REQUIRES_ADJUDICATION candidates in adjudication_candidates.json (ROOT-001/002/003; ROOT-004 absent)",
+      "precedence_rule_count": "0 encoded rules; 5 claim records reference precedence, 2 explicitly state absence ('no precedence rule encoded', 'no precedence rule between them')",
+      "authority_record_count": "14 claim records contain authority concepts; all UNRESOLVED, all keyword-level or zero-hit, none semantically joined to code"
+    }
+  }
+}

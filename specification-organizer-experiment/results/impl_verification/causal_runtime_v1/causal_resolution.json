@@ -1,0 +1,111 @@
+[
+ {
+  "root": "ROOT-001",
+  "name": "RECOVERY_AUTHORITY",
+  "cause": [
+   "no adjudicated authority for recovery decisions",
+   "wal.lisp resolves PREPARED by assumption at recovery start",
+   "wal_triad_bridge.py refuses to resolve IN_DOUBT without an explicit frame"
+  ],
+  "impact": [
+   "CON-INV-07 cannot be satisfied while both surfaces exist",
+   "recovery outcome depends on which surface runs",
+   "replay and canonical effect can diverge after a crash"
+  ],
+  "dependency": [
+   "adjudicate recovery authority",
+   "then re-classify code#03 vs code#05",
+   "then re-run the crash-recovery test against the adopted rule"
+  ],
+  "resolution": "adjudicate which surface holds recovery authority; no winner can be assigned from the corpus",
+  "resolution_type": "AUTHORITY_DECISION_REQUIRED",
+  "blocked_by": "authority_conflict (wal.lisp resolves at recovery start, bridge is fail-closed)",
+  "sequenced_actions": [
+   "re-classify code#03 vs code#05",
+   "re-run tests/test_cae_e2e.py:205-235 against the adopted rule",
+   "the test currently asserts wal.lisp behaviour, which is not an adoption of it"
+  ],
+  "status": "UNRESOLVED_ADJUDICATION_REQUIRED"
+ },
+ {
+  "root": "ROOT-002",
+  "name": "WAL_TAIL_POLICY",
+  "cause": [
+   "storage norm for partial tail records never adopted",
+   "implementation asserts truncation as the recovery operation",
+   "test asserts the same behaviour"
+  ],
+  "impact": [
+   "claim mdsu0034#901f414c31 is violated",
+   "any append-only claim that depends on the tail is unclassifiable",
+   "test corpus encodes the unadopted decision"
+  ],
+  "dependency": [
+   "depends on ROOT-001",
+   "adopt storage norm",
+   "then decide whether the existing test is a violation or a specification of the norm"
+  ],
+  "resolution": "adopt an explicit storage norm for incomplete records at recovery, or retract the test expectation",
+  "resolution_type": "NORM_ADOPTION_REQUIRED",
+  "blocked_by": "norm exists as a design claim only; implementation (code#02) contradicts it; implementation != adoption",
+  "sequenced_actions": [
+   "define tail-policy: preserve | truncate-on-adopted-norm | quarantine",
+   "make code#02 conditional on the adopted norm",
+   "the existing test asserting truncation is evidence of divergence, not of adoption"
+  ],
+  "status": "UNRESOLVED_ADJUDICATION_REQUIRED"
+ },
+ {
+  "root": "ROOT-003",
+  "name": "DURABILITY_NORM",
+  "cause": [
+   "durability definition left open in the design",
+   "code#01 defines it as fdatasync success",
+   "code asserts precedence via its local tx table without a Canonical History comparison path"
+  ],
+  "impact": [
+   "durability claim is implementation-defined, not adopted",
+   "precedence requirement cannot be honoured",
+   "linearization-point claim is VERIFIED only under the unadopted definition"
+  ],
+  "dependency": [
+   "adopt durability norm",
+   "then re-verify code#01 against it",
+   "then build the Canonical History join path for precedence semantics"
+  ],
+  "resolution": "define durability precedence against Canonical History; code#06 satisfies only the txid/duplicate half of the claim",
+  "resolution_type": "DEFINITION_REQUIRED",
+  "blocked_by": "no Canonical History surface exists in the code corpus; the structural half of the claim has no join path",
+  "sequenced_actions": [
+   "decide local-durability vs history-precedence",
+   "implement the comparison path or restrict the claim to local scope"
+  ],
+  "status": "UNRESOLVED_ADJUDICATION_REQUIRED"
+ },
+ {
+  "root": "ROOT-004",
+  "name": "SURFACE_DIVERGENCE",
+  "cause": [
+   "two independent implementation surfaces for the same state semantics",
+   "no precedence rule between them",
+   "no adoption record"
+  ],
+  "impact": [
+   "state classification is ambiguous",
+   "STOP condition active: authority_conflict",
+   "no VERIFIED status can be assigned to the divergent nodes until authority is fixed"
+  ],
+  "dependency": [
+   "depends on ROOT-001 and ROOT-003",
+   "adjudication must precede any classification change"
+  ],
+  "resolution": "cannot be resolved here: no adjudicated authority; classification stays frozen (no win/lose)",
+  "resolution_type": "AUTHORITY_CONFLICT",
+  "blocked_by": "hard constraint authority_conflict — two surfaces encode opposite rules for the same state semantics",
+  "sequenced_actions": [
+   "adjudication by authority is the only path",
+   "then re-run phase 3 for the affected rules"
+  ],
+  "status": "UNRESOLVED_ADJUDICATION_REQUIRED"
+ }
+]

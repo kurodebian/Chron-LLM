@@ -1,0 +1,51 @@
+{"artifact": "runtime/phase-d/wal.lisp", "symbol": "append-and-sync", "condition": "record fully written (written == length)", "operation": "fdatasync", "target": "wal_fd", "effect": "durability asserted; commit effect returns success only after sync"}
+{"artifact": "runtime/phase-d/wal.lisp", "symbol": "recover-from-wal", "condition": "recovery start, no precondition checked", "operation": "truncate", "target": "wal_tail", "effect": "tail_removed unconditionally"}
+{"artifact": "runtime/phase-d/wal.lisp", "symbol": "recover-from-wal", "condition": "state == :prepared at recovery", "operation": "resolve", "target": "prepared_tx", "effect": "abort (ABORT record appended)"}
+{"artifact": "runtime/phase-d/wal.lisp", "symbol": "recover-from-wal", "condition": "state == :committed", "operation": "apply", "target": "canonical-apply-fn", "effect": "canonical effect applied (rollforward)"}
+{"artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py", "symbol": "frame ingest", "condition": "frame_type == PREPARED", "operation": "retain in in_doubt", "target": "txid frames", "effect": "no canonical effect until an explicit ABORTED/COMMITTED frame"}
+{"artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py", "symbol": "I3", "condition": "same txid + differing payload digest", "operation": "halt", "target": "frame", "effect": "sticky fail-closed reject"}
+{"artifact": "tests/test_cae_e2e.py", "symbol": "test_phase_a_recover_truncates_uncommitted_prepare", "condition": "crash before commit", "operation": "assert truncate", "target": "uncommitted PREPARED records", "effect": "asserts tail_removed (affirms code#02 behaviour)"}
+{"artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/core.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/package.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/phase-d/wal.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "llama-agent/chron-llm-immune.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/phase-d/wal.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/core.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/package.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/package.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/t5_stateful_reducer_audit_runner.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/t3_reducer_test_runner.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/setup_schemas.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/schema_definitions.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/update_phase7a_inventory.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/t1_b_hypothesis_runner.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/core.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/package.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/core.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/core.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/phase-c/projection.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/core.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/package.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "tests/test_cae_e2e.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/phase-d/wal.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "llama-agent/delta3-agent.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/core.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/package.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/src/causal_kernel/extractor/extract_component.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/phase-c/projection.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/audit_delta1_structure.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/update_phase7a_inventory.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/audit_delta1_structure.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/phase-d/wal.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "llama-agent/generate.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r0/trace.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/phase-f/freeze-test.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/core.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/phase-d/edge.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/r1/core.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "runtime/phase-e/analyze.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "llama-agent/quicklisp.lisp", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}
+{"artifact": "chron-llm-causal/tests/test_wal_triad_bridge.py", "symbol": null, "condition": null, "operation": null, "target": null, "effect": null}

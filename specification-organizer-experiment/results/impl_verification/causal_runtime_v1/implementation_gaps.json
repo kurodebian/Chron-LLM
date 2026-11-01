@@ -1,0 +1,97 @@
+{
+ "classification": {
+  "MISSING_EVIDENCE": 37,
+  "UNRESOLVED": 1520,
+  "VERIFIED": 1,
+  "CONFLICT": 3
+ },
+ "executable_now": [],
+ "executable_now_note": "nothing is executable: a rule needs semantic proof AND an adoption record; the corpus has semantic proof for one rule but no adoption record for any rule",
+ "promotable_pending_adoption": [
+  "mdsu0033#6ca9741022"
+ ],
+ "claims_total": 3304,
+ "claims_promoted_to_rules": 1561,
+ "claims_not_promoted_no_normalized_content": 1743,
+ "executable_rules": [
+  "mdsu0033#6ca9741022"
+ ],
+ "rules_with_no_semantic_join": 1557,
+ "keyword_match_forbidden_excluded": 44,
+ "adoption_gap": {
+  "implementation_without_adoption_record": 1561,
+  "adoption_records_found": 0,
+  "note": "code implements a behaviour; no norm-adoption record exists in the corpus, so no rule can be marked adopted"
+ },
+ "joined_code_nodes": [
+  "code#01",
+  "code#02",
+  "code#03",
+  "code#05",
+  "code#06",
+  "code#07"
+ ],
+ "code_nodes_without_semantic_join": [
+  "code#04",
+  "site#019ec3cc2d",
+  "site#01b29dd308",
+  "site#0e1207f3f1",
+  "site#10b91b6674",
+  "site#129c719095",
+  "site#1da8b935a3",
+  "site#2973db5d75",
+  "site#2987eac67f",
+  "site#3054a4dd7d",
+  "site#314aee8eab",
+  "site#368d40580f",
+  "site#3b1d136616",
+  "site#41c49dab80",
+  "site#4276fc9108",
+  "site#4900f0f8c3",
+  "site#5dfe3152bf",
+  "site#5e8adba0f3",
+  "site#62a9bc2c7f",
+  "site#66b92d0e92",
+  "site#67b148e634",
+  "site#86f99d0d94",
+  "site#8aedd1e832",
+  "site#958f4dc9c1",
+  "site#95ee4dd917",
+  "site#9885009e4f",
+  "site#ac82104513",
+  "site#ad79007a69",
+  "site#b087ae68aa",
+  "site#b2cdb02cb7",
+  "site#b600eb0a2a",
+  "site#b6e4b54757",
+  "site#bf9ae4d4ae",
+  "site#c0f209cb9a",
+  "site#c1541fe729",
+  "site#ce41ff564c",
+  "site#e7c71ad193",
+  "site#ed142aaf57",
+  "site#f010fb183a",
+  "site#f05d89c729",
+  "site#f17054f5ae",
+  "site#f74ac07a63",
+  "site#f9d6e25d0a",
+  "site#fad9a9e2bd",
+  "site#fcf502206b"
+ ],
+ "rules_without_root_mapping": 38,
+ "root_mapping_note": "rules keep root nil when CLAIM_IR recorded no root_cause; attribution by domain (e.g. the single VERIFIED rule concerns durability, which ROOT-003 governs) is not asserted here because the claim record does not state it",
+ "retracted_findings": [
+  {
+   "finding": "tie-break by event_id conflict",
+   "reason": "the cited artifact chron-llm-causal/tests/test_event_store.py does not exist; no norm claim with that semantics was recorded in the ledger — treated as MISSING_EVIDENCE, not as a conflict",
+   "status": "RETRACTED"
+  }
+ ],
+ "structural_gap": [
+  {
+   "claim": "mdsu0035#81bdafbbc1",
+   "gap": "duplicate detection is implemented for txid (code#06) but the Canonical-History precedence half has no implementation surface",
+   "kind": "NO_JOIN_PATH"
+  }
+ ]
+}

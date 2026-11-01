@@ -1,0 +1,20 @@
+{
+  "adjudication": "index digest re-record (derived artifact)",
+  "adjudicated_utc": "2026-10-30T02:44:55+00:00",
+  "path": "md_sheets/chapters_index.md",
+  "manifest_id": "CORPUS-FREEZE-MDSHEETS-01",
+  "recorded_sha256": "ea49ceccd6f4a8eae0e62d5c9f2afc722a3632feda52990c5b8ab1f343b38742",
+  "live_sha256": "769645903bb7fc6efd4c5b595fa8390002ebc033fb74b75e09d0fc35bbac79a3",
+  "live_bytes": 72440,
+  "basis": "user adjudication 2026-10-30: re-record as derived artifact. Uncommitted generator change (build_chapters_index.py) adds --exclude, which excludes md_sheets/chron_os_architecture_summary.md, a non-chapter sheet in the sheet directory. Pinned corpus chapter files re-hash MATCH; corpus content unchanged.",
+  "pinned_files_rehash": {
+    "md_sheets/1-74.md": true,
+    "md_sheets/75-99.md": true,
+    "md_sheets/100-124.md": true
+  },
+  "frozen_manifest_untouched": true,
+  "uncommitted_files": [
+    "build_chapters_index.py",
+    "md_sheets/chapters_index.md"
+  ]
+}

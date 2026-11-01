@@ -1,0 +1,92 @@
+{
+ "conflicts": [
+  {
+   "claim_ref": "STEP-31 §31.4",
+   "step": "STEP-31",
+   "match": [
+    "truncat",
+    "切詰め"
+   ],
+   "claim_text": "truncation forbidden without an explicit storage norm",
+   "code": {
+    "path": "runtime/phase-d/wal.lisp",
+    "line": "250-252",
+    "behavior": "recovery unconditionally truncates to last valid offset"
+   },
+   "edge": "VIOLATES",
+   "status": "CONFLICT",
+   "tests_also_affirm": "tests/test_cae_e2e.py:205-235 asserts the truncation behaviour"
+  },
+  {
+   "claim_ref": "STEP-30 CON-INV-07 / STEP-31 FAC-INV-06",
+   "step": "STEP-30",
+   "match": [
+    "CON-INV-07",
+    "IN_DOUBT"
+   ],
+   "claim_text": "IN_DOUBT outcome must not be guessed",
+   "code": {
+    "path": "runtime/phase-d/wal.lisp",
+    "line": "259-271",
+    "behavior": "PREPARED resolved to ABORT at recovery start, no IN_DOUBT state"
+   },
+   "edge": "VIOLATES",
+   "status": "CONFLICT",
+   "tests_also_affirm": null
+  },
+  {
+   "claim_ref": "STEP-30 durability definition",
+   "step": "STEP-30",
+   "match": [
+    "durability",
+    "耐久性"
+   ],
+   "claim_text": "durability definition left unresolved in the design",
+   "code": {
+    "path": "runtime/phase-d/wal.lisp",
+    "line": "107-117",
+    "behavior": "durability defined as fdatasync success"
+   },
+   "edge": "VIOLATES",
+   "status": "CONFLICT",
+   "tests_also_affirm": null
+  },
+  {
+   "claim_ref": "STEP-32 Transaction Index precedence",
+   "step": "STEP-32",
+   "match": [
+    "Transaction Index",
+    "優先"
+   ],
+   "claim_text": "index must not take precedence over Canonical History on conflict",
+   "code": {
+    "path": "runtime/phase-d/wal.lisp",
+    "line": "recovery",
+    "behavior": "status resolved from local tx table, no Canonical History cross-check"
+   },
+   "edge": "VIOLATES",
+   "status": "CONFLICT",
+   "tests_also_affirm": null
+  },
+  {
+   "claim_ref": "STEP-31 §31.9 tie-break",
+   "step": "STEP-31",
+   "match": [
+    "tie-break",
+    "同値",
+    "同時",
+    "順序"
+   ],
+   "claim_text": "equal-timestamp tie-break left open",
+   "code": {
+    "path": "chron-llm-causal/tests/test_event_store.py",
+    "line": "test_timestamp_collision_tie_break",
+    "behavior": "deterministic event_id tie-break decided without an adopted norm"
+   },
+   "edge": "VIOLATES",
+   "status": "CONFLICT",
+   "tests_also_affirm": "test encodes an unadopted decision"
+  }
+ ],
+ "note": "all conflicts are design-norm vs code-behavior; no claim-to-claim conflict recorded"
+}
