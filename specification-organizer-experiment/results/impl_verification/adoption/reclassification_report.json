@@ -1,0 +1,186 @@
+{
+ "mode": "RECLASSIFY_ADOPTION",
+ "generated_at": "2026-11-03T01:18:21.308782+00:00",
+ "provenance_note": "Statuses reached via adoption carry provenance tags; plain VERIFIED means pin identity/design-only as before. Adjudication method: LLM_ADJUDICATION, tier ADOPTED_LLM_PROVISIONAL pending human ratification.",
+ "adoption_records": [
+  {
+   "adr_id": "ADR-001",
+   "target": "ROOT-001",
+   "decision": "RECOVERY_AUTHORITY = wal_triad_bridge fail-closed IN_DOUBT retention; wal.lisp start-of-recovery ABORT resolution is a violation pending repair",
+   "adopted_rule": "PREPARED transactions are never resolved by assumption at recovery start. Unresolved transactions stay IN_DOUBT — isolated, never canonical, never in the replay set — until an explicit resolution frame (COMMITTED or ABORTED) arrives.",
+   "status": "ADOPTED_LLM_PROVISIONAL",
+   "method": "LLM_ADJUDICATION",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "confidence": "medium"
+  },
+  {
+   "adr_id": "ADR-002",
+   "target": "ROOT-002",
+   "decision": "WAL_TAIL_POLICY = quarantine (preserve partial tail records, exclude from canonical replay); truncation forbidden without an explicitly adopted norm plus recorded evidence",
+   "adopted_rule": "Incomplete records at recovery are quarantined, never truncated. Truncation requires an explicitly adopted storage norm and recorded evidence; the existing truncation behaviour is a violation pending repair.",
+   "status": "ADOPTED_LLM_PROVISIONAL",
+   "method": "LLM_ADJUDICATION",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "confidence": "medium"
+  },
+  {
+   "adr_id": "ADR-003",
+   "target": "ROOT-003",
+   "decision": "DURABILITY_NORM = fdatasync success of a fully written record as the local linearization point; Canonical-History precedence restricted to local scope until a join path exists",
+   "adopted_rule": "Durability = successful fdatasync of a fully written record (append-and-sync). Precedence against Canonical History is not adopted: transaction-index claims hold in local scope only until a Canonical-History comparison path exists.",
+   "status": "ADOPTED_LLM_PROVISIONAL",
+   "method": "LLM_ADJUDICATION",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "confidence": "medium"
+  },
+  {
+   "adr_id": "ADR-004",
+   "target": "ROOT-004",
+   "decision": "PRECEDENCE RULE = wal_triad_bridge is canonical authority for transaction/state semantics; runtime/phase-d/wal.lisp is a legacy physical WAL surface, non-authoritative for canonical state until aligned with ADR-001/ADR-002",
+   "adopted_rule": "When implementation surfaces diverge on the same state semantics, the fail-closed bridge is authoritative. The wal.lisp recovery path is legacy and non-authoritative until repaired to the adopted norms.",
+   "status": "ADOPTED_LLM_PROVISIONAL",
+   "method": "LLM_ADJUDICATION",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "confidence": "medium"
+  },
+  {
+   "adr_id": "ADR-005",
+   "target": "CHAPTER_SEGMENTATION",
+   "decision": "CONVENTION = full-chapter span (ledger pin ranges) is the unit of chapter identity going forward; pre-regen records stay labelled as covering pre-regen ranges",
+   "adopted_rule": "Chapter identity is the ledger pin range (full-chapter span), not an interior-H1 split. Records written under the pre-regen segmentation are labelled as covering pre-regen ranges; they are not rewritten.",
+   "status": "ADOPTED_LLM_PROVISIONAL",
+   "method": "LLM_ADJUDICATION",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "confidence": "high"
+  },
+  {
+   "adr_id": "ADR-006",
+   "target": "P1_SCOPE",
+   "decision": "SCOPE = pass stays scoped to the freeze-pinned 127-unit corpus; the 99 unpinned chapters (125-149.md, 150-174.md, 175-199.md, 200-218.md) are excluded until pinned and freeze-recorded",
+   "adopted_rule": "The implementation-verification pass covers exactly the CORPUS-FREEZE-MDSHEETS-01 chapter files (127 units). Unpinned chapters may enter only after pinning and a recorded freeze; extending the pass without a freeze is not authorized.",
+   "status": "ADOPTED_LLM_PROVISIONAL",
+   "method": "LLM_ADJUDICATION",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "confidence": "high"
+  },
+  {
+   "adr_id": "ADR-007",
+   "target": "INDEX_RE_RECORD",
+   "decision": "INDEX = adopt the regenerated chapters_index.md (live digest 595a41b66c...) as the index record; chron_os_architecture_summary.md excluded as a non-chapter sheet; re-record requires human ratification",
+   "adopted_rule": "chapters_index.md carries the live regen digest; the recorded pre-regen digest is superseded with provenance. Index re-recording is provisional until human ratification; the freeze manifest for chapter files is untouched.",
+   "status": "ADOPTED_LLM_PROVISIONAL",
+   "method": "LLM_ADJUDICATION",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "confidence": "high"
+  },
+  {
+   "adr_id": "ADR-008",
+   "target": "ANCHOR_DIGEST_CONVENTION",
+   "decision": "CONVENTION = LF-only line convention adopted; the three recorded anchor-line digest mismatches (mdsu0000, mdsu0014, mdsu0016) stay reported as observed, not corrected in the immutable layer",
+   "adopted_rule": "Anchor-line digests are computed under the LF-only corpus convention without a trailing-newline convention. Existing mismatched stored digests remain as recorded evidence of the old convention; re-recording pending ratification.",
+   "status": "ADOPTED_LLM_PROVISIONAL",
+   "method": "LLM_ADJUDICATION",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "confidence": "high"
+  }
+ ],
+ "claim_status_counts": {
+  "MISSING_EVIDENCE": 37,
+  "UNRESOLVED": 3262,
+  "VERIFIED_VIA_ADOPTED_NORM": 1,
+  "AGREED_VIA_LLM_ADJUDICATION": 2,
+  "CLAIM_RESTRICTED_BY_ADOPTED_NORM": 2
+ },
+ "claims_total": 3304,
+ "applied_effects": [
+  {
+   "adr_id": "ADR-001",
+   "claim": "mdsu0033#dee9153c1e",
+   "old_status": "CONFLICT",
+   "new_status": "AGREED_VIA_LLM_ADJUDICATION",
+   "artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py",
+   "reason": "CON-INV-07 adopted as governing recovery norm; bridge satisfies it; wal.lisp recorded as violation pending repair",
+   "provenance": "ADOPTED_LLM_PROVISIONAL"
+  },
+  {
+   "adr_id": "ADR-002",
+   "claim": "mdsu0034#901f414c31",
+   "old_status": "CONFLICT",
+   "new_status": "AGREED_VIA_LLM_ADJUDICATION",
+   "artifact": "runtime/phase-d/wal.lisp",
+   "reason": "anti-truncation norm adopted as governing tail policy; code#02 truncation and the test assertion recorded as violations pending repair",
+   "provenance": "ADOPTED_LLM_PROVISIONAL"
+  },
+  {
+   "adr_id": "ADR-003",
+   "claim": "mdsu0033#6ca9741022",
+   "old_status": "VERIFIED",
+   "new_status": "VERIFIED_VIA_ADOPTED_NORM",
+   "artifact": "runtime/phase-d/wal.lisp",
+   "reason": "linearization point = durability confirmation adopted; code#01 semantic join holds under the adopted norm",
+   "provenance": "ADOPTED_LLM_PROVISIONAL"
+  },
+  {
+   "adr_id": "ADR-003",
+   "claim": "mdsu0035#81bdafbbc1",
+   "old_status": "CONFLICT",
+   "new_status": "CLAIM_RESTRICTED_BY_ADOPTED_NORM",
+   "artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py",
+   "reason": "txid duplicate detection holds locally under adopted durability norm; Canonical-History precedence half stays unresolved pending join path",
+   "provenance": "ADOPTED_LLM_PROVISIONAL"
+  },
+  {
+   "adr_id": "ADR-004",
+   "claim": "mdsu0035#7296fb4b84",
+   "old_status": "UNRESOLVED",
+   "new_status": "CLAIM_RESTRICTED_BY_ADOPTED_NORM",
+   "artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py",
+   "reason": "WAL state-semantics claim classified under adopted authority; evidence remains keyword-level, so scope is restricted, not verified",
+   "provenance": "ADOPTED_LLM_PROVISIONAL"
+  }
+ ],
+ "conflict_matrix_entries": [
+  {
+   "claim": "mdsu0033#dee9153c1e",
+   "artifact": "code#03",
+   "root": "ROOT-001",
+   "status": "CONFLICT",
+   "why": "code resolves PREPARED to ABORT at recovery start with no confirmation step — assumption is the operation itself"
+  },
+  {
+   "claim": "mdsu0034#901f414c31",
+   "artifact": "code#02",
+   "root": "ROOT-002",
+   "status": "CONFLICT",
+   "why": "claim forbids truncation without an explicit storage norm and evidence; code truncates on recovery start with no such precondition"
+  },
+  {
+   "claim": "mdsu0034#901f414c31",
+   "artifact": "code#07",
+   "root": "ROOT-002",
+   "status": "CONFLICT",
+   "why": "test asserts exactly the behaviour the claim forbids; test and design norm cannot both hold"
+  },
+  {
+   "claim": "mdsu0035#81bdafbbc1",
+   "artifact": "no-join-path",
+   "root": "ROOT-003",
+   "status": "CONFLICT",
+   "why": "structural: precedence semantics require a comparison path with Canonical History; no Canonical History surface exists in the code corpus, so the requirement cannot be satisfied — code resolves status from its local tx table alone"
+  },
+  {
+   "claim": "mdsu0035#7296fb4b84",
+   "artifact": "code#03",
+   "root": "ROOT-004",
+   "status": "CONFLICT",
+   "why": "recovery-evidence precedence is undecided in the design; two surfaces encode opposite rules (wal.lisp resolves at start, bridge is fail-closed)"
+  }
+ ],
+ "conflicts_remaining_unadjudicated": [],
+ "inputs_digest": {
+  "adoption_records_sha256": "47a9ce0f66e288e73d505121022193288607e4cfea56021912e34194a47895e7",
+  "claim_ir_v2_sha256": "c488f2a016a2ba7893c23cc2cc20b41ec8b351cd9d60f0ad2d6749b154757f32",
+  "conflict_matrix_sha256": "39e2c902c3fc337e39b197370fb5ae843c8ba72a2bce0e4bc9a7ceb1daa2a971",
+  "causal_resolution_sha256": "0d89252b6541a219b9bd8da65aeaed31838c4e8f9b2ff7ed7ac008d8eca1cada"
+ }
+}

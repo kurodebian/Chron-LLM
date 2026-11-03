@@ -1,0 +1,298 @@
+[
+ {
+  "adr_id": "ADR-001",
+  "target": "ROOT-001",
+  "decision": "RECOVERY_AUTHORITY = wal_triad_bridge fail-closed IN_DOUBT retention; wal.lisp start-of-recovery ABORT resolution is a violation pending repair",
+  "adopted_rule": "PREPARED transactions are never resolved by assumption at recovery start. Unresolved transactions stay IN_DOUBT — isolated, never canonical, never in the replay set — until an explicit resolution frame (COMMITTED or ABORTED) arrives.",
+  "adjudication": {
+   "method": "LLM_ADJUDICATION",
+   "adjudicator": "hermes-agent",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "date": "2026-11-03",
+   "rationale": "CON-INV-07 forbids guessing an IN_DOUBT outcome. The bridge encodes exactly that invariant (fail-closed, IN_DOUBT isolated, never canonical); wal.lisp encodes the opposite (ABORT by assumption). The design claim is the norm; the bridge satisfies it, so the norm-claim-consistent surface is adopted as authority. Implementation != adoption: wal.lisp behaviour is rejected because ratifying it would ratify the assumption the norm forbids.",
+   "confidence": "medium",
+   "rejected_alternatives": [
+    "adopt wal.lisp ABORT-on-recovery as the norm (rejected: violates CON-INV-07; ratifies an unadopted implementation-defined behaviour)",
+    "keep both surfaces unranked (rejected: leaves authority_conflict STOP active and classification frozen)"
+   ],
+   "risks": [
+    "tests/test_cae_e2e.py asserts the opposite behaviour and will fail until reconciled",
+    "wal.lisp lineage consumers may rely on ABORT-on-recovery"
+   ]
+  },
+  "cited_evidence": [
+   "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py:19",
+   "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py:199-214",
+   "runtime/phase-d/wal.lisp:259-271",
+   "tests/test_cae_e2e.py:205-236"
+  ],
+  "classification_effects": [
+   {
+    "claim": "mdsu0033#dee9153c1e",
+    "new_status": "AGREED_VIA_LLM_ADJUDICATION",
+    "artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py",
+    "reason": "CON-INV-07 adopted as governing recovery norm; bridge satisfies it; wal.lisp recorded as violation pending repair"
+   }
+  ],
+  "sequenced_actions": [
+   "re-classify code#03 vs code#05 under adopted authority",
+   "repair wal.lisp recovery to preserve IN_DOUBT instead of ABORT-by-assumption",
+   "re-run crash-recovery test against adopted rule"
+  ],
+  "status": "ADOPTED_LLM_PROVISIONAL"
+ },
+ {
+  "adr_id": "ADR-002",
+  "target": "ROOT-002",
+  "decision": "WAL_TAIL_POLICY = quarantine (preserve partial tail records, exclude from canonical replay); truncation forbidden without an explicitly adopted norm plus recorded evidence",
+  "adopted_rule": "Incomplete records at recovery are quarantined, never truncated. Truncation requires an explicitly adopted storage norm and recorded evidence; the existing truncation behaviour is a violation pending repair.",
+  "adjudication": {
+   "method": "LLM_ADJUDICATION",
+   "adjudicator": "hermes-agent",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "date": "2026-11-03",
+   "rationale": "The design claim forbids truncation without an explicit storage norm and the chapter declares Storage Contract and WAL Tail Policy unresolved. Adopting quarantine preserves append-only semantics and keeps the design norm governing; adopting truncation would ratify implementation-defined behaviour that the corpus itself prohibits (AGENTS.md constraints 4/5: unsupported meaning must not be silently invented).",
+   "confidence": "medium",
+   "rejected_alternatives": [
+    "adopt truncate-on-recovery as the storage norm (rejected: would ratify code behaviour against an unresolved design norm; test asserts it but test != adoption)",
+    "leave tail policy unadopted (rejected: ROOT-002 stays blocked and dependent claims unclassifiable)"
+   ],
+   "risks": [
+    "tests/test_cae_e2e.py asserts truncation as expected and diverges from the adopted norm",
+    "quarantined tail records accumulate until an explicit resolution protocol exists"
+   ]
+  },
+  "cited_evidence": [
+   "runtime/phase-d/wal.lisp:250-252",
+   "tests/test_cae_e2e.py:205-236"
+  ],
+  "classification_effects": [
+   {
+    "claim": "mdsu0034#901f414c31",
+    "new_status": "AGREED_VIA_LLM_ADJUDICATION",
+    "artifact": "runtime/phase-d/wal.lisp",
+    "reason": "anti-truncation norm adopted as governing tail policy; code#02 truncation and the test assertion recorded as violations pending repair"
+   }
+  ],
+  "sequenced_actions": [
+   "make code#02 truncation conditional on an adopted norm (default: quarantine)",
+   "reconcile tests/test_cae_e2e.py expectation with the adopted norm",
+   "re-run E2E after repair"
+  ],
+  "status": "ADOPTED_LLM_PROVISIONAL"
+ },
+ {
+  "adr_id": "ADR-003",
+  "target": "ROOT-003",
+  "decision": "DURABILITY_NORM = fdatasync success of a fully written record as the local linearization point; Canonical-History precedence restricted to local scope until a join path exists",
+  "adopted_rule": "Durability = successful fdatasync of a fully written record (append-and-sync). Precedence against Canonical History is not adopted: transaction-index claims hold in local scope only until a Canonical-History comparison path exists.",
+  "adjudication": {
+   "method": "LLM_ADJUDICATION",
+   "adjudicator": "hermes-agent",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "date": "2026-11-03",
+   "rationale": "The chapter declares the durability definition unresolved; code#01 defines it as fdatasync success and the semantic join shows the same condition and same effect as the linearization-point claim. Adopting the fdatasync definition gives the promotable claim an adopted norm; the Canonical-History half of the txid-precedence claim has no implementation surface, so it is restricted rather than violated — the structural gap stays reported, not guessed.",
+   "confidence": "medium",
+   "rejected_alternatives": [
+    "adopt history-precedence durability (rejected: no Canonical History surface exists in the code corpus — cannot be verified)",
+    "leave durability unadopted (rejected: promotable claim mdsu0033#6ca9741022 stays unpromoted despite semantic proof)"
+   ],
+   "risks": [
+    "fdatasync durability is machine-level durability, not cross-surface precedence",
+    "restriction must be lifted only after the join path is built and verified"
+   ]
+  },
+  "cited_evidence": [
+   "runtime/phase-d/wal.lisp:107-117",
+   "runtime/r1/core.lisp:3",
+   "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py:185-193"
+  ],
+  "classification_effects": [
+   {
+    "claim": "mdsu0033#6ca9741022",
+    "new_status": "VERIFIED_VIA_ADOPTED_NORM",
+    "artifact": "runtime/phase-d/wal.lisp",
+    "reason": "linearization point = durability confirmation adopted; code#01 semantic join holds under the adopted norm"
+   },
+   {
+    "claim": "mdsu0035#81bdafbbc1",
+    "new_status": "CLAIM_RESTRICTED_BY_ADOPTED_NORM",
+    "artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py",
+    "reason": "txid duplicate detection holds locally under adopted durability norm; Canonical-History precedence half stays unresolved pending join path"
+   }
+  ],
+  "sequenced_actions": [
+   "re-verify code#01 against the adopted norm",
+   "build Canonical-History join path for precedence semantics",
+   "lift restriction only after join path verified"
+  ],
+  "status": "ADOPTED_LLM_PROVISIONAL"
+ },
+ {
+  "adr_id": "ADR-004",
+  "target": "ROOT-004",
+  "decision": "PRECEDENCE RULE = wal_triad_bridge is canonical authority for transaction/state semantics; runtime/phase-d/wal.lisp is a legacy physical WAL surface, non-authoritative for canonical state until aligned with ADR-001/ADR-002",
+  "adopted_rule": "When implementation surfaces diverge on the same state semantics, the fail-closed bridge is authoritative. The wal.lisp recovery path is legacy and non-authoritative until repaired to the adopted norms.",
+  "adjudication": {
+   "method": "LLM_ADJUDICATION",
+   "adjudicator": "hermes-agent",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "date": "2026-11-03",
+   "rationale": "Two surfaces encode opposite recovery rules with no precedence rule and no adoption record; the authority_conflict STOP cannot lift without adjudication. The bridge is fail-closed and matches the adopted norms of ADR-001/ADR-002/ADR-003; wal.lisp matches none of them, so precedence follows the adopted norms. The divergent-node claim retains keyword-level-only evidence, so its status is restricted, not VERIFIED.",
+   "confidence": "medium",
+   "rejected_alternatives": [
+    "declare wal.lisp authoritative (rejected: contradicts all adopted norms)",
+    "freeze classification indefinitely (rejected: STOP condition stays active; adjudication is the only path named in causal_resolution)"
+   ],
+   "risks": [
+    "two surfaces continue to exist; divergence is reported, not deleted",
+    "restriction statuses are authority-scope facts, not semantic proofs"
+   ]
+  },
+  "cited_evidence": [
+   "runtime/phase-d/wal.lisp:259-271",
+   "runtime/phase-d/wal.lisp:250-252",
+   "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py:19",
+   "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py:169-171"
+  ],
+  "classification_effects": [
+   {
+    "claim": "mdsu0035#7296fb4b84",
+    "new_status": "CLAIM_RESTRICTED_BY_ADOPTED_NORM",
+    "artifact": "chron-llm-causal/src/causal_kernel/bridge/wal_triad_bridge.py",
+    "reason": "WAL state-semantics claim classified under adopted authority; evidence remains keyword-level, so scope is restricted, not verified"
+   }
+  ],
+  "sequenced_actions": [
+   "re-run phase 3 for affected rules",
+   "repair wal.lisp to adopted norms or mark it legacy explicitly"
+  ],
+  "status": "ADOPTED_LLM_PROVISIONAL"
+ },
+ {
+  "adr_id": "ADR-005",
+  "target": "CHAPTER_SEGMENTATION",
+  "decision": "CONVENTION = full-chapter span (ledger pin ranges) is the unit of chapter identity going forward; pre-regen records stay labelled as covering pre-regen ranges",
+  "adopted_rule": "Chapter identity is the ledger pin range (full-chapter span), not an interior-H1 split. Records written under the pre-regen segmentation are labelled as covering pre-regen ranges; they are not rewritten.",
+  "adjudication": {
+   "method": "LLM_ADJUDICATION",
+   "adjudicator": "hermes-agent",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "date": "2026-11-03",
+   "rationale": "The post-regen ledger pins full-chapter spans and all 127 unit digests reproduce from live bytes under that convention; interior-H1 units exist, so H1-based identity cannot pin units. Ratifying the convention already used by P1/P2 records makes the mixed-convention log explicit instead of silently normalized. No per-claim effect: the convention governs the pipeline, not individual claims.",
+   "confidence": "high",
+   "rejected_alternatives": [
+    "re-label pre-regen records under the new convention (rejected: would rewrite immutable log records)",
+    "keep interior-H1 segmentation (rejected: incompatible with ledger pins and digest reproducibility)"
+   ],
+   "risks": [
+    "log mixes two conventions until pre-regen records are explicitly labelled"
+   ]
+  },
+  "cited_evidence": [
+   "specification-organizer-experiment/results/impl_verification/state_note_2026-10-30.md:23",
+   "specification-organizer-experiment/results/impl_verification/state_note_2026-10-30.md:70",
+   "specification-organizer-experiment/results/impl_verification/state_note_2026-10-30.md:28"
+  ],
+  "classification_effects": [],
+  "sequenced_actions": [
+   "label pre-regen chapter_log records as covering pre-regen ranges",
+   "keep ledger pin ranges as identity going forward"
+  ],
+  "status": "ADOPTED_LLM_PROVISIONAL"
+ },
+ {
+  "adr_id": "ADR-006",
+  "target": "P1_SCOPE",
+  "decision": "SCOPE = pass stays scoped to the freeze-pinned 127-unit corpus; the 99 unpinned chapters (125-149.md, 150-174.md, 175-199.md, 200-218.md) are excluded until pinned and freeze-recorded",
+  "adopted_rule": "The implementation-verification pass covers exactly the CORPUS-FREEZE-MDSHEETS-01 chapter files (127 units). Unpinned chapters may enter only after pinning and a recorded freeze; extending the pass without a freeze is not authorized.",
+  "adjudication": {
+   "method": "LLM_ADJUDICATION",
+   "adjudicator": "hermes-agent",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "date": "2026-11-03",
+   "rationale": "Provenance requires pin+freeze before verification: the freeze manifest covers 3 files, and running claims over unpinned bytes would produce findings with no digest anchor. Excluding them until pinned preserves Gate A corpus-preservation semantics and keeps every recorded finding traceable to a frozen unit. No per-claim effect: scope governs the run, not claims.",
+   "confidence": "high",
+   "rejected_alternatives": [
+    "extend the pass to all 7 chapter files without freezing (rejected: findings would have no digest anchor; freeze is the provenance contract)",
+    "leave scope undecided (rejected: run completion stays ambiguous)"
+   ],
+   "risks": [
+    "the organizer objective says whole corpus; scope extension is deferred, not denied — pinning is the named prerequisite"
+   ]
+  },
+  "cited_evidence": [
+   "specification-organizer-experiment/results/impl_verification/state_note_2026-10-30.md:57",
+   "specification-organizer-experiment/results/impl_verification/state_note_2026-10-30.md:9"
+  ],
+  "classification_effects": [],
+  "sequenced_actions": [
+   "pin units for the 4 unpinned chapter files",
+   "record a new freeze manifest",
+   "extend the pass only after the freeze is recorded"
+  ],
+  "status": "ADOPTED_LLM_PROVISIONAL"
+ },
+ {
+  "adr_id": "ADR-007",
+  "target": "INDEX_RE_RECORD",
+  "decision": "INDEX = adopt the regenerated chapters_index.md (live digest 595a41b66c...) as the index record; chron_os_architecture_summary.md excluded as a non-chapter sheet; re-record requires human ratification",
+  "adopted_rule": "chapters_index.md carries the live regen digest; the recorded pre-regen digest is superseded with provenance. Index re-recording is provisional until human ratification; the freeze manifest for chapter files is untouched.",
+  "adjudication": {
+   "method": "LLM_ADJUDICATION",
+   "adjudicator": "hermes-agent",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "date": "2026-11-03",
+   "rationale": "The drift is the uncommitted generator regen that adds --exclude for a non-chapter sheet — a convention change, not corpus drift (all 127 unit digests reproduce). Re-recording the index digest matches the live generator output while leaving the chapter-file freeze untouched. No per-claim effect.",
+   "confidence": "high",
+   "rejected_alternatives": [
+    "keep the stale recorded digest (rejected: index provenance would disagree with live generator output)",
+    "re-freeze chapter files under the new index (rejected: chapter digests unchanged; freeze is invariant)"
+   ],
+   "risks": [
+    "re-record is provisional; drift stays reported until ratification"
+   ]
+  },
+  "cited_evidence": [
+   "specification-organizer-experiment/results/impl_verification/state_note_2026-10-30.md:15",
+   "specification-organizer-experiment/results/impl_verification/state_note_2026-10-30.md:86",
+   "build_chapters_index.py:1"
+  ],
+  "classification_effects": [],
+  "sequenced_actions": [
+   "re-record chapters_index.md digest after human ratification",
+   "leave chapter-file freeze digests untouched"
+  ],
+  "status": "ADOPTED_LLM_PROVISIONAL"
+ },
+ {
+  "adr_id": "ADR-008",
+  "target": "ANCHOR_DIGEST_CONVENTION",
+  "decision": "CONVENTION = LF-only line convention adopted; the three recorded anchor-line digest mismatches (mdsu0000, mdsu0014, mdsu0016) stay reported as observed, not corrected in the immutable layer",
+  "adopted_rule": "Anchor-line digests are computed under the LF-only corpus convention without a trailing-newline convention. Existing mismatched stored digests remain as recorded evidence of the old convention; re-recording pending ratification.",
+  "adjudication": {
+   "method": "LLM_ADJUDICATION",
+   "adjudicator": "hermes-agent",
+   "model": "qwen3.8-flash-next-gyro-gyro-s",
+   "date": "2026-11-03",
+   "rationale": "The corpus is LF-only and unit digests reproduce from live bytes; the three anchor mismatches differ only by a trailing-newline convention. Adopting LF-only makes the convention explicit while leaving the immutable stored records untouched (observed, not corrected). No per-claim effect.",
+   "confidence": "high",
+   "rejected_alternatives": [
+    "silently rewrite the three stored anchor digests (rejected: mutates immutable recorded evidence)",
+    "keep the trailing-newline convention (rejected: does not reproduce from a line-by-line read of LF-only corpus)"
+   ],
+   "risks": [
+    "stored anchors remain mismatched until re-recording is ratified"
+   ]
+  },
+  "cited_evidence": [
+   "specification-organizer-experiment/results/impl_verification/state_note_2026-10-30.md:18",
+   "specification-organizer-experiment/results/impl_verification/state_note_2026-10-30.md:20"
+  ],
+  "classification_effects": [],
+  "sequenced_actions": [
+   "re-record anchor digests under LF-only after ratification"
+  ],
+  "status": "ADOPTED_LLM_PROVISIONAL"
+ }
+]

@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07#",
+  "title": "chron-llm-adoption-record-v1",
+  "description": "An adoption record created by LLM adjudication. Authority tier is provisional: ADOPTED_LLM_PROVISIONAL until human ratification. Verification is not authorization: this record is the authorization artifact, its provenance declares who authorized it and how.",
+  "type": "object",
+  "required": ["adr_id", "target", "decision", "adopted_rule", "adjudication", "cited_evidence", "classification_effects", "status"],
+  "properties": {
+    "adr_id": {"type": "string"},
+    "target": {"type": "string", "description": "root cause id or convention/scope name"},
+    "decision": {"type": "string"},
+    "adopted_rule": {"type": "string"},
+    "adjudication": {
+      "type": "object",
+      "required": ["method", "adjudicator", "model", "date", "rationale", "confidence"],
+      "properties": {
+        "method": {"type": "string", "enum": ["LLM_ADJUDICATION"]},
+        "adjudicator": {"type": "string"},
+        "model": {"type": "string"},
+        "date": {"type": "string"},
+        "rationale": {"type": "string"},
+        "confidence": {"type": "string", "enum": ["high", "medium", "low"]},
+        "rejected_alternatives": {"type": "array", "items": {"type": "string"}},
+        "risks": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "cited_evidence": {"type": "array", "items": {"type": "string"}, "description": "path:line citations; each must exist on disk and be verified by the adoption builder before the record is written"},
+    "classification_effects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "new_status", "reason"],
+        "properties": {
+          "claim": {"type": "string"},
+          "artifact": {"type": "string"},
+          "new_status": {"type": "string", "enum": ["VERIFIED_VIA_ADOPTED_NORM", "AGREED_VIA_LLM_ADJUDICATION", "VIOLATION_ADOPTED_NORM", "CLAIM_RESTRICTED_BY_ADOPTED_NORM", "CONVENTION_ADOPTED", "SCOPE_ADOPTED"]},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "sequenced_actions": {"type": "array", "items": {"type": "string"}},
+    "status": {"type": "string", "enum": ["ADOPTED_LLM_PROVISIONAL", "RATIFIED_HUMAN", "RETRACTED"]}
+  }
+}
