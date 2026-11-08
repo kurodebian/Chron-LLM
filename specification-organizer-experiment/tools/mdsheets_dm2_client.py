@@ -113,10 +113,12 @@ def _http_json(
         except Exception:
             pass
         raise OpenAIBackendError(
-            f"HTTP {exc.code} from {url}: {detail}"
+            f"HTTP {exc.code} from {url} (client read timeout={timeout}s): {detail}"
         ) from exc
     except (urllib.error.URLError, TimeoutError, OSError) as exc:
-        raise OpenAIBackendError(f"backend unreachable at {url}: {exc}") from exc
+        raise OpenAIBackendError(
+            f"backend unreachable at {url} (client read timeout={timeout}s): {exc}"
+        ) from exc
     try:
         return json.loads(body)
     except json.JSONDecodeError as exc:
@@ -195,6 +197,13 @@ def call_openai_chat(
     }
 
     grammar_mode = {"requested": "auto", "applied": "none", "reason": "not_configured"}
+    # Transport calibration knob (opt-in, provenance-visible): llama.cpp
+    # chat-template thinking toggle. Unset -> payload byte-identical to the
+    # established contract. temp/seed/grammar authority untouched; the exact
+    # payload is persisted as provenance by the runner.
+    thinking = os.environ.get("MDSHEETS_DM2_ENABLE_THINKING")
+    if thinking is not None and thinking.strip():
+        payload["enable_thinking"] = thinking.strip().lower() in ("1", "true", "yes")
     if config.grammar_path and os.path.isfile(config.grammar_path):
         grammar_text = open(config.grammar_path, encoding="utf-8").read()
         advertised = bool(grammar_probe and grammar_probe.get("grammar_advertised"))
@@ -245,6 +254,10 @@ def call_openai_chat(
         },
         "grammar_mode": grammar_mode,
         "grammar_probe": grammar_probe,
+        "enable_thinking": payload.get("enable_thinking"),
+        # Transport read timeout actually used for this call (persisted
+        # evidence; the wire payload itself stays contract-identical).
+        "transport_timeout_seconds": config.timeout,
         "prompt_sha256": sha256_text(prompt),
         "prompt_chars": len(prompt),
         "raw_output_sha256": sha256_text(content),
