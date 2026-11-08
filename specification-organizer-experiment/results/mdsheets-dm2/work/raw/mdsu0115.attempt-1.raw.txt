@@ -1,0 +1,35 @@
+{
+  "unit_id": "mdsu0115",
+  "line_start": 9936,
+  "line_end": 10703,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-111 の Validator Conformance / Negative-Test Coverage / Deterministic Failure Classification を前提として、監査 Validator の検証に使用する Test Fixture、Golden Oracle、Regression Evidence の登録・変更・評価・失効管理を規定する。",
+      "目的は、テストが PASS したという事実だけで Validator の正しさを証明したと誤認すること、および Validator と期待結果が同一の欠陥を共有しているために欠陥を検出できない状態を防止することである。",
+      "本契約単独では、以下を実行・確定しない。",
+      "Fixture の存在、Oracle の登録、テスト定義の存在は、実行結果または正しさの証拠として扱わない。",
+      "以下は相互に同一視してはならない。",
+      "各 Fixture は、パスやファイル名とは独立した安定識別子を持たなければならない。"
+    ],
+    "lines": [
+      9953,
+      9955,
+      9969,
+      9980,
+      9984,
+      10044
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

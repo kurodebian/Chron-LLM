@@ -1,0 +1,39 @@
+{
+  "unit_id": "mdsu0098",
+  "line_start": 21223,
+  "line_end": 22538,
+  "source_text": "",
+  "semantic_kind": "Unclassified",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-94 までに記録された再開計画・ステージ実行台帳・遷移判定・監視評価・安定性評価・残留リスク照合を統合し、指定スコープにおける再開完了証明と運用ライフサイクルの引き渡し可否を評価するための規範草案である。",
+      "必須条件に関する不明状態を、正常・合格・完了へ暗黙変換してはならない。",
+      "`Re-Entry Completion Closure` は、再開計画で要求されたステージ・操作・対象・証拠・照合・評価の集合が、定義済みの範囲と規則に従って閉じているかを評価する処理である。",
+      "発行前に以下を確認する。",
+      "不明状態は独立した状態として保持する。"
+    ],
+    "lines": [
+      21242,
+      21407,
+      21413,
+      21724
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "none",
+    "semantic_scope": "unspecified"
+  },
+  "resolution": {
+    "status": "ambiguous",
+    "reason": "multiple_plausible_interpretations",
+    "candidate_kinds": [
+      "Requirement",
+      "Constraint",
+      "Definition",
+      "Procedure",
+      "State"
+    ]
+  }
+}

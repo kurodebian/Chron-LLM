@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0118",
+  "line_start": 12260,
+  "line_end": 13181,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-115 — Coverage Certification Lifecycle / Certificate Revocation / Downstream Acceptance Invalidation Contract**",
+      "本契約は、STEP-113 が定義する Coverage Claim／Coverage Certificate と、STEP-114 が定義する Coverage Policy／Policy Evaluation／Exception の関係を接続し、認証の発行、効力確立、停止、失効、取消し、再評価、再認証、および下流判断への無効化伝播を規定する。",
+      "この STEP も、設計ドラフトの完成だけで実装適合性や規範採用が成立したとは扱わない。"
+    ],
+    "lines": [
+      12260,
+      12287,
+      13181
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0107",
+  "line_start": 4319,
+  "line_end": 5079,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Normative adoption not authorized",
+      "DRAFT / PROPOSED",
+      "MUST",
+      "Normative Invariants"
+    ],
+    "lines": [4319, 5079]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

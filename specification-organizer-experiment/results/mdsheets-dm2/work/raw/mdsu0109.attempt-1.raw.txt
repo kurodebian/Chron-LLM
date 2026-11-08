@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0109",
+  "line_start": 5776,
+  "line_end": 6524,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-106 は、STEP-105 で定義した Freeze Readiness Audit を実際の仕様コーパスへ適用するために、棚卸し対象の固定、契約 ID の解決、Registry との差分検出、契約間依存関係の解決、監査の実行順序、監査証跡の生成を規範化する。",
+      "本 STEP は、監査の入力条件と実行契約を定義するものであり、実コーパスの棚卸し・検証・裁定は別途実行しなければならない。",
+      "規範要件 NCI-REQ-001: いかなる監査段階も、後続段階の完了状態を暗黙に確定してはならない。",
+      "監査完了と監査合格を区別する。"
+    ],
+    "lines": [5776, 6524]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

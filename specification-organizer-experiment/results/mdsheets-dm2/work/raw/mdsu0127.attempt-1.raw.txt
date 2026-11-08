@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0127",
+  "line_start": 20854,
+  "line_end": 21671,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "要件を定義する規範候補である",
+      "必須の管理対象："
+    ],
+    "lines": [
+      20872,
+      20882
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0073",
+  "line_start": 29423,
+  "line_end": 29971,
+  "source_text": "",
+  "semantic_kind": "Definition",
+  "semantic_evidence": {
+    "phrases": [
+      "本 STEP では、以下を別々の判定として定義する。"
+    ],
+    "lines": [
+      29446
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "definitional",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

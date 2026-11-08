@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0108",
+  "line_start": 5080,
+  "line_end": 5775,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-105 — Operational Stability Certification / Lifecycle Closure / Cross-Contract Finalization and Freeze Readiness Audit Contract**",
+      "本契約は、運用再入場後の安定性認定とライフサイクルの閉包を定義するとともに、関連する規範契約群が正式採用・Freeze 判定に必要な条件を満たしているかを監査するための規則を定める。",
+      "本契約では、以下の区別を必須とする。"
+    ],
+    "lines": [5080, 5775]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

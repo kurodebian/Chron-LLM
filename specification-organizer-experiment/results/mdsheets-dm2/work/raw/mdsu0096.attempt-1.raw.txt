@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0096",
+  "line_start": 18402,
+  "line_end": 19684,
+  "source_text": "",
+  "semantic_kind": "Unclassified",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-93 — Recovery Readiness Certification / Resume Authorization Revalidation / Controlled Re-Entry Evidence Contract**",
+      "本契約は、STEP-92 の復帰完了証拠と回復評価を入力として、サービス・Capability・対象・操作スコープごとの再開準備を評価し、STEP-90 の Resume Authorization を再検証するための規範草案である。",
+      "再開を実行してはならない"
+    ],
+    "lines": [18402, 18421, 18423]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "none",
+    "semantic_scope": "unspecified"
+  },
+  "resolution": {
+    "status": "ambiguous",
+    "reason": "multiple_plausible_interpretations",
+    "candidate_kinds": [
+      "Heading",
+      "Requirement",
+      "Constraint",
+      "Description"
+    ]
+  }
+}

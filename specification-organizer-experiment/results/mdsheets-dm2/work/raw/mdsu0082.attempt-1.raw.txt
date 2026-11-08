@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0082",
+  "line_start": 3762,
+  "line_end": 4932,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "実行ゲート閉鎖",
+      "明示的な認可がない限り未実施・未許可として維持する。"
+    ],
+    "lines": [
+      3764,
+      4932
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

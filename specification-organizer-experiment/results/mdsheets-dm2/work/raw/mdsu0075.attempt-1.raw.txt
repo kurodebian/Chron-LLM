@@ -1,0 +1,24 @@
+{
+  "unit_id": "mdsu0075",
+  "line_start": 30746,
+  "line_end": 31524,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、ライフサイクルの状態遷移に対して複数の要求が並行・競合・重複して発生する場合の整合性要件を定義するためのドラフトである。",
+      "したがって、競合要求が同時に到着しても、複数の互いに矛盾する状態を同一の正規履歴上で同時に確定させてはならない。"
+    ],
+    "lines": [30764, 30822]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

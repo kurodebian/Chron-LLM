@@ -1,0 +1,41 @@
+{
+  "unit_id": "mdsu0076",
+  "line_start": 31525,
+  "line_end": 32193,
+  "source_text": "",
+  "semantic_kind": "Unclassified",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-73 — Distributed Commit Protocol / Transaction Boundary / Outbox-Inbox and Reconciliation Contract**",
+      "本契約は、Chron-LLM Kernel と外部システムにまたがる操作について、トランザクション境界、メッセージ配送、受信側処理、結果確認、障害回復および分散整合性の監査要件を定義するためのドラフトである。",
+      "候補要件：",
+      "各境界について、少なくとも次を定義する必要がある。",
+      "候補モデル：",
+      "候補状態：",
+      "候補となる障害クラス：",
+      "補償の制約",
+      "不変条件候補",
+      "未解決事項"
+    ],
+    "lines": [31525, 32193]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "none",
+    "semantic_scope": "unspecified"
+  },
+  "resolution": {
+    "status": "ambiguous",
+    "reason": "multiple_plausible_interpretations",
+    "candidate_kinds": [
+      "Heading",
+      "Requirement",
+      "Constraint",
+      "Definition",
+      "Procedure",
+      "State",
+      "Exception"
+    ]
+  }
+}

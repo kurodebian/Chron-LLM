@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0119",
+  "line_start": 13182,
+  "line_end": 13931,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-116 — Certificate Registry Integrity / Revocation Ledger / Consumer Acknowledgment Reconciliation Contract",
+      "本契約は、STEP-115 で定義した Certificate Lifecycle と Invalidation Propagation を支える、Certificate Registry、Revocation Ledger、Consumer Acknowledgment Ledger の整合性・来歴・照合・回復規則を定義する。",
+      "中核要件は、Registry に表示されている現在状態、Canonical History に確定したイベント、Consumer が実際に反映した状態を、相互に区別したうえで照合できることである。",
+      "本契約はレジストリの論理的要件を定義する。",
+      "Registry Entry は、対応する Canonical Event と照合できなければならない。",
+      "確定済みの Canonical Event を、後から削除・上書きしてはならない。"
+    ],
+    "lines": [13182, 13931]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

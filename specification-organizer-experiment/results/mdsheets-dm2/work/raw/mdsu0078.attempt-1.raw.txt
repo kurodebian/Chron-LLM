@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0078",
+  "line_start": 1,
+  "line_end": 1003,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "同一の排他的 Commit 権限スコープについて、相互に両立しない複数の権限所有者が同時に有効となることを禁止する。",
+      "権限所有者は、単なるローカル変数、リーダー名、サービスディスカバリの結果で決定してはならない。",
+      "故障疑いが発生しただけで、旧所有者の権限を無条件に新所有者へ移してはならない。",
+      "通信可能なノード数が多数であるというだけで、権限が成立したと判断してはならない。",
+      "split-brain 防止には、少なくとも次の性質が必要となる。"
+    ],
+    "lines": [1, 1003]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

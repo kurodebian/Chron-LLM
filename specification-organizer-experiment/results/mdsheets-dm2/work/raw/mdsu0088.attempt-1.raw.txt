@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0088",
+  "line_start": 10401,
+  "line_end": 11247,
+  "source_text": "",
+  "semantic_kind": "Definition",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-85 — Policy Decision Enforcement / Mandatory Action Completion / Enforcement Evidence Reconciliation Contract",
+      "本書は、STEP-84 が確定したポリシー決定を、具体的な制御要求、実行主体への配送、実効性の確認、部分失敗の照合、証拠の正規履歴への記録へ接続する契約を定義する。"
+    ],
+    "lines": [
+      10401,
+      10429
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "definitional",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

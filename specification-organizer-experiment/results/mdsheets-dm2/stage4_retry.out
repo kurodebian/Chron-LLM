@@ -1,0 +1,22 @@
+{
+  "step-1a": {
+    "record_file": "STEP-1a.dm2.json",
+    "record_present": true,
+    "validator_ok_log_entry": true,
+    "schema_pass": true,
+    "semantic_pass": true,
+    "status": "PASS",
+    "reason": "record present with validator-OK log entry (schema-pass and semantic-pass enforced atomically by the validator authority)"
+  },
+  "step-120": {
+    "record_file": "STEP-120.dm2.json",
+    "record_present": true,
+    "validator_ok_log_entry": true,
+    "schema_pass": true,
+    "semantic_pass": true,
+    "status": "PASS",
+    "reason": "record present with validator-OK log entry (schema-pass and semantic-pass enforced atomically by the validator authority)"
+  },
+  "all_required_pass": true
+}
+status=COMPLETED report=/home/junu/Chron-LLM/specification-organizer-experiment/results/mdsheets-dm2/report.json

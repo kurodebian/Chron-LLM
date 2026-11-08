@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0093",
+  "line_start": 14547,
+  "line_end": 15573,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Operational Resume Authorization / Convergence Evidence Validation / Safe Re-Entry Gate Contract",
+      "運用再開を認可する条件を定義する",
+      "再開要求と再開認可を分離する",
+      "例外承認には、少なくとも次を要求する",
+      "Resume request MUST NOT imply resume authorization"
+    ],
+    "lines": [14547, 15573]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

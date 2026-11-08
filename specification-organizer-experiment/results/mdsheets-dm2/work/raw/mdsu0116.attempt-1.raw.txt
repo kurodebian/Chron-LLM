@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0116",
+  "line_start": 10704,
+  "line_end": 11499,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-113 — Test Coverage Traceability / Requirement-to-Test Closure / Coverage Claim Certification Contract**",
+      "Requirement から実行証拠までの追跡可能性と、Coverage Claim の算出・検証・認定・失効を規定する",
+      "以下の状態を相互に同一視してはならない。"
+    ],
+    "lines": [
+      10704,
+      10721,
+      10751
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

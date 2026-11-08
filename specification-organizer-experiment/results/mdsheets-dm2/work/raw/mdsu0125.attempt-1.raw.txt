@@ -1,0 +1,24 @@
+{
+  "unit_id": "mdsu0125",
+  "line_start": 19267,
+  "line_end": 20164,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Authorization Decision Lifecycle / Permit Lease / Execution-Boundary Revalidation and Revocation Race Control Contract",
+      "本契約の目的は、認可判定時点では有効だった `PERMIT` が、実際の操作開始時点では失効・陳腐化・適用範囲外になっている問題を防止し、実行の許可と副作用の発生を、検証可能な履歴で関連付けることである。"
+    ],
+    "lines": [19267, 19291]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

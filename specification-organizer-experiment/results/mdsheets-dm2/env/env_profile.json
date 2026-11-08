@@ -1,0 +1,111 @@
+{
+  "task": "p2-env",
+  "generated_utc": "2026-11-03T08:03:47.100720+00:00",
+  "endpoint": {
+    "base_url": "http://10.0.0.1:8080/v1",
+    "reachable": true,
+    "served_models": [
+      "qwen3.8-flash-next-gyro-gyro-s"
+    ],
+    "props_keys": [
+      "build_info",
+      "chat_template",
+      "chat_template_caps",
+      "default_generation_settings",
+      "is_sleeping",
+      "modalities",
+      "model_alias",
+      "model_path",
+      "models_autoload",
+      "total_slots"
+    ],
+    "grammar_advertised": false,
+    "max_context": 65536,
+    "max_context_matches_runner_assumption": true
+  },
+  "client": {
+    "api": "openai",
+    "temperature": 0.0,
+    "seed": 0,
+    "timeout_s": 600,
+    "api_key_present": true,
+    "api_key_source": "env MDSHEETS_DM2_API_KEY",
+    "grammar_mode": "auto",
+    "grammar_advertised_by_backend": false,
+    "enable_thinking_profile_default": "0"
+  },
+  "integrity": {
+    "units_total": 127,
+    "reconstruction_blocked_units": [],
+    "reconstruction_mismatches": [],
+    "corpus_digest_checks": [
+      {
+        "file": "1-74.md",
+        "declared_sha256": "7205b6469b11800848f77e813f6a345549472fe32abff5c125959f1a461303df",
+        "live_sha256": "7205b6469b11800848f77e813f6a345549472fe32abff5c125959f1a461303df",
+        "match": true
+      },
+      {
+        "file": "75-99.md",
+        "declared_sha256": "e5f87195d3368c37a586b1d77691c4aa1e38bd36b28947caec18bc668a1149ea",
+        "live_sha256": "e5f87195d3368c37a586b1d77691c4aa1e38bd36b28947caec18bc668a1149ea",
+        "match": true
+      },
+      {
+        "file": "100-124.md",
+        "declared_sha256": "a51afdd7c5656b9e41c0b4220b77b5313aa25493615262f2b288f425c06d25b2",
+        "live_sha256": "a51afdd7c5656b9e41c0b4220b77b5313aa25493615262f2b288f425c06d25b2",
+        "match": true
+      }
+    ],
+    "preservation_checks": [
+      {
+        "segment": "mdsus001",
+        "declared_sha256": "8e9f71ad1f96bc3cbeea3a15b707a2435ce51a41b0065b0c122436830c15d01c",
+        "live_sha256": "8e9f71ad1f96bc3cbeea3a15b707a2435ce51a41b0065b0c122436830c15d01c",
+        "match": true
+      }
+    ]
+  },
+  "progress": {
+    "log_lines": 85,
+    "ok_units": 71,
+    "fail_units": 4,
+    "not_attempted_units": 52,
+    "fail_unit_ids": [
+      "mdsu0059",
+      "mdsu0061",
+      "mdsu0069",
+      "mdsu0070"
+    ],
+    "ok_record_pairing_clean": true,
+    "gate": {
+      "STEP-1a": true,
+      "STEP-120": true
+    },
+    "gate_all_pass": true
+  },
+  "calibration": {
+    "asof": "2026-11-03",
+    "measured_completion_rate_tok_s": 19.1,
+    "measurement": "2026-11-03 chat completion 400 tokens in 20.9s (temp 0, seed 0)",
+    "thinking_toggle": "profile default MDSHEETS_DM2_ENABLE_THINKING=0 (transport-only; exact payload persisted per attempt in work/request/*.request.json). Old thinking-enabled runs consumed ~5.2k tokens/unit at ~19 tok/s => ~270s, causing the 300s timeout FAIL on mdsu0058; temp/seed/grammar untouched.",
+    "timeout_s_recommendation": 600
+  },
+  "causal_verification_env": {
+    "unit_ledger": "/home/junu/Chron-LLM/specification-organizer-experiment/ledger/mdsheets_units.json",
+    "dm2_records_dir": "/home/junu/Chron-LLM/specification-organizer-experiment/results/mdsheets-dm2",
+    "validator_authority": "/home/junu/Chron-LLM/specification-organizer-experiment/tools/mdsheets_dm2_verify.py",
+    "causal_ir_builder": "/home/junu/Chron-LLM/specification-organizer-experiment/extract_cir.py",
+    "causal_runtime_v1": "/home/junu/Chron-LLM/specification-organizer-experiment/results/impl_verification/causal_runtime_v1",
+    "adoption": "/home/junu/Chron-LLM/specification-organizer-experiment/results/impl_verification/adoption",
+    "reclassification": "/home/junu/Chron-LLM/specification-organizer-experiment/results/impl_verification/adoption/reclassify_adoption.py (derived read-only; P3 tier ADOPTED_LLM_PROVISIONAL pending human ratification)",
+    "external_quality_gate": "/home/junu/Chron-LLM/specification-organizer-experiment/audit.sh (EXTERNAL_QUALITY_GATE, unmodified authority)",
+    "test_baseline": "pytest 298 passed (2026-11-03, this environment)"
+  },
+  "disciplines": [
+    "MISSING_EVIDENCE != PASS",
+    "digest mismatches reported verbatim; no repair",
+    "keys never written to profile or printed"
+  ]
+}

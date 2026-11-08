@@ -1,0 +1,24 @@
+{
+  "unit_id": "mdsu0068",
+  "line_start": 26127,
+  "line_end": 26717,
+  "source_text": "",
+  "semantic_kind": "Definition",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-65 — Authorization Decision Lifecycle / Revocation / Revalidation / In-Flight Operation Control Contract**",
+      "ライフサイクルを定義するための候補を整理したが"
+    ],
+    "lines": [26127, 26717]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "definitional",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

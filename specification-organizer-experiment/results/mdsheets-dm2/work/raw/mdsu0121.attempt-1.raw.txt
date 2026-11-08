@@ -1,0 +1,24 @@
+{
+  "unit_id": "mdsu0121",
+  "line_start": 14952,
+  "line_end": 15844,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は STEP-117 の失効伝播収束証明契約を前提とし、発行済み収束証明のレジストリ管理、下流 Consumer による証明受理、証明発行後の状態ドリフト検出、受理状態の再評価、および関連記録間の整合性確認を規定する。",
+      "本契約の主要な設計原則は、証明の存在、証明の有効性、Consumer の受理、受理後の利用状態、発行後の状態維持を、それぞれ独立した検証対象にすることである。"
+    ],
+    "lines": [14972, 14989]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

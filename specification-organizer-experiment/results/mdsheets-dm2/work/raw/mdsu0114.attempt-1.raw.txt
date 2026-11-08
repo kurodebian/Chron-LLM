@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0114",
+  "line_start": 9280,
+  "line_end": 9935,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-110 で定義した Schema・Validator・クロスアーティファクト検証契約に対し、Validator 自体の適合性、負例テストの十分性、失敗分類の決定論性、検証結果の再現性を評価するための規範を定義する。",
+      "Validator の入力仕様には、以下を定義する。",
+      "Validator は入力の不備を検出して報告するが、入力自体を変更してはならない。",
+      "必須ゲートのいずれかが未評価の場合、Validator 全体を無条件に `CONFORMANT_FOR_SCOPE` としてはならない。"
+    ],
+    "lines": [
+      9305,
+      9363,
+      9405,
+      9813
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

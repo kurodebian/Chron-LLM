@@ -1,0 +1,35 @@
+{
+  "unit_id": "mdsu0092",
+  "line_start": 13596,
+  "line_end": 14546,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Every convergence result MUST bind an explicit scope.",
+      "Unauthenticated observations MUST NOT establish convergence.",
+      "Stale observations MUST NOT establish current-state validity.",
+      "Unknown dependencies MUST NOT be silently excluded.",
+      "Quorum success MUST NOT imply global consistency by itself.",
+      "LLM output MUST NOT independently establish canonical convergence."
+    ],
+    "lines": [
+      14425,
+      14431,
+      14433,
+      14435,
+      14437,
+      14463
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

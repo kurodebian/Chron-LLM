@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0101",
+  "line_start": 24855,
+  "line_end": 26622,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-98 — Compliance Decision Governance / Nonconformance Risk Acceptance / Corrective Action Closure Certification Contract",
+      "Normative adoption: NOT AUTHORIZED",
+      "STEP-98 は草案作成完了・提案状態であり、検証・正式採用・Freeze は未実施である。"
+    ],
+    "lines": [24855, 24856, 26622]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

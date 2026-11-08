@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0106",
+  "line_start": 3298,
+  "line_end": 4318,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-103 — Migration Outcome Reconciliation / Canonical State Recovery / Post-Migration Integrity and Operational Re-Entry Authorization Contract**",
+      "Contract Draft v0.1.0 · DRAFT / PROPOSED · Normative adoption not authorized",
+      "本契約は、STEP-102 の移行処理後に発生し得る結果不明、部分適用、重複適用、イベント欠落、Canonical History と観測状態の不一致を、安全に分類・照合・復旧するための規範候補を定義する。"
+    ],
+    "lines": [3298, 3300, 3345]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

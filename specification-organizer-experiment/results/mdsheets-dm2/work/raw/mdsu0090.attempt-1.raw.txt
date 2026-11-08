@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0090",
+  "line_start": 12189,
+  "line_end": 12550,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "証明書の停止・失効・再有効化を決定する権限は、適用されるポリシーと権限契約に従う。"
+    ],
+    "lines": [
+      12550
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

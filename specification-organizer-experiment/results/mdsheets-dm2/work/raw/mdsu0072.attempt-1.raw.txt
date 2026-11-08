@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0072",
+  "line_start": 28661,
+  "line_end": 29422,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Gate Contract",
+      "Contract"
+    ],
+    "lines": [
+      28661
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

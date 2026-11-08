@@ -1,0 +1,41 @@
+{
+  "unit_id": "mdsu0095",
+  "line_start": 16972,
+  "line_end": 18401,
+  "source_text": "",
+  "semantic_kind": "Unclassified",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-92 — Safe-State Reversion Completion Ledger / Residual Risk Reconciliation / Post-Reversion Recovery Authorization Contract**",
+      "本契約は、STEP-91 による `Safe-State Reversion` を対象に、複数操作・複数対象の完了状況、効果検証、外部副作用、未解決操作、残留リスク、例外、回復評価を統合的に記録するための規範草案である。",
+      "以下の状態を同一視してはならない。",
+      "`Reversion Completion Plan` は、ある復帰要求について、必要な操作・対象・依存関係・効果検証・照合・残留リスク処理を事前に定義する。",
+      "REVERSION\\_REQUESTED",
+      "REVERSION\\_COMPLETION\\_PLAN\\_REGISTERED",
+      "例外は、通常の閉鎖条件を満たせない状況に対して、規範的に認められた範囲で代替処理を許可する仕組みである。",
+      "1. 複数の復帰操作を一つの完了計画に束ねる。"
+    ],
+    "lines": [16972, 18401]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "none",
+    "semantic_scope": "unspecified"
+  },
+  "resolution": {
+    "status": "ambiguous",
+    "reason": "multiple_plausible_interpretations",
+    "candidate_kinds": [
+      "Heading",
+      "Requirement",
+      "Constraint",
+      "Definition",
+      "Description",
+      "Procedure",
+      "State",
+      "Event",
+      "Exception"
+    ]
+  }
+}

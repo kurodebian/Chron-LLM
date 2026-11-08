@@ -571,17 +571,27 @@ def run(
             json.loads(p.read_text(encoding="utf-8"))
             for p in sorted(root.glob("*.dm2.json"))
         ]
-        units_view = [
-            {
-                "unit_id": u["unit_id"],
-                "line_start": u["line_start"],
-                "line_end": u["line_end"],
-            }
-            for u in artifact["units"]
-        ]
-        with validator_schema_profile(PROFILE_SCHEMA_PATH):
-            validate_dm2.validate_semantic_extraction_set(units_view, records)
-        set_check["set_status"] = "PASS"
+        # The set-level gate validates canonical units built the same way
+        # as per-unit validation: corpus-reconstructed, sha256-verified
+        # source_text. A view without source_text would crash on the
+        # canonical-field requirement or bypass V2 equality checks.
+        units_view = []
+        view_errors: list[str] = []
+        for u in artifact["units"]:
+            try:
+                units_view.append(
+                    canonical_from_unit(u, reconstruct_unit(u, corpus))
+                )
+            except UnitReconstructionError as exc:
+                view_errors.append(str(exc))
+        if view_errors:
+            set_check["set_status"] = (
+                "FAIL_SOURCE_RECONSTRUCTION: " + "; ".join(view_errors[:3])
+            )
+        else:
+            with validator_schema_profile(PROFILE_SCHEMA_PATH):
+                validate_dm2.validate_semantic_extraction_set(units_view, records)
+            set_check["set_status"] = "PASS"
 
     report = {
         "task": "p2-dm2",

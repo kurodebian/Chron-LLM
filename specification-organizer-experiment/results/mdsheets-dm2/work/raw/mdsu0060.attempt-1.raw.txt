@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0060",
+  "line_start": 20410,
+  "line_end": 21074,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "権限境界を定義する。",
+      "本 Step では、次の判断を独立したものとして扱う。",
+      "いずれか一つの検証成功から、残りの成功を推定してはならない。"
+    ],
+    "lines": [
+      20432,
+      20434,
+      20443
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

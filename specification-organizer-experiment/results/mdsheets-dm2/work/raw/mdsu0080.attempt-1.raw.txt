@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0080",
+  "line_start": 1970,
+  "line_end": 2752,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "読み取りは、正準履歴を書き換える権限を持たない。",
+      "読み取り要求は、必要な整合性保証を明示する。",
+      "実装が提供できない保証を、暗黙のデフォルトで満たしたことにしてはならない。",
+      "利用者が要求した強い保証を満たせないのに、弱い保証の結果を同じ成功ステータスで返してはならない。",
+      "読み取り側がその操作を確定済みとして扱ってはならない。",
+      "正式採用候補へ移行するには、少なくとも次の条件が必要である。",
+      "コード変更、テスト実行、コーパス走査、規範採用、Freeze は、明示的に認可されるまで未実施・未許可として維持する。"
+    ],
+    "lines": [1970, 2752]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

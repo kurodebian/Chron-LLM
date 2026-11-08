@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/junu/Chron-LLM/specification-organizer-experiment/tools/mdsheets_dm2_runner.py", line 696, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/junu/Chron-LLM/specification-organizer-experiment/tools/mdsheets_dm2_runner.py", line 678, in main
+    report = run(
+             ^^^^
+  File "/home/junu/Chron-LLM/specification-organizer-experiment/tools/mdsheets_dm2_runner.py", line 583, in run
+    validate_dm2.validate_semantic_extraction_set(units_view, records)
+  File "/home/junu/Chron-LLM/specification-organizer-experiment/tools/validate_dm2.py", line 671, in validate_semantic_extraction_set
+    validate_semantic_extraction(
+  File "/home/junu/Chron-LLM/specification-organizer-experiment/tools/validate_dm2.py", line 257, in validate_semantic_extraction
+    raise ValueError(
+ValueError: INVALID_DM2: canonical_unit missing field 'source_text'

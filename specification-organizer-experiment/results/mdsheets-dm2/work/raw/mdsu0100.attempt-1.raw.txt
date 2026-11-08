@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0100",
+  "line_start": 23529,
+  "line_end": 24854,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、運用対象が適用される規範的要求事項・ポリシー・Capability 制約を継続的に満たしているかを、明示されたスコープと評価時点に基づいて判定するための契約である。",
+      "すべての適合性評価は、対象・要求事項・時間範囲・評価規則・依存関係を含むスコープに結び付ける。",
+      "Normative adoption: NOT AUTHORIZED"
+    ],
+    "lines": [23529, 24854]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

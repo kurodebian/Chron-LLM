@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0104",
+  "line_start": 1100,
+  "line_end": 2371,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-100 が規定する Normative Adoption および Canonical Baseline のライフサイクルを前提として、成立済みベースラインに対する規範変更を管理するための境界条件を定義する。",
+      "| MUST | 必須要件 |",
+      "| MUST NOT | 絶対禁止要件 |",
+      "LLM、監査器、スキーマ検証器、依存グラフ生成器は変更候補や検証結果を提示できるが、それらの出力だけで Canonical History を変更してはならない。",
+      "確立済み Baseline の内容をインプレース更新してはならない。"
+    ],
+    "lines": [
+      1145,
+      1164,
+      1165,
+      1221,
+      1244
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

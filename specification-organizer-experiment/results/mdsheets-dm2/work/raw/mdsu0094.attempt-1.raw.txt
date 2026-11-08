@@ -1,0 +1,24 @@
+{
+  "unit_id": "mdsu0094",
+  "line_start": 15574,
+  "line_end": 16971,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、サービス再開後の運用状態を継続的に監視し、所定の条件下で安定性を評価するとともに、逸脱・監視不能・証拠不整合が検出された場合の制限、安全状態への復帰、再評価を規定する。",
+      "次の区別を必須とする。"
+    ],
+    "lines": [15593, 15634]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

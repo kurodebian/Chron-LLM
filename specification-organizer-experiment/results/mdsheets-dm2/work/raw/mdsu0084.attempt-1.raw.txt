@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0084",
+  "line_start": 6042,
+  "line_end": 7290,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "規範候補を定義する",
+      "論理的な責務と権限境界は維持しなければならない",
+      "必須の権限検証を PASS にしない",
+      "暗黙に操作を許可してはならない"
+    ],
+    "lines": [
+      6078,
+      6499,
+      7170,
+      7182
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

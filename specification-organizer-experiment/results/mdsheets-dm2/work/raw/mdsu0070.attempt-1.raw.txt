@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0070",
+  "line_start": 27321,
+  "line_end": 27973,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "強制失敗、部分実行、通信障害、外部副作用、結果不明状態の回復契約を定義する。",
+      "リトライ前に、少なくとも次の条件を評価する。",
+      "条件が不明な場合、リトライを安全と推測してはならない。",
+      "サービス再開には、既存の Recovery Acceptance / Operational Readiness 契約と Capability-Specific Authorization 契約が要求する条件を満たす必要がある。",
+      "LLM は失敗分類候補、回復案、照合候補を提案できる。ただし、提案を実行許可・副作用不存在の証明・Commit 成功の証拠として扱ってはならない。"
+    ],
+    "lines": [
+      27353,
+      27605,
+      27616,
+      27766,
+      27792
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

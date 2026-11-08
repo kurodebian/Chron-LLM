@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0062",
+  "line_start": 21816,
+  "line_end": 22614,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本 Step では、改変を防ぐこと、改変を検出すること、正当な変更を認可すること、復旧結果を検証することを独立した責務として扱う。",
+      "次の責務を混同してはならない。",
+      "通常の Append-Only 経路では禁止する操作：",
+      "裁定： Step 59 は設計草案である。"
+    ],
+    "lines": [
+      21816,
+      22614
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0112",
+  "line_start": 7659,
+  "line_end": 8436,
+  "source_text": "",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "Read-Only Corpus Audit Runbook / Deterministic Inventory Execution / Audit Evidence Capture Contract"
+    ],
+    "lines": [
+      7659
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "procedure-block",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

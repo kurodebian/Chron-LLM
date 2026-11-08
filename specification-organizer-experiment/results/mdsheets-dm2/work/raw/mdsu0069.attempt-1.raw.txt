@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0069",
+  "line_start": 26718,
+  "line_end": 27320,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Authorization Enforcement / Policy Decision Point / Policy Enforcement Point / Fail-Safe Integration Contract"
+    ],
+    "lines": [
+      26718
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

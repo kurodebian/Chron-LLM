@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0089",
+  "line_start": 11248,
+  "line_end": 12188,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "契約を定義する",
+      "含まれていなければならない",
+      "記録しなければならない",
+      "完全完了としてはならない"
+    ],
+    "lines": [11276, 11392, 11406, 11673]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

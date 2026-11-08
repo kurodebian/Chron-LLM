@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0077",
+  "line_start": 32194,
+  "line_end": 32937,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-74 — Distributed Ordering / Causal Consistency / Partition Recovery and Reconciliation Contract",
+      "本契約は、複数のプロセス、ノード、メッセージング基盤、外部システムにまたがる処理について、順序・因果関係・分断中の権限・再接続後の整合性回復を区別し、検証可能な契約候補として定義する。",
+      "`MUST`、`MUST NOT`、`SHOULD`、`MAY` の規範的意味は、上位契約で定義された用語体系との整合を確認するまで確定しない。",
+      "分断されたノードが独自に正準履歴を書き換える権限を得ることはない。"
+    ],
+    "lines": [32194]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

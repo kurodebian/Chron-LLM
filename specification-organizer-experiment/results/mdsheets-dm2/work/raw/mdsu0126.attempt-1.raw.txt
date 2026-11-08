@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0126",
+  "line_start": 20165,
+  "line_end": 20853,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "最優先事項は、復旧を可能にする証拠と、復旧を正当化する権威を分離し、不完全・古い・矛盾する証拠から実行結果や副作用の状態を推測確定しない契約を作ることである。"
+    ],
+    "lines": [
+      20853
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

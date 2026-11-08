@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0083",
+  "line_start": 4933,
+  "line_end": 6041,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、検証・受入れ・拒否・公開認可に関する意思決定を、再現可能で監査可能な証拠付きレコードとして管理するための候補規則を定義する。",
+      "意思決定レコードは対象・入力・規則・権限を識別可能でなければならない。",
+      "再生は既定で読み取り専用とし、正準履歴、外部サービス、通知、認可状態、業務データを変更してはならない。"
+    ],
+    "lines": [4933, 6041]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

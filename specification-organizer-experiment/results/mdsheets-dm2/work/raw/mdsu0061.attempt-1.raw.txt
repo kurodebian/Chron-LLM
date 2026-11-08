@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0061",
+  "line_start": 21075,
+  "line_end": 21815,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 58 — Evidence Registry / Trust Policy Versioning / Acceptance Decision Ledger Contract",
+      "Contract"
+    ],
+    "lines": [
+      21075
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

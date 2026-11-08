@@ -1,0 +1,32 @@
+{
+  "unit_id": "mdsu0081",
+  "line_start": 2753,
+  "line_end": 3761,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "REQUIRED",
+      "クエリ定義は、対象ソース、結合条件、フィルター、集約規則、必要な整合性、結果の完全性要件を特定できなければならない。",
+      "動的にソースを追加する場合は、その選択規則と認可範囲を事前に定義するか、追加の検証・認可段階を設ける。",
+      "統合結果が正しいと判定されても、ソースごとの結果の来歴を破棄してはならない。",
+      "共通境界を確立できない場合、結果を単一時点の状態として提示してはならない。",
+      "部分結果を完全結果と同じステータスで返してはならない。",
+      "クエリ検証成功を Commit 認可、規範採用、Freeze 認可と同一視しない。"
+    ],
+    "lines": [
+      2753,
+      3761
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0103",
+  "line_start": 1,
+  "line_end": 1099,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-100 — Normative Adoption Execution / Canonical Baseline Establishment / Post-Adoption Integrity Verification Contract",
+      "STEP-100 は、採用準備判定を受けた規範集合について、採用権限の検証、採用対象の固定、Canonical History への採用決定の確定、採用効果の検証、Canonical Baseline の確立を個別の段階として管理する契約である。",
+      "採用の要求、採用の承認、Commit の要求、Commit の成立、採用効果の確認、ベースラインの確立を同一状態として扱ってはならない。",
+      "Canonical Commit の要求直前に、Kernel は承認済みの決定的な検証規則に従い、以下を確認しなければならない。",
+      "いずれかの必須条件が満たされていない、または状態が不明な場合、Commit を許可してはならない。",
+      "採用計画、監査レポート、生成されたマニフェスト自体が直接 Canonical State を変更してはならない。",
+      "本契約はドラフトである。以下の規則は、上位規範との整合性確認および必要な承認が完了するまで、採用済み規範として扱ってはならない。"
+    ],
+    "lines": [1, 1099]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

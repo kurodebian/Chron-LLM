@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0091",
+  "line_start": 12551,
+  "line_end": 13595,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-88 — Certificate Revocation Propagation / Dependent Authorization Revalidation / Operational Gate Consistency Contract**",
+      "本契約は、STEP-87 において停止・失効・期限切れ・置換・有効性不明となった完了証明書について、その証明書を根拠としている下流の認可・ポリシー判断・実行中操作・運用ゲートへ影響を伝播させ、各対象の現在の有効性を再評価するための契約である。",
+      "本書は設計ドラフトであり、実装・検証済みの規範として扱ってはならない。",
+      "CCV-INV-01  Historical certificate records MUST NOT be erased by revocation."
+    ],
+    "lines": [12551, 13595]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

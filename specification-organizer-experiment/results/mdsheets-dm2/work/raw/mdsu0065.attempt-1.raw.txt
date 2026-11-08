@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0065",
+  "line_start": 24006,
+  "line_end": 24774,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、Step 61 で導入した Capability、Operation、Resource Scope、Operational Mode、Authorization Policy、Enforcement Control を、識別・版管理・相互参照可能な Registry / Catalog として扱うための規範境界を定義する。",
+      "必須原則:",
+      "Registry への登録だけで権限や実行能力を発生させない。",
+      "LLM による定義候補生成は提案に限定し、承認・有効化・廃止を実行させない。",
+      "Registry presence MUST NOT imply definition validity.",
+      "Draft definitions MUST NOT be treated as effective.",
+      "Registry audit PASS MUST NOT imply Freeze authorization."
+    ],
+    "lines": [24006, 24774]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

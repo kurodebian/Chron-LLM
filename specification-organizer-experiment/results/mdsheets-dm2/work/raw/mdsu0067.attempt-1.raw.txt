@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0067",
+  "line_start": 25506,
+  "line_end": 26126,
+  "source_text": "",
+  "semantic_kind": "Definition",
+  "semantic_evidence": {
+    "phrases": [
+      "Policy Evaluation Engine / Deterministic Decision Trace / Decision Replay Contract",
+      "ポリシー評価エンジンの境界、決定トレース、決定再生の契約を定義する",
+      "本 Step は、評価エンジンが実行時に何を受け取り、どの規則に従って評価し、どの証拠と中間結果を記録し、過去の決定をどの条件で再現できるかを規定するための設計案である"
+    ],
+    "lines": [
+      25506,
+      25538,
+      25540
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "definitional",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

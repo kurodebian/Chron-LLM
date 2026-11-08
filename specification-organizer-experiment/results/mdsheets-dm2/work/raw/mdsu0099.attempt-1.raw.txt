@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0099",
+  "line_start": 22539,
+  "line_end": 23528,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Steady-State Governance Contract",
+      "現在も有効とみなしてはならない",
+      "単一の `valid=true` フラグだけで表現してはならない"
+    ],
+    "lines": [22539, 22545, 22560]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

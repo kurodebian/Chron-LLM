@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0079",
+  "line_start": 1004,
+  "line_end": 1969,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "設計ドラフト v0.1.0-draft · 規範採用前 · 実行ゲート閉鎖",
+      "本契約は、Chron-LLM の正準履歴 `History` について、永続化、複製、Commit の確定、確認応答、クラッシュ後の復旧、複製先との整合性を定義候補として整理する。"
+    ],
+    "lines": [
+      1006,
+      1038
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

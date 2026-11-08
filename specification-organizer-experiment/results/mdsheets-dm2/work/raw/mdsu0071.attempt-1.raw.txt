@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0071",
+  "line_start": 27974,
+  "line_end": 28660,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Recovery Evidence Closure / Residual Risk Acceptance / Operational Resume Gate Contract",
+      "設計草案のみ。規範採用・実装・検証・Freeze は未実施。",
+      "必須の証拠閉包条件が成立している",
+      "通常再開は許可しない",
+      "RER-INV-01: Recovery completion alone MUST NOT close evidence.",
+      "明示的な承認なしにコード変更、テスト実行、Corpus 走査、Freeze を進めない"
+    ],
+    "lines": [
+      27974,
+      28660
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

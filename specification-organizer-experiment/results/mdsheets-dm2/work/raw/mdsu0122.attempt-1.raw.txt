@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0122",
+  "line_start": 15845,
+  "line_end": 16709,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約の目的は、証明の信頼状態が変化した際に、下流 Consumer が古い情報や不完全な情報を根拠として操作を許可することを防止し、認可判断から操作結果の検証までを追跡可能にすることである。",
+      "中心要件： 証明の信頼状態を確認することと、特定の操作を許可することを分離し、認可判断時点の前提条件を操作の実行まで追跡可能にする。",
+      "認可・実行防止の判定は、以下の基本規則を満たさなければならない。",
+      "証明の信頼状態を確認するだけでは、失効後の利用防止は成立しない。"
+    ],
+    "lines": [
+      15845,
+      16709
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

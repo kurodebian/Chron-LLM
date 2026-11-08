@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0087",
+  "line_start": 9369,
+  "line_end": 10400,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-84 — Dependency Impact Policy Registry / Risk-Based Revalidation Priority / Mandatory Invalidation Rules Contract",
+      "Mandatory Invalidation Rules Contract"
+    ],
+    "lines": [
+      9369
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

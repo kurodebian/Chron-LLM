@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0111",
+  "line_start": 7156,
+  "line_end": 7658,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "NAC-REQ-001: 本レビューは、対象契約の内容・参照・規範的地位を読み取り専用で評価する。",
+      "NAC-REQ-002: 契約の統合・改訂・廃止・優先順位変更は、独立した変更提案、認可、Commit Protocol を経由する。",
+      "NAC-REQ-003: LLM は重複候補・矛盾候補・不足候補の抽出に限定する。候補の採否、規範的権限の確定、Canonical Commit は決定的検証および認可された裁定に委ねる。",
+      "NAC-REQ-004: 不明な事項は `UNKNOWN` として保持する。記載がないことを「存在しない」「不要」「非該当」と解釈しない。",
+      "NAC-REQ-005: レビューの結果として規範的欠落が見つかっても、実装側で自動補完してはならない。"
+    ],
+    "lines": [
+      7231,
+      7233,
+      7235,
+      7237,
+      7239
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

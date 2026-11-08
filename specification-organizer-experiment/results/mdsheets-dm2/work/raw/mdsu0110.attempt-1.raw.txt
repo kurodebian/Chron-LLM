@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0110",
+  "line_start": 6525,
+  "line_end": 7155,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "NFA-REQ-001: これらの状態は、証拠と明示的な遷移条件なしに統合してはならない。",
+      "NFA-REQ-002: 監査 Finding の内容、証拠、裁定、実施された修正をそれぞれ識別できなければならない。",
+      "NFA-REQ-003: 修正が Canonical Truth を変更する場合、既存の Commit Protocol に従う。監査システムが直接 Canonical History を変更してはならない。"
+    ],
+    "lines": [6586, 6588, 6590]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

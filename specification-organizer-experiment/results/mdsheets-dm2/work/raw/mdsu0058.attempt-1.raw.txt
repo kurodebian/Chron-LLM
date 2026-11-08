@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0058",
+  "line_start": 18940,
+  "line_end": 19814,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "Step 55 — Audit Finding Lifecycle / Remediation Proposal / Revalidation and Closure Contract",
+      "検証済みの証拠がない限り、完了・適合・Freeze を主張しない。"
+    ],
+    "lines": [
+      18940,
+      19814
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

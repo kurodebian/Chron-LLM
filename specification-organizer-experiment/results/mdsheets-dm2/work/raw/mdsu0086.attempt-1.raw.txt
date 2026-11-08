@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0086",
+  "line_start": 8231,
+  "line_end": 9368,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-83 は、それらの依存関係に変更が発生した際、既存の評価・認証・決定・認可・実行中操作へ及ぶ影響を識別し、必要な再評価、停止、無効化、取消し、再認可を適切な範囲で要求する契約候補を定義する。",
+      "Canonical History の変更は Kernel の Commit 境界を通過しなければならない。",
+      "変更前の状態を取得できない場合、変更差分の完全性を確定してはならない。"
+    ],
+    "lines": [8231, 9368]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

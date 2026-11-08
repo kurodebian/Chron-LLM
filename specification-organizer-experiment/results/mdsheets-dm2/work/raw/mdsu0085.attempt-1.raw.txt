@@ -1,0 +1,23 @@
+{
+  "unit_id": "mdsu0085",
+  "line_start": 7291,
+  "line_end": 8230,
+  "source_text": "",
+  "semantic_kind": "Definition",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-82 では、依存関係を登録・変更・追跡する Registry と、各依存関係を裏付ける Evidence、特定時点のグラフを固定する Versioned Snapshot、網羅性を評価する Completeness Certification を定義する。"
+    ],
+    "lines": [7329]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "definitional",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}
