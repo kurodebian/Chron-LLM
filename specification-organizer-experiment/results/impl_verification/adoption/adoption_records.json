@@ -39,7 +39,14 @@
    "repair wal.lisp recovery to preserve IN_DOUBT instead of ABORT-by-assumption",
    "re-run crash-recovery test against adopted rule"
   ],
-  "status": "ADOPTED_LLM_PROVISIONAL"
+  "status": "RATIFIED_HUMAN",
+  "ratification": {
+   "method": "HUMAN_RATIFICATION",
+   "ratifier": "junu (user, session adjudication form, single-select)",
+   "date": "2026-11-11T11:55:04Z",
+   "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+   "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+  }
  },
  {
   "adr_id": "ADR-002",
@@ -79,7 +86,14 @@
    "reconcile tests/test_cae_e2e.py expectation with the adopted norm",
    "re-run E2E after repair"
   ],
-  "status": "ADOPTED_LLM_PROVISIONAL"
+  "status": "RATIFIED_HUMAN",
+  "ratification": {
+   "method": "HUMAN_RATIFICATION",
+   "ratifier": "junu (user, session adjudication form, single-select)",
+   "date": "2026-11-11T11:55:04Z",
+   "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+   "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+  }
  },
  {
   "adr_id": "ADR-003",
@@ -126,7 +140,14 @@
    "build Canonical-History join path for precedence semantics",
    "lift restriction only after join path verified"
   ],
-  "status": "ADOPTED_LLM_PROVISIONAL"
+  "status": "RATIFIED_HUMAN",
+  "ratification": {
+   "method": "HUMAN_RATIFICATION",
+   "ratifier": "junu (user, session adjudication form, single-select)",
+   "date": "2026-11-11T11:55:04Z",
+   "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+   "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+  }
  },
  {
   "adr_id": "ADR-004",
@@ -167,7 +188,14 @@
    "re-run phase 3 for affected rules",
    "repair wal.lisp to adopted norms or mark it legacy explicitly"
   ],
-  "status": "ADOPTED_LLM_PROVISIONAL"
+  "status": "RATIFIED_HUMAN",
+  "ratification": {
+   "method": "HUMAN_RATIFICATION",
+   "ratifier": "junu (user, session adjudication form, single-select)",
+   "date": "2026-11-11T11:55:04Z",
+   "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+   "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+  }
  },
  {
   "adr_id": "ADR-005",
@@ -199,7 +227,14 @@
    "label pre-regen chapter_log records as covering pre-regen ranges",
    "keep ledger pin ranges as identity going forward"
   ],
-  "status": "ADOPTED_LLM_PROVISIONAL"
+  "status": "RATIFIED_HUMAN",
+  "ratification": {
+   "method": "HUMAN_RATIFICATION",
+   "ratifier": "junu (user, session adjudication form, single-select)",
+   "date": "2026-11-11T11:55:04Z",
+   "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+   "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+  }
  },
  {
   "adr_id": "ADR-006",
@@ -231,7 +266,14 @@
    "record a new freeze manifest",
    "extend the pass only after the freeze is recorded"
   ],
-  "status": "ADOPTED_LLM_PROVISIONAL"
+  "status": "RATIFIED_HUMAN",
+  "ratification": {
+   "method": "HUMAN_RATIFICATION",
+   "ratifier": "junu (user, session adjudication form, single-select)",
+   "date": "2026-11-11T11:55:04Z",
+   "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+   "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+  }
  },
  {
   "adr_id": "ADR-007",
@@ -263,7 +305,14 @@
    "re-record chapters_index.md digest after human ratification",
    "leave chapter-file freeze digests untouched"
   ],
-  "status": "ADOPTED_LLM_PROVISIONAL"
+  "status": "RATIFIED_HUMAN",
+  "ratification": {
+   "method": "HUMAN_RATIFICATION",
+   "ratifier": "junu (user, session adjudication form, single-select)",
+   "date": "2026-11-11T11:55:04Z",
+   "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+   "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+  }
  },
  {
   "adr_id": "ADR-008",
@@ -293,6 +342,13 @@
   "sequenced_actions": [
    "re-record anchor digests under LF-only after ratification"
   ],
-  "status": "ADOPTED_LLM_PROVISIONAL"
+  "status": "RATIFIED_HUMAN",
+  "ratification": {
+   "method": "HUMAN_RATIFICATION",
+   "ratifier": "junu (user, session adjudication form, single-select)",
+   "date": "2026-11-11T11:55:04Z",
+   "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+   "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+  }
  }
 ]

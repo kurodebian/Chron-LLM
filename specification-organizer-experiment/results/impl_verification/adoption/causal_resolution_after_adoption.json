@@ -25,13 +25,20 @@
    "repair wal.lisp recovery to preserve IN_DOUBT instead of ABORT-by-assumption",
    "re-run crash-recovery test against adopted rule"
   ],
-  "status": "RESOLVED_BY_LLM_ADJUDICATION_PROVISIONAL",
+  "status": "RESOLVED_BY_LLM_ADJUDICATION_RATIFIED",
   "adoption": {
    "adr_id": "ADR-001",
    "decision": "RECOVERY_AUTHORITY = wal_triad_bridge fail-closed IN_DOUBT retention; wal.lisp start-of-recovery ABORT resolution is a violation pending repair",
    "adopted_rule": "PREPARED transactions are never resolved by assumption at recovery start. Unresolved transactions stay IN_DOUBT — isolated, never canonical, never in the replay set — until an explicit resolution frame (COMMITTED or ABORTED) arrives.",
    "method": "LLM_ADJUDICATION",
-   "tier": "ADOPTED_LLM_PROVISIONAL"
+   "tier": "RATIFIED_HUMAN",
+   "ratification": {
+    "method": "HUMAN_RATIFICATION",
+    "ratifier": "junu (user, session adjudication form, single-select)",
+    "date": "2026-11-11T11:55:04Z",
+    "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+    "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+   }
   }
  },
  {
@@ -60,13 +67,20 @@
    "reconcile tests/test_cae_e2e.py expectation with the adopted norm",
    "re-run E2E after repair"
   ],
-  "status": "RESOLVED_BY_LLM_ADJUDICATION_PROVISIONAL",
+  "status": "RESOLVED_BY_LLM_ADJUDICATION_RATIFIED",
   "adoption": {
    "adr_id": "ADR-002",
    "decision": "WAL_TAIL_POLICY = quarantine (preserve partial tail records, exclude from canonical replay); truncation forbidden without an explicitly adopted norm plus recorded evidence",
    "adopted_rule": "Incomplete records at recovery are quarantined, never truncated. Truncation requires an explicitly adopted storage norm and recorded evidence; the existing truncation behaviour is a violation pending repair.",
    "method": "LLM_ADJUDICATION",
-   "tier": "ADOPTED_LLM_PROVISIONAL"
+   "tier": "RATIFIED_HUMAN",
+   "ratification": {
+    "method": "HUMAN_RATIFICATION",
+    "ratifier": "junu (user, session adjudication form, single-select)",
+    "date": "2026-11-11T11:55:04Z",
+    "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+    "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+   }
   }
  },
  {
@@ -95,13 +109,20 @@
    "build Canonical-History join path for precedence semantics",
    "lift restriction only after join path verified"
   ],
-  "status": "RESOLVED_BY_LLM_ADJUDICATION_PROVISIONAL",
+  "status": "RESOLVED_BY_LLM_ADJUDICATION_RATIFIED",
   "adoption": {
    "adr_id": "ADR-003",
    "decision": "DURABILITY_NORM = fdatasync success of a fully written record as the local linearization point; Canonical-History precedence restricted to local scope until a join path exists",
    "adopted_rule": "Durability = successful fdatasync of a fully written record (append-and-sync). Precedence against Canonical History is not adopted: transaction-index claims hold in local scope only until a Canonical-History comparison path exists.",
    "method": "LLM_ADJUDICATION",
-   "tier": "ADOPTED_LLM_PROVISIONAL"
+   "tier": "RATIFIED_HUMAN",
+   "ratification": {
+    "method": "HUMAN_RATIFICATION",
+    "ratifier": "junu (user, session adjudication form, single-select)",
+    "date": "2026-11-11T11:55:04Z",
+    "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+    "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+   }
   }
  },
  {
@@ -128,13 +149,20 @@
    "re-run phase 3 for affected rules",
    "repair wal.lisp to adopted norms or mark it legacy explicitly"
   ],
-  "status": "RESOLVED_BY_LLM_ADJUDICATION_PROVISIONAL",
+  "status": "RESOLVED_BY_LLM_ADJUDICATION_RATIFIED",
   "adoption": {
    "adr_id": "ADR-004",
    "decision": "PRECEDENCE RULE = wal_triad_bridge is canonical authority for transaction/state semantics; runtime/phase-d/wal.lisp is a legacy physical WAL surface, non-authoritative for canonical state until aligned with ADR-001/ADR-002",
    "adopted_rule": "When implementation surfaces diverge on the same state semantics, the fail-closed bridge is authoritative. The wal.lisp recovery path is legacy and non-authoritative until repaired to the adopted norms.",
    "method": "LLM_ADJUDICATION",
-   "tier": "ADOPTED_LLM_PROVISIONAL"
+   "tier": "RATIFIED_HUMAN",
+   "ratification": {
+    "method": "HUMAN_RATIFICATION",
+    "ratifier": "junu (user, session adjudication form, single-select)",
+    "date": "2026-11-11T11:55:04Z",
+    "adjudication_verbatim": "全て批准 (8件 → RATIFIED_HUMAN)",
+    "upgraded_from": "ADOPTED_LLM_PROVISIONAL"
+   }
   }
  }
 ]

@@ -68,13 +68,19 @@ for r in records:
         effects.append((r['adr_id'], cid, e))
 
 # --- reclassify ---
+def provenance_tier(rec):
+    # Ratified records carry the human authorization tier; provisional ones keep
+    # the provisional provenance tag. Claim statuses themselves are unchanged.
+    return rec['status'] if rec['status'] == 'RATIFIED_HUMAN' else 'ADOPTED_LLM_PROVISIONAL'
+
+rec_status = {r['adr_id']: r['status'] for r in records}
 new_status = {cid: c['status'] for cid, c in claims.items()}
 applied = []
 for adr_id, cid, e in effects:
     applied.append({'adr_id': adr_id, 'claim': cid,
                     'old_status': new_status[cid], 'new_status': e['new_status'],
                     'artifact': e.get('artifact'), 'reason': e['reason'],
-                    'provenance': 'ADOPTED_LLM_PROVISIONAL'})
+                    'provenance': provenance_tier({'status': rec_status[adr_id]})})
     new_status[cid] = e['new_status']
 
 counts = {}
@@ -91,7 +97,9 @@ report = {
     'generated_at': datetime.now(timezone.utc).isoformat(),
     'provenance_note': ('Statuses reached via adoption carry provenance tags; plain VERIFIED '
                         'means pin identity/design-only as before. Adjudication method: '
-                        'LLM_ADJUDICATION, tier ADOPTED_LLM_PROVISIONAL pending human ratification.'),
+                        'LLM_ADJUDICATION; tier per record as recorded in adoption_records.json '
+                        '(RATIFIED_HUMAN records are human-ratified; others remain '
+                        'ADOPTED_LLM_PROVISIONAL pending human ratification).'),
     'adoption_records': [
         {'adr_id': r['adr_id'], 'target': r['target'], 'decision': r['decision'],
          'adopted_rule': r['adopted_rule'], 'status': r['status'],
@@ -120,11 +128,14 @@ for root in resolution:
     adr = next((r for r in records if r['target'] == root['root']), None)
     entry = dict(root)
     if adr:
-        entry['status'] = 'RESOLVED_BY_LLM_ADJUDICATION_PROVISIONAL'
+        tier_suffix = ('RATIFIED' if adr['status'] == 'RATIFIED_HUMAN' else 'PROVISIONAL')
+        entry['status'] = f'RESOLVED_BY_LLM_ADJUDICATION_{tier_suffix}'
         entry['adoption'] = {'adr_id': adr['adr_id'], 'decision': adr['decision'],
                              'adopted_rule': adr['adopted_rule'],
                              'method': adr['adjudication']['method'],
                              'tier': adr['status']}
+        if 'ratification' in adr:
+            entry['adoption']['ratification'] = adr['ratification']
         entry['sequenced_actions'] = adr.get('sequenced_actions', root.get('sequenced_actions'))
     else:
         entry['status'] = root['status']
