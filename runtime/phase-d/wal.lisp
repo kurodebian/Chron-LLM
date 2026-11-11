@@ -50,6 +50,10 @@
   (dotimes (i 8)
     (setf (aref buf (+ offset i)) (ldb (byte 8 (* i 8)) val))))
 
+(defun read-u16-le (buf offset)
+  (logior (aref buf offset)
+          (ash (aref buf (+ offset 1)) 8)))
+
 (defun read-u32-le (buf offset)
   (logior (aref buf offset)
           (ash (aref buf (+ offset 1)) 8)
@@ -241,15 +245,55 @@
     result))
 
 (defun recover-from-wal (filepath canonical-apply-fn)
-  "起動時フック: クラッシュ後リカバリ (Truncate & 3-Way Recovery)"
+  "起動時フック: クラッシュ後リカバリ (Quarantine Tail & 3-Way Recovery)
+
+  批准済み規範 ADR-001/ADR-002 (RATIFIED_HUMAN 2026-11-11):
+  - PREPARED は recovery 開始時に ABORT へ確定しない。IN_DOUBT として保全
+    (isolated: canonical・replay set に出さない)。明示的な解決フレーム
+    (COMMITTED / ABORTED) が到着するまで解決しない — CON-INV-07。
+  - 部分末尾レコードは truncate しない。末尾は quarantine 退避ファイルへ
+    保全し、WAL 本体のみ有効末尾へ正規化する (ADR-002: truncate には明示的に
+    採択された storage 規範 + 記録済み evidence が必要)。"
   (let* ((scan-res (scan-wal-file filepath))
          (valid-off (wal-scan-result-valid-offset scan-res))
          (tx-table (wal-scan-result-tx-table scan-res))
-         (payloads (wal-scan-result-tx-payloads scan-res)))
+         (payloads (wal-scan-result-tx-payloads scan-res))
+         (quarantine-path (format nil "~A.quarantine" filepath))
+         (tail-octets nil))
 
-    ;; 1. 物理Truncateによる安全切断
+    ;; 1. 部分末尾の Quarantine 退避 (退避であって切り捨てではない)
     (when (probe-file filepath)
-      (sb-posix:truncate filepath valid-off))
+      (let ((total (with-open-file (s filepath
+                                    :element-type '(unsigned-byte 8)
+                                    :direction :input)
+                     (file-length s))))
+        (when (> total valid-off)
+          (setf tail-octets
+                (with-open-file (s filepath
+                                  :element-type '(unsigned-byte 8)
+                                  :direction :input)
+                  (file-position s valid-off)
+                  (let ((buf (make-array (- total valid-off)
+                                         :element-type '(unsigned-byte 8))))
+                    (read-sequence buf s)
+                    buf)))
+          ;; 退避: 部分末尾 bytes を quarantine ファイルへ追記 + fdatasync
+          ;; (ADR-003: 完全レコードの fdatasync が local linearization point。
+          ;; 末尾退避は完全レコードではないため local scope の保全のみ)。
+          (let ((qfd (sb-posix:open quarantine-path
+                                   (logior sb-posix:o-creat
+                                           sb-posix:o-wronly
+                                           sb-posix:o-append)
+                                   (logior sb-posix:s-irusr
+                                           sb-posix:s-iwusr))))
+            (unwind-protect
+                (progn
+                  (sb-posix:write qfd (sb-sys:vector-sap tail-octets)
+                                  (length tail-octets))
+                  (sb-posix:fdatasync qfd))
+              (sb-posix:close qfd)))
+          ;; WAL 本体を有効末尾へ正規化 (bytes は quarantine に退避済み)。
+          (sb-posix:truncate filepath valid-off))))
 
     ;; 2. 追記用 FD の取得
     (let ((fd (open-wal-file filepath)))
@@ -260,8 +304,10 @@
               (lambda (tx-id state)
                 (ecase state
                   (:prepared
-                   ;; ROLLBACK: ABORT レコードを書き込んで確定
-                   (write-abort-record fd tx-id))
+                   ;; IN_DOUBT 保全 (ADR-001/002): ABORT を書かない・適用しない・
+                   ;; 解決しない。tx-table に :prepared として残存し、呼び出し側が
+                   ;; 解決フレームまで isolation を維持する (never canonical)。
+                   nil)
                   (:aborted nil)
                   (:committed
                    ;; ROLLFORWARD: State Machine に適用
@@ -279,4 +325,6 @@
                (append-and-sync fd rec)))
         (close-wal-file fd)))
 
-    (values (1+ (wal-scan-result-max-tx-id scan-res)) valid-off)))
+    ;; 返り値: next-tx-id, valid-offset, 退避バイト数, quarantine パス
+    (values (1+ (wal-scan-result-max-tx-id scan-res)) valid-off
+            (if tail-octets (length tail-octets) 0) quarantine-path)))

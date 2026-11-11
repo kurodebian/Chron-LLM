@@ -36,6 +36,7 @@ class PhaseAWALEngineMock:
         self.active_transactions: Dict[int, Dict[str, Any]] = {}
         self.corrupt_next_prepare_len = False
         self.fail_next_prepare_crc = False
+        self.quarantine: list[Dict[str, Any]] = []
 
     def prepare(self, payload_dict: Dict[str, Any]) -> Dict[str, Any]:
         txid = self.next_txid
@@ -98,26 +99,33 @@ class PhaseAWALEngineMock:
 
     def recover(self) -> Dict[str, Any]:
         """
-        Simulates Phase A startup recovery per R2.1-D:
-        Scans WAL log, truncates/discards uncommitted PREPARED or CORRUPT records.
+        Startup recovery per ratified norms (ADR-001/ADR-002, RATIFIED_HUMAN 2026-11-11):
+        - COMMITTED / ABORTED with CRC OK -> durable records
+        - PREPARED -> preserved as IN_DOUBT pending an explicit resolution frame;
+          never resolved by assumption, never canonical, never replayed
+        - corrupt records -> quarantined (preserved aside), never truncated away
         """
-        recovered_log = []
-        truncated_count = 0
+        recovered_log, in_doubt_log, quarantined = [], [], []
 
         for rec in self.wal_log:
             hdr_type = rec["hdr"]["type"]
             if hdr_type in ("COMMITTED", "ABORTED") and rec.get("crc_status") == "OK":
                 recovered_log.append(rec)
+            elif hdr_type == "PREPARED" and rec.get("crc_status") == "OK":
+                in_doubt_log.append(rec)
             else:
-                truncated_count += 1
+                quarantined.append(rec)
 
-        self.wal_log = recovered_log
-        self.active_transactions.clear()
+        self.wal_log = recovered_log + in_doubt_log
+        self.quarantine = quarantined
+        # Prepared transactions stay pending in active_transactions: an explicit
+        # COMMIT/ABORT resolution frame may still arrive (ADR-001).
 
         return {
             "status": "OK",
             "recovered_records": len(recovered_log),
-            "truncated_records": truncated_count,
+            "in_doubt_records": len(in_doubt_log),
+            "quarantined_records": len(quarantined),
         }
 
 
@@ -202,11 +210,12 @@ def test_2pc_crc_failure_triggers_abort():
     assert len(engine.active_transactions) == 0
 
 
-def test_phase_a_recover_truncates_uncommitted_prepare():
+def test_phase_a_recover_preserves_in_doubt_prepare():
     """
-    Simulates crash recovery scenario:
-    Prepare succeeds, but process crashes before commit. Phase A recover()
-    must truncate uncommitted PREPARED records upon startup.
+    Crash recovery under ratified norms (ADR-001/ADR-002, RATIFIED_HUMAN 2026-11-11):
+    Prepare succeeds, process crashes before commit. recover() must PRESERVE the
+    uncommitted PREPARED record as IN_DOUBT pending explicit resolution —
+    never truncate it, never make it canonical.
     """
     engine = PhaseAWALEngineMock()
 
@@ -232,9 +241,15 @@ def test_phase_a_recover_truncates_uncommitted_prepare():
     rec_res = engine.recover()
 
     assert rec_res["status"] == "OK"
-    assert rec_res["truncated_records"] == 1
+    assert rec_res["in_doubt_records"] == 1
     assert rec_res["recovered_records"] == 0
-    assert len(engine.wal_log) == 0  # Uncommitted PREPARED record removed
+    assert rec_res["quarantined_records"] == 0
+    # ADR-001/ADR-002: PREPARED preserved as IN_DOUBT, never truncated away.
+    assert len(engine.wal_log) == 1
+    assert engine.wal_log[0]["hdr"]["type"] == "PREPARED"
+    # IN_DOUBT stays pending: explicit COMMIT/ABORT resolution may still arrive.
+    assert txid in engine.active_transactions
+    assert engine.next_sequence == 1  # no sequence allocated (S-1 holds)
 
 
 def test_committed_sequence_gate_gapless():

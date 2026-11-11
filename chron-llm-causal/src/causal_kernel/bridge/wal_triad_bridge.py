@@ -41,6 +41,8 @@ __all__ = [
     "RecordDuplicateError",
     "ConflictHaltError",
     "FrameTypeViolation",
+    "join_canonical_history",
+    "recover_canonical",
 ]
 
 _ENVELOPE_VERSION = "1"
@@ -236,3 +238,58 @@ class WALTriadIndex:
     def replay_set(self):
         """Recover(H) basis: committed txids only; IN_DOUBT excluded."""
         return sorted(self._committed)
+
+
+# ------------------------------------------------- Canonical-History join (ADR-003)
+def join_canonical_history(
+    index: WALTriadIndex, canonical_txids: Any
+) -> dict[str, Any]:
+    """Canonical ↔ History comparison path (ADR-003, local scope).
+
+    Reconciles transaction-index claims (durable COMMITTED frames) against
+    Canonical-History txid observations. Fail-closed discipline:
+    MISSING_EVIDENCE != PASS — an agreed verdict requires BOTH directions
+    (committed→history and history→committed) to be empty-divergent.
+    A halted index never yields AGREED (sticky fail-closed, I3).
+    """
+    if index.halted:
+        return {
+            "verdict": "HALTED",
+            "reason": index._halt_reason,
+            "committed_txids": [],
+            "canonical_txids": [],
+            "missing_effects": [],
+            "phantom_effects": [],
+            "in_doubt_txids": [],
+        }
+    committed = index.replay_set()
+    observed = sorted(set(canonical_txids))
+    missing = sorted(set(committed) - set(observed))
+    phantom = sorted(set(observed) - set(committed))
+    verdict = "AGREED" if not missing and not phantom else "DIVERGENT"
+    return {
+        "verdict": verdict,
+        "committed_txids": committed,
+        "canonical_txids": observed,
+        "missing_effects": missing,
+        "phantom_effects": phantom,
+        "in_doubt_txids": sorted({e["txid"] for e in index.in_doubt_frames()}),
+    }
+
+
+def recover_canonical(index: WALTriadIndex) -> dict[str, Any]:
+    """Recover(H): canonical basis rebuilt from durable COMMITTED frames only.
+
+    IN_DOUBT frames are reported separately and NEVER enter the canonical basis
+    (ADR-001). One effect per txid (I4). Idempotent: same index -> same basis.
+    """
+    frames = index.canonical_frames()
+    seqs = [f["sequence"] for f in frames if f["sequence"] is not None]
+    return {
+        "canonical_txids": sorted(index._committed),
+        "effects": frames,
+        "replay_set": index.replay_set(),
+        "in_doubt_txids": sorted({e["txid"] for e in index.in_doubt_frames()}),
+        "sequence_basis": max(seqs) if seqs else None,
+        "halted": index.halted,
+    }
