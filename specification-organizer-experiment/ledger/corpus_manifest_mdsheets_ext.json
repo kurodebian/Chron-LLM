@@ -1,0 +1,51 @@
+{
+ "files": [
+  {
+   "bytes": 1303299,
+   "path": "md_sheets/125-149.md",
+   "sha256": "d2622334918fa032ff4488ddf8134caf881a54335a7e4f5af166fc354bfa1054"
+  },
+  {
+   "bytes": 1243331,
+   "path": "md_sheets/150-174.md",
+   "sha256": "23f8be33d2fd589ba503a1ac2c2b80afe06279ac3e0f16a78021867f823776c5"
+  },
+  {
+   "bytes": 1013650,
+   "path": "md_sheets/175-199.md",
+   "sha256": "82f8fb44f52d9d37c7dc9339d0fd421404b4f61def337a418cd6bc4a1c45a991"
+  },
+  {
+   "bytes": 870040,
+   "path": "md_sheets/200-218.md",
+   "sha256": "1aeb9f01fd5cd56e6e76feb5782c5eeefc86415684bcd9e9177bf879c07cdbe6"
+  },
+  {
+   "bytes": 72440,
+   "note": "re-recorded adopted index record (ADR-007 RATIFIED_HUMAN); supersedes CORPUS-FREEZE-MDSHEETS-01 index entry ea49cecc…",
+   "path": "md_sheets/chapters_index.md",
+   "sha256": "769645903bb7fc6efd4c5b595fa8390002ebc033fb74b75e09d0fc35bbac79a3"
+  },
+  {
+   "bytes": 39005,
+   "path": "specification-organizer-experiment/ledger/mdsheets_chapter_ledger_ext.json",
+   "sha256": "c169fb0efde849f5ff2163c02d14e2e4349bb95d8ab317a4a89b81e963923aa4"
+  },
+  {
+   "bytes": 48927,
+   "path": "specification-organizer-experiment/ledger/units/mdsheets_units_ext.json",
+   "sha256": "e6653b8fa6858fbc90a50c1ba7416f0a03c646225a2cf8f3bcab5dd643d477d9"
+  }
+ ],
+ "generated_utc": "2026-11-11T12:06:48Z",
+ "generator": "sha256 over file bytes; re-hash to verify",
+ "manifest_id": "CORPUS-FREEZE-MDSHEETS-02",
+ "n_chapters": 99,
+ "notes": [
+  "freeze is a record, not adoption (ARTIFACT_EXISTENCE != NORMATIVE_ADOPTION)",
+  "CORPUS-FREEZE-MDSHEETS-01 (127-unit freeze) untouched and byte-identical",
+  "namespace separation: md_sheets STEP-187..218 vs contracts/governance step-187..218 are separate domains (D-CCX-01 precedent; deferred contract)"
+ ],
+ "scope": "extension freeze: 99 chapters in 125-149.md, 150-174.md, 175-199.md, 200-218.md (ADR-006 RATIFIED_HUMAN prerequisite)",
+ "status": "RECORDED (record of freeze; not adoption)"
+}
