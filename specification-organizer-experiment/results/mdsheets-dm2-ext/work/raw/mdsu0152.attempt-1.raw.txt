@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0152",
+  "line_start": 27894,
+  "line_end": 29181,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-149 governs the lifecycle of the cross-consumer currentness certificate introduced by STEP-148.",
+      "Core requirement: a currentness certificate is a bounded, evidence-backed assertion about a particular cohort and state snapshot.",
+      "Its prior successful issuance MUST NOT be treated as proof that the same conditions still hold after relevant state changes.",
+      "The following distinctions are mandatory:",
+      "No implementation or operator may collapse these states into one Boolean where doing so would conceal an unresolved safety condition.",
+      "Every implementation-conformance claim MUST identify the verification evidence for each applicable invariant."
+    ],
+    "lines": [
+      27894,
+      29181
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

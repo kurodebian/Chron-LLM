@@ -60,7 +60,10 @@ def main() -> int:
 
     results = Path(args.results)
     units = load_units(Path(args.units))
-    corpus = load_corpus(Path(args.corpus))
+    corpus = load_corpus(
+        Path(args.corpus),
+        tuple(cf["file"] for cf in units.get("corpus_files", ())) or None,
+    )
 
     log_entries = [
         json.loads(l)
@@ -130,7 +133,20 @@ def main() -> int:
         if seg.get("reason_code") != "OUTSIDE_H1_BOUNDARY":
             failures.append({"unit_id": seg["segment_id"], "step": "-",
                              "check": "unresolved_reason_changed"})
-    if not units.get("unresolved_segments"):
+    # Schema-aware presence policy for unresolved segments: the 127-unit
+    # P0 artifact freezes exactly one unresolved segment (preamble); the
+    # extension artifact (chron-llm/mdsheets-units-ext/1) freezes ZERO
+    # (unitize_ext checks enforce it). Any segment that appears — under
+    # either schema — is still byte-verified against the corpus above,
+    # so an unplanned unresolved segment FAILS, never passes silently.
+    if units.get("schema") == "chron-llm/mdsheets-units-ext/1":
+        if units.get("unresolved_segments"):
+            failures.append({"unit_id": "-", "step": "-",
+                             "check": "ext_unresolved_segments_not_empty"})
+        if units.get("unresolved_h1_headers"):
+            failures.append({"unit_id": "-", "step": "-",
+                             "check": "ext_unresolved_h1_headers_not_empty"})
+    elif not units.get("unresolved_segments"):
         failures.append({"unit_id": "-", "step": "-",
                          "check": "unresolved_segments_empty"})
 

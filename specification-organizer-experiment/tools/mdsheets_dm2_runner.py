@@ -75,6 +75,8 @@ PROFILE_SCHEMA_PATH = (
     / "dm2-semantic-extraction-record-v2.mdsheets.schema.json"
 )
 UNITS_SCHEMA = "chron-llm/mdsheets-units/1"
+UNITS_EXT_SCHEMA = "chron-llm/mdsheets-units-ext/1"
+UNITS_SCHEMAS = (UNITS_SCHEMA, UNITS_EXT_SCHEMA)
 
 LLMCall = Callable[[str], "tuple[str, dict[str, Any], dict[str, Any]]"]
 # LLMCall contract: prompt -> (raw_output, request_payload, metadata)
@@ -112,21 +114,30 @@ def validator_schema_profile(schema_path: Path) -> Iterator[None]:
 
 def load_units(path: Path) -> dict[str, Any]:
     artifact = json.loads(path.read_text(encoding="utf-8"))
-    if artifact.get("schema") != UNITS_SCHEMA:
+    if artifact.get("schema") not in UNITS_SCHEMAS:
         raise ValueError(
-            f"units artifact schema mismatch: expected {UNITS_SCHEMA!r}, "
-            f"got {artifact.get('schema')!r}"
+            f"units artifact schema mismatch: expected one of "
+            f"{UNITS_SCHEMAS}, got {artifact.get('schema')!r}"
         )
     return artifact
 
 
-def load_corpus(corpus_dir: Path) -> dict[str, list[str]]:
-    """{filename: lines with keepends}, P1 convention (CRLF-safe)."""
+DEFAULT_CORPUS_FILES = ("1-74.md", "75-99.md", "100-124.md")
+
+
+def load_corpus(
+    corpus_dir: Path,
+    file_names: tuple[str, ...] | None = None,
+) -> dict[str, list[str]]:
+    """{filename: lines with keepends}, P1 convention (CRLF-safe).
+    Default file set is the P0 freeze trio; callers pass the units
+    artifact's corpus_files so frozen extensions (CORPUS-FREEZE-MDSHEETS-02)
+    load without code changes."""
     return {
         name: (corpus_dir / name)
         .read_text(encoding="utf-8")
         .splitlines(keepends=True)
-        for name in ("1-74.md", "75-99.md", "100-124.md")
+        for name in (file_names or DEFAULT_CORPUS_FILES)
     }
 
 
@@ -422,13 +433,22 @@ def plan_units(
     return to_run, skipped
 
 
-def gate_block(root: Path, log_entries: list[dict[str, Any]]) -> dict[str, Any]:
-    """Gate: step-1a + step-120, schema-pass + semantic-pass per step."""
+GATE_STEPS_DEFAULT = ("STEP-1a", "STEP-120")
+
+
+def gate_block(
+    root: Path,
+    log_entries: list[dict[str, Any]],
+    gate_steps: tuple[str, ...] = GATE_STEPS_DEFAULT,
+) -> dict[str, Any]:
+    """Gate anchor steps (default = P0 contract: step-1a + step-120),
+    schema-pass + semantic-pass per step. Extension passes pass their own
+    anchors explicitly; the full-set authority stays with the verifier."""
     ok_steps = {
         e["step"] for e in log_entries if e.get("status") == "OK"
     }
     gate: dict[str, Any] = {}
-    for step in ("STEP-1a", "STEP-120"):
+    for step in gate_steps:
         rec = root / f"{step}.dm2.json"
         has_ok_logline = step in ok_steps
         if rec.is_file() and has_ok_logline:
@@ -454,7 +474,7 @@ def gate_block(root: Path, log_entries: list[dict[str, Any]]) -> dict[str, Any]:
             "reason": reason,
         }
     gate["all_required_pass"] = all(
-        gate[k]["status"] == "PASS" for k in ("step-1a", "step-120")
+        gate[k]["status"] == "PASS" for k in (s.lower() for s in gate_steps)
     )
     return gate
 
@@ -470,10 +490,14 @@ def run(
     llm_call: LLMCall | None = None,
     client_config: OpenAIChatConfig | None = None,
     dry_run: bool = False,
+    gate_steps: tuple[str, ...] | None = None,
 ) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=True)
     artifact = load_units(units_path)
-    corpus = load_corpus(corpus_dir)
+    corpus = load_corpus(
+        corpus_dir,
+        tuple(cf["file"] for cf in artifact.get("corpus_files", ())) or None,
+    )
     log_path = root / "extraction_log.jsonl"
     resume = resume_state(read_log(log_path))
     to_run, skipped = plan_units(artifact, steps, limit, resume, root)
@@ -559,7 +583,8 @@ def run(
     n_ok_total = sum(1 for e in log_entries if e.get("status") == "OK")
     set_check = {
         "policy": "1unit=1record enforced per-record by identity checks; "
-        "set-level validate_semantic_extraction_set runs only on a full 127-unit pass",
+        f"set-level validate_semantic_extraction_set runs only on a full "
+        f"{len(artifact['units'])}-unit pass",
         "records_present": len(list(root.glob("*.dm2.json"))),
         "units_total": len(artifact["units"]),
         "set_status": "NOT_ATTEMPTED (partial run)"
@@ -646,7 +671,9 @@ def run(
             "dry_run": dry_run,
         },
         "set_check": set_check,
-        "gate": gate_block(root, log_entries),
+        "gate": gate_block(
+            root, log_entries, tuple(gate_steps or GATE_STEPS_DEFAULT)
+        ),
         "provenance": {
             "request_raw": "work/request/<unit_id>.attempt-<n>.request.json",
             "raw_output": "work/raw/<unit_id>.attempt-<n>.raw.txt",
@@ -678,6 +705,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--max-attempts", type=int, default=2)
     parser.add_argument(
+        "--gate-steps",
+        type=lambda s: tuple(x.strip() for x in s.split(",") if x.strip()),
+        default=None,
+        help="gate anchor steps (default: STEP-1a,STEP-120; extension "
+        "passes name their own anchors, e.g. STEP-125,STEP-148,STEP-218b)",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="reconstruct + verify sha256 + plan only; no client, no model call",
@@ -693,6 +727,7 @@ def main(argv: list[str] | None = None) -> int:
             limit=args.limit,
             max_attempts=args.max_attempts,
             dry_run=args.dry_run,
+            gate_steps=args.gate_steps,
         )
     except OpenAIBackendError as exc:
         print(f"BACKEND BLOCKER: {exc}", file=sys.stderr)

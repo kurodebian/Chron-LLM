@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0134",
+  "line_start": 7003,
+  "line_end": 8214,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "MUST / MUST NOT は、正式採用された場合に適用される規範要件を表す。",
+      "次の変換は禁止する。",
+      "復旧許可は、安全状態への遷移が完了したという理由だけでは発行できない。"
+    ],
+    "lines": [
+      7003,
+      8214
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

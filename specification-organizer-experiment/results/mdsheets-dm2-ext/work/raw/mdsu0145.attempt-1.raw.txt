@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0145",
+  "line_start": 20275,
+  "line_end": 21192,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Consumer は、配布メッセージの受信時に少なくとも次のフィールドを特定できなければならない。",
+      "通常の `ACCEPTED` 判定には、少なくとも次が必要である。",
+      "受諾済みの版を、単に古いメッセージが後から到着したという理由で巻き戻してはならない。"
+    ],
+    "lines": [
+      20275,
+      21192
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "unit_id": "mdsu0156",
+  "line_start": 3730,
+  "line_end": 4813,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "規範を定義する",
+      "MUST | 必須要件",
+      "MUST NOT | 禁止要件",
+      "Canonical History は、正式な Commit 手続で受理された変更の正本でなければならない。",
+      "Kernel は、正式な Commit の唯一の権限主体である。",
+      "Canonical History is the sole canonical record of committed facts.",
+      "Derived projections MUST NOT implicitly mutate canonical state.",
+      "Kernel MUST remain the sole canonical commit authority.",
+      "Validator success MUST NOT imply semantic truth beyond declared validation capabilities.",
+      "Audit completion MUST NOT imply readiness or operational re-entry authorization."
+    ],
+    "lines": [
+      3730,
+      4813
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

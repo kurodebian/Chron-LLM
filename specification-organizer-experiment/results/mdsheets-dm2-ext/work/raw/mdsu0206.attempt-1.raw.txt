@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0206",
+  "line_start": 21042,
+  "line_end": 22025,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Canonical History Governance Validation Results / Evidence Attestation / Decision Binding / Acceptance Readiness Contract",
+      "Acceptance Readiness Contract"
+    ],
+    "lines": [
+      21042
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

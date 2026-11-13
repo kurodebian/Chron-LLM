@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0146",
+  "line_start": 21193,
+  "line_end": 22096,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、Certificate の公開後に各 Consumer が報告する状態を収集し、Registry・Publication・Consumer の証拠を照合したうえで、指定された Consumer 集合について収束の成立可否を評価するための規範候補である。",
+      "MUST — 採用後に必須。",
+      "収束を `CONVERGED` と判定するには、採用された Convergence Policy が要求する条件をすべて満たさなければならない。"
+    ],
+    "lines": [
+      21193,
+      22096
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

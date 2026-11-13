@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0144",
+  "line_start": 19326,
+  "line_end": 20274,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-142 でも、Consumer が受信・検証・受諾したという事実を、全 Consumer の収束や運用再開の許可と同一視しない。"
+    ],
+    "lines": [
+      20274
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

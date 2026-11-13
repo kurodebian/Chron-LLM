@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0178",
+  "line_start": 22255,
+  "line_end": 23223,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "次STEPでも、複数の複製が一致することや、再構築されたEventが形式検証を通過することだけでは、元のCanonical Historyが正しく復元されたと断定しない。復旧元の信頼性と、復元内容を裏付ける証拠を独立して評価する。"
+    ],
+    "lines": [
+      23223
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

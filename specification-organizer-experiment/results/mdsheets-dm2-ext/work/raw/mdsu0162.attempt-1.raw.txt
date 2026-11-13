@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0162",
+  "line_start": 7909,
+  "line_end": 8697,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-150〜156で扱う Assurance、Closure、Recovery、Readiness、Failure-Injection、Control-Plane Integrity に関する証拠について、生成から判定利用、保管、失効、再判定に至るまでの来歴と完全性を規定する。",
+      "中核要件は次のとおり。",
+      "すべての規範対象証拠は、次の論理フィールドを持たなければならない。",
+      "`MUST` は必須要件"
+    ],
+    "lines": [
+      7909,
+      8697
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

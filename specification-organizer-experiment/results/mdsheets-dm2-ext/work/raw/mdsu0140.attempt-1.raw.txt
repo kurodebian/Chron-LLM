@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0140",
+  "line_start": 14913,
+  "line_end": 16051,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約の目的は、これらを Retirement Closure の独立した判定対象とし、個別退役の成功から Scope 全体の閉包証明へ進むための規範を定義することである。",
+      "Retirement 対象と効果検証対象の不一致を隠蔽してはならない。",
+      "Scope からの除外は、根拠と承認を必要とする。",
+      "必須対象に未解決状態が残る場合、Scope 全体の Closure を認定しない。",
+      "Orphan Finding を `CLOSED` とするには、明示された処置結果とその検証証拠を必要とする。",
+      "Closure Certificate の発行前に、次を確認する。"
+    ],
+    "lines": [14913, 16051]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

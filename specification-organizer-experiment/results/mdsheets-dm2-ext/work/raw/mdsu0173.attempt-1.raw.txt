@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0173",
+  "line_start": 17110,
+  "line_end": 18036,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "監査入力の固定、Corpus Snapshot の完全性、抽出処理の再現性、Audit Run の来歴管理を規範化します。"
+    ],
+    "lines": [
+      17112
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "global"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0186",
+  "line_start": 3536,
+  "line_end": 4524,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-179 — Replay Checkpoint Integrity / Incremental Reconstruction / History Compaction Safety / Projection Rebuild Reconciliation / Recovery Certification Contract",
+      "Checkpointの完全性、Incremental Reconstructionの同値性、History Compactionの安全性、Projection再構築の整合性、Recovery Certificationの成立条件を規定する。",
+      "本STEPは規範契約の設計案であり、実装・実行・採用・Freezeを意味しない。"
+    ],
+    "lines": [
+      3536,
+      3538,
+      3540
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

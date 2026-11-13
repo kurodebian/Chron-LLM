@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0174",
+  "line_start": 18037,
+  "line_end": 19291,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Normative Requirement Coverage / Source-to-Extraction Reconciliation / Omission Detection / Ambiguity Closure Contract",
+      "MUST / MUST NOT / SHOULD / MAY の解釈",
+      "本契約が採用された場合の必須要件および禁止事項",
+      "規範的不変条件"
+    ],
+    "lines": [
+      18037,
+      19291
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

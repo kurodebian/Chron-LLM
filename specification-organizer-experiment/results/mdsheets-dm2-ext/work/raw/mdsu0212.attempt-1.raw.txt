@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0212",
+  "line_start": 5074,
+  "line_end": 5834,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-205 は、Canonical History と運用 Queue の障害復旧において、復旧時間目標（RTO）、復旧時点目標（RPO）、復旧可能なデータ範囲、証拠保持、復旧時間の計測、目標未達時の裁定条件を定義する。",
+      "RTO / RPO は、システム全体に対する単一の値として暗黙に適用するのではなく、対象・障害シナリオ・復旧完了条件を持つ Recovery Objective Record として管理する。",
+      "Objective Record は最低限、次を明示する。",
+      "復旧点候補は、少なくとも次の検証を通過しなければならない。"
+    ],
+    "lines": [
+      5099,
+      5205,
+      5238,
+      5384
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

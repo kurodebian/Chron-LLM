@@ -1,0 +1,32 @@
+{
+  "unit_id": "mdsu0159",
+  "line_start": 5837,
+  "line_end": 5872,
+  "source_text": "# **STEP-155 — Assurance Control-Plane Integrity / Trigger-to-Decision Traceability / Scheduler Completeness / Monitoring Independence / Fail-Safe Degradation Contract**\n\nSTEP\\_ID: 155  \nCONTRACT\\_ID: CHRON-ASSURANCE-CONTROL-PLANE-INTEGRITY-155  \nVERSION: 0.1.0-draft  \nSTATUS: PROPOSED\\_NEXT  \nNORMATIVE\\_STATUS: PROPOSED  \nADOPTION\\_STATUS: NOT\\_ADOPTED  \nIMPLEMENTATION\\_STATUS: NOT\\_VERIFIED  \nTEST\\_STATUS: NOT\\_EXECUTED  \nREPOSITORY\\_INSPECTION: NOT\\_PERFORMED  \nCANONICAL\\_MUTATION: NONE  \nFREEZE\\_STATUS: NOT\\_AUTHORIZED\n\nPREDECESSOR\\_CONTRACTS:  \n  \\- STEP-154: CONTINUOUS-OPERATIONAL-ASSURANCE  \n  \\- STEP-153: CROSS-CONTRACT-OPERATIONAL-SAFETY-AUDIT  \n  \\- STEP-152: CLOSURE-MONITORING-EXECUTION-ORCHESTRATION  \n  \\- STEP-151: CROSS-CERTIFICATE-CLOSURE-MONITORING  \n  \\- STEP-150: CROSS-CERTIFICATE-CLOSURE-INTEGRITY\n\n予定範囲：\n\n1. Trigger から Readiness Decision までの完全な追跡可能性。  \n2. イベント収集・スケジューラ・ジョブレジストリ間の整合性。  \n3. 必須再評価の未登録・未実行・重複消失の検出。  \n4. 監視系と監視対象の障害ドメイン分離。  \n5. 監視機構自身の健全性と独立性の検証。  \n6. 監視障害時の Fail-Safe / Fail-Closed / Degraded Mode の選択規則。  \n7. トリガー欠落・キュー飽和・スケジューラ停止の検出。  \n8. 再評価期限の超過と未処理義務の集約。  \n9. Assurance Control Plane の権限・永続化・改ざん耐性。  \n10. 継続保証機構自体の Readiness 判定と復旧条件。\n\nSTEP-155 でも、契約ドラフトの完成は採用・実装・検証・運用再開を意味しない。次段階では、継続保証を支える制御面そのものを監査対象に含める。\n\n",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "Assurance Control-Plane Integrity / Trigger-to-Decision Traceability / Scheduler Completeness / Monitoring Independence / Fail-Safe Degradation Contract",
+      "予定範囲：",
+      "Trigger から Readiness Decision までの完全な追跡可能性。",
+      "STEP-155 でも、契約ドラフトの完成は採用・実装・検証・運用再開を意味しない。",
+      "次段階では、継続保証を支える制御面そのものを監査対象に含める。"
+    ],
+    "lines": [
+      5837,
+      5858,
+      5860,
+      5871
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

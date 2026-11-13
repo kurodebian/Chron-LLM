@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0222",
+  "line_start": 15649,
+  "line_end": 16638,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Normative Contract Draft",
+      "Recoveryの計画・認可・実行・検証・残留リスク受容を規定する。",
+      "`MUST` は必須、`MUST NOT` は禁止、`SHOULD` は理由を記録した逸脱が許容される推奨、`MAY` は許可された選択肢を示す。",
+      "Recovery Authorityは、最低限、次の組合せに束縛されなければならない。",
+      "Recovery操作であることを理由に、通常のCommit制御を迂回してはならない。",
+      "Acceptance Rule: すべての必須ゲートについて、採択済みの基準に基づくEvidenceが確認されるまでは、STEP-215のAcceptanceをGrantedとしてはならない。"
+    ],
+    "lines": [
+      15649,
+      16638
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

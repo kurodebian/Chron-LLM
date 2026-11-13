@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0172",
+  "line_start": 16013,
+  "line_end": 17109,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、複数の規範契約に分散する要求、制約、権限、状態遷移、証拠要件、受入条件を統一的に識別・関連付け、全体の規範閉包を評価するためのルールを定義する。",
+      "contract_inventory_entry:",
+      "REQUIRED",
+      "禁止する。",
+      "してはならない。"
+    ],
+    "lines": [
+      16013,
+      17109
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "global"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

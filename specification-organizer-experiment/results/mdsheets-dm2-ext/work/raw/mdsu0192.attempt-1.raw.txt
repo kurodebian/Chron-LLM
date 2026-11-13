@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0192",
+  "line_start": 8833,
+  "line_end": 9515,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "`MUST`、`MUST NOT`、`SHOULD`、`MAY` は、採用後の規範要件を表す。",
+      "Validator は、自身の Certification を根拠として Commit 権限を取得してはならない。",
+      "条件の一部が未評価または不明の場合、昇格判定は `INDETERMINATE` とし、自動的に成功扱いにしてはならない。"
+    ],
+    "lines": [
+      8833,
+      9515
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

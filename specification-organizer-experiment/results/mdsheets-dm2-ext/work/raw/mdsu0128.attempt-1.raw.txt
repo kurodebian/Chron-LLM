@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0128",
+  "line_start": 1,
+  "line_end": 1190,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-124 が定義する証拠の信頼評価、証拠受理、外部実行アテステーション、および照合結果を、後続の Recovery Decision と再認可判断が利用するためのライフサイクル契約である。",
+      "本契約の目的は、証拠の受理状態が後から変更・失効・無効化された場合に、その証拠に依存して生成された下流判断を特定し、必要な再評価を強制し、Recovery の再認可を明示的な判定として管理することである。",
+      "必須。違反する実装・処理は契約不適合。"
+    ],
+    "lines": [1, 1190]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

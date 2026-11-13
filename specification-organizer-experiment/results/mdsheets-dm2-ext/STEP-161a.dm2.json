@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0166",
+  "line_start": 11726,
+  "line_end": 11752,
+  "source_text": "# **STEP-161 — Recovery Certification Lifecycle / Revocation Propagation / Reassessment Trigger Closure / Re-Certification Integrity Contract**\n\n次段階では、STEP-160 で発行されることを想定した Recovery Certification のライフサイクルに焦点を移す。\n\n1. 認証の発行・有効化・期限切れ・失効・置換・再発行の状態遷移。  \n2. 失効イベントから全 Consumer の再評価・伝播確認までの閉包条件。  \n3. 認証に依存する Readiness 判定・Adjudication・Closure Certificate の再評価義務。  \n4. 未確認 Consumer、到達不能 Consumer、遅延 Consumer が残る場合の認証状態。  \n5. 旧認証と新認証の共存、競合、参照更新、失効伝播の整合性。  \n6. 再認証時の新旧証拠比較、再利用可能な証拠、再取得必須の証拠。  \n7. 失効後に発見された過去の依存・副作用・義務の再開処理。  \n8. Certification Lifecycle の完全性と再評価トリガーの取りこぼし検出。  \n9. Readiness・Re-entry・Freeze の独立性を維持した再認証ゲート。  \n10. 20 不変条件・20 テスト候補・20 未解決事項・20 受入ゲートによる規範化。\n\nNEXT\\_STEP:  \n  STEP\\_ID: 161  \n  CONTRACT\\_ID: CHRON-RECOVERY-CERTIFICATION-LIFECYCLE-REVOCATION-PROPAGATION-161  \n  VERSION: 0.1.0-draft  \n  STATUS: PROPOSED  \n  ADOPTION\\_STATUS: NOT\\_ADOPTED  \n  IMPLEMENTATION\\_STATUS: NOT\\_VERIFIED  \n  TEST\\_STATUS: NOT\\_EXECUTED  \n  REPOSITORY\\_INSPECTION: NOT\\_PERFORMED  \n  CANONICAL\\_MUTATION: NONE  \n  FREEZE\\_STATUS: NOT\\_AUTHORIZED\n\n",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "Recovery Certification Lifecycle / Revocation Propagation / Reassessment Trigger Closure / Re-Certification Integrity Contract",
+      "Recovery Certification のライフサイクルに焦点を移す",
+      "閉包条件",
+      "再評価義務",
+      "規範化"
+    ],
+    "lines": [
+      11726,
+      11728,
+      11731,
+      11732,
+      11739
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0172",
+  "line_start": 16013,
+  "line_end": 17109,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "# **STEP-165 — Cross-Contract Normative Closure / Contradiction Resolution / Requirement Traceability / Global Acceptance Ledger Contract**",
+      "STEP-165 では、STEP-150〜164 で個別に定義してきた契約を横断し、規範の重複・矛盾・依存欠落・権限境界の不整合を検出して管理するための統合契約を定義します。"
+    ],
+    "lines": [
+      16013,
+      16015
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "global"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0136",
+  "line_start": 9558,
+  "line_end": 10840,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本案の MUST / MUST NOT は、正式採用された場合の規範要件を表す。",
+      "以下を必須設計原則とする。"
+    ],
+    "lines": [
+      9558,
+      10840
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

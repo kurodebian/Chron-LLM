@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0216",
+  "line_start": 8718,
+  "line_end": 9900,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-209 — Canonical History Governance Post-Reconciliation Assurance Operations / Evidence Retention / Finding Closure / Long-Term Integrity Monitoring Contract"
+    ],
+    "lines": [
+      8718
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

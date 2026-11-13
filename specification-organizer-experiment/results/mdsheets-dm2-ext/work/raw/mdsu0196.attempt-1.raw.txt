@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0196",
+  "line_start": 11976,
+  "line_end": 13069,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "The contract MUST distinguish a verification result from the truth of every claim that the result concerns."
+    ],
+    "lines": [
+      12012
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

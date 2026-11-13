@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0129",
+  "line_start": 1191,
+  "line_end": 2359,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "`MUST`: 必須要件。",
+      "`MUST NOT`: 禁止要件。",
+      "本契約は、分散したコンシューマーや下流判断を含む環境で、失効伝播と再評価の完了を、明示的な対象集合・確認証拠・依存スナップショット・ポリシー版に基づいて検証可能にする。"
+    ],
+    "lines": [
+      1191,
+      2359
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

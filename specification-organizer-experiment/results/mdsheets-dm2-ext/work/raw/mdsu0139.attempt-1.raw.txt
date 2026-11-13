@@ -1,0 +1,24 @@
+{
+  "unit_id": "mdsu0139",
+  "line_start": 13533,
+  "line_end": 14912,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-135 の再認証結果を Consumer 側の参照・認可状態へ反映するための規範を定義する。",
+      "NORMATIVE_STATUS: PROPOSED"
+    ],
+    "lines": [13533, 14912]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0148",
+  "line_start": 23115,
+  "line_end": 24218,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-145 は、Operational Re-Entry の認可を、公開済み Certificate や Convergence 判定から独立した決定的なゲートとして定義する。",
+      "本契約の採用後、`MUST` は必須、`MUST NOT` は禁止、`SHOULD` は逸脱理由の記録を要する推奨、`MAY` は明示された範囲内の許容を表すものとする。",
+      "`REQUIRED` フィールドの欠落を Validator が推測で埋めてはならない。",
+      "Execution Permit は、認可 Commit の効果を確認した後にのみ発行できる。"
+    ],
+    "lines": [
+      23115,
+      24218
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

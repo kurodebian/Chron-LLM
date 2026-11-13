@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0181",
+  "line_start": 25516,
+  "line_end": 26640,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-173 によって認可された再稼働について、実行中の安全条件が維持されているかを継続的に観測し、違反・不確実性・監視不能を検出した際の処理を定義します。",
+      "ガードは起動前に、以下の情報を含む `RuntimeGuardManifest` を確定しなければなりません。",
+      "MUST は必須、`MUST NOT` は禁止、`SHOULD` は原則として推奨、`MAY` は許可を表します。"
+    ],
+    "lines": [
+      25516
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

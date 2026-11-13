@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0142",
+  "line_start": 17045,
+  "line_end": 18121,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "REQUIRED",
+      "MUST",
+      "禁止する",
+      "必須要件",
+      "規範要件"
+    ],
+    "lines": [
+      17045,
+      18121
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

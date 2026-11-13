@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0218",
+  "line_start": 11094,
+  "line_end": 12197,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Canonical History Governance Normative Change Execution / Controlled Policy Rollout / Rollback / Post-Change Verification Contract",
+      "本提案における `MUST`、`MUST NOT`、`SHOULD`、`MAY` は、本契約が正式採用された場合に適用される要件を示す。"
+    ],
+    "lines": [
+      11094,
+      11129
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

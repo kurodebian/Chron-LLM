@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0157",
+  "line_start": 4814,
+  "line_end": 4848,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-154 も契約ドラフトの段階では設計提案にとどめ",
+      "予定範囲：",
+      "Readiness 判定の鮮度・期限・有効条件の監視。"
+    ],
+    "lines": [
+      4814,
+      4848
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

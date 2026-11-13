@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0213",
+  "line_start": 5835,
+  "line_end": 6631,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-206 は、Canonical History と運用 Queue の複製、Replica Consistency、Failover Authority、Split-Brain Prevention、Writer Fencing、Failback を規定する。",
+      "Canonical History に対する同時に有効な Writer Authority は、適用される Commit Authority 契約に従い、一意でなければならない。",
+      "実装において単一主体が複数の権限を保持する場合でも、各権限の条件・範囲・証拠を区別して評価できなければならない。"
+    ],
+    "lines": [
+      5835,
+      6631
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0197",
+  "line_start": 13070,
+  "line_end": 14243,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-190 proposes the protocol that composes individual verification results into a bounded, evidence-backed decision about whether a specified downstream operation may proceed.",
+      "The central requirement is to prevent a valid proof of one property from being misinterpreted as proof of unrelated properties.",
+      "`MUST`, `MUST NOT`, `SHOULD`, `SHOULD NOT`, and `MAY` are proposed normative keywords. They acquire binding force only after formal adoption."
+    ],
+    "lines": [13093, 13095, 13146]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

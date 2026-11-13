@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0184",
+  "line_start": 2012,
+  "line_end": 2811,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "規範契約ドラフト",
+      "本契約は、次の5つの制御領域を定義します。",
+      "本契約は、正規 History の直接書換え、評価結果からの自動承認、失効の暗黙的な伝播完了、または未確認の全体受容を許可しません。"
+    ],
+    "lines": [2014, 2054, 2062]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0165",
+  "line_start": 10626,
+  "line_end": 11725,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Derived projections MUST NOT overwrite canonical truth.",
+      "Recovery certification MUST be evidence-bound and version-bound.",
+      "Missing evidence MUST NOT be interpreted as PASS."
+    ],
+    "lines": [
+      10626,
+      11725
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

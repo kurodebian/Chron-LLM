@@ -1,0 +1,39 @@
+{
+  "unit_id": "mdsu0143",
+  "line_start": 18122,
+  "line_end": 19325,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "規範契約を定義する",
+      "必須識別情報",
+      "REQUIRED",
+      "リスクの受容は、明示的な権限と適用 Policy を必要とする。",
+      "少なくとも以下が成立している必要がある。",
+      "発行認可は、以下のすべてを確認した場合にのみ許可する。",
+      "未知状態を、成功・失敗・不存在のいずれかへ暗黙に変換してはならない。",
+      "必須要件："
+    ],
+    "lines": [
+      18151,
+      18237,
+      18240,
+      18694,
+      18735,
+      18883,
+      19024,
+      19028
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

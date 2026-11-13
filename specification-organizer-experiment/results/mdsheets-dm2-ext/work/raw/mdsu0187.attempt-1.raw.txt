@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0187",
+  "line_start": 4525,
+  "line_end": 5373,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Canonical History MUST remain the sole Canonical Truth source.",
+      "Rotation MUST NOT automatically authorize retirement or deletion of the prior generation.",
+      "Snapshot Publication MUST NOT mutate Canonical History."
+    ],
+    "lines": [4525, 5373]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

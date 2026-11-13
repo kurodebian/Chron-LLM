@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0175",
+  "line_start": 19292,
+  "line_end": 20279,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-167のCoverage Auditで記録されたFindingについて、妥当性裁定、修正候補の生成、修正計画の認可、実行制御、再抽出、修正後監査、差分照合までのライフサイクルを定義する契約案である。",
+      "いずれの段階も、前段階の存在だけを根拠として自動的に成功扱いしてはならない。"
+    ],
+    "lines": [
+      19331,
+      19367
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

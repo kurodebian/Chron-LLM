@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0204",
+  "line_start": 19253,
+  "line_end": 20207,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "規範契約ドラフト",
+      "初期化は、探索対象が明示的に固定された Scope Declaration を必要とする。",
+      "Bootstrap の全フェーズは、Canonical History の権威を変更せずに実施しなければならない。",
+      "REQUIRED",
+      "必須フェーズ"
+    ],
+    "lines": [19253, 20207]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

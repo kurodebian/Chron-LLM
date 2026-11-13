@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0160",
+  "line_start": 5873,
+  "line_end": 6918,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "MUST | 必須条件",
+      "MUST NOT | 禁止条件",
+      "各トリガーについて、次の対応関係を追跡可能にしなければならない。",
+      "以下の20条件は、本契約の採用後に検証対象となる規範候補である。"
+    ],
+    "lines": [
+      5873,
+      6918
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

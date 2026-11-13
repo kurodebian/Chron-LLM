@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0158",
+  "line_start": 4849,
+  "line_end": 5836,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-153 で定義した横断 Operational Readiness 判定を、時間経過、状態変化、リスク変化、証拠の失効、権限変更、依存関係のドリフトに対して継続的に再評価するための規範を定義する。",
+      "Readiness MUST be bound to an explicit scope, evidence snapshot, and time.",
+      "A readiness decision MUST NOT be extended implicitly beyond its validity conditions."
+    ],
+    "lines": [
+      4849,
+      5836
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

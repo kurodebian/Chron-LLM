@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0214",
+  "line_start": 6632,
+  "line_end": 7354,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Conflict Resolution Contract"
+    ],
+    "lines": [
+      6632
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

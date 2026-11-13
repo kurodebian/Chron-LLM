@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0183",
+  "line_start": 1210,
+  "line_end": 2011,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本 STEP は、STEP-175 の再進入後に得られる実行時証拠を統合し、運用保証の更新、認証の鮮度・失効判定、残留リスクの受容統制、および継続的な閉包判定を規範化する設計ドラフトです。",
+      "MUST：適合する実装が満たさなければならない要件。",
+      "MUST NOT：適合する実装が実行してはならない要件。",
+      "本契約は、以下を許可しない。"
+    ],
+    "lines": [
+      1210,
+      2011
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0177",
+  "line_start": 21345,
+  "line_end": 22254,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、Canonical Commit適格性評価と認可を通過した提案が、Kernelを通じてCanonical Historyへ永続化されるまでのトランザクション境界、重複防止、クラッシュ復旧、結果照合を規定する。",
+      "実装は、物理操作の順序、原子性、耐久性、クラッシュ時の判定規則を別途定義しなければならない。",
+      "禁止する"
+    ],
+    "lines": [
+      21345,
+      22254
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

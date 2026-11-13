@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0211",
+  "line_start": 4316,
+  "line_end": 5073,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-204 は、STEP-203 で定義した Queue Recovery、Crash Consistency、Worker Fencing、Execution Reconciliation の契約に対し、独立した検証、障害注入、決定性評価、証拠完全性検査、および Disaster-Recovery Acceptance の判定条件を定義する。",
+      "必須検証が失敗・未評価・証拠不足となった場合、対象範囲の受入を無条件に許可してはならない。",
+      "試験結果は、識別済みの対象・入力・契約版・環境に拘束される"
+    ],
+    "lines": [4316, 5073]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

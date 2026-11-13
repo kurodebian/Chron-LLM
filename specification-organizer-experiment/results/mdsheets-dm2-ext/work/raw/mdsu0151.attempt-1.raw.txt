@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0151",
+  "line_start": 26448,
+  "line_end": 27893,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-148 defines the conditions under which a consumer may claim that a Stability Certificate has been received, validated, accepted, and remains current.",
+      "Core requirement: certificate currentness is an evidence-backed, version-bound, consumer-specific determination.",
+      "Implementations MUST represent these distinctions in their state model, event records, and validation rules.",
+      "The following invariants are mandatory requirements of this proposed contract."
+    ],
+    "lines": [
+      26448,
+      27893
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

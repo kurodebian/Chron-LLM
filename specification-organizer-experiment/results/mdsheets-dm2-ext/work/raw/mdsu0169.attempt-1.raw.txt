@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0169",
+  "line_start": 12964,
+  "line_end": 14116,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "MUST: 必須要件。",
+      "MUST NOT: 禁止要件。",
+      "以下の優先順位を MUST とする。"
+    ],
+    "lines": [
+      13038,
+      13039,
+      13056
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "global"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

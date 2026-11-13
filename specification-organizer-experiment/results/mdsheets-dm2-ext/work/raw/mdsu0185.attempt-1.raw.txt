@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0185",
+  "line_start": 2812,
+  "line_end": 3535,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "各リプレイは、入力範囲と再構築規則を固定するマニフェストを持たなければなりません。",
+      "同一の固定入力と規則から決定的な再構築結果を生成しなければならない。",
+      "全体受容の撤回は権限付き判断として記録しなければならない。"
+    ],
+    "lines": [
+      2812,
+      3535
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

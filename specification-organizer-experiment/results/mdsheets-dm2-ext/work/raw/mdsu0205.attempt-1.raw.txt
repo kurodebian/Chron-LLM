@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0205",
+  "line_start": 20208,
+  "line_end": 21041,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Canonical History Governance Bootstrap Validation / Inventory Completeness Proof / Adoption Evidence Verification / Genesis Reproducibility Contract",
+      "規範契約を定義する",
+      "REQUIRED"
+    ],
+    "lines": [
+      20208,
+      21041
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

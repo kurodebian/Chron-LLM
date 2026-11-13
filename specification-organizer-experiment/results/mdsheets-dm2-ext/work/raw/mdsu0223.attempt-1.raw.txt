@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0223",
+  "line_start": 16639,
+  "line_end": 17506,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Normative Contract Draft · CRA-216 · v0.1.0-draft",
+      "本契約は、STEP-215で定義したRecovery Plan、Recovery Authorization、Recovery Execution、Recovery Verification、Residual Risk Assessmentの各Evidenceを統合し、複数のドメインにまたがるRecoveryの整合性を評価するための規範を定義する。",
+      "各遷移は、次の条件を満たさなければならない。",
+      "必須Claimに対する有効な`FAIL`が存在する場合、対象Assurance Claimを`PASS`としてはならない。"
+    ],
+    "lines": [
+      16641,
+      16671,
+      16871,
+      17075
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

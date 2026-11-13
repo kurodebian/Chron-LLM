@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0179",
+  "line_start": 23224,
+  "line_end": 24284,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-172 は、STEP-171 が定義した History Integrity Verification、Event Ordering Assurance、Trusted Recovery Anchor を前提として、Canonical History の欠損・破損・複製間不一致が検出された際の信頼できる証拠源の選定、複製間の不一致裁定、欠損イベント候補の再構成、認可された復旧、復旧後検証および復旧認証を規定する。",
+      "すべての Recovery Run は、証拠収集または変更処理の開始前に `Recovery Scope Manifest` を確定しなければならない。",
+      "Canonical History の意味的変更は、Kernel の Commit 境界を通じてのみ行う。",
+      "Canonical History の変更は Kernel の Commit 境界に限定し、復旧認証は証拠で裏付けられた範囲だけを保証する。"
+    ],
+    "lines": [
+      23224,
+      24284
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

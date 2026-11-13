@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0225",
+  "line_start": 18180,
+  "line_end": 19179,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-218 は、契約追加を続けるか、リポジトリ監査・実装検証へ移るかを決定するゲートである。",
+      "監査段階では、契約ファイル、実装、テスト、レジストリ、Canonical History を変更しない。",
+      "以下を本契約の不変条件とする。"
+    ],
+    "lines": [
+      18180,
+      19179
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

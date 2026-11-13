@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0131",
+  "line_start": 3643,
+  "line_end": 4728,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、無効化が完了したことを、実行結果・外部副作用・補償処理・残留リスクの解消と同一視しない。",
+      "すべての必須実行対象について、結果が確認済みか、未確定か、補償が必要か、隔離が必要かを明示し、その証拠に基づいて再入場ゲートを判定する。",
+      "STEP-128 を実装・採用候補へ進めるため、以下を満たす必要がある。"
+    ],
+    "lines": [
+      3643,
+      4728
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

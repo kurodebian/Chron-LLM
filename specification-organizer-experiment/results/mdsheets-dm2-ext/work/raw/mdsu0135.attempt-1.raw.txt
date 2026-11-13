@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0135",
+  "line_start": 8215,
+  "line_end": 9557,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-132 は、STEP-131 によって許可された通常運用への復帰を、無条件の一括復帰として扱わず、制約付きの段階的実行として統制する。",
+      "本案における MUST / MUST NOT は、正式採用された場合の規範要件を示す。",
+      "自動再劣化は、事前に承認されたポリシー、条件、対象範囲に拘束される。"
+    ],
+    "lines": [8215, 9557]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

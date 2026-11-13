@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0199",
+  "line_start": 14908,
+  "line_end": 15484,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "中心となる要件は、操作の受理、Commit の試行、永続化、確定応答を同一の事実として扱わず、復旧後も Canonical History から操作の結果を一意に判定できることである。",
+      "システムは、Commit が論理的に確定する `Linearization Point` を定義しなければならない。",
+      "外部への成功応答は、採用された永続化契約に従い、Canonical Commit の確定を証明できる時点より前に返してはならない。"
+    ],
+    "lines": [
+      14933,
+      15075,
+      15096
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0210",
+  "line_start": 3378,
+  "line_end": 4315,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-203 は、STEP-202 が定義する運用キュー、作業割当、実行リース、認可拘束、冪等性、再試行、エスカレーションについて、プロセス停止・ホスト障害・ストレージ障害・ネットワーク分断・ワーカー再起動・フェイルオーバー後も安全性を維持するための復旧契約を定義する。"
+    ],
+    "lines": [
+      3404
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

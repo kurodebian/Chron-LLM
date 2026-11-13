@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0189",
+  "line_start": 6276,
+  "line_end": 7098,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "`MUST`、`MUST NOT`、`SHOULD`、`SHOULD NOT`、`MAY` は、この契約が採用された場合の規範要件を表す",
+      "監査系は成功を推定してはならない",
+      "監査結果は Derived Projection であり、監査結果から Canonical State を更新してはならない"
+    ],
+    "lines": [
+      6276,
+      7098
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

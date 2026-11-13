@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0153",
+  "line_start": 1,
+  "line_end": 1202,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-150 defines the contract for proving that a collection of related currentness certificates, invalidation and revocation events, consumer states, and residual obligations is internally consistent and that its claimed closure is supported by authoritative evidence.",
+      "The central requirement is:",
+      "A certificate lifecycle MUST NOT be declared globally closed merely because one certificate has been revoked, one replacement certificate has been issued, or one consumer cohort has converged.",
+      "Every validated mandatory obligation MUST have a responsible owner or an explicit unassigned status with a corresponding assignment obligation."
+    ],
+    "lines": [1, 1202]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

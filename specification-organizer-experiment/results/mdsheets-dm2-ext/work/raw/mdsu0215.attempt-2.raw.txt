@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0215",
+  "line_start": 7355,
+  "line_end": 8717,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-208 は、STEP-207 において提案・承認・実行された可能性のある History Reconciliation の結果を、実行主体とは独立した検証主体が評価し、その正当性・完全性・整合性・証拠充足性を判定するための契約を定義する。",
+      "本契約は、検証・証拠構成・判定条件を定義する。",
+      "同じ入力、同じ検証器、同じ Profile、同じ規範的依存関係、同じ許可された実行条件に対し、決定的検証部分は同じ判定を生成しなければならない。",
+      "必須フィールドの欠落を、空文字列・推定値・暗黙の既定値で補ってはならない。"
+    ],
+    "lines": [7355, 8717]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

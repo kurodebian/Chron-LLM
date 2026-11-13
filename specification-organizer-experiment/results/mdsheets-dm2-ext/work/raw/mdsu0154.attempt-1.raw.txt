@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0154",
+  "line_start": 1203,
+  "line_end": 2575,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "規範契約である",
+      "`MUST`：必須。",
+      "`MUST NOT`：禁止。"
+    ],
+    "lines": [
+      1287,
+      1295,
+      1296
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

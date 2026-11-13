@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0219",
+  "line_start": 12198,
+  "line_end": 13155,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Normative Contract Draft v0.1.0",
+      "本契約は、Canonical History に関わる操作について、実行時に適用する Policy の解決、適用可能性、Authorization の鮮度、対象状態との整合性、および Enforcement Point における規範執行を規定する。",
+      "すべての Canonical History mutation path は、適用される規範に従って Enforcement Point を通過しなければならない。",
+      "Resolution は、同一の固定入力、同一の規範バージョンおよび同一の決定規則に対して、同一の結果を返さなければならない。",
+      "未知の Policy、失効状態不明、TOCTOU、古い Cache、Replica Divergence および Epoch 不一致を、暗黙の許可へ変換しないことを必須の設計原則とする。"
+    ],
+    "lines": [
+      12198,
+      13155
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

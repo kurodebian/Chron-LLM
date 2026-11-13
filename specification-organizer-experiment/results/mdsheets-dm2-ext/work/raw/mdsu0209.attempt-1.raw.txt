@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0209",
+  "line_start": 2320,
+  "line_end": 3377,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Every state transition MUST bind:",
+      "Priority MUST be computed under an explicit, versioned arbitration policy.",
+      "Queue-state changes MUST NOT mutate Canonical History except through an independently authorized and committed governance event under the applicable Commit protocol."
+    ],
+    "lines": [
+      2320,
+      3377
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

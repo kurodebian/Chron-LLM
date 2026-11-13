@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0194",
+  "line_start": 10338,
+  "line_end": 11125,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、分散環境における Canonical History の Commit、複製、順序付け、競合処理、障害復旧を規定するための提案である。",
+      "Canonical History の確定権限は、明示的に指定された Commit Authority に属する。",
+      "競合が解消されていない Proposal は、規定された裁定が完了するまで Canonical Commit してはならない。"
+    ],
+    "lines": [
+      10338,
+      11125
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

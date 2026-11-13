@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0208",
+  "line_start": 1219,
+  "line_end": 2319,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-201 MUST preserve four distinct epistemic categories.",
+      "A finding MUST have a stable identity and traceable originating evidence."
+    ],
+    "lines": [
+      1490,
+      2080
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

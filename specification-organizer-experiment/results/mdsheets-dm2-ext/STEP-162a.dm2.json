@@ -1,0 +1,47 @@
+{
+  "unit_id": "mdsu0168",
+  "line_start": 12937,
+  "line_end": 12963,
+  "source_text": "# **STEP-162 — Certification Dependency Graph Completeness / Transitive Impact Closure / Orphaned Authorization Detection / Global Assurance Consistency Contract**\n\n次段階では、個別の認証ライフサイクルから、認証・権限・証明書・依存成果物を横断する依存グラフ全体の完全性へ進む。\n\n1. Certification・Adjudication・Authority・Consumer・Obligation 間の依存グラフの規範化。  \n2. 直接依存と推移的依存の区別、および推移的影響閉包の判定。  \n3. 参照元のない証明書、参照先のない依存辺、孤立した権限・認証の検出。  \n4. グラフの Root Set、列挙完全性、Snapshot、Watermark、生成規則の固定。  \n5. 失効・期限切れ・権限変更がグラフ全体に及ぼす影響の評価。  \n6. 循環依存、相互認証、複数の競合する権威、動的依存の処理。  \n7. グラフの不完全性がある場合の UNKNOWN / INCONCLUSIVE の維持。  \n8. グラフの変化と過去の Closure・Recovery Certification の整合性確認。  \n9. Canonical History と Derived Dependency Graph の権威境界。  \n10. Readiness・Re-entry・Freeze を独立させた横断整合性監査。\n\nNEXT\\_STEP:  \n  STEP\\_ID: 162  \n  CONTRACT\\_ID: CHRON-CERTIFICATION-DEPENDENCY-GRAPH-COMPLETENESS-TRANSITIVE-IMPACT-CLOSURE-162  \n  VERSION: 0.1.0-draft  \n  STATUS: PROPOSED  \n  ADOPTION\\_STATUS: NOT\\_ADOPTED  \n  IMPLEMENTATION\\_STATUS: NOT\\_VERIFIED  \n  TEST\\_STATUS: NOT\\_EXECUTED  \n  REPOSITORY\\_INSPECTION: NOT\\_PERFORMED  \n  CANONICAL\\_MUTATION: NONE  \n  FREEZE\\_STATUS: NOT\\_AUTHORIZED\n\n",
+  "semantic_kind": "Procedure",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-162 — Certification Dependency Graph Completeness / Transitive Impact Closure / Orphaned Authorization Detection / Global Assurance Consistency Contract",
+      "次段階では、個別の認証ライフサイクルから、認証・権限・証明書・依存成果物を横断する依存グラフ全体の完全性へ進む。",
+      "1. Certification・Adjudication・Authority・Consumer・Obligation 間の依存グラフの規範化。",
+      "2. 直接依存と推移的依存の区別、および推移的影響閉包の判定。",
+      "3. 参照元のない証明書、参照先のない依存辺、孤立した権限・認証の検出。",
+      "4. グラフの Root Set、列挙完全性、Snapshot、Watermark、生成規則の固定。",
+      "5. 失効・期限切れ・権限変更がグラフ全体に及ぼす影響の評価。",
+      "6. 循環依存、相互認証、複数の競合する権威、動的依存の処理。",
+      "7. グラフの不完全性がある場合の UNKNOWN / INCONCLUSIVE の維持。",
+      "8. グラフの変化と過去の Closure・Recovery Certification の整合性確認。",
+      "9. Canonical History と Derived Dependency Graph の権威境界。",
+      "10. Readiness・Re-entry・Freeze を独立させた横断整合性監査。"
+    ],
+    "lines": [
+      12937,
+      12939,
+      12941,
+      12942,
+      12943,
+      12944,
+      12945,
+      12946,
+      12947,
+      12948,
+      12949,
+      12950
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "procedure-block",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "global"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "unit_id": "mdsu0217",
+  "line_start": 9901,
+  "line_end": 11093,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本書で `MUST`、`MUST NOT`、`SHOULD`、`MAY` を使用する場合、それらは本提案が採用されたときの規範的要件を表す。",
+      "STEP-210 の目的は、規範契約・Policy・Verification Profile・Validator Contract の変更に対し、既存の保証結果を破壊せず、変更の影響範囲と過去の判断の再評価要否を決定可能にすることである。"
+    ],
+    "lines": [9901, 11093]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

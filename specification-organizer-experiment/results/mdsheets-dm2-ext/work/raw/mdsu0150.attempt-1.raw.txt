@@ -1,0 +1,35 @@
+{
+  "unit_id": "mdsu0150",
+  "line_start": 25237,
+  "line_end": 26447,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-147 は、STEP-146 から引き渡された実行結果、外部効果の証拠、Residual Risk、Evidence Manifest を入力として、再入場後の運用状態が規定条件下で安定しているかを独立に評価する契約である。",
+      "必須条件が不明、または証拠が不足する場合、安定性を推測してはならない。",
+      "Evidence Closure が再開された場合、関連する安定性評価・認証への影響を評価しなければならない。",
+      "Baseline は次の条件を満たさなければならない。",
+      "条件を満たさない Baseline は、安定性認証の根拠として使用してはならない。"
+    ],
+    "lines": [
+      25237,
+      25262,
+      25351,
+      25423,
+      25459,
+      25470,
+      26447
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

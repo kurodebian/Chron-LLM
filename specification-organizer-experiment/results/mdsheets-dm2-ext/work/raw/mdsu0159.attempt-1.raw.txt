@@ -1,0 +1,32 @@
+{
+  "unit_id": "mdsu0159",
+  "line_start": 5837,
+  "line_end": 5872,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "Assurance Control-Plane Integrity / Trigger-to-Decision Traceability / Scheduler Completeness / Monitoring Independence / Fail-Safe Degradation Contract",
+      "予定範囲：",
+      "Trigger から Readiness Decision までの完全な追跡可能性。",
+      "STEP-155 でも、契約ドラフトの完成は採用・実装・検証・運用再開を意味しない。",
+      "次段階では、継続保証を支える制御面そのものを監査対象に含める。"
+    ],
+    "lines": [
+      5837,
+      5858,
+      5860,
+      5871
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

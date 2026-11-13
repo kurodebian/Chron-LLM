@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0198",
+  "line_start": 14244,
+  "line_end": 14907,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-190 で区別した `Proof Verification`、`Audit Decision`、`Authorization`、`Commit Admission`、`Commit Finality` を実行時に混同なく強制するための規範候補を定義する。",
+      "規範語 `MUST`、`MUST NOT`、`SHOULD`、`MAY` は採用後の要件候補を示す。",
+      "Commit Admission は、少なくとも以下の条件がすべて成立した場合に限り許可される。"
+    ],
+    "lines": [14244, 14907]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

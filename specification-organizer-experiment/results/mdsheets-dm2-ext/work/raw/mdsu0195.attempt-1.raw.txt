@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0195",
+  "line_start": 11126,
+  "line_end": 11975,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "The terms `MUST`, `MUST NOT`, `SHOULD`, `SHOULD NOT`, and `MAY` are proposed normative keywords.",
+      "Canonical mutation MUST be mediated by the designated Commit Authority and the applicable commit protocol.",
+      "A Canonical History MUST have an explicit, stable identity independent of its physical storage path.",
+      "Every committed event MUST be uniquely identifiable within its declared identity scope.",
+      "The system MUST NOT silently merge divergent histories or choose one solely because it is newer, larger, more available, or stored on a preferred replica."
+    ],
+    "lines": [
+      11197,
+      11209,
+      11215,
+      11229,
+      11243
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "unit_id": "mdsu0226",
+  "line_start": 19180,
+  "line_end": 19241,
+  "source_text": "",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "Execution constraints",
+      "Do not claim formal v2 adoption.",
+      "Do not modify normative contracts or schemas to imply approval.",
+      "Do not authorize freeze.",
+      "Preserve the existing worktree state.",
+      "may close only after",
+      "FREEZE=NOT_AUTHORIZED"
+    ],
+    "lines": [
+      19224,
+      19228,
+      19229,
+      19231,
+      19232,
+      19236,
+      19240
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

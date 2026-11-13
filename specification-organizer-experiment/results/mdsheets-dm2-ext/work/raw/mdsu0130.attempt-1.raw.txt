@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0130",
+  "line_start": 2360,
+  "line_end": 3642,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "`MUST` — 必須要件。",
+      "`MUST NOT` — 禁止要件。",
+      "`SHOULD` — 逸脱理由と影響を記録しない限り満たすべき要件。",
+      "`MAY` — 明示された条件下で許容される選択肢。",
+      "本契約は、証明書の状態変更を検知するだけでなく、その証明書に依存して成立した認可判断、Recovery 再認可、実行許可リース、キャッシュ済み判断および進行中操作を特定し、必要な無効化・再評価・実行停止・照合を実施したことを検証可能にする。"
+    ],
+    "lines": [
+      2360,
+      3642
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

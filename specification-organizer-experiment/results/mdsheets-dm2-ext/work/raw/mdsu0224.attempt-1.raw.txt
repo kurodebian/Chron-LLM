@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0224",
+  "line_start": 17507,
+  "line_end": 18179,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Normative Contract Draft",
+      "Acceptance Grant Protocol",
+      "Decision Finality",
+      "Reassessment and Revocation Contract"
+    ],
+    "lines": [
+      17507,
+      17509
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

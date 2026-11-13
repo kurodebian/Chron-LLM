@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0191",
+  "line_start": 7977,
+  "line_end": 8832,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-184 — Verification Engine Determinism / Reproducible Audit Execution / Policy Evaluation Trace / Independent Re-Verification / Result Attestation Contract",
+      "規範化する"
+    ],
+    "lines": [
+      7977,
+      7979
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "weak",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

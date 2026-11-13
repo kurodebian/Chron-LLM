@@ -1,0 +1,37 @@
+{
+  "unit_id": "mdsu0226",
+  "line_start": 19180,
+  "line_end": 19241,
+  "source_text": "# **STEP-218 — DM-2 v2 Schema Adoption Decision**\n\n**Record ID:** `STEP-218-DM2-V2-ADOPTION`  \n**Status:** `PROPOSED_NOT_APPROVED`  \n**Normative effect:** `NONE`  \n**Implementation observed:** `v2`  \n**Formal adoption:** `NOT_VERIFIED`\n\n## **1\\. Decision required**\n\nDetermine whether `dm2-semantic-extraction-record-v2.schema.json` is formally adopted as the machine-readable representation required by the DM-2-5 unknown/ambiguity contract.\n\n## **2\\. Evidence established**\n\n* The validator explicitly loads the v2 schema.  \n* The v2 schema requires a `resolution` object.  \n* Focused tests passed: 197 passed, 0 failed.  \n* The legacy schema does not define the explicit `resolution` field.  \n* The inspected DM-2-5 contract states that the machine-readable uncertainty representation must be explicitly specified and accepted.  \n* No explicit v2 adoption record or decision-authority procedure was found in the inspected repository scope.  \n* The worktree was reported clean.\n\n## **3\\. Decision options**\n\n**A — Adopt v2**\n\nAuthorize v2 as the applicable schema revision and reconcile the relevant contracts and validator requirements.\n\n**B — Retain the legacy schema as normative**\n\nDefine the required remediation for the current v2 implementation before making changes.\n\n**C — Defer**\n\nKeep the current implementation unchanged and prohibit freeze until the authority and adoption decision are established.\n\n## **4\\. Required approval metadata**\n\n* `decision_authority`: `UNRESOLVED`  \n* `approver`: `UNASSIGNED`  \n* `selected_option`: `UNDECIDED`  \n* `approval_reference`: `NOT_PROVIDED`  \n* `approval_date`: `NOT_PROVIDED`\n\n## **5\\. Execution constraints**\n\nUntil an authorized decision is recorded:\n\n* Do not claim formal v2 adoption.  \n* Do not modify normative contracts or schemas to imply approval.  \n* Do not treat passing tests as evidence of normative acceptance.  \n* Do not authorize freeze.  \n* Preserve the existing worktree state.\n\n## **6\\. Closure criteria**\n\nSTEP-218 may close only after the applicable schema authority is established, the adoption decision is recorded by an authorized party, the contracts and implementation are reconciled with that decision, and the required validation passes.\n\n**Current disposition:** `BLOCKED_ON_AUTHORIZED_DECISION`\n\n次の作業は、この記録案の承認経路を確定することです。承認権限をこちらで推定して記録を確定扱いにはしません。したがって、現時点での状態は `FREEZE=NOT_AUTHORIZED` のままです。\n\n",
+  "semantic_kind": "Constraint",
+  "semantic_evidence": {
+    "phrases": [
+      "Execution constraints",
+      "Do not claim formal v2 adoption.",
+      "Do not modify normative contracts or schemas to imply approval.",
+      "Do not authorize freeze.",
+      "Preserve the existing worktree state.",
+      "may close only after",
+      "FREEZE=NOT_AUTHORIZED"
+    ],
+    "lines": [
+      19224,
+      19228,
+      19229,
+      19231,
+      19232,
+      19236,
+      19240
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "prohibited",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

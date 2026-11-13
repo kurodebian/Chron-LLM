@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0137",
+  "line_start": 10841,
+  "line_end": 12219,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Recovery Loop Closure Certification / Residual Failure Debt Registry / Cross-Loop Risk Aggregation and Operational Re-Entry Authorization Contract",
+      "本書の MUST / MUST NOT は、正式採用された場合に適用する規範要件を表す。",
+      "特に、局所的な復旧成功を全体復旧へ自動的に一般化せず、残留リスクを受容したことを解消とみなさず、全体復旧認定を運用再開の無条件な許可にしないことを規範上の境界として維持する。"
+    ],
+    "lines": [
+      10841,
+      12219
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0157",
+  "line_start": 4814,
+  "line_end": 4848,
+  "source_text": "# **STEP-154 — Continuous Operational Assurance / Readiness Decision Freshness / Risk-Based Reassessment Scheduling / Revocation-Triggered Revalidation / Audit Continuity Contract**\n\nSTEP\\_ID: 154  \nCONTRACT\\_ID: CHRON-CONTINUOUS-OPERATIONAL-ASSURANCE-154  \nVERSION: 0.1.0-draft  \nSTATUS: PROPOSED\\_NEXT  \nNORMATIVE\\_STATUS: PROPOSED  \nADOPTION\\_STATUS: NOT\\_ADOPTED  \nIMPLEMENTATION\\_STATUS: NOT\\_VERIFIED  \nTEST\\_STATUS: NOT\\_EXECUTED  \nREPOSITORY\\_INSPECTION: NOT\\_PERFORMED  \nCANONICAL\\_MUTATION: NONE  \nFREEZE\\_STATUS: NOT\\_AUTHORIZED\n\nPREDECESSOR\\_CONTRACTS:  \n  \\- STEP-153: CROSS-CONTRACT-OPERATIONAL-SAFETY-AUDIT  \n  \\- STEP-152: CLOSURE-MONITORING-EXECUTION-ORCHESTRATION  \n  \\- STEP-151: CROSS-CERTIFICATE-CLOSURE-MONITORING  \n  \\- STEP-150: CROSS-CERTIFICATE-CLOSURE-INTEGRITY\n\n予定範囲：\n\n1. Readiness 判定の鮮度・期限・有効条件の監視。  \n2. リスクと要件重要度に応じた再監査スケジューリング。  \n3. Revocation・Policy 変更・History 異常に連動する再検証。  \n4. 継続監査の永続ジョブ・重複排除・冪等性。  \n5. 監査の中断・再開・結果不明状態の回復。  \n6. 判定の失効・再評価・後継判定のライフサイクル。  \n7. 監視漏れ、検出遅延、証拠の鮮度切れの評価。  \n8. 監査結果と Canonical History の分離。  \n9. 継続監視の終了・停止・再開条件。  \n10. 運用再開承認と Freeze の独立性維持。\n\nSTEP-154 も契約ドラフトの段階では設計提案にとどめ、実際の運用監視が実装・稼働しているとは扱わない。\n\n",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-154 も契約ドラフトの段階では設計提案にとどめ",
+      "予定範囲：",
+      "Readiness 判定の鮮度・期限・有効条件の監視。"
+    ],
+    "lines": [
+      4814,
+      4848
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

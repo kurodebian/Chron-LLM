@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0176",
+  "line_start": 20280,
+  "line_end": 21344,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "本契約は、STEP-168で定義した修正ライフサイクルから生成される証拠を対象とし、証拠連鎖、実行証明、結果完全性、監査Lineage、Canonical Commit適格性の評価規則を定義する。",
+      "Canonical MutationはKernelの認可されたCommit経路を通らなければならない。",
+      "証拠の存在を証拠の真正性と同一視してはならない。"
+    ],
+    "lines": [
+      20280,
+      21344
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

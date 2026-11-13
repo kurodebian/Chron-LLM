@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0147",
+  "line_start": 22097,
+  "line_end": 23114,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "STEP-144 は、STEP-143 で評価された Convergence Certificate を、識別可能・検証可能・追跡可能な形で発行・公開し、その公開効果と Consumer への伝播を個別に検証するための契約を定義する。",
+      "各 Certificate は、少なくとも次の情報に暗号学的または同等の完全性保証で結び付けられなければならない。",
+      "Certificate の公開は、実行権限の付与を意味しない。"
+    ],
+    "lines": [
+      22097,
+      23114
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

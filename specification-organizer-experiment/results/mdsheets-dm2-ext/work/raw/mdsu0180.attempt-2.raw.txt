@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0180",
+  "line_start": 24285,
+  "line_end": 25515,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "必須入力",
+      "要求する",
+      "してはならない",
+      "受入条件",
+      "規範的不変条件 20 項目"
+    ],
+    "lines": [
+      24285,
+      25515
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

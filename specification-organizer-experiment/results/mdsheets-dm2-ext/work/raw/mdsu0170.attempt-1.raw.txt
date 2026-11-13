@@ -1,0 +1,28 @@
+{
+  "unit_id": "mdsu0170",
+  "line_start": 14117,
+  "line_end": 15168,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "すべての Rebuild Run は、処理開始前に次の入力境界を固定しなければならない。",
+      "Replay は次を MUST NOT とする。",
+      "不変条件（20項目）"
+    ],
+    "lines": [
+      14117,
+      15168
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

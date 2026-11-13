@@ -1,0 +1,27 @@
+{
+  "unit_id": "mdsu0132",
+  "line_start": 4729,
+  "line_end": 5822,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "MUST：必須条件。",
+      "MUST NOT：禁止条件。",
+      "SHOULD：逸脱理由を記録しない限り採用すべき条件。",
+      "MAY：明示された制約の範囲内で許可される選択肢。",
+      "STEP-129 は、再入場許可から運用段階への移行を、単一の成功・失敗フラグではなく、段階別の権限・実行・証拠・境界検証によって制御する契約案である。"
+    ],
+    "lines": [4729, 5822]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "unit_id": "mdsu0200",
+  "line_start": 15485,
+  "line_end": 16154,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Canonical History WAL Recovery / Deterministic Replay / Integrity Verification / Quarantine Contract"
+    ],
+    "lines": [
+      15485
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

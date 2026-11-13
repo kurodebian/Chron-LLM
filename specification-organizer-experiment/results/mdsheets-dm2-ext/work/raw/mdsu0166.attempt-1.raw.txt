@@ -1,0 +1,33 @@
+{
+  "unit_id": "mdsu0166",
+  "line_start": 11726,
+  "line_end": 11752,
+  "source_text": "",
+  "semantic_kind": "Description",
+  "semantic_evidence": {
+    "phrases": [
+      "Recovery Certification Lifecycle / Revocation Propagation / Reassessment Trigger Closure / Re-Certification Integrity Contract",
+      "Recovery Certification のライフサイクルに焦点を移す",
+      "閉包条件",
+      "再評価義務",
+      "規範化"
+    ],
+    "lines": [
+      11726,
+      11728,
+      11731,
+      11732,
+      11739
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "none",
+    "structural_form": "other",
+    "semantic_strength": "descriptive",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

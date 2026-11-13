@@ -1,0 +1,31 @@
+{
+  "unit_id": "mdsu0163",
+  "line_start": 8698,
+  "line_end": 9655,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Assurance Evidence Store Consistency / Metadata-to-Blob Reconciliation / Orphan and Dangling Reference Detection / Retention Enforcement Contract",
+      "本契約は、STEP-157 が定義する証拠の来歴・識別・判定再現性を前提として、証拠ストアの物理的実体、メタデータ、参照グラフ、利用中の判定、保持ポリシーの間に存在する不整合を検出・分類・追跡するための規範を定める。",
+      "実装方式にかかわらず、論理的な参照整合性と証拠の権限境界は維持しなければならない。",
+      "`MUST` は必須、`MUST NOT` は禁止、`SHOULD` は合理的な例外と理由が記録される場合に限り逸脱可能な推奨、`MAY` は任意要件を表す。"
+    ],
+    "lines": [
+      8698,
+      8728,
+      8762,
+      8781
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

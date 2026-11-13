@@ -1,0 +1,30 @@
+{
+  "unit_id": "mdsu0180",
+  "line_start": 24285,
+  "line_end": 25515,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "NORMATIVE_STATUS: PROPOSED",
+      "本書は設計上の規範契約案である。",
+      "必須入力",
+      "必須条件",
+      "要求する"
+    ],
+    "lines": [
+      24285,
+      25515
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

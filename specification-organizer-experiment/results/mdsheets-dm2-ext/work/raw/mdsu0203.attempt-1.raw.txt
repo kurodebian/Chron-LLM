@@ -1,0 +1,26 @@
+{
+  "unit_id": "mdsu0203",
+  "line_start": 18265,
+  "line_end": 19252,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "Canonical History Governance",
+      "Normative Contract Resolution"
+    ],
+    "lines": [
+      18265
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "required",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "system-wide"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}

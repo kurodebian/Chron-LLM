@@ -1,0 +1,29 @@
+{
+  "unit_id": "mdsu0161",
+  "line_start": 6919,
+  "line_end": 7908,
+  "source_text": "",
+  "semantic_kind": "Requirement",
+  "semantic_evidence": {
+    "phrases": [
+      "規範契約である",
+      "本契約の`MUST`、`MUST NOT`、`SHOULD`、`MAY`は、STEP-155と同じ規範的意味を持つ。",
+      "故障注入は、対象・範囲・権限・中止条件が検証されるまで開始してはならない。"
+    ],
+    "lines": [
+      6986,
+      7045,
+      7628
+    ]
+  },
+  "semantic_attributes": {
+    "modality": "must",
+    "structural_form": "other",
+    "semantic_strength": "strong",
+    "semantic_scope": "component-specific"
+  },
+  "resolution": {
+    "status": "resolved",
+    "reason": null
+  }
+}
